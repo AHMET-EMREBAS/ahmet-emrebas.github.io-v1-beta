@@ -1,7 +1,6 @@
 {
   "version": 2,
   "projects": {
-    "ae-common": "libs/ae-common",
     "api": "apps/api",
     "desktop": "apps/desktop",
     "web": "apps/web",
