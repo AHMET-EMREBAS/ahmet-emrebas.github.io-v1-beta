@@ -9,9 +9,25 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 export interface ResourceModuleOptions {
+  /**
+   * For Query Controller
+   */
   viewEntity: ClassConstructor<any>;
+
+  /**
+   * Entities required for this module.
+   * The first entity in the array is the main entity
+   */
   entities: ClassConstructor<any>[];
+
+  /**
+   * Data transfer object for creating the entity.
+   */
   createDTO: ClassConstructor<any>;
+
+  /**
+   * Data transfer object for updating the entity
+   */
   updateDTO: ClassConstructor<any>;
 }
 export function ResourceModule(moduleOptions: ResourceModuleOptions) {
