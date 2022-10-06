@@ -10,7 +10,10 @@ import {
   Put,
   ValidationPipe,
 } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import {
+  ApiBody,
+  ApiTags,
+} from '@nestjs/swagger';
 import { InjectRepository } from '@nestjs/typeorm';
 
 import { Role } from '../decorators/role.meta';
@@ -33,11 +36,9 @@ export function PostController(options: PostControllerOptions) {
     ) {}
 
     @Post(SINGULAR_PATH)
+    @ApiBody({ type: options.createDTO })
     save(
-      @Body(
-        new ValidationPipe({ expectedType: options.createDTO }),
-        new ValidationPipe({ expectedType: options.createDTO, transform: true })
-      )
+      @Body(new ValidationPipe({ expectedType: options.createDTO }))
       body: typeof options.createDTO
     ) {
       return this.repository.save(body);

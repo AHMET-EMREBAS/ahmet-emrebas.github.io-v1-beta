@@ -59,4 +59,27 @@ export class QueryDTO {
     }
   })
   order: { [key: string]: 'ASC' | 'DESC' };
+
+  @ApiProperty({
+    type: 'string',
+    isArray: true,
+    required: false,
+    default: ['id'],
+  })
+  @Expose()
+  @Transform(({ value }) => {
+    if (value?.push) {
+      return value;
+    }
+
+    if (value && typeof value == 'string') {
+      try {
+        const result = JSON.parse(value);
+        return result;
+      } catch (err) {
+        return undefined;
+      }
+    }
+  })
+  select: string[];
 }

@@ -18,6 +18,7 @@ import { WhereDTO } from '../dto/where.dto';
 
 export interface QueryControllerOptions {
   entity: ClassConstructor<any>;
+  viewEntity: ClassConstructor<any>;
 }
 
 export function QueryController(options: QueryControllerOptions) {
@@ -29,7 +30,7 @@ export function QueryController(options: QueryControllerOptions) {
   @Controller()
   class QController {
     constructor(
-      @InjectRepository(options.entity)
+      @InjectRepository(options.viewEntity)
       public readonly repository: Repository<any>
     ) {}
 

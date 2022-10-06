@@ -9,6 +9,7 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 export interface ResourceModuleOptions {
+  viewEntity: ClassConstructor<any>;
   entities: ClassConstructor<any>[];
   createDTO: ClassConstructor<any>;
   updateDTO: ClassConstructor<any>;
@@ -17,7 +18,10 @@ export function ResourceModule(moduleOptions: ResourceModuleOptions) {
   @Module({
     imports: [TypeOrmModule.forFeature(moduleOptions.entities)],
     controllers: [
-      QueryController({ entity: moduleOptions.entities[0] }),
+      QueryController({
+        viewEntity: moduleOptions.viewEntity,
+        entity: moduleOptions.entities[0],
+      }),
       PostController({
         entity: moduleOptions.entities[0],
         createDTO: moduleOptions.createDTO,

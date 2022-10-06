@@ -1,6 +1,7 @@
 import {
   PriceLevel,
   Store,
+  StoreView,
 } from 'api-common';
 
 import { Module } from '@nestjs/common';
@@ -11,11 +12,13 @@ import { ResourceModule } from './resources/resource.module';
 @Module({
   imports: [
     ResourceModule({
-      entities: [Store],
+      viewEntity: StoreView,
+      entities: [Store, PriceLevel, StoreView],
       createDTO: Store,
       updateDTO: PartialType(Store),
     }),
     ResourceModule({
+      viewEntity: PriceLevel,
       entities: [PriceLevel],
       createDTO: PriceLevel,
       updateDTO: PartialType(PriceLevel),
