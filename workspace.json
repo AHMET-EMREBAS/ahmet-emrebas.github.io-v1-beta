@@ -1,9 +1,12 @@
 {
   "version": 2,
   "projects": {
+    "ae-common": "libs/ae-common",
     "api": "apps/api",
+    "api-inventory": "libs/api-inventory",
     "desktop": "apps/desktop",
     "web": "apps/web",
-    "web-e2e": "apps/web-e2e"
+    "web-e2e": "apps/web-e2e",
+    "web-inventory": "libs/web-inventory"
   }
 }

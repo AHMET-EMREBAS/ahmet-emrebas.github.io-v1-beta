@@ -14,7 +14,11 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "ae-common": ["libs/ae-common/src/index.ts"],
+      "api-inventory": ["libs/api-inventory/src/index.ts"],
+      "web-inventory": ["libs/web-inventory/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

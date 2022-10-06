@@ -1,0 +1,26 @@
+{
+  "projectType": "library",
+  "root": "libs/web-inventory",
+  "sourceRoot": "libs/web-inventory/src",
+  "prefix": "ahmet-emrebas",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/web-inventory"],
+      "options": {
+        "jestConfig": "libs/web-inventory/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/web-inventory/src/**/*.ts",
+          "libs/web-inventory/src/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

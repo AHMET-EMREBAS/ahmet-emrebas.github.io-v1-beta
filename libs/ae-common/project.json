@@ -1,0 +1,32 @@
+{
+  "root": "libs/ae-common",
+  "sourceRoot": "libs/ae-common/src",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/ae-common",
+        "main": "libs/ae-common/src/index.ts",
+        "tsConfig": "libs/ae-common/tsconfig.lib.json",
+        "assets": ["libs/ae-common/*.md"]
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/ae-common/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/ae-common"],
+      "options": {
+        "jestConfig": "libs/ae-common/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
