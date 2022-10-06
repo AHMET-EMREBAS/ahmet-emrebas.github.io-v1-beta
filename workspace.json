@@ -1,11 +1,14 @@
 {
   "version": 2,
   "projects": {
-    "ae-common": "libs/ae-common",
     "api": "apps/api",
+    "api-auth": "libs/api-auth",
+    "api-common": "libs/api-common",
     "api-inventory": "libs/api-inventory",
+    "commonjs": "libs/commonjs",
     "desktop": "apps/desktop",
     "web": "apps/web",
+    "web-auth": "libs/web-auth",
     "web-e2e": "apps/web-e2e",
     "web-inventory": "libs/web-inventory"
   }
