@@ -1,0 +1,32 @@
+{
+  "root": "libs/ae-models",
+  "sourceRoot": "libs/ae-models/src",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/ae-models",
+        "main": "libs/ae-models/src/index.ts",
+        "tsConfig": "libs/ae-models/tsconfig.lib.json",
+        "assets": ["libs/ae-models/*.md"]
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/ae-models/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/ae-models"],
+      "options": {
+        "jestConfig": "libs/ae-models/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
