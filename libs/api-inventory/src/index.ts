@@ -1,1 +1,1 @@
-export * from './lib/api-inventory.module';
+export * from "./lib";

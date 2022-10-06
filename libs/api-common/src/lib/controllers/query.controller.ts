@@ -9,6 +9,7 @@ import {
   Query,
   ValidationPipe,
 } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { InjectRepository } from '@nestjs/typeorm';
 
 import { Role } from '../decorators/role.meta';
@@ -23,6 +24,7 @@ export function QueryController(options: QueryControllerOptions) {
   const SINGULAR_PATH = options.entity.name.toLowerCase();
   const PLURAL_PATH = SINGULAR_PATH + 's';
 
+  @ApiTags(`Query ${options.entity.name} Controller`)
   @Role(`Read ${options.entity.name}`)
   @Controller()
   class QController {
@@ -39,9 +41,19 @@ export function QueryController(options: QueryControllerOptions) {
      */
     @Get(PLURAL_PATH)
     getAll(
-      @Query(new ValidationPipe(), new ValidationPipe({ transform: true }))
+      @Query(
+        new ValidationPipe({
+          transform: true,
+          transformOptions: { exposeUnsetFields: false },
+        })
+      )
       queryDTO: QueryDTO,
-      @Query(new ValidationPipe(), new ValidationPipe({ transform: true }))
+      @Query(
+        new ValidationPipe({
+          transform: true,
+          transformOptions: { exposeUnsetFields: false },
+        })
+      )
       whereDTO: WhereDTO
     ) {
       console.log('Query DTO: ', queryDTO);

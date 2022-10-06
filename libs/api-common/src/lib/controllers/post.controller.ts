@@ -10,6 +10,7 @@ import {
   Put,
   ValidationPipe,
 } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { InjectRepository } from '@nestjs/typeorm';
 
 import { Role } from '../decorators/role.meta';
@@ -22,6 +23,7 @@ export interface PostControllerOptions {
 export function PostController(options: PostControllerOptions) {
   const SINGULAR_PATH = options.entity.name.toLowerCase();
 
+  @ApiTags(`Post ${options.entity.name} Controller`)
   @Role(`Write ${options.entity.name}`)
   @Controller()
   class PController {

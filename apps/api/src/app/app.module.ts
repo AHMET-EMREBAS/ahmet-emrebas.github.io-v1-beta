@@ -3,6 +3,7 @@ import {
   Store,
   User,
 } from 'api-common';
+import { ApiInventoryModule } from 'api-inventory';
 
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -18,6 +19,7 @@ import { AppService } from './app.service';
       entities: [User, PriceLevel, Store],
       synchronize: true,
     }),
+    ApiInventoryModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -7,6 +7,7 @@ import {
   Param,
   ParseIntPipe,
 } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { InjectRepository } from '@nestjs/typeorm';
 
 import { Role } from '../decorators/role.meta';
@@ -17,6 +18,7 @@ export interface DeleteControllerOptions {
 export function DeleteController(options: DeleteControllerOptions) {
   const SINGULAR_PATH = options.entity.name.toLowerCase();
 
+  @ApiTags(`Delete ${options.entity.name} Controller`)
   @Role(`Delete ${options.entity.name}`)
   @Controller()
   class DController {
