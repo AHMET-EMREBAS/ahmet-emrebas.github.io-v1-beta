@@ -14,3 +14,9 @@ export interface IUser {
    */
   roles: string[];
 }
+
+export interface UserCookie {
+  sub: number;
+  username: string;
+  roles: string[];
+}
