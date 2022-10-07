@@ -1,6 +1,7 @@
 {
   "version": 2,
   "projects": {
+    "ae-material": "libs/ae-material",
     "api": "apps/api",
     "api-auth": "libs/api-auth",
     "api-common": "libs/api-common",

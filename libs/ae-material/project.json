@@ -1,0 +1,42 @@
+{
+  "projectType": "library",
+  "root": "libs/ae-material",
+  "sourceRoot": "libs/ae-material/src",
+  "prefix": "ae",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/angular:package",
+      "outputs": ["dist/libs/ae-material"],
+      "options": {
+        "project": "libs/ae-material/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/ae-material/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "libs/ae-material/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/ae-material"],
+      "options": {
+        "jestConfig": "libs/ae-material/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/ae-material/src/**/*.ts",
+          "libs/ae-material/src/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

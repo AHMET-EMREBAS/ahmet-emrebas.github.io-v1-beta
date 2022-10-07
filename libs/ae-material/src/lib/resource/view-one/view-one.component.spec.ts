@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ResourceComponent } from './resource.component';
+import { ViewOneComponent } from './view-one.component';
 
-describe('ResourceComponent', () => {
-  let component: ResourceComponent;
-  let fixture: ComponentFixture<ResourceComponent>;
+describe('ViewOneComponent', () => {
+  let component: ViewOneComponent;
+  let fixture: ComponentFixture<ViewOneComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ResourceComponent],
+      declarations: [ViewOneComponent],
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ResourceComponent);
+    fixture = TestBed.createComponent(ViewOneComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
