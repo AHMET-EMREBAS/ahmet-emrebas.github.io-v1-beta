@@ -21,7 +21,7 @@ export type TableColumn = {
 };
 
 @Component({
-  selector: 'ahmet-emrebas-dynamic-table',
+  selector: 'ae-dynamic-table',
   templateUrl: './dynamic-table.component.html',
   styleUrls: ['./dynamic-table.component.scss'],
 })
