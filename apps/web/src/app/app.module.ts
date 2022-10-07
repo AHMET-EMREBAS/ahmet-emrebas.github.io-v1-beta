@@ -22,6 +22,7 @@ import { StoreService } from './store.service';
     BrowserModule,
     BrowserAnimationsModule,
 
+    HttpClientModule,
     StoreModule.forRoot({}, {}),
     EffectsModule.forRoot([]),
     EntityDataModule.forRoot({
@@ -34,7 +35,6 @@ import { StoreService } from './store.service';
     }),
     DynamicTableModule,
 
-    HttpClientModule,
     RouterModule.forRoot([], { initialNavigation: 'enabledBlocking' }),
   ],
   providers: [

@@ -1940,31 +1940,31 @@
   dependencies:
     uuid "8.3.2"
 
-"@ngrx/data@^14.3.2":
-  version "14.3.2"
-  resolved "https://registry.yarnpkg.com/@ngrx/data/-/data-14.3.2.tgz#aa73768faefbe73479eb170fbee232a2ddb7d95b"
-  integrity sha512-+WpQXOG9sk20lkhPFOmJVM4fSeWKHrAwbAEgdD2UFB5gm08Razc03M5uY2u/z7oz2IhtN739pkkN+lqgSySxAw==
+"@ngrx/data@13":
+  version "13.2.0"
+  resolved "https://registry.yarnpkg.com/@ngrx/data/-/data-13.2.0.tgz#c31d27d11dc01a342d16636f948832edf471a64c"
+  integrity sha512-OYMZACQIz9XriClCO/7teXZa++TehWskfyMvjkoz0sR7bfBr07u8jiCQB+wLpN3+80skjh850+CaUoLzL09ePw==
   dependencies:
     tslib "^2.0.0"
 
-"@ngrx/effects@^14.3.2":
-  version "14.3.2"
-  resolved "https://registry.yarnpkg.com/@ngrx/effects/-/effects-14.3.2.tgz#a5cc62e78cec2f5ccce810b8d27a58cc91e72c4f"
-  integrity sha512-6bpGfA44jzwhBcmNaTwVgnFmYOX9iKPFpXyetDe41tVESo1CsNhUBPTmISDXKN9Mx2mwGbsMxrn6QFRypSsKAQ==
+"@ngrx/effects@13":
+  version "13.2.0"
+  resolved "https://registry.yarnpkg.com/@ngrx/effects/-/effects-13.2.0.tgz#36aba5af45ac034419509f799ed70acdb80228b1"
+  integrity sha512-HmWggpl3xGQFfUzON/uel5jSyUWsrGZsR5qR/oFLGjPRWzwKfdHrl0OcBl5IhFgFxT74cAi9F4JTICUytGRbFA==
   dependencies:
     tslib "^2.0.0"
 
-"@ngrx/entity@^14.3.2":
-  version "14.3.2"
-  resolved "https://registry.yarnpkg.com/@ngrx/entity/-/entity-14.3.2.tgz#160dbc6d4d8329e05135a7b352156ff5ee6d8103"
-  integrity sha512-Uyb36oVEiTbBJcb6TJ3OTseJdeamNKSxkvqw/uLHt+My87QaRaTEQceDWCsVCBEO4Q4Vgf2g0vbdPZdtGUZcbg==
+"@ngrx/entity@13":
+  version "13.2.0"
+  resolved "https://registry.yarnpkg.com/@ngrx/entity/-/entity-13.2.0.tgz#de90258a49ad1482ecd61262cba7c9b8097b5919"
+  integrity sha512-2zgz2/3BpYSvVNLqQM034lK3kQ0UoHj7kxmtf5Bkf2yWrjEGVmwyRUYDt1/vlfoBUE/KU7DDPHWJT8r5Li0ALA==
   dependencies:
     tslib "^2.0.0"
 
-"@ngrx/store@^14.3.2":
-  version "14.3.2"
-  resolved "https://registry.yarnpkg.com/@ngrx/store/-/store-14.3.2.tgz#91333c9c4d7b54bf98d842cb94e6afa3a6ea8df2"
-  integrity sha512-XGHjr0arh6gClo8Ce+xqJLvW9PkeXPW2tCo9Z5qMtHFI/z5dUppLVKGmMgD/fQBDyoqWTK5xu+89tDkdeZfRjQ==
+"@ngrx/store@13":
+  version "13.2.0"
+  resolved "https://registry.yarnpkg.com/@ngrx/store/-/store-13.2.0.tgz#43d4e9bf064808dd546ef1edbbcd08c2a8e0871a"
+  integrity sha512-3wlGMkfe0EXsiS6E6W0wCksuGapa5Z6JVFvKQMHFpXZ3XeixXKlULnemlcdMT7Yrnry+CGOtRHqkmKxLoQzhTw==
   dependencies:
     tslib "^2.0.0"
 

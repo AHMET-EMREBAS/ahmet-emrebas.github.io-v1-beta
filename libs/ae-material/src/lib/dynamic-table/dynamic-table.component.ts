@@ -26,13 +26,12 @@ export type TableColumn = {
   styleUrls: ['./dynamic-table.component.scss'],
 })
 export class DynamicTableComponent implements OnInit {
-  globalFilterFields!: string[];
+  globalFilterFields: string[] = ['id'];
+  contextMenuItems: MenuItem[] = [{ label: 'New', icon: 'pi pi-plus' }];
 
   selectedItems!: Record<string, any>[];
 
   contextMenuSelection!: Record<string, any>;
-
-  contextMenuItems!: MenuItem[];
 
   // @ViewChild('dt1') dt1!: Table;
 
