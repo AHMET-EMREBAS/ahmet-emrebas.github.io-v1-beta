@@ -6,6 +6,7 @@ import {
 } from '@angular/core';
 
 import { IStore } from 'commonjs';
+import { MenuItem } from 'primeng/api';
 import { Table } from 'primeng/table';
 
 @Component({
@@ -18,6 +19,21 @@ export class ResourceComponent implements OnInit {
     globalFilterFields: ['id', 'name', 'priceLevel'],
   };
   selectedItems = [];
+
+  contextMenuSelection!: any;
+
+  items: MenuItem[] = [
+    {
+      label: 'View',
+      icon: 'pi pi-fw pi-search',
+      command: () => console.log('View ', this.contextMenuSelection),
+    },
+    {
+      label: 'Delete',
+      icon: 'pi pi-fw pi-times',
+      command: () => console.log('Delete ', this.contextMenuSelection),
+    },
+  ];
 
   @ViewChild('dt1') dt1!: Table;
   columns = [
@@ -51,4 +67,6 @@ export class ResourceComponent implements OnInit {
   handleResize(event: any) {
     console.log(event);
   }
+
+  query() {}
 }

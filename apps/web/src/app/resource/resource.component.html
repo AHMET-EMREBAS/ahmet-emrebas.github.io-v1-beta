@@ -1,8 +1,12 @@
+<p-contextMenu #cm [model]="items"></p-contextMenu>
+
+
 <p-table #dt1 [columns]="selectedColumns" [value]=" (stores$ | async)!" responsiveLayout="scroll"
     styleClass="p-datatable-striped p-datatable-gridlines" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
     [globalFilterFields]="tableOptions.globalFilterFields!" [(selection)]="selectedItems" dataKey="id"
-    (onFilter)="handleFilter($event)" [resizableColumns]="true" [reorderableColumns]="true">
+    (onFilter)="handleFilter($event)" [resizableColumns]="true" [reorderableColumns]="true"
+    [(contextMenuSelection)]="contextMenuSelection" [contextMenu]="cm">
 
 
     <ng-template pTemplate="caption">
@@ -51,7 +55,7 @@
                 <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
             </td>
 
-            <td *ngFor="let col of columns">
+            <td *ngFor="let col of columns" [pContextMenuRow]="rowData">
                 {{rowData[col.field]}}
             </td>
         </tr>
