@@ -32,7 +32,11 @@
     #######################################################################################################################################################################
     [reorderableColumns]="true"
     ########################################################################################################################################################################
-    [(contextMenuSelection)]="contextMenuSelection" [contextMenu]="cm" (onPage)="handleOnPage($event)">
+    [(contextMenuSelection)]="contextMenuSelection"
+    ########################################################################################################################################################################1
+    [contextMenu]="cm"
+    ########################################################################################################################################################################12
+    (onPage)="handleOnPage($event)" (onSort)="handleSort($event)">
 
 
 
@@ -51,7 +55,7 @@
                     (click)="clear(dt1)"></button>
                 <span class="p-input-icon-left ml-auto">
                     <i class="pi pi-search"></i>
-                    <input pInputText type="text" (input)="filter($event, dt1)" placeholder="Search keyword" />
+                    <input pInputText type="text" [formControl]="globalFilterControl" placeholder="Search keyword" />
                 </span>
 
                 <p-checkbox [(ngModel)]="withDeleted" [binary]="true" [label]="'With Deleted'"></p-checkbox>

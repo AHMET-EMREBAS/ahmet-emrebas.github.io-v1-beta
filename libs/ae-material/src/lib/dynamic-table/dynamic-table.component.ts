@@ -3,8 +3,12 @@ import {
   Inject,
   OnInit,
 } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
-import { MenuItem } from 'primeng/api';
+import {
+  MenuItem,
+  SortEvent,
+} from 'primeng/api';
 import { Table } from 'primeng/table';
 
 import { DynamicTableService } from './dynamic-table.service';
@@ -26,6 +30,8 @@ export type TableColumn = {
   styleUrls: ['./dynamic-table.component.scss'],
 })
 export class DynamicTableComponent implements OnInit {
+  globalFilterControl = new FormControl('');
+
   withDeleted = false;
   globalFilterFields: string[] = ['id'];
   contextMenuItems: MenuItem[] = [{ label: 'New', icon: 'pi pi-plus' }];
@@ -74,6 +80,10 @@ export class DynamicTableComponent implements OnInit {
 
   handleFilter(event: any) {
     console.log(event);
+  }
+
+  handleSort(event: SortEvent) {
+    console.log('Sort : ', event);
   }
 
   handleResize(event: any) {
