@@ -2,8 +2,7 @@
     styleClass="p-datatable-striped p-datatable-gridlines" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
     [globalFilterFields]="tableOptions.globalFilterFields!" [(selection)]="selectedItems" dataKey="id"
-    (onFilter)="handleFilter($event)" [resizableColumns]="true" (onResize)="handleResize($event)"
-    [reorderableColumns]="true">
+    (onFilter)="handleFilter($event)" [resizableColumns]="true" [reorderableColumns]="true">
 
 
     <ng-template pTemplate="caption">
