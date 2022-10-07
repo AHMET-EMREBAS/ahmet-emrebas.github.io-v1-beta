@@ -30,7 +30,7 @@ import { StoreService } from './store.service';
         Store: {},
       },
       pluralNames: {
-        Store: 'store',
+        Store: 'Stores',
       },
     }),
     DynamicTableModule,

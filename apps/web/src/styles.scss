@@ -1,1 +1,44 @@
 /* You can add global styles to this file, and also import other style files */
+
+* {
+    box-sizing: border-box;
+}
+
+
+/* width */
+::-webkit-scrollbar {
+    width: 0.2rem;
+    // height: 3px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: var(--gray-300);
+    ;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: var(--gray-500);
+    border-radius: 5px;
+    transition: all ease-in-out 400ms;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    border-radius: 5px;
+    background: var(--gray-600);
+
+}
+
+
+.p-paginator-bottom {
+    position: sticky;
+    bottom: 0px;
+}
+
+.p-datatable-header {
+    position: sticky;
+    z-index: 100;
+    top: 0px;
+}

@@ -1,7 +1,9 @@
 import {
+  AfterViewInit,
   Component,
   Inject,
   OnInit,
+  ViewChild,
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
@@ -29,7 +31,8 @@ export type TableColumn = {
   templateUrl: './dynamic-table.component.html',
   styleUrls: ['./dynamic-table.component.scss'],
 })
-export class DynamicTableComponent implements OnInit {
+export class DynamicTableComponent implements OnInit, AfterViewInit {
+  @ViewChild('dt1') table!: Table;
   globalFilterControl = new FormControl('');
 
   withDeleted = false;
@@ -50,22 +53,32 @@ export class DynamicTableComponent implements OnInit {
 
   visibleColumns = this.columns;
 
+  totalRecord = 200;
+
   filteredEntities$ = this.dataService.entities$;
 
   constructor(
     @Inject(DynamicTableService.name)
     public readonly dataService: DynamicTableService<Record<string, any>>
   ) {}
-
-  ngOnInit(): void {
-    console.log('Table init');
+  ngAfterViewInit(): void {
+    this.dataService.getAll().subscribe((data) => {
+      setTimeout(() => {
+        this.table.totalRecords = 200;
+      });
+    });
   }
 
-  filter(event: any, table: Table) {
-    console.log(event);
+  ngOnInit(): void {}
 
-    console.log(table.paginator);
-    console.log(table);
+  filter(event: any, table: Table) {
+    // console.log(event);
+
+    console.log('Rows: ', table._rows);
+    console.log('Cont ', table._totalRecords);
+
+    // console.log(table.paginator);
+    // console.log(table);
     this.dataService.getWithQuery({
       take: table._first + '',
       skip: table._rows * table._first + '',
