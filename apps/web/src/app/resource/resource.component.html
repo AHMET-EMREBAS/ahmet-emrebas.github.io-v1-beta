@@ -2,18 +2,18 @@
 
 
 <p-table #dt1 [columns]="selectedColumns" [value]=" (stores$ | async)!" responsiveLayout="scroll"
-    styleClass="p-datatable-striped p-datatable-gridlines" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
-    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    styleClass="p-datatable-striped p-datatable-gridlines " [paginator]="true" [rows]="10"
+    [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
     [globalFilterFields]="tableOptions.globalFilterFields!" [(selection)]="selectedItems" dataKey="id"
     (onFilter)="handleFilter($event)" [resizableColumns]="true" [reorderableColumns]="true"
     [(contextMenuSelection)]="contextMenuSelection" [contextMenu]="cm">
 
 
     <ng-template pTemplate="caption">
-        <div class="flex flex-row gap-2">
+        <div class="flex flex-row gap-2 flex-wrap">
 
             <p-multiSelect [options]="columns" [(ngModel)]="selectedColumns" optionLabel="header"
-                selectedItemsLabel="{0} columns selected" [style]="{minWidth: '200px'}" placeholder="Choose Columns">
+                selectedItemsLabel="{0} columns selected" placeholder="Choose Columns">
             </p-multiSelect>
 
             <div class="flex-grow-1"></div>
@@ -31,7 +31,7 @@
     <ng-template pTemplate="header" let-columns>
         <tr>
             <th></th>
-            <th style="width: 3rem" pResizableColumn>
+            <th style="width: 3rem">
                 <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
             </th>
             <th *ngFor="let col of columns" [pSortableColumn]="col.field" pResizableColumn pReorderableColumn>
