@@ -6,6 +6,7 @@ import {
 } from '@angular/forms';
 
 import { ButtonModule } from 'primeng/button';
+import { CheckboxModule } from 'primeng/checkbox';
 import { ContextMenuModule } from 'primeng/contextmenu';
 import { InputTextModule } from 'primeng/inputtext';
 import { MultiSelectModule } from 'primeng/multiselect';
@@ -26,6 +27,7 @@ import { DynamicTableComponent } from './dynamic-table.component';
     InputTextModule,
     MultiSelectModule,
     ContextMenuModule,
+    CheckboxModule,
   ],
   exports: [DynamicTableComponent],
 })

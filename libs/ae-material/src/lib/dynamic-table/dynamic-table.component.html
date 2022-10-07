@@ -1,14 +1,43 @@
 <p-contextMenu #cm [model]="contextMenuItems"></p-contextMenu>
 
 
-<p-table #dt1 [columns]="visibleColumns" [value]="(filteredEntities$ | async)!" responsiveLayout="scroll"
-    styleClass="p-datatable-striped p-datatable-gridlines " [paginator]="true" [rows]="10"
-    [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-    [globalFilterFields]="globalFilterFields!" [(selection)]="selectedItems" dataKey="id"
-    (onFilter)="handleFilter($event)" [resizableColumns]="true" [reorderableColumns]="true"
+
+<p-table #dt1
+    ################################################################################################################################################
+    [columns]="visibleColumns"
+    #################################################################################################################################################
+    [value]="(filteredEntities$ | async)!"
+    ##################################################################################################################################################
+    responsiveLayout="scroll"
+    ####################################################################################################################################################
+    styleClass="p-datatable-striped p-datatable-gridlines "
+    #####################################################################################################################################################
+    [paginator]="true"
+    ######################################################################################################################################################
+    [rows]="10"
+    #######################################################################################################################################################
+    [showCurrentPageReport]="true"
+    ########################################################################################################################################################
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    #########################################################################################################################################################
+    [globalFilterFields]="globalFilterFields!"
+    ##########################################################################################################################################################
+    [(selection)]="selectedItems"
+    ############################################################################################################################################################
+    dataKey="id"
+    ###############################################################################################################################################################
+    (onFilter)="handleFilter($event)"
+    #################################################################################################################################################################
+    [resizableColumns]="true"
+    #######################################################################################################################################################################
+    [reorderableColumns]="true"
+    ########################################################################################################################################################################
     [(contextMenuSelection)]="contextMenuSelection" [contextMenu]="cm" (onPage)="handleOnPage($event)">
 
 
+
+
+    <!-- Table caption -->
     <ng-template pTemplate="caption">
         <div class="flex flex-row gap-2 flex-wrap">
 
@@ -24,10 +53,15 @@
                     <i class="pi pi-search"></i>
                     <input pInputText type="text" (input)="filter($event, dt1)" placeholder="Search keyword" />
                 </span>
+
+                <p-checkbox [(ngModel)]="withDeleted" [binary]="true" [label]="'With Deleted'"></p-checkbox>
             </div>
         </div>
     </ng-template>
 
+
+
+    <!-- Table headers  -->
     <ng-template pTemplate="header" let-columns>
         <tr>
             <th></th>
@@ -46,6 +80,12 @@
             </th>
         </tr>
     </ng-template>
+
+
+
+
+
+    <!-- Data content here  -->
     <ng-template pTemplate="body" let-rowData let-columns="columns" let-index="rowIndex">
         <tr [pReorderableRow]="index">
             <td>

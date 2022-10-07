@@ -26,6 +26,7 @@ export type TableColumn = {
   styleUrls: ['./dynamic-table.component.scss'],
 })
 export class DynamicTableComponent implements OnInit {
+  withDeleted = false;
   globalFilterFields: string[] = ['id'];
   contextMenuItems: MenuItem[] = [{ label: 'New', icon: 'pi pi-plus' }];
 
@@ -59,7 +60,12 @@ export class DynamicTableComponent implements OnInit {
 
     console.log(table.paginator);
     console.log(table);
-    this.dataService.getWithQuery('', {});
+    this.dataService.getWithQuery({
+      take: table._first + '',
+      skip: table._rows * table._first + '',
+
+      where: JSON.stringify(table.filter),
+    });
   }
 
   clear(table: Table) {
