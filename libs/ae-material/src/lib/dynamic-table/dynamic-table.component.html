@@ -14,11 +14,11 @@
         <div class="flex gap-2">
             <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash"
                 (click)="clear(dt1)"></button>
-            <!-- <span class="p-input-icon-left ml-auto">
-            <i class="pi pi-search"></i>
-            <input pInputText type="text" [formControl]="globalFilterControl"
-                (input)="filter(globalFilterControl.value)" placeholder="Search keyword" />
-        </span> -->
+            <span class="p-input-icon-left ml-auto">
+                <i class="pi pi-search"></i>
+                <input pInputText type="text" [formControl]="globalFilterControl" (input)="filter()"
+                    placeholder="Search keyword" />
+            </span>
 
             <!-- <p-checkbox [(ngModel)]="withDeleted" [binary]="true" [label]="'With Deleted'"></p-checkbox> -->
         </div>

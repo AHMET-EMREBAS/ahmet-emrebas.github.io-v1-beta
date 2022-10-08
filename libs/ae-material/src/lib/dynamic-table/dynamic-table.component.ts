@@ -70,4 +70,8 @@ export class DynamicTableComponent implements OnInit, AfterViewInit {
   clear(table: Table) {
     table.clear();
   }
+
+  filter() {
+    this.table.filterGlobal(this.globalFilterControl.value, 'contains');
+  }
 }
