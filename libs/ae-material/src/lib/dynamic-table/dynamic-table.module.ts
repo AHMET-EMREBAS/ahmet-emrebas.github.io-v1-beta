@@ -5,8 +5,10 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 
+import { ConfirmationService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { CheckboxModule } from 'primeng/checkbox';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ContextMenuModule } from 'primeng/contextmenu';
 import { InputTextModule } from 'primeng/inputtext';
 import { MultiSelectModule } from 'primeng/multiselect';
@@ -28,7 +30,9 @@ import { DynamicTableComponent } from './dynamic-table.component';
     MultiSelectModule,
     ContextMenuModule,
     CheckboxModule,
+    ConfirmDialogModule,
   ],
   exports: [DynamicTableComponent],
+  providers: [ConfirmationService],
 })
 export class DynamicTableModule {}

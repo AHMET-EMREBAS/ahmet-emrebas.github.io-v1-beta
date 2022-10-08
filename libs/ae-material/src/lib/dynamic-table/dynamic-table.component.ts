@@ -2,12 +2,16 @@ import {
   AfterViewInit,
   Component,
   Inject,
+  Input,
   OnInit,
   ViewChild,
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
-import { MenuItem } from 'primeng/api';
+import {
+  ConfirmationService,
+  MenuItem,
+} from 'primeng/api';
 import { Table } from 'primeng/table';
 import { BehaviorSubject } from 'rxjs';
 
@@ -34,12 +38,14 @@ export class DynamicTableComponent implements OnInit, AfterViewInit {
   globalFilterControl = new FormControl('');
 
   withDeleted = false;
-  globalFilterFields: string[] = ['id', 'name', 'priceLevel'];
-  contextMenuItems: MenuItem[] = [{ label: 'New', icon: 'pi pi-plus' }];
+  @Input() globalFilterFields: string[] = ['id', 'name', 'priceLevel'];
+  @Input() contextMenuItems: MenuItem[] = [
+    { label: 'New', icon: 'pi pi-plus' },
+  ];
 
-  selectedItems!: Record<string, any>[];
+  selectedItems: Record<string, any>[] = [];
 
-  contextMenuSelection!: Record<string, any>;
+  contextMenuSelection: Record<string, any> = {};
 
   // @ViewChild('dt1') dt1!: Table;
 
@@ -56,7 +62,8 @@ export class DynamicTableComponent implements OnInit, AfterViewInit {
 
   constructor(
     @Inject(DynamicTableService.name)
-    public readonly dataService: DynamicTableService<Record<string, any>>
+    public readonly dataService: DynamicTableService<Record<string, any>>,
+    private readonly confirmService: ConfirmationService
   ) {}
 
   ngAfterViewInit(): void {
@@ -65,6 +72,26 @@ export class DynamicTableComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     console.log('Table init');
+  }
+
+  deleteSelection() {
+    const item = this.selectedItems.shift();
+
+    if (item)
+      this.confirmService.confirm({
+        message: 'Are you sure to delete the item with id ' + item['id'] + '?',
+        accept: () => {
+          this.dataService.delete(item['id']);
+          setTimeout(() => {
+            this.deleteSelection();
+          }, 400);
+        },
+        reject: () => {
+          setTimeout(() => {
+            this.deleteSelection();
+          }, 400);
+        },
+      });
   }
 
   clear(table: Table) {

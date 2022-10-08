@@ -1,17 +1,21 @@
 <p-contextMenu #cm [model]="contextMenuItems"></p-contextMenu>
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
 
 
 
 <p-toolbar styleClass="sticky-top">
 
     <div class="flex flex-row gap-2 flex-wrap w-full">
-
+        <p-button styleClass="p-button-success" icon="pi pi-plus" label="New" [routerLink]="['create']">
+        </p-button>
         <p-multiSelect [options]="columns" [(ngModel)]="visibleColumns" optionLabel="header"
             selectedItemsLabel="{0} columns selected" placeholder="Choose Columns">
         </p-multiSelect>
 
         <div class="flex-grow-1"></div>
         <div class="flex gap-2">
+            <p-button styleClass="p-button-danger" icon="pi pi-trash" label="Delete" (click)="deleteSelection()">
+            </p-button>
             <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash"
                 (click)="clear(dt1)"></button>
             <span class="p-input-icon-left ml-auto">
