@@ -8,43 +8,43 @@ import { ApiProperty } from '@nestjs/swagger';
 
 @Exclude()
 export class QueryDTO {
-  @ApiProperty({ type: 'boolean', required: false })
-  @Expose()
-  @Transform(({ value }) => {
-    if (value === 'true') {
-      return true;
-    } else {
-      return false;
-    }
-  })
-  withDeleted: boolean;
+  // @ApiProperty({ type: 'boolean', required: false })
+  // @Expose()
+  // @Transform(({ value }) => {
+  //   if (value === 'true') {
+  //     return true;
+  //   } else {
+  //     return false;
+  //   }
+  // })
+  // withDeleted: boolean;
 
-  @ApiProperty({ type: 'number', required: false })
-  @Expose()
-  @Transform(({ value }) => {
-    const v = parseInt(value);
-    if (v > 0) {
-      return v;
-    }
-    return 0;
-  })
-  skip: number;
+  // @ApiProperty({ type: 'number', required: false })
+  // @Expose()
+  // @Transform(({ value }) => {
+  //   const v = parseInt(value);
+  //   if (v > 0) {
+  //     return v;
+  //   }
+  //   return 0;
+  // })
+  // skip: number;
 
-  @ApiProperty({
-    type: 'number',
-    required: false,
-  })
-  @Expose()
-  @Transform(({ value }) => {
-    const v = parseInt(value);
+  // @ApiProperty({
+  //   type: 'number',
+  //   required: false,
+  // })
+  // @Expose()
+  // @Transform(({ value }) => {
+  //   const v = parseInt(value);
 
-    if (v && v > 0 && v <= 100) {
-      return v;
-    }
+  //   if (v && v > 0 && v <= 100) {
+  //     return v;
+  //   }
 
-    return 20;
-  })
-  take: number;
+  //   return 20;
+  // })
+  // take: number;
 
   @ApiProperty({ type: 'object', required: false, default: { id: 'ASC' } })
   @Expose()

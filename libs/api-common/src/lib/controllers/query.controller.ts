@@ -41,7 +41,7 @@ export function QueryController(options: QueryControllerOptions) {
      * @returns
      */
     @Get(PLURAL_PATH)
-    getAll(
+    async getAll(
       @Query(
         new ValidationPipe({
           transform: true,
@@ -59,15 +59,21 @@ export function QueryController(options: QueryControllerOptions) {
     ) {
       console.log('Query DTO: ', queryDTO);
       console.log('Where DTO: ', whereDTO);
-      return this.repository.find({
+
+      return await this.repository.find({
         ...queryDTO,
-        where: whereDTO,
+        where: whereDTO.where,
       });
     }
 
     @Get(SINGULAR_PATH + '/:id')
     getOneById(@Param('id', ParseIntPipe) id: number) {
       return this.repository.findOneBy({ id });
+    }
+
+    @Get(SINGULAR_PATH + '/func/count')
+    count() {
+      return this.repository.count();
     }
   }
 

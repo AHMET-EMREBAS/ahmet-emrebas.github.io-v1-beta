@@ -3,10 +3,19 @@ import {
   EntityCollectionServiceElementsFactory,
 } from '@ngrx/data';
 
-export class DynamicTableService<T> extends EntityCollectionServiceBase<T> {
+import { HttpClientService } from '../http-client';
+
+export class DynamicTableService<
+  T extends Record<string, any>
+> extends EntityCollectionServiceBase<T> {
+  entityCount$ = this.httpClient.get<number>(
+    `${this.entityName.toLowerCase()}/func/count`
+  );
+
   constructor(
     entityName: string,
-    elementsFactory: EntityCollectionServiceElementsFactory
+    private readonly elementsFactory: EntityCollectionServiceElementsFactory,
+    private readonly httpClient: HttpClientService
   ) {
     super(entityName, elementsFactory);
   }

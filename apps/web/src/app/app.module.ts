@@ -5,8 +5,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 
 import {
+  BASE_HTTP_CLIENT_PATH,
   DynamicTableModule,
   DynamicTableService,
+  HttpClientService,
 } from 'ae-material';
 
 import { EntityDataModule } from '@ngrx/data';
@@ -42,6 +44,11 @@ import { StoreService } from './store.service';
       provide: DynamicTableService.name,
       useClass: StoreService,
     },
+    {
+      provide: BASE_HTTP_CLIENT_PATH,
+      useValue: 'http://localhost:3333/api',
+    },
+    HttpClientService,
   ],
   bootstrap: [AppComponent],
 })

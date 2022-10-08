@@ -7,11 +7,9 @@ import {
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
-import {
-  MenuItem,
-  SortEvent,
-} from 'primeng/api';
+import { MenuItem } from 'primeng/api';
 import { Table } from 'primeng/table';
+import { BehaviorSubject } from 'rxjs';
 
 import { DynamicTableService } from './dynamic-table.service';
 
@@ -36,7 +34,7 @@ export class DynamicTableComponent implements OnInit, AfterViewInit {
   globalFilterControl = new FormControl('');
 
   withDeleted = false;
-  globalFilterFields: string[] = ['id'];
+  globalFilterFields: string[] = ['id', 'name', 'priceLevel'];
   contextMenuItems: MenuItem[] = [{ label: 'New', icon: 'pi pi-plus' }];
 
   selectedItems!: Record<string, any>[];
@@ -52,62 +50,24 @@ export class DynamicTableComponent implements OnInit, AfterViewInit {
   ];
 
   visibleColumns = this.columns;
+  data$ = this.dataService.filteredEntities$;
 
-  totalRecord = 200;
-
-  filteredEntities$ = this.dataService.entities$;
+  change$ = new BehaviorSubject<any>({});
 
   constructor(
     @Inject(DynamicTableService.name)
     public readonly dataService: DynamicTableService<Record<string, any>>
   ) {}
+
   ngAfterViewInit(): void {
-    this.dataService.getAll().subscribe((data) => {
-      setTimeout(() => {
-        this.table.totalRecords = 200;
-      });
-    });
+    this.dataService.getAll();
   }
 
-  ngOnInit(): void {}
-
-  filter(event: any, table: Table) {
-    // console.log(event);
-
-    console.log('Rows: ', table._rows);
-    console.log('Cont ', table._totalRecords);
-
-    // console.log(table.paginator);
-    // console.log(table);
-    this.dataService.getWithQuery({
-      take: table._first + '',
-      skip: table._rows * table._first + '',
-
-      where: JSON.stringify(table.filter),
-    });
+  ngOnInit(): void {
+    console.log('Table init');
   }
 
   clear(table: Table) {
     table.clear();
-  }
-
-  handleFilter(event: any) {
-    console.log(event);
-  }
-
-  handleSort(event: SortEvent) {
-    console.log('Sort : ', event);
-  }
-
-  handleResize(event: any) {
-    console.log(event);
-  }
-
-  query() {
-    console.log('query');
-  }
-
-  handleOnPage(event: any) {
-    console.log('Page Event : ', event);
   }
 }
