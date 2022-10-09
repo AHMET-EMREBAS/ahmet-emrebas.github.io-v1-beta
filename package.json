@@ -62,6 +62,7 @@
     "@nrwl/nest": "13",
     "@nrwl/node": "13.10.6",
     "@nrwl/workspace": "13.10.6",
+    "@schematics/angular": "^14.2.5",
     "@types/bcrypt": "^5.0.0",
     "@types/jest": "27.0.2",
     "@types/node": "16.11.7",

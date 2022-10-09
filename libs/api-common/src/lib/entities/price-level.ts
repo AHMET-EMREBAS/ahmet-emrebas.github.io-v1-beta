@@ -8,18 +8,19 @@ import {
   Entity,
 } from 'typeorm';
 
-import { ApiProperty } from '@nestjs/swagger';
-
+import { Property } from '../property';
 import { BaseEntity } from './base.entity';
 
 @Entity()
 @Exclude()
 export class PriceLevel extends BaseEntity implements IPriceLevel {
-  @ApiProperty({
+  @Property({
     type: 'string',
+    inputType: 'text',
     required: true,
     minLength: 3,
-    uniqueItems: true,
+    maxLength: 20,
+    unique: true,
   })
   @Expose()
   @Column({ type: 'text', unique: true })

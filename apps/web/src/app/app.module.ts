@@ -6,7 +6,6 @@ import { RouterModule } from '@angular/router';
 
 import {
   BASE_HTTP_CLIENT_PATH,
-  DynamicTableModule,
   DynamicTableService,
   HttpClientService,
 } from 'ae-material';
@@ -35,7 +34,6 @@ import { StoreService } from './store.service';
         Store: 'Stores',
       },
     }),
-    DynamicTableModule,
 
     RouterModule.forRoot([], { initialNavigation: 'enabledBlocking' }),
   ],

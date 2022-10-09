@@ -9,14 +9,11 @@ export interface IUser {
    */
   password: string;
 
-  /**
-   * User can access the resouces allowed for these roles.
-   */
-  roles: string[];
+  permissions: string;
 }
 
 export interface UserCookie {
   sub: number;
   username: string;
-  roles: string[];
+  permissions: string;
 }

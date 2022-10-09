@@ -1,28 +1,58 @@
+import { Request } from 'express';
 import {
-  PriceLevel,
-  Store,
-  StoreView,
-} from 'api-common';
+  Column,
+  DataSource,
+  Entity,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
-import { Module } from '@nestjs/common';
-import { PartialType } from '@nestjs/swagger';
+import {
+  DynamicModule,
+  Module,
+  Scope,
+} from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
-import { ResourceModule } from './resources/resource.module';
+import { ENTITIES } from './entities/entities';
+import {
+  InventoryResourceController,
+  RESPOSITORY_TOKEN,
+} from './inventory-resource.controller';
 
-@Module({
-  imports: [
-    ResourceModule({
-      viewEntity: StoreView,
-      entities: [Store, PriceLevel, StoreView],
-      createDTO: Store,
-      updateDTO: PartialType(Store),
-    }),
-    ResourceModule({
-      viewEntity: PriceLevel,
-      entities: [PriceLevel],
-      createDTO: PriceLevel,
-      updateDTO: PartialType(PriceLevel),
-    }),
-  ],
-})
-export class ApiInventoryModule {}
+@Entity()
+class Some {
+  @PrimaryGeneratedColumn() id: number;
+  @Column()
+  some: string;
+}
+
+@Module({})
+export class ApiInventoryModule {
+  static configure(): DynamicModule {
+    return {
+      module: ApiInventoryModule,
+      controllers: [InventoryResourceController],
+      imports: [
+        TypeOrmModule.forRoot({
+          type: 'better-sqlite3',
+          database: './database/inventory.sqlite',
+          autoLoadEntities: true,
+          synchronize: true,
+          dropSchema: true,
+        }),
+        TypeOrmModule.forFeature(ENTITIES),
+      ],
+      providers: [
+        {
+          scope: Scope.REQUEST,
+          inject: ['REQUEST', DataSource],
+          provide: RESPOSITORY_TOKEN,
+          useFactory: (req: Request, datasource: DataSource) => {
+            const { resource } = req.params;
+            return datasource.getRepository(resource);
+          },
+        },
+      ],
+    };
+  }
+}

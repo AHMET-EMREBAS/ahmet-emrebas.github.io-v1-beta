@@ -17,8 +17,7 @@ import {
   ViewEntity,
 } from 'typeorm';
 
-import { ApiProperty } from '@nestjs/swagger';
-
+import { Property } from '../property';
 import { BaseEntity } from './base.entity';
 import { PriceLevel } from './price-level';
 
@@ -26,11 +25,13 @@ import { PriceLevel } from './price-level';
 @Exclude()
 export class Store extends BaseEntity implements IStore {
   @Expose()
-  @ApiProperty({
+  @Property({
     type: 'number',
+    inputType: 'select-one',
+    selectFrom: 'pricelevel',
+    selectLabelProperty: 'name',
+    selectValueProperty: 'id',
     required: false,
-    description: 'Pricelevel ID',
-    minimum: 1,
   })
   @ManyToOne(() => PriceLevel, {
     eager: true,
@@ -40,11 +41,12 @@ export class Store extends BaseEntity implements IStore {
   priceLevel: IPriceLevel;
 
   @Expose()
-  @ApiProperty({
+  @Property({
     type: 'string',
-    required: true,
-    uniqueItems: true,
+    inputType: 'text',
     minLength: 3,
+    maxLength: 50,
+    unique: true,
   })
   @Column({ type: 'text', unique: true })
   name: string;
@@ -55,7 +57,6 @@ export class Store extends BaseEntity implements IStore {
     dataSource
       .createQueryBuilder()
       .select('*')
-
       .addSelect('priceLevel.name', 'priceLevel')
       .from(Store, 'store')
       .leftJoin(PriceLevel, 'priceLevel', 'priceLevel.id = store.priceLevel'),

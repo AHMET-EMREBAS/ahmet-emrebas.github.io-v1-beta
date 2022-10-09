@@ -3,7 +3,6 @@ import {
   Component,
   Inject,
   Input,
-  OnInit,
   ViewChild,
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
@@ -13,7 +12,6 @@ import {
   MenuItem,
 } from 'primeng/api';
 import { Table } from 'primeng/table';
-import { BehaviorSubject } from 'rxjs';
 
 import { DynamicTableService } from './dynamic-table.service';
 
@@ -33,8 +31,9 @@ export type TableColumn = {
   templateUrl: './dynamic-table.component.html',
   styleUrls: ['./dynamic-table.component.scss'],
 })
-export class DynamicTableComponent implements OnInit, AfterViewInit {
+export class DynamicTableComponent implements AfterViewInit {
   @ViewChild('dt1') table!: Table;
+
   globalFilterControl = new FormControl('');
 
   withDeleted = false;
@@ -56,9 +55,8 @@ export class DynamicTableComponent implements OnInit, AfterViewInit {
   ];
 
   visibleColumns = this.columns;
-  data$ = this.dataService.filteredEntities$;
 
-  change$ = new BehaviorSubject<any>({});
+  data$ = this.dataService.filteredEntities$;
 
   constructor(
     @Inject(DynamicTableService.name)
@@ -68,10 +66,6 @@ export class DynamicTableComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.dataService.getAll();
-  }
-
-  ngOnInit(): void {
-    console.log('Table init');
   }
 
   deleteSelection() {
