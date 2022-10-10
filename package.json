@@ -29,6 +29,7 @@
     "@ngrx/effects": "13",
     "@ngrx/entity": "13",
     "@ngrx/store": "13",
+    "@nrwl/nx-plugin": "13",
     "bcrypt": "^5.1.0",
     "better-sqlite3": "^7.6.2",
     "class-transformer": "^0.5.1",
@@ -56,8 +57,10 @@
     "@nrwl/angular": "13",
     "@nrwl/cli": "13",
     "@nrwl/cypress": "13.10.6",
+    "@nrwl/devkit": "13.10.6",
     "@nrwl/eslint-plugin-nx": "13.10.6",
     "@nrwl/jest": "13.10.6",
+    "@nrwl/js": "13.10.6",
     "@nrwl/linter": "13.10.6",
     "@nrwl/nest": "13",
     "@nrwl/node": "13.10.6",
@@ -86,6 +89,7 @@
     "postcss-url": "^10.1.1",
     "prettier": "^2.5.1",
     "ts-jest": "27.0.5",
+    "tslib": "^2.0.0",
     "typescript": "~4.6.2"
   }
 }

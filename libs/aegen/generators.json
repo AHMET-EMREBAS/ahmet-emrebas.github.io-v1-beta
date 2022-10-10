@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "name": "aegen",
+  "version": "0.0.1",
+  "generators": {
+    "aegen": {
+      "factory": "./src/generators/aegen/generator",
+      "schema": "./src/generators/aegen/schema.json",
+      "description": "aegen generator"
+    },
+    "resource": {
+      "factory": "./src/generators/resource/generator",
+      "schema": "./src/generators/resource/schema.json",
+      "description": "resource generator"
+    }
+  }
+}

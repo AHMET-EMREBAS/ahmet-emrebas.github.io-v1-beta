@@ -2,7 +2,8 @@
   "version": 2,
   "projects": {
     "ae-material": "libs/ae-material",
-
+    "aegen": "libs/aegen",
+    "aegen-e2e": "apps\\aegen-e2e",
     "api": "apps/api",
     "api-auth": "libs/api-auth",
     "api-common": "libs/api-common",

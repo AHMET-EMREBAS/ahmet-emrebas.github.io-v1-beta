@@ -15,8 +15,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@ahmet-emrebas/aegen": ["libs/aegen/src/index.ts"],
       "ae-material": ["libs/ae-material/src/index.ts"],
-
+      "aegen": ["libs/aegen/src/index.ts"],
       "api-auth": ["libs/api-auth/src/index.ts"],
       "api-common": ["libs/api-common/src/index.ts"],
       "api-inventory": ["libs/api-inventory/src/index.ts"],
