@@ -12,5 +12,7 @@
     }
   },
   "tags": [],
-  "implicitDependencies": ["cli"]
+  "implicitDependencies": [
+    "cli"
+  ]
 }

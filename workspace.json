@@ -2,7 +2,14 @@
   "version": 2,
   "projects": {
     "cli": "libs/cli",
-    "cli-e2e": "apps\\cli-e2e",
-    "common": "libs/common"
+    "cli-e2e": "apps/cli-e2e",
+    "common": "libs/common",
+    "inventory": "apps/inventory",
+    "inventory-client": "apps/inventory-client",
+    "inventory-client-e2e": "apps/inventory-client-e2e",
+    "pos-client": "apps/pos-client",
+    "pos-client-e2e": "apps/pos-client-e2e",
+    "pos-client-pos-desktop": "apps/pos-client/pos-desktop",
+    "pos-desktop": "apps/pos-desktop"
   }
 }

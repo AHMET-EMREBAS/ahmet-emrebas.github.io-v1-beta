@@ -1,0 +1,76 @@
+{
+  "root": "apps/pos-client/pos-desktop",
+  "sourceRoot": "apps/pos-client/pos-desktop/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "nx-electron:build",
+      "outputs": [
+        "{options.outputPath}"
+      ],
+      "options": {
+        "outputPath": "dist/apps/pos-client/pos-desktop",
+        "main": "apps/pos-client/pos-desktop/src/main.ts",
+        "tsConfig": "apps/pos-client/pos-desktop/tsconfig.app.json",
+        "assets": [
+          "apps/pos-client/pos-desktop/src/assets"
+        ]
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "extractLicenses": true,
+          "inspect": false,
+          "fileReplacements": [
+            {
+              "replace": "apps/pos-client/pos-desktop/src/environments/environment.ts",
+              "with": "apps/pos-client/pos-desktop/src/environments/environment.prod.ts"
+            }
+          ]
+        }
+      }
+    },
+    "serve": {
+      "executor": "nx-electron:execute",
+      "options": {
+        "buildTarget": "pos-client-pos-desktop:build"
+      }
+    },
+    "package": {
+      "executor": "nx-electron:package",
+      "options": {
+        "name": "pos-client-pos-desktop",
+        "outputPath": "dist/packages",
+        "prepackageOnly": true
+      }
+    },
+    "make": {
+      "executor": "nx-electron:make",
+      "options": {
+        "name": "pos-client-pos-desktop",
+        "outputPath": "dist/executables"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": [
+        "{options.outputFile}"
+      ],
+      "options": {
+        "lintFilePatterns": [
+          "apps/pos-client/pos-desktop/**/*.ts"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": [
+        "coverage/apps/pos-client/pos-desktop"
+      ],
+      "options": {
+        "jestConfig": "apps/pos-client/pos-desktop/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}
