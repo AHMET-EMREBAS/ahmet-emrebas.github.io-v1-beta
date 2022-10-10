@@ -7,6 +7,8 @@
     "inventory": "apps/inventory",
     "inventory-client": "apps/inventory-client",
     "inventory-client-e2e": "apps/inventory-client-e2e",
+    "material": "libs/material",
+    "material-e2e": "apps/material-e2e",
     "pos-client": "apps/pos-client",
     "pos-client-e2e": "apps/pos-client-e2e",
     "pos-client-pos-desktop": "apps/pos-client/pos-desktop",

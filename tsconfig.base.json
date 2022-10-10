@@ -16,7 +16,8 @@
     "baseUrl": ".",
     "paths": {
       "cli": ["libs/cli/src/index.ts"],
-      "common": ["libs/common/src/index.ts"]
+      "common": ["libs/common/src/index.ts"],
+      "material": ["libs/material/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
