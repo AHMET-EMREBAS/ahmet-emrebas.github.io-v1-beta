@@ -15,10 +15,10 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "models/*": ["libs/models/src/lib/*"],
+      "api-core": ["libs/api-core/src/index.ts"],
       "auth": ["libs/auth/src/index.ts"],
       "cli": ["libs/cli/src/index.ts"],
-      "common": ["libs/common/src/index.ts"],
+      "dtos": ["libs/dtos/src/index.ts"],
       "utils": ["libs/utils/src/index.ts"]
     }
   },

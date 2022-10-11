@@ -1,29 +1,29 @@
 {
-  "root": "libs/common",
-  "sourceRoot": "libs/common/src",
+  "root": "libs/dtos",
+  "sourceRoot": "libs/dtos/src",
   "targets": {
     "build": {
       "executor": "@nrwl/js:tsc",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/libs/common",
-        "main": "libs/common/src/index.ts",
-        "tsConfig": "libs/common/tsconfig.lib.json",
-        "assets": ["libs/common/*.md"]
+        "outputPath": "dist/libs/dtos",
+        "main": "libs/dtos/src/index.ts",
+        "tsConfig": "libs/dtos/tsconfig.lib.json",
+        "assets": ["libs/dtos/*.md"]
       }
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["libs/common/**/*.ts"]
+        "lintFilePatterns": ["libs/dtos/**/*.ts"]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/common"],
+      "outputs": ["coverage/libs/dtos"],
       "options": {
-        "jestConfig": "libs/common/jest.config.js",
+        "jestConfig": "libs/dtos/jest.config.js",
         "passWithNoTests": true
       }
     }

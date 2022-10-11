@@ -9,6 +9,7 @@ import { UnprocessableEntityException } from '@nestjs/common';
 
 export class ValidatorClass {
   private readonly uniqueFields!: string[];
+
   constructor(public readonly repo: Repository<any>) {
     this.uniqueFields = this.repo.metadata.uniques.map(
       (e) => e.columns[0].propertyName

@@ -24,6 +24,11 @@ async function bootstrap() {
   app.use(favicon(join(__dirname, 'assets', 'favicon.ico')));
 
   const config = new DocumentBuilder()
+    .setContact(
+      'Ahmet Emrebas',
+      'https://authdare.com',
+      'aemrebas.dev@gmail.com'
+    )
     .setTitle('Api')
     .setDescription('Resource api')
     .build();

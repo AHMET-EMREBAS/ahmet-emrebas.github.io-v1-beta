@@ -1,3 +1,0 @@
-# common
-
-Contains common interfaces

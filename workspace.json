@@ -2,12 +2,11 @@
   "version": 2,
   "projects": {
     "api": "apps/api",
+    "api-core": "libs/api-core",
     "auth": "libs/auth",
     "cli": "libs/cli",
     "cli-e2e": "apps/cli-e2e",
-    "common": "libs/common",
-    "desktop": "apps/desktop",
-    "models": "libs/models",
+    "dtos": "libs/dtos",
     "utils": "libs/utils",
     "web": "apps/web",
     "web-e2e": "apps/web-e2e"
