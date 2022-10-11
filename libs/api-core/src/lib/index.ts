@@ -1,2 +1,2 @@
-export * from "./api-core.module";
-export * from "./property";
+export * from './base.entity';
+export * from './repository.service';
