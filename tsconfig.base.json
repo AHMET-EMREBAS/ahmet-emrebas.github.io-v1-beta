@@ -15,7 +15,10 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "cli": ["libs/cli/src/index.ts"]
+      "auth": ["libs/auth/src/index.ts"],
+      "cli": ["libs/cli/src/index.ts"],
+      "common": ["libs/common/src/index.ts"],
+      "utils": ["libs/utils/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
