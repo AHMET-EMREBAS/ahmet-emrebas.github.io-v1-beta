@@ -4,20 +4,18 @@ import {
 } from 'class-transformer';
 import {
   IsNotEmpty,
+  IsOptional,
   Min,
 } from 'class-validator';
 import {
   Column,
-  CreateDateColumn,
   Entity,
   JoinColumn,
   ManyToOne,
 } from 'typeorm';
 
 import { BaseEntity } from '../common/base.entity';
-import { Pricelevel } from './price-level.entity';
 import { Sku } from './sku.entity';
-import { Store } from './store.entity';
 
 @Entity()
 @Exclude()
@@ -26,7 +24,7 @@ export class Sale extends BaseEntity {
   @IsNotEmpty()
   @ManyToOne(() => Sku, { eager: true })
   @JoinColumn()
-  item: Sku;
+  sku: Sku;
 
   @Expose()
   @Column({ type: 'int' })
@@ -35,16 +33,11 @@ export class Sale extends BaseEntity {
 
   @Expose()
   @Column({ type: 'numeric', nullable: true })
-  customUnitPrice: number;
+  @IsOptional()
+  customPrice: number;
 
   @Expose()
-  @ManyToOne(() => Pricelevel)
-  @JoinColumn()
-  pricelevel: Pricelevel;
-
-  @CreateDateColumn() soldAt: Date;
-
-  @ManyToOne(() => Store, { eager: true })
-  @JoinColumn()
-  store: Store;
+  @Column({ type: 'numeric', nullable: true })
+  @IsOptional()
+  discount: number;
 }

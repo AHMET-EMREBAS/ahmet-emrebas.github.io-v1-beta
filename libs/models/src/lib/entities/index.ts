@@ -1,5 +1,6 @@
 export * from "./category.entity";
 export * from "./clock-in-out.entity";
+export * from "./customer.entity";
 export * from "./department.entity";
 export * from "./price-level.entity";
 export * from "./price.entity";
@@ -7,4 +8,5 @@ export * from "./product.entity";
 export * from "./sale.entity";
 export * from "./sku.entity";
 export * from "./store.entity";
+export * from "./transaction.entity";
 export * from "./user.entity";
