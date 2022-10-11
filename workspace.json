@@ -1,7 +1,11 @@
 {
   "version": 2,
   "projects": {
+    "api": "apps/api",
     "cli": "libs/cli",
-    "cli-e2e": "apps/cli-e2e"
+    "cli-e2e": "apps/cli-e2e",
+    "desktop": "apps/desktop",
+    "web": "apps/web",
+    "web-e2e": "apps/web-e2e"
   }
 }
