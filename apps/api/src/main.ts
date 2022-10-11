@@ -24,9 +24,8 @@ async function bootstrap() {
   app.use(favicon(join(__dirname, 'assets', 'favicon.ico')));
 
   const config = new DocumentBuilder()
-    .setTitle('APP_NAME')
-    .setDescription('APP_DESCRIPTION')
-    .setVersion('APP_VERSION')
+    .setTitle('Api')
+    .setDescription('Resource api')
     .build();
 
   const document = SwaggerModule.createDocument(app, config);

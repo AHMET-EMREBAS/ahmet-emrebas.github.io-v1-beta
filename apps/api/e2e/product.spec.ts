@@ -22,8 +22,9 @@ describe('e2e', () => {
           name: '',
         })
         .expect(402)
+
         .then((res) => {
-          console.log('Response ', res);
+          console.log('Response ', res.body);
           expect(res.body.message).toBe(
             'name must be longer than or equal to 3'
           );

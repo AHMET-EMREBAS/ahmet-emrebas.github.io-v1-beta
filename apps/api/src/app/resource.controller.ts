@@ -1,4 +1,3 @@
-import { validate } from 'class-validator';
 import { Repository } from 'typeorm';
 
 import {
@@ -9,54 +8,57 @@ import {
   Param,
   Post,
   Put,
-  UnprocessableEntityException,
+  Scope,
 } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 
 import { InjectRepo } from './consts';
+import { ValidatorClass } from './validator.class';
 
-@Controller(':resource')
-export class ResourceController {
-  private readonly uniqueFields!: string[];
-  constructor(@InjectRepo() private readonly repo: Repository<any>) {
-    this.uniqueFields = this.repo.metadata.uniques.map(
-      (e) => e.columns[0].propertyName
-    );
-  }
+function Resource() {
+  return Param('resource');
+}
 
-  async isUnique(body: any) {
-    for (const u of this.uniqueFields) {
-      const found = await this.repo.findOneBy({ [u]: body[u] });
-      if (found) {
-        throw new UnprocessableEntityException(`${u} must be unique!`);
-      }
-    }
+class EmptyClass {}
+
+@ApiTags(ResourceController.name)
+@Controller({
+  path: ':resource',
+  scope: Scope.REQUEST,
+})
+export class ResourceController extends ValidatorClass {
+  constructor(@InjectRepo() repository: Repository<any>) {
+    super(repository);
   }
 
   @Get()
-  get() {
+  get(@Resource() resource: string) {
     return this.repo.find();
   }
 
-  @Post()
-  async post(@Body() body: any) {
-    const created = this.repo.create(body);
-    const errors = await validate(created);
+  @Get(':id')
+  getById(@Resource() resource: string, @Param('id') id: number) {
+    return this.repo.findOneBy({ id });
+  }
 
-    if (errors?.length > 0) {
-      console.log(errors);
-      throw new UnprocessableEntityException(errors[0]);
-    }
-    console.log(errors);
-    return this.repo.save(body);
+  @Post()
+  async post(@Resource() resource: string, @Body() body: EmptyClass) {
+    await this.validateDTO(body);
+    return await this.repo.save(body);
   }
 
   @Put(':id')
-  update(@Param(':id') id: number, @Body() body: any) {
-    return this.repo.update(id, body);
+  async update(
+    @Resource() resource: string,
+    @Param('id') id: number,
+    @Body() body: EmptyClass
+  ) {
+    await this.validateDTO(body, true);
+    return await this.repo.update(id, body);
   }
 
   @Delete(':id')
-  delete(@Param('id') id: number) {
+  delete(@Resource() resource: string, @Param('id') id: number) {
     return this.repo.delete(id);
   }
 }

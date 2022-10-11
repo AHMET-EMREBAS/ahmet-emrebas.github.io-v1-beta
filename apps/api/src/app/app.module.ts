@@ -1,14 +1,15 @@
+import * as entityMap from 'models/entities';
 import { join } from 'path';
 
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { ProvideRepo } from './consts';
-import * as entityMap from './entities';
 import { ResourceController } from './resource.controller';
 
 const entities = Object.values(entityMap);
 
+console.log(entities);
 @Module({
   imports: [
     TypeOrmModule.forRoot({

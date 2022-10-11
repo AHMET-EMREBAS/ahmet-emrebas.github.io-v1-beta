@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "models/*": ["libs/models/src/**/*"],
       "auth": ["libs/auth/src/index.ts"],
       "cli": ["libs/cli/src/index.ts"],
       "common": ["libs/common/src/index.ts"],
