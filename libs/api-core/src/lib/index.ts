@@ -1,2 +1,3 @@
-export * from './base.entity';
-export * from './repository.service';
+export * from "./base.controller";
+export * from "./base.entity";
+export * from "./repository.service";

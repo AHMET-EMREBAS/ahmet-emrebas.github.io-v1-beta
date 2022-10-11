@@ -49,9 +49,7 @@ export function BaseController<T extends BaseEntity>(
   class BController {
     constructor(public readonly repositoryService: RepositoryService<T>) {}
 
-    @ApiBody({
-      type: options.createDTO,
-    })
+    @ApiBody({ type: options.createDTO })
     @Post(SINGULAR_PATH)
     save(
       @Body(new ValidationPipe({ expectedType: options.createDTO })) body: T
@@ -90,6 +88,41 @@ export function BaseController<T extends BaseEntity>(
       }
 
       return this.repositoryService.softDelete(id);
+    }
+
+    @Put(SINGULAR_PATH + '/many/:id/:relation/:relationId')
+    addRelation(
+      @Param('id', ParseIntPipe) id: number,
+      @Param('relationId', ParseIntPipe) relationId: number,
+      @Param('relation') relation: string
+    ) {
+      this.repositoryService.addRelation(id, relation, relationId);
+    }
+
+    @Delete(SINGULAR_PATH + '/many/:id/:relation/:relationId')
+    removeRelation(
+      @Param('id', ParseIntPipe) id: number,
+      @Param('relationId', ParseIntPipe) relationId: number,
+      @Param('relation') relation: string
+    ) {
+      this.repositoryService.addRelation(id, relation, relationId);
+    }
+
+    @Put(SINGULAR_PATH + '/:id/:relation/:relationId')
+    setRelation(
+      @Param('id', ParseIntPipe) id: number,
+      @Param('relationId', ParseIntPipe) relationId: number,
+      @Param('relation') relation: string
+    ) {
+      this.repositoryService.setRelation(id, relation, relationId);
+    }
+
+    @Delete(SINGULAR_PATH + '/:id/:relation')
+    unsetRelation(
+      @Param('id', ParseIntPipe) id: number,
+      @Param('relation') relation: string
+    ) {
+      this.repositoryService.unsetRelation(id, relation);
     }
   }
 
