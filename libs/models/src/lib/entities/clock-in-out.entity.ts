@@ -7,10 +7,11 @@ import {
   ManyToOne,
 } from 'typeorm';
 
+import { BaseEntity } from '../common';
 import { User } from './user.entity';
 
 @Entity()
-export class Clockinout {
+export class Clockinout extends BaseEntity {
   @Expose()
   @CreateDateColumn({ update: false })
   start: Date;

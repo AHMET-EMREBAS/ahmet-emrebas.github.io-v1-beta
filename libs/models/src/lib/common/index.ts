@@ -1,2 +1,2 @@
-export * from "./base.entity";
-export * from "./transformers";
+export * from './base.entity';
+export * from './transformers';

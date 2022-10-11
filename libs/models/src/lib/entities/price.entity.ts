@@ -30,7 +30,19 @@ export class Price extends BaseEntity {
   @Column({ type: 'numeric', nullable: true })
   @Min(0)
   @IsOptional()
+  usedCost: number;
+
+  @Expose()
+  @Column({ type: 'numeric', nullable: true })
+  @Min(0)
+  @IsOptional()
   price: number;
+
+  @Expose()
+  @Column({ type: 'numeric', nullable: true })
+  @Min(0)
+  @IsOptional()
+  usedPrice: number;
 
   @ManyToOne(() => Pricelevel, { eager: true })
   @JoinColumn()
