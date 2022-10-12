@@ -1,22 +1,30 @@
-import { Sample } from 'models';
+import * as models from 'models';
 import { join } from 'path';
 
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-import { SampleModule } from './resources/sample/sample.module';
+import * as resources from './resources';
+
+const ResourceModules = Object.entries(resources)
+  .filter(([key, value]) => key.endsWith('Module'))
+  .map(([key, value]) => value);
+
+const Entities = Object.entries(models)
+  .filter(([key, value]) => !key.endsWith('DTO'))
+  .map(([key, value]) => value);
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
       type: 'better-sqlite3',
       database: join(__dirname, 'database', 'main.sqlite'),
-      entities: [Sample],
-      subscribers: [Sample],
+      entities: Entities,
+      subscribers: Entities,
       synchronize: true,
       dropSchema: true,
     }),
-    SampleModule,
+    ...ResourceModules,
   ],
 
   providers: [],

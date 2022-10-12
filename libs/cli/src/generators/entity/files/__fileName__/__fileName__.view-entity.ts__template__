@@ -6,7 +6,7 @@ import {
 
 @ViewEntity({
   expression: (ds: DataSource) => {
-    return ds.createQueryBuilder().select('*');
+    return ds.createQueryBuilder().select('*').from('<%= fileName %>', '<%= fileName %>');
   },
 })
 export class <%= className %>View {

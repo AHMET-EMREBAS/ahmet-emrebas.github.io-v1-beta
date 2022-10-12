@@ -1,4 +1,5 @@
 export * from './<%= fileName %>.entity';
+export * from './<%= fileName %>.view-entity';
 export * from './<%= fileName %>.create-dto';
 export * from './<%= fileName %>.update-dto';
 

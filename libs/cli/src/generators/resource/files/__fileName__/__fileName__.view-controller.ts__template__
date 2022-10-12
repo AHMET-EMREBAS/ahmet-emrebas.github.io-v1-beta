@@ -1,0 +1,19 @@
+import { QueryController } from 'api-core';
+import {
+  <%= className %>View,
+} from 'models';
+import { Controller } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
+import { <%= className %>ViewService } from './<%= fileName %>.view-service';
+
+@ApiTags(<%= className %>ViewController.name)
+@Controller()
+export class <%= className %>ViewController extends QueryController<<%= className %>View>({
+  entity: <%= className %>View,
+  singularName: 'view<%= fileName %>',
+  pluralName: 'view<%= fileName %>s',
+}) {
+  constructor(service: <%= className %>ViewService) {
+    super(service);
+  }
+}

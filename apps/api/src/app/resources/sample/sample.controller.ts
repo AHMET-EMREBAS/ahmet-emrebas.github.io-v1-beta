@@ -1,9 +1,5 @@
 import { CrudController } from 'api-core';
-import {
-  Sample,
-  SampleCreateDTO,
-  SampleUpdateDTO,
-} from 'models';
+import { Sample, SampleCreateDTO, SampleUpdateDTO } from 'models';
 
 import { Controller } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';

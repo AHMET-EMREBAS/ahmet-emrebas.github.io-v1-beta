@@ -1,0 +1,13 @@
+import { RepositoryService } from 'api-core';
+import { <%= className %>View } from 'models';
+import { Repository } from 'typeorm';
+
+import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+
+@Injectable()
+export class <%= className %>ViewService extends RepositoryService<<%= className %>View> {
+  constructor(@InjectRepository(<%= className %>View) <%= fileName %>ViewRepository: Repository<<%= className %>View>) {
+    super(<%= fileName %>ViewRepository);
+  }
+}

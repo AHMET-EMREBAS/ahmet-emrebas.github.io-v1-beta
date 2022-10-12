@@ -12,7 +12,6 @@ import {
   ApiOperation,
 } from '@nestjs/swagger';
 
-import { BaseEntity } from './base.entity';
 import { entityConsts } from './controller-paths';
 import { ID } from './param.decorators';
 import { Permission } from './permission.metadata';
@@ -34,9 +33,7 @@ export interface QueryControllerOptions {
  * @param options
  * @returns
  */
-export function QueryController<T extends BaseEntity>(
-  options: QueryControllerOptions
-) {
+export function QueryController<T>(options: QueryControllerOptions) {
   const {
     SINGULAR_PATH,
     PLURAL_PATH,

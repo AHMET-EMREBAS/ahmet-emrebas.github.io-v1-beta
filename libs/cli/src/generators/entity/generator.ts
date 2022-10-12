@@ -1,4 +1,3 @@
-import { appendFileSync } from 'fs';
 import {
   camelCase,
   snakeCase,
@@ -13,19 +12,13 @@ import {
   Tree,
 } from '@nrwl/devkit';
 
+import { addExports } from '../common';
 import { EntityGeneratorSchema } from './schema';
 
 export default async function (tree: Tree, options: EntityGeneratorSchema) {
   const project = getProjects(tree).get(options.project);
-
   const targetRoot = join(project.sourceRoot, 'lib');
 
-  const indexFilePath = join(targetRoot, 'index.ts');
-
-  console.table({
-    targetRoot,
-    indexFilePath,
-  });
   const templateOptions = {
     template: '',
     fileName: snakeCase(options.name).replace('_', '-'),
@@ -34,10 +27,7 @@ export default async function (tree: Tree, options: EntityGeneratorSchema) {
 
   generateFiles(tree, join(__dirname, 'files'), targetRoot, templateOptions);
 
-  appendFileSync(
-    indexFilePath,
-    `\nexport * from './${templateOptions.fileName}' `
-  );
+  addExports(targetRoot);
 
   await formatFiles(tree);
 }

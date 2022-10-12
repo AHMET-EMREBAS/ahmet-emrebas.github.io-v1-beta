@@ -7,10 +7,9 @@ import {
   QueryDeepPartialEntity,
 } from 'typeorm/query-builder/QueryPartialEntity';
 
-import { BaseEntity } from './base.entity';
 import { IncrementFieldDTO } from './query-options.dto';
 
-export class RepositoryService<T extends BaseEntity> {
+export class RepositoryService<T> {
   constructor(private readonly repository: Repository<T>) {}
 
   find(query: FindManyOptions<T>) {
