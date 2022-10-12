@@ -1,0 +1,3 @@
+export * from './<%= __fileName__ %>.controller';
+export * from './<%= __fileName__ %>.module';
+export * from './<%= __fileName__ %>.service';

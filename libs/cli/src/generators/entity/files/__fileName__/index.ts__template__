@@ -1,0 +1,4 @@
+export * from './<%= __fileName__ %>.entity';
+export * from './<%= __fileName__ %>.create-dto';
+export * from './<%= __fileName__ %>.update-dto';
+

@@ -1,6 +1,6 @@
 import { Property } from 'api-core';
 
-export class SampleCreateDTO {
+export class <%= className %>CreateDTO {
   @Property({
     minLength: 3,
     maxLength: 20,

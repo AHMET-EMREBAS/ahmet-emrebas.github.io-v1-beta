@@ -1,0 +1,12 @@
+import { BaseEntity } from 'api-core';
+import {
+  Column,
+  Entity,
+} from 'typeorm';
+
+@Entity()
+export class <%= className %> extends BaseEntity<<%= className %> {
+
+@Column({type:'text'}) name:string;
+
+}

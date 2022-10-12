@@ -47,6 +47,11 @@
       "factory": "./src/generators/form/generator",
       "schema": "./src/generators/form/schema.json",
       "description": "form generator"
+    },
+    "entity": {
+      "factory": "./src/generators/entity/generator",
+      "schema": "./src/generators/entity/schema.json",
+      "description": "entity generator"
     }
   }
 }
