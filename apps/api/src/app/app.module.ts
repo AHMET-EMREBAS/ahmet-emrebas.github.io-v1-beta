@@ -1,14 +1,11 @@
-import * as entityMap from 'models/entities';
 import { join } from 'path';
 
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { ProvideRepo } from './consts';
+import { SampleModule } from './resources/sample/sample.module';
 
-const entities = Object.values(entityMap);
-
-console.log(entities);
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -19,6 +16,7 @@ console.log(entities);
       synchronize: true,
       dropSchema: true,
     }),
+    SampleModule,
   ],
 
   providers: [ProvideRepo()],

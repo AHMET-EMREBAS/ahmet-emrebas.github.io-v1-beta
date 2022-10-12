@@ -1,4 +1,9 @@
-import * as path from 'path';
+import {
+  camelCase,
+  snakeCase,
+  upperFirst,
+} from 'lodash';
+import { join } from 'path';
 
 import {
   formatFiles,
@@ -9,15 +14,12 @@ import {
 import { ResourceGeneratorSchema } from './schema';
 
 export default async function (tree: Tree, options: ResourceGeneratorSchema) {
-  generateFiles(
-    tree,
-    path.join(__dirname, 'files'),
-    `apps/${options.project}/src/app/resources/${options.name}`,
-    {
-      template: '',
-      name: options.name,
-    }
-  );
+  const targetFolder = `./apps/${options.project}/src/app/resources`;
+  generateFiles(tree, join(__dirname, 'files'), targetFolder, {
+    template: '',
+    fileName: snakeCase(options.name).replace('_', '-'),
+    className: upperFirst(camelCase(options.name)),
+  });
 
   await formatFiles(tree);
 }
