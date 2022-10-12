@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { ClassConstructor } from 'class-transformer';
 
 import {
@@ -5,6 +6,11 @@ import {
   Query,
   ValidationPipe,
 } from '@nestjs/common';
+import {
+  ApiInternalServerErrorResponse,
+  ApiOkResponse,
+  ApiOperation,
+} from '@nestjs/swagger';
 
 import { BaseEntity } from './base.entity';
 import { entityConsts } from './controller-paths';
@@ -17,16 +23,19 @@ import {
 } from './query-options.dto';
 import { RepositoryService } from './repository.service';
 
-export interface ControllerOptions {
+export interface QueryControllerOptions {
   singularName: string;
   pluralName?: string;
   entity: ClassConstructor<any>;
-  createDTO: ClassConstructor<any>;
-  updateDTO: ClassConstructor<any>;
-  [key: string]: any;
 }
+
+/**
+ * Designed for entity views only. Contains only the find all and find by id operations.
+ * @param options
+ * @returns
+ */
 export function QueryController<T extends BaseEntity>(
-  options: ControllerOptions
+  options: QueryControllerOptions
 ) {
   const {
     SINGULAR_PATH,
@@ -39,17 +48,7 @@ export function QueryController<T extends BaseEntity>(
     DESCREMENT_PATH,
   } = entityConsts(options.singularName, options.pluralName);
 
-  const CreateDTOValidationPipe = new ValidationPipe({
-    expectedType: options.createDTO,
-    transform: true,
-    transformOptions: { exposeUnsetFields: false },
-    validationError: {
-      target: false,
-      value: false,
-    },
-  });
-
-  const UpdateDTOValidationPipe = new ValidationPipe({
+  const QueryValidationDTO = new ValidationPipe({
     transform: true,
     skipMissingProperties: true,
     skipNullProperties: true,
@@ -61,15 +60,18 @@ export function QueryController<T extends BaseEntity>(
     },
   });
 
-  class BController {
+  class CrudBaseController {
     constructor(public readonly service: RepositoryService<T>) {}
 
     @Permission({ get: options.entity.name })
+    @ApiOperation({ summary: `Find all ${PLURAL_PATH}.` })
+    @ApiOkResponse()
+    @ApiInternalServerErrorResponse()
     @Get(PLURAL_PATH)
     findAll(
-      @Query(UpdateDTOValidationPipe) paginatorDTO: PaginatorDTO,
-      @Query(UpdateDTOValidationPipe) whereQuery: WhereQueryDTO,
-      @Query(UpdateDTOValidationPipe) queryOptions: QueryOptionsDTO
+      @Query(QueryValidationDTO) paginatorDTO: PaginatorDTO,
+      @Query(QueryValidationDTO) whereQuery: WhereQueryDTO,
+      @Query(QueryValidationDTO) queryOptions: QueryOptionsDTO
     ) {
       return this.service.find({
         ...whereQuery,
@@ -79,11 +81,14 @@ export function QueryController<T extends BaseEntity>(
     }
 
     @Permission({ get: options.entity.name })
+    @ApiOperation({ summary: `Find one ${SINGULAR_PATH} by id.` })
+    @ApiOkResponse()
+    @ApiInternalServerErrorResponse()
     @Get(ID_PATH)
     findOneById(@ID() id: number) {
       return this.service.findOneById(id);
     }
   }
 
-  return BController;
+  return CrudBaseController;
 }

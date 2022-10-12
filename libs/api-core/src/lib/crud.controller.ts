@@ -42,7 +42,11 @@ export interface ControllerOptions {
   updateDTO: ClassConstructor<any>;
   [key: string]: any;
 }
-
+/**
+ * Complete controller including all database operations.
+ * @param options
+ * @returns
+ */
 export function CrudController<T extends BaseEntity>(
   options: ControllerOptions
 ) {
@@ -80,7 +84,7 @@ export function CrudController<T extends BaseEntity>(
     },
   });
 
-  class BController {
+  class CrudBaseController {
     constructor(public readonly service: RepositoryService<T>) {}
 
     @Permission({ get: options.entity.name })
@@ -213,5 +217,5 @@ export function CrudController<T extends BaseEntity>(
     }
   }
 
-  return BController;
+  return CrudBaseController;
 }

@@ -9,3 +9,4 @@ export * from './user.decorator';
 export * from './validation.pipe';
 export * from './controller-paths';
 export * from './crud.controller';
+export * from './query.controller';
