@@ -6,13 +6,12 @@ import {
 import { join } from 'path';
 
 import {
-  formatFiles,
   generateFiles,
   getProjects,
   Tree,
 } from '@nrwl/devkit';
 
-import { addExports } from '../common';
+import { addExport } from '../common';
 import { EntityGeneratorSchema } from './schema';
 
 export default async function (tree: Tree, options: EntityGeneratorSchema) {
@@ -27,7 +26,5 @@ export default async function (tree: Tree, options: EntityGeneratorSchema) {
 
   generateFiles(tree, join(__dirname, 'files'), targetRoot, templateOptions);
 
-  addExports(targetRoot);
-
-  await formatFiles(tree);
+  await addExport(tree, targetRoot, templateOptions.fileName);
 }

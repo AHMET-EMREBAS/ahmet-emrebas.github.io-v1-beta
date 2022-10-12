@@ -2,10 +2,10 @@ import { DataSource, ViewColumn, ViewEntity } from 'typeorm';
 
 @ViewEntity({
   expression: (ds: DataSource) => {
-    return ds.createQueryBuilder().select('*').from('todo', 'todo');
+    return ds.createQueryBuilder().select('*').from('department', 'department');
   },
 })
-export class TodoView {
+export class DepartmentView {
   @ViewColumn()
   name: string;
 }

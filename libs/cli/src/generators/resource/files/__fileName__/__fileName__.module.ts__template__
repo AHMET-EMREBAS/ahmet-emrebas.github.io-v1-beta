@@ -1,14 +1,14 @@
-import { <%= className %> } from 'models';
-
+import { <%= className %>, <%= className %>View  } from 'models';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-
 import { <%= className %>Controller } from './<%= fileName %>.controller';
 import { <%= className %>Service } from './<%= fileName %>.service';
+import { <%= className %>ViewController } from './<%= fileName %>.controller';
+import { <%= className %>ViewService } from './<%= fileName %>.service';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([<%= className %>])],
-  controllers: [<%= className %>Controller],
-  providers: [<%= className %>Service],
+  imports: [TypeOrmModule.forFeature([<%= className %> , <%= className %>View])],
+  controllers: [<%= className %>Controller, <%= className %>ViewController],
+  providers: [<%= className %>Service, <%= className %>ViewService],
 })
 export class <%= className %>Module {}

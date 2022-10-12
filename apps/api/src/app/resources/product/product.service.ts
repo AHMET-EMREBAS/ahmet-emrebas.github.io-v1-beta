@@ -1,15 +1,15 @@
 import { RepositoryService } from 'api-core';
-import { TodoView } from 'models';
+import { Product } from 'models';
 import { Repository } from 'typeorm';
 
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
-export class TodoViewService extends RepositoryService<TodoView> {
+export class ProductService extends RepositoryService<Product> {
   constructor(
-    @InjectRepository(TodoView) todoViewRepository: Repository<TodoView>
+    @InjectRepository(Product) productRepository: Repository<Product>
   ) {
-    super(todoViewRepository);
+    super(productRepository);
   }
 }

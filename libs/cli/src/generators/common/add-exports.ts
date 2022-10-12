@@ -1,17 +1,23 @@
 import {
-  lstatSync,
   readdirSync,
   writeFileSync,
 } from 'fs';
 import { join } from 'path';
 
-export function addExports(targetRoot: string) {
+import {
+  formatFiles,
+  Tree,
+} from '@nrwl/devkit';
+
+export async function addExport(
+  tree: Tree,
+  targetRoot: string,
+  fileName: string
+) {
   const dirs = readdirSync(targetRoot);
 
-  const exports = dirs
-    .filter((e) => lstatSync(join(targetRoot, e)).isDirectory())
-    .map((e) => `export * from './${e}'`)
-    .join('\n');
+  const exportText = `export * from './${fileName}'`;
 
-  writeFileSync(join(targetRoot, 'index.ts'), exports);
+  writeFileSync(join(targetRoot, 'index.ts'), exportText);
+  await formatFiles(tree);
 }
