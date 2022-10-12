@@ -8,7 +8,7 @@ export class QueryOptionsDTO {
     required: false,
   })
   @Transform(({ value }) => (value === 'true' ? true : false))
-  hardDelete: boolean | 'true' | 'false';
+  hardDelete: boolean;
 
   @Property({
     type: 'boolean',
@@ -31,4 +31,13 @@ export class PaginatorDTO {
 export class WhereQueryDTO {
   @Property({ type: 'text', required: false })
   where: any;
+}
+
+export class IncrementFieldDTO {
+  @Property({ type: 'string', minLength: 2, required: true })
+  property: string;
+
+  @Property({ type: 'number', required: true, min: '0' })
+  @Transform(({ value }) => value && parseInt(value))
+  value: number;
 }

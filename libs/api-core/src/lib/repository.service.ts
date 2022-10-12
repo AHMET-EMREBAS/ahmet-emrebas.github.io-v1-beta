@@ -1,5 +1,6 @@
 import {
   FindManyOptions,
+  FindOptionsWhere,
   Repository,
 } from 'typeorm';
 import {
@@ -7,6 +8,7 @@ import {
 } from 'typeorm/query-builder/QueryPartialEntity';
 
 import { BaseEntity } from './base.entity';
+import { IncrementFieldDTO } from './query-options.dto';
 
 export class RepositoryService<T extends BaseEntity> {
   constructor(private readonly repository: Repository<T>) {}
@@ -27,12 +29,12 @@ export class RepositoryService<T extends BaseEntity> {
     return this.repository.update(id, body);
   }
 
-  delete(id: number) {
-    return this.repository.delete(id);
-  }
-
-  softDelete(id: number) {
-    return this.repository.softDelete(id);
+  delete(id: number, hardDelete = false) {
+    if (hardDelete) {
+      return this.repository.delete(id);
+    } else {
+      return this.repository.softDelete(id);
+    }
   }
 
   addRelation(id: number, relation: string, relationId: number) {
@@ -65,5 +67,17 @@ export class RepositoryService<T extends BaseEntity> {
       .relation(relation)
       .of(id)
       .set(null);
+  }
+
+  increment(query: FindOptionsWhere<T>, body: IncrementFieldDTO) {
+    return this.repository.increment(query, body.property, body.value);
+  }
+
+  decrement(query: FindOptionsWhere<T>, body: IncrementFieldDTO) {
+    return this.repository.decrement(query, body.property, body.value);
+  }
+
+  restore(id: number) {
+    return this.repository.restore(id);
   }
 }

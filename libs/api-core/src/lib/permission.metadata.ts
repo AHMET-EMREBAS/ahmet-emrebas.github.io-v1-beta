@@ -8,6 +8,6 @@ export const PermissionToken = 'REQUIRED_PERMISSION';
  * @param permission
  * @returns
  */
-export function Permission(permission: string) {
+export function Permission(permission: Record<string, string>) {
   return SetMetadata(PermissionToken, permission);
 }

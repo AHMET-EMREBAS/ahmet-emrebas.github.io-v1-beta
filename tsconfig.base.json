@@ -18,7 +18,7 @@
       "api-core": ["libs/api-core/src/index.ts"],
       "auth": ["libs/auth/src/index.ts"],
       "cli": ["libs/cli/src/index.ts"],
-      "dtos": ["libs/dtos/src/index.ts"],
+
       "material": ["libs/material/src/index.ts"],
       "models": ["libs/models/src/index.ts"],
       "utils": ["libs/utils/src/index.ts"]
