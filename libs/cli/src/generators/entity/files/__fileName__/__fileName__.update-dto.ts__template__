@@ -1,5 +1,5 @@
 import { PartialType } from '@nestjs/swagger';
 
-import { <%= className %>CreateDTO } from './sample.create-dto';
+import { <%= className %>CreateDTO } from './<%= fileName %>.create-dto';
 
 export class <%= className %>UpdateDTO extends PartialType(<%= className %>CreateDTO) {}

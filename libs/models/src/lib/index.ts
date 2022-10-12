@@ -1,2 +1,3 @@
-export * from './models.module';
 export * from './sample';
+
+export * from './some' 

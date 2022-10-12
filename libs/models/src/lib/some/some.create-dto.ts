@@ -3,7 +3,7 @@ import {
   Property,
 } from 'api-core';
 
-export class <%= className %>CreateDTO extends BaseDTO<<%= className %>CreateDTO> {
+export class SomeCreateDTO extends BaseDTO<SomeCreateDTO> {
   @Property({
     minLength: 3,
     maxLength: 20,
