@@ -1,0 +1,22 @@
+{
+  "name": "product",
+  "columns": {
+    "name": {
+      "type": "text",
+      "unique": true,
+      "minLength": 3
+    },
+    "description": {
+      "type": "text",
+      "nullable": true
+    }
+  },
+  "relations": {
+    "category": {
+      "type": "many-to-one",
+      "target": "category",
+      "joinColumn": true,
+      "nullable": true
+    }
+  }
+}

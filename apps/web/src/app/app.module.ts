@@ -23,6 +23,7 @@ const routes = [
     loadChildren: () => import('./layout').then((m) => m.LayoutModule),
   },
 ];
+
 @NgModule({
   declarations: [AppComponent],
   imports: [

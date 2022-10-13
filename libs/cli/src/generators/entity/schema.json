@@ -22,6 +22,11 @@
         "index": 1
       },
       "x-prompt": "Which project will you add the resource?"
+    },
+    "entity": {
+      "type": "string",
+      "description": "Entity schema object as JSON string",
+      "x-prompt": "provide entity schema..."
     }
   },
   "required": ["name", "project"]
