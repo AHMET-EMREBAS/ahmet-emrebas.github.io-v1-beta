@@ -1,6 +1,6 @@
 <div class="full-container flex flex-column gap-2  justify-content-between">
 
-    <p-menubar class="sticky-top">
+    <p-menubar>
         <ng-template pTemplate="start">
             <img src="assets/icons/icon-72x72.png" height="40" class="mr-2" />
         </ng-template>
@@ -9,7 +9,7 @@
 
             <div class="p-inputgroup">
 
-                <input #searchInput type="search" id="search" pInputText placeholder="Search">
+                <input class="search-input" #searchInput type="search" id="search" pInputText placeholder="Search">
                 <button name="search" aria-roledescription="Search button" pButton class="p-inputgroup-addon"
                     (click)="search(searchInput)">
                     <i class="pi pi-search"></i>
@@ -29,94 +29,24 @@
             <p-card header="Card Header ">
                 <router-outlet></router-outlet>
             </p-card>
-            <p-card header="Card Header ">
-                <router-outlet></router-outlet>
-            </p-card>
-
-            <p-card header="Card Header ">
-                <router-outlet></router-outlet>
-            </p-card>
-            <p-card header="Card Header ">
-                <router-outlet></router-outlet>
-            </p-card>
-
-            <p-card header="Card Header ">
-                <router-outlet></router-outlet>
-            </p-card>
-            <p-card header="Card Header ">
-                <router-outlet></router-outlet>
-            </p-card>
-
-            <p-card header="Card Header ">
-                <router-outlet></router-outlet>
-            </p-card>
-            <p-card header="Card Header ">
-                <router-outlet></router-outlet>
-            </p-card>
-
-            <p-card header="Card Header ">
-                <router-outlet></router-outlet>
-            </p-card>
-            <p-card header="Card Header ">
-                <router-outlet></router-outlet>
-            </p-card>
-
-            <p-card header="Card Header ">
-                <router-outlet></router-outlet>
-            </p-card>
-            <p-card header="Card Header ">
-                <router-outlet></router-outlet>
-            </p-card>
-
-            <p-card header="Card Header ">
-                <router-outlet></router-outlet>
-            </p-card>
-            <p-card header="Card Header ">
-                <router-outlet></router-outlet>
-            </p-card>
-
-            <p-card header="Card Header ">
-                <router-outlet></router-outlet>
-            </p-card>
-            <p-card header="Card Header ">
-                <router-outlet></router-outlet>
-            </p-card>
-
-            <p-card header="Card Header ">
-                <router-outlet></router-outlet>
-            </p-card>
-            <p-card header="Card Header ">
-                <router-outlet></router-outlet>
-            </p-card>
-
-            <p-card header="Card Header ">
-                <router-outlet></router-outlet>
-            </p-card>
-            <p-card header="Card Header ">
-                <router-outlet></router-outlet>
-            </p-card>
-
-            <p-card header="Card Header ">
-                <router-outlet></router-outlet>
-            </p-card>
-            <p-card header="Card Header ">
-                <router-outlet></router-outlet>
-            </p-card>
-
-            <p-card header="Card Header ">
-                <router-outlet></router-outlet>
-            </p-card>
-            <p-card header="Card Header ">
-                <router-outlet></router-outlet>
-            </p-card>
 
 
 
         </div>
 
-        <p-menu [model]="resourcesMenu"></p-menu>
+        <p-menu [model]="configMenu"></p-menu>
     </div>
 
-    <p-toolbar class="sticky-bottom"></p-toolbar>
+    <p-toolbar [style]="{padding:'5px'}">
+
+
+        <div class="p-toolbar-group-left">
+            <small class="text-gray-700"> Copyright 2022 all rights are reserved. </small>
+        </div>
+
+        <div class="p-toolbar-group-right">
+            <p-button icon="pi pi-bell" styleClass="p-button-warning"></p-button>
+        </div>
+    </p-toolbar>
 
 </div>

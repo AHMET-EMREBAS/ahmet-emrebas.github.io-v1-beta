@@ -25,6 +25,19 @@ export class LayoutComponent implements OnInit {
     },
   ];
 
+  configMenu: MenuItem[] = [
+    {
+      label: 'Config',
+      icon: PrimeIcons.COG,
+      items: [
+        { label: 'Config 1' },
+        { label: 'Config 1' },
+        { label: 'Config 1' },
+        { label: 'Config 1' },
+      ],
+    },
+  ];
+
   constructor() {}
 
   ngOnInit(): void {}

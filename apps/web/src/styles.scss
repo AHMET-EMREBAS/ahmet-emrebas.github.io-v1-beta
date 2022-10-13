@@ -27,3 +27,13 @@ html {
 ::-webkit-scrollbar-thumb {
     background-color: darkgrey;
 }
+
+
+.p-menuitem-link {
+    border-left: 5px solid transparent;
+}
+
+.p-menuitem-link-active {
+
+    border-left: 5px solid royalblue;
+}
