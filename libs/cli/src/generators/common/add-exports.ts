@@ -1,6 +1,6 @@
 import {
+  appendFileSync,
   readdirSync,
-  writeFileSync,
 } from 'fs';
 import { join } from 'path';
 
@@ -16,8 +16,8 @@ export async function addExport(
 ) {
   const dirs = readdirSync(targetRoot);
 
-  const exportText = `export * from './${fileName}'`;
+  const exportText = `\nexport * from './${fileName}'`;
 
-  writeFileSync(join(targetRoot, 'index.ts'), exportText);
+  appendFileSync(join(targetRoot, 'index.ts'), exportText);
   await formatFiles(tree);
 }

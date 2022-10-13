@@ -3,8 +3,8 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { <%= className %>Controller } from './<%= fileName %>.controller';
 import { <%= className %>Service } from './<%= fileName %>.service';
-import { <%= className %>ViewController } from './<%= fileName %>.controller';
-import { <%= className %>ViewService } from './<%= fileName %>.service';
+import { <%= className %>ViewController } from './<%= fileName %>.view-controller';
+import { <%= className %>ViewService } from './<%= fileName %>.view-service';
 
 @Module({
   imports: [TypeOrmModule.forFeature([<%= className %> , <%= className %>View])],
