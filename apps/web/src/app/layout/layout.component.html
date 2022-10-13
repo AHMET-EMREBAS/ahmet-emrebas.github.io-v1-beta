@@ -1,4 +1,4 @@
-<div class="main-container flex flex-column gap-2  justify-content-between">
+<div class="full-container flex flex-column gap-2  justify-content-between">
 
     <p-menubar class="sticky-top">
         <ng-template pTemplate="start">
@@ -18,13 +18,13 @@
         </ng-template>
     </p-menubar>
 
-    <div class="main-container flex flex-row  gap-2   ">
+    <div class="full-container flex flex-row  gap-2   ">
 
 
 
         <p-menu [model]="resourcesMenu"></p-menu>
 
-        <div class="router-container flex flex-column gap-2 flex-grow-1  ">
+        <div class="full-container flex flex-column gap-2 flex-grow-1  ">
 
             <p-card header="Card Header ">
                 <router-outlet></router-outlet>
