@@ -1,0 +1,51 @@
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import {
+  RouterModule,
+  Routes,
+} from '@angular/router';
+
+import { SharedModule } from 'primeng/api';
+import { ButtonModule } from 'primeng/button';
+import { CardModule } from 'primeng/card';
+import { InputTextModule } from 'primeng/inputtext';
+import { MenuModule } from 'primeng/menu';
+import { MenubarModule } from 'primeng/menubar';
+import { ToolbarModule } from 'primeng/toolbar';
+
+import { LayoutComponent } from './layout.component';
+
+const routes: Routes = [
+  {
+    path: '',
+    component: LayoutComponent,
+    children: [
+      {
+        path: 'product',
+        loadChildren: () =>
+          import('../resources/product').then((m) => m.ProductModule),
+      },
+      {
+        path: 'sample',
+        loadChildren: () =>
+          import('../resources/sample').then((m) => m.SampleModule),
+      },
+    ],
+  },
+];
+
+@NgModule({
+  declarations: [LayoutComponent],
+  imports: [
+    CommonModule,
+    SharedModule,
+    RouterModule.forChild(routes),
+    MenubarModule,
+    MenuModule,
+    ButtonModule,
+    InputTextModule,
+    CardModule,
+    ToolbarModule,
+  ],
+})
+export class LayoutModule {}

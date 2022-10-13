@@ -6,9 +6,7 @@
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
-      "outputs": [
-        "{options.outputPath}"
-      ],
+      "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/apps/web",
         "index": "apps/web/src/index.html",
@@ -18,12 +16,21 @@
         "inlineStyleLanguage": "scss",
         "assets": [
           "apps/web/src/favicon.ico",
-          "apps/web/src/assets"
+          "apps/web/src/assets",
+          "apps/web/src/manifest.webmanifest"
         ],
         "styles": [
-          "apps/web/src/styles.scss"
+          "apps/web/src/styles.scss",
+          "node_modules/primeicons/primeicons.css",
+          "node_modules/primeng/resources/themes/lara-light-blue/theme.css",
+          "node_modules/primeng/resources/primeng.min.css",
+          "node_modules/quill/dist/quill.core.css",
+          "node_modules/quill/dist/quill.snow.css",
+          "node_modules/primeflex/primeflex.css"
         ],
-        "scripts": []
+        "scripts": [],
+        "serviceWorker": true,
+        "ngswConfigPath": "apps/web/ngsw-config.json"
       },
       "configurations": {
         "production": {
@@ -82,17 +89,12 @@
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
-        "lintFilePatterns": [
-          "apps/web/src/**/*.ts",
-          "apps/web/src/**/*.html"
-        ]
+        "lintFilePatterns": ["apps/web/src/**/*.ts", "apps/web/src/**/*.html"]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": [
-        "coverage/apps/web"
-      ],
+      "outputs": ["coverage/apps/web"],
       "options": {
         "jestConfig": "apps/web/jest.config.js",
         "passWithNoTests": true
