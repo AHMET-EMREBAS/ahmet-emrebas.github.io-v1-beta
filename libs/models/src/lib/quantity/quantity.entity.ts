@@ -1,13 +1,8 @@
-import {
-  BaseEntity,
-  Relation,
-} from 'api-core';
-import {
-  Column,
-  Entity,
-} from 'typeorm';
+import { BaseEntity, Relation } from 'api-core';
+import { Column, Entity } from 'typeorm';
 
 import { Product } from '../product';
+
 import { Store } from '../store';
 
 @Entity()
