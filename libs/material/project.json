@@ -2,13 +2,11 @@
   "projectType": "library",
   "root": "libs/material",
   "sourceRoot": "libs/material/src",
-  "prefix": "ahmet-emrebas",
+  "prefix": "aemat",
   "targets": {
     "build": {
       "executor": "@nrwl/angular:package",
-      "outputs": [
-        "dist/libs/material"
-      ],
+      "outputs": ["dist/libs/material"],
       "options": {
         "project": "libs/material/ng-package.json"
       },
@@ -24,9 +22,7 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": [
-        "coverage/libs/material"
-      ],
+      "outputs": ["coverage/libs/material"],
       "options": {
         "jestConfig": "libs/material/jest.config.js",
         "passWithNoTests": true

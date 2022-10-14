@@ -13,7 +13,7 @@
           "error",
           {
             "type": "attribute",
-            "prefix": "ahmetEmrebas",
+            "prefix": "aemat",
             "style": "camelCase"
           }
         ],
@@ -21,7 +21,7 @@
           "error",
           {
             "type": "element",
-            "prefix": "ahmet-emrebas",
+            "prefix": "aemat",
             "style": "kebab-case"
           }
         ]

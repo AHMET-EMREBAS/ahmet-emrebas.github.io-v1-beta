@@ -6,6 +6,7 @@
     "auth": "libs/auth",
     "cli": "libs/cli",
     "cli-e2e": "apps/cli-e2e",
+    "common": "libs/common",
     "material": "libs/material",
     "models": "libs/models",
     "utils": "libs/utils",

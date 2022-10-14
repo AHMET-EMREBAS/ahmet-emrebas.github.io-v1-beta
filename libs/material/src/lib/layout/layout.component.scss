@@ -1,0 +1,19 @@
+.full-container {
+
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    overflow-y: auto;
+}
+
+.search-input {
+    width: 100px;
+    transition: all ease-in-out 400ms;
+}
+
+.search-input:focus {
+
+    width: 200px;
+    transition: all ease-in-out 400ms;
+
+}

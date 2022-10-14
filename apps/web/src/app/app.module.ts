@@ -22,6 +22,10 @@ const routes = [
     path: 'app',
     loadChildren: () => import('./layout').then((m) => m.LayoutModule),
   },
+  {
+    path: 'material',
+    loadChildren: () => import('material').then((m) => m.MaterialModule),
+  },
 ];
 
 @NgModule({
