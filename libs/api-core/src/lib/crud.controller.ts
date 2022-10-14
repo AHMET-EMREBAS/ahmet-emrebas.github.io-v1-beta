@@ -115,7 +115,7 @@ export function CrudController<T extends BaseEntity>(
 
     @Permission({ post: options.entity.name })
     @ApiBody({ type: options.createDTO })
-    @ApiOperation({ summary: `Save one ${SINGULAR_PATH} by id.` })
+    @ApiOperation({ summary: `Save one ${SINGULAR_PATH}.` })
     @ApiCreatedResponse()
     @ApiInternalServerErrorResponse()
     @ApiUnprocessableEntityResponse()
@@ -151,7 +151,7 @@ export function CrudController<T extends BaseEntity>(
     }
 
     @Permission({ put: options.entity.name })
-    @ApiOperation({ summary: `Add relation by relation name an id.` })
+    @ApiOperation({ summary: `Add relation by relation name and id.` })
     @ApiOkResponse()
     @ApiInternalServerErrorResponse()
     @Put(MANY_RELATION_PATH)
