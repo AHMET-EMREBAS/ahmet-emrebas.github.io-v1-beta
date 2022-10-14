@@ -13,15 +13,6 @@
         "index": 0
       },
       "x-prompt": "What name would you like to use?"
-    },
-    "project": {
-      "type": "string",
-      "description": "Project Name",
-      "$default": {
-        "$source": "argv",
-        "index": 1
-      },
-      "x-prompt": "Which project will you add the resource?"
     }
   },
   "required": ["name", "project"]

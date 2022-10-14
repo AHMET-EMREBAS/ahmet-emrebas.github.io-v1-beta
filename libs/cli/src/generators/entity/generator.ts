@@ -25,7 +25,7 @@ const valueTypemap = {
 };
 
 export default async function (tree: Tree, options: EntityGeneratorSchema) {
-  const project = getProjects(tree).get(options.project);
+  const project = getProjects(tree).get('models');
   const targetRoot = join(project.sourceRoot, 'lib');
 
   const entityOptions = JSON.parse(
