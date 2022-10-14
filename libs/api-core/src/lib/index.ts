@@ -10,3 +10,4 @@ export * from './validation.pipe';
 export * from './controller-paths';
 export * from './crud.controller';
 export * from './query.controller';
+export * from './relation.decorator';

@@ -4,9 +4,15 @@ import {
 } from 'api-core';
 
 export class <%= className %>CreateDTO extends BaseDTO<<%= className %>CreateDTO> {
-  @Property({
-    minLength: 3,
-    maxLength: 20,
-  })
-  name: string;
+
+  <% for(var i=0; i < columns.length; i++) { %>
+
+
+  @Property(<%- JSON.stringify(columns[i]) %>)
+  
+  <%= columns[i].name %>: <%= columns[i].valueType %>;
+   
+<% } %>
+
+
 }

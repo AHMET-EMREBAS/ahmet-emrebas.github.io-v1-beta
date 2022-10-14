@@ -1,7 +1,31 @@
-import { BaseEntity } from 'api-core';
+import { BaseEntity, Relation } from 'api-core';
 import { Column, Entity } from 'typeorm';
+import { 
+<% for(var i=0; i < relations.length; i++) { %> 
+<%= relations[i].valueType %>,
+
+} from '../<%= relations[i].target %>';
+<% }%>
+
+
 
 @Entity()
 export class <%= className %> extends BaseEntity<<%= className %>> {
-  @Column({ type: 'text' }) name: string;
+
+
+<% for(var i=0; i < columns.length; i++) { %>
+  @Column({type:'<%= columns[i].type %>', unique: <%= !!columns[i].unique %>})
+  <%= columns[i].name %>: <%= columns[i].valueType %>;
+<% } %>
+
+
+<% for(var i=0; i < relations.length; i++) { %>
+
+
+  @Relation('<%= relations[i].type %>',<%- relations[i].valueType %>)
+  <%= relations[i].name %>: <%- relations[i].valueType %>;
+<% } %>
+
+
+
 }

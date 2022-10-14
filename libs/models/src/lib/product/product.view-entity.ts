@@ -8,4 +8,7 @@ import { DataSource, ViewColumn, ViewEntity } from 'typeorm';
 export class ProductView {
   @ViewColumn()
   name: string;
+
+  @ViewColumn()
+  description: string;
 }

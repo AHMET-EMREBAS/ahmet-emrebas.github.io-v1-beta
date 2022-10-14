@@ -10,6 +10,8 @@ import {
   },
 })
 export class <%= className %>View {
+ <% for(var i=0; i < columns.length; i++) { %>
   @ViewColumn()
-  name: string;
+  <%= columns[i].name %>: <%= columns[i].valueType %>;
+<% } %>
 }

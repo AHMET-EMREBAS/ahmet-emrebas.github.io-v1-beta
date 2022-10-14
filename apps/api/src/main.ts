@@ -3,7 +3,6 @@
  * This is only a minimal backend to get started.
  */
 
-import { readFileSync } from 'fs';
 import { join } from 'path';
 import * as favicon from 'serve-favicon';
 
@@ -34,11 +33,11 @@ async function bootstrap() {
     .setDescription('Resource api')
     .build();
 
-  // const document = SwaggerModule.createDocument(app, config);
+  const document = SwaggerModule.createDocument(app, config);
 
-  const document = JSON.parse(
-    readFileSync(join(__dirname, 'assets', 'openapi.json')).toString()
-  );
+  // const document = JSON.parse(
+  //   readFileSync(join(__dirname, 'assets', 'openapi.json')).toString()
+  // );
   SwaggerModule.setup('api', app, document);
 
   await app.listen(port);

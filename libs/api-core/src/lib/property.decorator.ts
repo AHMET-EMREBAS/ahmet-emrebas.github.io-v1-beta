@@ -51,6 +51,7 @@ export function Property(
     | ApiPropertyOptions
     | HTMLInputElement
     | {
+        unique: boolean;
         /**
          * IS input email
          */
@@ -78,6 +79,8 @@ export function Property(
          * UI Input Type
          */
         inputType?: string;
+
+        valueType?: string;
       }
   >
 ) {
