@@ -51,16 +51,29 @@ export function Property(
     | ApiPropertyOptions
     | HTMLInputElement
     | {
+        /**
+         *
+         */
+        type: string;
+
+        /**
+         *
+         */
         unique: boolean;
+
         /**
          * IS input email
          */
         isEmail: boolean;
+
         /**
          * Is input barcode
          */
         isBarcode?: boolean;
 
+        /**
+         *
+         */
         selectOptions?: { id: number; name: string }[];
 
         enum?: string[];
@@ -101,5 +114,12 @@ export function Property(
     }
   }
 
-  return applyDecorators(ApiProperty(options as any), ...validators);
+  let cType = options.type;
+  if (options.type === 'text') {
+    cType = 'string';
+  }
+  return applyDecorators(
+    ApiProperty({ ...options, type: cType } as any),
+    ...validators
+  );
 }
