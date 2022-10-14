@@ -7,5 +7,5 @@ import { DataSource, ViewColumn, ViewEntity } from 'typeorm';
 })
 export class QuantityView {
   @ViewColumn()
-  quantity: number;
+  quantity: any;
 }

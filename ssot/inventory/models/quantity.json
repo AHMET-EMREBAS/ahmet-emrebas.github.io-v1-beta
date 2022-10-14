@@ -1,7 +1,7 @@
 {
   "columns": {
     "quantity": {
-      "type": "number"
+      "type": "int"
     }
   },
   "relations": {

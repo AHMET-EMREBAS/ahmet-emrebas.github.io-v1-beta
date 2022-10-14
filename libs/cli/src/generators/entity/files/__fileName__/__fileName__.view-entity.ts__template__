@@ -4,12 +4,14 @@ import {
   ViewEntity,
 } from 'typeorm';
 
+import { BaseViewEntity } from 'api-core';
+
 @ViewEntity({
   expression: (ds: DataSource) => {
     return ds.createQueryBuilder().select('*').from('<%= fileName %>', '<%= fileName %>');
   },
 })
-export class <%= className %>View {
+export class <%= className %>View extends BaseViewEntity {
  <% for(var i=0; i < columns.length; i++) { %>
   @ViewColumn()
   <%= columns[i].name %>: <%= columns[i].valueType %>;

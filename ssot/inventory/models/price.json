@@ -1,28 +1,28 @@
 {
   "columns": {
     "cost": {
-      "type": "number",
+      "type": "numeric",
       "inputType": "currency",
       "unique": true,
       "min": 0,
       "default": 0
     },
     "price": {
-      "type": "number",
+      "type": "numeric",
       "inputType": "currency",
       "unique": true,
       "min": 0,
       "default": 0
     },
     "usedCost": {
-      "type": "number",
+      "type": "numeric",
       "inputType": "currency",
       "unique": true,
       "min": 0,
       "default": 0
     },
     "usedPrice": {
-      "type": "number",
+      "type": "numeric",
       "inputType": "currency",
       "unique": true,
       "min": 0,

@@ -173,7 +173,7 @@ export function CrudController<T extends BaseEntity>(
       @RelationId() relationId: number,
       @RelationName() relation: string
     ) {
-      this.service.addRelation(id, relation, relationId);
+      return this.service.addRelation(id, relation, relationId);
     }
 
     @Permission({ put: options.entity.name })
@@ -186,7 +186,7 @@ export function CrudController<T extends BaseEntity>(
       @RelationId() relationId: number,
       @RelationName() relation: string
     ) {
-      this.service.setRelation(id, relation, relationId);
+      return this.service.setRelation(id, relation, relationId);
     }
 
     @Permission({ delete: options.entity.name })
@@ -195,7 +195,7 @@ export function CrudController<T extends BaseEntity>(
     @ApiInternalServerErrorResponse()
     @Delete(DELETE_ONE_RELATION_PATH)
     unsetRelation(@ID() id: number, @RelationName() relation: string) {
-      this.service.unsetRelation(id, relation);
+      return this.service.unsetRelation(id, relation);
     }
 
     @Permission({ put: options.entity.name })

@@ -21,7 +21,7 @@ export class RepositoryService<T> {
   }
 
   save(body: T) {
-    this.repository.save(body);
+    return this.repository.save(body);
   }
 
   update(id: number, body: QueryDeepPartialEntity<T>) {

@@ -3,45 +3,45 @@ import { BaseDTO, Property } from 'api-core';
 export class PriceCreateDTO extends BaseDTO<PriceCreateDTO> {
   @Property({
     name: 'cost',
-    valueType: 'number',
-    type: 'number',
+    valueType: 'any',
+    type: 'numeric',
     inputType: 'currency',
     unique: true,
     min: 0,
     default: 0,
   })
-  cost: number;
+  cost: any;
 
   @Property({
     name: 'price',
-    valueType: 'number',
-    type: 'number',
+    valueType: 'any',
+    type: 'numeric',
     inputType: 'currency',
     unique: true,
     min: 0,
     default: 0,
   })
-  price: number;
+  price: any;
 
   @Property({
     name: 'usedCost',
-    valueType: 'number',
-    type: 'number',
+    valueType: 'any',
+    type: 'numeric',
     inputType: 'currency',
     unique: true,
     min: 0,
     default: 0,
   })
-  usedCost: number;
+  usedCost: any;
 
   @Property({
     name: 'usedPrice',
-    valueType: 'number',
-    type: 'number',
+    valueType: 'any',
+    type: 'numeric',
     inputType: 'currency',
     unique: true,
     min: 0,
     default: 0,
   })
-  usedPrice: number;
+  usedPrice: any;
 }

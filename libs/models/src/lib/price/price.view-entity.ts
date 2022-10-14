@@ -7,14 +7,14 @@ import { DataSource, ViewColumn, ViewEntity } from 'typeorm';
 })
 export class PriceView {
   @ViewColumn()
-  cost: number;
+  cost: any;
 
   @ViewColumn()
-  price: number;
+  price: any;
 
   @ViewColumn()
-  usedCost: number;
+  usedCost: any;
 
   @ViewColumn()
-  usedPrice: number;
+  usedPrice: any;
 }

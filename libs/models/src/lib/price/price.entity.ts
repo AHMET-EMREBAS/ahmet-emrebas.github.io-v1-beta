@@ -5,17 +5,17 @@ import { Pricelevel } from '../pricelevel';
 
 @Entity()
 export class Price extends BaseEntity<Price> {
-  @Column({ type: 'number', unique: true })
-  cost: number;
+  @Column({ type: 'numeric', unique: true })
+  cost: any;
 
-  @Column({ type: 'number', unique: true })
-  price: number;
+  @Column({ type: 'numeric', unique: true })
+  price: any;
 
-  @Column({ type: 'number', unique: true })
-  usedCost: number;
+  @Column({ type: 'numeric', unique: true })
+  usedCost: any;
 
-  @Column({ type: 'number', unique: true })
-  usedPrice: number;
+  @Column({ type: 'numeric', unique: true })
+  usedPrice: any;
 
   @Relation('many-to-one', Pricelevel)
   priceLevel: Pricelevel;
