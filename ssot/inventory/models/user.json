@@ -1,0 +1,21 @@
+{
+  "columns": {
+    "username": {
+      "type": "text",
+      "unique": true,
+      "minLength": 3
+    },
+    "password": {
+      "type": "text",
+      "unique": true,
+      "minLength": 3
+    }
+  },
+  "relations": {
+    "permissions": {
+      "type": "many-to-many",
+      "target": "permission",
+      "nullable": true
+    }
+  }
+}

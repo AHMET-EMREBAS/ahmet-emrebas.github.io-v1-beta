@@ -1,5 +1,11 @@
 {
   "columns": {
+    "barcode": {
+      "type": "text",
+      "unique": true,
+      "minLength": 11,
+      "maxLength": 13
+    },
     "name": {
       "type": "text",
       "unique": true,
@@ -15,6 +21,11 @@
     "category": {
       "type": "many-to-one",
       "target": "category",
+      "nullable": true
+    },
+    "department": {
+      "type": "many-to-one",
+      "target": "department",
       "nullable": true
     }
   }

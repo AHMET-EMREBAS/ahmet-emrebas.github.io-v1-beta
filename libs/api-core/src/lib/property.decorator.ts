@@ -81,6 +81,12 @@ export function Property(
         inputType?: string;
 
         valueType?: string;
+
+        min: number;
+
+        max: number;
+
+        default: any;
       }
   >
 ) {

@@ -1,0 +1,16 @@
+{
+  "columns": {
+    "name": {
+      "type": "text",
+      "unique": true,
+      "minLength": 3
+    }
+  },
+  "relations": {
+    "pricelevel": {
+      "type": "many-to-one",
+      "target": "pricelevel",
+      "nullable": true
+    }
+  }
+}

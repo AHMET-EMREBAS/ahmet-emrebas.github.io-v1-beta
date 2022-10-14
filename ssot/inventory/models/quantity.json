@@ -1,0 +1,17 @@
+{
+  "columns": {
+    "quantity": {
+      "type": "number"
+    }
+  },
+  "relations": {
+    "product": {
+      "type": "many-to-one",
+      "target": "product"
+    },
+    "store": {
+      "type": "many-to-one",
+      "target": "store"
+    }
+  }
+}

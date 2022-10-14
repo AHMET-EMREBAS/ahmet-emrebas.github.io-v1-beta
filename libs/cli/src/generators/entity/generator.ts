@@ -25,8 +25,6 @@ const valueTypemap = {
 };
 
 export default async function (tree: Tree, options: EntityGeneratorSchema) {
-  console.log(options);
-
   const project = getProjects(tree).get(options.project);
   const targetRoot = join(project.sourceRoot, 'lib');
 
@@ -42,20 +40,20 @@ export default async function (tree: Tree, options: EntityGeneratorSchema) {
     return {
       name: key,
       valueType: valueTypemap[value.type as any] || 'any',
-      type: value.type,
+      ...value,
       unique: !!value.unique,
     };
   });
 
-  const relations = Object.entries(entityOptions.relations).map(
+  const relations = Object.entries(entityOptions.relations || {}).map(
     ([key, value]) => {
-      const { type, target, ...rest } = value;
-
       return {
         name: key,
-        valueType: upperFirst(key),
-        type,
-        options: rest,
+        valueType: upperFirst(value.target as string),
+        arrayValueType: ['many-to-many', 'one-to-many'].includes(value.type)
+          ? '[]'
+          : '',
+        ...value,
       };
     }
   );
@@ -65,6 +63,7 @@ export default async function (tree: Tree, options: EntityGeneratorSchema) {
     fileName: snakeCase(options.name).replace('_', '-'),
     className: upperFirst(camelCase(options.name)),
     columns,
+
     relations,
   };
 

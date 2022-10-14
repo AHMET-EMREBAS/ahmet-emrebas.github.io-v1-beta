@@ -7,6 +7,9 @@ import { DataSource, ViewColumn, ViewEntity } from 'typeorm';
 })
 export class ProductView {
   @ViewColumn()
+  barcode: string;
+
+  @ViewColumn()
   name: string;
 
   @ViewColumn()

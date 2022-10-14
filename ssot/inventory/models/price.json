@@ -1,0 +1,39 @@
+{
+  "columns": {
+    "cost": {
+      "type": "number",
+      "inputType": "currency",
+      "unique": true,
+      "min": 0,
+      "default": 0
+    },
+    "price": {
+      "type": "number",
+      "inputType": "currency",
+      "unique": true,
+      "min": 0,
+      "default": 0
+    },
+    "usedCost": {
+      "type": "number",
+      "inputType": "currency",
+      "unique": true,
+      "min": 0,
+      "default": 0
+    },
+    "usedPrice": {
+      "type": "number",
+      "inputType": "currency",
+      "unique": true,
+      "min": 0,
+      "default": 0
+    }
+  },
+  "relations": {
+    "priceLevel": {
+      "type": "many-to-one",
+      "target": "pricelevel",
+      "nullable": true
+    }
+  }
+}

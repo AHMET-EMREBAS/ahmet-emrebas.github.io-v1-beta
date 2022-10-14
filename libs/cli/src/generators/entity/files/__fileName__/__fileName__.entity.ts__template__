@@ -1,10 +1,7 @@
 import { BaseEntity, Relation } from 'api-core';
 import { Column, Entity } from 'typeorm';
-import { 
 <% for(var i=0; i < relations.length; i++) { %> 
-<%= relations[i].valueType %>,
-
-} from '../<%= relations[i].target %>';
+import { <%= relations[i].valueType %>} from '../<%= relations[i].target %>';
 <% }%>
 
 
@@ -23,7 +20,7 @@ export class <%= className %> extends BaseEntity<<%= className %>> {
 
 
   @Relation('<%= relations[i].type %>',<%- relations[i].valueType %>)
-  <%= relations[i].name %>: <%- relations[i].valueType %>;
+  <%= relations[i].name %>: <%- relations[i].valueType %>  <%= relations[i].arrayValueType %>;
 <% } %>
 
 

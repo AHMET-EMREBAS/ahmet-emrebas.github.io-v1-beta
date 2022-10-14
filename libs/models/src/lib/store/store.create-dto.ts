@@ -1,6 +1,6 @@
 import { BaseDTO, Property } from 'api-core';
 
-export class CategoryCreateDTO extends BaseDTO<CategoryCreateDTO> {
+export class StoreCreateDTO extends BaseDTO<StoreCreateDTO> {
   @Property({
     name: 'name',
     valueType: 'string',
