@@ -1,19 +1,43 @@
 <form [formGroup]="formGroup" [noValidate]="false">
 
-
-
     <ng-container *ngFor="let field of fields">
 
 
         <ng-container *ngIf="field.inputType === 'text'">
+            <div class="field">
+                <label [for]="field.name" class="block">{{(field.label || field.name) | titlecase}}</label>
+                <input [id]="field.name" type="text" pInputText [minLength]="field.minLength || null"
+                    [maxLength]="field.maxLength || null" [required]="field.required !==undefined"
+                    [autocomplete]="field.autocomplete || 'off'" [formControlName]="field.name" />
+            </div>
+        </ng-container>
 
 
-            <input type="text" pInputText [minLength]="field.minLength || null" [maxLength]="field.maxLength || null"
-                [required]="field.required !==undefined" autocomplete="off">
 
+        <ng-container *ngIf="field.inputType === 'number'">
+            <div class="field">
+                <label [for]="field.name" class="block">{{(field.label || field.name) | titlecase}}</label>
+                <p-inputNumber [id]="field.name" [min]="field.min || null" [max]="field.max || null"
+                    [required]="field.required !==undefined" [formControlName]="field.name">
+                </p-inputNumber>
+            </div>
+        </ng-container>
+
+
+        <ng-container *ngIf="field.inputType === 'select'">
+            <div class="field">
+                <label [for]="field.name" class="block">{{(field.label || field.name) | titlecase}}</label>
+                <p-multiSelect [id]="field.name" [selectionLimit]="!field.multiple ? 0: 1" [options]="field.options"
+                    [label]="(field.label || field.name) | titlecase" [formControlName]="field.name">
+                </p-multiSelect>
+            </div>
         </ng-container>
 
     </ng-container>
+
+
+
+    <p-button type="submit" [label]="'Save'" (click)="submit()" [disabled]="isFormSubmitted"></p-button>
 
 
 

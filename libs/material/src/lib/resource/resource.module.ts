@@ -7,8 +7,10 @@ import {
 import { RouterModule } from '@angular/router';
 
 import { ButtonModule } from 'primeng/button';
+import { InputNumberModule } from 'primeng/inputnumber';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputTextareaModule } from 'primeng/inputtextarea';
+import { MultiSelectModule } from 'primeng/multiselect';
 import { TableModule } from 'primeng/table';
 import { ToolbarModule } from 'primeng/toolbar';
 
@@ -48,9 +50,11 @@ import { ViewComponent } from './view/view.component';
     ReactiveFormsModule,
     InputTextModule,
     InputTextareaModule,
+    InputNumberModule,
     TableModule,
     ToolbarModule,
     ButtonModule,
+    MultiSelectModule,
   ],
 
   providers: [ResourceService],
