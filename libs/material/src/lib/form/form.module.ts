@@ -6,6 +6,10 @@ import {
 } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
+import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+
 import { BaseInputComponent } from './base-input/base-input.component';
 import {
   CheckboxInputComponent,
@@ -55,6 +59,9 @@ import {
     ]),
     FormsModule,
     ReactiveFormsModule,
+    InputTextModule,
+    InputTextareaModule,
+    ButtonModule,
   ],
   exports: [
     FormComponent,

@@ -1,1 +1,16 @@
-<router-outlet></router-outlet>
+<h1>Form</h1>
+
+<form #form [formGroup]="formGroup" [noValidate]="false">
+
+    <ng-container *ngFor="let field of fields">
+
+        <div class="field">
+            <label for="firstName" class="block">{{field.name | titlecase}}</label>
+            <input pInputText [id]="field.name" type="text" [name]="field.name" [formControlName]="field.name" required
+                autocomplete="off">
+        </div>
+    </ng-container>
+
+    <button pButton type="submit" [label]="formSubmitLabel" (click)="submit()" [disabled]="formSubmitted"></button>
+
+</form>
