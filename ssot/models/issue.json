@@ -1,0 +1,31 @@
+{
+  "columns": {
+    "title": {
+      "type": "text",
+      "minLength": 1,
+      "maxLength": 100
+    },
+    "description": {
+      "type": "text",
+      "nullable": true,
+      "maxLength": 500
+    },
+    "category": {
+      "type": "text",
+      "inputType": "select",
+      "enum": ["bug", "test", "enhancement", "task", "documentation"]
+    },
+    "status": {
+      "type": "text",
+      "inputType": "select",
+      "enum": ["todo", "in progress", "complete"]
+    }
+  },
+  "relations": {
+    "assigned": {
+      "type": "many-to-one",
+      "target": "user",
+      "nullable": true
+    }
+  }
+}

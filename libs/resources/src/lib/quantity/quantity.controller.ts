@@ -1,9 +1,5 @@
 import { CrudController } from 'api-core';
-import {
-  Quantity,
-  QuantityCreateDTO,
-  QuantityUpdateDTO,
-} from 'models';
+import { Quantity, QuantityCreateDTO, QuantityUpdateDTO } from 'models';
 
 import { Controller } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
@@ -17,7 +13,7 @@ export class QuantityController extends CrudController<Quantity>({
   createDTO: QuantityCreateDTO,
   updateDTO: QuantityUpdateDTO,
   singularName: 'quantity',
-  pluralName: 'quantities',
+  pluralName: 'quantitys',
 }) {
   constructor(service: QuantityService) {
     super(service);

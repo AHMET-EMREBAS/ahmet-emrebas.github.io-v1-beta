@@ -100,6 +100,11 @@ export function Property(
         max: number;
 
         default: any;
+
+        /**
+         * implemented only for data models.
+         */
+        transform: string;
       }
   >
 ) {

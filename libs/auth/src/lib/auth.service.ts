@@ -1,11 +1,10 @@
 import { compare } from 'bcrypt';
+import { User } from 'models';
 import { Repository } from 'typeorm';
 
-import {
-  Inject,
-  Injectable,
-} from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
+import { InjectRepository } from '@nestjs/typeorm';
 
 interface IUser {
   id: number;
@@ -15,7 +14,7 @@ interface IUser {
 @Injectable()
 export class AuthService {
   constructor(
-    @Inject('UserRepository')
+    @InjectRepository(User)
     private readonly userRpo: Repository<IUser>,
     private readonly jwtService: JwtService
   ) {}

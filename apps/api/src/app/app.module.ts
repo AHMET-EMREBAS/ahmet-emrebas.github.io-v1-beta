@@ -1,18 +1,17 @@
+import {
+  filterEntityClasses,
+  filterModuleClasses,
+} from 'api-core';
+import { AuthModule } from 'auth';
 import * as models from 'models';
 import { join } from 'path';
+import * as resources from 'resources';
 
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-import * as resources from './resources';
-
-const ResourceModules = Object.entries(resources)
-  .filter(([key, value]) => key.endsWith('Module'))
-  .map(([key, value]) => value);
-
-const Entities = Object.entries(models)
-  .filter(([key, value]) => !key.endsWith('DTO'))
-  .map(([key, value]) => value);
+const ResourceModules = filterModuleClasses(resources);
+const Entities = filterEntityClasses(models);
 
 @Module({
   imports: [
@@ -25,6 +24,7 @@ const Entities = Object.entries(models)
       dropSchema: true,
     }),
     ...ResourceModules,
+    AuthModule,
   ],
 
   providers: [],

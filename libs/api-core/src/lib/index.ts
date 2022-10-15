@@ -12,3 +12,7 @@ export * from './crud.controller';
 export * from './query.controller';
 export * from './relation.decorator';
 export * from './public.metadata';
+export * from './filter-classes';
+
+export * from './transformers';
+export * from './column.decorator';

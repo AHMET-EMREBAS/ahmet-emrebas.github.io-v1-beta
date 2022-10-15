@@ -30,7 +30,7 @@ export default async function (tree: Tree, options: EntityGeneratorSchema) {
 
   const entityOptions = JSON.parse(
     readFileSync(
-      join(workspaceRoot, 'ssot', 'inventory', 'models', options.name + '.json')
+      join(workspaceRoot, 'ssot', 'models', options.name + '.json')
     ).toString()
   ) as EntitySchemaOptions<any>;
 
@@ -63,7 +63,6 @@ export default async function (tree: Tree, options: EntityGeneratorSchema) {
     fileName: snakeCase(options.name).replace('_', '-'),
     className: upperFirst(camelCase(options.name)),
     columns,
-
     relations,
   };
 

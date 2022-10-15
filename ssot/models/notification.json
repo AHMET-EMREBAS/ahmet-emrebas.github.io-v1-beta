@@ -1,0 +1,27 @@
+{
+  "columns": {
+    "title": {
+      "type": "text",
+      "minLength": 3
+    },
+    "message": {
+      "type": "text",
+      "nullable": true
+    },
+    "read": {
+      "type": "boolean",
+      "nullable": true
+    },
+    "global": {
+      "type": "boolean",
+      "nullable": true
+    }
+  },
+  "relations": {
+    "users": {
+      "type": "many-to-many",
+      "target": "user",
+      "nullable": true
+    }
+  }
+}

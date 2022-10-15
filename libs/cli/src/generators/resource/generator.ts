@@ -17,7 +17,7 @@ import { ResourceGeneratorSchema } from './schema';
 export default async function (tree: Tree, options: ResourceGeneratorSchema) {
   const sourceRoot = getProjects(tree).get('resources').sourceRoot;
 
-  const targetDir = join(sourceRoot, 'src', 'lib');
+  const targetDir = join(sourceRoot, 'lib');
 
   const templateOptions = {
     template: '',

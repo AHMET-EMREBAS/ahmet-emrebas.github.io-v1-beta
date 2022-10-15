@@ -1,1 +1,1 @@
-export * from './lib/resources.module';
+export * from './lib';
