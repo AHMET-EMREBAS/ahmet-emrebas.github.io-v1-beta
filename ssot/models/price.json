@@ -34,6 +34,11 @@
       "type": "many-to-one",
       "target": "pricelevel",
       "nullable": true
+    },
+    "sku": {
+      "type": "many-to-one",
+      "target": "sku",
+      "nullable": true
     }
   }
 }

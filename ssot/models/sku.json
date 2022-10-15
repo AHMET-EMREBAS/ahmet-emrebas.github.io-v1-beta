@@ -1,0 +1,33 @@
+{
+  "columns": {
+    "barcode": {
+      "type": "text",
+      "unique": true,
+      "minLength": 11,
+      "maxLength": 13
+    },
+    "name": {
+      "type": "text",
+      "unique": true,
+      "minLength": 3
+    },
+    "description": {
+      "type": "text",
+      "nullable": true,
+      "maxLength": 400
+    },
+    "details": {
+      "type": "text",
+      "transform": "json",
+      "nullable": true,
+      "maxLength": 1000
+    }
+  },
+  "relations": {
+    "product": {
+      "type": "many-to-one",
+      "target": "product",
+      "nullable": true
+    }
+  }
+}

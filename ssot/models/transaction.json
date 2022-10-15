@@ -1,0 +1,33 @@
+{
+  "columns": {
+    "total": {
+      "type": "numeric",
+      "nullable": true
+    },
+    "subtotal": {
+      "type": "numeric",
+      "nullable": true
+    },
+    "taxExempt": {
+      "type": "boolean",
+      "nullable": true
+    }
+  },
+  "relations": {
+    "customer": {
+      "type": "many-to-one",
+      "target": "customer",
+      "nullable": true
+    },
+    "cashier": {
+      "type": "many-to-one",
+      "target": "user",
+      "nullable": true
+    },
+    "store": {
+      "type": "many-to-one",
+      "target": "store",
+      "nullable": true
+    }
+  }
+}

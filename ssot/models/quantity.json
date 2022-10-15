@@ -5,13 +5,15 @@
     }
   },
   "relations": {
-    "product": {
+    "sku": {
       "type": "many-to-one",
-      "target": "product"
+      "target": "sku",
+      "nullable": true
     },
     "store": {
       "type": "many-to-one",
-      "target": "store"
+      "target": "store",
+      "nullable": true
     }
   }
 }

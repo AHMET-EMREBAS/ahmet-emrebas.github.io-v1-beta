@@ -10,6 +10,12 @@
       "unique": true,
       "minLength": 3
     },
+    "pin": {
+      "type": "text",
+      "unique": true,
+      "minLength": 4,
+      "maxLength": 4
+    },
     "workhours": {
       "type": "text",
       "transform": "json"
