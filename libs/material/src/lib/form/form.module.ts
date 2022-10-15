@@ -10,44 +10,10 @@ import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 
-import { BaseInputComponent } from './base-input/base-input.component';
-import {
-  CheckboxInputComponent,
-} from './checkbox-input/checkbox-input.component';
-import { DateInputComponent } from './date-input/date-input.component';
-import {
-  DateTimeInputComponent,
-} from './date-time-input/date-time-input.component';
-import { EditorInputComponent } from './editor-input/editor-input.component';
-import { EmailInputComponent } from './email-input/email-input.component';
 import { FormComponent } from './form.component';
-import { InputWrapperComponent } from './input-wrapper/input-wrapper.component';
-import { NumberInputComponent } from './number-input/number-input.component';
-import { PhoneInputComponent } from './phone-input/phone-input.component';
-import { SelectInputComponent } from './select-input/select-input.component';
-import { SwitchInputComponent } from './switch-input/switch-input.component';
-import { TextInputComponent } from './text-input/text-input.component';
-import {
-  TextareaInputComponent,
-} from './textarea-input/textarea-input.component';
 
 @NgModule({
-  declarations: [
-    FormComponent,
-    InputWrapperComponent,
-    TextInputComponent,
-    TextareaInputComponent,
-    EditorInputComponent,
-    NumberInputComponent,
-    SelectInputComponent,
-    DateInputComponent,
-    DateTimeInputComponent,
-    CheckboxInputComponent,
-    SwitchInputComponent,
-    BaseInputComponent,
-    EmailInputComponent,
-    PhoneInputComponent,
-  ],
+  declarations: [FormComponent],
   imports: [
     CommonModule,
     RouterModule.forChild([
@@ -63,33 +29,6 @@ import {
     InputTextareaModule,
     ButtonModule,
   ],
-  exports: [
-    FormComponent,
-    InputWrapperComponent,
-    TextInputComponent,
-    TextareaInputComponent,
-    EditorInputComponent,
-    NumberInputComponent,
-    SelectInputComponent,
-    DateInputComponent,
-    DateTimeInputComponent,
-    CheckboxInputComponent,
-    SwitchInputComponent,
-    BaseInputComponent,
-    FormComponent,
-    InputWrapperComponent,
-    TextInputComponent,
-    TextareaInputComponent,
-    EditorInputComponent,
-    NumberInputComponent,
-    SelectInputComponent,
-    DateInputComponent,
-    DateTimeInputComponent,
-    CheckboxInputComponent,
-    SwitchInputComponent,
-    BaseInputComponent,
-    EmailInputComponent,
-    PhoneInputComponent,
-  ],
+  exports: [FormComponent],
 })
 export class FormModule {}

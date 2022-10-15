@@ -20,10 +20,22 @@ export class UserCreateDTO extends BaseDTO<UserCreateDTO> {
   password: string;
 
   @Property({
+    name: 'pin',
+    valueType: 'string',
+    type: 'text',
+    unique: true,
+    minLength: 4,
+    maxLength: 4,
+    nullable: true,
+  })
+  pin: string;
+
+  @Property({
     name: 'workhours',
     valueType: 'string',
     type: 'text',
     transform: 'json',
+    nullable: true,
     unique: false,
   })
   workhours: string;

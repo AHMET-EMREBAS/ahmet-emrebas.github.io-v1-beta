@@ -14,11 +14,13 @@
       "type": "text",
       "unique": true,
       "minLength": 4,
-      "maxLength": 4
+      "maxLength": 4,
+      "nullable": true
     },
     "workhours": {
       "type": "text",
-      "transform": "json"
+      "transform": "json",
+      "nullable": true
     }
   },
   "relations": {

@@ -21,7 +21,10 @@ import {
 } from './strategies';
 
 @Module({
-  imports: [JwtModule.register(jtwOptions), TypeOrmModule.forFeature([User])],
+  imports: [
+    JwtModule.register(jtwOptions),
+    TypeOrmModule.forFeature([User, Permission]),
+  ],
   controllers: [AuthController],
   providers: [LocalStrategy, JwtStrategy, AuthService],
 })
@@ -37,10 +40,10 @@ export class AuthModule implements OnModuleInit {
       password: 'password',
     };
 
-    try {
-      this.userRepo.findOneByOrFail({ username: 'root' });
-    } catch (err) {
-      this.userRepo.save(rootuser);
+    const found = await this.userRepo.findOneBy({ username: 'root' });
+
+    if (!found) {
+      await this.userRepo.save(rootuser);
     }
   }
 }

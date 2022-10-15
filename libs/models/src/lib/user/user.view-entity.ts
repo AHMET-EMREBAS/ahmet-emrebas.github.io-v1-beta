@@ -15,5 +15,8 @@ export class UserView extends BaseViewEntity {
   password: string;
 
   @ViewColumn()
+  pin: string;
+
+  @ViewColumn()
   workhours: string;
 }

@@ -26,14 +26,11 @@ export class FormComponent {
       type: 'textarea',
     },
   ];
+
   formGroup = new FormGroup({
     name: new FormControl('', Validators.minLength(3)),
     description: new FormControl('', Validators.maxLength(100)),
   });
-
-  controller(name: string) {
-    return this.formGroup.controls[name];
-  }
 
   submit() {
     if (this.formGroup.dirty && this.formGroup.valid) {

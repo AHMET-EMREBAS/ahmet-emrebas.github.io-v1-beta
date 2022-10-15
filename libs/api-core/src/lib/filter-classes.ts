@@ -5,7 +5,7 @@ export function filterModuleClasses<T = ClassConstructor<any>[]>(
 ): T {
   return Object.entries(classes)
     .filter(([key, value]) => key.endsWith('Module'))
-    .map(([key, value]) => value) as T;
+    .map(([key, value]) => value) as any;
 }
 
 export function filterEntityClasses<T = ClassConstructor<any>[]>(
@@ -13,5 +13,5 @@ export function filterEntityClasses<T = ClassConstructor<any>[]>(
 ): T {
   return Object.entries(classes)
     .filter(([key, value]) => !key.endsWith('DTO'))
-    .map(([key, value]) => value) as T;
+    .map(([key, value]) => value) as any;
 }
