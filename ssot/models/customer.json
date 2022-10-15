@@ -10,15 +10,14 @@
       "unique": true,
       "minLength": 3
     },
-    "workhours": {
+    "phone": {
       "type": "text",
-      "transform": "json"
-    }
-  },
-  "relations": {
-    "permissions": {
-      "type": "many-to-many",
-      "target": "permission",
+      "unique": true,
+      "nullable": true
+    },
+    "email": {
+      "type": "text",
+      "unique": true,
       "nullable": true
     }
   }

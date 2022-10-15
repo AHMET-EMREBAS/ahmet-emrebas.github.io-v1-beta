@@ -4,10 +4,10 @@ import { BaseViewEntity } from 'api-core';
 
 @ViewEntity({
   expression: (ds: DataSource) => {
-    return ds.createQueryBuilder().select('*').from('user', 'user');
+    return ds.createQueryBuilder().select('*').from('customer', 'customer');
   },
 })
-export class UserView extends BaseViewEntity {
+export class CustomerView extends BaseViewEntity {
   @ViewColumn()
   username: string;
 
@@ -15,5 +15,8 @@ export class UserView extends BaseViewEntity {
   password: string;
 
   @ViewColumn()
-  workhours: string;
+  phone: string;
+
+  @ViewColumn()
+  email: string;
 }

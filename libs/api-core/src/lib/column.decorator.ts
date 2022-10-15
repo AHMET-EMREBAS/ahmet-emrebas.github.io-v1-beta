@@ -6,7 +6,9 @@ import {
 
 import { jsonTransformer } from './transformers';
 
-export function Column(options: ColumnOptions & { transform?: 'json' }) {
+export function Column(
+  options: ColumnOptions & { transform?: 'json' | string }
+) {
   const transformers: ValueTransformer[] = [];
 
   if (options.transform === 'json') {

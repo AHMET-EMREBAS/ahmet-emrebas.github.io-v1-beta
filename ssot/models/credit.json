@@ -1,0 +1,16 @@
+{
+  "columns": {
+    "credit": {
+      "type": "numeric",
+      "inputType": "number",
+      "min": 0
+    }
+  },
+  "relations": {
+    "customer": {
+      "type": "many-to-one",
+      "target": "customer",
+      "nullable": true
+    }
+  }
+}

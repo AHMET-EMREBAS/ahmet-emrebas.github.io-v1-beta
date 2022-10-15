@@ -1,6 +1,6 @@
 import { BaseDTO, Property } from 'api-core';
 
-export class UserCreateDTO extends BaseDTO<UserCreateDTO> {
+export class CustomerCreateDTO extends BaseDTO<CustomerCreateDTO> {
   @Property({
     name: 'username',
     valueType: 'string',
@@ -20,11 +20,20 @@ export class UserCreateDTO extends BaseDTO<UserCreateDTO> {
   password: string;
 
   @Property({
-    name: 'workhours',
+    name: 'phone',
     valueType: 'string',
     type: 'text',
-    transform: 'json',
-    unique: false,
+    unique: true,
+    nullable: true,
   })
-  workhours: string;
+  phone: string;
+
+  @Property({
+    name: 'email',
+    valueType: 'string',
+    type: 'text',
+    unique: true,
+    nullable: true,
+  })
+  email: string;
 }

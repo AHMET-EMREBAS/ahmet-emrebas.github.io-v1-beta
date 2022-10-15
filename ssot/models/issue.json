@@ -19,12 +19,22 @@
       "type": "text",
       "inputType": "select",
       "enum": ["todo", "in progress", "complete"]
+    },
+    "priority": {
+      "type": "text",
+      "inputType": "select",
+      "enum": ["Just do it now!", "Relax", "Love is a verb!", "Make me happy"]
     }
   },
   "relations": {
     "assigned": {
       "type": "many-to-one",
       "target": "user",
+      "nullable": true
+    },
+    "sprint": {
+      "type": "many-to-one",
+      "target": "sprint",
       "nullable": true
     }
   }
