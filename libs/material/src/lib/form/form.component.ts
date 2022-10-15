@@ -28,8 +28,11 @@ export class FormComponent {
   ];
 
   formGroup = new FormGroup({
-    name: new FormControl('', Validators.minLength(3)),
-    description: new FormControl('', Validators.maxLength(100)),
+    name: new FormControl('', [Validators.minLength(3), Validators.required]),
+    description: new FormControl('', [
+      Validators.maxLength(100),
+      Validators.required,
+    ]),
   });
 
   submit() {

@@ -1,1 +1,21 @@
-<p>create works!</p>
+<form [formGroup]="formGroup" [noValidate]="false">
+
+
+
+    <ng-container *ngFor="let field of fields">
+
+
+        <ng-container *ngIf="field.inputType === 'text'">
+
+
+            <input type="text" pInputText [minLength]="field.minLength || null" [maxLength]="field.maxLength || null"
+                [required]="field.required !==undefined" autocomplete="off">
+
+        </ng-container>
+
+    </ng-container>
+
+
+
+
+</form>

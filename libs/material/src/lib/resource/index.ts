@@ -3,5 +3,7 @@ export * from "./delete";
 export * from "./detail";
 export * from "./resource.component";
 export * from "./resource.module";
+export * from "./resource.service";
+export * from "./resource";
 export * from "./update";
 export * from "./view";

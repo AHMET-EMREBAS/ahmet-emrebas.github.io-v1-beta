@@ -11,6 +11,7 @@ import { StoreModule } from '@ngrx/store';
 
 import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
+import { entityDataModuleConfig } from './entity-data-module-config';
 
 const routes = [
   {
@@ -24,7 +25,7 @@ const routes = [
   },
   {
     path: 'material',
-    loadChildren: () => import('material').then((m) => m.MaterialModule),
+    loadChildren: () => import('material').then((m) => m.ResourceModule),
   },
 ];
 
@@ -37,7 +38,7 @@ const routes = [
     HttpClientModule,
     StoreModule.forRoot({}, {}),
     EffectsModule.forRoot([]),
-    EntityDataModule.forRoot({}),
+    EntityDataModule.forRoot(entityDataModuleConfig),
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
       // Register the ServiceWorker as soon as the application is stable
