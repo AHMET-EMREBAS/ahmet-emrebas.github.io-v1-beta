@@ -1,0 +1,5 @@
+<div class="field" [formGroup]="formGroup">
+    <label [for]="options.name" class="block"> {{(options.label || options.placeholder || options.name) | titlecase}}
+    </label>
+    <input pInputText [id]="options.name" type="text" [formControlName]="options.name" [aematSetAttribute]="options">
+</div>

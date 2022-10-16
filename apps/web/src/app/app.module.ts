@@ -25,7 +25,7 @@ const routes = [
   },
   {
     path: 'material',
-    loadChildren: () => import('material').then((m) => m.ResourceModule),
+    loadChildren: () => import('material').then((m) => m.FormModule),
   },
 ];
 
