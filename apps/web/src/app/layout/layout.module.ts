@@ -19,18 +19,7 @@ const routes: Routes = [
   {
     path: '',
     component: LayoutComponent,
-    children: [
-      {
-        path: 'product',
-        loadChildren: () =>
-          import('../resources/product').then((m) => m.ProductModule),
-      },
-      {
-        path: 'sample',
-        loadChildren: () =>
-          import('../resources/sample').then((m) => m.SampleModule),
-      },
-    ],
+    children: [],
   },
 ];
 

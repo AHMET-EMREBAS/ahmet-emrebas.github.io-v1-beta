@@ -2,7 +2,8 @@
   "columns": {
     "name": {
       "type": "text",
-      "unique": true
+      "unique": true,
+      "minLength": 3
     }
   }
 }

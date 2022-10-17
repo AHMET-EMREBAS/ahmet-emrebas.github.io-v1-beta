@@ -15,11 +15,6 @@ import { entityDataModuleConfig } from './entity-data-module-config';
 
 const routes = [
   {
-    path: '',
-    loadChildren: () =>
-      import('./landing-page').then((m) => m.LandingPageModule),
-  },
-  {
     path: 'app',
     loadChildren: () => import('./layout').then((m) => m.LayoutModule),
   },

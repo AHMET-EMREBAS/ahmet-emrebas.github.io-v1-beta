@@ -1,13 +1,20 @@
 {{formGroup.value | json}}
-<form [formGroup]="formGroup" [noValidate]="false">
-
-    <ng-container *ngFor="let field of fields">
+<form #form [formGroup]="formGroup" [noValidate]="false">
 
 
+    <div class="field">
+        <label for="First Name" class="block">First Name</label>
+        <input id="First Name" type="text" pInputText formControlName="firstName">
+    </div>
 
-    </ng-container>
+    <div class="field">
+        <label for="Age" class="block">Age</label>
+        <input id="Age" type="number" pInputText formControlName="firstName">
+    </div>
 
 
-    <p-button type="submit" [label]="'Save'" (click)="submit()" [disabled]="isFormSubmitted"></p-button>
+
+
+    <button pButton type="submit" [label]="formSubmitLabel" (click)="submit()" [disabled]="formSubmitted"></button>
 
 </form>

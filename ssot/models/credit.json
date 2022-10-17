@@ -1,9 +1,7 @@
 {
   "columns": {
     "credit": {
-      "type": "numeric",
-      "inputType": "number",
-      "min": 0
+      "type": "numeric"
     }
   },
   "relations": {

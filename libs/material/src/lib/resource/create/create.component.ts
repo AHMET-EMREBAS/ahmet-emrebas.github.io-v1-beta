@@ -1,11 +1,9 @@
 import { Component } from '@angular/core';
 import {
+  FormBuilder,
   FormControl,
-  FormGroup,
   Validators,
 } from '@angular/forms';
-
-import { ResourceService } from '../resource.service';
 
 @Component({
   selector: 'aemat-create',
@@ -13,54 +11,80 @@ import { ResourceService } from '../resource.service';
   styleUrls: ['./create.component.scss'],
 })
 export class CreateComponent {
-  isFormSubmitted = false;
-
-  formGroup = new FormGroup({
-    name: new FormControl('', Validators.required),
-    colors: new FormControl(null, Validators.required),
-    cities: new FormControl(null, Validators.required),
-    category: new FormControl(null, Validators.required),
-  });
+  formSubmitted = false;
+  formSubmitLabel = 'Submit';
 
   fields: any[] = [
     {
-      name: 'name',
-      type: 'text',
-      inputType: 'text',
-      reqiured: true,
-    },
-
-    {
-      name: 'colors',
-      type: 'text',
-      inputType: 'select-one-enum',
-      multiple: true,
-      options: ['Red', 'Blue', 'Orange', 'Gray', 'Black'],
+      name: 'firstName',
+      placeholder: 'Fist name',
+      minLength: 10,
+      required: true,
     },
     {
-      name: 'cities',
-      type: 'text',
-      inputType: 'select-many-enum',
-      multiple: true,
-      options: ['Red', 'Blue', 'Orange', 'Gray', 'Black'],
+      name: 'age',
+      placeholder: 'Fist name',
+      minLength: 10,
+      required: true,
     },
     {
-      name: 'category',
-      type: 'number',
-      inputType: 'select-one-object',
-      options: [
-        { id: 1, label: 'Cat 1' },
-        { id: 2, label: 'Cat 2' },
-      ],
+      name: 'gender',
+      placeholder: 'Fist name',
+      minLength: 10,
+      required: true,
+    },
+    {
+      name: 'city',
+      placeholder: 'City',
+      inputType: 'select-one',
+      minLength: 10,
+      required: true,
+    },
+    {
+      name: 'active',
+      label: 'Active',
+      inputType: 'switch',
     },
   ];
 
-  constructor(private readonly resourceService: ResourceService) {}
+  formGroup = this.fb.group({});
+
+  constructor(private readonly fb: FormBuilder) {}
+
+  ngAfterViewInit(): void {
+    console.log('');
+  }
+
+  ngOnInit(): void {
+    for (const field of this.fields) {
+      const validators = [
+        field.required && Validators.required,
+        field.minLength && Validators.minLength(field.minLength),
+        field.maxLength && Validators.maxLength(field.maxLength),
+        field.min && Validators.min(field.min),
+        field.max && Validators.max(field.max),
+        field.email && Validators.email(field.email),
+      ].filter((e) => e);
+
+      const formControl = new FormControl('', validators);
+
+      this.formGroup.addControl(field.name, formControl);
+    }
+    // const op1 = (e: any) =>
+    //   Object.entries(e).filter(([key, value]) => (Validators as any)[key]);
+    // const op = this.fields.map((e) => ({
+    //   [e.name]: ['', op1(e)],
+    // }));
+    // this.formGroup = this.fb.group(op);
+  }
 
   submit() {
-    if (this.formGroup.dirty && this.formGroup.valid) {
-      this.resourceService.save(this.formGroup.value);
-      this.isFormSubmitted = true;
+    if (this.formGroup.dirty && !this.formGroup.invalid) {
+      console.log(this.formGroup.value);
+      this.formSubmitted = true;
+      this.formSubmitLabel = 'Processing ... ';
+    } else {
+      console.log('Form is not valid');
     }
   }
 }
