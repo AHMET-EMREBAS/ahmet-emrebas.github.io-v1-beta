@@ -2,6 +2,7 @@ import {
   Component,
   OnInit,
 } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { CategoryService } from './category.service';
 
@@ -11,7 +12,10 @@ import { CategoryService } from './category.service';
   styleUrls: ['./category.component.scss'],
 })
 export class CategoryComponent implements OnInit {
-  constructor(private readonly categoryService: CategoryService) {}
+  constructor(
+    private readonly categoryService: CategoryService,
+    private readonly router: Router
+  ) {}
 
   ngOnInit(): void {
     this.categoryService.entities$.subscribe(console.log);

@@ -17,11 +17,11 @@ import { ICategory } from '../category.interface';
 import { CategoryService } from '../category.service';
 
 @Component({
-  selector: 'ahmet-emrebas-delete-category',
-  templateUrl: './delete-category.component.html',
-  styleUrls: ['./delete-category.component.scss'],
+  selector: 'ahmet-emrebas-detail-category',
+  templateUrl: './detail-category.component.html',
+  styleUrls: ['./detail-category.component.scss'],
 })
-export class DeleteCategoryComponent implements OnInit {
+export class DetailCategoryComponent implements OnInit {
   id!: number;
   item$!: Observable<ICategory>;
   constructor(
@@ -37,33 +37,7 @@ export class DeleteCategoryComponent implements OnInit {
     this.item$ = this.categoryService.getOneByIdFromCache(this.id);
   }
 
-  deleteItem() {
-    this.confirmationService.confirm({
-      accept: () => {
-        this.categoryService.removeOneFromCache(this.id);
-
-        this.messageService.add({
-          data: 'Deleted an item',
-          severity: 'warn',
-          summary: `Deleted ${this.id}`,
-        });
-        this.backHome();
-      },
-      header: 'Are you sure to delete item?',
-      acceptButtonStyleClass: 'p-button-danger',
-      acceptIcon: 'pi pi-trash',
-      rejectIcon: 'pi pi-times',
-      reject: () => {
-        this.backHome();
-      },
-    });
-  }
-
   entries(item: Record<string, any>) {
     return Object.entries(item);
-  }
-
-  backHome() {
-    this.router.navigate([''], { relativeTo: this.route });
   }
 }

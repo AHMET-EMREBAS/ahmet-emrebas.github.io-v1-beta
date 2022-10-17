@@ -43,9 +43,9 @@ export class ViewCategoryComponent implements OnInit {
 
   ngOnInit(): void {
     this.entities$ = this.categoryService.entities$;
-    for (let i = 0; i < 50; i++) {
-      this.categoryService.addOneToCache({ name: `item ${i}`, id: i });
-    }
+    // for (let i = 0; i < 50; i++) {
+    //   this.categoryService.addOneToCache({ name: `item ${i}`, id: i });
+    // }
   }
 
   filterTable(event: {
@@ -55,5 +55,9 @@ export class ViewCategoryComponent implements OnInit {
     };
   }) {
     console.log(event);
+  }
+
+  deleteSelections() {
+    this.router.navigate(['delete', this.selectedItems.pop()?.id]);
   }
 }

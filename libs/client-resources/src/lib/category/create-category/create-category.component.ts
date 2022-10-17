@@ -13,5 +13,7 @@ import { CategoryService } from '../category.service';
 export class CreateCategoryComponent implements OnInit {
   constructor(private readonly categoryService: CategoryService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.categoryService.addOneToCache({ id: 1, name: 'Some' });
+  }
 }

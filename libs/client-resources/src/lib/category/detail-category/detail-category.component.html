@@ -1,0 +1,14 @@
+<p-card styleClass="w-full" *ngIf="item$ | async as item">
+    <ng-template pTemplate="header">
+        <strong>ID: </strong>{{item.id}}
+    </ng-template>
+
+    <div class="flex flex-column gap-2">
+
+        <div class="field" *ngFor="let i of entries(item)">
+
+            <strong>{{i[0]}}</strong>: {{i[1]}}
+        </div>
+    </div>
+
+</p-card>

@@ -11,47 +11,23 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DialogModule } from 'primeng/dialog';
 import { MessageModule } from 'primeng/message';
 import { ToastModule } from 'primeng/toast';
+import { ToolbarModule } from 'primeng/toolbar';
 
 import { CategoryComponent } from './category.component';
 import { CategoryService } from './category.service';
+import { categoryRoutes } from './routes';
 
 @NgModule({
   declarations: [CategoryComponent],
   imports: [
     CommonModule,
+    RouterModule.forChild(categoryRoutes),
+    ToolbarModule,
     DialogModule,
     MessageModule,
     ConfirmDialogModule,
     ToastModule,
     ButtonModule,
-    RouterModule.forChild([
-      {
-        path: '',
-        component: CategoryComponent,
-        children: [
-          {
-            path: '',
-            loadChildren: () =>
-              import('./view-category').then((m) => m.ViewCategoryModule),
-          },
-          {
-            path: 'create',
-            loadChildren: () =>
-              import('./create-category').then((m) => m.CreateCategoryModule),
-          },
-          {
-            path: 'update',
-            loadChildren: () =>
-              import('./update-category').then((m) => m.UpdateCategoryModule),
-          },
-          {
-            path: 'delete/:id',
-            loadChildren: () =>
-              import('./delete-category').then((m) => m.DeleteCategoryModule),
-          },
-        ],
-      },
-    ]),
   ],
   providers: [CategoryService, ConfirmationService, MessageService],
 })
