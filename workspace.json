@@ -6,11 +6,11 @@
     "auth": "libs/auth",
     "cli": "libs/cli",
     "cli-e2e": "apps/cli-e2e",
+    "client-resources": "libs/client-resources",
     "common": "libs/common",
     "material": "libs/material",
     "models": "libs/models",
     "resources": "libs/resources",
-
     "utils": "libs/utils",
     "web": "apps/web",
     "web-e2e": "apps/web-e2e"

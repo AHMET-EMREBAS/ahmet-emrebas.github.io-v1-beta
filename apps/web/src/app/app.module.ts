@@ -15,6 +15,11 @@ import { entityDataModuleConfig } from './entity-data-module-config';
 
 const routes = [
   {
+    path: '',
+    loadChildren: () =>
+      import('client-resources').then((m) => m.CategoryModule),
+  },
+  {
     path: 'app',
     loadChildren: () => import('./layout').then((m) => m.LayoutModule),
   },

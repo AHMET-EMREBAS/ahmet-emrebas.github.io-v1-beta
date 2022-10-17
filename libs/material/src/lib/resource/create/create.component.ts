@@ -70,12 +70,6 @@ export class CreateComponent {
 
       this.formGroup.addControl(field.name, formControl);
     }
-    // const op1 = (e: any) =>
-    //   Object.entries(e).filter(([key, value]) => (Validators as any)[key]);
-    // const op = this.fields.map((e) => ({
-    //   [e.name]: ['', op1(e)],
-    // }));
-    // this.formGroup = this.fb.group(op);
   }
 
   submit() {

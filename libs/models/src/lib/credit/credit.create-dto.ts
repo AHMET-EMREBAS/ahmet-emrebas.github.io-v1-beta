@@ -5,8 +5,6 @@ export class CreditCreateDTO extends BaseDTO<CreditCreateDTO> {
     name: 'credit',
     valueType: 'any',
     type: 'numeric',
-    inputType: 'number',
-    min: 0,
     unique: false,
   })
   credit: any;

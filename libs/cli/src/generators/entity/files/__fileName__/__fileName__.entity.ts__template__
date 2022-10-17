@@ -11,7 +11,7 @@ export class <%= className %> extends BaseEntity<<%= className %>> {
 
 
 <% for(var i=0; i < columns.length; i++) { %>
-  @Column({type:'<%= columns[i].type %>', unique: <%= !!columns[i].unique %>,  nullable: <%= !!columns[i].nullable %>,  transform: '<%= columns[i].transform %>'})
+  @Column({type:'<%= columns[i].type %>', unique: <%= !!columns[i].unique %>,  nullable: <%= !!columns[i].nullable %> })
   <%= columns[i].name %>: <%= columns[i].valueType %>;
 <% } %>
 

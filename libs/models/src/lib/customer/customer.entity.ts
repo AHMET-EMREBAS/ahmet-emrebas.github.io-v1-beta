@@ -1,4 +1,7 @@
-import { BaseEntity, Relation, Column } from 'api-core';
+import {
+  BaseEntity,
+  Column,
+} from 'api-core';
 import { Entity } from 'typeorm';
 
 @Entity()
