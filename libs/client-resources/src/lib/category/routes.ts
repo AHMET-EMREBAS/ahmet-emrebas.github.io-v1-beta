@@ -59,7 +59,6 @@ export const categoryRoutes: Routes = [
         path: 'delete/:id',
         loadChildren: () =>
           import('./delete-category').then((m) => m.DeleteCategoryModule),
-        canActivate: [PermissionCheck],
       },
     ],
   },

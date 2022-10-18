@@ -42,4 +42,8 @@ export class DeleteCategoryComponent implements OnInit {
   entries(item: Record<string, any>) {
     return Object.entries(item);
   }
+
+  deleteItem() {
+    this.ds.delete(this.id);
+  }
 }

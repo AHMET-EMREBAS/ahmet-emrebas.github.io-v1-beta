@@ -1,12 +1,10 @@
-<form [formGroup]=" ds.formGroup" [noValidate]="false">
-    <div class="field">
-        <label for="category-name" class="block"> Category Name</label>
-        <input type="text" pInputText [formControl]="ds.controls['name'] " [aematSetAttribute]="ds.controls['name']">
-    </div>
+<form [formGroup]="formGroup" [noValidate]="false">
 
+    <aemat-form-input [group]="formGroup" [controlName]="'name'" [attributes]="{name:'name'}">
+    </aemat-form-input>
 
     <div class="flex flex-row gap-5">
-        <button type="submit" pButton (click)="ds.submitForm()" label="Save"></button>
-        <button type="button" pButton class="p-button-secondary" label="Reset" (click)="ds.resetForm()"></button>
+        <button type="submit" pButton (click)="submit()" label="Save"></button>
+        <button type="button" pButton class="p-button-secondary" label="Reset" (click)="reset()"></button>
     </div>
 </form>

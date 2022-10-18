@@ -2,8 +2,8 @@ import {
   AfterViewInit,
   Component,
 } from '@angular/core';
-
-import { FilterMetadata } from 'primeng/api';
+import { FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { ICategory } from '../category.interface';
 import { CategoryService } from '../category.service';
@@ -14,20 +14,31 @@ import { CategoryService } from '../category.service';
   styleUrls: ['./view-category.component.scss'],
 })
 export class ViewCategoryComponent implements AfterViewInit {
+  searchControl = new FormControl('');
+
+  contextMenuItems = [
+    {
+      label: 'delete',
+      icon: 'pi pi-trash',
+      command: () =>
+        this.router.navigate(['delete', this.selectedcontextItem.id]),
+    },
+  ];
+  columns = [
+    { field: 'id', header: '#' },
+    { field: 'name', header: 'Name' },
+  ];
+  globalFilterFields = ['id', 'name'];
+  selectedItems = [];
+  selectedcontextItem!: ICategory;
   entities$ = this.ds.entities$;
 
-  constructor(public readonly ds: CategoryService) {}
+  constructor(
+    private readonly ds: CategoryService,
+    private readonly router: Router
+  ) {}
 
   ngAfterViewInit(): void {
     this.ds.getAll();
-  }
-
-  filterTable(event: {
-    filteredValue: ICategory[];
-    filters: {
-      [key: string]: FilterMetadata[];
-    };
-  }) {
-    this.ds.filter(event.filters);
   }
 }
