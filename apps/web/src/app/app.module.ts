@@ -2,8 +2,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterModule } from '@angular/router';
+import {
+  RouterModule,
+  Routes,
+} from '@angular/router';
 import { ServiceWorkerModule } from '@angular/service-worker';
+
+import { provideLayoutMenu } from 'libs/material/src/lib/layout/providers';
+import { LayoutModule } from 'material';
 
 import { EntityDataModule } from '@ngrx/data';
 import { EffectsModule } from '@ngrx/effects';
@@ -13,27 +19,14 @@ import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
 import { entityDataModuleConfig } from './entity-data-module-config';
 
-const routes = [
-  {
-    path: '',
-    loadChildren: () =>
-      import('client-resources').then((m) => m.CategoryModule),
-  },
-  {
-    path: 'app',
-    loadChildren: () => import('./layout').then((m) => m.LayoutModule),
-  },
-  {
-    path: 'material',
-    loadChildren: () => import('material').then((m) => m.FormModule),
-  },
-];
+const routes: Routes = [];
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    LayoutModule,
     RouterModule.forRoot(routes, { useHash: true }),
     HttpClientModule,
     StoreModule.forRoot({}, {}),
@@ -46,7 +39,31 @@ const routes = [
       registrationStrategy: 'registerWhenStable:30000',
     }),
   ],
-  providers: [],
+  providers: [
+    provideLayoutMenu({
+      TOP_LEFT: [
+        {
+          label: 'Resources',
+          items: [{ label: 'Products' }],
+        },
+      ],
+      BOTTOM_LEFT: [
+        {
+          label: 'Profile',
+        },
+      ],
+      TOP_RIGHT: [
+        {
+          label: 'Features',
+        },
+      ],
+      BOTTOM_RIGHT: [
+        {
+          label: 'Config',
+        },
+      ],
+    }),
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

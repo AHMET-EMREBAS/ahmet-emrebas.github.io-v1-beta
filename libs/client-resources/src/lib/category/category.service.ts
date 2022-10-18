@@ -1,14 +1,16 @@
 import { Injectable } from '@angular/core';
 
-import { NgrxResourceService } from 'material';
 import { map } from 'rxjs';
 
-import { EntityCollectionServiceElementsFactory } from '@ngrx/data';
+import {
+  EntityCollectionServiceBase,
+  EntityCollectionServiceElementsFactory,
+} from '@ngrx/data';
 
 import { ICategory } from './category.interface';
 
 @Injectable({ providedIn: 'root' })
-export class CategoryService extends NgrxResourceService<ICategory> {
+export class CategoryService extends EntityCollectionServiceBase<ICategory> {
   constructor(ef: EntityCollectionServiceElementsFactory) {
     super('Category', ef);
   }

@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { FormGroup } from '@angular/forms';
-
-import { InputControl } from 'material';
+import {
+  FormControl,
+  FormGroup,
+} from '@angular/forms';
 
 import { CategoryService } from '../category.service';
 
@@ -12,15 +13,7 @@ import { CategoryService } from '../category.service';
 })
 export class CreateCategoryComponent {
   formGroup = new FormGroup({
-    name: new InputControl(
-      {
-        name: 'name',
-        minLength: 3,
-        maxLength: 20,
-        unique: true,
-      },
-      this.ds
-    ),
+    name: new FormControl('', []),
   });
 
   constructor(public readonly ds: CategoryService) {}

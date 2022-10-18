@@ -1,8 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import {
+  FormsModule,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { RouterModule } from '@angular/router';
-
-import { FormModule } from 'material';
 
 import { CreateCategoryComponent } from './create-category.component';
 
@@ -10,7 +12,8 @@ import { CreateCategoryComponent } from './create-category.component';
   declarations: [CreateCategoryComponent],
   imports: [
     CommonModule,
-    FormModule,
+    FormsModule,
+    ReactiveFormsModule,
     RouterModule.forChild([{ path: '', component: CreateCategoryComponent }]),
   ],
 })

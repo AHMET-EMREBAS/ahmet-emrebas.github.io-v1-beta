@@ -1,6 +1,6 @@
-<div class="full-container flex flex-column gap-2  justify-content-between">
+<div class="flex flex-column gap-2  border-blue-200 border-3 h-full">
 
-    <p-menubar>
+    <p-menubar [model]=" (bigView$ | async) ? lm.MENU_BAR || [] : mobileMenu()">
         <ng-template pTemplate="start">
             <img src="assets/icons/icon-72x72.png" height="40" class="mr-2" />
         </ng-template>
@@ -18,23 +18,32 @@
         </ng-template>
     </p-menubar>
 
-    <div class="full-container flex flex-row  gap-2   ">
+    <div class="flex flex-row flex-grow-1  gap-2 border-orange-200 border-3 ">
 
 
+        <ng-container *ngIf="bigView$ | async">
+            <div class="flex flex-column justify-content-between" *ngIf="lm">
+                <p-menu *ngIf="lm.TOP_LEFT" [model]="lm.TOP_LEFT"></p-menu>
+                <p-menu *ngIf="lm.BOTTOM_LEFT" [model]="lm.BOTTOM_LEFT"></p-menu>
+            </div>
 
-        <p-menu [model]="resourcesMenu"></p-menu>
+        </ng-container>
 
-        <div class="full-container flex flex-column gap-2 flex-grow-1  ">
+        <div class="flex flex-column gap-2 flex-grow-1">
 
             <p-card header="Card Header ">
-                <router-outlet></router-outlet>
+                <ng-content></ng-content>
             </p-card>
-
-
-
         </div>
 
-        <p-menu [model]="configMenu"></p-menu>
+        <ng-container *ngIf="bigView$ | async">
+
+            <div class="flex flex-column justify-content-between" *ngIf="lm">
+
+                <p-menu *ngIf="lm.TOP_RIGHT" [model]="lm.TOP_RIGHT"></p-menu>
+                <p-menu *ngIf="lm.BOTTOM_RIGHT" [model]="lm.BOTTOM_RIGHT"></p-menu>
+            </div>
+        </ng-container>
     </div>
 
     <p-toolbar [style]="{padding:'5px'}">

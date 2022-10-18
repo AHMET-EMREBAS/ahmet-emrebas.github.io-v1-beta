@@ -18,13 +18,20 @@ html {
 body {
     outline: none;
     display: flex;
+
     flex-direction: column;
+    justify-content: stretch;
     padding: 0px;
     margin: 0px;
     position: relative;
     height: 100% !important;
     width: 100% !important;
     border: 3px solid red;
+}
+
+ae-root {
+    position: relative;
+    height: 100%;
 }
 
 
