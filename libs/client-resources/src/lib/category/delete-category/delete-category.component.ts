@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   OnInit,
 } from '@angular/core';
@@ -20,12 +21,13 @@ import { CategoryService } from '../category.service';
   selector: 'ahmet-emrebas-delete-category',
   templateUrl: './delete-category.component.html',
   styleUrls: ['./delete-category.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DeleteCategoryComponent implements OnInit {
   id!: number;
   item$!: Observable<ICategory>;
   constructor(
-    private readonly categoryService: CategoryService,
+    public readonly ds: CategoryService,
     private readonly confirmationService: ConfirmationService,
     private readonly messageService: MessageService,
     private readonly route: ActivatedRoute,
@@ -34,36 +36,10 @@ export class DeleteCategoryComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = parseInt(this.route.snapshot.paramMap.get('id') as string);
-    this.item$ = this.categoryService.getOneByIdFromCache(this.id);
-  }
-
-  deleteItem() {
-    this.confirmationService.confirm({
-      accept: () => {
-        this.categoryService.removeOneFromCache(this.id);
-
-        this.messageService.add({
-          data: 'Deleted an item',
-          severity: 'warn',
-          summary: `Deleted ${this.id}`,
-        });
-        this.backHome();
-      },
-      header: 'Are you sure to delete item?',
-      acceptButtonStyleClass: 'p-button-danger',
-      acceptIcon: 'pi pi-trash',
-      rejectIcon: 'pi pi-times',
-      reject: () => {
-        this.backHome();
-      },
-    });
+    this.item$ = this.ds.getOneByIdFromCache(this.id);
   }
 
   entries(item: Record<string, any>) {
     return Object.entries(item);
-  }
-
-  backHome() {
-    this.router.navigate([''], { relativeTo: this.route });
   }
 }

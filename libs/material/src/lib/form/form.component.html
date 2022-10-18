@@ -1,8 +1,0 @@
-<form #form [formGroup]="formGroup" [noValidate]="false">
-
-    <aemat-input-wrapper *ngFor="let field of fields" [formGroup]="formGroup" [options]="field"></aemat-input-wrapper>
-
-
-    <button pButton type="submit" [label]="formSubmitLabel" (click)="submit()" [disabled]="formSubmitted"></button>
-
-</form>

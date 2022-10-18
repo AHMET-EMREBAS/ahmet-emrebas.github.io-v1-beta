@@ -1,7 +1,4 @@
-import {
-  Component,
-  OnInit,
-} from '@angular/core';
+import { Component } from '@angular/core';
 
 import { CategoryService } from '../category.service';
 
@@ -10,10 +7,6 @@ import { CategoryService } from '../category.service';
   templateUrl: './create-category.component.html',
   styleUrls: ['./create-category.component.scss'],
 })
-export class CreateCategoryComponent implements OnInit {
-  constructor(private readonly categoryService: CategoryService) {}
-
-  ngOnInit(): void {
-    this.categoryService.addOneToCache({ id: 1, name: 'Some' });
-  }
+export class CreateCategoryComponent {
+  constructor(public readonly ds: CategoryService) {}
 }

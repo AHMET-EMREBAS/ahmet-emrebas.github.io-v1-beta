@@ -2,12 +2,14 @@ import {
   BaseDTO,
   Property,
 } from 'api-core';
+import { Exclude, Expose } from 'class-transformer';
 
+@Exclude()
 export class <%= className %>CreateDTO extends BaseDTO<<%= className %>CreateDTO> {
 
   <% for(var i=0; i < columns.length; i++) { %>
 
-
+  @Expose()
   @Property(<%- JSON.stringify(columns[i]) %>)
   
   <%= columns[i].name %>: <%= columns[i].valueType %>;

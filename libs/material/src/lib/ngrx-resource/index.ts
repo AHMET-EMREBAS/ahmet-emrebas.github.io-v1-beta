@@ -1,1 +1,1 @@
-export * from "./nxrx-resource.service";
+export * from './ngrx-resource.service';

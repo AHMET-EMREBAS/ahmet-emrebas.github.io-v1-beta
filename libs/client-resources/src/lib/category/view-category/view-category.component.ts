@@ -1,19 +1,9 @@
 import {
+  AfterViewInit,
   Component,
-  OnInit,
 } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import {
-  ActivatedRoute,
-  Router,
-} from '@angular/router';
 
-import {
-  ConfirmationService,
-  FilterMetadata,
-  MessageService,
-} from 'primeng/api';
-import { Observable } from 'rxjs';
+import { FilterMetadata } from 'primeng/api';
 
 import { ICategory } from '../category.interface';
 import { CategoryService } from '../category.service';
@@ -23,29 +13,13 @@ import { CategoryService } from '../category.service';
   templateUrl: './view-category.component.html',
   styleUrls: ['./view-category.component.scss'],
 })
-export class ViewCategoryComponent implements OnInit {
-  selectedItems: ICategory[] = [];
-  entities$!: Observable<ICategory[]>;
-  columns: { header: string; field: string }[] = [
-    { header: '#', field: 'id' },
-    { header: 'Category', field: 'name' },
-  ];
-  globalFilterFields = ['id', 'name'];
-  searchControl = new FormControl('');
+export class ViewCategoryComponent implements AfterViewInit {
+  entities$ = this.ds.entities$;
 
-  constructor(
-    private readonly categoryService: CategoryService,
-    private readonly confirmationService: ConfirmationService,
-    private readonly messageService: MessageService,
-    private readonly route: ActivatedRoute,
-    private readonly router: Router
-  ) {}
+  constructor(public readonly ds: CategoryService) {}
 
-  ngOnInit(): void {
-    this.entities$ = this.categoryService.entities$;
-    // for (let i = 0; i < 50; i++) {
-    //   this.categoryService.addOneToCache({ name: `item ${i}`, id: i });
-    // }
+  ngAfterViewInit(): void {
+    this.ds.getAll();
   }
 
   filterTable(event: {
@@ -54,10 +28,6 @@ export class ViewCategoryComponent implements OnInit {
       [key: string]: FilterMetadata[];
     };
   }) {
-    console.log(event);
-  }
-
-  deleteSelections() {
-    this.router.navigate(['delete', this.selectedItems.pop()?.id]);
+    this.ds.filter(event.filters);
   }
 }

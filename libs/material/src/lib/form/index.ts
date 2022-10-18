@@ -1,2 +1,3 @@
-export * from "./form.component";
-export * from "./form.module";
+export * from './input-control';
+export * from './form.module';
+export * from './set-attribute.directive';

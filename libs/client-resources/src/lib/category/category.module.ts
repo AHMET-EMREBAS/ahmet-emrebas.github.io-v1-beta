@@ -15,7 +15,10 @@ import { ToolbarModule } from 'primeng/toolbar';
 
 import { CategoryComponent } from './category.component';
 import { CategoryService } from './category.service';
-import { categoryRoutes } from './routes';
+import {
+  categoryRoutes,
+  PermissionCheck,
+} from './routes';
 
 @NgModule({
   declarations: [CategoryComponent],
@@ -29,6 +32,11 @@ import { categoryRoutes } from './routes';
     ToastModule,
     ButtonModule,
   ],
-  providers: [CategoryService, ConfirmationService, MessageService],
+  providers: [
+    CategoryService,
+    ConfirmationService,
+    MessageService,
+    PermissionCheck,
+  ],
 })
 export class CategoryModule {}

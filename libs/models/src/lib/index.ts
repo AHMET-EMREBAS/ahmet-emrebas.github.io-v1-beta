@@ -12,3 +12,4 @@ export * from './store';
 export * from './user';
 
 export * from './credit'
+export * from './category'

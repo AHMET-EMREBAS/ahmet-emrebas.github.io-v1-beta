@@ -64,7 +64,9 @@ export function CrudController<T extends BaseEntity>(
   const CreateDTOValidationPipe = new ValidationPipe({
     expectedType: options.createDTO,
     transform: true,
-    transformOptions: { exposeUnsetFields: false },
+    transformOptions: {
+      exposeUnsetFields: false,
+    },
     validationError: {
       target: false,
       value: false,
@@ -77,11 +79,20 @@ export function CrudController<T extends BaseEntity>(
     skipMissingProperties: true,
     skipNullProperties: true,
     skipUndefinedProperties: true,
-    transformOptions: { exposeUnsetFields: false },
+    transformOptions: {
+      exposeUnsetFields: false,
+    },
+
     validationError: {
       target: false,
       value: false,
     },
+  });
+
+  const QueryValidationPipe = new ValidationPipe({
+    transform: true,
+    transformOptions: { exposeDefaultValues: false, exposeUnsetFields: false },
+    skipMissingProperties: true,
   });
 
   class CrudBaseController {
@@ -93,10 +104,14 @@ export function CrudController<T extends BaseEntity>(
     @ApiInternalServerErrorResponse()
     @Get(PLURAL_PATH)
     findAll(
-      @Query(UpdateDTOValidationPipe) paginatorDTO: PaginatorDTO,
-      @Query(UpdateDTOValidationPipe) whereQuery: WhereQueryDTO,
-      @Query(UpdateDTOValidationPipe) queryOptions: QueryOptionsDTO
+      @Query(QueryValidationPipe)
+      paginatorDTO: PaginatorDTO,
+      @Query(QueryValidationPipe)
+      whereQuery: WhereQueryDTO,
+      @Query(QueryValidationPipe)
+      queryOptions: QueryOptionsDTO
     ) {
+      console.log(paginatorDTO, whereQuery, queryOptions);
       return this.service.find({
         ...whereQuery,
         ...paginatorDTO,
@@ -147,6 +162,7 @@ export function CrudController<T extends BaseEntity>(
       @ID() id: number,
       @Query(UpdateDTOValidationPipe) queryOptions: QueryOptionsDTO
     ) {
+      console.log(id, queryOptions);
       return this.service.delete(id, queryOptions.hardDelete);
     }
 
