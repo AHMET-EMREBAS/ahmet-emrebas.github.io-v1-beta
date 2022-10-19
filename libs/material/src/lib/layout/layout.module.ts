@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
 import { SharedModule } from 'primeng/api';
+import { BadgeModule } from 'primeng/badge';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { InputTextModule } from 'primeng/inputtext';
@@ -18,6 +19,7 @@ import { LayoutComponent } from './layout.component';
     CommonModule,
     LM,
     SharedModule,
+    BadgeModule,
     MenubarModule,
     MenuModule,
     ButtonModule,

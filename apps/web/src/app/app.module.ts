@@ -8,8 +8,10 @@ import {
 } from '@angular/router';
 import { ServiceWorkerModule } from '@angular/service-worker';
 
-import { provideLayoutMenu } from 'libs/material/src/lib/layout/providers';
-import { LayoutModule } from 'material';
+import {
+  LayoutModule,
+  provideLayoutMenu,
+} from 'material';
 
 import { EntityDataModule } from '@ngrx/data';
 import { EffectsModule } from '@ngrx/effects';
@@ -18,6 +20,7 @@ import { StoreModule } from '@ngrx/store';
 import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
 import { entityDataModuleConfig } from './entity-data-module-config';
+import { MyLayoutManager } from './layout-manager';
 
 const routes: Routes = [];
 
@@ -39,31 +42,7 @@ const routes: Routes = [];
       registrationStrategy: 'registerWhenStable:30000',
     }),
   ],
-  providers: [
-    provideLayoutMenu({
-      TOP_LEFT: [
-        {
-          label: 'Resources',
-          items: [{ label: 'Products' }],
-        },
-      ],
-      BOTTOM_LEFT: [
-        {
-          label: 'Profile',
-        },
-      ],
-      TOP_RIGHT: [
-        {
-          label: 'Features',
-        },
-      ],
-      BOTTOM_RIGHT: [
-        {
-          label: 'Config',
-        },
-      ],
-    }),
-  ],
+  providers: [provideLayoutMenu(MyLayoutManager)],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

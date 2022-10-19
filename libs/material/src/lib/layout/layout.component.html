@@ -1,6 +1,6 @@
-<div class="flex flex-column gap-2  border-blue-200 border-3 h-full">
+<div class="flex flex-column gap-2" *ngIf="lm.getMenu() as LM">
 
-    <p-menubar [model]=" (bigView$ | async) ? lm.MENU_BAR || [] : mobileMenu()">
+    <p-menubar [model]=" (bigView$ | async) ? LM.MENU_BAR || [] : mobileMenu()">
         <ng-template pTemplate="start">
             <img src="assets/icons/icon-72x72.png" height="40" class="mr-2" />
         </ng-template>
@@ -18,43 +18,40 @@
         </ng-template>
     </p-menubar>
 
-    <div class="flex flex-row flex-grow-1  gap-2 border-orange-200 border-3 ">
-
+    <div class="flex flex-row flex-grow-1  justify-content-center  gap-2  ">
 
         <ng-container *ngIf="bigView$ | async">
-            <div class="flex flex-column justify-content-between" *ngIf="lm">
-                <p-menu *ngIf="lm.TOP_LEFT" [model]="lm.TOP_LEFT"></p-menu>
-                <p-menu *ngIf="lm.BOTTOM_LEFT" [model]="lm.BOTTOM_LEFT"></p-menu>
-            </div>
 
+            <div class="flex flex-column justify-content-between" *ngIf="lm">
+                <p-menu *ngIf="LM.TOP_LEFT" [model]="LM.TOP_LEFT"></p-menu>
+                <p-menu *ngIf="LM.BOTTOM_LEFT" [model]="LM.BOTTOM_LEFT"></p-menu>
+            </div>
         </ng-container>
 
-        <div class="flex flex-column gap-2 flex-grow-1">
-
-            <p-card header="Card Header ">
-                <ng-content></ng-content>
-            </p-card>
+        <div class="x-container flex flex-column gap-2 flex-grow-1">
+            <ng-content></ng-content>
         </div>
 
         <ng-container *ngIf="bigView$ | async">
 
             <div class="flex flex-column justify-content-between" *ngIf="lm">
 
-                <p-menu *ngIf="lm.TOP_RIGHT" [model]="lm.TOP_RIGHT"></p-menu>
-                <p-menu *ngIf="lm.BOTTOM_RIGHT" [model]="lm.BOTTOM_RIGHT"></p-menu>
+                <p-menu *ngIf="LM.TOP_RIGHT" [model]="LM.TOP_RIGHT"></p-menu>
+                <p-menu *ngIf="LM.BOTTOM_RIGHT" [model]="LM.BOTTOM_RIGHT"></p-menu>
             </div>
         </ng-container>
     </div>
 
     <p-toolbar [style]="{padding:'5px'}">
 
+        <div class="p-toolbar-group-left"></div>
 
-        <div class="p-toolbar-group-left">
-            <small class="text-gray-700"> Copyright 2022 all rights are reserved. </small>
-        </div>
-
-        <div class="p-toolbar-group-right">
-            <p-button icon="pi pi-bell" styleClass="p-button-warning"></p-button>
+        <div class="p-toolbar-group-right gap-3">
+            <ng-container *ngIf="LM.STATUS_BAR">
+                <p-button [icon]="s.icon || ''" [label]=" s.label || ''" [styleClass]="(s.styleClass || '')"
+                    *ngFor="let  s of LM.STATUS_BAR" [badge]="s.badge || ''">
+                </p-button>
+            </ng-container>
         </div>
     </p-toolbar>
 

@@ -1,11 +1,11 @@
 import { Provider } from '@angular/core';
 
-import { LayoutMenu } from './layout-menu';
+import { LayoutManager } from './layout-menu';
 
-export const LAYOUT_MENU_TOKEN = 'LAYOUT_MENU_TOKEN';
-export function provideLayoutMenu(value: LayoutMenu): Provider {
+export const LAYOUT_MANAGER_TOKEN = 'LAYOUT_MANAGER_TOKEN';
+export function provideLayoutMenu(value: LayoutManager): Provider {
   return {
-    provide: LAYOUT_MENU_TOKEN,
+    provide: LAYOUT_MANAGER_TOKEN,
     useValue: value,
   };
 }
