@@ -3,6 +3,7 @@
  * This is only a minimal backend to get started.
  */
 
+import * as cookieParser from 'cookie-parser';
 import { join } from 'path';
 import * as favicon from 'serve-favicon';
 
@@ -24,7 +25,7 @@ async function bootstrap() {
   app.enableCors();
 
   app.use(favicon(join(__dirname, 'assets', 'favicon.ico')));
-
+  app.use(cookieParser());
   const config = new DocumentBuilder()
     .setContact(
       'Ahmet Emrebas',

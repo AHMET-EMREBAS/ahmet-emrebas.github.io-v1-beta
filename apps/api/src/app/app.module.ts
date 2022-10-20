@@ -1,4 +1,5 @@
 import { AuthModule } from 'auth';
+import { User } from 'models';
 import { join } from 'path';
 
 import { Module } from '@nestjs/common';
@@ -9,7 +10,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     TypeOrmModule.forRoot({
       type: 'better-sqlite3',
       database: join(__dirname, 'database', 'main.sqlite'),
-      entities: [],
+      entities: [User],
       subscribers: [],
       synchronize: true,
       dropSchema: true,

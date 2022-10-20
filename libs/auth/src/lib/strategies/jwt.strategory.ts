@@ -10,7 +10,7 @@ import { PassportStrategy } from '@nestjs/passport';
 import { jtwOptions } from '../jwt.constants';
 
 function fromCookie(req: Request) {
-  return req.cookies['auth'];
+  return req?.cookies && req.cookies['auth'];
 }
 
 function fromQuery(req: Request) {

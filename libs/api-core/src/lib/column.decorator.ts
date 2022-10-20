@@ -4,7 +4,10 @@ import {
   ValueTransformer,
 } from 'typeorm';
 
-import { jsonTransformer } from './transformers';
+import {
+  jsonTransformer,
+  passwordTransformer,
+} from './transformers';
 
 export function Column(
   options: ColumnOptions & { transform?: 'json' | string }
@@ -13,6 +16,10 @@ export function Column(
 
   if (options.transform === 'json') {
     transformers.push(jsonTransformer());
+  }
+
+  if (options.transform === 'password') {
+    transformers.push(passwordTransformer());
   }
 
   return Col({ ...options, transformer: transformers });

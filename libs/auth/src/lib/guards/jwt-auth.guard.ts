@@ -20,6 +20,7 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
     if (isPublicRoute(this.reflector, context)) {
       return true;
     }
+
     return super.canActivate(context);
   }
 }

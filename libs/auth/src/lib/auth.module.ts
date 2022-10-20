@@ -1,7 +1,4 @@
-import {
-  Permission,
-  User,
-} from 'models';
+import { User } from 'models';
 import { Repository } from 'typeorm';
 
 import { Module } from '@nestjs/common';
@@ -21,18 +18,13 @@ import {
 } from './strategies';
 
 @Module({
-  imports: [
-    JwtModule.register(jtwOptions),
-    TypeOrmModule.forFeature([User, Permission]),
-  ],
+  imports: [JwtModule.register(jtwOptions), TypeOrmModule.forFeature([User])],
   controllers: [AuthController],
   providers: [LocalStrategy, JwtStrategy, AuthService],
 })
 export class AuthModule implements OnModuleInit {
   constructor(
-    @InjectRepository(User) private readonly userRepo: Repository<User>,
-    @InjectRepository(Permission)
-    private readonly permissionRepo: Repository<Permission>
+    @InjectRepository(User) private readonly userRepo: Repository<User>
   ) {}
   async onModuleInit() {
     const rootuser = {

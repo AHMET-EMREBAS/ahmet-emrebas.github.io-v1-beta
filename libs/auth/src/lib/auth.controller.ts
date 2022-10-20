@@ -1,4 +1,3 @@
-import { Public } from 'api-core';
 import {
   Request,
   Response,
@@ -18,6 +17,7 @@ import { ApiTags } from '@nestjs/swagger';
 
 import { AuthService } from './auth.service';
 import { LoginDTO } from './dtos';
+import { JwtAuthGuard } from './guards';
 import { LocalAuthGuard } from './guards/local.guard';
 import { AUTH_COOKIE_NAME } from './jwt.constants';
 
@@ -26,7 +26,6 @@ import { AUTH_COOKIE_NAME } from './jwt.constants';
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
-  @Public()
   @UseGuards(LocalAuthGuard)
   @Post('login')
   async login(
@@ -47,9 +46,10 @@ export class AuthController {
     res.end();
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get('profile')
   profile(@Req() req: Request) {
-    return req['user'];
+    return { profile: true };
   }
 
   resetPassword() {
