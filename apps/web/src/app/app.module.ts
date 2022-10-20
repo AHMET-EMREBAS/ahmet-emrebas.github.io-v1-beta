@@ -8,10 +8,7 @@ import {
 } from '@angular/router';
 import { ServiceWorkerModule } from '@angular/service-worker';
 
-import {
-  LayoutModule,
-  provideLayoutMenu,
-} from 'material';
+import { provideLayoutManager } from 'material';
 
 import { EntityDataModule } from '@ngrx/data';
 import { EffectsModule } from '@ngrx/effects';
@@ -29,7 +26,6 @@ const routes: Routes = [];
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    LayoutModule,
     RouterModule.forRoot(routes, { useHash: true }),
     HttpClientModule,
     StoreModule.forRoot({}, {}),
@@ -42,7 +38,7 @@ const routes: Routes = [];
       registrationStrategy: 'registerWhenStable:30000',
     }),
   ],
-  providers: [provideLayoutMenu(MyLayoutManager)],
+  providers: [provideLayoutManager(MyLayoutManager)],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
