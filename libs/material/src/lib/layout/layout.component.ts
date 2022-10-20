@@ -12,7 +12,7 @@ import {
 import { map } from 'rxjs/operators';
 
 import { LayoutManager } from './layout-menu';
-import { LAYOUT_MANAGER_TOKEN } from './providers';
+import { LAYOUT_MANAGER_TOKEN } from './layout-providers';
 
 @Component({
   selector: 'aemat-layout',

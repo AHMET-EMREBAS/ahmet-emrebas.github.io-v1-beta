@@ -2,7 +2,7 @@
   "projectType": "library",
   "root": "libs/material",
   "sourceRoot": "libs/material/src",
-  "prefix": "aemat",
+  "prefix": "ae",
   "targets": {
     "build": {
       "executor": "@nrwl/angular:package",
