@@ -8,12 +8,18 @@
     "cli-e2e": "apps/cli-e2e",
     "client-resources": "libs/client-resources",
     "common": "libs/common",
+    "inventory-client": "apps/inventory-client",
+    "inventory-client-e2e": "apps/inventory-client-e2e",
     "material": "libs/material",
     "models": "libs/models",
+    "nativescript-mobile": "apps/nativescript-mobile",
+    "pos-client": "apps/pos-client",
+    "pos-client-e2e": "apps/pos-client-e2e",
+    "project-management-client": "apps/project-management-client",
+    "project-management-client-e2e": "apps/project-management-client-e2e",
     "resources": "libs/resources",
     "utils": "libs/utils",
     "web": "apps/web",
-    "web-e2e": "apps/web-e2e",
-    "nativescript-mobile": "apps/nativescript-mobile"
+    "web-e2e": "apps/web-e2e"
   }
 }

@@ -28,8 +28,6 @@ MIT
 @ngrx/store
 MIT
 
-material
-
 primeflex
 MIT
 

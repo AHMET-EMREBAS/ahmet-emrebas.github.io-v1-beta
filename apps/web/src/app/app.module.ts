@@ -8,8 +8,6 @@ import {
 } from '@angular/router';
 import { ServiceWorkerModule } from '@angular/service-worker';
 
-import { provideLayoutManager } from 'material';
-
 import {
   EntityDataModule,
   HttpUrlGenerator,
@@ -20,8 +18,6 @@ import { StoreModule } from '@ngrx/store';
 import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
 import { entityDataModuleConfig } from './entity-data-module-config';
-import { MyLayoutManager } from './layout-manager';
-import { ResourceService } from './resource.service';
 import { MyURLGenerator } from './url-generaotr';
 
 const routes: Routes = [];
@@ -44,8 +40,6 @@ const routes: Routes = [];
     }),
   ],
   providers: [
-    provideLayoutManager(MyLayoutManager),
-    ResourceService,
     {
       provide: HttpUrlGenerator,
       useClass: MyURLGenerator,

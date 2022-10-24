@@ -1,17 +1,10 @@
 import { DefaultHttpUrlGenerator } from '@ngrx/data';
 
-function authCookie() {
-  console.log(
-    (document.cookie
-      .split(';')
-      .map((e) => e.split('='))
-      .find((e) => e[0] === 'auth') || [])[1]
-  );
-
+export function getAuthTokenFromCookies(tokenKey: string = 'auth') {
   return (document.cookie
     .split(';')
     .map((e) => e.split('='))
-    .find((e) => e[0] === 'auth') || [])[1];
+    .find((e) => e[0] === tokenKey) || [])[1];
 }
 
 export class MyURLGenerator extends DefaultHttpUrlGenerator {
@@ -23,11 +16,15 @@ export class MyURLGenerator extends DefaultHttpUrlGenerator {
     return (
       super.entityResource(entityName, root, trailingSlashEndpoints) +
       '?auth=' +
-      authCookie()
+      getAuthTokenFromCookies()
     );
   }
 
   override collectionResource(entityName: string, root: string): string {
-    return super.collectionResource(entityName, root) + '?auth=' + authCookie();
+    return (
+      super.collectionResource(entityName, root) +
+      '?auth=' +
+      getAuthTokenFromCookies()
+    );
   }
 }
