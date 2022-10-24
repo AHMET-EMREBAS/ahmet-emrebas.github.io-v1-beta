@@ -6,7 +6,9 @@
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "docs/apps/inventory",
         "index": "apps/inventory-client/src/index.html",
@@ -16,10 +18,15 @@
         "inlineStyleLanguage": "scss",
         "assets": [
           "apps/inventory-client/src/favicon.ico",
-          "apps/inventory-client/src/assets"
+          "apps/inventory-client/src/assets",
+          "apps/inventory-client/src/manifest.webmanifest"
         ],
-        "styles": ["apps/inventory-client/src/styles.scss"],
-        "scripts": []
+        "styles": [
+          "apps/inventory-client/src/styles.scss"
+        ],
+        "scripts": [],
+        "serviceWorker": true,
+        "ngswConfigPath": "apps/inventory-client/ngsw-config.json"
       },
       "configurations": {
         "production": {
@@ -83,7 +90,9 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/inventory-client"],
+      "outputs": [
+        "coverage/apps/inventory-client"
+      ],
       "options": {
         "jestConfig": "apps/inventory-client/jest.config.js",
         "passWithNoTests": true

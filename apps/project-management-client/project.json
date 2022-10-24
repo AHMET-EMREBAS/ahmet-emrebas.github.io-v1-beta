@@ -6,7 +6,9 @@
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/apps/project-management-client",
         "index": "apps/project-management-client/src/index.html",
@@ -18,7 +20,9 @@
           "apps/project-management-client/src/favicon.ico",
           "apps/project-management-client/src/assets"
         ],
-        "styles": ["apps/project-management-client/src/styles.scss"],
+        "styles": [
+          "apps/project-management-client/src/styles.scss"
+        ],
         "scripts": []
       },
       "configurations": {
@@ -83,7 +87,9 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/project-management-client"],
+      "outputs": [
+        "coverage/apps/project-management-client"
+      ],
       "options": {
         "jestConfig": "apps/project-management-client/jest.config.js",
         "passWithNoTests": true

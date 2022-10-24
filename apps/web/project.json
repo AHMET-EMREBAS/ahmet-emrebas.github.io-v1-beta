@@ -19,6 +19,7 @@
         "assets": [
           "apps/web/src/favicon.ico",
           "apps/web/src/assets",
+          "apps/web/src/manifest.webmanifest",
           "apps/web/src/manifest.webmanifest"
         ],
         "styles": [

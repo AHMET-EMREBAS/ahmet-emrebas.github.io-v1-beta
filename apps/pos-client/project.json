@@ -6,7 +6,9 @@
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/apps/pos-client",
         "index": "apps/pos-client/src/index.html",
@@ -18,7 +20,9 @@
           "apps/pos-client/src/favicon.ico",
           "apps/pos-client/src/assets"
         ],
-        "styles": ["apps/pos-client/src/styles.scss"],
+        "styles": [
+          "apps/pos-client/src/styles.scss"
+        ],
         "scripts": []
       },
       "configurations": {
@@ -83,7 +87,9 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/pos-client"],
+      "outputs": [
+        "coverage/apps/pos-client"
+      ],
       "options": {
         "jestConfig": "apps/pos-client/jest.config.js",
         "passWithNoTests": true
