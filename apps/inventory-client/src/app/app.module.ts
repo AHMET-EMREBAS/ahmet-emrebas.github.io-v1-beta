@@ -3,12 +3,21 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
+import { ContactComponent } from './contact/contact.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, ContactComponent],
   imports: [
     BrowserModule,
-    RouterModule.forRoot([], { initialNavigation: 'enabledBlocking' }),
+    RouterModule.forRoot(
+      [
+        {
+          path: 'contact',
+          component: ContactComponent,
+        },
+      ],
+      { useHash: true, initialNavigation: 'enabledBlocking' }
+    ),
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -20,7 +20,13 @@ import { AppComponent } from './app.component';
 import { entityDataModuleConfig } from './entity-data-module-config';
 import { MyURLGenerator } from './url-generaotr';
 
-const routes: Routes = [];
+const routes: Routes = [
+  { path: 'inventory', redirectTo: '/apps/inventory/index.html' },
+  {
+    path: 'project-management',
+    redirectTo: '/appas/project-management/index.html',
+  },
+];
 
 @NgModule({
   declarations: [AppComponent],
