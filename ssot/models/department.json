@@ -1,9 +1,0 @@
-{
-  "columns": {
-    "name": {
-      "type": "text",
-      "unique": true,
-      "minLength": 3
-    }
-  }
-}
