@@ -1,13 +1,13 @@
 import { User } from 'models';
 import { Repository } from 'typeorm';
 
-import { Module } from '@nestjs/common';
+import {
+  Module,
+  Optional,
+} from '@nestjs/common';
 import { OnModuleInit } from '@nestjs/common/interfaces';
 import { JwtModule } from '@nestjs/jwt';
-import {
-  InjectRepository,
-  TypeOrmModule,
-} from '@nestjs/typeorm';
+import { InjectRepository } from '@nestjs/typeorm';
 
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
@@ -18,24 +18,27 @@ import {
 } from './strategies';
 
 @Module({
-  imports: [JwtModule.register(jtwOptions), TypeOrmModule.forFeature([User])],
+  imports: [JwtModule.register(jtwOptions)],
   controllers: [AuthController],
   providers: [LocalStrategy, JwtStrategy, AuthService],
 })
 export class AuthModule implements OnModuleInit {
   constructor(
-    @InjectRepository(User) private readonly userRepo: Repository<User>
+    @Optional()
+    @InjectRepository(User)
+    private readonly userRepo: Repository<User>
   ) {}
   async onModuleInit() {
     const rootuser = {
       username: 'root',
       password: 'password',
+      permissions: 'admin, profile',
     };
 
-    const found = await this.userRepo.findOneBy({ username: 'root' });
+    const found = await this.userRepo?.findOneBy({ username: 'root' });
 
     if (!found) {
-      await this.userRepo.save(rootuser);
+      await this.userRepo?.save(rootuser);
     }
   }
 }

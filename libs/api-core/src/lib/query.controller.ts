@@ -60,7 +60,7 @@ export function QueryController<T>(options: QueryControllerOptions) {
   class CrudBaseController {
     constructor(public readonly service: RepositoryService<T>) {}
 
-    @Permission({ get: options.entity.name })
+    @Permission(`get:${SINGULAR_PATH}`)
     @ApiOperation({ summary: `Find all ${PLURAL_PATH}.` })
     @ApiOkResponse()
     @ApiInternalServerErrorResponse()
@@ -77,7 +77,7 @@ export function QueryController<T>(options: QueryControllerOptions) {
       });
     }
 
-    @Permission({ get: options.entity.name })
+    @Permission(`get:${SINGULAR_PATH}`)
     @ApiOperation({ summary: `Find one ${SINGULAR_PATH} by id.` })
     @ApiOkResponse()
     @ApiInternalServerErrorResponse()

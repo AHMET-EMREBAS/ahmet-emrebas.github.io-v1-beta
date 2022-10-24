@@ -25,13 +25,17 @@ function fromHeader(req: Request) {
 export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor() {
     super({
-      jwtFromRequest: ExtractJwt.fromExtractors([fromCookie]),
+      jwtFromRequest: ExtractJwt.fromExtractors([fromCookie, fromQuery]),
       ignoreExpiration: false,
       secretOrKey: jtwOptions.secret,
     });
   }
 
   async validate(payload: any) {
-    return { userId: payload.sub, username: payload.username };
+    return {
+      userId: payload.sub,
+      username: payload.username,
+      permissions: payload.permissions,
+    };
   }
 }

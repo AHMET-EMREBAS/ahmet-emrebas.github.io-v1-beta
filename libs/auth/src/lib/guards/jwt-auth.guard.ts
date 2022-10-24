@@ -1,5 +1,9 @@
-import { isPublicRoute } from 'api-core';
-import { Observable } from 'rxjs';
+import {
+  getRequiredPermission,
+  isPublicRoute,
+} from 'api-core';
+import { Request } from 'express';
+import { User } from 'models';
 
 import {
   ExecutionContext,
@@ -14,13 +18,41 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
     super();
   }
 
-  canActivate(
-    context: ExecutionContext
-  ): boolean | Promise<boolean> | Observable<boolean> {
+  async canActivate(context: ExecutionContext): Promise<any> {
+    const req = context.switchToHttp().getRequest<Request>();
+    const requiredPermission = getRequiredPermission(this.reflector, context);
+
+    console.table({ cookies: req.cookies });
+
     if (isPublicRoute(this.reflector, context)) {
       return true;
     }
+    let activated: boolean;
 
-    return super.canActivate(context);
+    try {
+      activated = (await super.canActivate(context)) as boolean;
+    } catch (err) {
+      activated = false;
+    }
+
+    const user = req?.user as User;
+
+    console.table({
+      requiredPermission,
+      userPermission: user?.permissions,
+    });
+    if (requiredPermission) {
+      if (user?.permissions.includes('admin')) {
+        return true;
+      }
+
+      if (user?.permissions?.includes(requiredPermission)) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    return activated;
   }
 }

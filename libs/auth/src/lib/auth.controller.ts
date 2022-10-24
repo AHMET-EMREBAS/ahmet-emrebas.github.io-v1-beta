@@ -1,4 +1,8 @@
 import {
+  Permission,
+  Public,
+} from 'api-core';
+import {
   Request,
   Response,
 } from 'express';
@@ -26,6 +30,7 @@ import { AUTH_COOKIE_NAME } from './jwt.constants';
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
+  @Public()
   @UseGuards(LocalAuthGuard)
   @Post('login')
   async login(
@@ -37,7 +42,7 @@ export class AuthController {
 
     res.cookie(AUTH_COOKIE_NAME, token);
 
-    res.send({ message: 'Welcome in' });
+    res.send({ message: 'Welcome in', [AUTH_COOKIE_NAME]: token });
   }
 
   @Post('logout')
@@ -46,6 +51,7 @@ export class AuthController {
     res.end();
   }
 
+  @Permission('profile')
   @UseGuards(JwtAuthGuard)
   @Get('profile')
   profile(@Req() req: Request) {

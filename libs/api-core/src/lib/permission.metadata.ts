@@ -12,14 +12,14 @@ export const PermissionToken = 'REQUIRED_PERMISSION';
  * @param permission
  * @returns
  */
-export function Permission(permission: Record<string, string>) {
+export function Permission(permission: string) {
   return SetMetadata(PermissionToken, permission);
 }
 
 export function getRequiredPermission(
   reflector: Reflector,
   context: ExecutionContext
-) {
+): string {
   const requiredPermission = reflector.getAllAndOverride(PermissionToken, [
     context.getClass(),
     context.getHandler(),

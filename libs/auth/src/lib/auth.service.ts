@@ -2,7 +2,10 @@ import { compare } from 'bcrypt';
 import { User } from 'models';
 import { Repository } from 'typeorm';
 
-import { Injectable } from '@nestjs/common';
+import {
+  Injectable,
+  Optional,
+} from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
 
@@ -14,13 +17,14 @@ interface IUser {
 @Injectable()
 export class AuthService {
   constructor(
+    @Optional()
     @InjectRepository(User)
     private readonly userRpo: Repository<IUser>,
     private readonly jwtService: JwtService
   ) {}
 
   async validateUser(username: string, pass: string): Promise<any> {
-    const user = await this.userRpo.findOneBy({ username });
+    const user = await this.userRpo?.findOneBy({ username });
 
     if (user && user.password) {
       const isPasswordCorrect = await compare(pass, user.password);
@@ -34,7 +38,7 @@ export class AuthService {
 
   async login(user: any): Promise<string> {
     const payload = {
-      role: user.role,
+      permissions: user.permissions,
       username: user.username,
       sub: user.id,
     };

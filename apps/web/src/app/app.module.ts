@@ -10,7 +10,10 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 
 import { provideLayoutManager } from 'material';
 
-import { EntityDataModule } from '@ngrx/data';
+import {
+  EntityDataModule,
+  HttpUrlGenerator,
+} from '@ngrx/data';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
@@ -18,6 +21,8 @@ import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
 import { entityDataModuleConfig } from './entity-data-module-config';
 import { MyLayoutManager } from './layout-manager';
+import { ResourceService } from './resource.service';
+import { MyURLGenerator } from './url-generaotr';
 
 const routes: Routes = [];
 
@@ -38,7 +43,14 @@ const routes: Routes = [];
       registrationStrategy: 'registerWhenStable:30000',
     }),
   ],
-  providers: [provideLayoutManager(MyLayoutManager)],
+  providers: [
+    provideLayoutManager(MyLayoutManager),
+    ResourceService,
+    {
+      provide: HttpUrlGenerator,
+      useClass: MyURLGenerator,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -13,6 +13,7 @@
     "resources": "libs/resources",
     "utils": "libs/utils",
     "web": "apps/web",
-    "web-e2e": "apps/web-e2e"
+    "web-e2e": "apps/web-e2e",
+    "nativescript-mobile": "apps/nativescript-mobile"
   }
 }

@@ -98,7 +98,7 @@ export function CrudController<T extends BaseEntity>(
   class CrudBaseController {
     constructor(public readonly service: RepositoryService<T>) {}
 
-    @Permission({ get: options.entity.name })
+    @Permission(`get:${SINGULAR_PATH}`)
     @ApiOperation({ summary: `Find all ${PLURAL_PATH}.` })
     @ApiOkResponse()
     @ApiInternalServerErrorResponse()
@@ -119,7 +119,7 @@ export function CrudController<T extends BaseEntity>(
       });
     }
 
-    @Permission({ get: options.entity.name })
+    @Permission(`get:${SINGULAR_PATH}`)
     @ApiOperation({ summary: `Find one ${SINGULAR_PATH} by id.` })
     @ApiOkResponse()
     @ApiInternalServerErrorResponse()
@@ -128,7 +128,7 @@ export function CrudController<T extends BaseEntity>(
       return this.service.findOneById(id);
     }
 
-    @Permission({ post: options.entity.name })
+    @Permission(`post:${SINGULAR_PATH}`)
     @ApiBody({ type: options.createDTO })
     @ApiOperation({ summary: `Save one ${SINGULAR_PATH}.` })
     @ApiCreatedResponse()
@@ -139,7 +139,7 @@ export function CrudController<T extends BaseEntity>(
       return this.service.save(body as any);
     }
 
-    @Permission({ put: options.entity.name })
+    @Permission(`put:${SINGULAR_PATH}`)
     @ApiBody({ type: options.updateDTO })
     @ApiOperation({ summary: `Update one ${SINGULAR_PATH}.` })
     @ApiOkResponse()
@@ -153,7 +153,7 @@ export function CrudController<T extends BaseEntity>(
       return this.service.update(id, body as any);
     }
 
-    @Permission({ delete: options.entity.name })
+    @Permission(`delete:${SINGULAR_PATH}`)
     @ApiOperation({ summary: `Delete one ${SINGULAR_PATH} by id.` })
     @ApiOkResponse()
     @ApiInternalServerErrorResponse()
@@ -166,7 +166,7 @@ export function CrudController<T extends BaseEntity>(
       return this.service.delete(id, queryOptions.hardDelete);
     }
 
-    @Permission({ put: options.entity.name })
+    @Permission(`put:${SINGULAR_PATH}`)
     @ApiOperation({ summary: `Add relation by relation name and id.` })
     @ApiOkResponse()
     @ApiInternalServerErrorResponse()
@@ -179,7 +179,7 @@ export function CrudController<T extends BaseEntity>(
       this.service.addRelation(id, relation, relationId);
     }
 
-    @Permission({ delete: options.entity.name })
+    @Permission(`delete:${SINGULAR_PATH}`)
     @ApiOperation({ summary: `Remove relation by relation name and id.` })
     @ApiOkResponse()
     @ApiInternalServerErrorResponse()
@@ -192,7 +192,7 @@ export function CrudController<T extends BaseEntity>(
       return this.service.addRelation(id, relation, relationId);
     }
 
-    @Permission({ put: options.entity.name })
+    @Permission(`put:${SINGULAR_PATH}`)
     @ApiOperation({ summary: `Set relation by relation name and id.` })
     @ApiOkResponse()
     @ApiInternalServerErrorResponse()
@@ -205,7 +205,7 @@ export function CrudController<T extends BaseEntity>(
       return this.service.setRelation(id, relation, relationId);
     }
 
-    @Permission({ delete: options.entity.name })
+    @Permission(`delete:${SINGULAR_PATH}`)
     @ApiOperation({ summary: `Unset relation by relation name.` })
     @ApiOkResponse()
     @ApiInternalServerErrorResponse()
@@ -214,7 +214,7 @@ export function CrudController<T extends BaseEntity>(
       return this.service.unsetRelation(id, relation);
     }
 
-    @Permission({ put: options.entity.name })
+    @Permission(`put:${SINGULAR_PATH}`)
     @ApiOperation({ summary: `Increment property by value.` })
     @ApiOkResponse()
     @ApiInternalServerErrorResponse()
@@ -223,7 +223,7 @@ export function CrudController<T extends BaseEntity>(
       return this.service.increment({ id } as any, body);
     }
 
-    @Permission({ put: options.entity.name })
+    @Permission(`put:${SINGULAR_PATH}`)
     @ApiOperation({ summary: `Decrement property by value.` })
     @ApiOkResponse()
     @ApiInternalServerErrorResponse()

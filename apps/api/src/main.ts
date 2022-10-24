@@ -29,7 +29,7 @@ async function bootstrap() {
   const config = new DocumentBuilder()
     .setContact(
       'Ahmet Emrebas',
-      'https://authdare.com',
+      'https://ahmet-emrebas.github.io',
       'aemrebas.dev@gmail.com'
     )
     .setTitle('Api')

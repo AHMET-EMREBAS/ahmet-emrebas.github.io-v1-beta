@@ -6,7 +6,9 @@
   "targets": {
     "build": {
       "executor": "@nrwl/angular:package",
-      "outputs": ["dist/libs/client-resources"],
+      "outputs": [
+        "dist/libs/client-resources"
+      ],
       "options": {
         "project": "libs/client-resources/ng-package.json"
       },
@@ -22,7 +24,9 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/client-resources"],
+      "outputs": [
+        "coverage/libs/client-resources"
+      ],
       "options": {
         "jestConfig": "libs/client-resources/jest.config.js",
         "passWithNoTests": true
