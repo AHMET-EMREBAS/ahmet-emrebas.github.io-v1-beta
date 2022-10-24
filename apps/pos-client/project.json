@@ -6,11 +6,9 @@
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
-      "outputs": [
-        "{options.outputPath}"
-      ],
+      "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/apps/pos-client",
+        "outputPath": "docs/apps/pos",
         "index": "apps/pos-client/src/index.html",
         "main": "apps/pos-client/src/main.ts",
         "polyfills": "apps/pos-client/src/polyfills.ts",
@@ -18,12 +16,13 @@
         "inlineStyleLanguage": "scss",
         "assets": [
           "apps/pos-client/src/favicon.ico",
-          "apps/pos-client/src/assets"
+          "apps/pos-client/src/assets",
+          "apps/pos-client/src/manifest.webmanifest"
         ],
-        "styles": [
-          "apps/pos-client/src/styles.scss"
-        ],
-        "scripts": []
+        "styles": ["apps/pos-client/src/styles.scss"],
+        "scripts": [],
+        "serviceWorker": true,
+        "ngswConfigPath": "apps/pos-client/ngsw-config.json"
       },
       "configurations": {
         "production": {
@@ -87,9 +86,7 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": [
-        "coverage/apps/pos-client"
-      ],
+      "outputs": ["coverage/apps/pos-client"],
       "options": {
         "jestConfig": "apps/pos-client/jest.config.js",
         "passWithNoTests": true
