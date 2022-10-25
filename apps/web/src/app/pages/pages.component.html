@@ -1,54 +1,62 @@
-<div class="flex flex-column  md:pl-8 md:pr-8  md:gap-2 ">
-
-    <p-toolbar>
-        <img id="app-logo" src="/assets/icons/icon-72x72.png" alt="Brand Logo" width="50px" data-automationId="logo">
-
-
-        <div class="flex flex-row">
-            <em aria-label="Excitement & Happyness" role="banner" aria-label="Greeting">Finally, you found us!</em>
+<div class="flex flex-column  md:pl-8 md:pr-8  h-full  md:gap-2 ">
+    <p-toolbar class="sticky top-0">
+        <div class="p-toolbar-group-left">
+            <img id="app-logo" src="/assets/icons/icon-72x72.png" i18n-alt alt="Brand Logo" width="40px"
+                data-automationId="logo">
         </div>
+        <div class="p-toolbar-group-right">
+            <div class="p-inputgroup">
+                <input class="shadow-2" type="search" role="searchbox" pInputText autocomplete="off" i18n-aria-label
+                    aria-label="Search content" placeholder="Search content" (keyup)="search()">
 
-
-        <!-- For big screen -->
-        <div class="flex flex-row gap-3" *ngIf="( isHandset$ | async) ===false">
-            <button pButton label="Contact" icon="pi pi-phone" class="shadow-4  p-button-rounded p-button-success"
-                [routerLink]="['contact']"></button>
+                <button i18n-aria-label aria-label="Search button." pButton class="p-inputgroup-addon shadow-2">
+                    <i class="pi pi-search" role="img" i18n-aria-label aria-label="Search Icon"></i>
+                </button>
+            </div>
         </div>
     </p-toolbar>
 
 
-    <!-- For big screens -->
-    <div class="flex flex-column  " *ngIf="(isHandset$ | async) === false">
+    <!-- Main Content -->
+    <div class="flex-grow-1 border-1  border-dashed border-round-1xl padding-4 border-teal-200">
+
+        <router-outlet></router-outlet>
+
+    </div>
+
+
+    <div class="flex flex-column   sticky bottom-0 ">
         <p-toolbar>
-
-
             <div class="p-toolbar-group-left gap-3" role="navigation" aria-label="Page Navigation">
-                <button pButton label="Home" aria-label="Navigate to home page." icon="pi pi-home"
-                    class="border-round-left-2xl shadow-2" styleClass="p-button-primary"></button>
 
-                <button pButton label="Services" aria-label="Navigate to services page." icon="pi pi-microsoft"
-                    class="shadow-2" styleClass="p-button-primary"> </button>
+                <button pButton i18n-aria-label aria-label="Go to home page." icon="pi pi-home" class="shadow-2"
+                    styleClass="p-button-primary"></button>
 
-                <button pButton label="Products" aria-label="View Products." icon="pi pi-shopping-cart" class="shadow-2"
-                    styleClass="p-button-primary">
+                <button pButton i18n-aria-label aria-label="Go to service page." icon="pi pi-microsoft" class="shadow-2"
+                    styleClass="p-button-primary"> </button>
+
+                <button pButton i18n-aria-label aria-label="Go to product page." icon="pi pi-shopping-cart"
+                    class="shadow-2" styleClass="p-button-primary">
                 </button>
-
             </div>
 
-            <div class="p-toolbar-group-right gap-1">
-
-                <div class="p-inputgroup ">
-                    <input class="shadow-2" type="search" role="searchbox" pInputText autocomplete="off"
-                        aria-label="Search content" placeholder="Search content" (keyup)="search()">
-
-                    <button aria-label="Search button" pButton
-                        class="p-inputgroup-addon border-round-right-2xl shadow-2">
-                        <i class="pi pi-search" role="img" aria-label="Search Icon"></i>
-                    </button>
+            <div class="p-toolbar-group-right">
+                <div class="flex flex-row gap-3">
+                    <a href="tel:+1 832 874 24 22" i18n-aria-label aria-label="Call us." pButton aria-label="Contact"
+                        icon="pi pi-phone" class="shadow-4  p-button-outlined p-button-success"></a>
                 </div>
-
             </div>
         </p-toolbar>
-        <router-outlet></router-outlet>
+
     </div>
+</div>
+
+<div
+    class="fixed bottom-0 right-0 flex flex-column h-full justify-content-center border-none border-dashed border-left-1  border-teal-200">
+
+    <p-button styleClass="p-button-secondary border-noround shadow-4 border-round-left-xl right-0 bottom-0"
+        ariaLabel="Config" icon="pi pi-cog">
+    </p-button>
+
+
 </div>
