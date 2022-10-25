@@ -21,3 +21,11 @@ nx generate @nrwl/nx-plugin:generator my-generator --project=cli
     nx g @nrwl/angular:stories feature-ui
 
 ```
+
+### How to I18n extract ?
+
+```
+
+nx run appname:extract-i18n
+
+```
