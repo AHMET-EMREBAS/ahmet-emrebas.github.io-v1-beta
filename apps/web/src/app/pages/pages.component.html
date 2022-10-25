@@ -1,2 +1,8 @@
-<p-menubar [model]="menubar"></p-menubar>
+<p-menubar>
+    <ng-template pTemplate="start">
+        <img src="/assets/icons/icon-72x72.png" i18n-alt alt="Application Logo" width="50" data-automationId="logo" />
+        <div class="p-menu-item"> Menu Item</div>
+    </ng-template>
+
+</p-menubar>
 <router-outlet></router-outlet>

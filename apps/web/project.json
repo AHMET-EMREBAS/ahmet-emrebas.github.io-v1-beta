@@ -13,6 +13,7 @@
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
       "outputs": ["{options.outputPath}"],
+
       "options": {
         "outputPath": "docs/web",
         "index": "apps/web/src/index.html",
@@ -64,24 +65,7 @@
           "outputHashing": "all"
         },
         "development": {
-          "buildOptimizer": false,
-          "optimization": false,
-          "vendorChunk": true,
-          "extractLicenses": false,
-          "sourceMap": true,
-          "namedChunks": true
-        },
-        "en": {
           "localize": ["en"],
-          "buildOptimizer": false,
-          "optimization": false,
-          "vendorChunk": true,
-          "extractLicenses": false,
-          "sourceMap": true,
-          "namedChunks": true
-        },
-        "tr": {
-          "localize": ["tr"],
           "buildOptimizer": false,
           "optimization": false,
           "vendorChunk": true,
@@ -99,13 +83,7 @@
           "browserTarget": "web:build:production"
         },
         "development": {
-          "browserTarget": "web:build:development:en"
-        },
-        "tr": {
-          "browserTarget": "web:build:tr"
-        },
-        "en": {
-          "browserTarget": "web:build:tr"
+          "browserTarget": "web:build:development"
         }
       },
       "defaultConfiguration": "development",

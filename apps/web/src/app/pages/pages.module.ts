@@ -9,15 +9,16 @@ import { MenubarModule } from 'primeng/menubar';
 import { PagesRoutingModule } from './pages-routing.module';
 import { PagesComponent } from './pages.component';
 
+export const PageModules = [
+  CommonModule,
+  SharedModule,
+  PagesRoutingModule,
+  MenubarModule,
+  ButtonModule,
+  InputTextModule,
+];
 @NgModule({
   declarations: [PagesComponent],
-  imports: [
-    CommonModule,
-    SharedModule,
-    PagesRoutingModule,
-    MenubarModule,
-    ButtonModule,
-    InputTextModule,
-  ],
+  imports: PageModules,
 })
 export class PagesModule {}

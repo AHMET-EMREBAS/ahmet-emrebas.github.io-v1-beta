@@ -1,7 +1,4 @@
-import {
-  Component,
-  OnInit,
-} from '@angular/core';
+import { Component } from '@angular/core';
 
 import { MenuItem } from 'primeng/api';
 
@@ -10,14 +7,14 @@ import { MenuItem } from 'primeng/api';
   templateUrl: './pages.component.html',
   styleUrls: ['./pages.component.scss'],
 })
-export class PagesComponent implements OnInit {
+export class PagesComponent {
   menubar: MenuItem[] = [
-    { label: $localize`Me` },
-    { label: $localize`About!` },
-    { label: $localize`Contact`, icon: 'pi pi-envelop' },
+    { automationId: 'mi-home', label: $localize`Home` },
+    { automationId: 'mi-about', label: $localize`About!` },
+    {
+      automationId: 'mi-contact',
+      label: $localize`Contact`,
+      icon: 'pi pi-envelop',
+    },
   ];
-
-  ngOnInit(): void {
-    console.log(PagesComponent.name + ' is initialized');
-  }
 }
