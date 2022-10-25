@@ -6,8 +6,8 @@
 
   "i18n": {
     "locales": {
-      "tr": "apps/web/src/locale/messages.tr.xlf",
-      "en": "apps/web/src/locale/messages.en.xlf"
+      "tr": "apps/web/src/app/locale/messages.tr.xlf",
+      "en": "apps/web/src/app/locale/messages.en.xlf"
     }
   },
 
@@ -75,10 +75,22 @@
         },
 
         "en": {
-          "localize": ["en"]
+          "localize": ["en"],
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
         },
         "tr": {
-          "localize": ["tr"]
+          "localize": ["tr"],
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
         }
       },
       "defaultConfiguration": "production"
@@ -91,12 +103,14 @@
         },
         "development": {
           "browserTarget": "web:build:development:"
+        },
+        "tr": {
+          "browserTarget": "web:build:tr"
         }
       },
       "defaultConfiguration": "development",
       "options": {
-        "proxyConfig": "apps/web/proxy.conf.json",
-        "browserTarget": "web:build:en"
+        "proxyConfig": "apps/web/proxy.conf.json"
       }
     },
     "extract-i18n": {
