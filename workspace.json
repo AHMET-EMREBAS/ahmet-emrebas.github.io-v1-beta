@@ -14,6 +14,7 @@
     "inventory-client": "apps/inventory-client",
     "inventory-client-e2e": "apps/inventory-client-e2e",
     "material": "libs/material",
+    "material-e2e": "apps/material-e2e",
     "models": "libs/models",
     "nativescript-mobile": "apps/nativescript-mobile",
     "pos-client": "apps/pos-client",

@@ -3,12 +3,18 @@
   "root": "apps/web",
   "sourceRoot": "apps/web/src",
   "prefix": "ae",
+
+  "i18n": {
+    "locales": {
+      "tr": "apps/web/src/locale/messages.tr.xlf",
+      "en": "apps/web/src/locale/messages.en.xlf"
+    }
+  },
+
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
-      "outputs": [
-        "{options.outputPath}"
-      ],
+      "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "docs",
         "index": "apps/web/src/index.html",
@@ -33,7 +39,9 @@
         ],
         "scripts": [],
         "serviceWorker": true,
-        "ngswConfigPath": "apps/web/ngsw-config.json"
+        "ngswConfigPath": "apps/web/ngsw-config.json",
+        "i18nMissingTranslation": "warning",
+        "localize": ["tr", "en"]
       },
       "configurations": {
         "production": {
@@ -64,6 +72,13 @@
           "extractLicenses": false,
           "sourceMap": true,
           "namedChunks": true
+        },
+
+        "en": {
+          "localize": ["en"]
+        },
+        "tr": {
+          "localize": ["tr"]
         }
       },
       "defaultConfiguration": "production"
@@ -75,12 +90,13 @@
           "browserTarget": "web:build:production"
         },
         "development": {
-          "browserTarget": "web:build:development"
+          "browserTarget": "web:build:development:"
         }
       },
       "defaultConfiguration": "development",
       "options": {
-        "proxyConfig": "apps/web/proxy.conf.json"
+        "proxyConfig": "apps/web/proxy.conf.json",
+        "browserTarget": "web:build:en"
       }
     },
     "extract-i18n": {
@@ -92,17 +108,12 @@
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
-        "lintFilePatterns": [
-          "apps/web/src/**/*.ts",
-          "apps/web/src/**/*.html"
-        ]
+        "lintFilePatterns": ["apps/web/src/**/*.ts", "apps/web/src/**/*.html"]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": [
-        "coverage/apps/web"
-      ],
+      "outputs": ["coverage/apps/web"],
       "options": {
         "jestConfig": "apps/web/jest.config.js",
         "passWithNoTests": true

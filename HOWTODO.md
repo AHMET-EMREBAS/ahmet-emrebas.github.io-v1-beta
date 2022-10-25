@@ -11,3 +11,13 @@ nx generate @nrwl/nx-plugin:generator my-generator --project=cli
 
 
 ```
+
+### How to story book?
+
+```
+    nx g @nrwl/storybook:configuration project-name --tsConfiguration=true
+    nx run project-name:storybook
+
+    nx g @nrwl/angular:stories feature-ui
+
+```

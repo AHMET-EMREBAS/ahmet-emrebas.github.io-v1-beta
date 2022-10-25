@@ -16,7 +16,13 @@ import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
 import { entityDataModuleConfig } from './entity-data-module-config';
 
-const routes: Routes = [];
+const routes: Routes = [
+  {
+    path: '',
+    loadChildren: () =>
+      import('./pages/pages.module').then((m) => m.PagesModule),
+  },
+];
 
 @NgModule({
   declarations: [AppComponent],
