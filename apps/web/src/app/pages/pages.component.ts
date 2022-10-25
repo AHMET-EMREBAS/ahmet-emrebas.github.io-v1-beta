@@ -9,12 +9,17 @@ import {
   shareReplay,
 } from 'rxjs';
 
+import { themeList } from '../theme-list';
+
 @Component({
   selector: 'ae-pages',
   templateUrl: './pages.component.html',
   styleUrls: ['./pages.component.scss'],
 })
 export class PagesComponent {
+  themes = themeList;
+  selectedTheme: { bundleName: string; outputPath: string }[] = [];
+  configSidebarDisplay = false;
   isHandset$ = this.breakpointObservers
     .observe([
       Breakpoints.Small,
@@ -33,5 +38,11 @@ export class PagesComponent {
   constructor(private readonly breakpointObservers: BreakpointObserver) {}
   search() {
     console.log('Searching...');
+  }
+
+  updateTheme() {
+    const el = document.getElementById('theme') as HTMLLinkElement;
+
+    el.setAttribute('href', this.selectedTheme[0].outputPath);
   }
 }

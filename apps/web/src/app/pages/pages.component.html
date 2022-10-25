@@ -51,11 +51,29 @@
     </div>
 </div>
 
+
+
+<p-sidebar [(visible)]="configSidebarDisplay" position="right" styleClass="h-full">
+
+
+
+    <div class="relative flex flex-column">
+
+
+        <p-multiSelect [options]="themes" [(ngModel)]="selectedTheme" [selectionLimit]="1" defaultLabel="Select Theme"
+            optionLabel="bundleName" display="chip" (onChange)="updateTheme()"></p-multiSelect>
+    </div>
+
+
+
+
+</p-sidebar>
+
 <div
     class="fixed bottom-0 right-0 flex flex-column h-full justify-content-center border-none border-dashed border-left-1  border-teal-200">
 
     <p-button styleClass="p-button-secondary border-noround shadow-4 border-round-left-xl right-0 bottom-0"
-        ariaLabel="Config" icon="pi pi-cog">
+        ariaLabel="Config" icon="pi pi-cog" (click)="configSidebarDisplay = true">
     </p-button>
 
 
