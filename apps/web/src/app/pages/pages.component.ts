@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 
-import { MenuItem } from 'primeng/api';
+import {
+  MegaMenuItem,
+  MenuItem,
+} from 'primeng/api';
 
 @Component({
   selector: 'ae-pages',
@@ -8,9 +11,17 @@ import { MenuItem } from 'primeng/api';
   styleUrls: ['./pages.component.scss'],
 })
 export class PagesComponent {
+  megamenu: MegaMenuItem[] = [
+    { label: 'Home', icon: 'pi pi-home' },
+    { label: 'Mega 2' },
+  ];
   menubar: MenuItem[] = [
-    { automationId: 'mi-home', label: $localize`Home` },
-    { automationId: 'mi-about', label: $localize`About` },
+    { automationId: 'mi-home', icon: 'pi pi-home', label: $localize`Home` },
+    {
+      automationId: 'mi-about',
+      icon: 'pi pi-info-circle',
+      label: $localize`About`,
+    },
     {
       automationId: 'mi-contact',
       label: $localize`Contact`,

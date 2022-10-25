@@ -18,7 +18,6 @@
       "api-core": ["libs/api-core/src/index.ts"],
       "auth": ["libs/auth/src/index.ts"],
       "cli": ["libs/cli/src/index.ts"],
-      "client-resources": ["libs/client-resources/src/index.ts"],
       "client-utils": ["libs/client-utils/src/index.ts"],
       "common": ["libs/common/src/index.ts"],
       "material": ["libs/material/src/index.ts"],

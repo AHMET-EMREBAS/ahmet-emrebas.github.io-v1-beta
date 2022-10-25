@@ -6,7 +6,6 @@
     "auth": "libs/auth",
     "cli": "libs/cli",
     "cli-e2e": "apps/cli-e2e",
-    "client-resources": "libs/client-resources",
     "client-utils": "libs/client-utils",
     "common": "libs/common",
     "doc-wrapper": "apps/doc-wrapper",
