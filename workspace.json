@@ -9,6 +9,8 @@
     "client-resources": "libs/client-resources",
     "client-utils": "libs/client-utils",
     "common": "libs/common",
+    "doc-wrapper": "apps/doc-wrapper",
+    "doc-wrapper-e2e": "apps/doc-wrapper-e2e",
     "employee-management-client": "apps/employee-management-client",
     "employee-management-client-e2e": "apps/employee-management-client-e2e",
     "inventory-client": "apps/inventory-client",

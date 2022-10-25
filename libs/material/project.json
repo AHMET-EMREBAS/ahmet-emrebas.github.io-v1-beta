@@ -3,12 +3,10 @@
   "root": "libs/material",
   "sourceRoot": "libs/material/src",
   "prefix": "ae",
-
   "targets": {
     "build": {
       "executor": "@nrwl/angular:package",
       "outputs": ["dist/libs/material"],
-
       "options": {
         "project": "libs/material/ng-package.json"
       },

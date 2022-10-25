@@ -3,20 +3,18 @@
   "root": "apps/web",
   "sourceRoot": "apps/web/src",
   "prefix": "ae",
-
   "i18n": {
     "locales": {
       "tr": "apps/web/src/app/locale/messages.tr.xlf",
       "en": "apps/web/src/app/locale/messages.en.xlf"
     }
   },
-
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "docs",
+        "outputPath": "docs/web",
         "index": "apps/web/src/index.html",
         "main": "apps/web/src/main.ts",
         "polyfills": "apps/web/src/polyfills.ts",
@@ -73,7 +71,6 @@
           "sourceMap": true,
           "namedChunks": true
         },
-
         "en": {
           "localize": ["en"],
           "buildOptimizer": false,
@@ -115,7 +112,6 @@
     },
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
-
       "options": {
         "browserTarget": "web:build",
         "outputPath": "apps/web/src/app/locale"

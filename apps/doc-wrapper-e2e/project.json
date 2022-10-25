@@ -1,0 +1,28 @@
+{
+  "root": "apps/doc-wrapper-e2e",
+  "sourceRoot": "apps/doc-wrapper-e2e/src",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "@nrwl/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/doc-wrapper-e2e/cypress.json",
+        "devServerTarget": "doc-wrapper:serve:development"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "doc-wrapper:serve:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/doc-wrapper-e2e/**/*.{js,ts}"]
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["doc-wrapper"]
+}
