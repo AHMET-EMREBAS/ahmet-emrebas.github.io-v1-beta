@@ -43,6 +43,11 @@ export class PagesComponent {
   updateTheme() {
     const el = document.getElementById('theme') as HTMLLinkElement;
 
-    el.setAttribute('href', this.selectedTheme[0].outputPath);
+    const theme = this.selectedTheme.pop();
+    if (theme) {
+      this.selectedTheme.splice(0, this.selectedTheme.length);
+      this.selectedTheme.push(theme);
+      el.setAttribute('href', theme.outputPath);
+    }
   }
 }

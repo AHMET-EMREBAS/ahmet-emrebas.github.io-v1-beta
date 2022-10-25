@@ -1,7 +1,7 @@
 <div class="flex flex-column  md:pl-8 md:pr-8  h-full  md:gap-2 ">
     <p-toolbar class="sticky top-0">
         <div class="p-toolbar-group-left">
-            <img id="app-logo" src="/assets/icons/icon-72x72.png" i18n-alt alt="Brand Logo" width="40px"
+            <img id="app-logo" src="/assets/icons/icon-72x72.png" i18n-alt alt="Brand Logo" width="50px"
                 data-automationId="logo">
         </div>
         <div class="p-toolbar-group-right">
@@ -29,14 +29,14 @@
         <p-toolbar>
             <div class="p-toolbar-group-left gap-3" role="navigation" aria-label="Page Navigation">
 
-                <button pButton i18n-aria-label aria-label="Go to home page." icon="pi pi-home" class="shadow-2"
-                    styleClass="p-button-primary"></button>
+                <button pButton i18n-aria-label aria-label="Go to home page." icon="pi pi-home"
+                    class="shadow-2"></button>
 
-                <button pButton i18n-aria-label aria-label="Go to service page." icon="pi pi-microsoft" class="shadow-2"
-                    styleClass="p-button-primary"> </button>
+                <button pButton i18n-aria-label aria-label="Go to service page." icon="pi pi-microsoft"
+                    class="shadow-2"> </button>
 
                 <button pButton i18n-aria-label aria-label="Go to product page." icon="pi pi-shopping-cart"
-                    class="shadow-2" styleClass="p-button-primary">
+                    class="shadow-2">
                 </button>
             </div>
 
@@ -60,8 +60,9 @@
     <div class="relative flex flex-column">
 
 
-        <p-multiSelect [options]="themes" [(ngModel)]="selectedTheme" [selectionLimit]="1" defaultLabel="Select Theme"
-            optionLabel="bundleName" display="chip" (onChange)="updateTheme()"></p-multiSelect>
+        <p-multiSelect [options]="themes" [(ngModel)]="selectedTheme" defaultLabel="Select Theme"
+            optionLabel="bundleName" display="chip" (onChange)="updateTheme()" (onFocus)="updateTheme()"
+            [showToggleAll]="false"></p-multiSelect>
     </div>
 
 
