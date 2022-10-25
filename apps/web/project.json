@@ -5,8 +5,11 @@
   "prefix": "ae",
   "i18n": {
     "locales": {
+      "en": "apps/web/src/app/locale/messages.en.xlf",
       "tr": "apps/web/src/app/locale/messages.tr.xlf",
-      "en": "apps/web/src/app/locale/messages.en.xlf"
+      "es": "apps/web/src/app/locale/messages.es.xlf",
+      "fr": "apps/web/src/app/locale/messages.fr.xlf",
+      "ru": "apps/web/src/app/locale/messages.ru.xlf"
     }
   },
   "targets": {
@@ -39,7 +42,7 @@
         "serviceWorker": true,
         "ngswConfigPath": "apps/web/ngsw-config.json",
         "i18nMissingTranslation": "warning",
-        "localize": ["tr", "en"]
+        "localize": ["en", "tr", "es", "fr", "ru"]
       },
       "configurations": {
         "production": {

@@ -5,41 +5,55 @@
     Configuration Content 
  -->
 <ng-template #CONFIG_BUTTON>
-    <p-button styleClass="p-button-secondary " ariaLabel="Config" icon="pi pi-cog"
-        (click)="configSidebarDisplay = true">
+    <p-button styleClass="p-button-secondary" i18n-ariaLabel ariaLabel="Open configuration page" icon="pi pi-cog"
+        (click)="configSidebarDisplay = true" data-automationId="config-button">
     </p-button>
-
-
-    <!-- Configuration Sidebar -->
-    <p-sidebar [(visible)]="configSidebarDisplay" position="right" styleClass="h-full">
-
-        <div class="relative flex flex-column">
-            <p-multiSelect [options]="themes" [(ngModel)]="selectedTheme" defaultLabel="Select Theme"
-                optionLabel="bundleName" display="chip" (onChange)="updateTheme()" (onFocus)="updateTheme()"
-                [showToggleAll]="false"></p-multiSelect>
-        </div>
-    </p-sidebar>
-
 </ng-template>
 
+
+<!-- 
+    Configuration Sidebar
+
+-->
+<p-sidebar [(visible)]="configSidebarDisplay" position="right" styleClass="h-full border-2 p-0" i18n-ariaCloseLabel
+    i18n-aria-label aria-label="Configuration sidebar" ariaCloseLabel="Close configuration sidebar">
+
+    <div class="relative flex flex-column">
+        <p-multiSelect role="combobox" [style]="{width:'100%'}" [options]="themes" [(ngModel)]="selectedTheme"
+            i18n-aria-label aria-label="Select theme" defaultLabel="Select theme" i18n-ariaFilterLabel
+            ariaFilterLabel="Select theme" optionLabel="bundleName" display="chip" (onChange)="updateTheme()"
+            (onFocus)="updateTheme()" [showToggleAll]="false" data-automationId="Select theme"></p-multiSelect>
+    </div>
+</p-sidebar>
 
 
 
 <!-- 
+    Chat with agent
+    Open chat dialog or go to agent chat page
+-->
+<ng-template #CHAT_WITH_AGENT>
+    <button pButton i18n-aria-label aria-label="Chat with agent." icon="pi pi-comments"
+        class="shadow-4  p-button-outlined p-button-success border-noround shadow-4 border-round-left-xl right-0 bottom-0"
+        [routerLink]="['chat']" routerLinkActive="router-link-active"></button>
+
+</ng-template>
+
+
+<!-- 
     Call us
-
- -->
+    
+-->
 <ng-template #CALL_US_BUTTON>
-
-    <a href="tel:+1 832 874 24 22" i18n-aria-label aria-label="Call us!" pButton aria-label="Contact" icon="pi pi-phone"
+    <a href="tel:+1 832 874 24 22" role="button" i18n-aria-label aria-label="Call us." pButton icon="pi pi-phone"
         class="shadow-4  p-button-outlined p-button-success border-noround shadow-4 border-round-left-xl right-0 bottom-0"></a>
 </ng-template>
 
 
 <!-- 
     Brand Logo 
-
- -->
+    
+-->
 <ng-template #BRAND_LOGO>
     <img id="app-logo" src="/assets/icons/icon-72x72.png" i18n-alt alt="Brand Logo" width="50px"
         data-automationId="logo">
@@ -68,7 +82,7 @@
 <!-- 
     Page navigation
     Home, Service, and Product page.
- -->
+-->
 <ng-template #PAGE_NAVIGATION_LINKS>
 
     <!-- Home page button -->
@@ -91,7 +105,7 @@
     Main Container
     Flex column 
     Mobile responsive
- -->
+-->
 <div class="flex flex-column  md:pl-8 md:pr-8  h-full  md:gap-2 ">
 
     <p-toolbar class="sticky top-0">
@@ -114,8 +128,8 @@
 
     <!-- 
         Main Content
-
-     -->
+        
+    -->
     <div class="flex-grow-1 border-1  border-dashed border-round-1xl padding-4 border-teal-200">
 
         <!-- Router content -->
@@ -133,7 +147,7 @@
 
             <!-- 
                 Left
-             -->
+            -->
             <div class="p-toolbar-group-left gap-3">
 
                 <ng-container *ngTemplateOutlet="PAGE_NAVIGATION_LINKS"></ng-container>
@@ -159,12 +173,14 @@
 
 <!-- 
     Fiexed right side container for quciky links
- -->
+-->
 <div
     class="fixed bottom-0 right-0 flex flex-column h-full justify-content-center border-none border-dashed border-left-1  border-teal-200">
 
 
-    <div class="flex flex-row gap-3">
+    <div class="flex flex-column gap-3">
+
+        <ng-container *ngTemplateOutlet="CHAT_WITH_AGENT"></ng-container>
         <ng-container *ngTemplateOutlet="CALL_US_BUTTON"></ng-container>
     </div>
 

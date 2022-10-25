@@ -42,8 +42,8 @@ export class PagesComponent {
 
   updateTheme() {
     const el = document.getElementById('theme') as HTMLLinkElement;
-
     const theme = this.selectedTheme.pop();
+
     if (theme) {
       this.selectedTheme.splice(0, this.selectedTheme.length);
       this.selectedTheme.push(theme);

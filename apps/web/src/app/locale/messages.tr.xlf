@@ -4,34 +4,104 @@
     <body>
       <trans-unit id="9167786874272926575" datatype="html">
         <source>Web</source>
-        <target>Internet</target>
         <context-group purpose="location">
           <context context-type="sourcefile">apps/web/src/app/app.component.ts</context>
           <context context-type="linenumber">9</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="7156797854368699223" datatype="html">
-        <source>Me</source>
-        <target>BeN</target>
+      <trans-unit id="564e144ef7066773565791f1d60870329e3a37db" datatype="html">
+        <source>Open configuration page</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">apps/web/src/app/pages/pages.component.ts</context>
-          <context context-type="linenumber">15</context>
+          <context context-type="sourcefile">apps/web/src/app/pages/pages.component.html</context>
+          <context context-type="linenumber">8</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="3216590368767182343" datatype="html">
-        <source>About!</source>
-        <target>Hakkimda</target>
+      <trans-unit id="ec18b60166dbd0b46a3f62de61b121c7e2db00b3" datatype="html">
+        <source>Configuration sidebar</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">apps/web/src/app/pages/pages.component.ts</context>
-          <context context-type="linenumber">16</context>
+          <context context-type="sourcefile">apps/web/src/app/pages/pages.component.html</context>
+          <context context-type="linenumber">19</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="7922989125096435449" datatype="html">
-        <source>Contact</source>
-        <target>Iletisim</target>
+      <trans-unit id="7e488c4b9277855306307bf39f9892068cc550fd" datatype="html">
+        <source>Close configuration sidebar</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">apps/web/src/app/pages/pages.component.ts</context>
-          <context context-type="linenumber">17</context>
+          <context context-type="sourcefile">apps/web/src/app/pages/pages.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="17f54358c48ff33192d7cdd3eb2ab8a350e41413" datatype="html">
+        <source>Select theme</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">apps/web/src/app/pages/pages.component.html</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">apps/web/src/app/pages/pages.component.html</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7609a5f6c706fc92fb7dbbe18e1934baeaeb7298" datatype="html">
+        <source>Chat with agent.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">apps/web/src/app/pages/pages.component.html</context>
+          <context context-type="linenumber">36</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="974265c48c93d3e1e6f610103762922953ba5773" datatype="html">
+        <source>Call us.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">apps/web/src/app/pages/pages.component.html</context>
+          <context context-type="linenumber">48</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9e0f9ef8a12baa793581e26dcb0e00cac3bd7251" datatype="html">
+        <source>Brand Logo</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">apps/web/src/app/pages/pages.component.html</context>
+          <context context-type="linenumber">58</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="27b64bad754df7955d7023ad3d475503bfbeb8b2" datatype="html">
+        <source>Search in the content by text or number.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">apps/web/src/app/pages/pages.component.html</context>
+          <context context-type="linenumber">72</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="fc318ebce17c24b6d7918e247c1e1e0199c949a6" datatype="html">
+        <source>Search in content.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">apps/web/src/app/pages/pages.component.html</context>
+          <context context-type="linenumber">74</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="02d938838df9372f6d19eb9f3296f7f3a00b6f40" datatype="html">
+        <source>Search Icon</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">apps/web/src/app/pages/pages.component.html</context>
+          <context context-type="linenumber">75</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="a87fc63c5f0d203e94d9d28fbced4e766777d6c0" datatype="html">
+        <source>Go to home page.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">apps/web/src/app/pages/pages.component.html</context>
+          <context context-type="linenumber">89</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d364deff830c5e6451361b93f9b78a1f353d90f4" datatype="html">
+        <source>Go to service page.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">apps/web/src/app/pages/pages.component.html</context>
+          <context context-type="linenumber">92</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3e750630986945c3aeb6276ccfe0bddf1db9f2d9" datatype="html">
+        <source>Go to product page.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">apps/web/src/app/pages/pages.component.html</context>
+          <context context-type="linenumber">95</context>
         </context-group>
       </trans-unit>
     </body>
