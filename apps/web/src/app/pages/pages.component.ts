@@ -1,9 +1,13 @@
+import {
+  BreakpointObserver,
+  Breakpoints,
+} from '@angular/cdk/layout';
 import { Component } from '@angular/core';
 
 import {
-  MegaMenuItem,
-  MenuItem,
-} from 'primeng/api';
+  map,
+  shareReplay,
+} from 'rxjs';
 
 @Component({
   selector: 'ae-pages',
@@ -11,26 +15,23 @@ import {
   styleUrls: ['./pages.component.scss'],
 })
 export class PagesComponent {
-  megamenu: MegaMenuItem[] = [
-    { label: 'Home', icon: 'pi pi-home' },
-    { label: 'Mega 2' },
-  ];
-  menubar: MenuItem[] = [
-    { automationId: 'mi-home', icon: 'pi pi-home', label: $localize`Home` },
-    {
-      automationId: 'mi-about',
-      icon: 'pi pi-info-circle',
-      label: $localize`About`,
-    },
-    {
-      automationId: 'mi-contact',
-      label: $localize`Contact`,
-      icon: 'pi pi-envelop',
+  isHandset$ = this.breakpointObservers
+    .observe([
+      Breakpoints.Small,
+      Breakpoints.XSmall,
+      Breakpoints.Handset,
+      Breakpoints.HandsetPortrait,
+      Breakpoints.HandsetLandscape,
+    ])
+    .pipe(
+      map((e) => {
+        return e.matches;
+      }),
+      shareReplay()
+    );
 
-      items: [
-        { automationId: 'mi-call', label: 'Call' },
-        { automationId: 'mi-email', label: 'Email' },
-      ],
-    },
-  ];
+  constructor(private readonly breakpointObservers: BreakpointObserver) {}
+  search() {
+    console.log('Searching...');
+  }
 }

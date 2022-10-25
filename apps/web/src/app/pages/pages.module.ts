@@ -1,7 +1,9 @@
+import { LayoutModule } from '@angular/cdk/layout';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
 import { SharedModule } from 'primeng/api';
+import { BadgeModule } from 'primeng/badge';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { MegaMenuModule } from 'primeng/megamenu';
@@ -20,6 +22,8 @@ export const PageModules = [
   InputTextModule,
   ToolbarModule,
   MegaMenuModule,
+  BadgeModule,
+  LayoutModule,
 ];
 @NgModule({
   declarations: [PagesComponent],

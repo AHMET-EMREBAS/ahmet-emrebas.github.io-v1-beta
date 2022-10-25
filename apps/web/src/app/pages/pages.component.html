@@ -1,4 +1,4 @@
-<div class="flex flex-column h-full w-full pl-8 pr-8 gap-2">
+<div class="flex flex-column  md:pl-8 md:pr-8  md:gap-2 ">
 
     <p-toolbar>
         <img id="app-logo" src="/assets/icons/icon-72x72.png" alt="Brand Logo" width="50px" data-automationId="logo">
@@ -8,26 +8,46 @@
             <em aria-label="Excitement & Happyness" role="banner" aria-label="Greeting">Finally, you found us!</em>
         </div>
 
-        <div class="flex flex-row gap-3">
+
+        <!-- For big screen -->
+        <div class="flex flex-row gap-3" *ngIf="( isHandset$ | async) ===false">
             <button pButton label="Contact" icon="pi pi-phone" class="shadow-4  p-button-rounded p-button-success"
                 [routerLink]="['contact']"></button>
         </div>
     </p-toolbar>
 
-    <div class="flex flex-column  h-full w-full">
+
+    <!-- For big screens -->
+    <div class="flex flex-column  " *ngIf="(isHandset$ | async) === false">
         <p-toolbar>
 
 
-            <div class="p-toolbar-group-left gap-1">
-                <button pButton label="Home" icon="pi pi-home" styleClass="p-button-primary"></button>
-                <button pButton label="Services" icon="pi pi-home" styleClass="p-button-primary"> </button>
+            <div class="p-toolbar-group-left gap-3" role="navigation" aria-label="Page Navigation">
+                <button pButton label="Home" aria-label="Navigate to home page." icon="pi pi-home"
+                    class="border-round-left-2xl shadow-2" styleClass="p-button-primary"></button>
+
+                <button pButton label="Services" aria-label="Navigate to services page." icon="pi pi-microsoft"
+                    class="shadow-2" styleClass="p-button-primary"> </button>
+
+                <button pButton label="Products" aria-label="View Products." icon="pi pi-shopping-cart" class="shadow-2"
+                    styleClass="p-button-primary">
+                </button>
+
             </div>
 
-            <div class="p-toolbar-group-right gap-1" role="none">
-                <button pButton label="About" icon="pi pi-home" styleClass="p-button-primary"></button>
+            <div class="p-toolbar-group-right gap-1">
+
+                <div class="p-inputgroup ">
+                    <input class="shadow-2" type="search" role="searchbox" pInputText autocomplete="off"
+                        aria-label="Search content" placeholder="Search content" (keyup)="search()">
+
+                    <button aria-label="Search button" pButton
+                        class="p-inputgroup-addon border-round-right-2xl shadow-2">
+                        <i class="pi pi-search" role="img" aria-label="Search Icon"></i>
+                    </button>
+                </div>
 
             </div>
-
         </p-toolbar>
         <router-outlet></router-outlet>
     </div>
