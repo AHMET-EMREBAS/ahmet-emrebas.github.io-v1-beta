@@ -15,6 +15,11 @@ export class PagesComponent {
       automationId: 'mi-contact',
       label: $localize`Contact`,
       icon: 'pi pi-envelop',
+
+      items: [
+        { automationId: 'mi-call', label: 'Call' },
+        { automationId: 'mi-email', label: 'Email' },
+      ],
     },
   ];
 }

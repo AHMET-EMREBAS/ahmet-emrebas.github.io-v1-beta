@@ -9,18 +9,20 @@ import { PageObject } from 'client-utils';
 import { PagesComponent } from './pages.component';
 import { PageModules } from './pages.module';
 
-class PagesPOM extends PageObject<PagesComponent> {
+class POM extends PageObject<PagesComponent> {
   logo = this.find('img[role=logo]');
   menubar = this.find('p-menubar');
   homeBtn = this.find('[data-automationId=mi-home]');
   aboutBtn = this.find('[data-automationId=mi-about]');
   contactBtn = this.find('[data-automationId=mi-contact]');
+  callBtn = this.find('[data-automationId=mi-call]');
+  emailBtn = this.find('[data-automationId=mi-email]');
 }
 
 describe('PagesComponent', () => {
   let component: PagesComponent;
   let fixture: ComponentFixture<PagesComponent>;
-  let pom: PagesPOM;
+  let pom: POM;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -36,7 +38,7 @@ describe('PagesComponent', () => {
     fixture.detectChanges();
 
     await fixture.whenStable();
-    pom = new PagesPOM(fixture);
+    pom = new POM(fixture);
   });
 
   it('should render each fragment', () => {
@@ -46,5 +48,14 @@ describe('PagesComponent', () => {
     expect(pom.aboutBtn).toBeTruthy();
     expect(pom.homeBtn).toBeTruthy();
     expect(pom.contactBtn).toBeTruthy();
+    expect(pom.emailBtn).toBeTruthy();
+    expect(pom.callBtn).toBeTruthy();
+  });
+
+  it('should render the menu items with correct labels.', () => {
+    expect(pom.text(pom.aboutBtn)).toBe('About');
+    expect(pom.text(pom.homeBtn)).toBe('Home');
+    expect(pom.text(pom.contactBtn)).toBe('Contact');
+    expect(pom.attr(pom.logo, 'alt')).toBe('Application Logo');
   });
 });
