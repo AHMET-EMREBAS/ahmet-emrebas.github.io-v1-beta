@@ -1,1 +1,2 @@
-export * from "./ui-element-id";
+export * from './page-object';
+export * from './ui-element-id';

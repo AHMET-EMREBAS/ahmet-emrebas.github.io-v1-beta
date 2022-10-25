@@ -1,52 +1,50 @@
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import {
   ComponentFixture,
   TestBed,
 } from '@angular/core/testing';
 
-import { MenuItem } from 'primeng/api';
+import { PageObject } from 'client-utils';
 
 import { PagesComponent } from './pages.component';
 import { PageModules } from './pages.module';
 
+class PagesPOM extends PageObject<PagesComponent> {
+  logo = this.find('img[role=logo]');
+  menubar = this.find('p-menubar');
+  homeBtn = this.find('[data-automationId=mi-home]');
+  aboutBtn = this.find('[data-automationId=mi-about]');
+  contactBtn = this.find('[data-automationId=mi-contact]');
+}
+
 describe('PagesComponent', () => {
   let component: PagesComponent;
   let fixture: ComponentFixture<PagesComponent>;
+  let pom: PagesPOM;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [PagesComponent],
       imports: [PageModules],
+      schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
   });
 
-  beforeEach(() => {
+  beforeEach(async () => {
     fixture = TestBed.createComponent(PagesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+
+    await fixture.whenStable();
+    pom = new PagesPOM(fixture);
   });
 
-  it('should create', () => {
+  it('should render each fragment', () => {
     expect(component).toBeTruthy();
-  });
-
-  it('should render the menu items', () => {
-    const menuItems: MenuItem[] = [
-      { automationId: 'mi-home', label: 'Home' },
-      { automationId: 'mi-about', label: 'About' },
-      { automationId: 'mi-contact', label: 'Contact' },
-    ];
-  });
-
-  it('should display logo', () => {
-    const logo = { automationId: 'logo' };
-    const logoElement = (
-      fixture.elementRef.nativeElement as HTMLElement
-    ).querySelector(
-      `[data-automationId=${'data-' + logo.automationId}]`
-    ) as HTMLImageElement;
-
-    expect(logoElement.getAttribute('href')).toBe(
-      '/assets/icons/icon-72x72.png'
-    );
+    expect(pom.menubar).toBeTruthy();
+    expect(pom.logo).toBeTruthy();
+    expect(pom.aboutBtn).toBeTruthy();
+    expect(pom.homeBtn).toBeTruthy();
+    expect(pom.contactBtn).toBeTruthy();
   });
 });

@@ -10,7 +10,7 @@ import { MenuItem } from 'primeng/api';
 export class PagesComponent {
   menubar: MenuItem[] = [
     { automationId: 'mi-home', label: $localize`Home` },
-    { automationId: 'mi-about', label: $localize`About!` },
+    { automationId: 'mi-about', label: $localize`About` },
     {
       automationId: 'mi-contact',
       label: $localize`Contact`,
