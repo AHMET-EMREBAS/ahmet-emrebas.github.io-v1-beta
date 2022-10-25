@@ -1,51 +1,152 @@
-<div class="flex flex-column  md:pl-8 md:pr-8  h-full  md:gap-2 ">
-    <p-toolbar class="sticky top-0">
-        <div class="p-toolbar-group-left">
-            <img id="app-logo" src="/assets/icons/icon-72x72.png" i18n-alt alt="Brand Logo" width="50px"
-                data-automationId="logo">
-        </div>
-        <div class="p-toolbar-group-right">
-            <div class="p-inputgroup">
-                <input class="shadow-2" type="search" role="searchbox" pInputText autocomplete="off" i18n-aria-label
-                    aria-label="Search content" placeholder="Search content" (keyup)="search()">
+<!-- 
+    Configuration buttton 
+    Navigate to configuration page
+    Configuration Sidebar 
+    Configuration Content 
+ -->
+<ng-template #CONFIG_BUTTON>
+    <p-button styleClass="p-button-secondary " ariaLabel="Config" icon="pi pi-cog"
+        (click)="configSidebarDisplay = true">
+    </p-button>
 
-                <button i18n-aria-label aria-label="Search button." pButton class="p-inputgroup-addon shadow-2">
-                    <i class="pi pi-search" role="img" i18n-aria-label aria-label="Search Icon"></i>
-                </button>
-            </div>
+
+    <!-- Configuration Sidebar -->
+    <p-sidebar [(visible)]="configSidebarDisplay" position="right" styleClass="h-full">
+
+        <div class="relative flex flex-column">
+            <p-multiSelect [options]="themes" [(ngModel)]="selectedTheme" defaultLabel="Select Theme"
+                optionLabel="bundleName" display="chip" (onChange)="updateTheme()" (onFocus)="updateTheme()"
+                [showToggleAll]="false"></p-multiSelect>
+        </div>
+    </p-sidebar>
+
+</ng-template>
+
+
+
+
+<!-- 
+    Call us
+
+ -->
+<ng-template #CALL_US_BUTTON>
+
+    <a href="tel:+1 832 874 24 22" i18n-aria-label aria-label="Call us!" pButton aria-label="Contact" icon="pi pi-phone"
+        class="shadow-4  p-button-outlined p-button-success border-noround shadow-4 border-round-left-xl right-0 bottom-0"></a>
+</ng-template>
+
+
+<!-- 
+    Brand Logo 
+
+ -->
+<ng-template #BRAND_LOGO>
+    <img id="app-logo" src="/assets/icons/icon-72x72.png" i18n-alt alt="Brand Logo" width="50px"
+        data-automationId="logo">
+</ng-template>
+
+
+
+<!-- 
+    Search Input Fragment 
+    Search through the website 
+-->
+<ng-template #SEARCH_INPUT>
+
+    <div class="p-inputgroup">
+        <input class="shadow-2" type="search" role="searchbox" pInputText autocomplete="off" i18n-aria-label
+            aria-label="Search in the content by text or number." placeholder="Search for" (keyup)="search()">
+
+        <button i18n-aria-label aria-label="Search in content." pButton class="p-inputgroup-addon shadow-2">
+            <i class="pi pi-search" role="img" i18n-aria-label aria-label="Search Icon"></i>
+        </button>
+    </div>
+
+</ng-template>
+
+
+<!-- 
+    Page navigation
+    Home, Service, and Product page.
+ -->
+<ng-template #PAGE_NAVIGATION_LINKS>
+
+    <!-- Home page button -->
+    <button pButton i18n-aria-label aria-label="Go to home page." icon="pi pi-home" class="shadow-2"></button>
+
+    <!-- Servie page button -->
+    <button pButton i18n-aria-label aria-label="Go to service page." icon="pi pi-microsoft" class="shadow-2"> </button>
+
+    <!-- Product page button -->
+    <button pButton i18n-aria-label aria-label="Go to product page." icon="pi pi-shopping-cart" class="shadow-2">
+    </button>
+
+
+</ng-template>
+
+
+
+
+<!-- 
+    Main Container
+    Flex column 
+    Mobile responsive
+ -->
+<div class="flex flex-column  md:pl-8 md:pr-8  h-full  md:gap-2 ">
+
+    <p-toolbar class="sticky top-0">
+
+        <!-- 
+            Left
+         -->
+        <div class="p-toolbar-group-left">
+            <ng-container *ngTemplateOutlet="BRAND_LOGO"></ng-container>
+        </div>
+
+        <!-- 
+            Right
+         -->
+        <div class="p-toolbar-group-right">
+            <ng-container *ngTemplateOutlet="SEARCH_INPUT"></ng-container>
         </div>
     </p-toolbar>
 
 
-    <!-- Main Content -->
+    <!-- 
+        Main Content
+
+     -->
     <div class="flex-grow-1 border-1  border-dashed border-round-1xl padding-4 border-teal-200">
 
+        <!-- Router content -->
         <router-outlet></router-outlet>
 
     </div>
 
 
+    <!-- 
+        Menu Items
+
+     -->
     <div class="flex flex-column   sticky bottom-0 ">
         <p-toolbar>
-            <div class="p-toolbar-group-left gap-3" role="navigation" aria-label="Page Navigation">
 
-                <button pButton i18n-aria-label aria-label="Go to home page." icon="pi pi-home"
-                    class="shadow-2"></button>
+            <!-- 
+                Left
+             -->
+            <div class="p-toolbar-group-left gap-3">
 
-                <button pButton i18n-aria-label aria-label="Go to service page." icon="pi pi-microsoft"
-                    class="shadow-2"> </button>
+                <ng-container *ngTemplateOutlet="PAGE_NAVIGATION_LINKS"></ng-container>
 
-                <button pButton i18n-aria-label aria-label="Go to product page." icon="pi pi-shopping-cart"
-                    class="shadow-2">
-                </button>
             </div>
 
+            <!-- 
+                Right
+              -->
             <div class="p-toolbar-group-right">
-                <div class="flex flex-row gap-3">
-                    <a href="tel:+1 832 874 24 22" i18n-aria-label aria-label="Call us." pButton aria-label="Contact"
-                        icon="pi pi-phone" class="shadow-4  p-button-outlined p-button-success"></a>
-                </div>
+                <ng-container *ngTemplateOutlet="CONFIG_BUTTON"></ng-container>
             </div>
+
         </p-toolbar>
 
     </div>
@@ -53,29 +154,18 @@
 
 
 
-<p-sidebar [(visible)]="configSidebarDisplay" position="right" styleClass="h-full">
 
 
 
-    <div class="relative flex flex-column">
-
-
-        <p-multiSelect [options]="themes" [(ngModel)]="selectedTheme" defaultLabel="Select Theme"
-            optionLabel="bundleName" display="chip" (onChange)="updateTheme()" (onFocus)="updateTheme()"
-            [showToggleAll]="false"></p-multiSelect>
-    </div>
-
-
-
-
-</p-sidebar>
-
+<!-- 
+    Fiexed right side container for quciky links
+ -->
 <div
     class="fixed bottom-0 right-0 flex flex-column h-full justify-content-center border-none border-dashed border-left-1  border-teal-200">
 
-    <p-button styleClass="p-button-secondary border-noround shadow-4 border-round-left-xl right-0 bottom-0"
-        ariaLabel="Config" icon="pi pi-cog" (click)="configSidebarDisplay = true">
-    </p-button>
 
+    <div class="flex flex-row gap-3">
+        <ng-container *ngTemplateOutlet="CALL_US_BUTTON"></ng-container>
+    </div>
 
 </div>
