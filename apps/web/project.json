@@ -99,9 +99,12 @@
           "browserTarget": "web:build:production"
         },
         "development": {
-          "browserTarget": "web:build:development:"
+          "browserTarget": "web:build:development:en"
         },
         "tr": {
+          "browserTarget": "web:build:tr"
+        },
+        "en": {
           "browserTarget": "web:build:tr"
         }
       },

@@ -1,9 +1,5 @@
-import { APP_BASE_HREF } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import {
-  LOCALE_ID,
-  NgModule,
-} from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
@@ -50,16 +46,6 @@ const routes: Routes = [
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000',
     }),
-  ],
-  providers: [
-    {
-      deps: [LOCALE_ID],
-      provide: APP_BASE_HREF,
-      multi: false,
-      useFactory: (locale: string) => {
-        return `/web/${locale}`;
-      },
-    },
   ],
   bootstrap: [AppComponent],
 })
