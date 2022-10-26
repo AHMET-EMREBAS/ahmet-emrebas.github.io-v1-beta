@@ -58,8 +58,9 @@
     
 -->
 <ng-template #BRAND_LOGO>
-    <img id="app-logo" src="/assets/icons/icon-72x72.png" i18n-alt alt="Brand Logo" width="50px"
-        data-automationId="logo">
+
+    <p-avatar image="/assets/imgs/profile-image.jpg" i18n-aria-label aria-label="Profile image"
+        data-automationId="profile-image" shape="circle" size="xlarge"></p-avatar>
 </ng-template>
 
 
@@ -92,7 +93,7 @@
 
     <!-- Home page button -->
     <button pButton i18n-aria-label aria-label="Go to profile." icon="pi pi-user" class="shadow-2" tooltipPosition="top"
-        pTooltip="Profile" [routerLink]="['profile']"></button>
+        pTooltip="Profile" [routerLink]="['']"></button>
 
     <!-- Servie page button -->
     <button pButton i18n-aria-label aria-label="Go to projects." icon="pi pi-microsoft" class="shadow-2"
@@ -160,7 +161,7 @@
         Main Content
         
     -->
-    <div class="flex-grow-1 border-1  border-dashed border-round-1xl padding-4 border-teal-200">
+    <div class="flex-grow-1 border-1  border-dashed padding-4 border-teal-200">
         <!-- Router content -->
         <router-outlet></router-outlet>
     </div>
@@ -202,7 +203,7 @@
 <!-- 
     Fiexed right side container for quciky links
 -->
-<div class="fixed flex flex-column" [style]="{top:'100px', right:'0px' }">
+<div class="fixed flex flex-column" [style]="{top:'120px', right:'0px' }">
 
     <div class="flex flex-column gap-3">
 

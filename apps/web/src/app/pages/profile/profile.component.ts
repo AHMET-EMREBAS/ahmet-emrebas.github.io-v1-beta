@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+} from '@angular/core';
 
 @Component({
   selector: 'ae-profile',
@@ -9,4 +12,6 @@ export class ProfileComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
+
+  sayHi() {}
 }

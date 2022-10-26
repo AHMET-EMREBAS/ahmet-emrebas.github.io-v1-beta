@@ -14,8 +14,8 @@ const routes: Routes = [
     path: '',
     component: PagesComponent,
     children: [
+      { path: '', component: ProfileComponent },
       { path: 'skills', component: SkillsComponent },
-      { path: 'profile', component: ProfileComponent },
       { path: 'projects', component: ProjectsComponent },
     ],
   },
