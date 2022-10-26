@@ -12,9 +12,13 @@ import { MenubarModule } from 'primeng/menubar';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { SidebarModule } from 'primeng/sidebar';
 import { ToolbarModule } from 'primeng/toolbar';
+import { TooltipModule } from 'primeng/tooltip';
 
 import { PagesRoutingModule } from './pages-routing.module';
 import { PagesComponent } from './pages.component';
+import { ProfileComponent } from './profile/profile.component';
+import { ProjectsComponent } from './projects/projects.component';
+import { SkillsComponent } from './skills/skills.component';
 
 export const PageModules = [
   CommonModule,
@@ -30,9 +34,15 @@ export const PageModules = [
   SidebarModule,
   MultiSelectModule,
   FormsModule,
+  TooltipModule,
 ];
 @NgModule({
-  declarations: [PagesComponent],
+  declarations: [
+    PagesComponent,
+    ProfileComponent,
+    ProjectsComponent,
+    SkillsComponent,
+  ],
   imports: PageModules,
 })
 export class PagesModule {}

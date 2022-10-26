@@ -6,7 +6,8 @@
  -->
 <ng-template #CONFIG_BUTTON>
     <p-button styleClass="p-button-secondary" i18n-ariaLabel ariaLabel="Open configuration page" icon="pi pi-cog"
-        (click)="configSidebarDisplay = true" data-automationId="config-button">
+        (click)="configSidebarDisplay = true" data-automationId="config-button" tooltipPosition="top" i18n-pTooltip
+        pTooltip="Open configurations">
     </p-button>
 </ng-template>
 
@@ -35,7 +36,8 @@
 <ng-template #CHAT_WITH_AGENT>
     <button pButton i18n-aria-label aria-label="Chat with agent." icon="pi pi-comments"
         class="shadow-4  p-button-outlined p-button-success border-noround shadow-4 border-round-left-xl right-0 bottom-0"
-        [routerLink]="['chat']" routerLinkActive="router-link-active"></button>
+        [routerLink]="['chat']" routerLinkActive="router-link-active" tooltipPosition="left" i18n-pTooltip
+        pTooltip="Let's chat!"></button>
 
 </ng-template>
 
@@ -46,7 +48,8 @@
 -->
 <ng-template #CALL_US_BUTTON>
     <a href="tel:+1 832 874 24 22" role="button" i18n-aria-label aria-label="Call us." pButton icon="pi pi-phone"
-        class="shadow-4  p-button-outlined p-button-success border-noround shadow-4 border-round-left-xl right-0 bottom-0"></a>
+        class="shadow-4  p-button-outlined p-button-success border-noround shadow-4 border-round-left-xl right-0 bottom-0"
+        i18n-pTooltip tooltipPosition="left" pTooltip="Let's talk!"></a>
 </ng-template>
 
 
@@ -69,7 +72,8 @@
 
     <div class="p-inputgroup">
         <input class="shadow-2" type="search" role="searchbox" pInputText autocomplete="off" i18n-aria-label
-            aria-label="Search in the content by text or number." placeholder="Search for" (keyup)="search()">
+            aria-label="Search in the content by text or number." i18n-placeholder placeholder="Search for"
+            (keyup)="search()">
 
         <button i18n-aria-label aria-label="Search in content." pButton class="p-inputgroup-addon shadow-2">
             <i class="pi pi-search" role="img" i18n-aria-label aria-label="Search Icon"></i>
@@ -79,6 +83,7 @@
 </ng-template>
 
 
+
 <!-- 
     Page navigation
     Home, Service, and Product page.
@@ -86,18 +91,42 @@
 <ng-template #PAGE_NAVIGATION_LINKS>
 
     <!-- Home page button -->
-    <button pButton i18n-aria-label aria-label="Go to home page." icon="pi pi-home" class="shadow-2"></button>
+    <button pButton i18n-aria-label aria-label="Go to profile." icon="pi pi-user" class="shadow-2" tooltipPosition="top"
+        pTooltip="Profile" [routerLink]="['profile']"></button>
 
     <!-- Servie page button -->
-    <button pButton i18n-aria-label aria-label="Go to service page." icon="pi pi-microsoft" class="shadow-2"> </button>
+    <button pButton i18n-aria-label aria-label="Go to projects." icon="pi pi-microsoft" class="shadow-2"
+        tooltipPosition="top" pTooltip="Projects" [routerLink]="['projects']"> </button>
 
     <!-- Product page button -->
-    <button pButton i18n-aria-label aria-label="Go to product page." icon="pi pi-shopping-cart" class="shadow-2">
+    <button pButton i18n-aria-label aria-label="Go to skills." icon="pi pi-star-fill" class="shadow-2"
+        tooltipPosition="top" pTooltip="Skills" [routerLink]="['skills']">
     </button>
+
+
 
 
 </ng-template>
 
+
+
+<!-- 
+    Profile links 
+
+ -->
+
+<ng-template #PROFILE_LINKS>
+
+    <a i18n-aria-label aria-label="GitHub profile" href="https://github.com/AHMET-EMREBAS/ahmet-emrebas.github.io"
+        target="_blank" pButton icon="pi pi-github" class="bg-gray-900 p-button-secondary" pTooltip="GitHub"
+        tooltipPosition="bottom"></a>
+
+    <a i18n-aria-label aria-label="LinkedIn profile" href="https://www.linkedin.com/in/ahmet-emrebas-280185248/"
+        target="_blank" pButton icon="pi pi-linkedin" class="bg-blue-600 p-button-secondary" pTooltip="LinkedIn"
+        tooltipPosition="bottom"></a>
+
+
+</ng-template>
 
 
 
@@ -120,8 +149,9 @@
         <!-- 
             Right
          -->
-        <div class="p-toolbar-group-right">
-            <ng-container *ngTemplateOutlet="SEARCH_INPUT"></ng-container>
+        <div class="p-toolbar-group-right gap-2">
+            <ng-container *ngTemplateOutlet="PROFILE_LINKS"></ng-container>
+
         </div>
     </p-toolbar>
 
@@ -131,10 +161,8 @@
         
     -->
     <div class="flex-grow-1 border-1  border-dashed border-round-1xl padding-4 border-teal-200">
-
         <!-- Router content -->
         <router-outlet></router-outlet>
-
     </div>
 
 
@@ -174,9 +202,7 @@
 <!-- 
     Fiexed right side container for quciky links
 -->
-<div
-    class="fixed bottom-0 right-0 flex flex-column h-full justify-content-center border-none border-dashed border-left-1  border-teal-200">
-
+<div class="fixed flex flex-column" [style]="{top:'100px', right:'0px' }">
 
     <div class="flex flex-column gap-3">
 

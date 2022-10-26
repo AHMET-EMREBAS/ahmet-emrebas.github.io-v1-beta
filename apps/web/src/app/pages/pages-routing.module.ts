@@ -5,8 +5,21 @@ import {
 } from '@angular/router';
 
 import { PagesComponent } from './pages.component';
+import { ProfileComponent } from './profile/profile.component';
+import { ProjectsComponent } from './projects/projects.component';
+import { SkillsComponent } from './skills/skills.component';
 
-const routes: Routes = [{ path: '', component: PagesComponent }];
+const routes: Routes = [
+  {
+    path: '',
+    component: PagesComponent,
+    children: [
+      { path: 'skills', component: SkillsComponent },
+      { path: 'profile', component: ProfileComponent },
+      { path: 'projects', component: ProjectsComponent },
+    ],
+  },
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
