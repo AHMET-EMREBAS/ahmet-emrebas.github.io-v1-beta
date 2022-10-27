@@ -8,7 +8,7 @@ import { SampleModule } from './sample/sample.module';
   imports: [
     TypeOrmModule.forRoot({
       type: 'better-sqlite3',
-      database: 'apps/api/database/main.sqlite',
+      database: 'tmp/database/main.sqlite',
       autoLoadEntities: true,
       synchronize: true,
     }),

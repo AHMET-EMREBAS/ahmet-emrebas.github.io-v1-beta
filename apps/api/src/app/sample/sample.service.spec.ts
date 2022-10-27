@@ -18,7 +18,7 @@ describe('SampleService', () => {
       imports: [
         TypeOrmModule.forRoot({
           type: 'better-sqlite3',
-          database: 'apps/api/database/sample/service-test.sqlite',
+          database: 'tmp/database/sample/service-test.sqlite',
           autoLoadEntities: true,
           synchronize: true,
           dropSchema: true,
