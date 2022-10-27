@@ -1,10 +1,11 @@
 import * as validators from 'class-validator';
-import { ValidatorOptions } from 'class-validator';
 import { upperFirst } from 'lodash';
 
 import { applyDecorators } from '@nestjs/common';
 
-export function Validate(options: ValidatorOptions) {
+import { ValidationOptions } from './validation-options';
+
+export function Validate(options: ValidationOptions) {
   const decorators = [];
 
   for (const [key, value] of Object.entries(options)) {
