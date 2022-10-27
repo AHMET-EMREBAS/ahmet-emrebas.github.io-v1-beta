@@ -10,9 +10,8 @@ import { Sample } from './entities/sample.entity';
 @Injectable()
 export class SampleService extends ResourceService<Sample, SampleView> {
   constructor(
-    @InjectRepository(Sample) private readonly repo: Repository<Sample>,
-    @InjectRepository(SampleView)
-    private readonly viewRepo: Repository<SampleView>
+    @InjectRepository(Sample) repo: Repository<Sample>,
+    @InjectRepository(SampleView) viewRepo: Repository<SampleView>
   ) {
     super(repo, viewRepo);
   }

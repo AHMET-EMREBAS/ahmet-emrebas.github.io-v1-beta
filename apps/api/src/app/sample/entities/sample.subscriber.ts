@@ -5,11 +5,16 @@ import {
   InsertEvent,
 } from 'typeorm';
 
+import { EventEmitter2 } from '@nestjs/event-emitter';
+
 import { Sample } from './sample.entity';
 
 @EventSubscriber()
 export class SampleSubscriber implements EntitySubscriberInterface<Sample> {
-  constructor(dataSource: DataSource) {
+  constructor(
+    dataSource: DataSource,
+    private readonly eventEmitter: EventEmitter2
+  ) {
     dataSource.subscribers.push(this);
   }
 
@@ -24,6 +29,6 @@ export class SampleSubscriber implements EntitySubscriberInterface<Sample> {
    * Called before post insertion.
    */
   beforeInsert(event: InsertEvent<Sample>) {
-    console.log(`BEFORE POST INSERTED: `, event.entity);
+    this.eventEmitter.emit('sample.entity.INSERT', event.entity);
   }
 }
