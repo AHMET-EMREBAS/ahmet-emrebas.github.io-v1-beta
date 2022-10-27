@@ -2,7 +2,8 @@
   "version": 2,
   "projects": {
     "api": "apps/api",
-    "api-security": "libs/api-security",
+    "cli": "libs/cli",
+    "cli-e2e": "apps\\cli-e2e",
     "common": "libs/common",
     "core": "libs/core",
     "nativescript-mobile": "apps/nativescript-mobile",

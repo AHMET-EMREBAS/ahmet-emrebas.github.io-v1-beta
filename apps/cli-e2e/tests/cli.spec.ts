@@ -8,8 +8,8 @@ import {
 describe('cli e2e', () => {
   it('should create cli', async () => {
     const plugin = uniq('cli');
-    ensureNxProject('@ahmet-emrebas/cli', 'dist/libs/cli');
-    await runNxCommandAsync(`generate @ahmet-emrebas/cli:cli ${plugin}`);
+    ensureNxProject('cli', 'dist/libs/cli');
+    await runNxCommandAsync(`generate cli:cli ${plugin}`);
 
     const result = await runNxCommandAsync(`build ${plugin}`);
     expect(result.stdout).toContain('Executor ran');
@@ -18,10 +18,8 @@ describe('cli e2e', () => {
   describe('--directory', () => {
     it('should create src in the specified directory', async () => {
       const plugin = uniq('cli');
-      ensureNxProject('@ahmet-emrebas/cli', 'dist/libs/cli');
-      await runNxCommandAsync(
-        `generate @ahmet-emrebas/cli:cli ${plugin} --directory subdir`
-      );
+      ensureNxProject('cli', 'dist/libs/cli');
+      await runNxCommandAsync(`generate cli:cli ${plugin} --directory subdir`);
       expect(() =>
         checkFilesExist(`libs/subdir/${plugin}/src/index.ts`)
       ).not.toThrow();
@@ -31,9 +29,9 @@ describe('cli e2e', () => {
   describe('--tags', () => {
     it('should add tags to the project', async () => {
       const plugin = uniq('cli');
-      ensureNxProject('@ahmet-emrebas/cli', 'dist/libs/cli');
+      ensureNxProject('cli', 'dist/libs/cli');
       await runNxCommandAsync(
-        `generate @ahmet-emrebas/cli:cli ${plugin} --tags e2etag,e2ePackage`
+        `generate cli:cli ${plugin} --tags e2etag,e2ePackage`
       );
       const project = readJson(`libs/${plugin}/project.json`);
       expect(project.tags).toEqual(['e2etag', 'e2ePackage']);
