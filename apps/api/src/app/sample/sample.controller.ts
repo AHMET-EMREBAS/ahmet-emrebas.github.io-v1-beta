@@ -15,10 +15,12 @@ import {
   Query,
 } from '@nestjs/common';
 import {
+  ApiBadGatewayResponse,
+  ApiBadRequestResponse,
   ApiCreatedResponse,
+  ApiOkResponse,
   ApiOperation,
   ApiTags,
-  ApiUnprocessableEntityResponse,
 } from '@nestjs/swagger';
 
 import { CreateSampleDto } from './dto/create-sample.dto';
@@ -33,25 +35,30 @@ export class SampleController {
 
   @ApiOperation({ summary: 'Create entity' })
   @ApiCreatedResponse()
-  @ApiUnprocessableEntityResponse()
+  @ApiBadRequestResponse()
   @Post()
   create(@Body(ValidationPipe) createDTO: CreateSampleDto) {
     return this.dataService.create(createDTO);
   }
 
   @ApiOperation({ summary: 'View entities' })
+  @ApiOkResponse()
+  @ApiBadGatewayResponse()
   @Get()
   findAll(@Query(ValidationPipe) query: QueryDTO<Sample>) {
     return this.dataService.viewAll(query);
   }
 
   @ApiOperation({ summary: 'View entity by id' })
+  @ApiOkResponse()
   @Get(':id')
   findOne(@Param('id', ParseIntPipe) id: number) {
     return this.dataService.viewOne(id);
   }
 
   @ApiOperation({ summary: 'Update entity by id' })
+  @ApiBadRequestResponse()
+  @ApiOkResponse()
   @Put(':id')
   update(
     @Param('id', ParseIntPipe) id: number,
@@ -61,6 +68,7 @@ export class SampleController {
   }
 
   @ApiOperation({ summary: 'Delete entity' })
+  @ApiOkResponse()
   @Delete(':id')
   remove(@Param('id', ParseIntPipe) id: number) {
     return this.dataService.remove(id);

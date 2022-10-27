@@ -1,4 +1,13 @@
-import { Test, TestingModule } from '@nestjs/testing';
+import {
+  Test,
+  TestingModule,
+} from '@nestjs/testing';
+import { TypeOrmModule } from '@nestjs/typeorm';
+
+import {
+  Sample,
+  SampleView,
+} from './entities';
 import { SampleService } from './sample.service';
 
 describe('SampleService', () => {
@@ -6,6 +15,16 @@ describe('SampleService', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
+      imports: [
+        TypeOrmModule.forRoot({
+          type: 'better-sqlite3',
+          database: 'apps/api/database/sample/service-test.sqlite',
+          autoLoadEntities: true,
+          synchronize: true,
+          dropSchema: true,
+        }),
+        TypeOrmModule.forFeature([Sample, SampleView]),
+      ],
       providers: [SampleService],
     }).compile();
 

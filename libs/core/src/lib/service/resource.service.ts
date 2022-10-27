@@ -1,5 +1,6 @@
 import {
   DeepPartial,
+  Equal,
   Repository,
 } from 'typeorm';
 import {
@@ -11,13 +12,17 @@ import { Injectable } from '@nestjs/common';
 import { QueryDTO } from '../query';
 
 @Injectable()
-export class ResourceService<E, E2> {
+export class ResourceService<
+  E extends { id?: number },
+  E2 extends { id?: number }
+> {
   constructor(
     private readonly __repo: Repository<E>,
     private readonly __viewRepo: Repository<E2>
   ) {}
-  create(createDto: DeepPartial<E>) {
-    return this.__repo.save(createDto);
+  async create(createDto: DeepPartial<E>) {
+    const r = await this.__repo.save(createDto);
+    return await this.__viewRepo.findOneBy({ id: r.id } as any);
   }
 
   findAll(query: QueryDTO<E>) {
@@ -25,11 +30,11 @@ export class ResourceService<E, E2> {
   }
 
   findOne(id: number) {
-    return this.__repo.findOneById(id);
+    return this.__repo.findOneBy({ id } as any);
   }
 
-  update(id: number, updateDto: QueryDeepPartialEntity<E>) {
-    return this.__repo.update(id, updateDto);
+  async update(id: number, updateDto: QueryDeepPartialEntity<E>) {
+    return await this.__repo.update(id, updateDto);
   }
 
   remove(id: number) {
@@ -41,6 +46,10 @@ export class ResourceService<E, E2> {
   }
 
   viewOne(id: number) {
-    return this.__viewRepo.findOneById(id);
+    return this.__viewRepo.findOneBy({ id } as any);
+  }
+
+  findOneBy(property: keyof E2, value: string) {
+    return this.__viewRepo.findOneBy({ [property]: Equal(value) } as any);
   }
 }

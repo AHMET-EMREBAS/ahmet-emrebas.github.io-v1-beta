@@ -1,6 +1,7 @@
 module.exports = {
   displayName: 'api',
   preset: '../../jest.preset.js',
+  verbose: true,
   globals: {
     'ts-jest': {
       tsconfig: '<rootDir>/tsconfig.spec.json',
