@@ -15,7 +15,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@ahmet-emrebas/core": ["libs/core/src/index.ts"],
       "api-core": ["libs/api-core/src/index.ts"],
+      "api-security": ["libs/api-security/src/index.ts"],
       "auth": ["libs/auth/src/index.ts"],
       "cli": ["libs/cli/src/index.ts"],
       "client-utils": ["libs/client-utils/src/index.ts"],

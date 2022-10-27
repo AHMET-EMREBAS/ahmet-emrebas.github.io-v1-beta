@@ -51,21 +51,36 @@
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
-html,
-body {
-    padding: 0px;
-    margin: 0px;
-}
 
 html,
 body {
     height: 100%;
     width: 100%;
+    padding: 0px;
+    margin: 0px;
+
 }
 
-body {
-    position: relative;
+@media only screen and (min-width:600px) {
+    html {
+        font-size: 0.9rem;
+    }
 
+    h1 {
+        font-size: 4rem;
+    }
+
+    h2 {
+        font-size: 3.9rem;
+    }
+
+    h3 {
+        font-size: 3.5rem;
+    }
+
+    P {
+        font-size: 1.7rem;
+    }
 
 }
 
@@ -73,6 +88,7 @@ body {
     height: 100%;
 
 }
+
 
 
 
@@ -89,4 +105,10 @@ body {
 
 ::-webkit-scrollbar-thumb {
     background-color: darkgrey;
+}
+
+
+p {
+    text-align: justify;
+    text-justify: inter-word;
 }

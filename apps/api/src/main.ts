@@ -7,7 +7,6 @@ import * as cookieParser from 'cookie-parser';
 import { join } from 'path';
 import * as favicon from 'serve-favicon';
 
-import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import {
   DocumentBuilder,
@@ -15,38 +14,33 @@ import {
 } from '@nestjs/swagger';
 
 import { AppModule } from './app/app.module';
+import {
+  APP_DESCRIPTION,
+  APP_NAME,
+  GLOBAL_PREFIX,
+  PORT,
+} from './config';
 
-async function bootstrap() {
+(async () => {
   const app = await NestFactory.create(AppModule);
-  const globalPrefix = 'api';
 
-  const port = process.env.PORT || 3333;
-  app.setGlobalPrefix(globalPrefix);
+  app.setGlobalPrefix(GLOBAL_PREFIX);
+
+  // Enable request from different origins
   app.enableCors();
-
-  app.use(favicon(join(__dirname, 'assets', 'favicon.ico')));
+  // Share teh favicon
+  app.use(favicon(join(__dirname, 'favicon.ico')));
+  // Parse cookies
   app.use(cookieParser());
+
+  // Configure swagger documentation
   const config = new DocumentBuilder()
-    .setContact(
-      'Ahmet Emrebas',
-      'https://ahmet-emrebas.github.io',
-      'aemrebas.dev@gmail.com'
-    )
-    .setTitle('Api')
-    .setDescription('Resource api')
+    .setTitle(APP_NAME)
+    .setDescription(APP_DESCRIPTION)
     .build();
-
   const document = SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup(GLOBAL_PREFIX, app, document);
 
-  // const document = JSON.parse(
-  //   readFileSync(join(__dirname, 'assets', 'openapi.json')).toString()
-  // );
-  SwaggerModule.setup('api', app, document);
-
-  await app.listen(port);
-  Logger.log(
-    `🚀 Application is running on: http://localhost:${port}/${globalPrefix}`
-  );
-}
-
-bootstrap();
+  // Start app
+  await app.listen(PORT);
+})();
