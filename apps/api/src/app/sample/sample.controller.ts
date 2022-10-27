@@ -15,8 +15,10 @@ import {
   Query,
 } from '@nestjs/common';
 import {
+  ApiCreatedResponse,
   ApiOperation,
   ApiTags,
+  ApiUnprocessableEntityResponse,
 } from '@nestjs/swagger';
 
 import { CreateSampleDto } from './dto/create-sample.dto';
@@ -30,10 +32,13 @@ export class SampleController {
   constructor(private readonly dataService: SampleService) {}
 
   @ApiOperation({ summary: 'Create entity' })
+  @ApiCreatedResponse()
+  @ApiUnprocessableEntityResponse()
   @Post()
   create(@Body(ValidationPipe) createDTO: CreateSampleDto) {
     return this.dataService.create(createDTO);
   }
+
   @ApiOperation({ summary: 'View entities' })
   @Get()
   findAll(@Query(ValidationPipe) query: QueryDTO<Sample>) {

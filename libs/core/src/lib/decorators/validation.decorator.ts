@@ -12,7 +12,7 @@ export function Validate(options: ValidationOptions) {
     const vn = upperFirst(key);
 
     if (validators[vn]) {
-      validators[vn](value);
+      decorators.push(validators[vn](value));
     }
   }
   return applyDecorators(...decorators);
