@@ -33,18 +33,10 @@ export class ResourceManagerComponent {
       max: '100',
     },
     {
-      placeholder: 'Male',
       name: 'gender',
       type: 'radio',
-      value: 'Male',
       required: true,
-    },
-    {
-      placeholder: 'Female',
-      name: 'gender',
-      type: 'radio',
-      value: 'Female',
-      required: true,
+      enums: ['Male', 'Female'],
     },
     { placeholder: 'Active', name: 'active', type: 'checkbox', required: true },
     {

@@ -1,19 +1,32 @@
-<form [formGroup]="formGroup" (ngSubmit)="submit()" [noValidate]="false" class="flex flex-column gap-3 "
+<form [formGroup]="formGroup" (ngSubmit)="submit()" [noValidate]="false" class="flex flex-column gap-3 p-4"
     *ngIf="formGroup">
 
 
     <ng-container *ngFor="let field of fields">
 
-        <div class="p-inputgroup" *ngIf="['text', 'number'].includes(field.type!)">
-            <span class="p-inputgroup-addon">{{(field.placeholder || field.name || field.ariaLabel) | titlecase}}</span>
-            <input pInputText [formControlName]="field.name!" [aeSetAttribute]="field">
+        <div class="flex flex-column gap-2" *ngIf="['text', 'number'].includes(field.type!)">
+            <label [for]="field.name">
+                {{field.placeholder}}
+            </label>
+            <input [id]=" field.name" pInputText [formControlName]="field.name!" [aeSetAttribute]="field">
         </div>
 
 
-        <div *ngIf="['checkbox', 'radio'].includes(field.type!)" class="p-inputgroup">
-            <label [for]="field.name"> {{field.placeholder | titlecase}}</label>
-            <input [id]="field.name!" type="checkbox" [formControlName]="field.name!" [name]="field.name"
-                [aeSetAttribute]="field">
+        <div *ngIf="['checkbox'].includes(field.type!)" class="flex">
+            <input [id]="field.name!" [formControlName]="field.name!" [name]="field.name" type="checkbox">
+            <label style="margin-left: 20px;" [for]="field.name"> {{field.placeholder | titlecase}}</label>
+        </div>
+
+
+        <div *ngIf="['radio'].includes(field.type!)" class="flex">
+            <fieldset class="w-full">
+                <legend>{{field.name | titlecase}}</legend>
+                <input #radioInput hidden [formControlName]="field.name!">
+                <div class="flex p-1" *ngFor="let o of field.enums">
+                    <input type="radio" [name]="field.name!" (input)="setValue(field.name!, o )">
+                    <label style="margin-left: 20px;" [for]="field.name"> {{o}}</label>
+                </div>
+            </fieldset>
         </div>
 
 
@@ -25,7 +38,6 @@
 
 
         <ng-container *ngIf="['select', 'dropdown'].includes(field.type!)">
-
 
 
             <label [for]="field.name"> {{field.placeholder}}</label>

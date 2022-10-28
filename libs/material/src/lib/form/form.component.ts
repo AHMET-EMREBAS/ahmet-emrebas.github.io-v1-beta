@@ -58,4 +58,9 @@ export class FormComponent implements OnInit {
   submit() {
     this.submitEvent.emit(this.formGroup.value);
   }
+
+  setValue(field: string, value: any) {
+    this.formGroup.get(field)?.setValue(value);
+    console.log(this.formGroup.value);
+  }
 }
