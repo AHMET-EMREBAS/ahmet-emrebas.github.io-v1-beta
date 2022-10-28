@@ -1,5 +1,7 @@
 import {
   QueryDTO,
+  Resource,
+  Secured,
   ValidationPipe,
 } from 'core';
 
@@ -28,6 +30,8 @@ import { Update<%= classname %>Dto } from './dto/update-<%= filename %>.dto';
 import { <%= classname %> } from './entities';
 import { <%= classname %>Service } from './<%= filename %>.service';
 
+@Resource('<%= filename %>)
+@Secured()
 @ApiTags(<%= classname %>Controller.name)
 @Controller('<%= filename %>')
 export class <%= classname %>Controller {

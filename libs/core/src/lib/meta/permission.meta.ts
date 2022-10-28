@@ -6,7 +6,7 @@ import { Reflector } from '@nestjs/core';
 
 const PERMISSION_METAKEY = 'REQUIRED_PERMISSION';
 
-export function Permission(permission: string) {
+export function Permission(permission: number) {
   return SetMetadata(PERMISSION_METAKEY, permission);
 }
 

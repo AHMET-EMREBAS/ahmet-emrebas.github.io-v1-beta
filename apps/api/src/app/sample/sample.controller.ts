@@ -71,6 +71,6 @@ export class SampleController {
   @ApiOkResponse()
   @Delete(':id')
   remove(@Param('id', ParseIntPipe) id: number) {
-    return this.dataService.remove(id);
+    return this.dataService.softDelete(id);
   }
 }

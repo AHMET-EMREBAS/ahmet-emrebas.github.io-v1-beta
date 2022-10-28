@@ -37,7 +37,11 @@ export class ResourceService<
     return await this.__repo.update(id, updateDto);
   }
 
-  remove(id: number) {
+  softDelete(id: number) {
+    return this.__repo.softDelete(id);
+  }
+
+  delete(id: number) {
     return this.__repo.delete(id);
   }
 
