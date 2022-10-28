@@ -53,12 +53,14 @@ export class AppModule {
     this.emailService
       .sendMail({
         to: 'aemrebas.dev@gmail.com',
-        from: '"Ahmet Emrebas" <noreply@authdare.com>',
+        from: `"Ahmet Emrebas" <${process.env.EMAIL}>`,
         subject: 'Hello',
-        text: 'Hello, Ahmet Emrebas',
-        template: 'hello',
+        text: 'Hello, Ahmet Emrebas, we are so happy to see you here.',
+        template: 'message',
         context: {
-          username: 'Ahmet Emrebas',
+          category: 'Hello',
+          title: 'Hi, Ahmet Emrebas',
+          message: 'We are so happy to see you here.',
         },
       })
       .then((r) => {
