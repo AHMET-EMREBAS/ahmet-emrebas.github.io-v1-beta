@@ -2,6 +2,8 @@ import { MailerModule } from '@nestjs-modules/mailer';
 import { EjsAdapter } from '@nestjs-modules/mailer/dist/adapters/ejs.adapter';
 import { Module } from '@nestjs/common';
 
+import { EmailService } from './email.service';
+
 @Module({
   imports: [
     MailerModule.forRoot({
@@ -30,5 +32,7 @@ import { Module } from '@nestjs/common';
       },
     }),
   ],
+  providers: [EmailService],
+  exports: [EmailService],
 })
 export class EmailModule {}
