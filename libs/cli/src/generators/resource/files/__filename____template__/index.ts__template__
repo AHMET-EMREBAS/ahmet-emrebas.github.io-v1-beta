@@ -1,0 +1,5 @@
+export * from './dto';
+export * from './entities';
+export * from './<%= filename %>.controller';
+export * from './<%= filename %>.module';
+export * from './<%= filename %>.service';

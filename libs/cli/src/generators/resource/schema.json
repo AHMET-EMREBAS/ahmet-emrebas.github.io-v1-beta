@@ -7,23 +7,23 @@
   "properties": {
     "name": {
       "type": "string",
-      "description": "",
+      "description": "Provide resource name.",
       "$default": {
         "$source": "argv",
         "index": 0
       },
-      "x-prompt": "What name would you like to use?"
+      "x-prompt": "What name do you like for resource? : "
     },
-    "tags": {
+    "project": {
       "type": "string",
-      "description": "Add tags to the project (used for linting)",
-      "alias": "t"
-    },
-    "directory": {
-      "type": "string",
-      "description": "A directory where the project is placed",
-      "alias": "d"
+      "description": "Provide project name.",
+      "$default": {
+        "$source": "argv",
+        "index": 1
+      },
+      "alias": "p",
+      "x-prompt": "To which project would you like to add the resource?"
     }
   },
-  "required": ["name"]
+  "required": ["name", "project"]
 }
