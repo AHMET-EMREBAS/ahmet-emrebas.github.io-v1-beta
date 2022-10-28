@@ -1,0 +1,16 @@
+{
+  "columns": {
+    "category": {
+      "type": "text",
+      "unique": true
+    }
+  },
+  "relations": {},
+  "dto": {
+    "category": {
+      "minLength": 3,
+      "maxLength": 20,
+      "isNotEmpty": true
+    }
+  }
+}

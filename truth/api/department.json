@@ -1,0 +1,16 @@
+{
+  "columns": {
+    "department": {
+      "type": "text",
+      "unique": true
+    }
+  },
+  "relations": {},
+  "dto": {
+    "department": {
+      "minLength": 3,
+      "maxLength": 20,
+      "isNotEmpty": true
+    }
+  }
+}

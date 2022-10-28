@@ -1,0 +1,30 @@
+{
+  "columns": {
+    "name": {
+      "type": "text",
+      "unique": true
+    },
+    "description": {
+      "type": "text",
+      "unique": true
+    }
+  },
+  "relations": {
+    "category": "many-to-many",
+    "department": "many-to-one"
+  },
+  "dto": {
+    "name": {
+      "minLength": 3,
+      "maxLength": 20,
+      "isNotEmpty": true,
+      "inputType": "text"
+    },
+    "description": {
+      "minLength": 3,
+      "maxLength": 400,
+      "isOptional": true,
+      "inputType": "textarea"
+    }
+  }
+}
