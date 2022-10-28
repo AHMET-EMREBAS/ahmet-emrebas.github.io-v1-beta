@@ -8,11 +8,11 @@ import {
   expression: (ds: DataSource) => {
     return ds
       .createQueryBuilder()
-      .select(['sample.id as id', 'sample.sample as sample'])
+      .select(['<%= filename %>.id as id', '<%= filename %>.<%= filename %> as <%= filename %>'])
       .from('<%= filename %>', '<%= filename %>');
   },
 })
 export class <%= classname %>View {
   @ViewColumn() id: number;
-  @ViewColumn() sample: string;
+  @ViewColumn() <%= filename %>: string;
 }

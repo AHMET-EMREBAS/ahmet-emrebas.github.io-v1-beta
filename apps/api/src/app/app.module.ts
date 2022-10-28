@@ -15,6 +15,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppTasks } from './app-tasks';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { CategoryModule } from './category';
 import { SampleModule } from './sample/sample.module';
 
 @Module({
@@ -39,10 +40,12 @@ import { SampleModule } from './sample/sample.module';
       database: 'tmp/database/main.sqlite',
       autoLoadEntities: true,
       synchronize: true,
+      dropSchema: true,
     }),
-    SampleModule,
     LoggerModule,
     EmailModule,
+    SampleModule,
+    CategoryModule,
   ],
   controllers: [AppController],
   providers: [AppService, AppTasks],

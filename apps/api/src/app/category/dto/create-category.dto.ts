@@ -1,6 +1,6 @@
 import { Property } from 'core';
 
-export class Create<%= classname %>Dto {
+export class CreateCategoryDto {
   @Property({
     type: 'string',
     inputType: 'text',
@@ -8,5 +8,5 @@ export class Create<%= classname %>Dto {
     minLength: 3,
     maxLength: 50,
   })
-  <%= filename %>: string;
+  category: string;
 }

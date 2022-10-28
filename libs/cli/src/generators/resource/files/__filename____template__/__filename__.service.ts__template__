@@ -2,6 +2,7 @@ import { ResourceService } from 'core';
 import { Repository } from 'typeorm';
 
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
 
 import { <%= classname %>View } from './entities';
 import { <%= classname %> } from './entities/<%= filename %>.entity';
