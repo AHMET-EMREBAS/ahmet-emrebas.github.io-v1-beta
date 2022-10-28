@@ -22,6 +22,7 @@
       "core": ["libs/core/src/index.ts"],
       "material": ["libs/material/src/index.ts"],
       "models": ["libs/models/src/index.ts"],
+      "pm": ["libs/pm/src/index.ts"],
       "resources": ["libs/resources/src/index.ts"],
       "utils": ["libs/utils/src/index.ts"]
     }

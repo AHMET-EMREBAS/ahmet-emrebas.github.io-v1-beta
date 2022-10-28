@@ -1,8 +1,11 @@
 {
   "columns": {
     "category": {
-      "type": "text",
-      "unique": true
+      "propertyType": "string",
+      "columnOptions": {
+        "type": "text",
+        "unique": true
+      }
     }
   },
   "relations": {},

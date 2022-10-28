@@ -1,0 +1,101 @@
+<div class="flex flex-column gap-3 p-3 h-full w-full">
+
+    <p-toolbar>
+
+        <img src="/assets/icons/icon-72x72.png" alt="Logo">
+    </p-toolbar>
+
+    <div class="flex flex-column gap-3">
+
+
+        <div class="flex flex-row gap-3">
+            <!-- <div class="flex flex-column gap-3">
+                <p-menu [model]="menu1"></p-menu>
+            </div> -->
+
+
+            <div class="flex flex-column gap-3 w-full">
+                <p-tabView>
+
+                    <p-tabPanel header="Projects">
+
+                        <div class="flex gap-3">
+
+                            <form [formGroup]="projectForm" novalidate="true" (ngSubmit)="createProject()"
+                                [noValidate]="false">
+
+
+                                <div class="p-inputgroup">
+                                    <span class="p-inputgroup-addon">Project Name</span>
+                                    <input pInputText formControlName="name" required minlength="3" autocomplete="off">
+                                </div>
+
+                                <button type="submit" pButton label="Save"></button>
+                            </form>
+
+
+
+                            <p-table [value]="listOfProjects()" responsiveLayout="scroll" class="flex-grow-1">
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th>Name</th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-project>
+                                    <tr>
+                                        <td>{{project.name}}</td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+
+
+                        </div>
+
+
+                    </p-tabPanel>
+                    <p-tabPanel header="Entities">
+
+
+                        <div class="flex gap-3">
+
+                            <form [formGroup]="projectForm" novalidate="true" (ngSubmit)="createProject()"
+                                [noValidate]="false">
+
+
+                                <div class="p-inputgroup">
+                                    <span class="p-inputgroup-addon">Project Name</span>
+                                    <input pInputText formControlName="name" required minlength="3" autocomplete="off">
+                                </div>
+
+                                <button type="submit" pButton label="Save"></button>
+                            </form>
+
+
+
+                            <p-table [value]="listOfProjects()" responsiveLayout="scroll" class="flex-grow-1">
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th>Name</th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-project>
+                                    <tr>
+                                        <td>{{project.name}}</td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+
+
+                        </div>
+
+
+                    </p-tabPanel>
+                    <p-tabPanel header="Columns"></p-tabPanel>
+                    <p-tabPanel header="Fields"></p-tabPanel>
+                    <p-tabPanel header="Dtos"></p-tabPanel>
+
+                </p-tabView>
+            </div>
+        </div>
+    </div>
+</div>
