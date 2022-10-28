@@ -6,7 +6,6 @@ import {
 import {
   Body,
   Controller,
-  Delete,
   Get,
   Param,
   ParseIntPipe,
@@ -65,12 +64,5 @@ export class SampleController {
     @Body(ValidationPipe) updateDTO: UpdateSampleDto
   ) {
     return this.dataService.update(id, updateDTO);
-  }
-
-  @ApiOperation({ summary: 'Delete entity' })
-  @ApiOkResponse()
-  @Delete(':id')
-  remove(@Param('id', ParseIntPipe) id: number) {
-    return this.dataService.softDelete(id);
   }
 }

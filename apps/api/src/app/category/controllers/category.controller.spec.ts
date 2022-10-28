@@ -2,24 +2,26 @@ import { QueryDTO } from 'core';
 import * as request from 'supertest';
 
 import { NestApplication } from '@nestjs/core';
-import { Test, TestingModule } from '@nestjs/testing';
+import {
+  Test,
+  TestingModule,
+} from '@nestjs/testing';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-import { Category as Entity, CategoryView as EntityView } from './entities';
+import {
+  Category as Entity,
+  CategoryView as EntityView,
+} from '../entities';
+import { CategoryService as Service } from '../services';
 import { CategoryController as Controller } from './category.controller';
-import { CategoryService as Service } from './category.service';
 
-const testData: Entity[] = [
+const validTestData: Entity[] = [
   { category: 'test category 1' },
   { category: 'test category 2' },
   { category: 'test category 3' },
   { category: 'test category 4' },
   { category: 'test category 5' },
 ];
-
-const validItem: Entity = {
-  category: 'fake 1',
-};
 
 const updatedItem: Partial<Entity> = {
   category: 'updated',
@@ -29,11 +31,11 @@ const invalidItem: Entity = {
   category: 'f',
 };
 
-describe('categoryController', () => {
+describe('CategoryController', () => {
   let app: NestApplication;
   let service: Service;
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     const module: TestingModule = await Test.createTestingModule({
       imports: [
         TypeOrmModule.forRoot({
@@ -52,43 +54,38 @@ describe('categoryController', () => {
     app = module.createNestApplication();
     app.init();
     service = module.get<Service>(Service);
-
-    // Create test data
-    for (const t of testData) await service.create(t);
+    for (const item of validTestData) {
+      await request(app.getHttpServer())
+        .post('/category')
+        .send({ ...item });
+    }
   });
 
-  it('/Get category', async () => {
-    return request(app.getHttpServer())
+  it('[/GET category] should get all category entities.', async () => {
+    return await request(app.getHttpServer())
       .get('/category')
       .expect(200)
       .expect((await service.viewAll(new QueryDTO())).map((e) => ({ ...e })));
   });
 
-  it('/Get category/:id', async () => {
+  it('[/GET category/:id] should get a category entity by id.', async () => {
     return request(app.getHttpServer())
       .get('/category/1')
       .expect(200)
       .expect({ ...(await service.viewOne(1)) });
   });
 
-  it('/Get category (Paginator) ', async () => {
+  it('[/GET /category/?take=1&skip=1] should paginate the category entities.', async () => {
     return request(app.getHttpServer())
-      .get('/category/?take=1')
+      .get('/category/?take=1&skip=1')
       .expect(200)
-      .then((data) => expect(data.body.length == 1));
-  });
-
-  it('/Post category', async () => {
-    return request(app.getHttpServer())
-      .post('/category')
-      .send({ ...validItem })
-      .expect(201)
       .then((data) => {
-        expect(data.body['category']).toBe(validItem.category);
+        expect(data.body.length === 1).toBeTruthy();
+        expect(data.body[0].id === 2).toBeTruthy();
       });
   });
 
-  it('/Post category (Invalid Input)', () => {
+  it('[/POST category] should not create the category entity with INVALID category property', () => {
     return request(app.getHttpServer())
       .post('/category')
       .send({ ...invalidItem })
@@ -100,14 +97,19 @@ describe('categoryController', () => {
       });
   });
 
-  it('/Put category/:id', async () => {
+  it('[/PUT category/:id] should update the category by id.', async () => {
     return request(app.getHttpServer())
       .put('/category/1')
       .send({ ...updatedItem })
       .expect(200);
   });
 
-  it('/Delete category/:id', async () => {
-    return request(app.getHttpServer()).delete('/category/1').expect(200);
+  it('[/DELETE category/:id] should delete the category by id.', async () => {
+    return request(app.getHttpServer())
+      .delete('/category/5')
+      .expect(200)
+      .then(async () => {
+        expect(await service.count()).toBe(4);
+      });
   });
 });

@@ -5,7 +5,9 @@ import {
 
 import {
   CacheModule,
+  MiddlewareConsumer,
   Module,
+  NestModule,
 } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { EventEmitterModule } from '@nestjs/event-emitter';
@@ -16,7 +18,7 @@ import { AppTasks } from './app-tasks';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CategoryModule } from './category';
-import { SampleModule } from './sample/sample.module';
+import { UserMiddleware } from './user.middleware';
 
 @Module({
   imports: [
@@ -44,10 +46,13 @@ import { SampleModule } from './sample/sample.module';
     }),
     LoggerModule,
     EmailModule,
-    SampleModule,
     CategoryModule,
   ],
   controllers: [AppController],
   providers: [AppService, AppTasks],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(UserMiddleware).forRoutes('*');
+  }
+}

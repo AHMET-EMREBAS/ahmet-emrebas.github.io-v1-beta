@@ -1,7 +1,13 @@
-import { Test, TestingModule } from '@nestjs/testing';
+import {
+  Test,
+  TestingModule,
+} from '@nestjs/testing';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-import { Category, CategoryView } from './entities';
+import {
+  Category,
+  CategoryView,
+} from '../entities';
 import { CategoryService } from './category.service';
 
 describe('CategoryService', () => {

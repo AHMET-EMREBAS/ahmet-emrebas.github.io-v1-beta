@@ -18,6 +18,6 @@ export class BaseEntity {
   @Column({ type: 'int', nullable: true }) updatedBy?: number;
   @Column({ type: 'int', nullable: true }) deletedBy?: number;
   @Column({ type: 'int', nullable: true }) lastSeenBy?: number;
-
+  @Column({ type: 'int', nullable: true }) viewCount?: number;
   @Column({ type: 'text', nullable: true }) accessible?: CanBe;
 }

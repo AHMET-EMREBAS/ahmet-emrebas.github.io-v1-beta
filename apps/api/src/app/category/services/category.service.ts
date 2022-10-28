@@ -4,8 +4,10 @@ import { Repository } from 'typeorm';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 
-import { CategoryView } from './entities';
-import { Category } from './entities/category.entity';
+import {
+  Category,
+  CategoryView,
+} from '../entities';
 
 @Injectable()
 export class CategoryService extends ResourceService<Category, CategoryView> {
