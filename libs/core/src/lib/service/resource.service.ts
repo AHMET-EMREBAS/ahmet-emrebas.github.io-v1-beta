@@ -83,7 +83,7 @@ export class ResourceService<E extends BaseEntity, E2 extends BaseEntity> {
   viewAllOwn(query: QueryDTO<E2>, user: IUserEntity) {
     return this.__viewRepo.find({
       ...query,
-      where: { ...query.where, createdBy: Equal(user.id) },
+      where: { ...query?.where, createdBy: Equal(user.id) },
     });
   }
 

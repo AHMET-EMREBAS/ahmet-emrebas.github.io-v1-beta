@@ -20,6 +20,9 @@ const validTestData: Entity[] = [
   { category: 'test category 3', createdBy: 3 },
   { category: 'test category 4', createdBy: 100 },
   { category: 'test category 5', createdBy: 100 },
+  { category: 'test category 6', createdBy: 100 },
+  { category: 'test category 7', createdBy: 100 },
+  { category: 'test category 8', createdBy: 100 },
 ];
 
 const updatedItem: Partial<Entity> = {
@@ -30,7 +33,7 @@ const invalidItem: Entity = {
   category: 'f',
 };
 
-describe('CategoryController', () => {
+describe('CategoryOwnController', () => {
   let app: NestApplication;
   let service: Service;
   beforeAll(async () => {
@@ -51,68 +54,58 @@ describe('CategoryController', () => {
 
     app = module.createNestApplication();
 
-    app.use((req, res, next) => {
+    app.use('*', (req, res, next) => {
       req.user = { id: 100 };
       return next();
     });
     app.init();
     service = module.get<Service>(Service);
     for (const item of validTestData) {
-      await request(app.getHttpServer())
-        .post('/category')
-        .send({ ...item });
+      await service.create(item);
     }
   });
 
-  it('[/GET category] should get all own category entities.', async () => {
+  it('[/GET own-category] should get all own category entities.', async () => {
     return await request(app.getHttpServer())
-      .get('/category')
+      .get('/own-category')
       .expect(200)
-      .expect(await service.viewAllOwn({}, { id: 100 } as any));
+      .expect(
+        (
+          await service.viewAllOwn({}, { id: 100 } as any)
+        ).map((e) => ({ ...e }))
+      );
   });
 
-  it('[/GET category/:id] should get a category entity by id.', async () => {
+  it('[/GET own-category/:id] should get a category entity by id.', async () => {
     return request(app.getHttpServer())
-      .get('/category/1')
+      .get('/own-category/4')
       .expect(200)
-      .expect({ ...(await service.viewOne(1)) });
+      .expect({ ...(await service.viewOne(4)) });
   });
 
-  it('[/GET /category/?take=1&skip=1] should paginate the category entities.', async () => {
+  it('[/GET /own-category/?take=1&skip=1] should paginate the category entities.', async () => {
     return request(app.getHttpServer())
-      .get('/category/?take=1&skip=1')
+      .get('/own-category/?take=1&skip=1')
       .expect(200)
       .then((data) => {
-        expect(data.body.length === 1).toBeTruthy();
-        expect(data.body[0].id === 2).toBeTruthy();
+        expect(data.body.length).toBe(1);
+        expect(data.body[0].id).toBe(5);
       });
   });
 
-  it('[/POST category] should not create the category entity with INVALID category property', () => {
+  it('[/PUT own-category/:id] should update the category by id.', async () => {
     return request(app.getHttpServer())
-      .post('/category')
-      .send({ ...invalidItem })
-      .expect(400)
-      .then((data) => {
-        expect(data.body?.message[0]).toBe(
-          'category must be longer than or equal to 3 characters'
-        );
-      });
-  });
-
-  it('[/PUT category/:id] should update the category by id.', async () => {
-    return request(app.getHttpServer())
-      .put('/category/1')
+      .put('/own-category/5')
       .send({ ...updatedItem })
       .expect(200);
   });
 
-  it('[/DELETE category/:id] should delete the category by id.', async () => {
+  it('[/DELETE own-category/:id] should delete the category by id.', async () => {
     return request(app.getHttpServer())
-      .delete('/category/5')
+      .delete('/own-category/8')
       .expect(200)
       .then(async () => {
-        expect(await service.count()).toBe(4);
+        expect(await service.countOwn({ id: 100 } as any)).toBe(4);
       });
   });
 });

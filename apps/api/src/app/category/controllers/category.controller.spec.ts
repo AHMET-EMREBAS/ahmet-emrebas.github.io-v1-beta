@@ -61,6 +61,8 @@ describe('CategoryController', () => {
     }
   });
 
+  afterAll(async () => await app.close());
+
   it('[/GET category] should get all category entities.', async () => {
     return await request(app.getHttpServer())
       .get('/category')
@@ -85,7 +87,7 @@ describe('CategoryController', () => {
       });
   });
 
-  it('[/POST category] should not create the category entity with INVALID category property', () => {
+  it('[/POST category] should NOT create the category entity with INVALID category property', () => {
     return request(app.getHttpServer())
       .post('/category')
       .send({ ...invalidItem })
@@ -106,7 +108,7 @@ describe('CategoryController', () => {
 
   it('[/DELETE category/:id] should delete the category by id.', async () => {
     return request(app.getHttpServer())
-      .delete('/category/5')
+      .delete('/category/1')
       .expect(200)
       .then(async () => {
         expect(await service.count()).toBe(4);
