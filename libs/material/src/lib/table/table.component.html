@@ -1,0 +1,30 @@
+<p-table #dataTable [value]="data" class="flex-grow-1" styleClass="p-datatable-striped" [paginator]="true" [rows]="10"
+    [showCurrentPageReport]="true" responsiveLayout="scroll"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[10,25,50]"
+    [globalFilterFields]="globalFilterFields">
+
+    <ng-template pTemplate="caption">
+        <div class="flex">
+            <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash"
+                (click)="dataTable.clear()"></button>
+            <span class="p-input-icon-left ml-auto">
+                <i class="pi pi-search"></i>
+                <input #searchInput pInputText type="text"
+                    (input)="dataTable.filterGlobal(searchInput.value, 'contains')" placeholder="Search keyword" />
+            </span>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+        <tr>
+            <th [pSortableColumn]="col" *ngFor="let col of columns()">
+                {{col | titlecase}}
+                <p-sortIcon field="code"> </p-sortIcon>
+            </th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-record>
+        <tr>
+            <td *ngFor="let col of columns()">{{record[col]}}</td>
+        </tr>
+    </ng-template>
+</p-table>

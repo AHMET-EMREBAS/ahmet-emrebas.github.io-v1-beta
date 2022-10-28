@@ -2,7 +2,7 @@
   "projectType": "library",
   "root": "libs/material",
   "sourceRoot": "libs/material/src",
-  "prefix": "ahmet-emrebas",
+  "prefix": "ae",
   "targets": {
     "build": {
       "executor": "@nrwl/angular:package",

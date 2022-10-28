@@ -1,0 +1,42 @@
+<form [formGroup]="formGroup" (ngSubmit)="submit()" [noValidate]="false" class="flex flex-column gap-3 "
+    *ngIf="formGroup">
+
+
+    <ng-container *ngFor="let field of fields">
+
+        <div class="p-inputgroup" *ngIf="['text', 'number'].includes(field.type!)">
+            <span class="p-inputgroup-addon">{{(field.placeholder || field.name || field.ariaLabel) | titlecase}}</span>
+            <input pInputText [formControlName]="field.name!" [aeSetAttribute]="field">
+        </div>
+
+
+        <div *ngIf="['checkbox', 'radio'].includes(field.type!)" class="p-inputgroup">
+            <label [for]="field.name"> {{field.placeholder | titlecase}}</label>
+            <input [id]="field.name!" type="checkbox" [formControlName]="field.name!" [name]="field.name"
+                [aeSetAttribute]="field">
+        </div>
+
+
+        <!-- 
+        <p-dropdown *ngIf="['dropdown'].includes(field.type!)" [formControlName]="field.name!"
+            [required]="!!field.required" [options]="field.enums!"
+            [placeholder]="(field.placeholder || field.name)! | titlecase">
+        </p-dropdown> -->
+
+
+        <ng-container *ngIf="['select', 'dropdown'].includes(field.type!)">
+
+
+
+            <label [for]="field.name"> {{field.placeholder}}</label>
+            <select [id]="field.name" [formControlName]="field.name!" [required]="!!field.required">
+                <option [value]="''">{{field.placeholder }}</option>
+                <option [value]="o" *ngFor="let o of field.enums">{{o}}</option>
+            </select>
+
+
+        </ng-container>
+    </ng-container>
+
+    <button type="submit" pButton label="Save"></button>
+</form>
