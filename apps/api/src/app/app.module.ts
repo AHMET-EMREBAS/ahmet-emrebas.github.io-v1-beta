@@ -1,5 +1,9 @@
-import { LoggerModule } from 'core';
+import {
+  EmailModule,
+  LoggerModule,
+} from 'core';
 
+import { MailerService } from '@nestjs-modules/mailer';
 import {
   CacheModule,
   Module,
@@ -39,8 +43,26 @@ import { SampleModule } from './sample/sample.module';
     }),
     SampleModule,
     LoggerModule,
+    EmailModule,
   ],
   controllers: [AppController],
   providers: [AppService, AppTasks],
 })
-export class AppModule {}
+export class AppModule {
+  constructor(private readonly emailService: MailerService) {
+    this.emailService
+      .sendMail({
+        to: 'aemrebas.dev@gmail.com',
+        from: '"Ahmet Emrebas" <noreply@authdare.com>',
+        subject: 'Hello',
+        text: 'Hello, Ahmet Emrebas',
+        template: 'hello',
+        context: {
+          username: 'Ahmet Emrebas',
+        },
+      })
+      .then((r) => {
+        console.log(r);
+      });
+  }
+}

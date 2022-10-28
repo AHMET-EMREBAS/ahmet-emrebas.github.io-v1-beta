@@ -26,6 +26,7 @@
     "@nativescript/angular": "^14.0.0",
     "@nativescript/core": "~8.2.0",
     "@nativescript/nx": "^4.0.2",
+    "@nestjs-modules/mailer": "^1.8.1",
     "@nestjs/common": "^8.0.0",
     "@nestjs/config": "^2.2.0",
     "@nestjs/core": "^8.0.0",
