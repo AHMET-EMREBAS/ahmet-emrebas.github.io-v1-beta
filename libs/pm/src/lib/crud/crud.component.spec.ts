@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ResourceManagerComponent } from './resource-manager.component';
+import { CrudComponent } from './crud.component';
 
-describe('ResourceManagerComponent', () => {
-  let component: ResourceManagerComponent;
-  let fixture: ComponentFixture<ResourceManagerComponent>;
+describe('CrudComponent', () => {
+  let component: CrudComponent;
+  let fixture: ComponentFixture<CrudComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ResourceManagerComponent],
+      declarations: [CrudComponent],
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ResourceManagerComponent);
+    fixture = TestBed.createComponent(CrudComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

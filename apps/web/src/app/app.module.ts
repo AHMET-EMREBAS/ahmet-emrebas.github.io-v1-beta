@@ -19,10 +19,6 @@ import { entityDataModuleConfig } from './entity-data-module-config';
 const routes: Routes = [
   {
     path: 'rm',
-    loadChildren: () =>
-      import('./resource-manager/resource-manager.module').then(
-        (m) => m.ResourceManagerModule
-      ),
   },
 ];
 
