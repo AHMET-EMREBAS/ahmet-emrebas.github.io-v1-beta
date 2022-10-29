@@ -2,6 +2,7 @@ import {
   EmailModule,
   LoggerModule,
 } from 'core';
+import * as resources from 'resource';
 
 import {
   CacheModule,
@@ -19,6 +20,11 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UserMiddleware } from './user.middleware';
 
+const resourceModules = Object.values(resources).filter((e) =>
+  e.name.endsWith('Module')
+);
+
+console.log(resourceModules);
 @Module({
   imports: [
     ScheduleModule.forRoot(),
@@ -45,6 +51,7 @@ import { UserMiddleware } from './user.middleware';
     }),
     LoggerModule,
     EmailModule,
+    resourceModules,
   ],
   controllers: [AppController],
   providers: [AppService, AppTasks],
