@@ -2,8 +2,8 @@ import {
   EmailModule,
   LoggerModule,
 } from 'core';
-import * as resources from 'resource';
 
+// import * as resources from 'resource';
 import {
   CacheModule,
   MiddlewareConsumer,
@@ -20,9 +20,9 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UserMiddleware } from './user.middleware';
 
-const resourceModules = Object.entries(resources)
-  .filter(([key, value]) => value.name.endsWith('Module'))
-  .map(([key, value]) => value);
+// const resourceModules = Object.entries(resources)
+//   .filter(([key, value]) => value.name.endsWith('Module'))
+//   .map(([key, value]) => value);
 
 @Module({
   imports: [
@@ -50,7 +50,7 @@ const resourceModules = Object.entries(resources)
     }),
     LoggerModule,
     EmailModule,
-    ...(resourceModules as any),
+    // ...(resourceModules as any),
   ],
   controllers: [AppController],
   providers: [AppService, AppTasks],

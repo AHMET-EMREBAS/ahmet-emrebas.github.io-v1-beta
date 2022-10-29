@@ -20,4 +20,5 @@ export class BaseEntity {
   @Column({ type: 'int', nullable: true }) lastSeenBy?: number;
   @Column({ type: 'int', nullable: true }) viewCount?: number;
   @Column({ type: 'text', nullable: true }) accessible?: CanBe;
+  @Column({ type: 'text', nullable: true }) __testField: string;
 }
