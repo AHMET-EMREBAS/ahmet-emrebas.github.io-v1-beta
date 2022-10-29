@@ -1,1 +1,1 @@
-export * from './lib/pm.module';
+export * from "./lib";

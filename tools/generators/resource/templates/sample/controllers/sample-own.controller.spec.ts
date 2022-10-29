@@ -8,32 +8,32 @@ import {
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import {
-  Category as Entity,
-  CategoryView as EntityView,
+  Sample as Entity,
+  SampleView as EntityView,
 } from '../entities';
-import { CategoryService as Service } from '../services';
-import { CategoryOwnController as Controller } from './category-own.controller';
+import { SampleService as Service } from '../services';
+import { SampleOwnController as Controller } from './sample-own.controller';
 
 const validTestData: Entity[] = [
-  { category: 'test category 1', createdBy: 1 },
-  { category: 'test category 2', createdBy: 2 },
-  { category: 'test category 3', createdBy: 3 },
-  { category: 'test category 4', createdBy: 100 },
-  { category: 'test category 5', createdBy: 100 },
-  { category: 'test category 6', createdBy: 100 },
-  { category: 'test category 7', createdBy: 100 },
-  { category: 'test category 8', createdBy: 100 },
+  { sample: 'test sample 1', createdBy: 1 },
+  { sample: 'test sample 2', createdBy: 2 },
+  { sample: 'test sample 3', createdBy: 3 },
+  { sample: 'test sample 4', createdBy: 100 },
+  { sample: 'test sample 5', createdBy: 100 },
+  { sample: 'test sample 6', createdBy: 100 },
+  { sample: 'test sample 7', createdBy: 100 },
+  { sample: 'test sample 8', createdBy: 100 },
 ];
 
 const updatedItem: Partial<Entity> = {
-  category: 'updated',
+  sample: 'updated',
 };
 
 const invalidItem: Entity = {
-  category: 'f',
+  sample: 'f',
 };
 
-describe('CategoryOwnController', () => {
+describe('SampleOwnController', () => {
   let app: NestApplication;
   let service: Service;
   beforeAll(async () => {
@@ -41,7 +41,7 @@ describe('CategoryOwnController', () => {
       imports: [
         TypeOrmModule.forRoot({
           type: 'better-sqlite3',
-          database: 'tmp/database/category-own/controller-test.sqlite',
+          database: 'tmp/database/sample-own/controller-test.sqlite',
           autoLoadEntities: true,
           synchronize: true,
           dropSchema: true,
@@ -65,9 +65,9 @@ describe('CategoryOwnController', () => {
     }
   });
 
-  it('[/GET owncategory] should get all own category entities.', async () => {
+  it('[/GET ownsample] should get all own sample entities.', async () => {
     return await request(app.getHttpServer())
-      .get('/owncategory')
+      .get('/ownsample')
       .expect(200)
       .expect(
         (
@@ -76,16 +76,16 @@ describe('CategoryOwnController', () => {
       );
   });
 
-  it('[/GET owncategory/:id] should get a category entity by id.', async () => {
+  it('[/GET ownsample/:id] should get a sample entity by id.', async () => {
     return request(app.getHttpServer())
-      .get('/owncategory/4')
+      .get('/ownsample/4')
       .expect(200)
       .expect({ ...(await service.viewOne(4)) });
   });
 
-  it('[/GET /owncategory/?take=1&skip=1] should paginate the category entities.', async () => {
+  it('[/GET /ownsample/?take=1&skip=1] should paginate the sample entities.', async () => {
     return request(app.getHttpServer())
-      .get('/owncategory/?take=1&skip=1')
+      .get('/ownsample/?take=1&skip=1')
       .expect(200)
       .then((data) => {
         expect(data.body.length).toBe(1);
@@ -93,16 +93,16 @@ describe('CategoryOwnController', () => {
       });
   });
 
-  it('[/PUT owncategory/:id] should update the category by id.', async () => {
+  it('[/PUT ownsample/:id] should update the sample by id.', async () => {
     return request(app.getHttpServer())
-      .put('/owncategory/5')
+      .put('/ownsample/5')
       .send({ ...updatedItem })
       .expect(200);
   });
 
-  it('[/DELETE owncategory/:id] should delete the category by id.', async () => {
+  it('[/DELETE ownsample/:id] should delete the sample by id.', async () => {
     return request(app.getHttpServer())
-      .delete('/owncategory/8')
+      .delete('/ownsample/8')
       .expect(200)
       .then(async () => {
         expect(await service.countOwn({ id: 100 } as any)).toBe(4);

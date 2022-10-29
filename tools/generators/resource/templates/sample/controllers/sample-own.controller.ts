@@ -16,22 +16,22 @@ import {
 import { Query } from '@nestjs/common';
 
 import {
-  CreateCategoryDto,
-  UpdateCategoryDto,
+  CreateSampleDto,
+  UpdateSampleDto,
 } from '../dtos/';
-import { Category } from '../entities';
-import { CategoryService } from '../services';
+import { Sample } from '../entities';
+import { SampleService } from '../services';
 
 @RestController({
   secure: true,
-  resource: 'owncategory',
+  resource: 'ownsample',
 })
-export class CategoryOwnController {
-  constructor(private readonly dataService: CategoryService) {}
+export class SampleOwnController {
+  constructor(private readonly dataService: SampleService) {}
 
   @PostOwnReq()
   createOwn(
-    @ReqBody() createDTO: CreateCategoryDto,
+    @ReqBody() createDTO: CreateSampleDto,
     @ReqUser() user: IUserEntity
   ) {
     return this.dataService.createOwn(createDTO, user);
@@ -39,7 +39,7 @@ export class CategoryOwnController {
 
   @GetOwnReq()
   findAllOwn(
-    @ReqQuery() query: QueryDTO<Category>,
+    @ReqQuery() query: QueryDTO<Sample>,
     @ReqUser() user: IUserEntity
   ) {
     return this.dataService.viewAllOwn(query, user);
@@ -53,7 +53,7 @@ export class CategoryOwnController {
   @UpdateOwnReq()
   updateOwn(
     @IDParam() id: number,
-    @ReqBody() updateDTO: UpdateCategoryDto,
+    @ReqBody() updateDTO: UpdateSampleDto,
     @ReqUser() user: IUserEntity
   ) {
     return this.dataService.updateOwn(id, updateDTO, user);
@@ -62,7 +62,7 @@ export class CategoryOwnController {
   @DeleteOwnReq()
   async softDeleteOwn(
     @IDParam() id: number,
-    @Query() query: QueryDTO<Category>,
+    @Query() query: QueryDTO<Sample>,
     @ReqUser() user: IUserEntity
   ) {
     return this.dataService.deleteOwn(id, query, user);
