@@ -17,7 +17,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppTasks } from './app-tasks';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { CategoryModule } from './category';
 import { UserMiddleware } from './user.middleware';
 
 @Module({
@@ -46,7 +45,6 @@ import { UserMiddleware } from './user.middleware';
     }),
     LoggerModule,
     EmailModule,
-    CategoryModule,
   ],
   controllers: [AppController],
   providers: [AppService, AppTasks],

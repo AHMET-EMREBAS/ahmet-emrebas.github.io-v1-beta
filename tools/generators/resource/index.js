@@ -10,7 +10,7 @@ function refactorFiles(
   callback = () => null
 ) {
   const dirs = readdirSync(dirpath);
-  const padding = ' '.repeat(level);
+
   for (const d of dirs) {
     const currentFilePath = join(dirpath, d);
 
