@@ -3,9 +3,12 @@ const { createFileSync } = require('fs-extra');
 const { upperFirst } = require('lodash');
 const { join } = require('path');
 
-const dirs = readdirSync(join(__dirname, 'templates'));
-
-function readDirs(obj = {}, dirpath = '', level = 0, callback = () => null) {
+function refactorFiles(
+  obj = {},
+  dirpath = '',
+  level = 0,
+  callback = () => null
+) {
   const dirs = readdirSync(dirpath);
   const padding = ' '.repeat(level);
   for (const d of dirs) {
@@ -25,7 +28,7 @@ function readDirs(obj = {}, dirpath = '', level = 0, callback = () => null) {
     if (currentFileStats.isDirectory()) {
       obj[d] = { type: 'd' };
       obj[d].path = currentFilePath;
-      obj[d].content = readDirs({}, join(dirpath, d), level + 5, callback);
+      obj[d].content = refactorFiles({}, join(dirpath, d), level + 5, callback);
 
       continue;
     }
@@ -33,37 +36,42 @@ function readDirs(obj = {}, dirpath = '', level = 0, callback = () => null) {
   return obj;
 }
 
+const TAMPLATES = '__templates__';
+const OUTPUT = 'dist';
+
 function handler(filename = '', classname = '') {
   return function cback(filePath = '', content = '') {
-    const npath = filePath.replaceAll('category', filename);
-    const ncontent = content
-      .replaceAll('category', filename)
-      .replaceAll('Category', classname);
-    console.log('Create ' + npath);
+    const npath = filePath
+      .replaceAll('sample', filename)
+      .replaceAll(TAMPLATES, OUTPUT);
 
+    const ncontent = content
+      .replaceAll('sample', filename)
+      .replaceAll('Sample', classname);
+
+    console.log('Created ' + npath);
     createFileSync(npath);
     writeFileSync(npath, ncontent);
   };
 }
 
-[
+const resourceNames = [
   'product',
   'price',
   'pricelevel',
   'department',
   'user',
-  'customer',
   'feature',
   'quantity',
   'store',
-  'tag',
   'order',
   'transaction',
+  'tag',
+  'customer',
   'employee',
   'project',
   'sprint',
   'issue',
-  'menuitem',
   'blog',
   'article',
   'message',
@@ -81,6 +89,8 @@ function handler(filename = '', classname = '') {
   'review',
   'promotion',
   'ad',
-].forEach((e) => {
-  readDirs({}, join(__dirname, 'templates'), 0, handler(e, upperFirst(e)));
-});
+];
+
+for (const e of resourceNames) {
+  refactorFiles({}, join(__dirname, TAMPLATES), 0, handler(e, upperFirst(e)));
+}
