@@ -8,6 +8,8 @@ import {
 } from '@angular/router';
 import { ServiceWorkerModule } from '@angular/service-worker';
 
+import { SpinnerModule } from 'primeng/spinner';
+
 import { EntityDataModule } from '@ngrx/data';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
@@ -15,15 +17,18 @@ import { StoreModule } from '@ngrx/store';
 import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
 import { entityDataModuleConfig } from './entity-data-module-config';
+import { IntroPageComponent } from './intro-page/intro-page.component';
 
 const routes: Routes = [
   {
-    path: 'rm',
+    path: '',
+    component: AppComponent,
+    children: [{ path: '', component: IntroPageComponent }],
   },
 ];
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, IntroPageComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -41,6 +46,7 @@ const routes: Routes = [
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000',
     }),
+    SpinnerModule,
   ],
   bootstrap: [AppComponent],
 })
