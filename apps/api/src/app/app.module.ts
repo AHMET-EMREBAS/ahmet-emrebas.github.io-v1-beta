@@ -20,11 +20,10 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UserMiddleware } from './user.middleware';
 
-const resourceModules = Object.values(resources).filter((e) =>
-  e.name.endsWith('Module')
-);
+const resourceModules = Object.entries(resources)
+  .filter(([key, value]) => value.name.endsWith('Module'))
+  .map(([key, value]) => value);
 
-console.log(resourceModules);
 @Module({
   imports: [
     ScheduleModule.forRoot(),
@@ -51,7 +50,7 @@ console.log(resourceModules);
     }),
     LoggerModule,
     EmailModule,
-    resourceModules,
+    ...(resourceModules as any),
   ],
   controllers: [AppController],
   providers: [AppService, AppTasks],
