@@ -42,7 +42,7 @@
 // @import url(~node_modules/primeng/resources/themes/luna-blue/theme.css);
 // @import url(~node_modules/primeng/resources/themes/luna-green/theme.css);
 // @import url(~node_modules/primeng/resources/themes/luna-pink/theme.css);
-// @import url(~node_modules/primeng/resources/themes/rhea/theme.css);
+
 
 
 
@@ -71,6 +71,31 @@ p-speeddial {
 }
 
 
+.p-sidebar {
+
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+    height: 80vh !important;
+    top: 10vh !important;
+    border-top: 4px solid var(--primary-color);
+    border-bottom: 4px solid var(--primary-color);
+    border-left: 20px solid var(--primary-color);
+    border-right: 3px solid orange;
+}
+
+.p-menuitem {
+    font-size: 1.3rem;
+    letter-spacing: 2px;
+    margin: 10px !important;
+}
+
+.router-link-active {
+    border: 1px dashed var(--primary-color);
+}
+
+.p-menuitem-icon {
+    font-size: 1.3rem;
+}
 
 * {
     box-sizing: border-box !important;

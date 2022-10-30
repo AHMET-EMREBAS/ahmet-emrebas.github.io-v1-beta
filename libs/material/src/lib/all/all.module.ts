@@ -8,6 +8,7 @@ import { AccordionModule } from 'primeng/accordion';
 import { SharedModule } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { CalendarModule } from 'primeng/calendar';
+import { CardModule } from 'primeng/card';
 import { CheckboxModule } from 'primeng/checkbox';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputMaskModule } from 'primeng/inputmask';
@@ -19,6 +20,7 @@ import { MessageModule } from 'primeng/message';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { SelectButtonModule } from 'primeng/selectbutton';
+import { SidebarModule } from 'primeng/sidebar';
 import { SpeedDialModule } from 'primeng/speeddial';
 import { TableModule } from 'primeng/table';
 import { ToastModule } from 'primeng/toast';
@@ -51,6 +53,9 @@ const __modules = [
   TooltipModule,
   SpeedDialModule,
   MenubarModule,
+  SidebarModule,
+  CardModule,
+  CalendarModule,
 ];
 @NgModule({
   imports: [...__modules],

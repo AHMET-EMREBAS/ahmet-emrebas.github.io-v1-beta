@@ -1,4 +1,8 @@
 import {
+  BreakpointObserver,
+  Breakpoints,
+} from '@angular/cdk/layout';
+import {
   Component,
   OnInit,
 } from '@angular/core';
@@ -12,6 +16,7 @@ import {
   bounceOutOnLeaveAnimation,
 } from 'angular-animations';
 import { MenuItem } from 'primeng/api';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'ae-landing',
@@ -23,20 +28,14 @@ import { MenuItem } from 'primeng/api';
   ],
 })
 export class LandingComponent implements OnInit {
+  isHandset$ = this.bpo
+    .observe([Breakpoints.Small, Breakpoints.XSmall, Breakpoints.Handset])
+    .pipe(
+      map((r) => {
+        return r.matches;
+      })
+    );
   isMenuOpen = false;
-  items: MenuItem[] = [
-    { icon: 'pi pi-home', label: 'Welcome', command: () => this.goto('') },
-    {
-      icon: 'pi pi-microsoft',
-      label: 'Solutions',
-      command: () => this.goto('solutions'),
-    },
-    {
-      icon: 'pi pi-envelope',
-      label: 'Contact',
-      command: () => this.goto('contact'),
-    },
-  ];
 
   menuItems: MenuItem[] = [
     {
@@ -61,7 +60,8 @@ export class LandingComponent implements OnInit {
 
   constructor(
     private readonly router: Router,
-    private readonly activeRoute: ActivatedRoute
+    private readonly activeRoute: ActivatedRoute,
+    private readonly bpo: BreakpointObserver
   ) {}
   ngOnInit(): void {
     this.title = window.document.title;

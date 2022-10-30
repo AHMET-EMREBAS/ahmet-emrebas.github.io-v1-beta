@@ -9,8 +9,6 @@ import { AllModules } from 'material/all';
 
 import { LandingComponent } from './landing.component';
 
-window.location.href = '#/home';
-
 const routes: Routes = [
   {
     title: 'Welcome',
@@ -19,6 +17,14 @@ const routes: Routes = [
     children: [],
   },
 ];
+
+const isIntroPage =
+  window.location.href.split('#')[1].split('/')[1] ==
+  'LodingPagesPleaseWaitForAWhileOrDoNotWait';
+
+if (isIntroPage) {
+  window.location.href = '#/home';
+}
 
 @NgModule({
   declarations: [LandingComponent],
