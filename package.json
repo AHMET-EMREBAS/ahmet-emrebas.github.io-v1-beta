@@ -42,6 +42,7 @@
     "@ngrx/entity": "13",
     "@ngrx/store": "13",
     "@nrwl/nx-plugin": "13",
+    "angular-animations": "^0.11.0",
     "bcrypt": "^5.1.0",
     "better-sqlite3": "^7.6.2",
     "cache-manager": "^5.1.1",

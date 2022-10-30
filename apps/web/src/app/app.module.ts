@@ -20,8 +20,13 @@ import { entityDataModuleConfig } from './ngrx.meta';
 
 const routes: Routes = [
   {
-    title: 'Welcome ( loading )',
     path: '',
+    redirectTo: 'LodingPagesPleaseWaitForAWhileOrDoNotWait',
+    pathMatch: 'full',
+  },
+  {
+    title: 'Welcome ( loading )',
+    path: 'LodingPagesPleaseWaitForAWhileOrDoNotWait',
     component: IntroPageComponent,
   },
   {

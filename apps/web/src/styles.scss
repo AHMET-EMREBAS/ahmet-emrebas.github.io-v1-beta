@@ -46,6 +46,32 @@
 
 
 
+
+p-speeddial {
+    position: absolute;
+    bottom: 100px;
+    right: 100px;
+
+}
+
+.p-speeddial-item .p-speeddial-action {
+    box-shadow: 0px 0px 10px gray;
+}
+
+.p-speeddial-item:first-child .p-speeddial-action {
+    background-color: royalblue;
+}
+
+.p-speeddial-item:nth-child(2) .p-speeddial-action {
+    background-color: black;
+}
+
+.p-speeddial-item:nth-child(3) .p-speeddial-action {
+    background-color: rgb(65, 214, 225);
+}
+
+
+
 * {
     box-sizing: border-box !important;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
@@ -58,7 +84,7 @@ body {
     width: 100%;
     padding: 0px;
     margin: 0px;
-
+    position: relative;
 }
 
 @media only screen and (min-width:600px) {

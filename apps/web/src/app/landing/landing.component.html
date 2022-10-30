@@ -1,7 +1,42 @@
-<p-toolbar>
+<ng-template #logo>
+    <svg class="menu-toggler" role="button" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg"
+        (click)="isMenuOpen = !isMenuOpen">
+        <rect class="color-1" x="000" y="000" width="400" height="100" rx="50" ry="50"></rect>
+        <rect class="color-2" x="000" y="120" width="200" height="100" rx="50" ry="50"></rect>
+        <rect class="color-1" x="000" y="240" width="100" height="100" rx="50" ry="50"></rect>
+    </svg>
+</ng-template>
 
-    <div class="p-toolbar-left">
-        <p-button [label]="'Hello'"></p-button>
+
+<div class="flex flex-column gap-4 h-full w-full md:p-6 p-1">
+
+    <p-toolbar>
+        <div class="p-toolbar-left flex  " [@enter]>
+            <ng-container *ngTemplateOutlet="logo"></ng-container>
+        </div>
+        <div class="p-toolbar-right  flex gap-4">
+            <a href="https://www.linkedin.com/in/ahmet-emrebas/" target="_blank"
+                style="background-color: rgb(16, 112, 201); color:white;" pButton label="LinkedIn" icon="pi pi-linkedin"
+                [@enter]></a>
+            <a href="https://github.com/AHMET-EMREBAS" target="_blank" style="background-color: black; color:white;"
+                pButton label="GitHub" icon="pi pi-github" [@enter]></a>
+        </div>
+    </p-toolbar>
+
+    <div class="flex flex-column  gap-8 justify-content-end">
+
+        <div class="flex flex-row gap-4">
+
+
+            <p-menu [model]="items" *ngIf="isMenuOpen" [@enter] [@leave]></p-menu>
+
+
+            <router-outlet></router-outlet>
+        </div>
     </div>
-</p-toolbar>
-<h1 id="last-title">{{title}}</h1>
+
+
+    <p-speedDial [model]="menuItems" [radius]="120" direction="up-left" type="quarter-circle"
+        buttonClassName="p-button-primary" showIcon="pi pi-compass" hideIcon="pi pi-times" [@enter]>
+    </p-speedDial>
+</div>
