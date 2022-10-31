@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import {
   Body,
   Controller,
+  Get,
   Post,
   ValidationPipe,
 } from '@nestjs/common';
@@ -21,6 +22,12 @@ export class UserController {
   ) {}
   @Post()
   create(@Body(ValidationPipe, TransformPipe) body: CreateUserDto) {
+    console.log(body);
     return this.userRepo.save(body);
+  }
+
+  @Get()
+  getUsers() {
+    return this.userRepo.find();
   }
 }

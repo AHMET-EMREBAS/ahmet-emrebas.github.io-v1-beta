@@ -1,4 +1,8 @@
 import {
+  Exclude,
+  Expose,
+} from 'class-transformer';
+import {
   IsAlpha,
   IsAlphanumeric,
   IsBoolean,
@@ -35,10 +39,14 @@ export type MyAPiPropertyOptions = ApiPropertyOptions & {
   isBoolean?: boolean;
   isNumber?: boolean;
   isNumberString?: boolean;
+  exclude?: boolean;
 };
 
 export function Property(o: MyAPiPropertyOptions) {
   const v: PropertyDecorator[] = [];
+
+  if (o.exclude === true) v.push(Exclude());
+  else v.push(Expose());
 
   if (o.minLength) v.push(MinLength(o.minLength));
   if (o.maxLength) v.push(MaxLength(o.maxLength));

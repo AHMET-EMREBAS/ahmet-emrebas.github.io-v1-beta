@@ -4,7 +4,6 @@ import { Repository } from 'typeorm';
 import {
   Body,
   Controller,
-  InternalServerErrorException,
   Post,
   ValidationPipe,
 } from '@nestjs/common';
@@ -23,11 +22,6 @@ export class SubController {
 
   @Post()
   create(@Body(ValidationPipe, TransformPipe) sub: CreateSubDTO) {
-    console.log(sub);
-    try {
-      return this.subRepo.save(sub);
-    } catch (rr) {
-      throw new InternalServerErrorException();
-    }
+    return this.subRepo.save(sub);
   }
 }

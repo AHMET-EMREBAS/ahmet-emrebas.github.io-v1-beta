@@ -1,15 +1,12 @@
-import { Property } from 'swagger-property';
+import {
+  EmailProperty,
+  PasswordProperty,
+} from 'swagger-property';
 
 export class CreateUserDto {
-  @Property({
-    type: 'string',
-    isEmail: true,
-  })
+  @EmailProperty()
   username: string;
 
-  @Property({
-    type: 'string',
-    isPassword: true,
-  })
+  @PasswordProperty()
   password: string;
 }
