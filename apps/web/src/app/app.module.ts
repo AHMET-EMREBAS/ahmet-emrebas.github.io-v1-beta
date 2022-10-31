@@ -21,31 +21,13 @@ import { entityDataModuleConfig } from './ngrx.meta';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'LodingPagesPleaseWaitForAWhileOrDoNotWait',
+    redirectTo: 'loading',
     pathMatch: 'full',
   },
   {
     title: 'Welcome ( loading )',
-    path: 'LodingPagesPleaseWaitForAWhileOrDoNotWait',
+    path: 'loading',
     component: IntroPageComponent,
-  },
-  {
-    path: 'home',
-    children: [
-      {
-        path: '',
-        loadChildren: () => import('./landing').then((m) => m.LandingModule),
-      },
-    ],
-  },
-  {
-    path: 'home',
-    children: [
-      {
-        path: '',
-        loadChildren: () => import('./landing').then((m) => m.LandingModule),
-      },
-    ],
   },
 ];
 
@@ -61,12 +43,12 @@ const routes: Routes = [
     RouterModule.forRoot(routes, {
       useHash: true,
       preloadingStrategy: PreloadAllModules,
-      // initialNavigation: 'enabledNonBlocking',
+
       // anchorScrolling: 'enabled',
-      // canceledNavigationResolution: 'replace',
+      canceledNavigationResolution: 'computed',
       enableTracing: environment.production === true,
-      // onSameUrlNavigation: 'reload',
-      // initialNavigation: 'enabledNonBlocking',
+      onSameUrlNavigation: 'reload',
+      initialNavigation: 'enabledNonBlocking',
     }),
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,

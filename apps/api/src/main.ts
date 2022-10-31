@@ -24,12 +24,14 @@ import {
 (async () => {
   const app = await NestFactory.create(AppModule);
 
-  app.setGlobalPrefix(GLOBAL_PREFIX);
+  // app.setGlobalPrefix(GLOBAL_PREFIX);
 
   // Enable request from different origins
   app.enableCors();
+
   // Share teh favicon
   app.use(favicon(join(__dirname, 'favicon.ico')));
+
   // Parse cookies
   app.use(cookieParser());
 
@@ -38,7 +40,9 @@ import {
     .setTitle(APP_NAME)
     .setDescription(APP_DESCRIPTION)
     .build();
+
   const document = SwaggerModule.createDocument(app, config);
+
   SwaggerModule.setup(GLOBAL_PREFIX, app, document);
 
   // Start app

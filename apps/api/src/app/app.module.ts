@@ -1,31 +1,25 @@
-import {
-  EmailModule,
-  LoggerModule,
-} from 'core';
+import { join } from 'path';
 
 // import * as resources from 'resource';
 import {
   CacheModule,
-  MiddlewareConsumer,
   Module,
-  NestModule,
 } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { ScheduleModule } from '@nestjs/schedule';
+import { ServeStaticModule } from '@nestjs/serve-static';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { AppTasks } from './app-tasks';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { UserMiddleware } from './user.middleware';
-
-// const resourceModules = Object.entries(resources)
-//   .filter(([key, value]) => value.name.endsWith('Module'))
-//   .map(([key, value]) => value);
 
 @Module({
   imports: [
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, 'client'),
+    }),
     ScheduleModule.forRoot(),
     EventEmitterModule.forRoot({
       global: true,
@@ -48,15 +42,8 @@ import { UserMiddleware } from './user.middleware';
       synchronize: true,
       dropSchema: true,
     }),
-    LoggerModule,
-    EmailModule,
-    // ...(resourceModules as any),
   ],
   controllers: [AppController],
   providers: [AppService, AppTasks],
 })
-export class AppModule implements NestModule {
-  configure(consumer: MiddlewareConsumer) {
-    consumer.apply(UserMiddleware).forRoutes('*');
-  }
-}
+export class AppModule {}

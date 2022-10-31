@@ -1,5 +1,3 @@
-import { LoggerService } from 'core';
-
 import { Injectable } from '@nestjs/common';
 import { OnEvent } from '@nestjs/event-emitter';
 import {
@@ -9,11 +7,9 @@ import {
 
 @Injectable()
 export class AppTasks {
-  constructor(private readonly logger: LoggerService) {}
-
   @Cron(CronExpression.EVERY_10_SECONDS)
   isUp() {
-    this.logger.log('System is up.');
+    console.log('Cron Task');
   }
 
   /**
@@ -21,7 +17,7 @@ export class AppTasks {
    * @param entity
    */
   @OnEvent('*.entity.INSERT')
-  uponInsert(entity: Record<string, any>) {
-    this.logger.log(JSON.stringify(entity));
+  uponInsert() {
+    console.log('Cron Task');
   }
 }
