@@ -4,14 +4,11 @@ import {
 } from 'bcrypt';
 import {
   Column,
-  Entity,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
-@Entity()
-export class User {
-  @PrimaryGeneratedColumn({})
-  id: number;
+export class Sub {
+  @PrimaryGeneratedColumn() id: number;
 
   @Column({
     generated: 'uuid',
@@ -20,7 +17,7 @@ export class User {
   })
   uuid: string;
 
-  @Column({ type: 'text' })
+  @Column({ type: 'text', unique: true })
   username: string;
 
   @Column({
@@ -31,10 +28,4 @@ export class User {
     },
   })
   password: string;
-
-  @Column({ type: 'text' })
-  organization: string;
-
-  @Column({ type: 'text' })
-  permisstion: string;
 }

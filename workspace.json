@@ -2,12 +2,9 @@
   "version": 2,
   "projects": {
     "api": "apps/api",
-    "auth": "libs/auth",
     "auth-service": "apps/auth-service",
-    "cli": "libs/cli",
-    "common": "libs/common",
-    "core": "libs/core",
     "nativescript-mobile": "apps/nativescript-mobile",
+    "validations": "libs/validations",
     "web": "apps/web",
     "web-e2e": "apps/web-e2e"
   }

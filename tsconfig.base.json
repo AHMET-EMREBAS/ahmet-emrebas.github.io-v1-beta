@@ -15,13 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@ahmet-emrebas/auth": ["libs/auth/src/index.ts"],
-      "cli": ["libs/cli/src/index.ts"],
-      "common": ["libs/common/src/index.ts"],
-      "core": ["libs/core/src/index.ts"],
-      "material/*": ["libs/material/src/lib/*"],
-      "models": ["libs/models/src/index.ts"],
-      "resource": ["libs/resource/src/index.ts"]
+      "validations": ["libs/validations/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
