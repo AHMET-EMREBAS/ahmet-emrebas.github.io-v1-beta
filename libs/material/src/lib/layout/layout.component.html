@@ -1,1 +1,35 @@
-<p>layout works!</p>
+<ng-template #layout let-isHandset="isHandset">
+
+    <div class="flex flex-column gap-2 p-2 h-full w-full border-2">
+
+        <!-- Footer -->
+        <ng-content select="[toolbar]"></ng-content>
+
+        <!-- Body -->
+        <div class="flex flex-row border-3 h-full">
+
+            <!-- Left block -->
+            <div class="flex flex-column border-2" *ngIf="isHandset===false">
+                <ng-content select="[c1]"></ng-content>
+            </div>
+
+            <!-- Main block -->
+            <div class="flex flex-column flex-grow-1">
+                <ng-content select="[c2]"></ng-content>
+            </div>
+
+            <!-- Right block -->
+            <div class="flex flex-column border-2" *ngIf="isHandset===false">
+                <ng-content select="[c3]"></ng-content>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <ng-content select="[statusbar]"></ng-content>
+        </div>
+    </div>
+</ng-template>
+
+
+<ng-container *ngTemplateOutlet="layout;context:{isHandset: (isHandset$ | async)}"></ng-container>

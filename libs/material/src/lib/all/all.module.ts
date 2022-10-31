@@ -1,8 +1,10 @@
+import { LayoutModule } from '@angular/cdk/layout';
 import { NgModule } from '@angular/core';
 import {
   FormsModule,
   ReactiveFormsModule,
 } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 import { AccordionModule } from 'primeng/accordion';
 import { SharedModule } from 'primeng/api';
@@ -29,6 +31,7 @@ import { ToolbarModule } from 'primeng/toolbar';
 import { TooltipModule } from 'primeng/tooltip';
 
 const __modules = [
+  RouterModule,
   SharedModule,
   ButtonModule,
   CalendarModule,
@@ -56,6 +59,7 @@ const __modules = [
   SidebarModule,
   CardModule,
   CalendarModule,
+  LayoutModule,
 ];
 @NgModule({
   imports: [...__modules],
