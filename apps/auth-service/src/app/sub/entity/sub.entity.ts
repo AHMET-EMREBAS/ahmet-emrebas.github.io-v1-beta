@@ -1,7 +1,4 @@
-import {
-  genSaltSync,
-  hashSync,
-} from 'bcrypt';
+import { PasswordTransformer } from 'transformers';
 import {
   Column,
   PrimaryGeneratedColumn,
@@ -22,10 +19,7 @@ export class Sub {
 
   @Column({
     type: 'text',
-    transformer: {
-      to: (value) => (value = hashSync(value, genSaltSync(8))),
-      from: (value) => value,
-    },
+    transformer: PasswordTransformer(),
   })
   password: string;
 }

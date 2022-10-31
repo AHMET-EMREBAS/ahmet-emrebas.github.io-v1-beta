@@ -1,7 +1,4 @@
-import {
-  genSaltSync,
-  hashSync,
-} from 'bcrypt';
+import { PasswordTransformer } from 'transformers';
 import {
   Column,
   Entity,
@@ -28,16 +25,10 @@ export class User {
 
   @Column({
     type: 'text',
-    transformer: {
-      to: (value) => (value = hashSync(value, genSaltSync(8))),
-      from: (value) => value,
-    },
+    transformer: PasswordTransformer(),
   })
   password: string;
 
-  @Column({ type: 'text' })
-  organization: string;
-
-  @Column({ type: 'text' })
+  @Column({ type: 'text', nullable: true })
   permisstion: string;
 }

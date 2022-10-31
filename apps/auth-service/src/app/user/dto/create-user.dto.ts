@@ -1,9 +1,15 @@
-import { IsNotEmpty } from 'class-validator';
+import { Property } from 'swagger-property';
 
 export class CreateUserDto {
-  @IsNotEmpty()
+  @Property({
+    type: 'string',
+    isEmail: true,
+  })
   username: string;
 
-  @IsNotEmpty()
+  @Property({
+    type: 'string',
+    isPassword: true,
+  })
   password: string;
 }

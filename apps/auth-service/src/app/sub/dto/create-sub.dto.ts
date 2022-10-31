@@ -1,13 +1,12 @@
 import {
-  IsEmail,
-  IsNotEmpty,
-} from 'class-validator';
+  EmailProperty,
+  PasswordProperty,
+} from 'swagger-property';
 
 export class CreateSubDTO {
-  @IsNotEmpty()
-  @IsEmail()
+  @EmailProperty()
   username: string;
 
-  @IsNotEmpty()
+  @PasswordProperty()
   password: string;
 }

@@ -1,0 +1,32 @@
+{
+  "root": "libs/swagger-property",
+  "sourceRoot": "libs/swagger-property/src",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/swagger-property",
+        "main": "libs/swagger-property/src/index.ts",
+        "tsConfig": "libs/swagger-property/tsconfig.lib.json",
+        "assets": ["libs/swagger-property/*.md"]
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/swagger-property/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/swagger-property"],
+      "options": {
+        "jestConfig": "libs/swagger-property/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

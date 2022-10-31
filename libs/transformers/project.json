@@ -1,0 +1,32 @@
+{
+  "root": "libs/transformers",
+  "sourceRoot": "libs/transformers/src",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/transformers",
+        "main": "libs/transformers/src/index.ts",
+        "tsConfig": "libs/transformers/tsconfig.lib.json",
+        "assets": ["libs/transformers/*.md"]
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/transformers/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/transformers"],
+      "options": {
+        "jestConfig": "libs/transformers/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
