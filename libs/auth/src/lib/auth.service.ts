@@ -15,15 +15,23 @@ export class AuthService {
   async validateUser(username: string, password: string) {
     const found = await this.authUserService.findByUsername(username);
 
-    const isPasswordMatch = await compare(password, found.password);
+    if (found && found.username == username && found.password) {
+      const isPasswordMatch = await compare(password, found.password);
 
-    if (isPasswordMatch === true) {
-      return found;
+      if (isPasswordMatch === true) {
+        return found;
+      }
     }
+
     return null;
   }
 
-  login(user: IUser) {
-    return this.jwtService.sign(user);
+  signAuthToken(user: IUser) {
+    return {
+      accessToken: this.jwtService.sign({
+        uuid: user.uuid,
+        permission: user.permission,
+      }),
+    };
   }
 }

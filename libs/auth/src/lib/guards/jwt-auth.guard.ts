@@ -1,4 +1,3 @@
-import { isPublicRoute } from 'ae-api-common';
 import { Observable } from 'rxjs';
 
 import {
@@ -7,6 +6,8 @@ import {
 } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { AuthGuard } from '@nestjs/passport';
+
+export const IS_PUBLIC_META_KEY = 'Public';
 
 @Injectable()
 export class JwtAuthGuard extends AuthGuard('jwt') {
@@ -17,9 +18,15 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
   canActivate(
     context: ExecutionContext
   ): boolean | Promise<boolean> | Observable<boolean> {
-    if (isPublicRoute(this.reflector, context)) {
+    const isPublicResource = this.reflector.getAllAndOverride(
+      IS_PUBLIC_META_KEY,
+      [context.getClass, context.getHandler]
+    );
+
+    if (isPublicResource) {
       return true;
     }
+
     return super.canActivate(context);
   }
 }

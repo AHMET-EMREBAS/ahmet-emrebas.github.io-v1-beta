@@ -25,6 +25,6 @@ export class Sub {
   })
   password: string;
 
-  @Column({ type: 'text' })
+  @Column({ type: 'text', nullable: true })
   permission: string;
 }

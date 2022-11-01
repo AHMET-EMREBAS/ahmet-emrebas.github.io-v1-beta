@@ -14,7 +14,7 @@ import { CreateSubDTO } from './dto/create-sub.dto';
 import { Sub } from './entity/sub.entity';
 
 @ApiTags(SubController.name)
-@Controller('sub')
+@Controller('api/sub')
 export class SubController {
   constructor(
     @InjectRepository(Sub) private readonly subRepo: Repository<Sub>

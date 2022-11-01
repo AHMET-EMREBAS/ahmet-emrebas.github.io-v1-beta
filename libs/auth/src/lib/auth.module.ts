@@ -9,6 +9,7 @@ import {
   JwtModuleOptions,
 } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { AuthUserService } from './auth-user.service';
 import { AuthController } from './auth.controller';
@@ -25,11 +26,15 @@ import { IUser } from './user.interface';
 export class AuthModule {
   static configure(
     jwtOptions: JwtModuleOptions,
-    authUserService: ClassConstructor<AuthUserService<IUser>>
+    authUserService: ClassConstructor<AuthUserService<IUser>>,
+    entities: ClassConstructor<any>[]
   ): DynamicModule {
     return {
       module: AuthModule,
-      imports: [JwtModule.register(jwtOptions)],
+      imports: [
+        JwtModule.register(jwtOptions),
+        TypeOrmModule.forFeature(entities),
+      ],
       providers: [
         {
           provide: AuthUserService,

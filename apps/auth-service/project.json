@@ -12,6 +12,7 @@
         "tsConfig": "apps/auth-service/tsconfig.app.json",
         "assets": [
           "apps/auth-service/src/assets",
+          "apps/auth-service/src/public",
           "apps/auth-service/src/favicon.ico"
         ]
       },

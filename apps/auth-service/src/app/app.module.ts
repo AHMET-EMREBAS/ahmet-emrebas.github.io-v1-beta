@@ -1,11 +1,11 @@
-import { AuthModule } from 'auth';
+import { join } from 'path';
 
 import { Module } from '@nestjs/common';
+import { ServeStaticModule } from '@nestjs/serve-static';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { SubAuthService } from './sub/sub-auth.service';
 import { SubModule } from './sub/sub.module';
 import { UserModule } from './user/user.module';
 
@@ -18,7 +18,9 @@ import { UserModule } from './user/user.module';
       synchronize: true,
       dropSchema: true,
     }),
-    AuthModule.configure({}, SubAuthService),
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, 'public'),
+    }),
     UserModule,
     SubModule,
   ],

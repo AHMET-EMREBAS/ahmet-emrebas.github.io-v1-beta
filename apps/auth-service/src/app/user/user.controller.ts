@@ -15,7 +15,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './entity/user.entity';
 
 @ApiTags(UserController.name)
-@Controller('user')
+@Controller('api/user')
 export class UserController {
   constructor(
     @InjectRepository(User) private readonly userRepo: Repository<User>
