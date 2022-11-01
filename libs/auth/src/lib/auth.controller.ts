@@ -21,8 +21,9 @@ import { LoginDto } from './dto/login.dto';
 import {
   JwtAuthGuard,
   LocalAuthGuard,
+  PermissionGuard,
 } from './guards';
-import { IUser } from './user.interface';
+import { Sub } from './sub/entity/sub.entity';
 
 @ApiTags(AuthController.name)
 @Controller('auth')
@@ -36,14 +37,21 @@ export class AuthController {
     @Req() req: Request,
     @Res() res: Response
   ) {
-    const token = await this.authService.signAuthToken(req.user as IUser);
+    const token = await this.authService.login(req.user as Sub);
     res.cookie('auth', token.accessToken);
     res.redirect('auth/profile');
   }
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard, PermissionGuard)
   @Get('profile')
-  profile(@Req() req: Request) {
-    return req.user;
+  profile() {
+    return 'profile';
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Post('logout')
+  logout(@Res() res: Response) {
+    res.cookie('auth', '');
+    res.redirect('/login');
   }
 }

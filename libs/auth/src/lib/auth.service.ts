@@ -1,19 +1,21 @@
 import { compare } from 'bcrypt';
+import { Repository } from 'typeorm';
 
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
+import { InjectRepository } from '@nestjs/typeorm';
 
-import { AuthUserService } from './auth-user.service';
-import { IUser } from './user.interface';
+import { Sub } from './sub/entity/sub.entity';
 
 @Injectable()
 export class AuthService {
   constructor(
-    private readonly authUserService: AuthUserService<IUser>,
+    @InjectRepository(Sub) private readonly authUserService: Repository<Sub>,
     private readonly jwtService: JwtService
   ) {}
+
   async validateUser(username: string, password: string) {
-    const found = await this.authUserService.findByUsername(username);
+    const found = await this.authUserService.findOneBy({ username });
 
     if (found && found.username == username && found.password) {
       const isPasswordMatch = await compare(password, found.password);
@@ -26,7 +28,7 @@ export class AuthService {
     return null;
   }
 
-  signAuthToken(user: IUser) {
+  login(user: Sub) {
     return {
       accessToken: this.jwtService.sign({
         uuid: user.uuid,

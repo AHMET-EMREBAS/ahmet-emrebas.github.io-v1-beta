@@ -1,0 +1,2 @@
+export * from './<%= filename %>.entity';
+export * from './dto';

@@ -73,6 +73,14 @@ export function TextProperty(o?: MyAPiPropertyOptions) {
   return Property({ ...o, type: 'string' });
 }
 
+export function ShortTextProperty(o?: MyAPiPropertyOptions) {
+  return Property({ ...o, maxLength: 50, type: 'string' });
+}
+
+export function LongTextProperty(o?: MyAPiPropertyOptions) {
+  return Property({ ...o, maxLength: 400, type: 'string' });
+}
+
 export function DateProperty(o?: MyAPiPropertyOptions) {
   return Property({ ...o, isDate: true, type: 'date' });
 }

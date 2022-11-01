@@ -1,0 +1,32 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "name": "cli",
+  "version": "0.0.1",
+  "generators": {
+    "cli": {
+      "factory": "./src/generators/cli/generator",
+      "schema": "./src/generators/cli/schema.json",
+      "description": "cli generator"
+    },
+    "entity": {
+      "factory": "./src/generators/entity/generator",
+      "schema": "./src/generators/entity/schema.json",
+      "description": "entity generator"
+    },
+    "controller": {
+      "factory": "./src/generators/controller/generator",
+      "schema": "./src/generators/controller/schema.json",
+      "description": "controller generator"
+    },
+    "resource": {
+      "factory": "./src/generators/resource/generator",
+      "schema": "./src/generators/resource/schema.json",
+      "description": "resource generator"
+    },
+    "service": {
+      "factory": "./src/generators/service/generator",
+      "schema": "./src/generators/service/schema.json",
+      "description": "service generator"
+    }
+  }
+}

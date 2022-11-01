@@ -1,0 +1,6 @@
+import { ShortTextProperty } from 'swagger-property';
+
+export class Create<%= classname %>Dto {
+  @ShortTextProperty({ nullable: false })
+  name: string;
+}

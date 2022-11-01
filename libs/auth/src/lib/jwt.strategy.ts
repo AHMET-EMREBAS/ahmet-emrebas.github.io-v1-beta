@@ -4,12 +4,10 @@ import {
   Strategy,
 } from 'passport-jwt';
 
-import {
-  Inject,
-  Injectable,
-} from '@nestjs/common';
-import { JwtModuleOptions } from '@nestjs/jwt';
+import { Injectable } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
+
+import { JWT_SECRET } from './jwt-options.const';
 
 function fromCookie(req: Request) {
   return req.cookies.auth;
@@ -24,11 +22,11 @@ function fromHeader(req: Request) {
 }
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
-  constructor(@Inject('JWT_OPTIONS') options: JwtModuleOptions) {
+  constructor() {
     super({
       jwtFromRequest: ExtractJwt.fromExtractors([fromCookie]),
       ignoreExpiration: false,
-      secretOrKey: options.secret,
+      secretOrKey: JWT_SECRET,
     });
   }
 
