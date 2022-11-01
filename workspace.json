@@ -8,6 +8,7 @@
     "core": "libs/core",
     "models": "libs/models",
     "nativescript-mobile": "apps/nativescript-mobile",
+    "rest": "libs/rest",
     "swagger-property": "libs/swagger-property",
     "transformers": "libs/transformers",
     "validations": "libs/validations",

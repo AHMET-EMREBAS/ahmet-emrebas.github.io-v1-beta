@@ -1,0 +1,33 @@
+{
+  "root": "libs/rest",
+  "sourceRoot": "libs/rest/src",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/rest",
+        "tsConfig": "libs/rest/tsconfig.lib.json",
+        "packageJson": "libs/rest/package.json",
+        "main": "libs/rest/src/index.ts",
+        "assets": ["libs/rest/*.md"]
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/rest/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/rest"],
+      "options": {
+        "jestConfig": "libs/rest/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
