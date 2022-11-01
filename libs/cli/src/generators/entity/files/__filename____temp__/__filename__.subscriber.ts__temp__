@@ -1,0 +1,22 @@
+import { ClassConstructor } from 'core';
+import {
+  EntitySubscriberInterface,
+  EventSubscriber,
+  InsertEvent,
+} from 'typeorm';
+
+import { <%= classname %> } from './<%= filename %>.entity';
+
+@EventSubscriber()
+export class <%= classname %>EventSubscriber
+  implements EntitySubscriberInterface<<%= classname %>>
+{
+  listenTo(): ClassConstructor<<%= classname %>> {
+    return <%= classname %>;
+  }
+
+  afterInsert(event: InsertEvent<<%= classname %>>): void | Promise<any> {
+    console.log(`[INSERTED] <%= classname %> `);
+    console.table(event.entity);
+  }
+}

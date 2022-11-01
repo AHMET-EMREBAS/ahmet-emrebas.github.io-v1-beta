@@ -11,6 +11,6 @@ export class ReadCategoryController {
 
   @Get()
   findAll() {
-    return;
+    return this.categoryService.find();
   }
 }

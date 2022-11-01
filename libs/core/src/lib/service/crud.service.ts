@@ -11,7 +11,7 @@ import {
 export class CrudService<T> {
   constructor(private readonly __repo: Repository<T>) {}
 
-  find(options: FindManyOptions<T>) {
+  find(options?: FindManyOptions<T>) {
     try {
       return this.__repo.find(options);
     } catch (err) {
@@ -19,7 +19,7 @@ export class CrudService<T> {
     }
   }
 
-  findOne(options: FindOneOptions) {
+  findOne(options?: FindOneOptions) {
     try {
       return this.__repo.findOne(options);
     } catch (err) {
@@ -27,7 +27,7 @@ export class CrudService<T> {
     }
   }
 
-  findOneBy(options: FindOptionsWhere<T> | FindOptionsWhere<T>[]) {
+  findOneBy(options?: FindOptionsWhere<T> | FindOptionsWhere<T>[]) {
     try {
       return this.__repo.findOneBy(options);
     } catch (err) {
@@ -35,7 +35,7 @@ export class CrudService<T> {
     }
   }
 
-  findAndCount(options: FindManyOptions<T>) {
+  findAndCount(options?: FindManyOptions<T>) {
     try {
       return this.__repo.findAndCount(options);
     } catch (err) {

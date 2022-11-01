@@ -1,2 +1,4 @@
-export * from './<%= filename %>.entity';
-export * from './dto';
+export * from "./<%= filename %>.entity";
+export * from "./<%= filename %>.subscriber";
+export * from "./<%= filename %>.view";
+export * from "./dto";

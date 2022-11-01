@@ -1,2 +1,2 @@
-export * from './create-<%= filename %>.dto';
-export * from './update-<%= filename %>.dto';
+export * from "./create-<%= filename %>.dto";
+export * from "./update-<%= filename %>.dto";

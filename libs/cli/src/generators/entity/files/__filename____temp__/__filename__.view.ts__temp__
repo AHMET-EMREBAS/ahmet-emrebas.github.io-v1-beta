@@ -1,0 +1,21 @@
+import {
+  DataSource,
+  ViewColumn,
+  ViewEntity,
+} from 'typeorm';
+
+@ViewEntity({
+  expression: (ds: DataSource) => {
+    return ds
+      .createQueryBuilder()
+      .select('<%= filename %>.id', 'id')
+      .select('<%= filename %>.uuid', 'uuid')
+      .select('<%= filename %>.name', 'name')
+      .from('<%= filename %>', '<%= filename %>');
+  },
+})
+export class <%= classname %>View {
+  @ViewColumn() id: number;
+  @ViewColumn() uuid: number;
+  @ViewColumn() name: string;
+}
