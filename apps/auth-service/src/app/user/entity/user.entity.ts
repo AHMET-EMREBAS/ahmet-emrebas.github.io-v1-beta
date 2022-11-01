@@ -2,8 +2,12 @@ import { PasswordTransformer } from 'transformers';
 import {
   Column,
   Entity,
+  JoinColumn,
+  ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+
+import { Sub } from '../../sub/entity/sub.entity';
 
 @Entity()
 export class User {
@@ -31,4 +35,8 @@ export class User {
 
   @Column({ type: 'text', nullable: true })
   permisstion: string;
+
+  @ManyToOne(() => Sub)
+  @JoinColumn()
+  sub: Sub;
 }

@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "auth": ["libs/auth/src/index.ts"],
       "swagger-property": ["libs/swagger-property/src/index.ts"],
       "transformers": ["libs/transformers/src/index.ts"],
       "validations": ["libs/validations/src/index.ts"]

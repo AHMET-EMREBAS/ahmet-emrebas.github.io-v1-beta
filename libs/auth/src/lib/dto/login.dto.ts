@@ -3,8 +3,8 @@ import {
   PasswordProperty,
 } from 'swagger-property';
 
-export class CreateUserDto {
-  @EmailProperty({ exclude: true })
+export class LoginDto {
+  @EmailProperty()
   username: string;
 
   @PasswordProperty()

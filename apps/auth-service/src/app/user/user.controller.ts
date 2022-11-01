@@ -21,7 +21,10 @@ export class UserController {
     @InjectRepository(User) private readonly userRepo: Repository<User>
   ) {}
   @Post()
-  create(@Body(ValidationPipe, TransformPipe) body: CreateUserDto) {
+  create(
+    @Body(ValidationPipe, TransformPipe)
+    body: CreateUserDto
+  ) {
     console.log(body);
     return this.userRepo.save(body);
   }

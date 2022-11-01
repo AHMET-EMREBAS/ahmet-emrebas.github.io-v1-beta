@@ -1,9 +1,11 @@
 import { PasswordTransformer } from 'transformers';
 import {
   Column,
+  Entity,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
+@Entity()
 export class Sub {
   @PrimaryGeneratedColumn() id: number;
 
@@ -22,4 +24,7 @@ export class Sub {
     transformer: PasswordTransformer(),
   })
   password: string;
+
+  @Column({ type: 'text' })
+  permission: string;
 }
