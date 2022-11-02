@@ -1,4 +1,4 @@
-import { compare } from 'bcrypt';
+import { compareSync } from 'bcrypt';
 import { Sub } from 'models';
 import { SubService } from 'rest';
 
@@ -14,14 +14,20 @@ export class AuthService {
 
   async validateUser(username: string, password: string) {
     const found = await this.subService.findOneBy({ username });
+    console.log('Auth Service');
+
+    console.table(found);
 
     if (found && found.username == username && found.password) {
-      const isPasswordMatch = await compare(password, found.password);
+      const isPasswordMatch = compareSync(password, found.password);
+
+      console.log('Is Password Match : ', isPasswordMatch);
 
       if (isPasswordMatch === true) {
         return found;
       }
     }
+    console.log('Password not match!');
 
     return null;
   }

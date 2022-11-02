@@ -1,4 +1,7 @@
-import { ReqBody } from 'core';
+import {
+  Public,
+  ReqBody,
+} from 'core';
 import {
   Request,
   Response,
@@ -31,6 +34,7 @@ import {
 export class AuthController {
   constructor(private authService: AuthService) {}
 
+  @Public()
   @UseGuards(LocalAuthGuard)
   @ApiOperation({ summary: 'Login' })
   @Post('login')

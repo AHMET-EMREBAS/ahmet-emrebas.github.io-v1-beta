@@ -1,11 +1,27 @@
+import {
+  AuthModule,
+  PermissionGuard,
+} from 'auth';
+import { createPermission } from 'core';
+import {
+  Sub,
+  SubView,
+} from 'models';
 import { join } from 'path';
-import { SampleModule } from 'rest';
+import {
+  SampleModule,
+  SubModule,
+  SubService,
+  SubSubscriber,
+} from 'rest';
 
 import {
   CacheModule,
   Module,
+  OnModuleInit,
 } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+import { APP_GUARD } from '@nestjs/core';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { ScheduleModule } from '@nestjs/schedule';
 import { ServeStaticModule } from '@nestjs/serve-static';
@@ -39,12 +55,33 @@ import { AppService } from './app.service';
       type: 'better-sqlite3',
       database: 'tmp/database/main.sqlite',
       autoLoadEntities: true,
+      subscribers: [SubSubscriber],
       synchronize: true,
       dropSchema: true,
     }),
+    TypeOrmModule.forFeature([Sub, SubView]),
     SampleModule,
+    SubModule,
+    AuthModule,
   ],
   controllers: [AppController],
-  providers: [AppService, AppTasks],
+  providers: [
+    AppService,
+    AppTasks,
+    SubService,
+    {
+      provide: APP_GUARD,
+      useClass: PermissionGuard,
+    },
+  ],
 })
-export class AppModule {}
+export class AppModule implements OnModuleInit {
+  constructor(private readonly subService: SubService) {}
+  async onModuleInit() {
+    const r = await this.subService.save({
+      username: 'aemrebas.dev@gmail.com',
+      password: 'aA123!',
+      permission: createPermission('read:sample', 'write:sample', 'read:sub'),
+    });
+  }
+}

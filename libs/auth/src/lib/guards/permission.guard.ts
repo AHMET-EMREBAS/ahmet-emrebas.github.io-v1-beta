@@ -1,23 +1,17 @@
 import { hasPermission } from 'core';
-import { Sub } from 'models';
 import { Observable } from 'rxjs';
-import { Repository } from 'typeorm';
 
 import {
   ExecutionContext,
   Injectable,
 } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
-import { InjectRepository } from '@nestjs/typeorm';
 
 import { JwtAuthGuard } from './jwt-auth.guard';
 
 @Injectable()
 export class PermissionGuard extends JwtAuthGuard {
-  constructor(
-    public readonly reflector: Reflector,
-    @InjectRepository(Sub) public readonly userRepo: Repository<Sub>
-  ) {
+  constructor(public readonly reflector: Reflector) {
     super(reflector);
   }
 

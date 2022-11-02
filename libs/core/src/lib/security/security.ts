@@ -15,15 +15,17 @@ export function Public() {
 
 export function isPublic(reflector: Reflector, context: ExecutionContext) {
   const isPublicResource = reflector.getAllAndOverride(PUBLIC_META_KEY, [
-    context.getClass(),
     context.getHandler(),
+    context.getClass(),
   ]);
 
   return !!isPublicResource;
 }
 
-export function createPermission(permission: string) {
-  return ':::' + permission.trim().toUpperCase() + ':::';
+export function createPermission(...permissions: string[]) {
+  return permissions
+    .map((p) => ':::' + p.trim().toUpperCase() + ':::')
+    .join('|');
 }
 
 export function Permission(permission: string) {
@@ -34,11 +36,13 @@ export function hasPermission(reflector: Reflector, context: ExecutionContext) {
   const user = context.switchToHttp().getRequest<Request>()['user'] as any;
 
   const requiredPermission = reflector.getAllAndOverride(PERMISSION_META_KEY, [
-    context.getClass(),
     context.getHandler(),
+    context.getClass(),
   ]);
 
   if (requiredPermission) {
+    console.log('Required permission : ', requiredPermission);
+    console.log('User permission : ', user?.permission);
     if (user?.permission?.includes(requiredPermission)) {
       return true;
     }
