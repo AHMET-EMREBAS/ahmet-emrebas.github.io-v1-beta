@@ -1,20 +1,22 @@
+import { ReqBody } from 'core';
 import {
   Request,
   Response,
 } from 'express';
-import { TransformPipe } from 'transformers';
+import { Sub } from 'models';
 
 import {
-  Body,
   Controller,
   Get,
   Post,
   Req,
   Res,
   UseGuards,
-  ValidationPipe,
 } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import {
+  ApiOperation,
+  ApiTags,
+} from '@nestjs/swagger';
 
 import { AuthService } from './auth.service';
 import { LoginDto } from './dto/login.dto';
@@ -23,7 +25,6 @@ import {
   LocalAuthGuard,
   PermissionGuard,
 } from './guards';
-import { Sub } from './sub/entity/sub.entity';
 
 @ApiTags(AuthController.name)
 @Controller('auth')
@@ -31,9 +32,10 @@ export class AuthController {
   constructor(private authService: AuthService) {}
 
   @UseGuards(LocalAuthGuard)
+  @ApiOperation({ summary: 'Login' })
   @Post('login')
   async login(
-    @Body(ValidationPipe, TransformPipe) loginDto: LoginDto,
+    @ReqBody() loginDto: LoginDto,
     @Req() req: Request,
     @Res() res: Response
   ) {

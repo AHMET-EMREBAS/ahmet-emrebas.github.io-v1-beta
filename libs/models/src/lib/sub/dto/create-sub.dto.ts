@@ -1,16 +1,16 @@
 import {
   EmailProperty,
+  LongTextProperty,
   PasswordProperty,
-  TextProperty,
 } from 'swagger-property';
 
-export class CreateSubDTO {
+export class CreateSubDto {
   @EmailProperty()
   username: string;
 
   @PasswordProperty()
   password: string;
 
-  @TextProperty()
+  @LongTextProperty()
   permission: string;
 }

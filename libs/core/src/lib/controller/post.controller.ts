@@ -15,7 +15,7 @@ export function GetPostController<T>(
   name: string,
   createDTO: ClassConstructor<any>,
   updateDTO: ClassConstructor<any>
-) {
+): any {
   class PostController {
     constructor(public readonly __service: CrudService<T>) {}
 

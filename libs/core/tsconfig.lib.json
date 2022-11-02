@@ -3,8 +3,7 @@
   "compilerOptions": {
     "outDir": "../../dist/out-tsc",
     "declaration": true,
-    "types": [],
-    "target": "es6"
+    "types": []
   },
   "include": ["**/*.ts"],
   "exclude": ["**/*.spec.ts", "**/*.test.ts"]

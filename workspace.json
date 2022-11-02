@@ -4,7 +4,7 @@
     "api": "apps/api",
     "auth": "libs/auth",
     "cli": "libs/cli",
-    "cli-e2e": "apps\\cli-e2e",
+    "cli-e2e": "apps/cli-e2e",
     "core": "libs/core",
     "models": "libs/models",
     "nativescript-mobile": "apps/nativescript-mobile",

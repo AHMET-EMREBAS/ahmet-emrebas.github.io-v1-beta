@@ -27,7 +27,7 @@ import { CrudService } from '../service';
 
 export function GetQueryController<T extends BaseEntity, V = any>(
   name: string
-) {
+): any {
   class QueryController {
     constructor(public readonly __service: CrudService<T, V>) {}
 

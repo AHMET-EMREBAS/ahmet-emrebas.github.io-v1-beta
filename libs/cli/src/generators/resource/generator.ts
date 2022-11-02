@@ -36,5 +36,5 @@ async function genResource(tree: Tree, options: ResourceGeneratorSchema) {
 export default async function (tree: Tree, options: ResourceGeneratorSchema) {
   await genResource(tree, options);
   await genEntity.default(tree, options);
-  formatFiles(tree);
+  await formatFiles(tree);
 }

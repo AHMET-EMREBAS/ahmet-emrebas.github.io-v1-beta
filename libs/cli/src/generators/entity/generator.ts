@@ -31,5 +31,5 @@ export default async function (tree: Tree, options: EntityGeneratorSchema) {
     `export * from './${filename}';`
   );
 
-  formatFiles(tree);
+  await formatFiles(tree);
 }

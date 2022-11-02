@@ -1,11 +1,25 @@
-# cli
+# Nx plugin
 
-This library was generated with [Nx](https://nx.dev).
+# Resource generator
 
-## Building
+Published by Ahmet Emrebas.
 
-Run `nx build cli` to build the library.
+## Installing
 
-## Running unit tests
+Run `yarn add -D aemrebas-cli`
 
-Run `nx test cli` to execute the unit tests via [Jest](https://jestjs.io).
+Or
+
+Run `npm install -D aemrebas-cli`
+
+## Running
+
+Before running any command, you MUST create two libraries, one is models, other is rest.
+
+`nx g @nrwl/nest:lib rest`
+
+`nx g @nrwl/nest:lib models`
+
+Then, you can start generating resource modules.
+
+`nx g cli:resource my-resource-name`
