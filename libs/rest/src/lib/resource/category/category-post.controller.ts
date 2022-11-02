@@ -24,16 +24,4 @@ export class CategoryPostController extends GetPostController(
   constructor(private readonly service: CategoryService) {
     super(service);
   }
-
-  // @WritePermission(CategoryNames.SINGULAR_NAME)
-  // @SaveOne()
-  // save(@ReqBody() body: CreateCategoryDto) {
-  //   return this.service.save(body);
-  // }
-
-  // @WritePermission(CategoryNames.SINGULAR_NAME)
-  // @UpdateOneById()
-  // update(@IdParam() id: number, @ReqBody() updated: UpdateCategoryDTO) {
-  //   return this.service.update(id, updated);
-  // }
 }
