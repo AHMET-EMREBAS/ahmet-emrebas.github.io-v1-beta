@@ -8,8 +8,16 @@ import {
   QueryDeepPartialEntity,
 } from 'typeorm/query-builder/QueryPartialEntity';
 
-export class CrudService<T> {
-  constructor(private readonly __repo: Repository<T>) {}
+export class CrudService<T, V = any> {
+  public viewService: CrudService<V>;
+  constructor(
+    private readonly __repo: Repository<T>,
+    __repoView?: Repository<V>
+  ) {
+    if (__repoView) {
+      this.viewService = new CrudService(__repoView);
+    }
+  }
 
   find(options?: FindManyOptions<T>) {
     try {

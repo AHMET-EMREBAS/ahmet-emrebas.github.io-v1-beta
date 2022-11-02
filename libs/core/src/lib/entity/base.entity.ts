@@ -14,7 +14,7 @@ export class BaseEntity {
     update: false,
     transformer: { to: () => v4(), from: (v) => v },
   })
-  __uuid?: string;
+  uuid?: string;
 
   @CreateDateColumn() createdAt?: Date;
   @UpdateDateColumn() updatedAt?: Date;

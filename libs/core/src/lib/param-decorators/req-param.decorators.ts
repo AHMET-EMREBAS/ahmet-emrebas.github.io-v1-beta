@@ -1,4 +1,7 @@
-import { ValidateAndTransformPipe } from 'validations';
+import {
+  ValidateAndTransformBy,
+  ValidateAndTransformPipe,
+} from 'validations';
 
 import {
   Body,
@@ -7,11 +10,16 @@ import {
   Query,
 } from '@nestjs/common';
 
+import { ClassConstructor } from '../entity';
+
 export function ReqQuery() {
   return Query(ValidateAndTransformPipe);
 }
 
-export function ReqBody() {
+export function ReqBody(type?: ClassConstructor<any>) {
+  if (type) {
+    return Body(ValidateAndTransformBy(type));
+  }
   return Body(ValidateAndTransformPipe);
 }
 

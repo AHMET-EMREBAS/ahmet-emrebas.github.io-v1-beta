@@ -1,10 +1,24 @@
-import { ValidationPipe } from '@nestjs/common';
+import { ClassConstructor } from 'class-transformer';
 
-export const ValidateAndTransformPipe = new ValidationPipe({
+import {
+  ValidationPipe,
+  ValidationPipeOptions,
+} from '@nestjs/common';
+
+const validationOptions: ValidationPipeOptions = {
   transform: true,
   transformOptions: {
     excludeExtraneousValues: true,
 
     exposeUnsetFields: false,
   },
-});
+};
+
+export const ValidateAndTransformPipe = new ValidationPipe(validationOptions);
+
+export function ValidateAndTransformBy(type: ClassConstructor<any>) {
+  return new ValidationPipe({
+    ...validationOptions,
+    expectedType: type,
+  });
+}

@@ -4,18 +4,20 @@ import {
   ViewEntity,
 } from 'typeorm';
 
+import { Category } from './category.entity';
+
 @ViewEntity({
   expression: (ds: DataSource) => {
     return ds
       .createQueryBuilder()
       .select('category.id', 'id')
-      .select('category.uuid', 'uuid')
-      .select('category.name', 'name')
-      .from('category', 'category');
+      .addSelect('category.uuid', 'uuid')
+      .addSelect('category.name', 'name')
+      .from(Category, 'category');
   },
 })
 export class CategoryView {
   @ViewColumn() id: number;
-  @ViewColumn() uuid: number;
+  @ViewColumn() uuid: string;
   @ViewColumn() name: string;
 }
