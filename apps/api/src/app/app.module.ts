@@ -48,8 +48,8 @@ import { AppService } from './app.service';
     }),
     CacheModule.register({
       isGlobal: true,
-      ttl: 5, // seconds
-      max: 10, // maximum number of items in cache
+      ttl: 5,
+      max: 10,
     }),
     TypeOrmModule.forRoot({
       type: 'better-sqlite3',
