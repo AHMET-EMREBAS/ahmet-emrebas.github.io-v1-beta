@@ -16,7 +16,9 @@ import { TableViewSampleComponent } from './table-view-sample.component';
           {
             path: '',
             loadChildren: () =>
-              import('material').then((m) => m.TableViewResourceModule),
+              import('material/table-view-resource').then(
+                (m) => m.TableViewResourceModule
+              ),
           },
         ],
       },

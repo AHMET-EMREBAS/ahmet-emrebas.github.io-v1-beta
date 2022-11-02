@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
-import { ResourceLayoutModule } from 'material';
+import { ResourceLayoutModule } from 'material/resource-layout';
 
 import { SampleRoutingModule } from './sample-routing.module';
 import { SampleComponent } from './sample.component';

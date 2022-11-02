@@ -17,7 +17,9 @@ import { DeleteSampleComponent } from './delete-sample.component';
           {
             path: '',
             loadChildren: () =>
-              import('material').then((m) => m.DeleteResourceModule),
+              import('material/delete-resource').then(
+                (m) => m.DeleteResourceModule
+              ),
           },
         ],
       },

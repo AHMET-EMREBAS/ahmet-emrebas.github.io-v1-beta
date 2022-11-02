@@ -16,7 +16,9 @@ import { UpdateSampleComponent } from './update-sample.component';
           {
             path: '',
             loadChildren: () =>
-              import('material').then((m) => m.UpdateResourceModule),
+              import('material/update-resource').then(
+                (m) => m.UpdateResourceModule
+              ),
           },
         ],
       },

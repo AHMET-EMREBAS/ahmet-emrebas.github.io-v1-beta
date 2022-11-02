@@ -18,7 +18,9 @@ import {
           {
             path: '',
             loadChildren: () =>
-              import('material').then((m) => m.StatisticViewResourceModule),
+              import('material/statistic-view-resource').then(
+                (m) => m.StatisticViewResourceModule
+              ),
           },
         ],
       },

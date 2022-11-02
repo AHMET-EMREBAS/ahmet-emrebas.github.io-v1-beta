@@ -16,7 +16,9 @@ import { CardViewSampleComponent } from './card-view-sample.component';
           {
             path: '',
             loadChildren: () =>
-              import('material').then((m) => m.CardViewResourceModule),
+              import('material/card-view-resource').then(
+                (m) => m.CardViewResourceModule
+              ),
           },
         ],
       },

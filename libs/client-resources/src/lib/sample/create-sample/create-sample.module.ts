@@ -16,7 +16,9 @@ import { CreateSampleComponent } from './create-sample.component';
           {
             path: '',
             loadChildren: () =>
-              import('material').then((m) => m.CreateResourceModule),
+              import('material/create-resource').then(
+                (m) => m.CreateResourceModule
+              ),
           },
         ],
       },
