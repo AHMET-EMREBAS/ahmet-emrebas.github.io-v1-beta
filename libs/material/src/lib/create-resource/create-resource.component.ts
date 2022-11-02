@@ -10,7 +10,7 @@ import {
   styleUrls: ['./create-resource.component.scss'],
 })
 export class CreateResourceComponent implements OnInit {
-  constructor(@Inject('DataService') dataService: any) {
+  constructor(@Inject('DataService') private readonly dataService: any) {
     console.log(dataService);
   }
 

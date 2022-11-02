@@ -34,14 +34,14 @@ export const routes: Routes = [
           ),
       },
       {
-        path: 'update',
+        path: 'update/:id',
         loadChildren: () =>
           import('./update-sample/update-sample.module').then(
             (m) => m.UpdateSampleModule
           ),
       },
       {
-        path: 'delete',
+        path: 'delete/:id',
         loadChildren: () =>
           import('./delete-sample/delete-sample.module').then(
             (m) => m.DeleteSampleModule
