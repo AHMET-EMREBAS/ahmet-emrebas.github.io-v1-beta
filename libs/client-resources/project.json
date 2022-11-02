@@ -1,0 +1,26 @@
+{
+  "projectType": "library",
+  "root": "libs/client-resources",
+  "sourceRoot": "libs/client-resources/src",
+  "prefix": "ae",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/client-resources"],
+      "options": {
+        "jestConfig": "libs/client-resources/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/client-resources/src/**/*.ts",
+          "libs/client-resources/src/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

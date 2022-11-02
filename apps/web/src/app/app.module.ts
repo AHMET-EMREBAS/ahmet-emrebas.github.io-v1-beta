@@ -21,14 +21,18 @@ import { entityDataModuleConfig } from './ngrx.meta';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'loading',
-    pathMatch: 'full',
+    loadChildren: () => import('client-resources').then((m) => m.SampleModule),
   },
-  {
-    title: 'Welcome ( loading )',
-    path: 'loading',
-    component: IntroPageComponent,
-  },
+  // {
+  //   path: '',
+  //   redirectTo: 'loading',
+  //   pathMatch: 'full',
+  // },
+  // {
+  //   title: 'Welcome ( loading )',
+  //   path: 'loading',
+  //   component: IntroPageComponent,
+  // },
 ];
 
 @NgModule({

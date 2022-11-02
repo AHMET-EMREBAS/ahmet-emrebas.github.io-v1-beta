@@ -10,42 +10,22 @@
     "importHelpers": true,
     "target": "es2015",
     "module": "esnext",
-    "lib": [
-      "es2017",
-      "dom"
-    ],
+    "lib": ["es2017", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "auth": [
-        "libs/auth/src/index.ts"
-      ],
-      "cli": [
-        "libs/cli/src/index.ts"
-      ],
-      "core": [
-        "libs/core/src/index.ts"
-      ],
-      "models": [
-        "libs/models/src/index.ts"
-      ],
-      "rest": [
-        "libs/rest/src/index.ts"
-      ],
-      "swagger-property": [
-        "libs/swagger-property/src/index.ts"
-      ],
-      "transformers": [
-        "libs/transformers/src/index.ts"
-      ],
-      "validations": [
-        "libs/validations/src/index.ts"
-      ]
+      "auth": ["libs/auth/src/index.ts"],
+      "cli": ["libs/cli/src/index.ts"],
+      "client-resources": ["libs/client-resources/src/index.ts"],
+      "core": ["libs/core/src/index.ts"],
+      "material": ["libs/material/src/index.ts"],
+      "models": ["libs/models/src/index.ts"],
+      "rest": ["libs/rest/src/index.ts"],
+      "swagger-property": ["libs/swagger-property/src/index.ts"],
+      "transformers": ["libs/transformers/src/index.ts"],
+      "validations": ["libs/validations/src/index.ts"]
     }
   },
-  "exclude": [
-    "node_modules",
-    "tmp"
-  ]
+  "exclude": ["node_modules", "tmp"]
 }

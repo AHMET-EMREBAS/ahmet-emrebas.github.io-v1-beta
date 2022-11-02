@@ -1,7 +1,4 @@
-import {
-  AuthModule,
-  PermissionGuard,
-} from 'auth';
+import { AuthModule } from 'auth';
 import { canAdministrate } from 'core';
 import {
   Sub,
@@ -21,7 +18,6 @@ import {
   OnModuleInit,
 } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { APP_GUARD } from '@nestjs/core';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { ScheduleModule } from '@nestjs/schedule';
 import { ServeStaticModule } from '@nestjs/serve-static';
@@ -65,15 +61,7 @@ import { AppService } from './app.service';
     AuthModule,
   ],
   controllers: [AppController],
-  providers: [
-    AppService,
-    AppTasks,
-    SubService,
-    {
-      provide: APP_GUARD,
-      useClass: PermissionGuard,
-    },
-  ],
+  providers: [AppService, AppTasks, SubService],
 })
 export class AppModule implements OnModuleInit {
   constructor(private readonly subService: SubService) {}
