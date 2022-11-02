@@ -19,6 +19,12 @@ import {
   Min,
   MinLength,
 } from 'class-validator';
+import {
+  BooleanTransformer,
+  FloatTransformer,
+  IntTransformer,
+  TrimTransformer,
+} from 'transformers';
 import { IsPassword } from 'validations';
 
 import { applyDecorators } from '@nestjs/common';
@@ -40,13 +46,24 @@ export type MyAPiPropertyOptions = ApiPropertyOptions & {
   isNumber?: boolean;
   isNumberString?: boolean;
   exclude?: boolean;
+  trim?: boolean;
 };
 
 export function Property(o: MyAPiPropertyOptions) {
   const v: PropertyDecorator[] = [];
 
-  if (o.exclude === true) v.push(Exclude());
-  else v.push(Expose());
+  if (o.nullable === true) {
+    v.push(IsOptional());
+    o.required = false;
+  } else {
+    v.push(IsNotEmpty());
+  }
+
+  if (o.exclude === true) {
+    v.push(Exclude());
+  } else {
+    v.push(Expose());
+  }
 
   if (o.minLength) v.push(MinLength(o.minLength));
   if (o.maxLength) v.push(MaxLength(o.maxLength));
@@ -63,10 +80,14 @@ export function Property(o: MyAPiPropertyOptions) {
   if (o.isAlphanumeric) v.push(IsAlphanumeric());
   if (o.isNumberString) v.push(IsNumberString());
 
-  if (o.nullable === true) v.push(IsOptional());
-  else v.push(IsNotEmpty());
+  if (o.trim) v.push(TrimTransformer());
 
-  return applyDecorators(ApiProperty(o), ...v);
+  if (o.type == 'int') v.push(IntTransformer());
+  if (o.type == 'float') v.push(FloatTransformer());
+
+  if (o.type === 'boolean') v.push(BooleanTransformer());
+
+  return applyDecorators(ApiProperty({ ...o }), ...v);
 }
 
 export function TextProperty(o?: MyAPiPropertyOptions) {
@@ -86,11 +107,11 @@ export function DateProperty(o?: MyAPiPropertyOptions) {
 }
 
 export function NumberProperty(o?: MyAPiPropertyOptions) {
-  return Property({ ...o, isNumber: true, type: 'number' });
+  return Property({ ...o, isNumber: true, type: 'int' });
 }
 
 export function NumberStringProperty(o?: MyAPiPropertyOptions) {
-  return Property({ ...o, isNumberString: true, type: 'number' });
+  return Property({ ...o, isNumberString: true, type: 'int' });
 }
 
 export function EmailProperty(o?: MyAPiPropertyOptions) {
@@ -103,4 +124,29 @@ export function EmailProperty(o?: MyAPiPropertyOptions) {
 
 export function PasswordProperty(o?: MyAPiPropertyOptions) {
   return TextProperty({ ...o, isPassword: true, default: 'aA123!' });
+}
+
+export function BooleanProperty(o?: MyAPiPropertyOptions) {
+  return Property({ ...o, type: 'boolean', nullable: true, default: false });
+}
+
+export function PositiveIntProperty(o?: MyAPiPropertyOptions) {
+  return NumberProperty({ ...o, minimum: 0 });
+}
+
+export function NegativeIntProperty(o?: MyAPiPropertyOptions) {
+  return NumberProperty({ ...o, maximum: 0 });
+}
+
+export function PositiveStringIntProperty(o?: MyAPiPropertyOptions) {
+  return NumberStringProperty({
+    ...o,
+    maxLength: 13,
+    minimum: 0,
+    trim: true,
+  });
+}
+
+export function NegativeStringIntProperty(o?: MyAPiPropertyOptions) {
+  return NumberStringProperty({ ...o, maxLength: 13, maximum: 0, trim: true });
 }

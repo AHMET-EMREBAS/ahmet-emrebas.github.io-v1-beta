@@ -24,7 +24,7 @@ import {
 (async () => {
   const app = await NestFactory.create(AppModule);
 
-  // app.setGlobalPrefix(GLOBAL_PREFIX);
+  app.setGlobalPrefix(GLOBAL_PREFIX);
 
   // Enable request from different origins
   app.enableCors();

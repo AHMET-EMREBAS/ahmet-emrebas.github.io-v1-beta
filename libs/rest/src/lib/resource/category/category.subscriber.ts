@@ -1,16 +1,13 @@
 import { ClassConstructor } from 'core';
+import { Category } from 'models';
 import {
   EntitySubscriberInterface,
   EventSubscriber,
   InsertEvent,
 } from 'typeorm';
 
-import { Category } from './category.entity';
-
 @EventSubscriber()
-export class CategoryEventSubscriber
-  implements EntitySubscriberInterface<Category>
-{
+export class CategorySubscriber implements EntitySubscriberInterface<Category> {
   listenTo(): ClassConstructor<Category> {
     return Category;
   }

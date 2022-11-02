@@ -1,2 +1,3 @@
 export * from './password.transformer';
-export * from './transform-dto.pipe';
+export * from './trim.transformer';
+export * from './value.transformer';
