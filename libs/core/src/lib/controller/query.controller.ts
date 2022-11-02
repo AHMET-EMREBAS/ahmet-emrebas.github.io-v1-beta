@@ -1,6 +1,15 @@
+import { Response } from 'express';
+
+import {
+  Req,
+  Res,
+} from '@nestjs/common';
+import { ApiSecurity } from '@nestjs/swagger';
+
 import { BaseEntity } from '../entity';
 import {
   AddRelationPath,
+  CountAll,
   DeleteById,
   FindAll,
   FindOneById,
@@ -32,6 +41,9 @@ export function GetQueryController<T extends BaseEntity, V = any>(
     constructor(public readonly __service: CrudService<T, V>) {}
 
     @ReadPermission(name)
+    @ApiSecurity('Permission', [
+      'User must have read permission for this resource',
+    ])
     @FindAll()
     findAll(
       @ReqQuery() paginatorDto: PaginatorQueryDto,
@@ -52,12 +64,21 @@ export function GetQueryController<T extends BaseEntity, V = any>(
     }
 
     @ReadPermission(name)
+    @ApiSecurity('Permission', [
+      'User must have read permission for this resource',
+    ])
     @FindOneById()
     findOneById(@IdParam() id: number, @ReqQuery() viewQueryDto: ViewQueryDto) {
       if (viewQueryDto.view === true) {
         return this.__service.viewService.findOneBy({ id } as any);
       }
       return this.__service.findOneBy({ id } as any);
+    }
+
+    @ReadPermission(name)
+    @CountAll()
+    async countAll(@Req() req: Request, @Res() res: Response) {
+      return await this.__service.count();
     }
 
     @WritePermission(name)
@@ -68,6 +89,12 @@ export function GetQueryController<T extends BaseEntity, V = any>(
       } else {
         return this.__service.softDelete(id);
       }
+    }
+
+    @WritePermission(name)
+    @DeleteById()
+    recover(@IdParam() id: number) {
+      return this.__service.recover(id);
     }
 
     @WritePermission(name)

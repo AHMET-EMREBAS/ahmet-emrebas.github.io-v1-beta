@@ -2,6 +2,7 @@ import {
   applyDecorators,
   Delete,
   Get,
+  Patch,
   Post,
   Put,
 } from '@nestjs/common';
@@ -18,6 +19,16 @@ export function FindAll() {
     }),
     ApiOkResponse(),
     Get()
+  );
+}
+
+export function CountAll() {
+  return applyDecorators(
+    ApiOperation({
+      summary: 'Count all',
+    }),
+    ApiOkResponse(),
+    Patch()
   );
 }
 

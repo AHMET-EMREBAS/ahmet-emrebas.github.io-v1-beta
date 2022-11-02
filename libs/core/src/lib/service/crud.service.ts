@@ -115,6 +115,26 @@ export class CrudService<T, V = any> {
     }
   }
 
+  async recover(id: number) {
+    try {
+      const found = await this.__repo.findOne({
+        where: { id } as any,
+        withDeleted: true,
+      });
+      return await this.__repo.recover(found);
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  count(options?: FindManyOptions<T>) {
+    try {
+      return this.__repo.count(options);
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
   softDelete(id: number) {
     try {
       return this.__repo.softDelete(id);

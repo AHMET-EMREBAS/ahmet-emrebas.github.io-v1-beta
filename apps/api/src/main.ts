@@ -1,9 +1,5 @@
-/**
- * This is not a production server yet!
- * This is only a minimal backend to get started.
- */
-
 import * as cookieParser from 'cookie-parser';
+// import * as helmet from 'helmet';
 import { join } from 'path';
 import * as favicon from 'serve-favicon';
 
@@ -28,6 +24,8 @@ import {
 
   // Enable request from different origins
   app.enableCors();
+
+  // app.use(helmet.default());
 
   // Share teh favicon
   app.use(favicon(join(__dirname, 'favicon.ico')));

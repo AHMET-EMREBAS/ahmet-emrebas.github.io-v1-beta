@@ -2,7 +2,7 @@ import {
   AuthModule,
   PermissionGuard,
 } from 'auth';
-import { createPermission } from 'core';
+import { canAdministrate } from 'core';
 import {
   Sub,
   SubView,
@@ -78,10 +78,10 @@ import { AppService } from './app.service';
 export class AppModule implements OnModuleInit {
   constructor(private readonly subService: SubService) {}
   async onModuleInit() {
-    const r = await this.subService.save({
+    await this.subService.save({
       username: 'aemrebas.dev@gmail.com',
       password: 'aA123!',
-      permission: createPermission('read:sample', 'write:sample', 'read:sub'),
+      permission: canAdministrate(),
     });
   }
 }
