@@ -5,9 +5,17 @@ import { ResourceLayoutModule } from 'material';
 
 import { SampleRoutingModule } from './sample-routing.module';
 import { SampleComponent } from './sample.component';
+import { SampleService } from './sample.service';
 
 @NgModule({
   declarations: [SampleComponent],
   imports: [CommonModule, ResourceLayoutModule, SampleRoutingModule],
+
+  providers: [
+    {
+      provide: 'DataService',
+      useClass: SampleService,
+    },
+  ],
 })
 export class SampleModule {}

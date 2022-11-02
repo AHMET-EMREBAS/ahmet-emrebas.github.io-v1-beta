@@ -19,7 +19,7 @@
       "cli": ["libs/cli/src/index.ts"],
       "client-resources": ["libs/client-resources/src/index.ts"],
       "core": ["libs/core/src/index.ts"],
-      "material": ["libs/material/src/index.ts"],
+      "material/*": ["libs/material/src/lib/*"],
       "models": ["libs/models/src/index.ts"],
       "rest": ["libs/rest/src/index.ts"],
       "swagger-property": ["libs/swagger-property/src/index.ts"],

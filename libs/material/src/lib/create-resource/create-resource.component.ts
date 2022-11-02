@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  Inject,
+  OnInit,
+} from '@angular/core';
 
 @Component({
   selector: 'ae-create-resource',
@@ -6,7 +10,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./create-resource.component.scss'],
 })
 export class CreateResourceComponent implements OnInit {
-  constructor() {}
+  constructor(@Inject('DataService') dataService: any) {
+    console.log(dataService);
+  }
 
   ngOnInit(): void {}
 }
