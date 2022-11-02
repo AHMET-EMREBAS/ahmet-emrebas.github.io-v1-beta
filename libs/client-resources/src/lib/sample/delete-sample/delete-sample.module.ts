@@ -8,7 +8,20 @@ import { DeleteSampleComponent } from './delete-sample.component';
   declarations: [DeleteSampleComponent],
   imports: [
     CommonModule,
-    RouterModule.forChild([{ path: '', component: DeleteSampleModule }]),
+    RouterModule.forChild([
+      {
+        path: '',
+        component: DeleteSampleModule,
+
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('material').then((m) => m.DeleteResourceModule),
+          },
+        ],
+      },
+    ]),
   ],
 })
 export class DeleteSampleModule {}

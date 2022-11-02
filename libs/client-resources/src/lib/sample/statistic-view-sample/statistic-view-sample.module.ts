@@ -11,7 +11,17 @@ import {
   imports: [
     CommonModule,
     RouterModule.forChild([
-      { path: '', component: StatisticViewSampleComponent },
+      {
+        path: '',
+        component: StatisticViewSampleComponent,
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('material').then((m) => m.StatisticViewResourceModule),
+          },
+        ],
+      },
     ]),
   ],
 })

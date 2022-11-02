@@ -8,7 +8,19 @@ import { UpdateSampleComponent } from './update-sample.component';
   declarations: [UpdateSampleComponent],
   imports: [
     CommonModule,
-    RouterModule.forChild([{ path: '', component: UpdateSampleComponent }]),
+    RouterModule.forChild([
+      {
+        path: '',
+        component: UpdateSampleComponent,
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('material').then((m) => m.UpdateResourceModule),
+          },
+        ],
+      },
+    ]),
   ],
 })
 export class UpdateSampleModule {}

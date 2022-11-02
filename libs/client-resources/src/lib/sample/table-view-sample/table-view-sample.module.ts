@@ -8,7 +8,19 @@ import { TableViewSampleComponent } from './table-view-sample.component';
   declarations: [TableViewSampleComponent],
   imports: [
     CommonModule,
-    RouterModule.forChild([{ path: '', component: TableViewSampleComponent }]),
+    RouterModule.forChild([
+      {
+        path: '',
+        component: TableViewSampleComponent,
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('material').then((m) => m.TableViewResourceModule),
+          },
+        ],
+      },
+    ]),
   ],
 })
 export class TableViewSampleModule {}

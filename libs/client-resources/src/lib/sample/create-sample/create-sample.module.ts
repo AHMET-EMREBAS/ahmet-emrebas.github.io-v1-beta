@@ -8,7 +8,19 @@ import { CreateSampleComponent } from './create-sample.component';
   declarations: [CreateSampleComponent],
   imports: [
     CommonModule,
-    RouterModule.forChild([{ path: '', component: CreateSampleModule }]),
+    RouterModule.forChild([
+      {
+        path: '',
+        component: CreateSampleComponent,
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('material').then((m) => m.CreateResourceModule),
+          },
+        ],
+      },
+    ]),
   ],
 })
 export class CreateSampleModule {}
