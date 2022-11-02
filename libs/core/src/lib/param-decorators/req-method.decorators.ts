@@ -60,3 +60,42 @@ export function DeleteById() {
     Delete(':id')
   );
 }
+
+export function SetRelationPath() {
+  return applyDecorators(
+    ApiOperation({
+      summary: 'Set relation by id',
+    }),
+    ApiOkResponse(),
+    Post(':id/:relationName/:relationId')
+  );
+}
+
+export function UnSetRelationPath() {
+  return applyDecorators(
+    ApiOperation({
+      summary: 'Set relation by id',
+    }),
+    ApiOkResponse(),
+    Delete(':id/:relationName')
+  );
+}
+
+export function AddRelationPath() {
+  return applyDecorators(
+    ApiOperation({
+      summary: 'Set relation by id',
+    }),
+    ApiOkResponse(),
+    Put(':id/:relationName/:relationId')
+  );
+}
+export function RemoveRelationPath() {
+  return applyDecorators(
+    ApiOperation({
+      summary: 'Set relation by id',
+    }),
+    ApiOkResponse(),
+    Delete(':id/:relationName/:relationId')
+  );
+}

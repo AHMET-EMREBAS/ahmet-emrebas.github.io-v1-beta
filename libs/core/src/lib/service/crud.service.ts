@@ -114,4 +114,52 @@ export class CrudService<T> {
       console.error(err);
     }
   }
+
+  add(id: number, relationId: number, relationName: string) {
+    try {
+      return this.__repo
+        .createQueryBuilder()
+        .relation(relationName)
+        .of(id)
+        .add(relationId);
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  set(id: number, relationId: number, relationName: string) {
+    try {
+      return this.__repo
+        .createQueryBuilder()
+        .relation(relationName)
+        .of(id)
+        .set(relationId);
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  unset(id: number, relationName: string) {
+    try {
+      return this.__repo
+        .createQueryBuilder()
+        .relation(relationName)
+        .of(id)
+        .set(null);
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  remove(id: number, relationId: number, relationName: string) {
+    try {
+      return this.__repo
+        .createQueryBuilder()
+        .relation(relationName)
+        .of(id)
+        .remove(relationId);
+    } catch (err) {
+      console.error(err);
+    }
+  }
 }

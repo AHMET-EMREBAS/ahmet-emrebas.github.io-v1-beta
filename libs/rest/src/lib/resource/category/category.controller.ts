@@ -1,13 +1,19 @@
 import {
+  AddRelationPath,
   DeleteById,
   FindAll,
   FindOneById,
   HardDelete,
   IdParam,
   PaginatorQueryDto,
+  RelationIdParam,
+  RelationNameParam,
+  RemoveRelationPath,
   ReqBody,
   ReqQuery,
   SaveOne,
+  SetRelationPath,
+  UnSetRelationPath,
   UpdateOneById,
   WhereQueryDto,
   WithDeletedDto,
@@ -33,11 +39,6 @@ export class CategoryController {
     @ReqQuery() withDeleteDto: WithDeletedDto,
     @ReqQuery() whereQueryDto: WhereQueryDto
   ) {
-    console.table({
-      ...paginatorDto,
-      ...withDeleteDto,
-      ...whereQueryDto,
-    });
     return this.service.find({
       ...paginatorDto,
       ...withDeleteDto,
@@ -67,5 +68,37 @@ export class CategoryController {
     } else {
       return this.service.softDelete(id);
     }
+  }
+
+  @AddRelationPath()
+  add(
+    @IdParam() id: number,
+    @RelationIdParam() relationId: number,
+    @RelationNameParam() relationName: string
+  ) {
+    return this.service.add(id, relationId, relationName);
+  }
+
+  @SetRelationPath()
+  set(
+    @IdParam() id: number,
+    @RelationIdParam() relationId: number,
+    @RelationNameParam() relationName: string
+  ) {
+    return this.service.set(id, relationId, relationName);
+  }
+
+  @UnSetRelationPath()
+  unset(@IdParam() id: number, @RelationNameParam() relationName: string) {
+    return this.service.unset(id, relationName);
+  }
+
+  @RemoveRelationPath()
+  remove(
+    @IdParam() id: number,
+    @RelationIdParam() relationId: number,
+    @RelationNameParam() relationName: string
+  ) {
+    return this.service.remove(id, relationId, relationName);
   }
 }

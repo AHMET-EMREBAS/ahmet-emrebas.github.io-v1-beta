@@ -18,3 +18,11 @@ export function ReqBody() {
 export function IdParam() {
   return Param('id', ParseIntPipe);
 }
+
+export function RelationIdParam() {
+  return Param('relationId', ParseIntPipe);
+}
+
+export function RelationNameParam() {
+  return Param('relationName');
+}
