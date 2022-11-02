@@ -11,8 +11,6 @@ import {
 
 import { AppModule } from './app/app.module';
 import {
-  APP_DESCRIPTION,
-  APP_NAME,
   GLOBAL_PREFIX,
   PORT,
 } from './config';
@@ -35,8 +33,16 @@ import {
 
   // Configure swagger documentation
   const config = new DocumentBuilder()
-    .setTitle(APP_NAME)
-    .setDescription(APP_DESCRIPTION)
+    .setTitle('Store Management System')
+    .setContact(
+      'Ahmet Emrebas',
+      'https://ahmet-emrebas.github.io',
+      'aemrebas.dev@gmail.com'
+    )
+
+    .setDescription('')
+    .setVersion('1.0.0')
+
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
