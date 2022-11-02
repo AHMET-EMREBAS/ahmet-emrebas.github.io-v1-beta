@@ -1,7 +1,7 @@
 import { CrudService } from 'core';
 import {
-  Category,
-  CategoryView,
+  Sample,
+  SampleView,
 } from 'models';
 import { Repository } from 'typeorm';
 
@@ -9,10 +9,10 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
-export class CategoryService extends CrudService<Category, CategoryView> {
+export class SampleService extends CrudService<Sample, SampleView> {
   constructor(
-    @InjectRepository(Category) mainRepo: Repository<Category>,
-    @InjectRepository(CategoryView) viewRepo: Repository<CategoryView>
+    @InjectRepository(Sample) mainRepo: Repository<Sample>,
+    @InjectRepository(SampleView) viewRepo: Repository<SampleView>
   ) {
     super(mainRepo, viewRepo);
   }

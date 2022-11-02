@@ -1,6 +1,6 @@
 import { ShortTextProperty } from 'swagger-property';
 
-export class CreateDepartmentDto {
+export class CreateSampleDto {
   @ShortTextProperty({ nullable: false })
   name: string;
 }

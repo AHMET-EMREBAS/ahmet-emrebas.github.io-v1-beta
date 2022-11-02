@@ -1,69 +1,40 @@
+import { appendFileSync } from 'fs';
 import {
-  addProjectConfiguration,
+  camelCase,
+  kebabCase,
+  upperFirst,
+} from 'lodash';
+import { join } from 'path';
+
+import {
   formatFiles,
   generateFiles,
-  getWorkspaceLayout,
-  names,
-  offsetFromRoot,
   Tree,
 } from '@nrwl/devkit';
-import * as path from 'path';
+
+import * as genEntity from '../entity/generator';
 import { ResourceGeneratorSchema } from './schema';
 
-interface NormalizedSchema extends ResourceGeneratorSchema {
-  projectName: string;
-  projectRoot: string;
-  projectDirectory: string;
-  parsedTags: string[]
-}
+async function genResource(tree: Tree, options: ResourceGeneratorSchema) {
+  const target = '/libs/rest/src/lib';
 
-function normalizeOptions(tree: Tree, options: ResourceGeneratorSchema): NormalizedSchema {
-  const name = names(options.name).fileName;
-  const projectDirectory = options.directory
-    ? `${names(options.directory).fileName}/${name}`
-    : name;
-  const projectName = projectDirectory.replace(new RegExp('/', 'g'), '-');
-  const projectRoot = `${getWorkspaceLayout(tree).libsDir}/${projectDirectory}`;
-  const parsedTags = options.tags
-    ? options.tags.split(',').map((s) => s.trim())
-    : [];
+  const filename = kebabCase(options.name);
+  const classname = upperFirst(camelCase(options.name));
 
-  return {
-    ...options,
-    projectName,
-    projectRoot,
-    projectDirectory,
-    parsedTags,
-  };
-}
+  generateFiles(tree, join(__dirname, 'files'), target, {
+    filename,
+    classname,
+    temp: '',
+  });
 
-function addFiles(tree: Tree, options: NormalizedSchema) {
-    const templateOptions = {
-      ...options,
-      ...names(options.name),
-      offsetFromRoot: offsetFromRoot(options.projectRoot),
-      template: ''
-    };
-    generateFiles(tree, path.join(__dirname, 'files'), options.projectRoot, templateOptions);
+  appendFileSync(
+    join(tree.root, target, 'index.ts'),
+    `export * from './${filename}';`
+  );
 }
 
 export default async function (tree: Tree, options: ResourceGeneratorSchema) {
-  const normalizedOptions = normalizeOptions(tree, options);
-  addProjectConfiguration(
-    tree,
-    normalizedOptions.projectName,
-    {
-      root: normalizedOptions.projectRoot,
-      projectType: 'library',
-      sourceRoot: `${normalizedOptions.projectRoot}/src`,
-      targets: {
-        build: {
-          executor: "cli:build",
-        },
-      },
-      tags: normalizedOptions.parsedTags,
-    }
-  );
-  addFiles(tree, normalizedOptions);
-  await formatFiles(tree);
+  await genResource(tree, options);
+  await genEntity.default(tree, options);
+  formatFiles(tree);
 }

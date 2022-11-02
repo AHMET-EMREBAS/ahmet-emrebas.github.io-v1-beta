@@ -11,7 +11,8 @@
       "$default": {
         "$source": "argv",
         "index": 0
-      }
+      },
+      "x-prompt": "Entity name"
     },
     "tags": {
       "type": "string",

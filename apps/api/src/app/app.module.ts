@@ -1,7 +1,6 @@
 import { join } from 'path';
-import { CategoryModule } from 'rest';
+import { SampleModule } from 'rest';
 
-// import * as resources from 'resource';
 import {
   CacheModule,
   Module,
@@ -43,7 +42,7 @@ import { AppService } from './app.service';
       synchronize: true,
       dropSchema: true,
     }),
-    CategoryModule,
+    SampleModule,
   ],
   controllers: [AppController],
   providers: [AppService, AppTasks],

@@ -4,14 +4,16 @@ import {
   ViewEntity,
 } from 'typeorm';
 
+import { <%= classname %> } from './<%= filename %>.entity';
+
 @ViewEntity({
   expression: (ds: DataSource) => {
     return ds
       .createQueryBuilder()
       .select('<%= filename %>.id', 'id')
-      .select('<%= filename %>.uuid', 'uuid')
-      .select('<%= filename %>.name', 'name')
-      .from('<%= filename %>', '<%= filename %>');
+      .addSelect('<%= filename %>.uuid', 'uuid')
+      .addSelect('<%= filename %>.name', 'name')
+      .from(<%= classname %>, '<%= filename %>');
   },
 })
 export class <%= classname %>View {

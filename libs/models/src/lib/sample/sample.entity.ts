@@ -5,7 +5,7 @@ import {
 } from 'typeorm';
 
 @Entity()
-export class Category extends BaseEntity {
+export class Sample extends BaseEntity {
   @Column({ type: 'text', unique: true })
   name: string;
 }

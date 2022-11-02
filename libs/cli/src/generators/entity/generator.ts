@@ -1,11 +1,13 @@
+import { appendFileSync } from 'fs';
 import {
+  camelCase,
   kebabCase,
-  snakeCase,
   upperFirst,
 } from 'lodash';
 import { join } from 'path';
 
 import {
+  formatFiles,
   generateFiles,
   Tree,
 } from '@nrwl/devkit';
@@ -13,11 +15,21 @@ import {
 import { EntityGeneratorSchema } from './schema';
 
 export default async function (tree: Tree, options: EntityGeneratorSchema) {
-  const target = '/libs/models/src/lib/models';
+  const target = '/libs/models/src/lib';
+
+  const filename = kebabCase(options.name);
+  const classname = upperFirst(camelCase(options.name));
 
   generateFiles(tree, join(__dirname, 'files'), target, {
-    filename: snakeCase(options.name),
-    classname: upperFirst(kebabCase(options.name)),
+    filename,
+    classname,
     temp: '',
   });
+
+  appendFileSync(
+    join(tree.root, target, 'index.ts'),
+    `export * from './${filename}';`
+  );
+
+  formatFiles(tree);
 }
