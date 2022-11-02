@@ -4,7 +4,6 @@ import {
   Req,
   Res,
 } from '@nestjs/common';
-import { ApiSecurity } from '@nestjs/swagger';
 
 import { BaseEntity } from '../entity';
 import {
@@ -41,9 +40,6 @@ export function GetQueryController<T extends BaseEntity, V = any>(
     constructor(public readonly __service: CrudService<T, V>) {}
 
     @ReadPermission(name)
-    @ApiSecurity('Permission', [
-      'User must have read permission for this resource',
-    ])
     @FindAll()
     findAll(
       @ReqQuery() paginatorDto: PaginatorQueryDto,
@@ -64,9 +60,6 @@ export function GetQueryController<T extends BaseEntity, V = any>(
     }
 
     @ReadPermission(name)
-    @ApiSecurity('Permission', [
-      'User must have read permission for this resource',
-    ])
     @FindOneById()
     findOneById(@IdParam() id: number, @ReqQuery() viewQueryDto: ViewQueryDto) {
       if (viewQueryDto.view === true) {
