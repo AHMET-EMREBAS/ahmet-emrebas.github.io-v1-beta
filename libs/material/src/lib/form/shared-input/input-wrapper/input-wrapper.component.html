@@ -1,0 +1,13 @@
+<div class="input-wrapper flex flex-row  justify-content-center align-items-center">
+    <ng-content></ng-content>
+
+    <div class="status">
+        <p-progressSpinner *ngIf="isTyping$ | async" [style]="{width: '40px', height: '40px'}" strokeWidth="4">
+        </p-progressSpinner>
+
+        <div class="ng-container" *ngIf="(isTyping$ | async) ===false">
+            <i *ngIf="control.valid" class="pi pi-check" [style]="{color:'var(--green-600)'}"> </i>
+            <i *ngIf="control.invalid" class="pi pi-times" [style]="{color:'var(--red-600)'}"> </i>
+        </div>
+    </div>
+</div>

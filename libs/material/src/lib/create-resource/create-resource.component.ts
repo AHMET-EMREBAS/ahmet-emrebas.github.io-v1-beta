@@ -1,8 +1,9 @@
 import {
   Component,
-  Inject,
   OnInit,
 } from '@angular/core';
+
+import { NgrxDataService } from '../data-services';
 
 @Component({
   selector: 'ae-create-resource',
@@ -10,9 +11,8 @@ import {
   styleUrls: ['./create-resource.component.scss'],
 })
 export class CreateResourceComponent implements OnInit {
-  constructor(@Inject('DataService') private readonly dataService: any) {
-    console.log(dataService);
+  constructor(private readonly dataService: NgrxDataService<any>) {}
+  ngOnInit(): void {
+    console.log(`[DataService] ${this.dataService.entityName}`);
   }
-
-  ngOnInit(): void {}
 }

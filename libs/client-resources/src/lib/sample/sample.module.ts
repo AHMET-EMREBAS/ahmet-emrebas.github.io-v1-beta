@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
+import { NgrxDataService } from 'material/data-services';
 import { ResourceLayoutModule } from 'material/resource-layout';
 
 import { SampleRoutingModule } from './sample-routing.module';
@@ -13,7 +14,7 @@ import { SampleService } from './sample.service';
 
   providers: [
     {
-      provide: 'DataService',
+      provide: NgrxDataService,
       useClass: SampleService,
     },
   ],
