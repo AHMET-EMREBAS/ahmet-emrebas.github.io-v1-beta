@@ -1,5 +1,12 @@
-import { BaseEntity, Col } from 'core';
-import { Entity, JoinColumn, ManyToOne } from 'typeorm';
+import {
+  BaseEntity,
+  Col,
+} from 'core';
+import {
+  Entity,
+  JoinColumn,
+  ManyToOne,
+} from 'typeorm';
 
 import { Sub } from '../sub';
 

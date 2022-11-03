@@ -2,7 +2,10 @@ import { BaseEntity, Col } from 'core';
 import { 
   Entity,
   JoinColumn,
-  ManyToOne
+  JoinTable, 
+  ManyToOne,
+  ManyToMany, 
+  OneToOne
 } from 'typeorm';
 
 
@@ -57,8 +60,27 @@ export class <%= classname %> extends BaseEntity {
 
     <% for(const c of relations) { %>     
 
-      @ManyToOne(()=><%- c.target %>)
-      @JoinColumn()
-       <%- c.name %>: <%- c.target %>
+
+        <% if(c.type ==='many-to-one') { %>
+                @ManyToOne(()=><%- c.target %>)
+                @JoinColumn()
+                <%- c.name %>: <%- c.target %>
+
+        <% } %>
+
+        <% if(c.type ==='one-to-one') { %>
+                @OneToOne(()=><%- c.target %>)
+                @JoinColumn()
+                <%- c.name %>: <%- c.target %>
+        <% } %>
+        
+        <% if(c.type ==='many-to-many') { %>
+                @ManyToMany(()=><%- c.target %>)
+                @JoinTable()
+                <%- c.name %>: <%- c.target %>[]
+        <% } %>
+
+
+
     <% } %>
 }

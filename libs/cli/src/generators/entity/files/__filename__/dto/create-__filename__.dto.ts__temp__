@@ -29,12 +29,25 @@ export class Create<%= classname %>Dto {
 
     <% for(const c of relations) { %>  
 
-      @Property({ 
-        type:'number', 
-        inputType:'select', 
-        target:'<%- c.name %>'
-      })
-      <%- c.name %>: number
+
+          <% if(c.type ==='many-to-many') { %> 
+                
+                @Property({ 
+                  type:'number', 
+                  inputType:'select', 
+                  multiple:true,
+                  target:'<%- c.name %>'
+                })
+                <%- c.name %>: {id:number}[]
+
+          <% } else {  %> 
+                @Property({ 
+                  type:'number', 
+                  inputType:'select', 
+                  target:'<%- c.name %>'  
+                })
+                <%- c.name %>: number;
+          <% } %>
 
      <% } %>
 }
