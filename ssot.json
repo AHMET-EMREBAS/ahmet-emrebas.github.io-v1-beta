@@ -1,0 +1,36 @@
+{
+  "sample": {
+    "entity": {
+      "columns": {
+        "name": {
+          "type": "string",
+          "inputType": "text",
+          "minLength": 3,
+          "maxLength": 10,
+          "required": true,
+          "unique": true
+        },
+        "description": {
+          "type": "string",
+          "inputType": "textarea",
+          "minLength": 3,
+          "maxLength": 400,
+          "required": true,
+          "unique": true
+        }
+      }
+    },
+    "view": {
+      "columns": {
+        "id": {
+          "type": "number",
+          "a": "id"
+        },
+        "name": {
+          "type": "string",
+          "a": "name"
+        }
+      }
+    }
+  }
+}

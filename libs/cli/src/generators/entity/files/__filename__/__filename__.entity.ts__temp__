@@ -1,11 +1,10 @@
 import { BaseEntity } from 'core';
-import {
-  Column,
-  Entity,
-} from 'typeorm';
+import { Column,Entity} from 'typeorm';
 
 @Entity()
 export class <%= classname %> extends BaseEntity {
+
   @Column({ type: 'text', unique: true })
   name: string;
+
 }
