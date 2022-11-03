@@ -32,10 +32,22 @@ export class InputWrapperComponent implements OnInit, AfterViewInit {
       this.control.valueChanges.pipe(map((e) => true)),
       this.control.valueChanges.pipe(
         debounceTime(1000),
-        map((e) => false)
+        map(() => false)
       )
     );
+
+    setTimeout(() => {
+      this.control.setValue('');
+    }, 400);
   }
 
   ngOnInit(): void {}
+
+  isValid() {
+    return this.control.dirty && this.control.valid;
+  }
+
+  isInvalid() {
+    return this.control.dirty && this.control.invalid;
+  }
 }

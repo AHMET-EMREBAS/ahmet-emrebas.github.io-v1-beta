@@ -1,17 +1,17 @@
 .status {
     position: absolute;
-    right: 3px;
+    right: -55px;
     margin-top: 10px;
-
+    z-index: 100;
 }
 
 
 .input-wrapper {
     position: relative;
-    width: max-content;
+    max-width: 300px;
 }
 
 
 i {
-    font-size: 2rem;
+    font-size: 1.8rem;
 }
