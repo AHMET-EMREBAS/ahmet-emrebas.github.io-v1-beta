@@ -33,21 +33,27 @@ import {
   ApiPropertyOptions,
 } from '@nestjs/swagger';
 
-export type MyAPiPropertyOptions = ApiPropertyOptions & {
-  isEmail?: boolean;
-  isPassword?: boolean;
-  isUUID?: boolean;
-  isPositive?: boolean;
-  isNegative?: boolean;
-  isAlpha?: boolean;
-  isAlphanumeric?: boolean;
-  isDate?: boolean;
-  isBoolean?: boolean;
-  isNumber?: boolean;
-  isNumberString?: boolean;
-  exclude?: boolean;
-  trim?: boolean;
-};
+export type MyAPiPropertyOptions = Partial<
+  ApiPropertyOptions &
+    HTMLInputElement & {
+      target: string;
+      inputType?: string;
+      unique?: boolean;
+      isEmail?: boolean;
+      isPassword?: boolean;
+      isUUID?: boolean;
+      isPositive?: boolean;
+      isNegative?: boolean;
+      isAlpha?: boolean;
+      isAlphanumeric?: boolean;
+      isDate?: boolean;
+      isBoolean?: boolean;
+      isNumber?: boolean;
+      isNumberString?: boolean;
+      exclude?: boolean;
+      trim?: boolean;
+    }
+>;
 
 export function Property(o: MyAPiPropertyOptions) {
   const v: PropertyDecorator[] = [];

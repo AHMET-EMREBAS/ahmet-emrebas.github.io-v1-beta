@@ -4,7 +4,6 @@
       "columns": {
         "name": {
           "type": "string",
-          "inputType": "text",
           "minLength": 3,
           "maxLength": 10,
           "required": true,
@@ -12,23 +11,27 @@
         },
         "description": {
           "type": "string",
-          "inputType": "textarea",
           "minLength": 3,
           "maxLength": 400,
-          "required": true,
-          "unique": true
+          "required": true
+        }
+      },
+      "relations": {
+        "sub": {
+          "type": "many-to-one",
+          "target": "Sub"
         }
       }
     },
     "view": {
       "columns": {
-        "id": {
-          "type": "number",
-          "a": "id"
-        },
         "name": {
           "type": "string",
-          "a": "name"
+          "columnName": "name"
+        },
+        "description": {
+          "type": "string",
+          "columnName": "description"
         }
       }
     }

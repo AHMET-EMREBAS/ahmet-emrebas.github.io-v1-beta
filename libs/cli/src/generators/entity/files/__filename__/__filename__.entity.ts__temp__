@@ -1,10 +1,64 @@
-import { BaseEntity } from 'core';
-import { Column,Entity} from 'typeorm';
+import { BaseEntity, Col } from 'core';
+import { 
+  Entity,
+  JoinColumn,
+  ManyToOne
+} from 'typeorm';
+
+
+<% if(relations?.length > 0) { %> 
+
+  <% for(const c of relations) { %>   
+    import { <%- c.target %>} from '../<%- c.name %>';
+  <% } %>
+   
+<% } %>
+
 
 @Entity()
 export class <%= classname %> extends BaseEntity {
 
-  @Column({ type: 'text', unique: true })
-  name: string;
+  
+    <% for(const c of columns) { %>     
 
+      @Col({
+        <% if(c.type) { %> 
+                        type:'<%- c.type  %>',
+        <% } %>
+
+        <% if(c.unique) { %>
+                        unique:<%- c.unique %>,
+        <% } %>
+
+        <% if(c.nullable) { %> 
+                        nullable:<%- c.nullable %>,
+        <% } %>
+
+       })
+     
+
+      <% if(c.type ==='string') { %> 
+                          <%- c.name %>:string;
+      <% } %>
+
+      <% if(c.type ==='int') { %> 
+                          <%- c.name %>:number;
+      <% } %>
+
+      <% if(c.type ==='date') { %> 
+                   <%- c.name %>:Date;
+      <% } %>
+
+      <% if(c.type ==='decimal') { %> 
+         <%- c.name %>:number;
+      <% } %>
+    <% } %>
+
+
+    <% for(const c of relations) { %>     
+
+      @ManyToOne(()=><%- c.target %>)
+      @JoinColumn()
+       <%- c.name %>: <%- c.target %>
+    <% } %>
 }

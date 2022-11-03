@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@ahmet-emrebas/utilities": ["libs/utilities/src/index.ts"],
       "auth": ["libs/auth/src/index.ts"],
       "cli": ["libs/cli/src/index.ts"],
       "client-resources": ["libs/client-resources/src/index.ts"],

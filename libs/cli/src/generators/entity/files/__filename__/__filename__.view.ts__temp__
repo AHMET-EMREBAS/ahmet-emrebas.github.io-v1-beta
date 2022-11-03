@@ -12,12 +12,44 @@ import { <%= classname %> } from './<%= filename %>.entity';
       .createQueryBuilder()
       .select('<%= filename %>.id', 'id')
       .addSelect('<%= filename %>.uuid', 'uuid')
-      .addSelect('<%= filename %>.name', 'name')
+
+
+        <% for(const c of viewColumns) { %> 
+      
+          .addSelect('<%= filename %>.<%- c.columnName %>', '<%- c.name %>' )
+
+        <% } %>
+      
       .from(<%= classname %>, '<%= filename %>');
   },
 })
 export class <%= classname %>View {
   @ViewColumn() id: number;
   @ViewColumn() uuid: number;
-  @ViewColumn() name: string;
+  <% for(const c of viewColumns) { %>     
+ 
+      <% if(c.type ==='string') { %>
+                          @ViewColumn() 
+                          <%- c.name %>:string;
+      <% } %>
+
+      <% if(c.type ==='int') { %> 
+                            @ViewColumn() 
+                            <%- c.name %>:number;
+      <% } %>
+
+      <% if(c.type ==='date') { %> 
+                            @ViewColumn() 
+                            <%- c.name %>:Date;
+      <% } %>
+
+      <% if(c.type ==='decimal') { %> 
+                            @ViewColumn() 
+                            <%- c.name %>:number;
+      <% } %>
+
+    <% } %>
+  
+
+
 }

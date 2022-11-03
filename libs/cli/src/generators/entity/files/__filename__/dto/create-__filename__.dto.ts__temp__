@@ -1,6 +1,40 @@
-import { ShortTextProperty } from 'swagger-property';
+import { Property } from 'swagger-property';
 
 export class Create<%= classname %>Dto {
-  @ShortTextProperty({ nullable: false })
-  name: string;
+
+    <% for(const c of columns) { %>     
+
+      @Property({
+        <% for(const [key, value] of Object.entries(c)) {%>
+            <%- key %>: <% if(typeof value ==='string') { %> '<%- value %>' <% } else { %> <%- value %> <% } %>,
+         <% } %>
+      })
+        <% if(c.type ==='string') { %> 
+                            <%- c.name %>:string;
+        <% } %>
+
+        <% if(c.type ==='int') { %> 
+                            <%- c.name %>:number;
+        <% } %>
+
+        <% if(c.type ==='date') { %> 
+                    <%- c.name %>:Date;
+        <% } %>
+
+        <% if(c.type ==='decimal') { %> 
+          <%- c.name %>:number;
+        <% } %>
+
+    <% } %>
+
+    <% for(const c of relations) { %>  
+
+      @Property({ 
+        type:'number', 
+        inputType:'select', 
+        target:'<%- c.name %>'
+      })
+      <%- c.name %>: number
+
+     <% } %>
 }
