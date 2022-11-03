@@ -6,6 +6,7 @@
     "cli": "libs/cli",
     "cli-e2e": "apps/cli-e2e",
     "client-resources": "libs/client-resources",
+    "common": "libs/common",
     "core": "libs/core",
     "material": "libs/material",
     "models": "libs/models",

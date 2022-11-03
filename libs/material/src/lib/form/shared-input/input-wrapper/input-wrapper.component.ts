@@ -2,13 +2,10 @@ import {
   AfterViewInit,
   Component,
   Input,
-  OnInit,
 } from '@angular/core';
-import {
-  FormControl,
-  Validators,
-} from '@angular/forms';
+import { FormControl } from '@angular/forms';
 
+import { bounceInOnEnterAnimation } from 'angular-animations';
 import {
   debounceTime,
   map,
@@ -16,18 +13,23 @@ import {
   Observable,
 } from 'rxjs';
 
+import { HtmlInputOptions } from '../html-input-element';
+
 @Component({
   selector: 'ae-input-wrapper',
   templateUrl: './input-wrapper.component.html',
   styleUrls: ['./input-wrapper.component.scss'],
+  animations: [bounceInOnEnterAnimation({ anchor: 'enter' })],
 })
-export class InputWrapperComponent implements OnInit, AfterViewInit {
-  isTyping$!: Observable<boolean>;
+export class InputWrapperComponent implements AfterViewInit {
   @Input() control!: FormControl;
+  @Input() attributes!: HtmlInputOptions;
 
-  constructor() {}
+  isTyping$!: Observable<boolean>;
+  locked = false;
+  showHint = false;
+
   ngAfterViewInit(): void {
-    this.control.addValidators(Validators.required);
     this.isTyping$ = merge(
       this.control.valueChanges.pipe(map((e) => true)),
       this.control.valueChanges.pipe(
@@ -41,13 +43,33 @@ export class InputWrapperComponent implements OnInit, AfterViewInit {
     }, 400);
   }
 
-  ngOnInit(): void {}
-
   isValid() {
     return this.control.dirty && this.control.valid;
   }
 
   isInvalid() {
     return this.control.dirty && this.control.invalid;
+  }
+
+  lockToggle() {
+    const element = document.getElementById(
+      this.attributes.id + ''
+    ) as HTMLInputElement;
+
+    if (this.locked) {
+      this.locked = false;
+      element.removeAttribute('disabled');
+      return;
+    }
+    this.locked = true;
+    element.disabled = true;
+  }
+
+  hintToggle() {
+    this.showHint = !this.showHint;
+  }
+
+  hints() {
+    return this.attributes.hint?.split('. ');
   }
 }

@@ -1,18 +1,42 @@
-<div class="input-wrapper flex flex-row justify-content-start align-items-center">
-    <div class="p-inputgroup">
+<div class="flex flex-column gap-3 w-full">
+
+    <label [for]="attributes.id"> {{attributes.label}} </label>
+
+
+    <div class="input-wrapper flex flex-row  gap-2 justify-content-start align-items-center">
+
+
+        <p-button styleClass="p-button-warning p-button-text" icon="pi pi-info-circle" pTooltip="Show hint."
+            tooltipPosition="bottom" (click)="hintToggle()"></p-button>
+
+
         <ng-content></ng-content>
-    </div>
-    <div class="status">
-        <p-progressSpinner *ngIf="isTyping$ | async" [style]="{width: '40px', height: '40px'}" strokeWidth="4">
-        </p-progressSpinner>
-        <div class="ng-container" *ngIf="(isTyping$ | async) ===false">
 
-            <i *ngIf="isValid()" class="pi pi-check mr-1" [style]="{color:'var(--green-600)'}">
-            </i>
 
-            <i *ngIf="isInvalid()" class="pi pi-times mr-1" [style]="{color:'var(--red-600)'}">
-            </i>
+        <div class="status">
 
+            <p-progressSpinner *ngIf="(isTyping$ | async) " [style]="{width: '45px', height: '45px'}" strokeWidth="4">
+            </p-progressSpinner>
+
+            <div class="status-buttons" *ngIf="(isTyping$ | async) ===false">
+
+                <p-button styleClass="p-button-success" icon="pi pi-unlock" *ngIf="isValid() && !locked"
+                    (click)="lockToggle()" [@enter]>
+                </p-button>
+
+                <p-button styleClass="p-button-secondary" icon="pi pi-lock" *ngIf="isValid() && locked"
+                    (click)="lockToggle()" [@enter]>
+                </p-button>
+
+                <p-button styleClass="p-button-danger" icon="pi pi-times" *ngIf="isInvalid()" (click)="control.reset()"
+                    [@enter]>
+                </p-button>
+
+            </div>
         </div>
+    </div>
+
+    <div class="hint-text pl-4" [@enter] *ngIf="showHint">
+        <li *ngFor="let h of hints()"> <small>{{h}}</small> </li>
     </div>
 </div>

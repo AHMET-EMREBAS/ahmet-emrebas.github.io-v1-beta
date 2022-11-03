@@ -19,6 +19,6 @@ import { ResourceLayoutComponent } from './resource-layout.component';
     ToolbarModule,
     ButtonModule,
   ],
-  exports: [ResourceLayoutComponent],
+  exports: [ResourceLayoutComponent, SharedModule],
 })
 export class ResourceLayoutModule {}

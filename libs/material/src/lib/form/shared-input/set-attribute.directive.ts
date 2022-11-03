@@ -5,11 +5,13 @@ import {
   OnInit,
 } from '@angular/core';
 
+import { HtmlInputOptions } from './html-input-element';
+
 @Directive({
   selector: '[aeSetAttribute]',
 })
 export class SetAttributeDirective implements OnInit {
-  @Input() aeSetAttribute!: Partial<HTMLInputElement>;
+  @Input() aeSetAttribute!: HtmlInputOptions;
   constructor(private readonly elm: ElementRef<HTMLInputElement>) {}
   ngOnInit(): void {
     for (const [key, value] of Object.entries(this.aeSetAttribute)) {

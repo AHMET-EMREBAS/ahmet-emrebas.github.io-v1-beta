@@ -5,15 +5,22 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 
+import { ButtonModule } from 'primeng/button';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { TooltipModule } from 'primeng/tooltip';
 
+import { BaseInputComponent } from './base-input/base-input.component';
 import { InputWrapperComponent } from './input-wrapper/input-wrapper.component';
 import { SetAttributeDirective } from './set-attribute.directive';
 
-const modules = [FormsModule, ReactiveFormsModule];
+const modules = [FormsModule, ReactiveFormsModule, ButtonModule, TooltipModule];
 
 @NgModule({
-  declarations: [SetAttributeDirective, InputWrapperComponent],
+  declarations: [
+    SetAttributeDirective,
+    InputWrapperComponent,
+    BaseInputComponent,
+  ],
   imports: [CommonModule, ProgressSpinnerModule, ...modules],
   exports: [...modules, SetAttributeDirective, InputWrapperComponent],
 })

@@ -1,1 +1,10 @@
-<p>form works!</p>
+<form class="flex flex-column gap-2 p-2 " (ngSubmit)="submit()" [formGroup]="formGroup" [noValidate]="false">
+    <ng-content></ng-content>
+
+    <div class="flex flex-row gap-2 w-full ">
+        <button type="submit" class="p-button-success flex-grow-1" pButton label="Save"
+            [disabled]="submitLock"></button>
+        <button type="reset" class="p-button-secondary flex-grow-1" pButton label="Reset"
+            [disabled]="submitLock"></button>
+    </div>
+</form>

@@ -10,5 +10,6 @@ import { Sample } from './sample.interface';
 export class SampleService extends NgrxDataService<Sample> {
   constructor(sef: EntityCollectionServiceElementsFactory) {
     super('Sample', sef);
+    this.entityActions$.subscribe(console.log);
   }
 }
