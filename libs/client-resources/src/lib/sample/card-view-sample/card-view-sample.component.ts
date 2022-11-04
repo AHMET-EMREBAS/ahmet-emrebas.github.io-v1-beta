@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+} from '@angular/core';
 
 @Component({
-  selector: 'ahmet-emrebas-card-view-sample',
+  selector: 'ae-card-view-sample',
   templateUrl: './card-view-sample.component.html',
   styleUrls: ['./card-view-sample.component.scss'],
 })
