@@ -1,5 +1,5 @@
 import { ClassConstructor } from 'core';
-import { <%= classname %> } from 'models';
+import { <%= classname %> } from 'models/<%= project %>/<%= filename %>';
 import {
   EntitySubscriberInterface,
   EventSubscriber,

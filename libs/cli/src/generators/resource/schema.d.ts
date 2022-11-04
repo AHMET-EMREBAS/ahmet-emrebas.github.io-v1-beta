@@ -1,5 +1,4 @@
 export interface ResourceGeneratorSchema {
-    name: string;
-    tags?: string;
-    directory?: string;
+  project: string;
+  name: string;
 }

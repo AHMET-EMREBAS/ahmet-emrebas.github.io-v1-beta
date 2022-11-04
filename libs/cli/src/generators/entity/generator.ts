@@ -1,7 +1,4 @@
-import {
-  appendFileSync,
-  readFileSync,
-} from 'fs';
+import { readFileSync } from 'fs';
 import {
   camelCase,
   kebabCase,
@@ -17,59 +14,37 @@ import {
 
 import { EntityGeneratorSchema } from './schema';
 
-export default async function (tree: Tree, options: EntityGeneratorSchema) {
-  const target = '/libs/models/src/lib';
+const mapName = ([key, value]) => ({ name: key, ...(value as any) });
 
-  const filename = kebabCase(options.name);
-  const classname = upperFirst(camelCase(options.name));
+export default async function (tree: Tree, options: EntityGeneratorSchema) {
+  const { project, name } = options;
+
+  const target = `/libs/models/src/lib/${project}`;
+
+  const filename = kebabCase(name);
+  const classname = upperFirst(camelCase(name));
 
   console.table({
+    project,
+    name,
     filename,
     classname,
-    root: tree.root,
   });
 
   const ssot = JSON.parse(
-    readFileSync(join(tree.root, 'ssot.json')).toString()
+    readFileSync(join(tree.root, 'projects', project, 'ssot.json')).toString()
   );
 
-  const columns = Object.entries(ssot[filename]['entity'].columns).map(
-    ([key, value]) => {
-      return {
-        name: key,
-        ...(value as any),
-      };
-    }
-  );
-
-  const relations = Object.entries(ssot[filename]['entity'].relations).map(
-    ([key, value]) => {
-      return {
-        name: key,
-        ...(value as any),
-      };
-    }
-  );
-
-  const viewColumns = Object.entries(ssot[filename]['view'].columns).map(
-    ([key, value]) => {
-      return {
-        name: key,
-        ...(value as any),
-      };
-    }
-  );
-
-  // console.log(ssot.sample.entity.columns);
-  console.table({
-    columns,
-    relations,
-    viewColumns,
+  console.log({
+    ssot: ssot,
   });
 
-  console.log(columns);
-  console.log(relations);
-  console.log(viewColumns);
+  const entityObj = ssot[filename]['entity'];
+  const viewObj = ssot[filename]['view'];
+
+  const columns = Object.entries(entityObj.columns).map(mapName);
+  const relations = Object.entries(entityObj.relations || {}).map(mapName);
+  const viewColumns = Object.entries(viewObj.columns).map(mapName);
 
   generateFiles(tree, join(__dirname, 'files'), target, {
     filename,
@@ -77,13 +52,9 @@ export default async function (tree: Tree, options: EntityGeneratorSchema) {
     columns,
     relations,
     viewColumns,
+    project,
     temp: '',
   });
-
-  appendFileSync(
-    join(tree.root, target, 'index.ts'),
-    `export * from './${filename}';`
-  );
 
   await formatFiles(tree);
 }

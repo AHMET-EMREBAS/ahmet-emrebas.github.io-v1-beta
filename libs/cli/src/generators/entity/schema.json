@@ -5,25 +5,26 @@
   "title": "",
   "type": "object",
   "properties": {
-    "name": {
+    "project": {
       "type": "string",
       "description": "",
       "$default": {
         "$source": "argv",
         "index": 0
       },
-      "x-prompt": "Entity name"
+      "x-prompt": "Project name",
+      "alias": "p"
     },
-    "tags": {
+    "name": {
       "type": "string",
-      "description": "Add tags to the project (used for linting)",
-      "alias": "t"
-    },
-    "directory": {
-      "type": "string",
-      "description": "A directory where the project is placed",
-      "alias": "d"
+      "description": "",
+      "$default": {
+        "$source": "argv",
+        "index": 1
+      },
+      "x-prompt": "Resource name",
+      "alias": "n"
     }
   },
-  "required": []
+  "required": ["project", "name"]
 }

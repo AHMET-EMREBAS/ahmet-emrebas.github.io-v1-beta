@@ -1,7 +1,13 @@
 import {
   <%= classname %>,
   <%= classname %>View,
-} from 'models';
+} from 'models/<%= project %>/<%= filename %>';
+
+<% if(relations?.length > 0) { %> 
+    <% for(const r of relations) {%> 
+      import { <%- r.target %> } from 'models/<%= project %>/<%= r.target.toLowerCase() %>';
+    <% } %>
+<% } %>
 
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -11,8 +17,20 @@ import { <%= classname %>QueryController } from './<%= filename %>-query.control
 import { <%= classname %>Service } from './<%= filename %>.service';
 import { <%= classname %>Subscriber } from './<%= filename %>.subscriber';
 
+
+
 @Module({
-  imports: [TypeOrmModule.forFeature([<%= classname %>, <%= classname %>View])],
+  imports: [TypeOrmModule.forFeature([
+    <%= classname %>, 
+    <%= classname %>View , 
+
+    <% if(relations?.length > 0) { %> 
+      <% for(const r of relations) {%> 
+        <%- r.target %> 
+      <% } %>
+    <% } %>
+
+    ])],
   controllers: [<%= classname %>QueryController, <%= classname %>PostController],
   providers: [<%= classname %>Service, <%= classname %>Subscriber],
   exports: [<%= classname %>Service],

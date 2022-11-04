@@ -10,15 +10,15 @@ import {
 } from '@nestjs/swagger';
 
 import { AppModule } from './app/app.module';
-import {
-  GLOBAL_PREFIX,
-  PORT,
-} from './config';
 
-(async () => {
+const GLOBAL_PREFIX = 'api';
+
+const PORT = process.env.PORT || 3333;
+
+async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  app.setGlobalPrefix(GLOBAL_PREFIX);
+  app.setGlobalPrefix('api');
 
   // Enable request from different origins
   app.enableCors();
@@ -39,7 +39,6 @@ import {
       'https://ahmet-emrebas.github.io',
       'aemrebas.dev@gmail.com'
     )
-
     .setDescription('')
     .setVersion('1.0.0')
 
@@ -51,4 +50,6 @@ import {
 
   // Start app
   await app.listen(PORT);
-})();
+}
+
+bootstrap();

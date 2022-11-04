@@ -1,4 +1,4 @@
-import { appendFileSync } from 'fs';
+import { readFileSync } from 'fs';
 import {
   camelCase,
   kebabCase,
@@ -15,22 +15,36 @@ import {
 import * as genEntity from '../entity/generator';
 import { ResourceGeneratorSchema } from './schema';
 
-async function genResource(tree: Tree, options: ResourceGeneratorSchema) {
-  const target = '/libs/rest/src/lib';
+const mapName = ([key, value]) => ({ name: key, ...(value as any) });
 
-  const filename = kebabCase(options.name);
-  const classname = upperFirst(camelCase(options.name));
+async function genResource(tree: Tree, options: ResourceGeneratorSchema) {
+  const { project, name } = options;
+
+  const target = `/libs/rest/src/lib/${project}`;
+
+  const filename = kebabCase(name);
+  const classname = upperFirst(camelCase(name));
+
+  const ssot = JSON.parse(
+    readFileSync(join(tree.root, 'projects', project, 'ssot.json')).toString()
+  );
+
+  const entityObj = ssot[filename]['entity'];
+  const viewObj = ssot[filename]['view'];
+
+  const columns = Object.entries(entityObj.columns).map(mapName);
+  const relations = Object.entries(entityObj.relations || {}).map(mapName);
+  const viewColumns = Object.entries(viewObj.columns).map(mapName);
 
   generateFiles(tree, join(__dirname, 'files'), target, {
     filename,
     classname,
+    project,
+    columns,
+    relations,
+    viewColumns,
     temp: '',
   });
-
-  appendFileSync(
-    join(tree.root, target, 'index.ts'),
-    `export * from './${filename}';`
-  );
 }
 
 export default async function (tree: Tree, options: ResourceGeneratorSchema) {
