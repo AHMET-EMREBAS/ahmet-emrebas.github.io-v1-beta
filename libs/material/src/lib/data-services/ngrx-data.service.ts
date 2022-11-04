@@ -3,7 +3,10 @@ import {
   Validators,
 } from '@angular/forms';
 
-import { FilterMetadata } from 'primeng/api';
+import {
+  FilterMetadata,
+  MenuItem,
+} from 'primeng/api';
 import {
   BehaviorSubject,
   map,
@@ -30,6 +33,20 @@ export class NgrxDataService<T> extends EntityCollectionServiceBase<T> {
   readonly rows$ = new BehaviorSubject<number>(2);
   readonly sortField$ = new BehaviorSubject<string>('');
   readonly sortOrder$ = new BehaviorSubject<number>(1);
+
+  contextMenuSelection?: T;
+
+  contextMenuItems: MenuItem[] = [
+    {
+      icon: 'pi pi-info-circle',
+      label: 'Hi',
+      command: () => {
+        console.log(this.contextMenuSelection);
+      },
+    },
+  ];
+
+  selection!: T[];
 
   pageData$ = merge([this.first$, this.rows$]).pipe(
     switchMap(() => {

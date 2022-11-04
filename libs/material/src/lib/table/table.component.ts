@@ -17,6 +17,7 @@ import { NgrxDataService } from '../data-services';
 })
 export class TableComponent implements AfterViewInit {
   @ViewChild('DATA_TABLE') table!: Table;
+
   isReady = false;
   constructor(public readonly ds: NgrxDataService<any>) {}
 

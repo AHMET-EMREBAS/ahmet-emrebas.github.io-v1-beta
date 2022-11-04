@@ -8,6 +8,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 
 import { SharedModule } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
+import { ContextMenuModule } from 'primeng/contextmenu';
 import { InputTextModule } from 'primeng/inputtext';
 import { TableModule as PrimeTableModule } from 'primeng/table';
 
@@ -24,6 +25,7 @@ import { TableComponent } from './table.component';
     InputTextModule,
     PrimeTableModule,
     MatPaginatorModule,
+    ContextMenuModule,
   ],
   exports: [TableComponent],
 })
