@@ -1,15 +1,19 @@
-import {
-  Component,
-  OnInit,
-} from '@angular/core';
+import { Component } from '@angular/core';
+
+import { SampleService } from '../sample.service';
 
 @Component({
   selector: 'ae-table-view-sample',
   templateUrl: './table-view-sample.component.html',
   styleUrls: ['./table-view-sample.component.scss'],
 })
-export class TableViewSampleComponent implements OnInit {
-  constructor() {}
+export class TableViewSampleComponent {
+  columns = [
+    { name: 'id', header: 'id' },
+    { name: 'uuid', header: 'uuid' },
+    { name: 'name', header: 'name' },
+  ];
+  globalFilterColumns = ['name'];
 
-  ngOnInit(): void {}
+  constructor(private readonly service: SampleService) {}
 }

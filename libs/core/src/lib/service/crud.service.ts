@@ -25,6 +25,7 @@ export class CrudService<T, V = any> {
     } catch (err) {
       console.error(err);
     }
+    return;
   }
 
   findOne(options?: FindOneOptions) {
@@ -33,6 +34,7 @@ export class CrudService<T, V = any> {
     } catch (err) {
       console.error(err);
     }
+    return;
   }
 
   findOneBy(options?: FindOptionsWhere<T> | FindOptionsWhere<T>[]) {
@@ -41,6 +43,7 @@ export class CrudService<T, V = any> {
     } catch (err) {
       console.error(err);
     }
+    return;
   }
 
   findAndCount(options?: FindManyOptions<T>) {
@@ -49,6 +52,7 @@ export class CrudService<T, V = any> {
     } catch (err) {
       console.error(err);
     }
+    return;
   }
 
   findAndCountBy(options: FindOptionsWhere<T> | FindOptionsWhere<T>[]) {
@@ -57,6 +61,7 @@ export class CrudService<T, V = any> {
     } catch (err) {
       console.error(err);
     }
+    return;
   }
 
   findBy(options: FindOptionsWhere<T> | FindOptionsWhere<T>[]) {
@@ -65,6 +70,7 @@ export class CrudService<T, V = any> {
     } catch (err) {
       console.error(err);
     }
+    return;
   }
 
   findOneOrFail(options: FindOneOptions<T>) {
@@ -73,6 +79,7 @@ export class CrudService<T, V = any> {
     } catch (err) {
       console.error(err);
     }
+    return;
   }
 
   findOneByOrFail(options: FindOptionsWhere<T> | FindOptionsWhere<T>[]) {
@@ -81,6 +88,7 @@ export class CrudService<T, V = any> {
     } catch (err) {
       console.error(err);
     }
+    return;
   }
 
   create(t: T) {
@@ -89,6 +97,7 @@ export class CrudService<T, V = any> {
     } catch (err) {
       console.error(err);
     }
+    return;
   }
 
   save(t: T) {
@@ -97,6 +106,7 @@ export class CrudService<T, V = any> {
     } catch (err) {
       console.error(err);
     }
+    return;
   }
 
   update(id: number, updated: QueryDeepPartialEntity<T>) {
@@ -105,6 +115,7 @@ export class CrudService<T, V = any> {
     } catch (err) {
       console.error(err);
     }
+    return;
   }
 
   delete(id: number) {
@@ -113,6 +124,7 @@ export class CrudService<T, V = any> {
     } catch (err) {
       console.error(err);
     }
+    return;
   }
 
   async recover(id: number) {
@@ -125,6 +137,7 @@ export class CrudService<T, V = any> {
     } catch (err) {
       console.error(err);
     }
+    return;
   }
 
   count(options?: FindManyOptions<T>) {
@@ -133,6 +146,7 @@ export class CrudService<T, V = any> {
     } catch (err) {
       console.error(err);
     }
+    return;
   }
 
   softDelete(id: number) {
@@ -141,6 +155,7 @@ export class CrudService<T, V = any> {
     } catch (err) {
       console.error(err);
     }
+    return;
   }
 
   add(id: number, relationId: number, relationName: string) {
@@ -153,6 +168,7 @@ export class CrudService<T, V = any> {
     } catch (err) {
       console.error(err);
     }
+    return;
   }
 
   set(id: number, relationId: number, relationName: string) {
@@ -165,6 +181,7 @@ export class CrudService<T, V = any> {
     } catch (err) {
       console.error(err);
     }
+    return;
   }
 
   unset(id: number, relationName: string) {
@@ -177,6 +194,7 @@ export class CrudService<T, V = any> {
     } catch (err) {
       console.error(err);
     }
+    return;
   }
 
   remove(id: number, relationId: number, relationName: string) {
@@ -189,5 +207,6 @@ export class CrudService<T, V = any> {
     } catch (err) {
       console.error(err);
     }
+    return;
   }
 }

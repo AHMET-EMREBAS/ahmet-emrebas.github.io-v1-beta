@@ -8,8 +8,24 @@ import { Sample } from './sample.interface';
 
 @Injectable()
 export class SampleService extends NgrxDataService<Sample> {
+  public override columns: { header: string; field: string }[] = [
+    {
+      field: 'id',
+      header: '#',
+    },
+    {
+      field: 'uuid',
+      header: 'UUID',
+    },
+    {
+      field: 'name',
+      header: 'Sample Name',
+    },
+  ];
+
+  public override globalFilterFields: string[] = ['name'];
+
   constructor(sef: EntityCollectionServiceElementsFactory) {
     super('Sample', sef);
-    this.entityActions$.subscribe(console.log);
   }
 }

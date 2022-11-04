@@ -1,4 +1,5 @@
 import { Response } from 'express';
+import { FindManyOptions } from 'typeorm';
 
 import {
   Req,
@@ -22,6 +23,7 @@ import {
 } from '../param-decorators';
 import {
   HardDelete,
+  OrderDto,
   PaginatorQueryDto,
   ViewQueryDto,
   WhereQueryDto,
@@ -45,13 +47,17 @@ export function GetQueryController<T extends BaseEntity, V = any>(
       @ReqQuery() paginatorDto: PaginatorQueryDto,
       @ReqQuery() withDeleteDto: WithDeletedDto,
       @ReqQuery() whereQueryDto: WhereQueryDto,
-      @ReqQuery() viewQueryDto: ViewQueryDto
+      @ReqQuery() viewQueryDto: ViewQueryDto,
+      @ReqQuery() orderDto: OrderDto
     ) {
       const query = {
         ...paginatorDto,
         ...withDeleteDto,
         ...whereQueryDto.where,
-      };
+        ...orderDto,
+      } as FindManyOptions<any>;
+
+      console.log(query);
 
       if (viewQueryDto.view === true) {
         return this.__service.viewService.find(query);

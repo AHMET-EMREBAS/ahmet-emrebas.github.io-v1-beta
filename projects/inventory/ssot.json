@@ -62,5 +62,26 @@
         }
       }
     }
+  },
+  "sample": {
+    "entity": {
+      "columns": {
+        "name": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 10,
+          "required": true,
+          "unique": true
+        }
+      }
+    },
+    "view": {
+      "columns": {
+        "name": {
+          "type": "string",
+          "columnName": "name"
+        }
+      }
+    }
   }
 }

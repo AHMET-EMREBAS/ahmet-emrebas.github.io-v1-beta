@@ -1,4 +1,5 @@
 import { join } from 'path';
+import { SampleModule } from 'rest/inventory/sample';
 
 import {
   CacheModule,
@@ -38,6 +39,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       synchronize: true,
       dropSchema: true,
     }),
+    SampleModule,
   ],
 })
 export class AppModule {}

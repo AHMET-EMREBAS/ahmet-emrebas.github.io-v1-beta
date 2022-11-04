@@ -1,0 +1,36 @@
+<p-table #DATA_TABLE [lazy]="true" [columns]="ds.columns" [value]="(ds.pageData$ | async)!" [paginator]="true"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rows]="2"
+    [rowsPerPageOptions]="[2,4,10,25,50]" responsiveLayout="scroll"
+    styleClass="p-datatable-gridlines p-datatable-striped" [globalFilterFields]="ds.globalFilterFields"
+    [totalRecords]="1000" (onPage)="loadData($event)" (onSort)="loadData($event)">
+
+    <ng-template pTemplate="caption">
+        <div class="flex">
+            <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash"
+                (click)="DATA_TABLE.clear()"></button>
+            <span class="p-input-icon-left ml-auto">
+                <i class="pi pi-search"></i>
+                <input pInputText type="text" [formControl]="ds.searchControl"
+                    (input)="DATA_TABLE.filterGlobal( ds.searchControl.value, 'contains')"
+                    placeholder="Search keyword" />
+            </span>
+        </div>
+    </ng-template>
+
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+            <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+                {{col.header}} <p-sortIcon [field]="col.field"></p-sortIcon>
+                <p-columnFilter type="text" [field]="col.field" display="menu"></p-columnFilter>
+
+            </th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-columns="columns">
+        <tr [@enter]>
+            <td *ngFor="let col of columns">
+                {{rowData[col.field]}}
+            </td>
+        </tr>
+    </ng-template>
+</p-table>

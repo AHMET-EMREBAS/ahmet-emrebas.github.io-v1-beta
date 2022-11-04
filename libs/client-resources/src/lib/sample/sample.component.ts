@@ -30,7 +30,6 @@ export class SampleComponent implements OnInit, OnDestroy {
             icon: 'pi pi-check',
           });
 
-          console.log('Working');
           this.router.navigate(['table-view'], { relativeTo: this.route });
         }
 
@@ -42,7 +41,7 @@ export class SampleComponent implements OnInit, OnDestroy {
             icon: 'pi pi-times',
           });
         }
-        this.router.navigate(['create'], { relativeTo: this.route });
+        // this.router.navigate(['create'], { relativeTo: this.route });
       })
     )
     .subscribe();

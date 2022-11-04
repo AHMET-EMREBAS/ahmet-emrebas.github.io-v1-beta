@@ -2,7 +2,7 @@ import { EntityDataModuleConfig } from '@ngrx/data';
 
 export const entityDataModuleConfig: EntityDataModuleConfig = {
   pluralNames: {
-    Sample: 'Samples',
+    Sample: 'Sample',
   },
   entityMetadata: {
     Sample: {},
