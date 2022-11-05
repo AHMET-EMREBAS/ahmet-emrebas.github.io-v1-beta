@@ -2,7 +2,8 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { FormModule } from 'material/form';
+import { FormModule } from 'material/form/form.module';
+import { SelectInputModule } from 'material/form/select-input';
 import { TextInputModule } from 'material/form/text-input';
 
 import { CreateSampleComponent } from './create-sample.component';
@@ -13,6 +14,7 @@ import { CreateSampleComponent } from './create-sample.component';
     CommonModule,
     FormModule,
     TextInputModule,
+    SelectInputModule,
     RouterModule.forChild([
       {
         path: '',

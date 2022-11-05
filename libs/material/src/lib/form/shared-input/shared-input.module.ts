@@ -5,6 +5,7 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 
+import { BadgeModule } from 'primeng/badge';
 import { ButtonModule } from 'primeng/button';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { TooltipModule } from 'primeng/tooltip';
@@ -21,7 +22,7 @@ const modules = [FormsModule, ReactiveFormsModule, ButtonModule, TooltipModule];
     InputWrapperComponent,
     BaseInputComponent,
   ],
-  imports: [CommonModule, ProgressSpinnerModule, ...modules],
+  imports: [CommonModule, ProgressSpinnerModule, BadgeModule, ...modules],
   exports: [...modules, SetAttributeDirective, InputWrapperComponent],
 })
 export class SharedInputModule {}

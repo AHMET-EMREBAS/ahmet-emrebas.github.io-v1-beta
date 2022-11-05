@@ -35,6 +35,7 @@ export class CreateSampleComponent
         Validators.minLength(3),
         Validators.maxLength(10),
       ]),
+      cities: new FormControl('', [Validators.required]),
     });
 
     this.formFields = {
@@ -43,7 +44,21 @@ export class CreateSampleComponent
         required: true,
         minLength: 3,
         maxLength: 10,
-        hint: 'At least 3 characters long. At most 10 characters long. Required!',
+        hint: '3-10 character long name.',
+      },
+
+      cities: {
+        id: 'city name',
+        // required: true,
+        options: [
+          { id: 1, label: 'Yozgat' },
+          { id: 2, label: 'Angara' },
+          { id: 3, label: 'Suvas' },
+          { id: 4, label: 'Girik Gale' },
+        ],
+
+        optionLabel: 'label',
+        // selectionLimit: 1,
       },
     };
   }

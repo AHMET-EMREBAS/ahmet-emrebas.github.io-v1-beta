@@ -17,6 +17,7 @@ export class FormComponent {
   @Input() formGroup!: FormGroup;
 
   submit() {
+    console.log(this.formGroup.value);
     if (this.formGroup.valid) {
       this.formSubmit.emit(this.formGroup.value);
       this.submitLock = true;

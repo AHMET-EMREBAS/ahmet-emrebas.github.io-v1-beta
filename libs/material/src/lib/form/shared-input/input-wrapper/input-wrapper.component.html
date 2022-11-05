@@ -1,14 +1,13 @@
-<div class="flex flex-column gap-3 w-full">
+<fieldset class="flex flex-column gap-2 w-full border-1 border-dashed p-2 ">
 
-    <label [for]="attributes.id"> {{attributes.label}} </label>
+    <legend>
+        <label [for]="attributes.id" class="ml-1">
+            {{attributes.label || 'Please set a label!'}}
+        </label>
+    </legend>
 
 
     <div class="input-wrapper flex flex-row  gap-2 justify-content-start align-items-center">
-
-
-        <p-button styleClass="p-button-warning p-button-text" icon="pi pi-info-circle" pTooltip="Show hint."
-            tooltipPosition="bottom" (click)="hintToggle()"></p-button>
-
 
         <ng-content></ng-content>
 
@@ -36,7 +35,24 @@
         </div>
     </div>
 
-    <div class="hint-text pl-4" [@enter] *ngIf="showHint">
-        <li *ngFor="let h of hints()"> <small>{{h}}</small> </li>
+    <div class="flex justify-content-between gap-2" [@enter]>
+
+
+        <!-- Min-Max length indicator. -->
+        <p-badge [severity]="(control.valid && control.dirty) ? 'success' : !control.dirty ? 'info' : 'danger'"
+            *ngIf="attributes.minLength || attributes.maxLength"
+            [value]="(control.value?.length || '0')  + ' of ' + (attributes.minLength || '?') + ' - ' + (attributes.maxLength || '?')">
+        </p-badge>
+
+        <!-- Select item indicator  -->
+        <p-badge *ngIf="attributes.options"
+            [severity]="(control.valid && control.dirty) ? 'success' : !control.dirty ? 'info' : 'danger'"
+            [value]="'Selected ' +  (control.value?.length || '0')  + ' of ' + attributes.options.length">
+        </p-badge>
+
+        <i *ngIf="attributes.hint">
+            <small>{{attributes.hint.substring(0, 30) }} ... </small>
+        </i>
+
     </div>
-</div>
+</fieldset>

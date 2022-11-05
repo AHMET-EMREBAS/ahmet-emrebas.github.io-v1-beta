@@ -4,6 +4,8 @@ export type HtmlInputOptions = Partial<
       hint: string;
       label: string;
       inputType: string;
-      options: { value: string; label: string }[];
+      options: { [key: string]: any }[];
+      selectionLimit: number;
+      optionLabel: string;
     }>
 >;

@@ -6,4 +6,5 @@ export interface Sample {
   deletedAt?: Date;
 
   name: string;
+  cities: string;
 }
