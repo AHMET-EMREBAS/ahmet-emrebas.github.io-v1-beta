@@ -3,9 +3,8 @@
 <p-table #DATA_TABLE [(selection)]="ds.selection" dataKey="id" [rowTrackBy]="trackBy" [columns]="ds.columns"
     [value]="(ds.entities$ | async)!" responsiveLayout="scroll" styleClass=" p-datatable-gridlines p-datatable-striped"
     [globalFilterFields]="ds.globalFilterFields" [paginator]="true" [showCurrentPageReport]="true" [rows]="4"
-    [lazy]="true" [totalRecords]="100000" (onLazyLoad)="clearCache()" [rowsPerPageOptions]="[4, 8, 16,25,50,100]"
-    [contextMenu]="cm" [(contextMenuSelection)]="ds.contextMenuSelection" (onPage)="loadData()" (onFilter)="loadData()"
-    (onSort)="loadData()">
+    [lazy]="true" [totalRecords]="totalRecords" [rowsPerPageOptions]="[4, 8, 16,25,50,100]" [contextMenu]="cm"
+    [(contextMenuSelection)]="ds.contextMenuSelection">
 
     <ng-template pTemplate="caption">
         <div class="flex gap-4">
@@ -15,8 +14,7 @@
             <span class="p-input-icon-left ml-auto">
 
                 <i class="pi pi-search"></i>
-                <input pInputText type="text" [formControl]="ds.searchControl" placeholder="Search keyword"
-                    (input)="DATA_TABLE.filterGlobal(ds.searchControl.value, 'contains')" />
+                <input pInputText type="text" [formControl]="ds.searchControl" placeholder="Search keyword" />
             </span>
         </div>
     </ng-template>

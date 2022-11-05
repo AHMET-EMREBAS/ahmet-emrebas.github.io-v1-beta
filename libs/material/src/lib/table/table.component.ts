@@ -6,6 +6,11 @@ import {
 
 import { fadeInOnEnterAnimation } from 'angular-animations';
 import { Table } from 'primeng/table';
+import {
+  debounceTime,
+  merge,
+  tap,
+} from 'rxjs';
 
 import { NgrxDataService } from '../data-services';
 
@@ -16,12 +21,28 @@ import { NgrxDataService } from '../data-services';
   animations: [fadeInOnEnterAnimation({ anchor: 'enter' })],
 })
 export class TableComponent implements AfterViewInit {
+  totalRecords = 100000;
   @ViewChild('DATA_TABLE') table!: Table;
 
   constructor(public readonly ds: NgrxDataService<any>) {}
 
   ngAfterViewInit(): void {
     this.loadData();
+
+    merge(
+      this.table.onPage,
+      this.table.onFilter.pipe(
+        debounceTime(1000),
+        tap(() => (this.table.first = 0))
+      ),
+      this.ds.searchControl.valueChanges.pipe(
+        debounceTime(1000),
+        tap(() => (this.table.first = 0))
+      ),
+      this.table.onSort
+    ).subscribe(() => {
+      this.loadData();
+    });
   }
 
   ngOnDestroy(): void {
@@ -32,6 +53,7 @@ export class TableComponent implements AfterViewInit {
   }
 
   loadData() {
+    this.clearCache();
     this.ds.getWithQuery({
       take: this.table.rows + '',
       skip: this.table.first + '',
