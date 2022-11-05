@@ -1,4 +1,7 @@
-import { Transform } from 'class-transformer';
+import {
+  Expose,
+  Transform,
+} from 'class-transformer';
 import {
   IsEnum,
   NotEquals,
@@ -80,12 +83,14 @@ export class FilterMetadata {
     enum: FilterMatchMode,
   })
   @IsEnum(FilterMatchMode)
+  @Expose()
   matchMode?: FilterMatchMode;
 
   @ApiProperty({
     enum: FilterOperator,
   })
   @IsEnum(FilterOperator)
+  @Expose()
   operator?: FilterOperator;
 }
 
@@ -99,11 +104,66 @@ export class FilterProperty {
 
 export class WhereQueryDto<T = any> {
   @ApiProperty({ required: false })
-  @ValidateNested()
   @Transform(({ value, obj }) => {
-    console.log('----------- Where query is not implemented --------');
-    console.log(value);
-    return value;
+    let query: any;
+    let v: { [key: string]: FilterMetadata[] | FilterMetadata };
+
+    try {
+      v = JSON.parse(value);
+    } catch (err) {
+      return null;
+    }
+
+    const global = v.global as FilterMetadata;
+
+    if (
+      ![null, undefined, 'null', 'undefined', '', ' '].includes(global?.value)
+    ) {
+      for (const [property, o] of Object.entries(
+        v as { global: FilterMetadata }
+      )) {
+        if (property !== 'global') {
+          if (!query) {
+            query = [];
+          }
+          query.push({
+            [property]: FilterMatchModeQuery.contains(global.value),
+          });
+        }
+      }
+      return query;
+    }
+
+    for (const [property, options] of Object.entries(v) as [
+      string,
+      FilterMetadata[]
+    ][]) {
+      if (property !== 'global') {
+        if (options) {
+          if (options.length > 0) {
+            for (const o of options) {
+              if (
+                [null, undefined, 'null', 'undefined', '', ' '].includes(
+                  o.value
+                )
+              ) {
+                continue;
+              }
+              if (!query) {
+                query = [];
+              }
+
+              query.push({
+                [property]: FilterMatchModeQuery[o.matchMode](o.value),
+              });
+            }
+          }
+        }
+      }
+    }
+
+    return query;
   })
+  @Expose()
   where: FindOptionsWhere<T>;
 }

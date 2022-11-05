@@ -1,5 +1,5 @@
 import { ClassConstructor } from 'core';
-import { Sub } from 'models';
+import { Sub } from 'models/sub';
 import {
   EntitySubscriberInterface,
   EventSubscriber,

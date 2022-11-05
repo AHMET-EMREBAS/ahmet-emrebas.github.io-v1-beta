@@ -8,7 +8,10 @@ import {
   QueryDeepPartialEntity,
 } from 'typeorm/query-builder/QueryPartialEntity';
 
+import { Logger } from '@nestjs/common';
+
 export class CrudService<T, V = any> {
+  private readonly logger: Logger;
   public readonly viewService: CrudService<V>;
   constructor(
     public readonly __repo: Repository<T>,
@@ -17,13 +20,15 @@ export class CrudService<T, V = any> {
     if (__repoView) {
       this.viewService = new CrudService(__repoView);
     }
+
+    this.logger = new Logger(this.__repo.metadata.tableName + 'Repository');
   }
 
   find(options?: FindManyOptions<T>) {
     try {
       return this.__repo.find(options);
     } catch (err) {
-      console.error(err);
+      this.logger.error(err);
     }
     return;
   }
@@ -32,7 +37,7 @@ export class CrudService<T, V = any> {
     try {
       return this.__repo.findOne(options);
     } catch (err) {
-      console.error(err);
+      this.logger.error(err);
     }
     return;
   }
@@ -41,7 +46,7 @@ export class CrudService<T, V = any> {
     try {
       return this.__repo.findOneBy(options);
     } catch (err) {
-      console.error(err);
+      this.logger.error(err);
     }
     return;
   }
@@ -50,7 +55,7 @@ export class CrudService<T, V = any> {
     try {
       return this.__repo.findAndCount(options);
     } catch (err) {
-      console.error(err);
+      this.logger.error(err);
     }
     return;
   }
@@ -59,7 +64,7 @@ export class CrudService<T, V = any> {
     try {
       return this.__repo.findAndCountBy(options);
     } catch (err) {
-      console.error(err);
+      this.logger.error(err);
     }
     return;
   }
@@ -68,7 +73,7 @@ export class CrudService<T, V = any> {
     try {
       return this.__repo.findBy(options);
     } catch (err) {
-      console.error(err);
+      this.logger.error(err);
     }
     return;
   }
@@ -77,7 +82,7 @@ export class CrudService<T, V = any> {
     try {
       return this.__repo.findOneOrFail(options);
     } catch (err) {
-      console.error(err);
+      this.logger.error(err);
     }
     return;
   }
@@ -86,7 +91,7 @@ export class CrudService<T, V = any> {
     try {
       return this.__repo.findOneByOrFail(options);
     } catch (err) {
-      console.error(err);
+      this.logger.error(err);
     }
     return;
   }
@@ -95,7 +100,7 @@ export class CrudService<T, V = any> {
     try {
       return this.__repo.create(t);
     } catch (err) {
-      console.error(err);
+      this.logger.error(err);
     }
     return;
   }
@@ -104,7 +109,7 @@ export class CrudService<T, V = any> {
     try {
       return this.__repo.save(t);
     } catch (err) {
-      console.error(err);
+      this.logger.error(err);
     }
     return;
   }
@@ -113,7 +118,7 @@ export class CrudService<T, V = any> {
     try {
       return this.__repo.update(id, updated);
     } catch (err) {
-      console.error(err);
+      this.logger.error(err);
     }
     return;
   }
@@ -122,7 +127,7 @@ export class CrudService<T, V = any> {
     try {
       return this.__repo.delete(id);
     } catch (err) {
-      console.error(err);
+      this.logger.error(err);
     }
     return;
   }
@@ -135,7 +140,7 @@ export class CrudService<T, V = any> {
       });
       return await this.__repo.recover(found);
     } catch (err) {
-      console.error(err);
+      this.logger.error(err);
     }
     return;
   }
@@ -144,7 +149,7 @@ export class CrudService<T, V = any> {
     try {
       return this.__repo.count(options);
     } catch (err) {
-      console.error(err);
+      this.logger.error(err);
     }
     return;
   }
@@ -153,7 +158,7 @@ export class CrudService<T, V = any> {
     try {
       return this.__repo.softDelete(id);
     } catch (err) {
-      console.error(err);
+      this.logger.error(err);
     }
     return;
   }
@@ -166,7 +171,7 @@ export class CrudService<T, V = any> {
         .of(id)
         .add(relationId);
     } catch (err) {
-      console.error(err);
+      this.logger.error(err);
     }
     return;
   }
@@ -179,7 +184,7 @@ export class CrudService<T, V = any> {
         .of(id)
         .set(relationId);
     } catch (err) {
-      console.error(err);
+      this.logger.error(err);
     }
     return;
   }
@@ -192,7 +197,7 @@ export class CrudService<T, V = any> {
         .of(id)
         .set(null);
     } catch (err) {
-      console.error(err);
+      this.logger.error(err);
     }
     return;
   }
@@ -205,7 +210,7 @@ export class CrudService<T, V = any> {
         .of(id)
         .remove(relationId);
     } catch (err) {
-      console.error(err);
+      this.logger.error(err);
     }
     return;
   }

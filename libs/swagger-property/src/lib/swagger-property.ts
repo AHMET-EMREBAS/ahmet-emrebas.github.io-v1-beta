@@ -88,10 +88,10 @@ export function Property(o: MyAPiPropertyOptions) {
 
   if (o.trim) v.push(TrimTransformer());
 
-  if (o.type == 'int') v.push(IntTransformer());
-  if (o.type == 'float') v.push(FloatTransformer());
+  if (o.type == 'int') v.push(IntTransformer(o.default));
+  if (o.type == 'float') v.push(FloatTransformer(o.default));
 
-  if (o.type === 'boolean') v.push(BooleanTransformer());
+  if (o.type === 'boolean') v.push(BooleanTransformer(o.default));
 
   return applyDecorators(ApiProperty({ ...o }), ...v);
 }

@@ -10,6 +10,8 @@ import { SharedModule } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { ContextMenuModule } from 'primeng/contextmenu';
 import { InputTextModule } from 'primeng/inputtext';
+import { PaginatorModule } from 'primeng/paginator';
+import { SkeletonModule } from 'primeng/skeleton';
 import { TableModule as PrimeTableModule } from 'primeng/table';
 
 import { TableComponent } from './table.component';
@@ -26,6 +28,8 @@ import { TableComponent } from './table.component';
     PrimeTableModule,
     MatPaginatorModule,
     ContextMenuModule,
+    SkeletonModule,
+    PaginatorModule,
   ],
   exports: [TableComponent],
 })

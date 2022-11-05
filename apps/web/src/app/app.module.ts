@@ -43,7 +43,7 @@ const routes: Routes = [
     HttpClientModule,
     StoreModule.forRoot({}, {}),
     EffectsModule.forRoot([]),
-    EntityDataModule.forRoot(entityDataModuleConfig),
+    EntityDataModule.forRoot({ ...entityDataModuleConfig }),
     RouterModule.forRoot(routes, {
       useHash: true,
       preloadingStrategy: PreloadAllModules,

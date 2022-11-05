@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import {
   FormControl,
   Validators,
@@ -7,11 +8,11 @@ import {
   FilterMetadata,
   MenuItem,
 } from 'primeng/api';
+import { Table } from 'primeng/table';
 import {
   BehaviorSubject,
   map,
-  merge,
-  switchMap,
+  Observable,
 } from 'rxjs';
 
 import {
@@ -28,12 +29,15 @@ export type SortEvent = { field: string; order: -1 | 1 | 0 };
 
 export type PageEvent = { first: number; row: number };
 
-export class NgrxDataService<T> extends EntityCollectionServiceBase<T> {
-  readonly first$ = new BehaviorSubject<number>(0);
-  readonly rows$ = new BehaviorSubject<number>(2);
-  readonly sortField$ = new BehaviorSubject<string>('');
-  readonly sortOrder$ = new BehaviorSubject<number>(1);
+export type QueryOptions = {
+  first?: number;
+  rows?: number;
+  sortOrder?: number;
+  sortField?: string;
+  where?: string;
+};
 
+export class NgrxDataService<T> extends EntityCollectionServiceBase<T> {
   contextMenuSelection?: T;
 
   contextMenuItems: MenuItem[] = [
@@ -48,31 +52,16 @@ export class NgrxDataService<T> extends EntityCollectionServiceBase<T> {
 
   selection!: T[];
 
-  pageData$ = merge([this.first$, this.rows$]).pipe(
-    switchMap(() => {
-      return this.entities$.pipe(
-        map((data) => {
-          return data
-            .sort((a: any, b: any) => {
-              const so = this.sortOrder$.getValue();
-              const sf = this.sortField$.getValue();
-              return (a[sf] < b[sf] ? -1 : 1) * so;
-            })
-            .slice(
-              this.first$.getValue(),
-              this.first$.getValue() + this.rows$.getValue()
-            );
-        })
-      );
-    })
-  );
-
   readonly searchControl = new FormControl('', Validators.maxLength(50));
   public columns: { header: string; field: string }[] = [];
-  public globalFilterFields: string[] = [];
+  public globalFilterFields: string[] = ['uuid'];
   readonly actionButtonLock$ = new BehaviorSubject<boolean>(false);
 
-  constructor(entityName: string, sef: EntityCollectionServiceElementsFactory) {
+  constructor(
+    entityName: string,
+    sef: EntityCollectionServiceElementsFactory,
+    private readonly httpClient: HttpClient
+  ) {
     super(entityName, sef);
   }
   lockActionButtons() {
@@ -80,5 +69,30 @@ export class NgrxDataService<T> extends EntityCollectionServiceBase<T> {
   }
   unlockActionButtons() {
     this.actionButtonLock$.next(false);
+  }
+
+  query(paginator: Table, table: Table) {
+    this.getWithQuery({
+      take: paginator.rows + '',
+      skip: paginator.first + '',
+      sortField: table.sortField,
+      sortOrder: table.sortOrder == 1 ? 'ASC' : 'DESC',
+      where: JSON.stringify({
+        global: { value: this.searchControl.value, matchMode: 'contains' },
+        ...table.filters,
+      }),
+    });
+  }
+
+  count(): Observable<number> {
+    return this.httpClient
+      .patch(`http://localhost:3333/api/${this.entityName.toLowerCase()}`, {})
+      .pipe(
+        map((c) => {
+          console.log('Total count : ', c);
+
+          return c;
+        })
+      ) as Observable<number>;
   }
 }

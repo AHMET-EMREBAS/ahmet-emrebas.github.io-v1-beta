@@ -1,7 +1,7 @@
 import {
   Sub,
   SubView,
-} from 'models';
+} from 'models/sub';
 
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';

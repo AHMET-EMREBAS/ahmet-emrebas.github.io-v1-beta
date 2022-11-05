@@ -1,10 +1,4 @@
-import { Response } from 'express';
 import { FindManyOptions } from 'typeorm';
-
-import {
-  Req,
-  Res,
-} from '@nestjs/common';
 
 import { BaseEntity } from '../entity';
 import {
@@ -51,13 +45,13 @@ export function GetQueryController<T extends BaseEntity, V = any>(
       @ReqQuery() orderDto: OrderDto
     ) {
       const query = {
-        ...paginatorDto,
+        where: whereQueryDto.where,
         ...withDeleteDto,
-        ...whereQueryDto.where,
+        ...paginatorDto,
         ...orderDto,
       } as FindManyOptions<any>;
 
-      console.log(query);
+      console.log(whereQueryDto.where);
 
       if (viewQueryDto.view === true) {
         return this.__service.viewService.find(query);
@@ -76,7 +70,7 @@ export function GetQueryController<T extends BaseEntity, V = any>(
 
     @ReadPermission(name)
     @CountAll()
-    async countAll(@Req() req: Request, @Res() res: Response) {
+    async countAll() {
       return await this.__service.count();
     }
 

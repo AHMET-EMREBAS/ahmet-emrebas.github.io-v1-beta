@@ -5,7 +5,7 @@ import {
 import {
   Sub,
   SubView,
-} from 'models';
+} from 'models/sub';
 
 import { Controller } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
@@ -16,10 +16,9 @@ import { SubService } from './sub.service';
 @ApiTags('[ Query / Relation ] Sub')
 @ManagePermission(SubNames.SINGULAR_NAME)
 @Controller(SubNames.SINGULAR_NAME)
-export class SubQueryController extends GetQueryController<
-  Sub,
-  SubView
->(SubNames.SINGULAR_NAME) {
+export class SubQueryController extends GetQueryController<Sub, SubView>(
+  SubNames.SINGULAR_NAME
+) {
   constructor(service: SubService) {
     super(service);
   }

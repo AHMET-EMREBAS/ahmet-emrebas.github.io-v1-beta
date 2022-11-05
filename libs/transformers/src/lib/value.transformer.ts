@@ -5,31 +5,32 @@ import {
   isString,
 } from 'class-validator';
 
-export function IntTransformer() {
+export function IntTransformer(defaultValue?: number) {
   return Transform(({ value }) => {
     if (isNumberString(value)) {
-      return parseInt(value);
+      const p = parseInt(value);
+      return p;
     }
-    return undefined;
+    return defaultValue;
   });
 }
 
-export function FloatTransformer() {
+export function FloatTransformer(defaultValue?: number) {
   return Transform(({ value }) => {
     if (isNumberString(value)) {
       return parseFloat(value);
     }
-    return undefined;
+    return defaultValue;
   });
 }
 
-export function BooleanTransformer() {
+export function BooleanTransformer(defaultValue?: boolean) {
   return Transform(({ value }) => {
     if (isString(value)) {
       if (isBooleanString(value.trim().toLowerCase())) {
         return value == 'true' ? true : false;
       }
     }
-    return undefined;
+    return defaultValue;
   });
 }

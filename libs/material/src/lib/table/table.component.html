@@ -1,23 +1,21 @@
 <p-contextMenu #cm [model]="ds.contextMenuItems"></p-contextMenu>
 
 
-<p-table #DATA_TABLE [(selection)]="ds.selection" dataKey="id" [rowTrackBy]="trackBy" [lazy]="true"
-    [columns]="ds.columns" [value]="(ds.pageData$ | async)!" [paginator]="true"
-    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rows]="2"
-    [rowsPerPageOptions]="[2,4,10,25,50]" responsiveLayout="scroll"
-    styleClass="p-datatable-gridlines p-datatable-striped" [globalFilterFields]="ds.globalFilterFields"
-    [totalRecords]="1000" (onPage)="loadData($event)" (onSort)="loadData($event)" [contextMenu]="cm"
-    [(contextMenuSelection)]="ds.contextMenuSelection">
+<p-table #DATA_TABLE [(selection)]="ds.selection" dataKey="id" [rowTrackBy]="trackBy" [columns]="ds.columns"
+    [value]="(ds.entities$ | async)!" responsiveLayout="scroll" [totalRecords]="totalRecords"
+    styleClass=" p-datatable-gridlines p-datatable-striped" [globalFilterFields]="ds.globalFilterFields"
+    [paginator]="true" [showCurrentPageReport]="true" [totalRecords]="totalRecords" [rows]="8"
+    [rowsPerPageOptions]="[8, 16,25,50,100]" [contextMenu]="cm" [(contextMenuSelection)]="ds.contextMenuSelection">
 
     <ng-template pTemplate="caption">
         <div class="flex">
             <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash"
-                (click)="DATA_TABLE.clear()"></button>
+                (click)="DATA_TABLE.clear()">
+            </button>
             <span class="p-input-icon-left ml-auto">
                 <i class="pi pi-search"></i>
-                <input pInputText type="text" [formControl]="ds.searchControl"
-                    (input)="DATA_TABLE.filterGlobal( ds.searchControl.value, 'contains')"
-                    placeholder="Search keyword" />
+                <input pInputText type="text" [formControl]="ds.searchControl" placeholder="Search keyword"
+                    (input)="DATA_TABLE.filterGlobal(ds.searchControl.value, 'contains')" />
             </span>
         </div>
     </ng-template>
@@ -35,8 +33,11 @@
             </th>
         </tr>
     </ng-template>
+
+
     <ng-template pTemplate="body" let-record let-columns="columns">
-        <tr [@enter] [pContextMenuRow]="record">
+        <tr [@enter] [pContextMenuRow]="record" style="position: relative;">
+
             <td>
                 <p-tableCheckbox [value]="record"></p-tableCheckbox>
             </td>
@@ -46,4 +47,8 @@
             </td>
         </tr>
     </ng-template>
+</p-table>
+
+
+<p-table #PAGINATOR [value]="[]" [lazy]="true">
 </p-table>

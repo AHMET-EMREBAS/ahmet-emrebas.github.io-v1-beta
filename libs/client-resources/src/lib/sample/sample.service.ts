@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { NgrxDataService } from 'material/data-services';
@@ -23,9 +24,12 @@ export class SampleService extends NgrxDataService<Sample> {
     },
   ];
 
-  public override globalFilterFields: string[] = ['name'];
+  public override globalFilterFields: string[] = ['uuid', 'name'];
 
-  constructor(sef: EntityCollectionServiceElementsFactory) {
-    super('Sample', sef);
+  constructor(
+    sef: EntityCollectionServiceElementsFactory,
+    httpClient: HttpClient
+  ) {
+    super('Sample', sef, httpClient);
   }
 }

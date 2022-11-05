@@ -2,7 +2,7 @@ import { CrudService } from 'core';
 import {
   Sub,
   SubView,
-} from 'models';
+} from 'models/sub';
 import { Repository } from 'typeorm';
 
 import { Injectable } from '@nestjs/common';

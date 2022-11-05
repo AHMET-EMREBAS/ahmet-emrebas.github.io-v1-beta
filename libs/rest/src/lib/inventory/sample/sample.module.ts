@@ -1,6 +1,12 @@
-import { Sample, SampleView } from 'models/inventory/sample';
+import {
+  Sample,
+  SampleView,
+} from 'models/inventory/sample';
 
-import { Module } from '@nestjs/common';
+import {
+  Module,
+  OnModuleInit,
+} from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { SamplePostController } from './sample-post.controller';
@@ -14,4 +20,13 @@ import { SampleSubscriber } from './sample.subscriber';
   providers: [SampleService, SampleSubscriber],
   exports: [SampleService],
 })
-export class SampleModule {}
+export class SampleModule implements OnModuleInit {
+  constructor(private readonly sampleService: SampleService) {}
+
+  async onModuleInit() {
+    let i = 0;
+    for (const _ of ' '.repeat(1000).split(' ')) {
+      await this.sampleService.save({ name: 'data' + ' ' + ++i });
+    }
+  }
+}

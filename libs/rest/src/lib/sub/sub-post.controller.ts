@@ -5,7 +5,7 @@ import {
 import {
   CreateSubDto,
   UpdateSubDTO,
-} from 'models';
+} from 'models/sub';
 
 import { Controller } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
