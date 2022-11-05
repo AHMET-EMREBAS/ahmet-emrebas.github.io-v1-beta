@@ -8,3 +8,4 @@ export * from './lib/table-view-resource';
 export * from './lib/update-resource';
 export * from './lib/table/table.component';
 export * from './lib/table/table.module';
+export * from './lib/card-view';

@@ -2,17 +2,23 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
+import { ConfirmationService } from 'primeng/api';
+import { CardModule } from 'primeng/card';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+
 import { DeleteSampleComponent } from './delete-sample.component';
 
 @NgModule({
   declarations: [DeleteSampleComponent],
   imports: [
     CommonModule,
+
+    ConfirmDialogModule,
+    CardModule,
     RouterModule.forChild([
       {
         path: '',
-        component: DeleteSampleModule,
-
+        component: DeleteSampleComponent,
         children: [
           {
             path: '',
@@ -25,5 +31,6 @@ import { DeleteSampleComponent } from './delete-sample.component';
       },
     ]),
   ],
+  providers: [ConfirmationService],
 })
 export class DeleteSampleModule {}

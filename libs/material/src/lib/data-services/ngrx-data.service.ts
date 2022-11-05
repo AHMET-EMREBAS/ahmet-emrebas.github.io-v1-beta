@@ -71,10 +71,10 @@ export class NgrxDataService<T> extends EntityCollectionServiceBase<T> {
     this.actionButtonLock$.next(false);
   }
 
-  query(paginator: Table, table: Table) {
+  query(table: Table) {
     this.getWithQuery({
-      take: paginator.rows + '',
-      skip: paginator.first + '',
+      take: table.rows + '',
+      skip: table.first + '',
       sortField: table.sortField,
       sortOrder: table.sortOrder == 1 ? 'ASC' : 'DESC',
       where: JSON.stringify({
@@ -86,11 +86,9 @@ export class NgrxDataService<T> extends EntityCollectionServiceBase<T> {
 
   count(): Observable<number> {
     return this.httpClient
-      .patch(`http://localhost:3333/api/${this.entityName.toLowerCase()}`, {})
+      .patch(`/api/${this.entityName.toLowerCase()}`, {})
       .pipe(
         map((c) => {
-          console.log('Total count : ', c);
-
           return c;
         })
       ) as Observable<number>;

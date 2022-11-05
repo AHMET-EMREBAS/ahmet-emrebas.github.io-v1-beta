@@ -1,1 +1,15 @@
-<router-outlet></router-outlet>
+<p-confirmDialog header="Delete item" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+<p-card>
+
+    <ng-template pTemplate="content">
+        <div class="flex flex-column gap-3 ">
+            <div *ngFor="let col of ds.columns" class="card-row flex gap-2" [@enter]>
+                <strong>{{col.header}} : </strong> <span>{{item[col.field]}}</span>
+            </div>
+        </div>
+    </ng-template>
+</p-card>
+<div class="flex flex-row justify-content-center gap-3 p-4">
+    <p-button styleClass="p-button-danger" label="Delete" (click)="deleteItem()"></p-button>
+</div>
+<!-- <router-outlet></router-outlet> -->

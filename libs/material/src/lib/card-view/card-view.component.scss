@@ -1,0 +1,28 @@
+strong {
+    text-decoration: underline;
+    font-weight: bolder;
+    min-width: 130px;
+    text-align: right;
+
+}
+
+
+p-card {
+    box-shadow: 0px 0px 0px transparent;
+    transition: box-shadow ease-in-out 400ms;
+}
+
+p-card:hover {
+    box-shadow: 0px 0px 10px gray;
+    cursor: pointer;
+}
+
+p-table {
+    position: sticky;
+    bottom: 0px;
+}
+
+p-toolbar {
+    position: sticky;
+    top: 0px;
+}
