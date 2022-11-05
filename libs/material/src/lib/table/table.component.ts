@@ -1,6 +1,7 @@
 import {
   AfterViewInit,
   Component,
+  OnDestroy,
   ViewChild,
 } from '@angular/core';
 
@@ -20,7 +21,7 @@ import { NgrxDataService } from '../data-services';
   styleUrls: ['./table.component.scss'],
   animations: [fadeInOnEnterAnimation({ anchor: 'enter' })],
 })
-export class TableComponent implements AfterViewInit {
+export class TableComponent implements AfterViewInit, OnDestroy {
   totalRecords = 100000;
   @ViewChild('DATA_TABLE') table!: Table;
 
