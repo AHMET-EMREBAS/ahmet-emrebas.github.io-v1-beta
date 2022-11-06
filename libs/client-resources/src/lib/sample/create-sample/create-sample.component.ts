@@ -84,6 +84,10 @@ export class CreateSampleComponent
         id: 'sample-dob',
       },
     };
+
+    setTimeout(() => {
+      this.formGroup.get('cities')?.setValue([1]);
+    }, 2000);
   }
 
   control(name: string) {

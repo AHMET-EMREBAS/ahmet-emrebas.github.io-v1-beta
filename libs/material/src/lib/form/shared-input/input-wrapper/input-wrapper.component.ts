@@ -1,9 +1,7 @@
 import {
   AfterViewInit,
   Component,
-  EventEmitter,
   Input,
-  Output,
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
@@ -26,8 +24,6 @@ import { HtmlInputOptions } from '../html-input-element';
 export class InputWrapperComponent implements AfterViewInit {
   @Input() control!: FormControl;
   @Input() attributes!: HtmlInputOptions;
-
-  @Output() lockEvent = new EventEmitter<boolean>();
 
   disabled = false;
 

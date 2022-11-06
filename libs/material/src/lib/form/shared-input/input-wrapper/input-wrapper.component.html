@@ -10,18 +10,12 @@
     <div class="input-wrapper flex flex-row  gap-2 justify-content-start align-items-center">
 
 
-
-
-
         <em *ngIf="disabled" style="width:100%;">{{getTextValue()}}</em>
 
-
-        <fieldset class="inner-field-set" [disabled]="disabled" [class.disabled]="disabled">
+        <fieldset class="inner-field-set gap-2 pr-6" [disabled]="disabled" [class.disabled]="disabled">
             <ng-content></ng-content>
             <ae-hidden-input [control]="control" [attributes]="attributes" tabindex="1241515"></ae-hidden-input>
         </fieldset>
-
-
 
         <div class="status" tabindex="5125125">
 
@@ -29,6 +23,9 @@
             </p-progressSpinner>
 
             <div class="status-buttons" *ngIf="(isTyping$ | async) ===false">
+
+
+
 
                 <p-button styleClass="p-button-success" icon="pi pi-unlock" *ngIf="isValid() && !disabled"
                     (click)="disableInput()" [@enter]>
