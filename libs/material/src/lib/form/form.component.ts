@@ -15,7 +15,7 @@ export class FormComponent {
   submitLock = false;
   @Output() formSubmit = new EventEmitter();
   @Input() formGroup!: FormGroup;
-
+  @Input() submitLabel = 'Submit';
   submit() {
     console.log(this.formGroup.value);
     if (this.formGroup.valid) {

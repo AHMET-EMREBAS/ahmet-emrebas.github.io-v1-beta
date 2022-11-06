@@ -3,8 +3,10 @@ import {
   FormControl,
   Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import {
+  ConfirmationService,
   FilterMetadata,
   MenuItem,
 } from 'primeng/api';
@@ -60,7 +62,9 @@ export class NgrxDataService<T> extends EntityCollectionServiceBase<T> {
   constructor(
     entityName: string,
     sef: EntityCollectionServiceElementsFactory,
-    private readonly httpClient: HttpClient
+    public readonly httpClient: HttpClient,
+    public readonly router: Router,
+    public readonly confirmService: ConfirmationService
   ) {
     super(entityName, sef);
   }

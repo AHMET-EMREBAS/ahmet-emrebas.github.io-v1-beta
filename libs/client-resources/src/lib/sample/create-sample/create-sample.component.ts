@@ -1,5 +1,6 @@
 import {
   Component,
+  Input,
   OnInit,
 } from '@angular/core';
 import {
@@ -25,6 +26,9 @@ export class CreateSampleComponent
   extends BaseResourceFormComponent<Sample>
   implements OnInit
 {
+  @Input() submitLabel = 'Save Sample';
+  @Input() defaultValue!: any;
+
   constructor(service: SampleService) {
     super(service);
   }
@@ -47,7 +51,6 @@ export class CreateSampleComponent
     this.formFields = {
       name: {
         id: 'sample-name-input',
-
         required: true,
         minLength: 3,
         maxLength: 10,
@@ -66,7 +69,6 @@ export class CreateSampleComponent
         ]),
 
         optionLabel: 'label',
-        // selectionLimit: 1,
       },
 
       price: {
@@ -77,17 +79,7 @@ export class CreateSampleComponent
         min: '50',
         max: '9000000',
       },
-      age: {
-        id: 'sample-age',
-      },
-      dob: {
-        id: 'sample-dob',
-      },
     };
-
-    setTimeout(() => {
-      this.formGroup.get('cities')?.setValue([1]);
-    }, 2000);
   }
 
   control(name: string) {

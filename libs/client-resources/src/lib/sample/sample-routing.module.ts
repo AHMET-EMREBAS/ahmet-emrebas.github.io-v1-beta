@@ -4,7 +4,11 @@ import {
   Routes,
 } from '@angular/router';
 
+import { CreateSampleComponent } from './create-sample';
+import { DeleteSampleComponent } from './delete-sample';
 import { SampleComponent } from './sample.component';
+import { TableViewSampleComponent } from './table-view-sample';
+import { UpdateSampleComponent } from './update-sample';
 
 export const routes: Routes = [
   {
@@ -14,31 +18,19 @@ export const routes: Routes = [
     children: [
       {
         path: 'table-view',
-        loadChildren: () =>
-          import('./table-view-sample/table-view-sample.module').then(
-            (m) => m.TableViewSampleModule
-          ),
+        component: TableViewSampleComponent,
       },
       {
         path: 'create',
-        loadChildren: () =>
-          import('./create-sample/create-sample.module').then(
-            (m) => m.CreateSampleModule
-          ),
+        component: CreateSampleComponent,
       },
       {
-        path: 'update',
-        loadChildren: () =>
-          import('./update-sample/update-sample.module').then(
-            (m) => m.UpdateSampleModule
-          ),
+        path: 'update/:id',
+        component: UpdateSampleComponent,
       },
       {
-        path: 'delete',
-        loadChildren: () =>
-          import('./delete-sample/delete-sample.module').then(
-            (m) => m.DeleteSampleModule
-          ),
+        path: 'delete/:id',
+        component: DeleteSampleComponent,
       },
     ],
   },

@@ -1,1 +1,2 @@
-<router-outlet></router-outlet>
+<ae-create-sample #form submitLabel="Update Sample" *ngIf="(item$ | async) as value" [defaultValue]="value">
+</ae-create-sample>

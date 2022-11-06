@@ -4,7 +4,10 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { NgrxDataService } from 'material/data-services';
-import { MenuItem } from 'primeng/api';
+import {
+  ConfirmationService,
+  MenuItem,
+} from 'primeng/api';
 
 import { EntityCollectionServiceElementsFactory } from '@ngrx/data';
 
@@ -41,7 +44,7 @@ export class SampleService extends NgrxDataService<Sample> {
       label: 'delete',
       icon: 'pi pi-trash',
       command: () => {
-        this.router.navigate(['delete']);
+        this.router.navigate(['delete', this.contextMenuSelection?.id]);
       },
     },
     {
@@ -64,8 +67,9 @@ export class SampleService extends NgrxDataService<Sample> {
     sef: EntityCollectionServiceElementsFactory,
     httpClient: HttpClient,
     private readonly clipboard: Clipboard,
-    private readonly router: Router
+    router: Router,
+    confirmService: ConfirmationService
   ) {
-    super('Sample', sef, httpClient);
+    super('Sample', sef, httpClient, router, confirmService);
   }
 }

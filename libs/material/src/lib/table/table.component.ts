@@ -1,7 +1,6 @@
 import {
   AfterViewInit,
   Component,
-  OnDestroy,
   ViewChild,
 } from '@angular/core';
 
@@ -21,8 +20,8 @@ import { NgrxDataService } from '../data-services';
   styleUrls: ['./table.component.scss'],
   animations: [fadeInOnEnterAnimation({ anchor: 'enter' })],
 })
-export class TableComponent implements AfterViewInit, OnDestroy {
-  totalRecords = 100000;
+export class TableComponent implements AfterViewInit {
+  totalRecords = this.ds.count();
   @ViewChild('DATA_TABLE') table!: Table;
 
   constructor(public readonly ds: NgrxDataService<any>) {}
@@ -46,9 +45,6 @@ export class TableComponent implements AfterViewInit, OnDestroy {
     });
   }
 
-  ngOnDestroy(): void {
-    this.ds.clearCache();
-  }
   trackBy(e: any) {
     return e.id;
   }
@@ -69,5 +65,10 @@ export class TableComponent implements AfterViewInit, OnDestroy {
 
   clearCache() {
     this.ds.clearCache();
+  }
+
+  clearFilter() {
+    this.table.clear();
+    this.ds.searchControl.setValue('');
   }
 }

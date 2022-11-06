@@ -12,6 +12,9 @@ import {
 import { MessageService } from 'primeng/api';
 import { map } from 'rxjs';
 
+import { EntityOp } from '@ngrx/data';
+
+import { isSampleActionType } from './is-sample-action-type';
 import { SampleService } from './sample.service';
 
 @Component({
@@ -20,41 +23,52 @@ import { SampleService } from './sample.service';
   styleUrls: ['./sample.component.scss'],
 })
 export class SampleComponent implements OnInit, OnDestroy {
-  sub = this.sampleService.entityActions$
+  sub = this.ss.entityActions$
     .pipe(
       map((action) => {
-        if (action.type === '[Sample] @ngrx/data/save/add-one/success') {
-          this.messageService.add({
+        if (isSampleActionType(action.type, EntityOp.SAVE_ADD_ONE_SUCCESS)) {
+          this.ms.add({
             severity: 'success',
             detail: 'Created the item',
             icon: 'pi pi-check',
           });
-
-          this.router.navigate(['table-view'], { relativeTo: this.route });
         }
 
-        if (action.type === '[Sample] @ngrx/data/save/add-one/error') {
-          this.messageService.add({
+        if (isSampleActionType(action.type, EntityOp.SAVE_DELETE_ONE_SUCCESS)) {
+          this.ms.add({
+            severity: 'success',
+            detail: 'Deleted the item',
+            icon: 'pi pi-check',
+          });
+
+          this.router.navigate(['../../table-view'], {
+            relativeTo: this.route,
+          });
+        }
+
+        if (isSampleActionType(action.type, EntityOp.SAVE_ADD_ONE_ERROR)) {
+          this.ms.add({
             severity: 'error',
             summary: 'Internal Server Error',
             detail: action.payload.data.error.message,
             icon: 'pi pi-times',
           });
         }
-        // this.router.navigate(['create'], { relativeTo: this.route });
       })
     )
     .subscribe();
 
   constructor(
-    private readonly sampleService: SampleService,
-    private readonly messageService: MessageService,
+    private readonly ss: SampleService,
+    private readonly ms: MessageService,
     private readonly router: Router,
     private readonly route: ActivatedRoute
   ) {}
 
   ngOnDestroy(): void {
-    this.sub.unsubscribe();
+    setTimeout(() => {
+      this.sub.unsubscribe();
+    });
   }
 
   ngOnInit(): void {

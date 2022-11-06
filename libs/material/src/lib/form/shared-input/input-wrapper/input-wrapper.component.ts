@@ -50,10 +50,6 @@ export class InputWrapperComponent implements AfterViewInit {
         })
       )
     );
-
-    setTimeout(() => {
-      this.control.setValue('');
-    }, 400);
   }
 
   isValid() {

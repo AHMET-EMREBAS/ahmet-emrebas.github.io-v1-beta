@@ -1,7 +1,4 @@
-import {
-  Component,
-  OnInit,
-} from '@angular/core';
+import { Component } from '@angular/core';
 import {
   ActivatedRoute,
   Router,
@@ -9,8 +6,8 @@ import {
 
 import { fadeInOnEnterAnimation } from 'angular-animations';
 import { ConfirmationService } from 'primeng/api';
+import { switchMap } from 'rxjs';
 
-import { Sample } from '../sample.interface';
 import { SampleService } from '../sample.service';
 
 @Component({
@@ -19,39 +16,30 @@ import { SampleService } from '../sample.service';
   styleUrls: ['./delete-sample.component.scss'],
   animations: [fadeInOnEnterAnimation({ anchor: 'enter' })],
 })
-export class DeleteSampleComponent implements OnInit {
-  item!: Sample;
+export class DeleteSampleComponent {
+  item$ = this.route.paramMap.pipe(
+    switchMap((param) => {
+      return this.ds.getByKey(param.get('id'));
+    })
+  );
 
   constructor(
     public readonly ds: SampleService,
     private readonly router: Router,
-    private readonly activatedRoute: ActivatedRoute,
+    private readonly route: ActivatedRoute,
     private readonly confirmService: ConfirmationService
   ) {}
-  ngOnInit(): void {
-    const hasItem = this.ds.contextMenuSelection;
 
-    if (hasItem) {
-      this.item = hasItem;
-    } else {
-      this.router.navigate(['../table-view']);
-    }
+  deleteItem(id: number) {
+    this.confirmService.confirm({
+      accept: () => {
+        this.ds.delete(id);
+      },
+      reject: () => this.back(),
+    });
   }
 
-  deleteItem() {
-    this.confirmService.confirm({
-      message: `Are you sure to delete the item with id, ${this.item?.id} ?`,
-      accept: () => {
-        this.ds.delete(this.item?.id + '');
-        this.router.navigate(['../table-view'], {
-          relativeTo: this.activatedRoute,
-        });
-      },
-      reject: () => {
-        this.router.navigate(['../table-view'], {
-          relativeTo: this.activatedRoute,
-        });
-      },
-    });
+  back() {
+    this.router.navigate(['../../table-view'], { relativeTo: this.route });
   }
 }

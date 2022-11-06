@@ -1,6 +1,6 @@
 <p-confirmDialog header="Delete item" icon="pi pi-exclamation-triangle"></p-confirmDialog>
-<p-card>
 
+<p-card *ngIf="( item$ | async) as item">
     <ng-template pTemplate="content">
         <div class="flex flex-column gap-3 ">
             <div *ngFor="let col of ds.columns" class="card-row flex gap-2" [@enter]>
@@ -8,8 +8,7 @@
             </div>
         </div>
     </ng-template>
+    <div class="flex flex-row justify-content-center gap-3 p-4">
+        <p-button styleClass="p-button-danger" label="Delete" (click)="deleteItem(item.id!)"></p-button>
+    </div>
 </p-card>
-<div class="flex flex-row justify-content-center gap-3 p-4">
-    <p-button styleClass="p-button-danger" label="Delete" (click)="deleteItem()"></p-button>
-</div>
-<!-- <router-outlet></router-outlet> -->
