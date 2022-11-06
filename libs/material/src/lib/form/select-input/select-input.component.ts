@@ -17,5 +17,7 @@ export class SelectInputComponent extends BaseInputComponent {
   setValue(event: any) {
     this.select.writeValue([event.itemValue]);
     this.control.setValue(event.itemValue);
+    this.control.markAsDirty();
+    this.control.markAsTouched();
   }
 }

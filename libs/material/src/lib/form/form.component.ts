@@ -23,9 +23,4 @@ export class FormComponent {
       this.submitLock = true;
     }
   }
-
-  restForm() {
-    this.formGroup.reset();
-    this.submitLock = false;
-  }
 }
