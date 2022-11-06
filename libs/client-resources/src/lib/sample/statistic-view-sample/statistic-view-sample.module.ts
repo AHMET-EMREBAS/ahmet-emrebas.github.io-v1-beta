@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
+import { CardModule } from 'primeng/card';
 import { ChartModule } from 'primeng/chart';
 
 import {
@@ -13,6 +14,7 @@ import {
   imports: [
     CommonModule,
     ChartModule,
+    CardModule,
     RouterModule.forChild([
       {
         path: '',
