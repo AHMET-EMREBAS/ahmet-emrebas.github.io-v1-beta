@@ -20,13 +20,6 @@ export const routes: Routes = [
           ),
       },
       {
-        path: 'card-view',
-        loadChildren: () =>
-          import('./card-view-sample/card-view-sample.module').then(
-            (m) => m.CardViewSampleModule
-          ),
-      },
-      {
         path: 'create',
         loadChildren: () =>
           import('./create-sample/create-sample.module').then(
@@ -45,13 +38,6 @@ export const routes: Routes = [
         loadChildren: () =>
           import('./delete-sample/delete-sample.module').then(
             (m) => m.DeleteSampleModule
-          ),
-      },
-      {
-        path: 'statistic-view',
-        loadChildren: () =>
-          import('./statistic-view-sample/statistic-view-sample.module').then(
-            (m) => m.StatisticViewSampleModule
           ),
       },
     ],
