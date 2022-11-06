@@ -28,7 +28,17 @@ export function CountAll() {
       summary: 'Count all',
     }),
     ApiOkResponse(),
-    Patch()
+    Patch('count')
+  );
+}
+
+export function UniqueBy() {
+  return applyDecorators(
+    ApiOperation({
+      summary: 'Unique by',
+    }),
+    ApiOkResponse(),
+    Patch('unique')
   );
 }
 

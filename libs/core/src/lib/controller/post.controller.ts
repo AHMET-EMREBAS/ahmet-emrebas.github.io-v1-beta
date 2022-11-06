@@ -6,9 +6,13 @@ import {
   IdParam,
   ReqBody,
   SaveOne,
+  UniqueBy,
   UpdateOneById,
 } from '../param-decorators';
-import { WritePermission } from '../security';
+import {
+  ReadPermission,
+  WritePermission,
+} from '../security';
 import { CrudService } from '../service';
 
 export function GetPostController<T>(
@@ -31,6 +35,18 @@ export function GetPostController<T>(
     @UpdateOneById()
     update(@IdParam() id: number, @ReqBody(updateDTO) updated: any) {
       return this.__service.update(id, updated);
+    }
+
+    @ReadPermission(name)
+    @UniqueBy()
+    async uniqueBy(@ReqBody(updateDTO) uniqueObj: any) {
+      const found = await this.__service.findOneBy(uniqueObj);
+
+      if (found) {
+        return true;
+      } else {
+        return false;
+      }
     }
   }
 

@@ -26,16 +26,11 @@ import { SampleService } from '../sample.service';
 })
 export class UpdateSampleComponent implements OnInit {
   item$ = this.route.paramMap.pipe(
-    switchMap((param) => {
-      return this.ss.getByKey(param.get('id'));
-    }),
-    map((data) => {
-      return data;
-    })
+    switchMap((param) => this.ss.getByKey(param.get('id'))),
+    map((data) => data)
   );
 
   submitLabel = 'Update Sample';
-
   formGroup!: FormGroup;
   formFields!: Partial<Record<keyof Sample, HtmlInputOptions>>;
 

@@ -90,11 +90,13 @@ export class NgrxDataService<T> extends EntityCollectionServiceBase<T> {
 
   count(): Observable<number> {
     return this.httpClient
-      .patch(`/api/${this.entityName.toLowerCase()}`, {})
-      .pipe(
-        map((c) => {
-          return c;
-        })
-      ) as Observable<number>;
+      .patch(`/api/${this.entityName.toLowerCase()}/count`, {})
+      .pipe(map((c) => c)) as Observable<number>;
+  }
+
+  isUniqueBy(key: string, value: any): Observable<any> {
+    return this.httpClient
+      .patch(`/api/${this.entityName.toLowerCase()}/unique`, { [key]: value })
+      .pipe(map((c) => c));
   }
 }

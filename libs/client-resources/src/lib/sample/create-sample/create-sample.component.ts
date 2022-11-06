@@ -10,7 +10,10 @@ import {
 } from '@angular/forms';
 
 import { HtmlInputOptions } from 'material/form/shared-input';
-import { of } from 'rxjs';
+import {
+  map,
+  of,
+} from 'rxjs';
 
 import { Sample } from '../sample.interface';
 import { SampleService } from '../sample.service';
@@ -27,15 +30,33 @@ export class CreateSampleComponent implements OnInit {
   formGroup!: FormGroup;
   formFields!: { [key: string]: HtmlInputOptions };
 
-  constructor(private readonly ss: SampleService) {}
+  constructor(private readonly sampleService: SampleService) {}
 
   ngOnInit(): void {
     this.formGroup = new FormGroup({
-      name: new FormControl('', [
-        Validators.required,
-        Validators.minLength(3),
-        Validators.maxLength(10),
-      ]),
+      name: new FormControl(
+        '',
+        [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(10),
+        ],
+        [
+          (control: any) => {
+            return this.sampleService.isUniqueBy('name', control.value).pipe(
+              map((data) => {
+                console.log('Async validator... ', data);
+                if (data) {
+                  console.log('Provide unique value...');
+                  return { unique: `Name must be unique` };
+                }
+                console.log('Good value');
+                return null;
+              })
+            );
+          },
+        ]
+      ),
       cities: new FormControl('', [Validators.required]),
       price: new FormControl('', [
         Validators.required,
@@ -83,7 +104,7 @@ export class CreateSampleComponent implements OnInit {
   }
 
   onSubmit(formValue: Sample) {
-    this.ss.add({ ...formValue });
+    this.sampleService.add({ ...formValue });
   }
 
   field(name: keyof Sample) {

@@ -213,6 +213,7 @@ export interface SchemaObject {
   required?: string[];
   enum?: any[];
 }
+
 export declare type SchemasObject = Record<string, SchemaObject>;
 export interface DiscriminatorObject {
   propertyName: string;

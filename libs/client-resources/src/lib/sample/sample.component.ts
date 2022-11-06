@@ -27,32 +27,21 @@ export class SampleComponent implements OnInit, OnDestroy {
     .pipe(
       map((action) => {
         if (isSampleActionType(action.type, EntityOp.SAVE_ADD_ONE_SUCCESS)) {
-          this.ms.add({
-            severity: 'success',
-            detail: 'Created the item',
-            icon: 'pi pi-check',
-          });
+          this.successMessage('Created item.');
         }
 
         if (isSampleActionType(action.type, EntityOp.SAVE_DELETE_ONE_SUCCESS)) {
-          this.ms.add({
-            severity: 'success',
-            detail: 'Deleted the item',
-            icon: 'pi pi-check',
-          });
+          this.successMessage('Deleted item');
 
-          this.router.navigate(['../../table-view'], {
-            relativeTo: this.route,
-          });
+          this.tableView();
+        }
+
+        if (isSampleActionType(action.type, EntityOp.SAVE_UPDATE_ONE_SUCCESS)) {
+          this.tableView();
         }
 
         if (isSampleActionType(action.type, EntityOp.SAVE_ADD_ONE_ERROR)) {
-          this.ms.add({
-            severity: 'error',
-            summary: 'Internal Server Error',
-            detail: action.payload.data.error.message,
-            icon: 'pi pi-times',
-          });
+          this.errorMessage(action.payload.data.error.message);
         }
       })
     )
@@ -73,5 +62,26 @@ export class SampleComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     // throw new Error('Method not implemented.');
+  }
+
+  tableView() {
+    this.router.navigate(['../../table-view'], { relativeTo: this.route });
+  }
+
+  successMessage(msg: string) {
+    this.ms.add({
+      severity: 'success',
+      detail: msg,
+      icon: 'pi pi-check',
+    });
+  }
+
+  errorMessage(msg: string) {
+    this.ms.add({
+      severity: 'error',
+      summary: 'Error',
+      detail: msg,
+      icon: 'pi pi-times',
+    });
   }
 }
