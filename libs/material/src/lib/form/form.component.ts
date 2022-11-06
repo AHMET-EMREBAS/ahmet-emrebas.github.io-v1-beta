@@ -21,6 +21,10 @@ export class FormComponent {
     if (this.formGroup.valid) {
       this.formSubmit.emit(this.formGroup.value);
       this.submitLock = true;
+
+      setTimeout(() => {
+        this.submitLock = false;
+      }, 5000);
     }
   }
 }
