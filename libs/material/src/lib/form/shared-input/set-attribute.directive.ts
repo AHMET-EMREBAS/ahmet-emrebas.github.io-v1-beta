@@ -23,10 +23,11 @@ export class SetAttributeDirective implements AfterViewInit {
       `#${this.aeSetAttribute.id} input`
     );
 
-    if (sub)
+    if (sub) {
+      sub.setAttribute('tabindex', '1');
       for (const [key, value] of Object.entries(this.aeSetAttribute)) {
         sub.setAttribute(key, value as any);
-        console.log(key, value);
       }
+    }
   }
 }

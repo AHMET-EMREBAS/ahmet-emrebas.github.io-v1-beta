@@ -9,5 +9,6 @@ export type HtmlInputOptions = Partial<
       optionLabel: string;
       locale: string;
       currency: string;
+      tabindex: number;
     }>
 >;

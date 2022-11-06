@@ -13,14 +13,13 @@
 
 
         <fieldset class="inner-field-set" [disabled]="disabled">
-
             <ng-content></ng-content>
         </fieldset>
 
 
 
-        <ae-hidden-input [control]="control" [attributes]="attributes"></ae-hidden-input>
-        <div class="status">
+        <ae-hidden-input [control]="control" [attributes]="attributes" tabindex="1241515"></ae-hidden-input>
+        <div class="status" tabindex="5125125">
 
             <p-progressSpinner *ngIf="(isTyping$ | async) " [style]="{width: '45px', height: '45px'}" strokeWidth="4">
             </p-progressSpinner>

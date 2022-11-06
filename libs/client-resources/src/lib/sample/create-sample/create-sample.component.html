@@ -1,4 +1,4 @@
-<ae-form [formGroup]="formGroup" (formSubmit)="onSubmit($event)">
+<ae-form [formGroup]="formGroup" (formSubmit)="onSubmit($event)" cdkTrapFocus>
         <ae-text-input [control]="control('name')" [attributes]="field('name')!"></ae-text-input>
 
         <ae-select-input [control]="control('cities')" [attributes]="field('cities')!">
