@@ -7,5 +7,7 @@ export type HtmlInputOptions = Partial<
       options: { [key: string]: any }[];
       selectionLimit: number;
       optionLabel: string;
+      locale: string;
+      currency: string;
     }>
 >;

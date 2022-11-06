@@ -7,4 +7,8 @@ export interface Sample {
 
   name: string;
   cities: string;
+
+  price: number;
+  dob: Date;
+  age: number;
 }

@@ -9,9 +9,17 @@
 
     <div class="input-wrapper flex flex-row  gap-2 justify-content-start align-items-center">
 
-        <ng-content></ng-content>
 
 
+
+        <fieldset class="inner-field-set" [disabled]="disabled">
+
+            <ng-content></ng-content>
+        </fieldset>
+
+
+
+        <ae-hidden-input [control]="control" [attributes]="attributes"></ae-hidden-input>
         <div class="status">
 
             <p-progressSpinner *ngIf="(isTyping$ | async) " [style]="{width: '45px', height: '45px'}" strokeWidth="4">
@@ -19,12 +27,12 @@
 
             <div class="status-buttons" *ngIf="(isTyping$ | async) ===false">
 
-                <p-button styleClass="p-button-success" icon="pi pi-unlock" *ngIf="isValid() && !locked"
-                    (click)="lockToggle()" [@enter]>
+                <p-button styleClass="p-button-success" icon="pi pi-unlock" *ngIf="isValid() && !disabled"
+                    (click)="toggleDisable()" [@enter]>
                 </p-button>
 
-                <p-button styleClass="p-button-secondary" icon="pi pi-lock" *ngIf="isValid() && locked"
-                    (click)="lockToggle()" [@enter]>
+                <p-button styleClass="p-button-secondary" icon="pi pi-lock" *ngIf="isValid() && disabled"
+                    (click)="toggleDisable()" [@enter]>
                 </p-button>
 
                 <p-button styleClass="p-button-danger" icon="pi pi-times" *ngIf="isInvalid()" (click)="control.reset()"
@@ -48,6 +56,13 @@
         <p-badge *ngIf="attributes.options"
             [severity]="(control.valid && control.dirty) ? 'success' : !control.dirty ? 'info' : 'danger'"
             [value]="'Selected ' +  (control.value?.length || '0')  + ' of ' + attributes.options.length">
+        </p-badge>
+
+        <!-- Select item indicator  -->
+        <p-badge *ngIf="attributes.min || attributes.max"
+            [severity]="(control.valid && control.dirty) ? 'success' : !control.dirty ? 'info' : 'danger'"
+            [value]="(control.value || '0')  + ' is less than ' + (attributes.max || ' ? ') + ' and  more than ' + (attributes.min || ' ? ') ">
+
         </p-badge>
 
         <i *ngIf="attributes.hint">

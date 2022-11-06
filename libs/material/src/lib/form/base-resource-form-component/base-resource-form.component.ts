@@ -14,7 +14,7 @@ export class BaseResourceFormComponent<T> {
   constructor(private readonly dataService: NgrxDataService<T>) {}
 
   onSubmit(formValue: T) {
-    this.dataService.add(formValue);
+    this.dataService.add({ ...formValue });
   }
 
   field(name: keyof T) {

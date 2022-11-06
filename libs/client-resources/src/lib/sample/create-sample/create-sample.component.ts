@@ -36,11 +36,17 @@ export class CreateSampleComponent
         Validators.maxLength(10),
       ]),
       cities: new FormControl('', [Validators.required]),
+      price: new FormControl('', [
+        Validators.required,
+        Validators.min(1),
+        Validators.max(90000000),
+      ]),
     });
 
     this.formFields = {
       name: {
         id: 'sample-name-input',
+
         required: true,
         minLength: 3,
         maxLength: 10,
@@ -48,8 +54,9 @@ export class CreateSampleComponent
       },
 
       cities: {
-        id: 'city name',
-        // required: true,
+        id: 'sample-city-input',
+        required: true,
+
         options: [
           { id: 1, label: 'Yozgat' },
           { id: 2, label: 'Angara' },
@@ -59,6 +66,21 @@ export class CreateSampleComponent
 
         optionLabel: 'label',
         // selectionLimit: 1,
+      },
+
+      price: {
+        id: 'sample-price',
+
+        required: true,
+        currency: 'USD',
+        min: '50',
+        max: '9000000',
+      },
+      age: {
+        id: 'sample-age',
+      },
+      dob: {
+        id: 'sample-dob',
       },
     };
   }

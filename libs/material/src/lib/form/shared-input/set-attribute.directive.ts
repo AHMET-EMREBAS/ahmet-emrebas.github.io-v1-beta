@@ -1,10 +1,9 @@
 import {
+  AfterViewInit,
   Directive,
   ElementRef,
   Input,
-  OnInit,
   Optional,
-  ViewContainerRef,
 } from '@angular/core';
 
 import { HtmlInputOptions } from './html-input-element';
@@ -12,24 +11,22 @@ import { HtmlInputOptions } from './html-input-element';
 @Directive({
   selector: '[aeSetAttribute]',
 })
-export class SetAttributeDirective implements OnInit {
+export class SetAttributeDirective implements AfterViewInit {
   @Input() aeSetAttribute!: HtmlInputOptions;
-  constructor(
-    @Optional() private readonly elm: ElementRef<HTMLInputElement>,
-    @Optional() private readonly con: ViewContainerRef
-  ) {}
-  ngOnInit(): void {
+  constructor(@Optional() private readonly elm: ElementRef<HTMLInputElement>) {}
+  ngAfterViewInit(): void {
     for (const [key, value] of Object.entries(this.aeSetAttribute)) {
-      this.set(key, value);
+      this.elm.nativeElement.setAttribute(key, value as any);
     }
-  }
 
-  private set(key: string, value: any) {
-    (this.con as any)[key] = value;
+    const sub = this.elm.nativeElement.querySelector(
+      `#${this.aeSetAttribute.id} input`
+    );
 
-    if (this.elm.nativeElement) {
-      this.elm.nativeElement.setAttribute(key, value);
-    } else {
-    }
+    if (sub)
+      for (const [key, value] of Object.entries(this.aeSetAttribute)) {
+        sub.setAttribute(key, value as any);
+        console.log(key, value);
+      }
   }
 }

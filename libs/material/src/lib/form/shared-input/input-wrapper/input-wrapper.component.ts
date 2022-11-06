@@ -1,7 +1,9 @@
 import {
   AfterViewInit,
   Component,
+  EventEmitter,
   Input,
+  Output,
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
@@ -25,8 +27,11 @@ export class InputWrapperComponent implements AfterViewInit {
   @Input() control!: FormControl;
   @Input() attributes!: HtmlInputOptions;
 
+  @Output() lockEvent = new EventEmitter<boolean>();
+
+  disabled = false;
+
   isTyping$!: Observable<boolean>;
-  locked = false;
   showHint = false;
 
   ngAfterViewInit(): void {
@@ -51,18 +56,8 @@ export class InputWrapperComponent implements AfterViewInit {
     return this.control.dirty && this.control.invalid;
   }
 
-  lockToggle() {
-    const element = document.getElementById(
-      this.attributes.id + ''
-    ) as HTMLInputElement;
-
-    if (this.locked) {
-      this.locked = false;
-      element.removeAttribute('disabled');
-      return;
-    }
-    this.locked = true;
-    element.disabled = true;
+  toggleDisable() {
+    this.disabled = !this.disabled;
   }
 
   hintToggle() {

@@ -19,9 +19,17 @@ export class BaseInputComponent implements OnInit {
   @Input() control!: FormControl;
   @Input() attributes: HtmlInputOptions = {};
 
+  ref = this;
+
+  disabled = false;
+
   ngOnInit(): void {
     if (!this.control) {
       this.control = new FormControl('');
     }
+  }
+
+  disabledToggle(isDisabled: boolean) {
+    this.disabled = isDisabled;
   }
 }

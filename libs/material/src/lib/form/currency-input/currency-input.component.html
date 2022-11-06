@@ -1,1 +1,6 @@
-<p>currency-input works!</p>
+<ae-input-wrapper [control]="control" [attributes]="attributes">
+    <p-inputNumber class="w-full" [style]="{width:'100%'}" [formControl]="control" mode="currency"
+        [currency]="attributes.currency!" [locale]="attributes.locale!" [aeSetAttribute]="attributes"
+        (onInput)="control.setValue($event.value || 0)" [disabled]="disabled">
+    </p-inputNumber>
+</ae-input-wrapper>

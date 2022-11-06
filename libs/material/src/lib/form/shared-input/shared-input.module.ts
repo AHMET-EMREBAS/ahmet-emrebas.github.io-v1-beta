@@ -11,6 +11,7 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { TooltipModule } from 'primeng/tooltip';
 
 import { BaseInputComponent } from './base-input/base-input.component';
+import { HiddenInputComponent } from './hidden-input/hidden-input.component';
 import { InputWrapperComponent } from './input-wrapper/input-wrapper.component';
 import { SetAttributeDirective } from './set-attribute.directive';
 
@@ -21,8 +22,14 @@ const modules = [FormsModule, ReactiveFormsModule, ButtonModule, TooltipModule];
     SetAttributeDirective,
     InputWrapperComponent,
     BaseInputComponent,
+    HiddenInputComponent,
   ],
   imports: [CommonModule, ProgressSpinnerModule, BadgeModule, ...modules],
-  exports: [...modules, SetAttributeDirective, InputWrapperComponent],
+  exports: [
+    ...modules,
+    SetAttributeDirective,
+    InputWrapperComponent,
+    HiddenInputComponent,
+  ],
 })
 export class SharedInputModule {}
