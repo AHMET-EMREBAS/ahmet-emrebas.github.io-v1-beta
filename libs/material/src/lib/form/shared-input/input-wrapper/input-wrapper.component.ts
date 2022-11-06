@@ -88,11 +88,11 @@ export class InputWrapperComponent implements AfterViewInit {
         `#${this.attributes.id} input`
       ) as HTMLInputElement;
 
-      if (element.focus) {
+      if (element?.focus) {
         element.focus();
       }
 
-      if (element2.focus) {
+      if (element2?.focus) {
         element2.focus();
       }
     }, 200);
