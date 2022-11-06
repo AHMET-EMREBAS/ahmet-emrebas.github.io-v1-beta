@@ -37,7 +37,7 @@ export class SampleService extends NgrxDataService<Sample> {
       label: 'edit',
       icon: 'pi pi-pencil',
       command: () => {
-        this.router.navigate(['update']);
+        this.router.navigate(['update', this.contextMenuSelection?.id]);
       },
     },
     {

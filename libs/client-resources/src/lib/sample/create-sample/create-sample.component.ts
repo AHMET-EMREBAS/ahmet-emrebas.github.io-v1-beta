@@ -9,9 +9,7 @@ import {
   Validators,
 } from '@angular/forms';
 
-import {
-  BaseResourceFormComponent,
-} from 'material/form/base-resource-form-component';
+import { HtmlInputOptions } from 'material/form/shared-input';
 import { of } from 'rxjs';
 
 import { Sample } from '../sample.interface';
@@ -22,16 +20,14 @@ import { SampleService } from '../sample.service';
   templateUrl: './create-sample.component.html',
   styleUrls: ['./create-sample.component.scss'],
 })
-export class CreateSampleComponent
-  extends BaseResourceFormComponent<Sample>
-  implements OnInit
-{
+export class CreateSampleComponent implements OnInit {
   @Input() submitLabel = 'Save Sample';
   @Input() defaultValue!: any;
 
-  constructor(service: SampleService) {
-    super(service);
-  }
+  formGroup!: FormGroup;
+  formFields!: { [key: string]: HtmlInputOptions };
+
+  constructor(private readonly ss: SampleService) {}
 
   ngOnInit(): void {
     this.formGroup = new FormGroup({
@@ -84,5 +80,13 @@ export class CreateSampleComponent
 
   control(name: string) {
     return this.formGroup.get(name) as FormControl;
+  }
+
+  onSubmit(formValue: Sample) {
+    this.ss.add({ ...formValue });
+  }
+
+  field(name: keyof Sample) {
+    return this.formFields[name];
   }
 }

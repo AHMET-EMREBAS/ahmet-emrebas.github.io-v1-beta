@@ -1,2 +1,9 @@
-<ae-create-sample #form submitLabel="Update Sample" *ngIf="(item$ | async) as value" [defaultValue]="value">
-</ae-create-sample>
+<ae-form [submitLabel]="submitLabel" [formGroup]="formGroup" (formSubmit)="onSubmit($event, item.id!)"
+    *ngIf="(item$ | async )as item">
+    <ae-text-input [defaultValue]="item.name" [control]="control('name')" [attributes]="field('name')!">
+    </ae-text-input>
+    <ae-select-input [defaultValue]="item.cities" [control]="control('cities')" [attributes]="field('cities')!">
+    </ae-select-input>
+    <ae-currency-input [defaultValue]="item.price" [control]="control('price')" [attributes]="field('price')!">
+    </ae-currency-input>
+</ae-form>
