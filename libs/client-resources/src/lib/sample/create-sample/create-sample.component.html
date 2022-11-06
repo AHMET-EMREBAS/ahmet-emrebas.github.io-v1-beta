@@ -1,9 +1,6 @@
-<ae-form [formGroup]="formGroup" (formSubmit)="onSubmit($event)" cdkTrapFocus>
+<ae-form [formGroup]="formGroup" (formSubmit)="onSubmit($event)">
         <ae-text-input [control]="control('name')" [attributes]="field('name')!"></ae-text-input>
-
-        <ae-select-input [control]="control('cities')" [attributes]="field('cities')!">
-        </ae-select-input>
-
+        <ae-select-input [control]="control('cities')" [attributes]="field('cities')!"> </ae-select-input>
         <ae-currency-input [control]="control('price')" [attributes]="field('price')!"> </ae-currency-input>
 </ae-form>
 <router-outlet></router-outlet>

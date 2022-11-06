@@ -12,13 +12,17 @@
 
 
 
-        <fieldset class="inner-field-set" [disabled]="disabled">
+
+        <em *ngIf="disabled">{{getTextValue()}}</em>
+
+
+        <fieldset class="inner-field-set" [disabled]="disabled" [class.disabled]="disabled">
             <ng-content></ng-content>
+            <ae-hidden-input [control]="control" [attributes]="attributes" tabindex="1241515"></ae-hidden-input>
         </fieldset>
 
 
 
-        <ae-hidden-input [control]="control" [attributes]="attributes" tabindex="1241515"></ae-hidden-input>
         <div class="status" tabindex="5125125">
 
             <p-progressSpinner *ngIf="(isTyping$ | async) " [style]="{width: '45px', height: '45px'}" strokeWidth="4">
@@ -27,11 +31,11 @@
             <div class="status-buttons" *ngIf="(isTyping$ | async) ===false">
 
                 <p-button styleClass="p-button-success" icon="pi pi-unlock" *ngIf="isValid() && !disabled"
-                    (click)="toggleDisable()" [@enter]>
+                    (click)="disableInput()" [@enter]>
                 </p-button>
 
                 <p-button styleClass="p-button-secondary" icon="pi pi-lock" *ngIf="isValid() && disabled"
-                    (click)="toggleDisable()" [@enter]>
+                    (click)="enableInput()" [@enter]>
                 </p-button>
 
                 <p-button styleClass="p-button-danger" icon="pi pi-times" *ngIf="isInvalid()" (click)="control.reset()"
@@ -42,7 +46,7 @@
         </div>
     </div>
 
-    <div class="flex justify-content-between gap-2" [@enter]>
+    <div class="flex justify-content-between gap-2" [@enter] *ngIf="!disabled">
 
 
         <!-- Min-Max length indicator. -->
@@ -52,9 +56,9 @@
         </p-badge>
 
         <!-- Select item indicator  -->
-        <p-badge *ngIf="attributes.options"
+        <p-badge *ngIf="(attributes.options | async) as options"
             [severity]="(control.valid && control.dirty) ? 'success' : !control.dirty ? 'info' : 'danger'"
-            [value]="'Selected ' +  (control.value?.length || '0')  + ' of ' + attributes.options.length">
+            [value]="'Selected ' +  (control.value?.length || '0')  + ' of ' + options.length">
         </p-badge>
 
         <!-- Select item indicator  -->

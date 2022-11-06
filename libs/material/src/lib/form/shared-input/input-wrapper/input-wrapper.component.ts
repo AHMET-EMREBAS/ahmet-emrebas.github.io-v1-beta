@@ -32,7 +32,6 @@ export class InputWrapperComponent implements AfterViewInit {
   disabled = false;
 
   isTyping$!: Observable<boolean>;
-  showHint = false;
 
   ngAfterViewInit(): void {
     this.isTyping$ = merge(
@@ -40,6 +39,19 @@ export class InputWrapperComponent implements AfterViewInit {
       this.control.valueChanges.pipe(
         debounceTime(1000),
         map(() => false)
+      ),
+      this.control.valueChanges.pipe(
+        debounceTime(3000),
+        map(() => {
+          if (
+            this.control.valid &&
+            this.control.dirty &&
+            this.control.touched
+          ) {
+            this.disabled = true;
+          }
+          return false;
+        })
       )
     );
 
@@ -60,11 +72,47 @@ export class InputWrapperComponent implements AfterViewInit {
     this.disabled = !this.disabled;
   }
 
-  hintToggle() {
-    this.showHint = !this.showHint;
+  disableInput() {
+    this.disabled = true;
   }
 
-  hints() {
-    return this.attributes.hint?.split('. ');
+  enableInput() {
+    this.disabled = false;
+
+    setTimeout(() => {
+      const element = document.querySelector(
+        `#${this.attributes.id}`
+      ) as HTMLInputElement;
+
+      const element2 = document.querySelector(
+        `#${this.attributes.id} input`
+      ) as HTMLInputElement;
+
+      if (element.focus) {
+        element.focus();
+      }
+
+      if (element2.focus) {
+        element2.focus();
+      }
+    }, 200);
+  }
+
+  getTextValue() {
+    if (
+      ['string', 'number', 'boolean', 'date'].includes(
+        typeof this.control.value
+      )
+    ) {
+      return this.control.value;
+    } else if (typeof this.control.value.map === 'function') {
+      return this.control.value.map((e: any) => {
+        if (this.attributes.optionLabel) {
+          return e[this.attributes.optionLabel];
+        } else {
+          return e.id;
+        }
+      });
+    }
   }
 }

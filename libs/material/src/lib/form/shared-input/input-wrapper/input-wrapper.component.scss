@@ -33,3 +33,7 @@ li::marker {
     display: flex;
     margin: 0px;
 }
+
+.disabled {
+    visibility: collapse;
+}

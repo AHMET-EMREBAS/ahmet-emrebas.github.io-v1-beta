@@ -11,6 +11,7 @@ import {
 import {
   BaseResourceFormComponent,
 } from 'material/form/base-resource-form-component';
+import { of } from 'rxjs';
 
 import { Sample } from '../sample.interface';
 import { SampleService } from '../sample.service';
@@ -57,12 +58,12 @@ export class CreateSampleComponent
         id: 'sample-city-input',
         required: true,
 
-        options: [
+        options: of([
           { id: 1, label: 'Yozgat' },
           { id: 2, label: 'Angara' },
           { id: 3, label: 'Suvas' },
           { id: 4, label: 'Girik Gale' },
-        ],
+        ]),
 
         optionLabel: 'label',
         // selectionLimit: 1,
@@ -70,7 +71,7 @@ export class CreateSampleComponent
 
       price: {
         id: 'sample-price',
-
+        label: 'Set price',
         required: true,
         currency: 'USD',
         min: '50',

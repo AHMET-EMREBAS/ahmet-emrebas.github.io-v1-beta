@@ -1,6 +1,7 @@
 <ae-input-wrapper [control]="control" [attributes]="attributes">
     <p-multiSelect [tabindex]="1" [defaultLabel]="attributes.label || 'Set label'" styleClass="w-full pr-6"
-        [formControl]="control" [selectionLimit]="attributes.selectionLimit || 10000" [options]="attributes.options!"
-        [optionLabel]="attributes.optionLabel!" [style.width]="'100%'" [aeSetAttribute]="attributes">
+        [formControl]="control" [selectionLimit]="attributes.selectionLimit || 10000"
+        [options]="(attributes.options |async )!" [optionLabel]="attributes.optionLabel!" [style.width]="'100%'"
+        [aeSetAttribute]="attributes">
     </p-multiSelect>
 </ae-input-wrapper>
