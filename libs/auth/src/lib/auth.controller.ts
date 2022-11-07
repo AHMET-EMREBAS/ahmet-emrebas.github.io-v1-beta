@@ -65,13 +65,12 @@ export class AuthController {
     res.redirect('/login');
   }
 
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
   @Post('can-activate')
   canActivate(@Body() body: any, @GetUser() user: Sub) {
-    console.log(body);
-
+    console.warn('Can activate is returning true!');
+    return true;
     const permit = createPermission(body.operation + ':' + body.resource);
-
     return checkPermission(user, permit);
   }
 }

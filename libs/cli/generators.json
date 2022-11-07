@@ -27,6 +27,11 @@
       "factory": "./src/generators/service/generator",
       "schema": "./src/generators/service/schema.json",
       "description": "service generator"
+    },
+    "client-resource": {
+      "factory": "./src/generators/client-resource/generator",
+      "schema": "./src/generators/client-resource/schema.json",
+      "description": "client-resource generator"
     }
   }
 }

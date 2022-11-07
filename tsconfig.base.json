@@ -17,7 +17,7 @@
     "paths": {
       "auth": ["libs/auth/src/index.ts"],
       "cli": ["libs/cli/src/index.ts"],
-      "client-resources": ["libs/client-resources/src/index.ts"],
+      "client-resources/*": ["libs/client-resources/src/lib/*"],
       "common": ["libs/common/src/index.ts"],
       "core": ["libs/core/src/index.ts"],
       "material/*": ["libs/material/src/lib/*"],

@@ -15,7 +15,6 @@ import {
   BehaviorSubject,
   map,
   Observable,
-  of,
 } from 'rxjs';
 
 import {
@@ -102,10 +101,9 @@ export class NgrxDataService<T> extends EntityCollectionServiceBase<T> {
   }
 
   canActivate(operation: string) {
-    // return this.httpClient.post<boolean>('/api/auth/can-activate', {
-    //   resource: this.entityName.toLowerCase(),
-    //   operation,
-    // });
-    return of(true);
+    return this.httpClient.post<boolean>('/api/auth/can-activate', {
+      resource: this.entityName.toLowerCase(),
+      operation,
+    });
   }
 }

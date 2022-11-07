@@ -8,8 +8,8 @@ import { CreateSampleComponent } from './create-sample';
 import { DeleteSampleComponent } from './delete-sample';
 import { SampleComponent } from './sample.component';
 import {
-  CanCreateSample,
-  CanReadSample,
+  CanReadSampleGuard,
+  CanWriteSampleGuard,
 } from './sample.guard';
 import { TableViewSampleComponent } from './table-view-sample';
 import { UpdateSampleComponent } from './update-sample';
@@ -23,12 +23,12 @@ export const routes: Routes = [
       {
         path: 'table-view',
         component: TableViewSampleComponent,
-        canActivate: [CanReadSample],
+        canActivate: [CanReadSampleGuard],
       },
       {
         path: 'create',
         component: CreateSampleComponent,
-        canActivate: [CanCreateSample],
+        canActivate: [CanWriteSampleGuard],
       },
       {
         path: 'update/:id',

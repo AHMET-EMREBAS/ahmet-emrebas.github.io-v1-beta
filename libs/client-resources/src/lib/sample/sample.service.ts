@@ -34,14 +34,14 @@ export class SampleService extends NgrxDataService<Sample> {
 
   public override contextMenuItems: MenuItem[] = [
     {
-      label: 'edit',
+      label: 'Edit',
       icon: 'pi pi-pencil',
       command: () => {
         this.router.navigate(['update', this.contextMenuSelection?.id]);
       },
     },
     {
-      label: 'delete',
+      label: 'Delete',
       icon: 'pi pi-trash',
       command: () => {
         this.router.navigate(['delete', this.contextMenuSelection?.id]);

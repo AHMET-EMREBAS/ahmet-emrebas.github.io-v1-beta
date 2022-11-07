@@ -21,7 +21,8 @@ import { entityDataModuleConfig } from './ngrx.meta';
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('client-resources').then((m) => m.SampleModule),
+    loadChildren: () =>
+      import('client-resources/sample').then((m) => m.SampleModule),
   },
   // {
   //   path: '',

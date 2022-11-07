@@ -6,15 +6,12 @@ import {
   UrlTree,
 } from '@angular/router';
 
-import {
-  map,
-  Observable,
-} from 'rxjs';
+import { Observable } from 'rxjs';
 
 import { SampleService } from './sample.service';
 
 @Injectable()
-export class CanCreateSample implements CanActivate {
+export class CanWriteSampleGuard implements CanActivate {
   constructor(private readonly service: SampleService) {}
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -24,16 +21,12 @@ export class CanCreateSample implements CanActivate {
     | UrlTree
     | Observable<boolean | UrlTree>
     | Promise<boolean | UrlTree> {
-    return this.service.canActivate('create').pipe(
-      map((data) => {
-        return data;
-      })
-    );
+    return this.service.canActivate('WRITE');
   }
 }
 
 @Injectable()
-export class CanReadSample implements CanActivate {
+export class CanReadSampleGuard implements CanActivate {
   constructor(private readonly service: SampleService) {}
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -43,10 +36,6 @@ export class CanReadSample implements CanActivate {
     | UrlTree
     | Observable<boolean | UrlTree>
     | Promise<boolean | UrlTree> {
-    return this.service.canActivate('read').pipe(
-      map((data) => {
-        return data;
-      })
-    );
+    return this.service.canActivate('READ');
   }
 }
