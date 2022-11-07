@@ -23,14 +23,20 @@ export class CategoryService extends NgrxDataService<Category> {
       label: 'Edit',
       icon: 'pi pi-pencil',
       command: () => {
-        this.router.navigate(['update', this.contextMenuSelection?.id]);
+        this.router.navigate([
+          '/category/update',
+          this.contextMenuSelection?.id,
+        ]);
       },
     },
     {
       label: 'Delete',
       icon: 'pi pi-trash',
       command: () => {
-        this.router.navigate(['delete', this.contextMenuSelection?.id]);
+        this.router.navigate([
+          '/category/delete',
+          this.contextMenuSelection?.id,
+        ]);
       },
     },
     {

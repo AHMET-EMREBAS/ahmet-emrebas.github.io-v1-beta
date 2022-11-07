@@ -39,14 +39,14 @@ export class <%= classname %>Service extends NgrxDataService<<%= classname %>> {
       label: 'Edit',
       icon: 'pi pi-pencil',
       command: () => {
-        this.router.navigate(['update', this.contextMenuSelection?.id]);
+        this.router.navigate(['/<%= filename %>/update', this.contextMenuSelection?.id]);
       },
     },
     {
       label: 'Delete',
       icon: 'pi pi-trash',
       command: () => {
-        this.router.navigate(['delete', this.contextMenuSelection?.id]);
+        this.router.navigate(['/<%= filename %>/delete', this.contextMenuSelection?.id]);
       },
     },
     {
@@ -71,14 +71,10 @@ export class <%= classname %>Service extends NgrxDataService<<%= classname %>> {
     private readonly clipboard: Clipboard,
     router: Router,
     confirmService: ConfirmationService,
-     <% for(const COLUMN of relations.slice(0, 1)) { %> 
+     <% for(const COLUMN of relations) { %> 
         public readonly <%- COLUMN.name %>Service:<%= COLUMN.name[0].toUpperCase() + COLUMN.name.substring(1) +'Service' %>,
     <% } %>
   ) {
-    super('<%= classname %>', sef, httpClient, router, confirmService, 
-     <% for(const COLUMN of relations.slice(0, 1)) { %> 
-        <%- COLUMN.name %>Service
-    <% } %>
-    );
+    super('<%= classname %>', sef, httpClient, router, confirmService);
   }
 }

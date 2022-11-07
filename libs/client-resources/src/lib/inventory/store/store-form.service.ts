@@ -55,7 +55,7 @@ export class StoreFormService {
 
         optionValue: 'id',
 
-        asyncOptions: this.storeService.subService?.entities$,
+        asyncOptions: this.storeService.pricelevelService?.entities$,
       });
   }
 

@@ -8,16 +8,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { PricePostController } from './price-post.controller';
 import { PriceQueryController } from './price-query.controller';
 import { PriceService } from './price.service';
-import { PriceSubscriber } from './price.subscriber';
-import { EventEmitterModule } from '@nestjs/event-emitter';
 
 @Module({
-  imports: [
-    TypeOrmModule.forFeature([Price, PriceView, Product]),
-    EventEmitterModule,
-  ],
+  imports: [TypeOrmModule.forFeature([Price, PriceView, Product])],
   controllers: [PriceQueryController, PricePostController],
-  providers: [PriceService, PriceSubscriber],
-  exports: [PriceService],
+  providers: [PriceService],
 })
 export class PriceModule {}

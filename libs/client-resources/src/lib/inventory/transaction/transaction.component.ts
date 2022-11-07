@@ -23,6 +23,7 @@ export class TransactionComponent implements OnInit, OnDestroy {
           isTransactionActionType(action.type, EntityOp.SAVE_ADD_ONE_SUCCESS)
         ) {
           this.successMessage('Created item.');
+          this.tableView();
         }
 
         if (
@@ -36,6 +37,7 @@ export class TransactionComponent implements OnInit, OnDestroy {
         if (
           isTransactionActionType(action.type, EntityOp.SAVE_UPDATE_ONE_SUCCESS)
         ) {
+          this.successMessage('Updated item');
           this.tableView();
         }
 
@@ -64,7 +66,7 @@ export class TransactionComponent implements OnInit, OnDestroy {
   }
 
   tableView() {
-    this.router.navigate(['../../table-view'], { relativeTo: this.route });
+    this.router.navigate(['/transaction/table-view']);
   }
 
   successMessage(msg: string) {

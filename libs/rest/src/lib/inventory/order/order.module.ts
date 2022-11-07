@@ -12,8 +12,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { OrderPostController } from './order-post.controller';
 import { OrderQueryController } from './order-query.controller';
 import { OrderService } from './order.service';
-import { OrderSubscriber } from './order.subscriber';
-import { EventEmitterModule } from '@nestjs/event-emitter';
 
 @Module({
   imports: [
@@ -27,10 +25,8 @@ import { EventEmitterModule } from '@nestjs/event-emitter';
 
       Transaction,
     ]),
-    EventEmitterModule,
   ],
   controllers: [OrderQueryController, OrderPostController],
-  providers: [OrderService, OrderSubscriber],
-  exports: [OrderService],
+  providers: [OrderService],
 })
 export class OrderModule {}

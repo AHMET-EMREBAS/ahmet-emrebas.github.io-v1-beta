@@ -43,14 +43,20 @@ export class QuantityService extends NgrxDataService<Quantity> {
       label: 'Edit',
       icon: 'pi pi-pencil',
       command: () => {
-        this.router.navigate(['update', this.contextMenuSelection?.id]);
+        this.router.navigate([
+          '/quantity/update',
+          this.contextMenuSelection?.id,
+        ]);
       },
     },
     {
       label: 'Delete',
       icon: 'pi pi-trash',
       command: () => {
-        this.router.navigate(['delete', this.contextMenuSelection?.id]);
+        this.router.navigate([
+          '/quantity/delete',
+          this.contextMenuSelection?.id,
+        ]);
       },
     },
     {
@@ -76,16 +82,10 @@ export class QuantityService extends NgrxDataService<Quantity> {
     router: Router,
     confirmService: ConfirmationService,
 
-    public readonly productService: ProductService
-  ) {
-    super(
-      'Quantity',
-      sef,
-      httpClient,
-      router,
-      confirmService,
+    public readonly productService: ProductService,
 
-      productService
-    );
+    public readonly storeService: StoreService
+  ) {
+    super('Quantity', sef, httpClient, router, confirmService);
   }
 }

@@ -35,14 +35,14 @@ export class StoreService extends NgrxDataService<Store> {
       label: 'Edit',
       icon: 'pi pi-pencil',
       command: () => {
-        this.router.navigate(['update', this.contextMenuSelection?.id]);
+        this.router.navigate(['/store/update', this.contextMenuSelection?.id]);
       },
     },
     {
       label: 'Delete',
       icon: 'pi pi-trash',
       command: () => {
-        this.router.navigate(['delete', this.contextMenuSelection?.id]);
+        this.router.navigate(['/store/delete', this.contextMenuSelection?.id]);
       },
     },
     {
@@ -70,14 +70,6 @@ export class StoreService extends NgrxDataService<Store> {
 
     public readonly pricelevelService: PricelevelService
   ) {
-    super(
-      'Store',
-      sef,
-      httpClient,
-      router,
-      confirmService,
-
-      pricelevelService
-    );
+    super('Store', sef, httpClient, router, confirmService);
   }
 }

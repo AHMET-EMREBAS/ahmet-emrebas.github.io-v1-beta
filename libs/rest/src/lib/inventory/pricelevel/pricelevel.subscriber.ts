@@ -8,7 +8,6 @@ import {
 } from 'typeorm';
 
 import { Logger } from '@nestjs/common';
-import { EventEmitter2 } from '@nestjs/event-emitter';
 
 @EventSubscriber()
 export class PricelevelSubscriber
@@ -16,19 +15,15 @@ export class PricelevelSubscriber
 {
   logger = new Logger(PricelevelSubscriber.name);
 
-  constructor(private readonly eventEmitter: EventEmitter2) {}
-
   listenTo(): ClassConstructor<Pricelevel> {
     return Pricelevel;
   }
 
   beforeInsert(event: InsertEvent<Pricelevel>): void | Promise<any> {
-    this.logger.log('[Pricelevel] Inserted product', event.entity);
-    this.eventEmitter.emit('product.beforeInsert', event.entity);
+    this.logger.log('[Pricelevel] Inserted pricelevel', event.entity);
   }
 
   beforeRemove(event: RemoveEvent<Pricelevel>): void | Promise<any> {
-    this.logger.log('[Pricelevel] Removed product', event.entity);
-    this.eventEmitter.emit('product.beforeRemove', event.entity);
+    this.logger.log('[Pricelevel] Removed pricelevel', event.entity);
   }
 }

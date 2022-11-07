@@ -67,7 +67,7 @@ export class PriceFormService {
 
         optionValue: 'id',
 
-        asyncOptions: this.priceService.subService?.entities$,
+        asyncOptions: this.priceService.productService?.entities$,
       });
   }
 

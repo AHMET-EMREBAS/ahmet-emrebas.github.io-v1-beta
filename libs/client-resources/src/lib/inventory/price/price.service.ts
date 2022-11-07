@@ -39,14 +39,14 @@ export class PriceService extends NgrxDataService<Price> {
       label: 'Edit',
       icon: 'pi pi-pencil',
       command: () => {
-        this.router.navigate(['update', this.contextMenuSelection?.id]);
+        this.router.navigate(['/price/update', this.contextMenuSelection?.id]);
       },
     },
     {
       label: 'Delete',
       icon: 'pi pi-trash',
       command: () => {
-        this.router.navigate(['delete', this.contextMenuSelection?.id]);
+        this.router.navigate(['/price/delete', this.contextMenuSelection?.id]);
       },
     },
     {
@@ -74,14 +74,6 @@ export class PriceService extends NgrxDataService<Price> {
 
     public readonly productService: ProductService
   ) {
-    super(
-      'Price',
-      sef,
-      httpClient,
-      router,
-      confirmService,
-
-      productService
-    );
+    super('Price', sef, httpClient, router, confirmService);
   }
 }

@@ -37,3 +37,7 @@ li::marker {
 .disabled {
     visibility: collapse;
 }
+
+label {
+    text-transform: capitalize;
+}

@@ -32,7 +32,7 @@ export class <%= classname %>FormService {
         <% for( const [CN, CV] of Object.entries(COLUMN)) { %>
          <%- CN %>: <% if(typeof CV ==='string') { %> '<%= CV %>', <% } else { %>  <%= CV %>, <% } %>
         <% } %>
-         <% if(COLUMN.inputType.includes('select')){ %> asyncOptions:this.<%= filename %>Service.subService?.entities$ <% }%>
+         <% if(COLUMN.inputType.includes('select')){ %> asyncOptions:this.<%= filename %>Service.<%- COLUMN.name %>Service?.entities$ <% }%>
       })
     <% } %>
   }

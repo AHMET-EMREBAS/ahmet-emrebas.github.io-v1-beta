@@ -22,6 +22,8 @@ export class ProductService extends NgrxDataService<Product> {
     { field: 'description', header: 'DESCRIPTION' },
 
     { field: 'category', header: 'CATEGORY' },
+
+    { field: 'department', header: 'DEPARTMENT' },
   ];
 
   public override globalFilterFields: string[] = [
@@ -41,14 +43,20 @@ export class ProductService extends NgrxDataService<Product> {
       label: 'Edit',
       icon: 'pi pi-pencil',
       command: () => {
-        this.router.navigate(['update', this.contextMenuSelection?.id]);
+        this.router.navigate([
+          '/product/update',
+          this.contextMenuSelection?.id,
+        ]);
       },
     },
     {
       label: 'Delete',
       icon: 'pi pi-trash',
       command: () => {
-        this.router.navigate(['delete', this.contextMenuSelection?.id]);
+        this.router.navigate([
+          '/product/delete',
+          this.contextMenuSelection?.id,
+        ]);
       },
     },
     {
@@ -74,16 +82,10 @@ export class ProductService extends NgrxDataService<Product> {
     router: Router,
     confirmService: ConfirmationService,
 
-    public readonly categoryService: CategoryService
-  ) {
-    super(
-      'Product',
-      sef,
-      httpClient,
-      router,
-      confirmService,
+    public readonly categoryService: CategoryService,
 
-      categoryService
-    );
+    public readonly departmentService: DepartmentService
+  ) {
+    super('Product', sef, httpClient, router, confirmService);
   }
 }

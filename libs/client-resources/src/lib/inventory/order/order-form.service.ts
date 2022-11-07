@@ -49,7 +49,7 @@ export class OrderFormService {
 
         optionValue: 'id',
 
-        asyncOptions: this.orderService.subService?.entities$,
+        asyncOptions: this.orderService.productService?.entities$,
       })
 
       .add({
@@ -69,7 +69,7 @@ export class OrderFormService {
 
         optionValue: 'id',
 
-        asyncOptions: this.orderService.subService?.entities$,
+        asyncOptions: this.orderService.pricelevelService?.entities$,
       })
 
       .add({
@@ -89,7 +89,7 @@ export class OrderFormService {
 
         optionValue: 'id',
 
-        asyncOptions: this.orderService.subService?.entities$,
+        asyncOptions: this.orderService.transactionService?.entities$,
       });
   }
 

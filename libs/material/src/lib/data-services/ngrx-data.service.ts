@@ -68,6 +68,9 @@ export class NgrxDataService<T> extends EntityCollectionServiceBase<T> {
     public readonly subService?: NgrxDataService<any>
   ) {
     super(entityName, sef);
+    setTimeout(() => {
+      this.getWithQuery({ view: 'true' });
+    }, 100);
   }
   lockActionButtons() {
     this.actionButtonLock$.next(true);
@@ -82,6 +85,7 @@ export class NgrxDataService<T> extends EntityCollectionServiceBase<T> {
       skip: table.first + '',
       sortField: table.sortField,
       sortOrder: table.sortOrder == 1 ? 'ASC' : 'DESC',
+      view: 'true',
       where: JSON.stringify({
         global: { value: this.searchControl.value, matchMode: 'contains' },
         ...table.filters,

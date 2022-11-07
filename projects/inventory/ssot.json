@@ -57,6 +57,11 @@
           "type": "string",
           "columnName": "name",
           "from": "category"
+        },
+        "department": {
+          "type": "string",
+          "columnName": "name",
+          "from": "department"
         }
       }
     },

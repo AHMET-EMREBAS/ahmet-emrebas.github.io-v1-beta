@@ -21,6 +21,7 @@ export class OrderComponent implements OnInit, OnDestroy {
       map((action) => {
         if (isOrderActionType(action.type, EntityOp.SAVE_ADD_ONE_SUCCESS)) {
           this.successMessage('Created item.');
+          this.tableView();
         }
 
         if (isOrderActionType(action.type, EntityOp.SAVE_DELETE_ONE_SUCCESS)) {
@@ -30,6 +31,7 @@ export class OrderComponent implements OnInit, OnDestroy {
         }
 
         if (isOrderActionType(action.type, EntityOp.SAVE_UPDATE_ONE_SUCCESS)) {
+          this.successMessage('Updated item');
           this.tableView();
         }
 
@@ -58,7 +60,7 @@ export class OrderComponent implements OnInit, OnDestroy {
   }
 
   tableView() {
-    this.router.navigate(['../../table-view'], { relativeTo: this.route });
+    this.router.navigate(['/order/table-view']);
   }
 
   successMessage(msg: string) {

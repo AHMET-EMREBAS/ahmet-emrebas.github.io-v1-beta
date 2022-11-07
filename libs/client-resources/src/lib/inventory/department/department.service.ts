@@ -23,14 +23,20 @@ export class DepartmentService extends NgrxDataService<Department> {
       label: 'Edit',
       icon: 'pi pi-pencil',
       command: () => {
-        this.router.navigate(['update', this.contextMenuSelection?.id]);
+        this.router.navigate([
+          '/department/update',
+          this.contextMenuSelection?.id,
+        ]);
       },
     },
     {
       label: 'Delete',
       icon: 'pi pi-trash',
       command: () => {
-        this.router.navigate(['delete', this.contextMenuSelection?.id]);
+        this.router.navigate([
+          '/department/delete',
+          this.contextMenuSelection?.id,
+        ]);
       },
     },
     {

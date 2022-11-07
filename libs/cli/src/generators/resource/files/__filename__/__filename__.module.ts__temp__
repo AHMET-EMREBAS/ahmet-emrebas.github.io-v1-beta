@@ -15,8 +15,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { <%= classname %>PostController } from './<%= filename %>-post.controller';
 import { <%= classname %>QueryController } from './<%= filename %>-query.controller';
 import { <%= classname %>Service } from './<%= filename %>.service';
-import { <%= classname %>Subscriber } from './<%= filename %>.subscriber';
-import { EventEmitterModule } from '@nestjs/event-emitter';
 
 
 @Module({
@@ -30,9 +28,9 @@ import { EventEmitterModule } from '@nestjs/event-emitter';
       <% } %>
     <% } %>
 
-    ]), EventEmitterModule],
+    ])],
   controllers: [<%= classname %>QueryController, <%= classname %>PostController],
-  providers: [<%= classname %>Service, <%= classname %>Subscriber],
-  exports: [<%= classname %>Service],
+  providers: [<%= classname %>Service],
+  
 })
 export class <%= classname %>Module {}

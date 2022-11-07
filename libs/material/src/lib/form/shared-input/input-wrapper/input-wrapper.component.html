@@ -2,7 +2,7 @@
 
     <legend>
         <label [for]="attributes.id" class="ml-1" [style]="{fontSize:'1.1rem'}">
-            {{attributes.label || 'Please set a label!'}}
+            {{(attributes.label || attributes.name || 'Please set a label!')}}
         </label>
     </legend>
 

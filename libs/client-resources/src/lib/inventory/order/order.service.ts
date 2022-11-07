@@ -47,14 +47,14 @@ export class OrderService extends NgrxDataService<Order> {
       label: 'Edit',
       icon: 'pi pi-pencil',
       command: () => {
-        this.router.navigate(['update', this.contextMenuSelection?.id]);
+        this.router.navigate(['/order/update', this.contextMenuSelection?.id]);
       },
     },
     {
       label: 'Delete',
       icon: 'pi pi-trash',
       command: () => {
-        this.router.navigate(['delete', this.contextMenuSelection?.id]);
+        this.router.navigate(['/order/delete', this.contextMenuSelection?.id]);
       },
     },
     {
@@ -80,16 +80,12 @@ export class OrderService extends NgrxDataService<Order> {
     router: Router,
     confirmService: ConfirmationService,
 
-    public readonly productService: ProductService
-  ) {
-    super(
-      'Order',
-      sef,
-      httpClient,
-      router,
-      confirmService,
+    public readonly productService: ProductService,
 
-      productService
-    );
+    public readonly pricelevelService: PricelevelService,
+
+    public readonly transactionService: TransactionService
+  ) {
+    super('Order', sef, httpClient, router, confirmService);
   }
 }

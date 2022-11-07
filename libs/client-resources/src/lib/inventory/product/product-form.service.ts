@@ -73,7 +73,7 @@ export class ProductFormService {
 
         optionValue: 'id',
 
-        asyncOptions: this.productService.subService?.entities$,
+        asyncOptions: this.productService.categoryService?.entities$,
       })
 
       .add({
@@ -93,7 +93,7 @@ export class ProductFormService {
 
         optionValue: 'id',
 
-        asyncOptions: this.productService.subService?.entities$,
+        asyncOptions: this.productService.departmentService?.entities$,
       });
   }
 

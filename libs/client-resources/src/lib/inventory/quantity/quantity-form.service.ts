@@ -49,7 +49,7 @@ export class QuantityFormService {
 
         optionValue: 'id',
 
-        asyncOptions: this.quantityService.subService?.entities$,
+        asyncOptions: this.quantityService.productService?.entities$,
       })
 
       .add({
@@ -69,7 +69,7 @@ export class QuantityFormService {
 
         optionValue: 'id',
 
-        asyncOptions: this.quantityService.subService?.entities$,
+        asyncOptions: this.quantityService.storeService?.entities$,
       });
   }
 

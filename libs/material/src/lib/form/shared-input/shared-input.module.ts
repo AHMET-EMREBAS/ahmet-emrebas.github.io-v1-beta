@@ -24,7 +24,14 @@ const modules = [FormsModule, ReactiveFormsModule, ButtonModule, TooltipModule];
     BaseInputComponent,
     HiddenInputComponent,
   ],
-  imports: [CommonModule, ProgressSpinnerModule, BadgeModule, ...modules],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    ProgressSpinnerModule,
+    BadgeModule,
+    ...modules,
+  ],
   exports: [
     ...modules,
     SetAttributeDirective,

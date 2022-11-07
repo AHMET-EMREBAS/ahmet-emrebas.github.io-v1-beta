@@ -1,55 +1,32 @@
 import { AuthModule } from 'auth';
 import { join } from 'path';
-import {
-  CategoryModule,
-  CategorySubscriber,
-} from 'rest/inventory/category';
-import {
-  DepartmentModule,
-  DepartmentSubscriber,
-} from 'rest/inventory/department';
-import {
-  OrderModule,
-  OrderSubscriber,
-} from 'rest/inventory/order';
-import {
-  PriceModule,
-  PriceSubscriber,
-} from 'rest/inventory/price';
-import {
-  PricelevelModule,
-  PricelevelSubscriber,
-} from 'rest/inventory/pricelevel';
-import {
-  ProductModule,
-  ProductSubscriber,
-} from 'rest/inventory/product';
-import {
-  QuantityModule,
-  QuantitySubscriber,
-} from 'rest/inventory/quantity';
-import {
-  SampleModule,
-  SampleSubscriber,
-} from 'rest/inventory/sample';
-import {
-  StoreModule,
-  StoreSubscriber,
-} from 'rest/inventory/store';
-import {
-  TransactionModule,
-  TransactionSubscriber,
-} from 'rest/inventory/transaction';
 
-import {
-  CacheModule,
-  Module,
-} from '@nestjs/common';
+import { CacheModule, Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { ScheduleModule } from '@nestjs/schedule';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { TypeOrmModule } from '@nestjs/typeorm';
+
+import { ProductSubscriber, ProductModule } from 'rest/inventory/product';
+import { CategorySubscriber, CategoryModule } from 'rest/inventory/category';
+import {
+  DepartmentSubscriber,
+  DepartmentModule,
+} from 'rest/inventory/department';
+import {
+  PricelevelSubscriber,
+  PricelevelModule,
+} from 'rest/inventory/pricelevel';
+import { StoreSubscriber, StoreModule } from 'rest/inventory/store';
+import { PriceSubscriber, PriceModule } from 'rest/inventory/price';
+import { QuantitySubscriber, QuantityModule } from 'rest/inventory/quantity';
+import { OrderSubscriber, OrderModule } from 'rest/inventory/order';
+import {
+  TransactionSubscriber,
+  TransactionModule,
+} from 'rest/inventory/transaction';
+import { SampleSubscriber, SampleModule } from 'rest/inventory/sample';
 
 @Module({
   imports: [
@@ -75,7 +52,18 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       type: 'better-sqlite3',
       database: 'tmp/database/main.sqlite',
       autoLoadEntities: true,
-      subscribers: [],
+      subscribers: [
+        ProductSubscriber,
+        CategorySubscriber,
+        DepartmentSubscriber,
+        PricelevelSubscriber,
+        StoreSubscriber,
+        PriceSubscriber,
+        QuantitySubscriber,
+        OrderSubscriber,
+        TransactionSubscriber,
+        SampleSubscriber,
+      ],
       synchronize: true,
       dropSchema: true,
     }),
@@ -100,18 +88,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     TransactionModule,
 
     SampleModule,
-  ],
-  providers: [
-    ProductSubscriber,
-    CategorySubscriber,
-    DepartmentSubscriber,
-    PricelevelSubscriber,
-    StoreSubscriber,
-    PriceSubscriber,
-    QuantitySubscriber,
-    OrderSubscriber,
-    TransactionSubscriber,
-    SampleSubscriber,
   ],
 })
 export class AppModule {}

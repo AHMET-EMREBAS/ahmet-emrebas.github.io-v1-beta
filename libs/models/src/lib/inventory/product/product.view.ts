@@ -15,9 +15,13 @@ import { Product } from './product.entity';
 
       .addSelect('category.name', 'category')
 
+      .addSelect('department.name', 'department')
+
       .from(Product, 'product')
 
-      .leftJoin('category', 'category');
+      .leftJoin('category', 'category')
+
+      .leftJoin('department', 'department');
   },
 })
 export class ProductView {
@@ -32,4 +36,7 @@ export class ProductView {
 
   @ViewColumn()
   category: string;
+
+  @ViewColumn()
+  department: string;
 }
