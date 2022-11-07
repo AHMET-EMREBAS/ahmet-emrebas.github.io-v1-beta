@@ -51,16 +51,7 @@ export class TableComponent implements AfterViewInit {
 
   loadData() {
     this.clearCache();
-    this.ds.getWithQuery({
-      take: this.table.rows + '',
-      skip: this.table.first + '',
-      sortField: this.table.sortField,
-      sortOrder: this.table.sortOrder == 1 ? 'ASC' : 'DESC',
-      where: JSON.stringify({
-        global: { value: this.ds.searchControl.value, matchMode: 'contains' },
-        ...this.table.filters,
-      }),
-    });
+    this.ds.query(this.table);
   }
 
   clearCache() {
