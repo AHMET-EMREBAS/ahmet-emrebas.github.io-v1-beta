@@ -1,0 +1,49 @@
+import { NgModule } from '@angular/core';
+import {
+  RouterModule,
+  Routes,
+} from '@angular/router';
+
+import { Create<%= classname %>Component } from './create-<%= filename %>';
+import { Delete<%= classname %>Component } from './delete-<%= filename %>';
+import { <%= classname %>Component } from './<%= filename %>.component';
+import {
+  CanRead<%= classname %>Guard,
+  CanWrite<%= classname %>Guard,
+} from './<%= filename %>.guard';
+import { TableView<%= classname %>Component } from './table-view-<%= filename %>';
+import { Update<%= classname %>Component } from './update-<%= filename %>';
+
+export const routes: Routes = [
+  {
+    path: '',
+    component: <%= classname %>Component,
+
+    children: [
+      {
+        path: 'table-view',
+        component: TableView<%= classname %>Component,
+        canActivate: [CanRead<%= classname %>Guard],
+      },
+      {
+        path: 'create',
+        component: Create<%= classname %>Component,
+        canActivate: [CanWrite<%= classname %>Guard],
+      },
+      {
+        path: 'update/:id',
+        component: Update<%= classname %>Component,
+      },
+      {
+        path: 'delete/:id',
+        component: Delete<%= classname %>Component,
+      },
+    ],
+  },
+];
+
+@NgModule({
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
+})
+export class <%= classname %>RoutingModule {}

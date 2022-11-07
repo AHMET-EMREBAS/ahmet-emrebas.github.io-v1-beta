@@ -4,7 +4,13 @@ export class CreateProductDto {
   @Property({
     name: 'name',
 
+    id: 'product-name-input',
+
     type: 'string',
+
+    valueType: 'string',
+
+    inputType: 'text-input',
 
     minLength: 3,
 
@@ -19,7 +25,13 @@ export class CreateProductDto {
   @Property({
     name: 'description',
 
+    id: 'product-description-input',
+
     type: 'string',
+
+    valueType: 'string',
+
+    inputType: 'text-input',
 
     minLength: 3,
 

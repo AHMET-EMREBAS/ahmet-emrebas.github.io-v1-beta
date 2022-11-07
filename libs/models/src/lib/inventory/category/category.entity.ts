@@ -1,8 +1,12 @@
+import { BaseEntity, Col } from 'core';
 import {
-  BaseEntity,
-  Col,
-} from 'core';
-import { Entity } from 'typeorm';
+  Entity,
+  JoinColumn,
+  JoinTable,
+  ManyToOne,
+  ManyToMany,
+  OneToOne,
+} from 'typeorm';
 
 @Entity()
 export class Category extends BaseEntity {

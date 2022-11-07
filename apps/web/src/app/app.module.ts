@@ -22,7 +22,9 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () =>
-      import('client-resources/sample').then((m) => m.SampleModule),
+      import('client-resources/inventory/category').then(
+        (m) => m.CategoryModule
+      ),
   },
 ];
 

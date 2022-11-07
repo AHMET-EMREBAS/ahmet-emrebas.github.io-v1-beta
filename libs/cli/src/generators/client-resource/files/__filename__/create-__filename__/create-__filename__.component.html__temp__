@@ -1,0 +1,13 @@
+<ae-form [submitLabel]="submitLabel" [formGroup]="formGroup" (formSubmit)="onSubmit($event)">
+
+<% for(const COLUMN of columns) {%>
+        <ae-<%- COLUMN.inputType %> [defaultValue]="defaultValue?.<%- COLUMN.name %>" [control]="control('<%- COLUMN.name %>')" [attributes]="formFields.<%- COLUMN.name %>!">
+        </ae-<%- COLUMN.inputType %>>
+<% } %>
+
+<% for(const COLUMN of relations) {%>
+        <ae-<%- COLUMN.inputType %> [defaultValue]="defaultValue?.<%- COLUMN.name %>" [control]="control('<%- COLUMN.name %>')" [attributes]="formFields.<%- COLUMN.name %>!">
+        </ae-<%- COLUMN.inputType %>>
+<% } %>
+
+</ae-form>

@@ -1,5 +1,6 @@
 export interface ClientResourceGeneratorSchema {
-    name: string;
-    tags?: string;
-    directory?: string;
+  name: string;
+  project: string;
+  tags?: string;
+  directory?: string;
 }

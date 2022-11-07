@@ -64,7 +64,8 @@ export class NgrxDataService<T> extends EntityCollectionServiceBase<T> {
     sef: EntityCollectionServiceElementsFactory,
     public readonly httpClient: HttpClient,
     public readonly router: Router,
-    public readonly confirmService: ConfirmationService
+    public readonly confirmService: ConfirmationService,
+    public readonly subService?: NgrxDataService<any>
   ) {
     super(entityName, sef);
   }

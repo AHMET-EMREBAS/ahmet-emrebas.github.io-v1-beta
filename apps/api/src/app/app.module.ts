@@ -1,5 +1,7 @@
 import { AuthModule } from 'auth';
 import { join } from 'path';
+import { CategoryModule } from 'rest/inventory/category';
+import { ProductModule } from 'rest/inventory/product';
 import { SampleModule } from 'rest/inventory/sample';
 
 import {
@@ -41,6 +43,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       dropSchema: true,
     }),
     SampleModule,
+    ProductModule,
+    CategoryModule,
     AuthModule,
   ],
 })

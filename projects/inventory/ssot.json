@@ -3,14 +3,20 @@
     "entity": {
       "columns": {
         "name": {
+          "id": "product-name-input",
           "type": "string",
+          "valueType": "string",
+          "inputType": "text-input",
           "minLength": 3,
           "maxLength": 10,
           "required": true,
           "unique": true
         },
         "description": {
+          "id": "product-description-input",
           "type": "string",
+          "valueType": "string",
+          "inputType": "text-input",
           "minLength": 3,
           "maxLength": 400,
           "required": true
@@ -19,7 +25,12 @@
       "relations": {
         "category": {
           "type": "many-to-one",
-          "target": "Category"
+          "target": "Category",
+          "valueType": "string",
+          "inputType": "select-input",
+          "required": true,
+          "optionLabel": "name",
+          "optionValue": "id"
         }
       }
     },
@@ -34,19 +45,23 @@
           "columnName": "description"
         },
         "category": {
-          "type": "number",
+          "type": "string",
           "columnName": "name",
           "from": "category"
         }
       }
-    }
+    },
+    "filterColumns": ["id", "uuid", "name", "category", "description"]
   },
 
   "category": {
     "entity": {
       "columns": {
         "name": {
+          "id": "category-name-input",
           "type": "string",
+          "valueType": "string",
+          "inputType": "text-input",
           "minLength": 3,
           "maxLength": 10,
           "required": true,
@@ -61,13 +76,106 @@
           "columnName": "name"
         }
       }
-    }
+    },
+    "filterColumns": ["id", "uuid", "name"]
+  },
+  "department": {
+    "entity": {
+      "columns": {
+        "name": {
+          "id": "department-name-input",
+          "type": "string",
+          "valueType": "string",
+          "inputType": "text-input",
+          "minLength": 3,
+          "maxLength": 10,
+          "required": true,
+          "unique": true
+        }
+      }
+    },
+    "view": {
+      "columns": {
+        "name": {
+          "type": "string",
+          "columnName": "name"
+        }
+      }
+    },
+    "filterColumns": ["id", "uuid", "name"]
+  },
+  "pricelevel": {
+    "entity": {
+      "columns": {
+        "name": {
+          "id": "pricelevel-name-input",
+          "type": "string",
+          "valueType": "string",
+          "inputType": "text-input",
+          "minLength": 3,
+          "maxLength": 10,
+          "required": true,
+          "unique": true
+        }
+      }
+    },
+    "view": {
+      "columns": {
+        "name": {
+          "type": "string",
+          "columnName": "name"
+        }
+      }
+    },
+    "filterColumns": ["id", "uuid", "name"]
+  },
+  "store": {
+    "entity": {
+      "columns": {
+        "name": {
+          "id": "store-name-input",
+          "type": "string",
+          "valueType": "string",
+          "inputType": "text-input",
+          "minLength": 3,
+          "maxLength": 10,
+          "required": true,
+          "unique": true
+        }
+      },
+      "relations": {
+        "pricelevel": {
+          "type": "many-to-one",
+          "target": "Pricelevel",
+          "valueType": "string",
+          "inputType": "select-input",
+          "required": true,
+          "optionLabel": "name",
+          "optionValue": "id"
+        }
+      }
+    },
+    "view": {
+      "columns": {
+        "name": {
+          "type": "string",
+          "columnName": "name"
+        },
+        "pricelevel": {
+          "type": "number",
+          "columnName": "name",
+          "from": "pricelevel"
+        }
+      }
+    },
+    "filterColumns": ["id", "uuid", "name", "pricelevel"]
   },
   "sample": {
     "entity": {
       "columns": {
         "name": {
           "type": "string",
+          "valueType": "string",
           "minLength": 3,
           "maxLength": 10,
           "required": true,
@@ -82,6 +190,7 @@
           "columnName": "name"
         }
       }
-    }
+    },
+    "filterColumns": ["id", "uuid", "name"]
   }
 }

@@ -1,0 +1,12 @@
+<div class="flex flex-column md:flex-row  flex-wrap gap-5 p-2" *ngIf="(item$ | async ) as item">
+<% for(const COLUMN of columns) {%>
+        <ae-<%- COLUMN.inputType %> [updateField]="true" (updateEvent)="update($event, item.id!)"  [defaultValue]="item?.<%- COLUMN.name %>" [control]="control('<%- COLUMN.name %>')" [attributes]="formFields.<%- COLUMN.name %>!">
+        </ae-<%- COLUMN.inputType %>>
+<% } %>
+
+<% for(const COLUMN of relations) {%>
+        <ae-<%- COLUMN.inputType %> [updateField]="true" (updateEvent)="update($event, item.id!)" [defaultValue]="item?.<%- COLUMN.name %>" [control]="control('<%- COLUMN.name %>')" [attributes]="formFields.<%- COLUMN.name %>!">
+        </ae-<%- COLUMN.inputType %>>
+<% } %>
+
+</div>

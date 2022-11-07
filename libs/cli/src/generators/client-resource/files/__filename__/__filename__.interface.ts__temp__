@@ -1,0 +1,15 @@
+export interface <%= classname %> {
+  id?: number;
+  uuid?: string;
+  createdAt?: Date;
+  updatedAt?: Date;
+  deletedAt?: Date;
+  
+   <% for(const COLUMN of columns) { %> 
+    <%- COLUMN.name %>: <%= COLUMN.valueType %>
+    <% } %>
+
+   <% for(const COLUMN of relations) { %> 
+    <%- COLUMN.name %>: <%= COLUMN.valueType %>
+    <% } %>
+}

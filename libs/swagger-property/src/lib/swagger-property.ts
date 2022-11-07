@@ -36,6 +36,7 @@ import {
 export type MyAPiPropertyOptions = Partial<
   ApiPropertyOptions &
     HTMLInputElement & {
+      valueType: string;
       target: string;
       inputType?: string;
       unique?: boolean;

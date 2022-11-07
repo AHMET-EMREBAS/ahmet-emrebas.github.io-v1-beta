@@ -4,7 +4,13 @@ export class CreateCategoryDto {
   @Property({
     name: 'name',
 
+    id: 'category-name-input',
+
     type: 'string',
+
+    valueType: 'string',
+
+    inputType: 'text-input',
 
     minLength: 3,
 

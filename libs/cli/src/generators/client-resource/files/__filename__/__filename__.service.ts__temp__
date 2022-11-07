@@ -1,0 +1,84 @@
+import { Clipboard } from '@angular/cdk/clipboard';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+
+import { NgrxDataService } from 'material/data-services';
+import {
+  ConfirmationService,
+  MenuItem,
+} from 'primeng/api';
+
+import { EntityCollectionServiceElementsFactory } from '@ngrx/data';
+
+import { <%= classname %> } from './<%= filename %>.interface';
+
+
+<% for(const COLUMN of relations) { %> 
+
+import { <%= COLUMN.name[0].toUpperCase() + COLUMN.name.substring(1) +'Service' %>} from '../<%- COLUMN.name %>';
+<% } %>
+
+
+@Injectable()
+export class <%= classname %>Service extends NgrxDataService<<%= classname %>> {
+  public override columns: { header: string; field: keyof <%= classname %> }[] = [
+ <% for(const c of filterColumns){ %> 
+    {      field: '<%- c.name %>',      header: '<%- c.name.toUpperCase() %>',    },
+<% }%>
+  ];
+
+  public override globalFilterFields: string[] = [
+    <% for(const c of filterColumns){ %> 
+    <%- c %>,
+    <% }%>
+  ];
+
+  public override contextMenuItems: MenuItem[] = [
+    {
+      label: 'Edit',
+      icon: 'pi pi-pencil',
+      command: () => {
+        this.router.navigate(['update', this.contextMenuSelection?.id]);
+      },
+    },
+    {
+      label: 'Delete',
+      icon: 'pi pi-trash',
+      command: () => {
+        this.router.navigate(['delete', this.contextMenuSelection?.id]);
+      },
+    },
+    {
+      separator: true,
+    },
+    {
+      label: 'Copy',
+      icon: 'pi pi-copy',
+      command: () => {
+        this.clipboard.copy(
+          Object.entries(this.contextMenuSelection || {})
+            .map(([key, value]) => `${key}:${value}`)
+            .join('\n')
+        );
+      },
+    },
+  ];
+
+  constructor(
+    sef: EntityCollectionServiceElementsFactory,
+    httpClient: HttpClient,
+    private readonly clipboard: Clipboard,
+    router: Router,
+    confirmService: ConfirmationService,
+     <% for(const COLUMN of relations.slice(0, 1)) { %> 
+        public readonly <%- COLUMN.name %>Service:<%= COLUMN.name[0].toUpperCase() + COLUMN.name.substring(1) +'Service' %>,
+    <% } %>
+  ) {
+    super('<%= classname %>', sef, httpClient, router, confirmService, 
+     <% for(const COLUMN of relations.slice(0, 1)) { %> 
+        <%- COLUMN.name %>Service
+    <% } %>
+    );
+  }
+}
