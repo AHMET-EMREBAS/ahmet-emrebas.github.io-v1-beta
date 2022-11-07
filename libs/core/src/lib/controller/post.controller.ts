@@ -41,12 +41,7 @@ export function GetPostController<T>(
     @UniqueBy()
     async uniqueBy(@ReqBody(updateDTO) uniqueObj: any) {
       const found = await this.__service.findOneBy(uniqueObj);
-
-      if (found) {
-        return true;
-      } else {
-        return false;
-      }
+      return !!found;
     }
   }
 

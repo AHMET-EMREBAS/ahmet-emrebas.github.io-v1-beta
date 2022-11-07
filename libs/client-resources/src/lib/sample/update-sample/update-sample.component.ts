@@ -5,17 +5,16 @@ import {
 import {
   FormControl,
   FormGroup,
-  Validators,
 } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
-import { HtmlInputOptions } from 'material/form/shared-input';
+import { InputAttributes } from 'material/form/shared-input';
 import {
   map,
-  of,
   switchMap,
 } from 'rxjs';
 
+import { SampleFormService } from '../sample-form.service';
 import { Sample } from '../sample.interface';
 import { SampleService } from '../sample.service';
 
@@ -26,57 +25,23 @@ import { SampleService } from '../sample.service';
 })
 export class UpdateSampleComponent implements OnInit {
   item$ = this.route.paramMap.pipe(
-    switchMap((param) => this.ss.getByKey(param.get('id'))),
+    switchMap((param) => this.sampleService.getByKey(param.get('id'))),
     map((data) => data)
   );
 
   submitLabel = 'Update Sample';
   formGroup!: FormGroup;
-  formFields!: Partial<Record<keyof Sample, HtmlInputOptions>>;
+  formFields!: Partial<Record<keyof Sample, InputAttributes>>;
 
   constructor(
-    private readonly ss: SampleService,
-    private readonly route: ActivatedRoute
+    private readonly sampleService: SampleService,
+    private readonly route: ActivatedRoute,
+    private readonly sampleFormService: SampleFormService
   ) {}
 
   ngOnInit(): void {
-    this.formGroup = new FormGroup({
-      name: new FormControl('', [
-        Validators.minLength(3),
-        Validators.maxLength(10),
-      ]),
-      cities: new FormControl('', []),
-      price: new FormControl('', [Validators.min(1), Validators.max(90000000)]),
-    });
-
-    this.formFields = {
-      name: {
-        id: 'sample-name-input',
-        minLength: 3,
-        maxLength: 10,
-        hint: '3-10 character long name.',
-      },
-
-      cities: {
-        id: 'sample-city-input',
-        options: of([
-          { id: 1, label: 'Yozgat' },
-          { id: 2, label: 'Angara' },
-          { id: 3, label: 'Suvas' },
-          { id: 4, label: 'Girik Gale' },
-        ]),
-
-        optionLabel: 'label',
-      },
-
-      price: {
-        id: 'sample-price',
-        label: 'Set price',
-        currency: 'USD',
-        min: '50',
-        max: '9000000',
-      },
-    };
+    this.formGroup = this.sampleFormService.createForm();
+    this.formFields = this.sampleFormService.createFormFields();
   }
 
   control(name: string) {
@@ -94,10 +59,14 @@ export class UpdateSampleComponent implements OnInit {
       }
     }
     console.log(updateValue);
-    this.ss.update({ id, ...(updateValue as any) });
+    this.sampleService.update({ id, ...(updateValue as any) });
   }
 
   field(name: keyof Sample) {
     return this.formFields[name];
+  }
+
+  update(formValue: Partial<Sample>, id: number) {
+    this.sampleService.update({ id, ...formValue });
   }
 }

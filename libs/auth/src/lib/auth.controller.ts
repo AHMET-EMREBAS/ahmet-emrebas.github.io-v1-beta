@@ -1,4 +1,7 @@
 import {
+  checkPermission,
+  createPermission,
+  GetUser,
   Public,
   ReqBody,
 } from 'core';
@@ -6,9 +9,10 @@ import {
   Request,
   Response,
 } from 'express';
-import { Sub } from 'models';
+import { Sub } from 'models/sub';
 
 import {
+  Body,
   Controller,
   Get,
   Post,
@@ -59,5 +63,15 @@ export class AuthController {
   logout(@Res() res: Response) {
     res.cookie('auth', '');
     res.redirect('/login');
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Post('can-activate')
+  canActivate(@Body() body: any, @GetUser() user: Sub) {
+    console.log(body);
+
+    const permit = createPermission(body.operation + ':' + body.resource);
+
+    return checkPermission(user, permit);
   }
 }

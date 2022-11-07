@@ -6,13 +6,13 @@ import {
   Optional,
 } from '@angular/core';
 
-import { HtmlInputOptions } from './html-input-element';
+import { InputAttributes } from './html-input-element';
 
 @Directive({
   selector: '[aeSetAttribute]',
 })
 export class SetAttributeDirective implements AfterViewInit {
-  @Input() aeSetAttribute!: HtmlInputOptions;
+  @Input() aeSetAttribute!: InputAttributes;
   constructor(@Optional() private readonly elm: ElementRef<HTMLInputElement>) {}
   ngAfterViewInit(): void {
     for (const [key, value] of Object.entries(this.aeSetAttribute)) {

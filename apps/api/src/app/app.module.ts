@@ -1,3 +1,4 @@
+import { AuthModule } from 'auth';
 import { join } from 'path';
 import { SampleModule } from 'rest/inventory/sample';
 
@@ -40,6 +41,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       dropSchema: true,
     }),
     SampleModule,
+    AuthModule,
   ],
 })
 export class AppModule {}

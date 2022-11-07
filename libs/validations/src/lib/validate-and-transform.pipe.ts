@@ -9,7 +9,6 @@ const validationOptions: ValidationPipeOptions = {
   transform: true,
   transformOptions: {
     excludeExtraneousValues: true,
-
     exposeUnsetFields: false,
   },
 };

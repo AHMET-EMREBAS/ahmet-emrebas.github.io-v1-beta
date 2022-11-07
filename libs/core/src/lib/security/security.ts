@@ -34,7 +34,7 @@ export function isPublic(reflector: Reflector, context: ExecutionContext) {
   return !!isPublicResource;
 }
 
-function createPermission(permission: string) {
+export function createPermission(permission: string) {
   return [PERMISSION_PAD, permission.trim().toUpperCase(), PERMISSION_PAD].join(
     ''
   );
@@ -76,7 +76,10 @@ export function hasPermission(reflector: Reflector, context: ExecutionContext) {
     context.getHandler(),
     context.getClass(),
   ]);
+  return checkPermission(user, rp);
+}
 
+export function checkPermission(user: any, rp: string) {
   if (rp) {
     console.log('Required permission : ', rp);
     console.log('User permission : ', user?.permission);

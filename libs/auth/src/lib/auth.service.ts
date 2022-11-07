@@ -1,6 +1,6 @@
 import { compareSync } from 'bcrypt';
-import { Sub } from 'models';
-import { SubService } from 'rest';
+import { Sub } from 'models/sub';
+import { SubService } from 'rest/sub';
 
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';

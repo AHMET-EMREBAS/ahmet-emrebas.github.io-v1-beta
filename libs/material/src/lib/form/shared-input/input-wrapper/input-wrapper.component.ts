@@ -1,7 +1,9 @@
 import {
   AfterViewInit,
   Component,
+  EventEmitter,
   Input,
+  Output,
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
@@ -13,7 +15,7 @@ import {
   Observable,
 } from 'rxjs';
 
-import { HtmlInputOptions } from '../html-input-element';
+import { InputAttributes } from '../html-input-element';
 
 @Component({
   selector: 'ae-input-wrapper',
@@ -23,7 +25,9 @@ import { HtmlInputOptions } from '../html-input-element';
 })
 export class InputWrapperComponent implements AfterViewInit {
   @Input() control!: FormControl;
-  @Input() attributes!: HtmlInputOptions;
+  @Input() attributes!: InputAttributes;
+  @Input() updateField!: boolean;
+  @Output() updateEvent = new EventEmitter<Record<string, any>>();
 
   disabled = false;
 
@@ -106,5 +110,16 @@ export class InputWrapperComponent implements AfterViewInit {
         }
       });
     }
+  }
+
+  emitUpdateEvent() {
+    if (this.attributes.name) {
+      if (this.control.dirty && this.control.valid)
+        this.updateEvent.emit({
+          [this.attributes.name]: this.control.value,
+        });
+      return;
+    }
+    throw new Error('Attibutes name must be provided!');
   }
 }

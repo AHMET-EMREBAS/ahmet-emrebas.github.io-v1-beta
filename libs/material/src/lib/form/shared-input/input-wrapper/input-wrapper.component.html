@@ -53,7 +53,7 @@
         </p-badge>
 
         <!-- Select item indicator  -->
-        <p-badge *ngIf="(attributes.options | async) as options"
+        <p-badge *ngIf="(attributes.options ? attributes.options : (attributes.asyncOptions | async)) as options"
             [severity]="(control.valid && control.dirty) ? 'success' : !control.dirty ? 'info' : 'danger'"
             [value]="'Selected ' +  (control.value?.length || '0')  + ' of ' + options.length">
         </p-badge>
@@ -70,4 +70,8 @@
         </i>
 
     </div>
+
+    <p-button styleClass="w-full p-button-warning" label="Update" *ngIf="updateField && control.dirty"
+        (click)="emitUpdateEvent()">
+    </p-button>
 </fieldset>

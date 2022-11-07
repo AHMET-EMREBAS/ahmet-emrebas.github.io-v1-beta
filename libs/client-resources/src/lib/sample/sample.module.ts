@@ -25,8 +25,13 @@ import { TooltipModule } from 'primeng/tooltip';
 
 import { CreateSampleComponent } from './create-sample';
 import { DeleteSampleComponent } from './delete-sample';
+import { SampleFormService } from './sample-form.service';
 import { SampleRoutingModule } from './sample-routing.module';
 import { SampleComponent } from './sample.component';
+import {
+  CanCreateSample,
+  CanReadSample,
+} from './sample.guard';
 import { SampleService } from './sample.service';
 import { TableViewSampleComponent } from './table-view-sample';
 import { UpdateSampleComponent } from './update-sample';
@@ -64,10 +69,14 @@ import { UpdateSampleComponent } from './update-sample';
     SampleService,
     ConfirmationService,
     MessageService,
+    CanCreateSample,
+    CanReadSample,
+    SampleFormService,
     {
       provide: NgrxDataService,
       useClass: SampleService,
     },
   ],
+  exports: [],
 })
 export class SampleModule {}

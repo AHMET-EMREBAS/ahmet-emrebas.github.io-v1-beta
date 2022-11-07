@@ -1,8 +1,9 @@
 <ae-form [submitLabel]="submitLabel" [formGroup]="formGroup" (formSubmit)="onSubmit($event)">
-        <ae-text-input [defaultValue]="defaultValue?.name" [control]="control('name')" [attributes]="field('name')!">
+        <ae-text-input [defaultValue]="defaultValue?.name" [control]="control('name')" [attributes]="formFields.name!">
         </ae-text-input>
         <ae-select-input [defaultValue]="defaultValue?.cities" [control]="control('cities')"
-                [attributes]="field('cities')!"> </ae-select-input>
+                [attributes]="formFields.cities!"> </ae-select-input>
+
         <ae-currency-input [defaultValue]="defaultValue?.price" [control]="control('price')"
-                [attributes]="field('price')!"> </ae-currency-input>
+                [attributes]="formFields.price!"> </ae-currency-input>
 </ae-form>

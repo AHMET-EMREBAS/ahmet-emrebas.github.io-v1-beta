@@ -5,6 +5,8 @@ import {
 
 import {
   Body,
+  createParamDecorator,
+  ExecutionContext,
   Param,
   ParseIntPipe,
   Query,
@@ -34,3 +36,9 @@ export function RelationIdParam() {
 export function RelationNameParam() {
   return Param('relationName');
 }
+
+export const GetUser = createParamDecorator(
+  (data: any, context: ExecutionContext) => {
+    return context.switchToHttp().getRequest().user;
+  }
+);

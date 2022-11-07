@@ -4,7 +4,7 @@ import {
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
-import { HtmlInputOptions } from '../html-input-element';
+import { InputAttributes } from '../html-input-element';
 
 @Component({
   selector: 'ae-hidden-input',
@@ -12,7 +12,7 @@ import { HtmlInputOptions } from '../html-input-element';
   styleUrls: ['./hidden-input.component.scss'],
 })
 export class HiddenInputComponent {
-  @Input() attributes!: HtmlInputOptions;
+  @Input() attributes!: InputAttributes;
   @Input() control!: FormControl;
 
   getType() {

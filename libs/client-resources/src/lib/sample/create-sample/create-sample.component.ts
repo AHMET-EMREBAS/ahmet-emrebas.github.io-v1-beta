@@ -6,15 +6,12 @@ import {
 import {
   FormControl,
   FormGroup,
-  Validators,
 } from '@angular/forms';
 
-import { HtmlInputOptions } from 'material/form/shared-input';
-import {
-  map,
-  of,
-} from 'rxjs';
+import { FormManager } from 'material/form/form-builder';
+import { InputAttributes } from 'material/form/shared-input';
 
+import { SampleFormService } from '../sample-form.service';
 import { Sample } from '../sample.interface';
 import { SampleService } from '../sample.service';
 
@@ -28,75 +25,18 @@ export class CreateSampleComponent implements OnInit {
   @Input() defaultValue!: any;
 
   formGroup!: FormGroup;
-  formFields!: { [key: string]: HtmlInputOptions };
+  formFields!: Partial<Record<keyof Sample, InputAttributes>>;
 
-  constructor(private readonly sampleService: SampleService) {}
+  constructor(
+    private readonly sampleService: SampleService,
+    private readonly sampleFormService: SampleFormService
+  ) {}
+
+  formBuilder!: FormManager<Sample>;
 
   ngOnInit(): void {
-    this.formGroup = new FormGroup({
-      name: new FormControl(
-        '',
-        [
-          Validators.required,
-          Validators.minLength(3),
-          Validators.maxLength(10),
-        ],
-        [
-          (control: any) => {
-            return this.sampleService.isUniqueBy('name', control.value).pipe(
-              map((data) => {
-                console.log('Async validator... ', data);
-                if (data) {
-                  console.log('Provide unique value...');
-                  return { unique: `Name must be unique` };
-                }
-                console.log('Good value');
-                return null;
-              })
-            );
-          },
-        ]
-      ),
-      cities: new FormControl('', [Validators.required]),
-      price: new FormControl('', [
-        Validators.required,
-        Validators.min(1),
-        Validators.max(90000000),
-      ]),
-    });
-
-    this.formFields = {
-      name: {
-        id: 'sample-name-input',
-        required: true,
-        minLength: 3,
-        maxLength: 10,
-        hint: '3-10 character long name.',
-      },
-
-      cities: {
-        id: 'sample-city-input',
-        required: true,
-
-        options: of([
-          { id: 1, label: 'Yozgat' },
-          { id: 2, label: 'Angara' },
-          { id: 3, label: 'Suvas' },
-          { id: 4, label: 'Girik Gale' },
-        ]),
-
-        optionLabel: 'label',
-      },
-
-      price: {
-        id: 'sample-price',
-        label: 'Set price',
-        required: true,
-        currency: 'USD',
-        min: '50',
-        max: '9000000',
-      },
-    };
+    this.formGroup = this.sampleFormService.createForm();
+    this.formFields = this.sampleFormService.createFormFields();
   }
 
   control(name: string) {
