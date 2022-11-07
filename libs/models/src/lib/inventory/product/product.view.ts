@@ -31,5 +31,5 @@ export class ProductView {
   description: string;
 
   @ViewColumn()
-  category: number;
+  category: string;
 }

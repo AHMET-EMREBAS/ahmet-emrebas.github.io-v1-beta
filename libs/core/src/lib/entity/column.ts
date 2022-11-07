@@ -1,7 +1,7 @@
 import { Column } from 'typeorm';
 
 export interface ColumnOptions {
-  type: 'string' | 'int' | 'decimal' | 'date' | 'enum';
+  type: 'string' | 'int' | 'decimal' | 'date' | 'enum' | 'boolean';
   nullable: boolean;
   unique: boolean;
 }

@@ -47,4 +47,11 @@ export class CreateProductDto {
     target: 'category',
   })
   category: number;
+
+  @Property({
+    type: 'number',
+    inputType: 'select',
+    target: 'department',
+  })
+  department: number;
 }

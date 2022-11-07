@@ -35,7 +35,11 @@ import {
 
 export type MyAPiPropertyOptions = Partial<
   ApiPropertyOptions &
-    HTMLInputElement & {
+    Omit<HTMLInputElement, 'max' | 'min' | 'maxLength' | 'minLength'> & {
+      max: number;
+      min: number;
+      minLength: number;
+      maxLength: number;
       valueType: string;
       target: string;
       inputType?: string;

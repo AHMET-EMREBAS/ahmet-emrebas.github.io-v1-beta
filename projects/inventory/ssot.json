@@ -31,6 +31,15 @@
           "required": true,
           "optionLabel": "name",
           "optionValue": "id"
+        },
+        "department": {
+          "type": "many-to-one",
+          "target": "Department",
+          "valueType": "string",
+          "inputType": "select-input",
+          "required": true,
+          "optionLabel": "name",
+          "optionValue": "id"
         }
       }
     },
@@ -170,6 +179,201 @@
     },
     "filterColumns": ["id", "uuid", "name", "pricelevel"]
   },
+
+  "price": {
+    "entity": {
+      "columns": {
+        "price": {
+          "id": "price-price-input",
+          "type": "decimal",
+          "valueType": "number",
+          "inputType": "currency-input",
+          "min": 0,
+          "required": true
+        },
+        "cost": {
+          "id": "price-cost-input",
+          "type": "decimal",
+          "valueType": "number",
+          "inputType": "currency-input",
+          "min": 0,
+          "required": true
+        }
+      },
+      "relations": {
+        "product": {
+          "type": "many-to-one",
+          "target": "Product",
+          "valueType": "string",
+          "inputType": "select-input",
+          "required": true,
+          "optionLabel": "name",
+          "optionValue": "id"
+        }
+      }
+    },
+    "view": {
+      "columns": {
+        "price": {
+          "type": "number",
+          "columnName": "price"
+        },
+        "cost": {
+          "type": "number",
+          "columnName": "cost"
+        },
+        "product": {
+          "type": "string",
+          "columnName": "name",
+          "from": "product"
+        }
+      }
+    },
+    "filterColumns": ["id", "uuid", "price", "cost", "product"]
+  },
+
+  "quantity": {
+    "entity": {
+      "columns": {
+        "quantity": {
+          "id": "quantity-quantity-input",
+          "type": "int",
+          "valueType": "number",
+          "inputType": "number-input",
+          "required": true
+        }
+      },
+      "relations": {
+        "product": {
+          "type": "many-to-one",
+          "target": "Product",
+          "valueType": "string",
+          "inputType": "select-input",
+          "required": true,
+          "optionLabel": "name",
+          "optionValue": "id"
+        },
+        "store": {
+          "type": "many-to-one",
+          "target": "Store",
+          "valueType": "string",
+          "inputType": "select-input",
+          "required": true,
+          "optionLabel": "name",
+          "optionValue": "id"
+        }
+      }
+    },
+    "view": {
+      "columns": {
+        "quantity": {
+          "type": "number",
+          "columnName": "quantity"
+        },
+        "product": {
+          "type": "string",
+          "columnName": "name",
+          "from": "product"
+        },
+        "store": {
+          "type": "string",
+          "columnName": "name",
+          "from": "store"
+        }
+      }
+    },
+    "filterColumns": ["id", "uuid", "price", "cost", "product", "store"]
+  },
+
+  "order": {
+    "entity": {
+      "columns": {
+        "quantity": {
+          "id": "quantity-quantity-input",
+          "type": "int",
+          "valueType": "number",
+          "inputType": "number-input",
+          "required": true
+        }
+      },
+      "relations": {
+        "product": {
+          "type": "many-to-one",
+          "target": "Product",
+          "valueType": "string",
+          "inputType": "select-input",
+          "required": true,
+          "optionLabel": "name",
+          "optionValue": "id"
+        },
+        "pricelevel": {
+          "type": "many-to-one",
+          "target": "Pricelevel",
+          "valueType": "string",
+          "inputType": "select-input",
+          "required": true,
+          "optionLabel": "name",
+          "optionValue": "id"
+        }
+      }
+    },
+    "view": {
+      "columns": {
+        "quantity": {
+          "type": "number",
+          "columnName": "quantity"
+        },
+        "product": {
+          "type": "string",
+          "columnName": "name",
+          "from": "product"
+        },
+        "pricelevel": {
+          "type": "string",
+          "columnName": "name",
+          "from": "store"
+        },
+        "transaction": {
+          "type": "string",
+          "columnName": "name",
+          "from": "transaction"
+        }
+      }
+    },
+    "filterColumns": [
+      "id",
+      "uuid",
+      "quantity",
+      "product",
+      "pricelevel",
+      "transaction"
+    ]
+  },
+
+  "transaction": {
+    "entity": {
+      "columns": {
+        "complete": {
+          "id": "transaction-complete-input",
+          "type": "boolean",
+          "valueType": "boolean",
+          "inputType": "checkbox-input",
+          "nullable": true
+        }
+      },
+      "relations": {}
+    },
+    "view": {
+      "columns": {
+        "complete": {
+          "type": "string",
+          "columnName": "complete"
+        }
+      }
+    },
+    "filterColumns": ["id", "uuid", "complete"]
+  },
+
   "sample": {
     "entity": {
       "columns": {

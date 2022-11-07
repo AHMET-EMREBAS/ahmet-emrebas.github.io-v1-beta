@@ -10,6 +10,8 @@ import {
 
 import { Category } from '../category';
 
+import { Department } from '../department';
+
 @Entity()
 export class Product extends BaseEntity {
   @Col({
@@ -27,4 +29,8 @@ export class Product extends BaseEntity {
   @ManyToOne(() => Category)
   @JoinColumn()
   category: Category;
+
+  @ManyToOne(() => Department)
+  @JoinColumn()
+  department: Department;
 }
