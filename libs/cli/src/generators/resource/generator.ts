@@ -47,8 +47,28 @@ async function genResource(tree: Tree, options: ResourceGeneratorSchema) {
   });
 }
 
+async function updateAppModule(tree: Tree, options: ResourceGeneratorSchema) {
+  const target = `/apps/api/src`;
+  const { project, name } = options;
+  const ssot = JSON.parse(
+    readFileSync(join(tree.root, 'projects', project, 'ssot.json')).toString()
+  );
+
+  const modules = Object.keys(ssot).map((e) => [
+    upperFirst(e),
+    e.toLowerCase(),
+  ]);
+
+  generateFiles(tree, join(__dirname, 'app-module'), target, {
+    project,
+    modules,
+    temp: '',
+  });
+}
+
 export default async function (tree: Tree, options: ResourceGeneratorSchema) {
   await genResource(tree, options);
   await genEntity.default(tree, options);
+  await updateAppModule(tree, options);
   await formatFiles(tree);
 }

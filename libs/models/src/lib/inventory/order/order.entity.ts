@@ -1,21 +1,20 @@
-import { BaseEntity, Col } from 'core';
+import {
+  BaseEntity,
+  Col,
+} from 'core';
 import {
   Entity,
   JoinColumn,
-  JoinTable,
   ManyToOne,
-  ManyToMany,
-  OneToOne,
 } from 'typeorm';
 
-import { Product } from '../product';
-
 import { Pricelevel } from '../pricelevel';
+import { Product } from '../product';
 
 @Entity()
 export class Order extends BaseEntity {
   @Col({
-    type: 'int',
+    type: 'number',
   })
   quantity: number;
 

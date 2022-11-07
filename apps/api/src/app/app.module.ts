@@ -1,18 +1,32 @@
 import { AuthModule } from 'auth';
 import { join } from 'path';
-import { CategoryModule } from 'rest/inventory/category';
-import { ProductModule } from 'rest/inventory/product';
-import { SampleModule } from 'rest/inventory/sample';
 
-import {
-  CacheModule,
-  Module,
-} from '@nestjs/common';
+import { CacheModule, Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { ScheduleModule } from '@nestjs/schedule';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { TypeOrmModule } from '@nestjs/typeorm';
+
+import { ProductSubscriber, ProductModule } from 'rest/inventory/product';
+import { CategorySubscriber, CategoryModule } from 'rest/inventory/category';
+import {
+  DepartmentSubscriber,
+  DepartmentModule,
+} from 'rest/inventory/department';
+import {
+  PricelevelSubscriber,
+  PricelevelModule,
+} from 'rest/inventory/pricelevel';
+import { StoreSubscriber, StoreModule } from 'rest/inventory/store';
+import { PriceSubscriber, PriceModule } from 'rest/inventory/price';
+import { QuantitySubscriber, QuantityModule } from 'rest/inventory/quantity';
+import { OrderSubscriber, OrderModule } from 'rest/inventory/order';
+import {
+  TransactionSubscriber,
+  TransactionModule,
+} from 'rest/inventory/transaction';
+import { SampleSubscriber, SampleModule } from 'rest/inventory/sample';
 
 @Module({
   imports: [
@@ -38,14 +52,42 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       type: 'better-sqlite3',
       database: 'tmp/database/main.sqlite',
       autoLoadEntities: true,
-      subscribers: [],
+      subscribers: [
+        ProductSubscriber,
+        CategorySubscriber,
+        DepartmentSubscriber,
+        PricelevelSubscriber,
+        StoreSubscriber,
+        PriceSubscriber,
+        QuantitySubscriber,
+        OrderSubscriber,
+        TransactionSubscriber,
+        SampleSubscriber,
+      ],
       synchronize: true,
       dropSchema: true,
     }),
-    SampleModule,
-    ProductModule,
-    CategoryModule,
     AuthModule,
+
+    ProductModule,
+
+    CategoryModule,
+
+    DepartmentModule,
+
+    PricelevelModule,
+
+    StoreModule,
+
+    PriceModule,
+
+    QuantityModule,
+
+    OrderModule,
+
+    TransactionModule,
+
+    SampleModule,
   ],
 })
 export class AppModule {}

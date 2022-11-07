@@ -11,6 +11,8 @@ import { Transaction } from './transaction.entity';
 
       .addSelect('transaction.complete', 'complete')
 
+      .addSelect('transaction.createdAt', 'createdAt')
+
       .from(Transaction, 'transaction');
   },
 })
@@ -20,4 +22,7 @@ export class TransactionView {
 
   @ViewColumn()
   complete: string;
+
+  @ViewColumn()
+  createdAt: string;
 }

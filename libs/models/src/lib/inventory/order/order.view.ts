@@ -1,4 +1,8 @@
-import { DataSource, ViewColumn, ViewEntity } from 'typeorm';
+import {
+  DataSource,
+  ViewColumn,
+  ViewEntity,
+} from 'typeorm';
 
 import { Order } from './order.entity';
 
@@ -15,7 +19,7 @@ import { Order } from './order.entity';
 
       .addSelect('store.name', 'pricelevel')
 
-      .addSelect('transaction.name', 'transaction')
+      .addSelect('transaction.uuid', 'transaction')
 
       .from(Order, 'order')
 

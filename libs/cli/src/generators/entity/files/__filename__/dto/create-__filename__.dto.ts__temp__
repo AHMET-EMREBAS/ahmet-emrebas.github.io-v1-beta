@@ -13,6 +13,10 @@ export class Create<%= classname %>Dto {
                             <%- c.name %>:string;
         <% } %>
 
+        <% if(c.type ==='boolean') { %> 
+                            <%- c.name %>:boolean;
+        <% } %>
+
         <% if(c.type ==='int') { %> 
                             <%- c.name %>:number;
         <% } %>

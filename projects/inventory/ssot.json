@@ -314,6 +314,15 @@
           "required": true,
           "optionLabel": "name",
           "optionValue": "id"
+        },
+        "transaction": {
+          "type": "many-to-one",
+          "target": "Transaction",
+          "valueType": "string",
+          "inputType": "select-input",
+          "required": true,
+          "optionLabel": "id",
+          "optionValue": "id"
         }
       }
     },
@@ -335,7 +344,7 @@
         },
         "transaction": {
           "type": "string",
-          "columnName": "name",
+          "columnName": "id",
           "from": "transaction"
         }
       }
@@ -368,10 +377,14 @@
         "complete": {
           "type": "string",
           "columnName": "complete"
+        },
+        "createdAt": {
+          "type": "string",
+          "columnName": "createdAt"
         }
       }
     },
-    "filterColumns": ["id", "uuid", "complete"]
+    "filterColumns": ["id", "uuid", "complete", "createdAt"]
   },
 
   "sample": {

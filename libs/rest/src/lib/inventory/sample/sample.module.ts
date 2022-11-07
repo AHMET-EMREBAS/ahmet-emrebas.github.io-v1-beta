@@ -7,6 +7,7 @@ import {
   Module,
   OnModuleInit,
 } from '@nestjs/common';
+import { EventEmitterModule } from '@nestjs/event-emitter';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { SamplePostController } from './sample-post.controller';
@@ -15,7 +16,7 @@ import { SampleService } from './sample.service';
 import { SampleSubscriber } from './sample.subscriber';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Sample, SampleView])],
+  imports: [TypeOrmModule.forFeature([Sample, SampleView]), EventEmitterModule],
   controllers: [SampleQueryController, SamplePostController],
   providers: [SampleService, SampleSubscriber],
   exports: [SampleService],

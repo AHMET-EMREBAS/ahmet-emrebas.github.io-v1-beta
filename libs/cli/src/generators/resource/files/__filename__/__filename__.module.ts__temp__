@@ -16,7 +16,7 @@ import { <%= classname %>PostController } from './<%= filename %>-post.controlle
 import { <%= classname %>QueryController } from './<%= filename %>-query.controller';
 import { <%= classname %>Service } from './<%= filename %>.service';
 import { <%= classname %>Subscriber } from './<%= filename %>.subscriber';
-
+import { EventEmitterModule } from '@nestjs/event-emitter';
 
 
 @Module({
@@ -30,7 +30,7 @@ import { <%= classname %>Subscriber } from './<%= filename %>.subscriber';
       <% } %>
     <% } %>
 
-    ])],
+    ]), EventEmitterModule],
   controllers: [<%= classname %>QueryController, <%= classname %>PostController],
   providers: [<%= classname %>Service, <%= classname %>Subscriber],
   exports: [<%= classname %>Service],
