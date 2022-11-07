@@ -24,16 +24,6 @@ const routes: Routes = [
     loadChildren: () =>
       import('client-resources/sample').then((m) => m.SampleModule),
   },
-  // {
-  //   path: '',
-  //   redirectTo: 'loading',
-  //   pathMatch: 'full',
-  // },
-  // {
-  //   title: 'Welcome ( loading )',
-  //   path: 'loading',
-  //   component: IntroPageComponent,
-  // },
 ];
 
 @NgModule({

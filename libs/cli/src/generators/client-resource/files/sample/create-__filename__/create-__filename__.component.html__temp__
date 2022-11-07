@@ -1,0 +1,5 @@
+<ae-form [submitLabel]="submitLabel" [formGroup]="formGroup" (formSubmit)="onSubmit($event)">
+
+        <ae-text-input [defaultValue]="defaultValue?.name" [control]="control('name')" [attributes]="formFields.name!">
+        </ae-text-input>
+</ae-form>

@@ -1,0 +1,14 @@
+<p-toast [position]="'top-center'"></p-toast>
+<p-toolbar>
+
+    <div class="p-toolbar-left flex  gap-3 pl-4">
+        <p-button icon="pi pi-plus" styleClass="p-button-success" tooltipPosition="bottom" pTooltip="New"
+            [routerLink]="['create']" routerLinkActive="router-link-active"></p-button>
+    </div>
+
+    <div class="p-toolbar-right flex gap-3 pr-4">
+        <p-button icon="pi pi-table" tooltipPosition="bottom" pTooltip="Table View" [routerLink]="['table-view']"
+            routerLinkActive="router-link-active"></p-button>
+    </div>
+</p-toolbar>
+<router-outlet></router-outlet>
