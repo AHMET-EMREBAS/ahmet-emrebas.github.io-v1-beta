@@ -4,7 +4,7 @@ import {
 } from 'typeorm';
 
 export class BaseID {
-  @PrimaryColumn({ generated: true, type: 'uuid' }) __uuid: string;
+  @PrimaryColumn({ generated: true, type: 'uuid' }) uuid: string;
 
   @PrimaryGeneratedColumn() id: number;
 }

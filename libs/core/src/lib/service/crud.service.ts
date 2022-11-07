@@ -7,6 +7,7 @@ import {
 import {
   QueryDeepPartialEntity,
 } from 'typeorm/query-builder/QueryPartialEntity';
+import { v4 } from 'uuid';
 
 import { Logger } from '@nestjs/common';
 
@@ -98,7 +99,7 @@ export class CrudService<T, V = any> {
 
   create(t: T) {
     try {
-      return this.__repo.create(t);
+      return this.__repo.create({ ...t, uuid: v4() });
     } catch (err) {
       this.logger.error(err);
     }
@@ -107,7 +108,7 @@ export class CrudService<T, V = any> {
 
   save(t: T) {
     try {
-      return this.__repo.save(t);
+      return this.__repo.save({ ...t, uuid: v4() });
     } catch (err) {
       this.logger.error(err);
     }

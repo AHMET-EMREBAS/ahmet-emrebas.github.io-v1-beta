@@ -1,4 +1,8 @@
-import { DataSource, ViewColumn, ViewEntity } from 'typeorm';
+import {
+  DataSource,
+  ViewColumn,
+  ViewEntity,
+} from 'typeorm';
 
 import { Sample } from './sample.entity';
 
@@ -8,16 +12,12 @@ import { Sample } from './sample.entity';
       .createQueryBuilder()
       .select('sample.id', 'id')
       .addSelect('sample.uuid', 'uuid')
-
       .addSelect('sample.name', 'name')
-
       .from(Sample, 'sample');
   },
 })
 export class SampleView {
   @ViewColumn() id: number;
-  @ViewColumn() uuid: number;
-
-  @ViewColumn()
-  name: string;
+  @ViewColumn() uuid: string;
+  @ViewColumn() name: string;
 }

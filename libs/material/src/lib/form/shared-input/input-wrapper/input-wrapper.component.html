@@ -52,6 +52,13 @@
             [value]="(control.value?.length || '0')  + ' of ' + (attributes.minLength || '?') + ' - ' + (attributes.maxLength || '?')">
         </p-badge>
 
+        <!-- Unique validation indicator. -->
+        <p-badge [severity]="'danger'" *ngIf="control.errors?.['unique']" [value]="'Not Unique'">
+        </p-badge>
+        <!-- Password indicator. -->
+        <p-badge [severity]="'danger'" *ngIf="control.errors?.['password']" [value]="'Weak password'">
+        </p-badge>
+
         <!-- Select item indicator  -->
         <p-badge *ngIf="(attributes.options ? attributes.options : (attributes.asyncOptions | async)) as options"
             [severity]="(control.valid && control.dirty) ? 'success' : !control.dirty ? 'info' : 'danger'"

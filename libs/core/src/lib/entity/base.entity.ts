@@ -5,16 +5,10 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { v4 } from 'uuid';
 
 export class BaseEntity {
   @PrimaryGeneratedColumn() id?: number;
-  @Column({
-    type: 'uuid',
-    update: false,
-    transformer: { to: () => v4(), from: (v) => v },
-  })
-  uuid?: string;
+  @Column({ type: 'text', update: false, unique: true }) uuid?: string;
 
   @CreateDateColumn() createdAt?: Date;
   @UpdateDateColumn() updatedAt?: Date;

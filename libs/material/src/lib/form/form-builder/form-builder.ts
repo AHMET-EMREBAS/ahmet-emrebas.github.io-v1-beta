@@ -29,9 +29,11 @@ export class FormManager<T = any> {
     this.controls[options.name] = formControl(options, this.dataService);
 
     if (options.update !== false) {
-      const { required, ...rest } = options;
-      this.updateFields[options.name] = rest;
-      this.updateControls[options.name] = formControl(rest, this.dataService);
+      this.updateFields[options.name] = options;
+      this.updateControls[options.name] = formControl(
+        options,
+        this.dataService
+      );
     }
 
     return this;
