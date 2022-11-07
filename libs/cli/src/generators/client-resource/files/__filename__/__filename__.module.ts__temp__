@@ -7,6 +7,7 @@ import { CurrencyInputModule } from 'material/form/currency-input';
 import { FormModule } from 'material/form/form.module';
 import { SelectInputModule } from 'material/form/select-input';
 import { TextInputModule } from 'material/form/text-input';
+import { CheckboxInputModule } from 'material/form/checkbox-input';
 import { ResourceLayoutModule } from 'material/resource-layout';
 import { TableModule } from 'material/table';
 import {
@@ -42,6 +43,9 @@ import { Update<%= classname %>Component } from './update-<%= filename %>';
 import { <%= COLUMN.name[0].toUpperCase() + COLUMN.name.substring(1) +'Service' %>} from '../<%- COLUMN.name %>';
 <% } %>
 
+import { RadioInputModule } from 'material/form/radio-input';
+import { SwitchInputModule } from 'material/form/switch-input';
+import { NumberInputModule } from 'material/form/number-input';
 
 @NgModule({
   declarations: [
@@ -53,6 +57,7 @@ import { <%= COLUMN.name[0].toUpperCase() + COLUMN.name.substring(1) +'Service' 
   ],
   imports: [
     CommonModule,
+    <%= classname %>RoutingModule,
     TableModule,
     SharedModule,
     ButtonModule,
@@ -61,7 +66,6 @@ import { <%= COLUMN.name[0].toUpperCase() + COLUMN.name.substring(1) +'Service' 
     MessageModule,
     MessagesModule,
     ResourceLayoutModule,
-    <%= classname %>RoutingModule,
     ClipboardModule,
     TooltipModule,
     ConfirmDialogModule,
@@ -70,6 +74,10 @@ import { <%= COLUMN.name[0].toUpperCase() + COLUMN.name.substring(1) +'Service' 
     TextInputModule,
     SelectInputModule,
     CurrencyInputModule,
+    CheckboxInputModule,
+    RadioInputModule,
+    SwitchInputModule,
+    NumberInputModule
   ],
 
   providers: [

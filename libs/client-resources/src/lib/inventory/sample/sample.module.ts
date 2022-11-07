@@ -7,6 +7,7 @@ import { CurrencyInputModule } from 'material/form/currency-input';
 import { FormModule } from 'material/form/form.module';
 import { SelectInputModule } from 'material/form/select-input';
 import { TextInputModule } from 'material/form/text-input';
+import { CheckboxInputModule } from 'material/form/checkbox-input';
 import { ResourceLayoutModule } from 'material/resource-layout';
 import { TableModule } from 'material/table';
 import { ConfirmationService, MessageService, SharedModule } from 'primeng/api';
@@ -29,6 +30,10 @@ import { SampleService } from './sample.service';
 import { TableViewSampleComponent } from './table-view-sample';
 import { UpdateSampleComponent } from './update-sample';
 
+import { RadioInputModule } from 'material/form/radio-input';
+import { SwitchInputModule } from 'material/form/switch-input';
+import { NumberInputModule } from 'material/form/number-input';
+
 @NgModule({
   declarations: [
     SampleComponent,
@@ -39,6 +44,7 @@ import { UpdateSampleComponent } from './update-sample';
   ],
   imports: [
     CommonModule,
+    SampleRoutingModule,
     TableModule,
     SharedModule,
     ButtonModule,
@@ -47,7 +53,6 @@ import { UpdateSampleComponent } from './update-sample';
     MessageModule,
     MessagesModule,
     ResourceLayoutModule,
-    SampleRoutingModule,
     ClipboardModule,
     TooltipModule,
     ConfirmDialogModule,
@@ -56,6 +61,10 @@ import { UpdateSampleComponent } from './update-sample';
     TextInputModule,
     SelectInputModule,
     CurrencyInputModule,
+    CheckboxInputModule,
+    RadioInputModule,
+    SwitchInputModule,
+    NumberInputModule,
   ],
 
   providers: [

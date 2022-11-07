@@ -8,6 +8,8 @@ export class CreateSampleDto {
 
     valueType: 'string',
 
+    inputType: 'text-input',
+
     minLength: 3,
 
     maxLength: 10,

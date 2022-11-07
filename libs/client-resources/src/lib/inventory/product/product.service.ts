@@ -17,27 +17,23 @@ import { DepartmentService } from '../department';
 @Injectable()
 export class ProductService extends NgrxDataService<Product> {
   public override columns: { header: string; field: keyof Product }[] = [
-    { field: '', header: '' },
+    { field: 'name', header: 'NAME' },
 
-    { field: '', header: '' },
+    { field: 'description', header: 'DESCRIPTION' },
 
-    { field: '', header: '' },
-
-    { field: '', header: '' },
-
-    { field: '', header: '' },
+    { field: 'category', header: 'CATEGORY' },
   ];
 
   public override globalFilterFields: string[] = [
-    id,
+    'id',
 
-    uuid,
+    'uuid',
 
-    name,
+    'name',
 
-    category,
+    'category',
 
-    description,
+    'description',
   ];
 
   public override contextMenuItems: MenuItem[] = [

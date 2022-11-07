@@ -7,6 +7,7 @@ import { CurrencyInputModule } from 'material/form/currency-input';
 import { FormModule } from 'material/form/form.module';
 import { SelectInputModule } from 'material/form/select-input';
 import { TextInputModule } from 'material/form/text-input';
+import { CheckboxInputModule } from 'material/form/checkbox-input';
 import { ResourceLayoutModule } from 'material/resource-layout';
 import { TableModule } from 'material/table';
 import { ConfirmationService, MessageService, SharedModule } from 'primeng/api';
@@ -31,6 +32,10 @@ import { UpdatePriceComponent } from './update-price';
 
 import { ProductService } from '../product';
 
+import { RadioInputModule } from 'material/form/radio-input';
+import { SwitchInputModule } from 'material/form/switch-input';
+import { NumberInputModule } from 'material/form/number-input';
+
 @NgModule({
   declarations: [
     PriceComponent,
@@ -41,6 +46,7 @@ import { ProductService } from '../product';
   ],
   imports: [
     CommonModule,
+    PriceRoutingModule,
     TableModule,
     SharedModule,
     ButtonModule,
@@ -49,7 +55,6 @@ import { ProductService } from '../product';
     MessageModule,
     MessagesModule,
     ResourceLayoutModule,
-    PriceRoutingModule,
     ClipboardModule,
     TooltipModule,
     ConfirmDialogModule,
@@ -58,6 +63,10 @@ import { ProductService } from '../product';
     TextInputModule,
     SelectInputModule,
     CurrencyInputModule,
+    CheckboxInputModule,
+    RadioInputModule,
+    SwitchInputModule,
+    NumberInputModule,
   ],
 
   providers: [

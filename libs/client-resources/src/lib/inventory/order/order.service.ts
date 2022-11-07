@@ -19,31 +19,27 @@ import { TransactionService } from '../transaction';
 @Injectable()
 export class OrderService extends NgrxDataService<Order> {
   public override columns: { header: string; field: keyof Order }[] = [
-    { field: '', header: '' },
+    { field: 'quantity', header: 'QUANTITY' },
 
-    { field: '', header: '' },
+    { field: 'product', header: 'PRODUCT' },
 
-    { field: '', header: '' },
+    { field: 'pricelevel', header: 'PRICELEVEL' },
 
-    { field: '', header: '' },
-
-    { field: '', header: '' },
-
-    { field: '', header: '' },
+    { field: 'transaction', header: 'TRANSACTION' },
   ];
 
   public override globalFilterFields: string[] = [
-    id,
+    'id',
 
-    uuid,
+    'uuid',
 
-    quantity,
+    'quantity',
 
-    product,
+    'product',
 
-    pricelevel,
+    'pricelevel',
 
-    transaction,
+    'transaction',
   ];
 
   public override contextMenuItems: MenuItem[] = [

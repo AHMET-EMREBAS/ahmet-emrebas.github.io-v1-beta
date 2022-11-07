@@ -48,4 +48,5 @@ export type InputAttributes<T = any> = Partial<{
   forbidden: (string | number | boolean)[];
   update: boolean;
   valueType: string;
+  nullable: boolean;
 }>;

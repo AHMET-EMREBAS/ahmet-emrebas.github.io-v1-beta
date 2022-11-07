@@ -30,7 +30,7 @@ export class <%= classname %>Service extends NgrxDataService<<%= classname %>> {
 
   public override globalFilterFields: string[] = [
     <% for(const c of filterColumns){ %> 
-    <%- c %>,
+    '<%- c %>',
     <% }%>
   ];
 

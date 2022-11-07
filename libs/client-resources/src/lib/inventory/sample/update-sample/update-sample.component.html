@@ -2,12 +2,12 @@
   class="flex flex-column md:flex-row flex-wrap gap-5 p-2"
   *ngIf="item$ | async as item"
 >
-  <ae-
+  <ae-text-input
     [updateField]="true"
     (updateEvent)="update($event, item.id!)"
     [defaultValue]="item?.name"
     [control]="control('name')"
     [attributes]="formFields.name!"
   >
-  </ae->
+  </ae-text-input>
 </div>

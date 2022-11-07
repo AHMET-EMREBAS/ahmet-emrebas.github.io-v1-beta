@@ -13,14 +13,10 @@ import { Sample } from './sample.interface';
 @Injectable()
 export class SampleService extends NgrxDataService<Sample> {
   public override columns: { header: string; field: keyof Sample }[] = [
-    { field: '', header: '' },
-
-    { field: '', header: '' },
-
-    { field: '', header: '' },
+    { field: 'name', header: 'NAME' },
   ];
 
-  public override globalFilterFields: string[] = [id, uuid, name];
+  public override globalFilterFields: string[] = ['id', 'uuid', 'name'];
 
   public override contextMenuItems: MenuItem[] = [
     {

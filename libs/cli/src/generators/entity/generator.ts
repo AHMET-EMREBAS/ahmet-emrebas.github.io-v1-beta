@@ -24,20 +24,9 @@ export default async function (tree: Tree, options: EntityGeneratorSchema) {
   const filename = kebabCase(name);
   const classname = upperFirst(camelCase(name));
 
-  console.table({
-    project,
-    name,
-    filename,
-    classname,
-  });
-
   const ssot = JSON.parse(
     readFileSync(join(tree.root, 'projects', project, 'ssot.json')).toString()
   );
-
-  console.log({
-    ssot: ssot,
-  });
 
   const entityObj = ssot[filename]['entity'];
   const viewObj = ssot[filename]['view'];

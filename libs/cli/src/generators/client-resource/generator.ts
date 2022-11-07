@@ -27,13 +27,6 @@ export default async function (
   const filename = kebabCase(name);
   const classname = upperFirst(camelCase(name));
 
-  console.table({
-    project,
-    name,
-    filename,
-    classname,
-  });
-
   const ssot = JSON.parse(
     readFileSync(join(tree.root, 'projects', project, 'ssot.json')).toString()
   );
