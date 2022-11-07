@@ -1,0 +1,31 @@
+<div
+  class="flex flex-column md:flex-row flex-wrap gap-5 p-2"
+  *ngIf="item$ | async as item"
+>
+  <ae-currency-input
+    [updateField]="true"
+    (updateEvent)="update($event, item.id!)"
+    [defaultValue]="item?.price"
+    [control]="control('price')"
+    [attributes]="formFields.price!"
+  >
+  </ae-currency-input>
+
+  <ae-currency-input
+    [updateField]="true"
+    (updateEvent)="update($event, item.id!)"
+    [defaultValue]="item?.cost"
+    [control]="control('cost')"
+    [attributes]="formFields.cost!"
+  >
+  </ae-currency-input>
+
+  <ae-select-input
+    [updateField]="true"
+    (updateEvent)="update($event, item.id!)"
+    [defaultValue]="item?.product"
+    [control]="control('product')"
+    [attributes]="formFields.product!"
+  >
+  </ae-select-input>
+</div>

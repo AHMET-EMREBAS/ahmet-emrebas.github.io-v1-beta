@@ -29,4 +29,11 @@ export class CreateOrderDto {
     target: 'pricelevel',
   })
   pricelevel: number;
+
+  @Property({
+    type: 'number',
+    inputType: 'select',
+    target: 'transaction',
+  })
+  transaction: number;
 }

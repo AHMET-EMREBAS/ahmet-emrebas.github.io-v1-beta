@@ -26,5 +26,5 @@ export class StoreView {
   name: string;
 
   @ViewColumn()
-  pricelevel: string;
+  pricelevel: number;
 }

@@ -9,9 +9,13 @@ import { StorePostController } from './store-post.controller';
 import { StoreQueryController } from './store-query.controller';
 import { StoreService } from './store.service';
 import { StoreSubscriber } from './store.subscriber';
+import { EventEmitterModule } from '@nestjs/event-emitter';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Store, StoreView, Pricelevel])],
+  imports: [
+    TypeOrmModule.forFeature([Store, StoreView, Pricelevel]),
+    EventEmitterModule,
+  ],
   controllers: [StoreQueryController, StorePostController],
   providers: [StoreService, StoreSubscriber],
   exports: [StoreService],

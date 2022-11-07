@@ -1,0 +1,17 @@
+import { EntityDataModuleConfig } from '@ngrx/data';
+
+export const entityDataModuleConfig: EntityDataModuleConfig = {
+  pluralNames: {
+
+ <% for(const [big, small] of modules) { %> 
+    <%- big %>: '<%- big %>',
+<% } %>
+
+    Category: 'Category',
+  },
+  entityMetadata: {
+   <% for(const [big, small] of modules) { %> 
+    <%- big %>: {},
+<% } %>
+  },
+};

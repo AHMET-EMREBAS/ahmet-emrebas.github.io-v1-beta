@@ -12,12 +12,13 @@ import {
   Tree,
 } from '@nrwl/devkit';
 
+import * as genClient from '../client-resource/generator';
 import * as genEntity from '../entity/generator';
 import { ResourceGeneratorSchema } from './schema';
 
 const mapName = ([key, value]) => ({ name: key, ...(value as any) });
 
-async function genResource(tree: Tree, options: ResourceGeneratorSchema) {
+async function genRest(tree: Tree, options: ResourceGeneratorSchema) {
   const { project, name } = options;
 
   const target = `/libs/rest/src/lib/${project}`;
@@ -47,7 +48,10 @@ async function genResource(tree: Tree, options: ResourceGeneratorSchema) {
   });
 }
 
-async function updateAppModule(tree: Tree, options: ResourceGeneratorSchema) {
+async function updateApiAppModule(
+  tree: Tree,
+  options: ResourceGeneratorSchema
+) {
   const target = `/apps/api/src`;
   const { project, name } = options;
   const ssot = JSON.parse(
@@ -66,9 +70,46 @@ async function updateAppModule(tree: Tree, options: ResourceGeneratorSchema) {
   });
 }
 
+async function updateClientAppModule(
+  tree: Tree,
+  options: ResourceGeneratorSchema
+) {
+  const target = `/apps/web/src`;
+  const { project, name } = options;
+  const ssot = JSON.parse(
+    readFileSync(join(tree.root, 'projects', project, 'ssot.json')).toString()
+  );
+
+  const modules = Object.keys(ssot).map((e) => [
+    upperFirst(e),
+    e.toLowerCase(),
+  ]);
+
+  generateFiles(tree, join(__dirname, 'web-app'), target, {
+    project,
+    modules,
+    temp: '',
+  });
+}
+
+async function generateAll(tree, _options) {
+  const { project } = _options;
+  const ssot = JSON.parse(
+    readFileSync(join(tree.root, 'projects', project, 'ssot.json')).toString()
+  );
+  const names = Object.keys(ssot);
+
+  for (const n of names) {
+    const options = { ..._options, name: n };
+    await genRest(tree, options);
+    await genEntity.default(tree, options);
+    await genClient.default(tree, options);
+  }
+}
+
 export default async function (tree: Tree, options: ResourceGeneratorSchema) {
-  await genResource(tree, options);
-  await genEntity.default(tree, options);
-  await updateAppModule(tree, options);
+  await generateAll(tree, options);
+  await updateApiAppModule(tree, options);
+  await updateClientAppModule(tree, options);
   await formatFiles(tree);
 }

@@ -13,21 +13,14 @@ import { Category } from './category.interface';
 @Injectable()
 export class CategoryService extends NgrxDataService<Category> {
   public override columns: { header: string; field: keyof Category }[] = [
-    {
-      field: 'id',
-      header: '#',
-    },
-    {
-      field: 'uuid',
-      header: 'UUID',
-    },
-    {
-      field: 'name',
-      header: 'Category Name',
-    },
+    { field: '', header: '' },
+
+    { field: '', header: '' },
+
+    { field: '', header: '' },
   ];
 
-  public override globalFilterFields: string[] = ['uuid', 'name'];
+  public override globalFilterFields: string[] = [id, uuid, name];
 
   public override contextMenuItems: MenuItem[] = [
     {

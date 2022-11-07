@@ -1,0 +1,26 @@
+<ae-form
+  [submitLabel]="submitLabel"
+  [formGroup]="formGroup"
+  (formSubmit)="onSubmit($event)"
+>
+  <ae-currency-input
+    [defaultValue]="defaultValue?.price"
+    [control]="control('price')"
+    [attributes]="formFields.price!"
+  >
+  </ae-currency-input>
+
+  <ae-currency-input
+    [defaultValue]="defaultValue?.cost"
+    [control]="control('cost')"
+    [attributes]="formFields.cost!"
+  >
+  </ae-currency-input>
+
+  <ae-select-input
+    [defaultValue]="defaultValue?.product"
+    [control]="control('product')"
+    [attributes]="formFields.product!"
+  >
+  </ae-select-input>
+</ae-form>

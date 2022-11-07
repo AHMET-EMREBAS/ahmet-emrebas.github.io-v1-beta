@@ -10,4 +10,6 @@ export interface Product {
   description: string;
 
   category: string;
+
+  department: string;
 }

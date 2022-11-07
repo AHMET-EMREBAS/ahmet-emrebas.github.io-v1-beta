@@ -65,6 +65,7 @@ import { UpdateCategoryComponent } from './update-category';
     CanWriteCategoryGuard,
     CanReadCategoryGuard,
     CategoryFormService,
+
     {
       provide: NgrxDataService,
       useClass: CategoryService,

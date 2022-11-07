@@ -1,0 +1,46 @@
+$color1: #49cebc;
+$color2: #d4ff00;
+
+svg rect:nth-child(odd) {
+    animation-duration: 1s;
+    animation-name: a;
+
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+
+}
+
+svg rect:nth-child(even) {
+    animation-duration: 1s;
+    animation-name: b;
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+}
+
+@keyframes a {
+
+    0% {
+        fill: $color1;
+        rx: 100;
+    }
+
+    100% {
+        fill: $color2;
+        rx: 10;
+    }
+}
+
+@keyframes b {
+
+    0% {
+        fill: $color2;
+        rx: 10;
+    }
+
+    100% {
+        fill: $color1;
+        rx: 100;
+    }
+}

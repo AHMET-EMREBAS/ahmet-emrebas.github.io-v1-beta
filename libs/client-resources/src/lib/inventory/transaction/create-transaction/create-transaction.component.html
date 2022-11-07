@@ -1,0 +1,12 @@
+<ae-form
+  [submitLabel]="submitLabel"
+  [formGroup]="formGroup"
+  (formSubmit)="onSubmit($event)"
+>
+  <ae-checkbox-input
+    [defaultValue]="defaultValue?.complete"
+    [control]="control('complete')"
+    [attributes]="formFields.complete!"
+  >
+  </ae-checkbox-input>
+</ae-form>

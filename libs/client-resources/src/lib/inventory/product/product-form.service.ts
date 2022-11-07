@@ -74,6 +74,26 @@ export class ProductFormService {
         optionValue: 'id',
 
         asyncOptions: this.productService.subService?.entities$,
+      })
+
+      .add({
+        name: 'department',
+
+        type: 'many-to-one',
+
+        target: 'Department',
+
+        valueType: 'string',
+
+        inputType: 'select-input',
+
+        required: true,
+
+        optionLabel: 'name',
+
+        optionValue: 'id',
+
+        asyncOptions: this.productService.subService?.entities$,
       });
   }
 

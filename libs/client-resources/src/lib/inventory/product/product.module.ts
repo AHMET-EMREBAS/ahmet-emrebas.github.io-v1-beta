@@ -31,6 +31,8 @@ import { UpdateProductComponent } from './update-product';
 
 import { CategoryService } from '../category';
 
+import { DepartmentService } from '../department';
+
 @NgModule({
   declarations: [
     ProductComponent,
@@ -69,6 +71,8 @@ import { CategoryService } from '../category';
     ProductFormService,
 
     CategoryService,
+
+    DepartmentService,
 
     {
       provide: NgrxDataService,

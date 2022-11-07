@@ -23,9 +23,9 @@ import { <%= COLUMN.name[0].toUpperCase() + COLUMN.name.substring(1) +'Service' 
 @Injectable()
 export class <%= classname %>Service extends NgrxDataService<<%= classname %>> {
   public override columns: { header: string; field: keyof <%= classname %> }[] = [
- <% for(const c of filterColumns){ %> 
-    {      field: '<%- c.name %>',      header: '<%- c.name.toUpperCase() %>',    },
-<% }%>
+ <% for(const c of viewColumns) { %> 
+    {      field: '<%= c.name %>',      header: '<%= c.name?.toUpperCase() %>',    },
+<% } %>
   ];
 
   public override globalFilterFields: string[] = [

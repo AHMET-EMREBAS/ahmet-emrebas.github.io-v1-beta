@@ -1,0 +1,33 @@
+<ae-form
+  [submitLabel]="submitLabel"
+  [formGroup]="formGroup"
+  (formSubmit)="onSubmit($event)"
+>
+  <ae-number-input
+    [defaultValue]="defaultValue?.quantity"
+    [control]="control('quantity')"
+    [attributes]="formFields.quantity!"
+  >
+  </ae-number-input>
+
+  <ae-select-input
+    [defaultValue]="defaultValue?.product"
+    [control]="control('product')"
+    [attributes]="formFields.product!"
+  >
+  </ae-select-input>
+
+  <ae-select-input
+    [defaultValue]="defaultValue?.pricelevel"
+    [control]="control('pricelevel')"
+    [attributes]="formFields.pricelevel!"
+  >
+  </ae-select-input>
+
+  <ae-select-input
+    [defaultValue]="defaultValue?.transaction"
+    [control]="control('transaction')"
+    [attributes]="formFields.transaction!"
+  >
+  </ae-select-input>
+</ae-form>

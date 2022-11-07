@@ -6,6 +6,8 @@ export class CreateSampleDto {
 
     type: 'string',
 
+    valueType: 'string',
+
     minLength: 3,
 
     maxLength: 10,

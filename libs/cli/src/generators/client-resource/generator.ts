@@ -38,9 +38,7 @@ export default async function (
     readFileSync(join(tree.root, 'projects', project, 'ssot.json')).toString()
   );
 
-  console.log({
-    ssot: ssot,
-  });
+  const obj = ssot[filename];
 
   const entityObj = ssot[filename]['entity'];
   const viewObj = ssot[filename]['view'];
@@ -48,7 +46,7 @@ export default async function (
   const columns = Object.entries(entityObj.columns).map(mapName);
   const relations = Object.entries(entityObj.relations || {}).map(mapName);
   const viewColumns = Object.entries(viewObj.columns).map(mapName);
-  const filterColumns = viewObj.filterColumns;
+  const filterColumns = obj.filterColumns;
 
   generateFiles(tree, join(__dirname, 'files'), target, {
     filename,

@@ -11,10 +11,12 @@ import { ProductPostController } from './product-post.controller';
 import { ProductQueryController } from './product-query.controller';
 import { ProductService } from './product.service';
 import { ProductSubscriber } from './product.subscriber';
+import { EventEmitterModule } from '@nestjs/event-emitter';
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([Product, ProductView, Category, Department]),
+    EventEmitterModule,
   ],
   controllers: [ProductQueryController, ProductPostController],
   providers: [ProductService, ProductSubscriber],
