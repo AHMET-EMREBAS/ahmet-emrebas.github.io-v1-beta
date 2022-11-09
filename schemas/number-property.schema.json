@@ -1,28 +1,18 @@
 {
-  "$id": "PropertySchema",
-  "title": "Property Schema",
+  "$id": "NumberPropertySchema",
+  "title": "Number Property Schema",
   "description": "Property defination of an entity",
   "properties": {
     "name": {
       "type": "string",
       "minLength": 3,
       "maxLength": 50,
-      "default": "name"
+      "default": "age"
     },
     "type": {
       "type": "string",
-      "enum": ["string", "number", "integer", "boolean", "array", "object"],
-      "default": "string"
-    },
-    "minLength": {
-      "type": "integer",
-      "minimum": 0,
-      "default": 3
-    },
-    "maxLength": {
-      "type": "integer",
-      "minimum": 0,
-      "default": 50
+      "enum": ["number", "integer"],
+      "default": "number"
     },
     "min": {
       "type": "number",
@@ -55,26 +45,10 @@
     "input": {
       "type": "string",
       "description": "Which HTML input element would you like to use for this property?",
-      "enum": [
-        "text",
-        "textarea",
-        "texteditor",
-        "number",
-        "currency",
-        "date",
-        "radio",
-        "checkbox",
-        "switch",
-        "select"
-      ]
-    },
-    "from": {
-      "type": "string",
-      "description": "Related entity name of this input.",
-      "minLength": 3,
-      "maxLength": 50
+      "enum": ["number", "currency"],
+      "default": "number"
     }
   },
-  "required": ["name", "type"],
+  "required": ["name", "type", "input"],
   "additionalProperties": false
 }

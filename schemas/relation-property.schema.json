@@ -1,0 +1,33 @@
+{
+  "$id": "RelationPropertySchema",
+  "title": "Relation Schema",
+  "description": "Property defination of an entity",
+  "properties": {
+    "name": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 50,
+      "default": "category"
+    },
+    "type": {
+      "type": "string",
+      "enum": ["many-to-many", "many-to-one", "one-to-many", "one-to-one"],
+      "default": "many-to-one"
+    },
+    "input": {
+      "type": "string",
+      "description": "Which HTML input element would you like to use for this property?",
+      "enum": ["checkbox", "radio", "switch", "select"],
+      "default": "select"
+    },
+    "from": {
+      "type": "string",
+      "description": "Related entity name of this input.",
+      "minLength": 3,
+      "maxLength": 50,
+      "default": "category"
+    }
+  },
+  "required": ["name", "type", "input", "from"],
+  "additionalProperties": false
+}

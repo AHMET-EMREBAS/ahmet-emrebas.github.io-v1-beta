@@ -1,26 +1,5 @@
 name: product
 properties:
-  - name: name
-    type: string
-    max: 100
-    minLength: 200
-  - name: name
-    type: string
-    minLength: 3
-    maxLength: 50
-    min: 1
-    max: 100
-    update: false
-    query: false
-    required: false
-    unique: true
-  - name: name
-    type: string
-    minLength: 3
-    maxLength: 50
-    min: 1
-    max: 100
-    update: false
-    query: false
-    required: false
-    unique: true
+  - name: age
+    type:
+    input:

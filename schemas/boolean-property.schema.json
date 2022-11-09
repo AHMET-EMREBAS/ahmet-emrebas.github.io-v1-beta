@@ -1,6 +1,6 @@
 {
-  "$id": "PropertySchema",
-  "title": "Property Schema",
+  "$id": "TextPropertySchema",
+  "title": "Text Property Schema",
   "description": "Property defination of an entity",
   "properties": {
     "name": {
@@ -11,26 +11,8 @@
     },
     "type": {
       "type": "string",
-      "enum": ["string", "number", "integer", "boolean", "array", "object"],
-      "default": "string"
-    },
-    "minLength": {
-      "type": "integer",
-      "minimum": 0,
-      "default": 3
-    },
-    "maxLength": {
-      "type": "integer",
-      "minimum": 0,
-      "default": 50
-    },
-    "min": {
-      "type": "number",
-      "default": 1
-    },
-    "max": {
-      "type": "number",
-      "default": 100
+      "enum": ["boolean"],
+      "default": "boolean"
     },
     "update": {
       "type": "boolean",
@@ -55,26 +37,10 @@
     "input": {
       "type": "string",
       "description": "Which HTML input element would you like to use for this property?",
-      "enum": [
-        "text",
-        "textarea",
-        "texteditor",
-        "number",
-        "currency",
-        "date",
-        "radio",
-        "checkbox",
-        "switch",
-        "select"
-      ]
-    },
-    "from": {
-      "type": "string",
-      "description": "Related entity name of this input.",
-      "minLength": 3,
-      "maxLength": 50
+      "enum": ["checkbox", "switch"],
+      "default": "checkbox"
     }
   },
-  "required": ["name", "type"],
+  "required": ["name", "type", "input"],
   "additionalProperties": false
 }

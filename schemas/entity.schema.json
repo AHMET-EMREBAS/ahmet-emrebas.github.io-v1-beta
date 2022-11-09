@@ -12,7 +12,20 @@
       "type": "array",
       "items": {
         "type": "object",
-        "$ref": "./property.schema.json"
+        "oneOf": [
+          {
+            "$ref": "./text-property.schema.json"
+          },
+          {
+            "$ref": "./number-property.schema.json"
+          },
+          {
+            "$ref": "./relation-property.schema.json"
+          },
+          {
+            "$ref": "./boolean-property.schema.json"
+          }
+        ]
       }
     }
   },
