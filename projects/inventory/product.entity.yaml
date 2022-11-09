@@ -1,0 +1,8 @@
+entityName: Product
+properties:
+  - name: name
+    isRequired: true
+    minLength: 3
+    maxLength: 12
+    unique: true
+    required: false

@@ -1,0 +1,41 @@
+{
+  "$id": "PropertyFragment",
+  "title": "Properties Fragment",
+  "description": "Property defination of an entity",
+  "properties": {
+    "name": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 10
+    },
+    "valueType": {
+      "type": "string",
+      "enum": ["string", "number", "Date", "boolean", "RefClass"]
+    },
+    "minLength": {
+      "type": "integer"
+    },
+    "maxLength": {
+      "type": "integer"
+    },
+    "min": {
+      "type": "integer"
+    },
+    "max": {
+      "type": "integer"
+    },
+    "update": {
+      "type": "boolean"
+    },
+    "query": {
+      "type": "boolean"
+    },
+    "required": {
+      "type": "boolean"
+    },
+    "unique": {
+      "type": "boolean"
+    }
+  },
+  "required": ["unique", "required", "name"]
+}

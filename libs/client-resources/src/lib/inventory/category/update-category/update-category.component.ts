@@ -8,6 +8,11 @@ import {
 } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
+import {
+  ICategory,
+  ICategoryKey,
+  PartialICategory,
+} from 'common/inventory/models';
 import { InputAttributes } from 'material/form/shared-input';
 import {
   map,
@@ -16,7 +21,6 @@ import {
 } from 'rxjs';
 
 import { CategoryFormService } from '../category-form.service';
-import { Category } from '../category.interface';
 import { CategoryService } from '../category.service';
 
 @Component({
@@ -25,11 +29,11 @@ import { CategoryService } from '../category.service';
   styleUrls: ['./update-category.component.scss'],
 })
 export class UpdateCategoryComponent implements OnInit {
-  item$!: Observable<Partial<Category>>;
+  item$!: Observable<Partial<ICategory>>;
 
   submitLabel = 'Update Category';
   formGroup!: FormGroup;
-  formFields!: Partial<Record<keyof Category, InputAttributes>>;
+  formFields!: Partial<Record<keyof ICategory, InputAttributes>>;
 
   constructor(
     private readonly categoryService: CategoryService,
@@ -51,11 +55,11 @@ export class UpdateCategoryComponent implements OnInit {
     return this.formGroup.get(name) as FormControl;
   }
 
-  field(name: keyof Category) {
+  field(name: ICategoryKey) {
     return this.formFields[name];
   }
 
-  update(formValue: Partial<Category>, id: number) {
+  update(formValue: PartialICategory, id: number) {
     this.categoryService.update({ id, ...formValue });
     this.formGroup.reset();
   }

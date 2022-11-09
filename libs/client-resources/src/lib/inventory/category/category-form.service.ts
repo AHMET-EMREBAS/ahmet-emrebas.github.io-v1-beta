@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
 
+import { ICategory } from 'common/inventory/models';
 import { FormManager } from 'material/form/form-builder';
-import { of } from 'rxjs';
 
-import { Category } from './category.interface';
 import { CategoryService } from './category.service';
 
 @Injectable()
 export class CategoryFormService {
-  private readonly formManager!: FormManager<Category>;
+  private readonly formManager!: FormManager<ICategory>;
 
   constructor(private readonly categoryService: CategoryService) {
     this.formManager = new FormManager(categoryService);

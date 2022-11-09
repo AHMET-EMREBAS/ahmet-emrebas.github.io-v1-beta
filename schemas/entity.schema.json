@@ -1,0 +1,20 @@
+{
+  "$id": "EntitySchema",
+  "title": "Entity Schema",
+  "description": "Entity defination",
+  "type": "object",
+  "properties": {
+    "entityName": {
+      "type": "string",
+      "description": "Entity Name"
+    },
+    "properties": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "$ref": "./property.schema.json"
+      }
+    }
+  },
+  "required": ["properties", "entityName"]
+}

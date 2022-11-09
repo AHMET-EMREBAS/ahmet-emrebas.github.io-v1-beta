@@ -32,6 +32,11 @@
       "factory": "./src/generators/client-resource/generator",
       "schema": "./src/generators/client-resource/schema.json",
       "description": "client-resource generator"
+    },
+    "to-template": {
+      "factory": "./src/generators/to-template/generator",
+      "schema": "./src/generators/to-template/schema.json",
+      "description": "to-template generator"
     }
   }
 }

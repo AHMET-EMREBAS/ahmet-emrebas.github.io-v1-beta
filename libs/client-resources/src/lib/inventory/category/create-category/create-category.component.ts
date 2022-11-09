@@ -1,11 +1,21 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import {
+  Component,
+  Input,
+  OnInit,
+} from '@angular/core';
+import {
+  FormControl,
+  FormGroup,
+} from '@angular/forms';
 
+import {
+  ICategory,
+  ICategoryKey,
+} from 'common/inventory/models';
 import { FormManager } from 'material/form/form-builder';
 import { InputAttributes } from 'material/form/shared-input';
 
 import { CategoryFormService } from '../category-form.service';
-import { Category } from '../category.interface';
 import { CategoryService } from '../category.service';
 
 @Component({
@@ -18,14 +28,14 @@ export class CreateCategoryComponent implements OnInit {
   @Input() defaultValue!: any;
 
   formGroup!: FormGroup;
-  formFields!: Partial<Record<keyof Category, InputAttributes>>;
+  formFields!: Partial<Record<ICategoryKey, InputAttributes>>;
 
   constructor(
     private readonly categoryService: CategoryService,
     private readonly categoryFormService: CategoryFormService
   ) {}
 
-  formBuilder!: FormManager<Category>;
+  formBuilder!: FormManager<ICategory>;
 
   ngOnInit(): void {
     this.formGroup = this.categoryFormService.createForm();
@@ -36,11 +46,11 @@ export class CreateCategoryComponent implements OnInit {
     return this.formGroup.get(name) as FormControl;
   }
 
-  onSubmit(formValue: Category) {
+  onSubmit(formValue: ICategory) {
     this.categoryService.add({ ...formValue });
   }
 
-  field(name: keyof Category) {
+  field(name: keyof ICategory) {
     return this.formFields[name];
   }
 }
