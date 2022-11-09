@@ -14,30 +14,32 @@ import {
 
 import * as genClient from '../client-resource/generator';
 import * as genEntity from '../entity/generator';
+import {
+  getColumns,
+  getRelationColumns,
+  loadMetaData,
+} from '../utils';
 import { ResourceGeneratorSchema } from './schema';
 
 const mapName = ([key, value]) => ({ name: key, ...(value as any) });
 
 async function genRest(tree: Tree, options: ResourceGeneratorSchema) {
   const { project, name } = options;
+  const projectName = project;
+  const entityName = name;
 
-  const target = `/libs/rest/src/lib/${project}`;
-
+  const targetDirectory = `/libs/rest/src/lib/${project}`;
   const filename = kebabCase(name);
   const classname = upperFirst(camelCase(name));
 
-  const ssot = JSON.parse(
-    readFileSync(join(tree.root, 'projects', project, 'ssot.json')).toString()
-  );
+  const entityMetadata = loadMetaData(tree, projectName, entityName);
 
-  const entityObj = ssot[filename]['entity'];
-  const viewObj = ssot[filename]['view'];
+  const columns = getColumns(entityMetadata);
+  const relations = getRelationColumns(entityMetadata);
 
-  const columns = Object.entries(entityObj.columns).map(mapName);
-  const relations = Object.entries(entityObj.relations || {}).map(mapName);
-  const viewColumns = Object.entries(viewObj.columns).map(mapName);
+  const viewColumns = [...columns, ...relations];
 
-  generateFiles(tree, join(__dirname, 'files'), target, {
+  generateFiles(tree, join(__dirname, 'files'), targetDirectory, {
     filename,
     classname,
     project,
