@@ -1,15 +1,6 @@
 name: product
+mainProperty: name
 properties:
-  - name: id
-    type: id
-    uiElement: number
-    generated: true
-
-  - name: uuid
-    type: uuid
-    uiElement: text
-    generated: true
-
   - name: name
     type: string
     minLength: 3
@@ -22,10 +13,20 @@ properties:
     maxLength: 50
     uiElement: textarea
 
+  - name: code
+    type: string
+    minLength: 3
+    maxLength: 50
+    uiElement: text
+
   - name: category
     type: many-to-one
-    uiElement: select
+    uiElement: search-item
     from: category
-    valueKey: id
-    labelKey: name
+    required: false
+
+  - name: department
+    type: many-to-one
+    uiElement: search-item
+    from: department
     required: false

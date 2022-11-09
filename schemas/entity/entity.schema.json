@@ -8,6 +8,12 @@
       "type": "string",
       "description": "Entity Name"
     },
+    "mainProperty": {
+      "type": "string",
+      "description": "What is the main/title property of this entity?",
+      "minLength": 1,
+      "maxLength": 50
+    },
     "properties": {
       "type": "array",
       "items": {
@@ -40,5 +46,5 @@
       }
     }
   },
-  "required": ["properties", "name"]
+  "required": ["properties", "name", "mainProperty"]
 }

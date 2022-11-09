@@ -1,0 +1,19 @@
+name: feature
+mainProperty: name
+properties:
+  - name: name
+    type: string
+    minLength: 3
+    maxLength: 50
+    uiElement: text
+
+  - name: description
+    type: string
+    minLength: 3
+    maxLength: 50
+    uiElement: text
+
+  - name: product
+    type: many-to-one
+    uiElement: search-item
+    from: product
