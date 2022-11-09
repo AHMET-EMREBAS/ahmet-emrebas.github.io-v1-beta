@@ -2,43 +2,24 @@ import { Property } from 'swagger-property';
 
 export class CreatePriceDto {
   @Property({
-    name: 'price',
-
-    id: 'price-price-input',
-
-    type: 'decimal',
-
-    valueType: 'number',
-
-    inputType: 'currency-input',
-
-    min: 0,
-
-    required: true,
+    min: 1,
+    max: 9999999999999,
   })
-  price: number;
+  price: currency;
 
   @Property({
-    name: 'cost',
-
-    id: 'price-cost-input',
-
-    type: 'decimal',
-
-    valueType: 'number',
-
-    inputType: 'currency-input',
-
     min: 0,
-
-    required: true,
+    max: 99999999999999,
   })
-  cost: number;
+  cost: currency;
 
   @Property({
-    type: 'number',
-    inputType: 'select',
-    target: 'product',
+    isNumber: true,
   })
-  product: number;
+  sku: number;
+
+  @Property({
+    isNumber: true,
+  })
+  pricelevel: number;
 }

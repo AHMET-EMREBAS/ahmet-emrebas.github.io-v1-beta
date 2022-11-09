@@ -9,7 +9,7 @@ import { Category } from './category.entity';
       .select('category.id', 'id')
       .addSelect('category.uuid', 'uuid')
 
-      .addSelect('category.name', 'name')
+      .addSelect('category.category', 'category')
 
       .from(Category, 'category');
   },
@@ -18,6 +18,5 @@ export class CategoryView {
   @ViewColumn() id: number;
   @ViewColumn() uuid: number;
 
-  @ViewColumn()
-  name: string;
+  @ViewColumn() category: string;
 }

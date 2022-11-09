@@ -6,10 +6,10 @@ export interface <%= classname %> {
   deletedAt?: Date;
   
    <% for(const COLUMN of columns) { %> 
-    <%- COLUMN.name %>: <%= COLUMN.valueType %>
+    <%- COLUMN.name %>: <%= COLUMN.valueType() %>
     <% } %>
 
    <% for(const COLUMN of relations) { %> 
-    <%- COLUMN.name %>: <%= COLUMN.valueType %>
+    <%- COLUMN.name %>: <%= COLUMN.valueType() %>
     <% } %>
 }

@@ -2,56 +2,38 @@ import { Property } from 'swagger-property';
 
 export class CreateProductDto {
   @Property({
-    name: 'name',
-
-    id: 'product-name-input',
-
-    type: 'string',
-
-    valueType: 'string',
-
-    inputType: 'text-input',
-
     minLength: 3,
-
-    maxLength: 10,
-
-    required: true,
-
-    unique: true,
+    maxLength: 50,
   })
   name: string;
 
   @Property({
-    name: 'description',
-
-    id: 'product-description-input',
-
-    type: 'string',
-
-    valueType: 'string',
-
-    inputType: 'text-input',
-
     minLength: 3,
-
-    maxLength: 400,
-
-    required: true,
+    maxLength: 50,
   })
   description: string;
 
   @Property({
-    type: 'number',
-    inputType: 'select',
-    target: 'category',
+    minLength: 3,
+    maxLength: 50,
+  })
+  code: string;
+
+  @Property({
+    required: false,
+    isNumber: true,
   })
   category: number;
 
   @Property({
-    type: 'number',
-    inputType: 'select',
-    target: 'department',
+    required: false,
+    isNumber: true,
   })
   department: number;
+
+  @Property({
+    required: false,
+    isNumberArray: true,
+  })
+  variants: number[];
 }

@@ -14,7 +14,7 @@
       "type": "string",
       "description": "What is the property type?",
       "enum": ["boolean"],
-      "default": "string"
+      "default": "boolean"
     },
     "label": {
       "type": "string",
@@ -64,6 +64,13 @@
       "description": "Which HTML input element is used for the property?",
       "enum": ["checkbox", "switch"],
       "default": "checkbox"
+    },
+    "description": {
+      "type": "string",
+      "description": "What is the role of this property?",
+      "minLength": 1,
+      "maxLength": 500,
+      "default": "description"
     }
   },
   "required": ["name", "type", "inputElement"],

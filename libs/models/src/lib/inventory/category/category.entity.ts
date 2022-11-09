@@ -12,8 +12,8 @@ import {
 export class Category extends BaseEntity {
   @Col({
     type: 'string',
-
     unique: true,
+    nullable: false,
   })
-  name: string;
+  category: string;
 }

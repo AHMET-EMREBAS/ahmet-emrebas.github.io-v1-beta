@@ -13,30 +13,36 @@ import { Product } from './product.entity';
 
       .addSelect('product.description', 'description')
 
+      .addSelect('product.code', 'code')
+
       .addSelect('category.name', 'category')
 
       .addSelect('department.name', 'department')
+
+      .addSelect('variant.name', 'variants')
 
       .from(Product, 'product')
 
       .leftJoin('category', 'category')
 
-      .leftJoin('department', 'department');
+      .leftJoin('department', 'department')
+
+      .leftJoin('variant', 'variant');
   },
 })
 export class ProductView {
   @ViewColumn() id: number;
   @ViewColumn() uuid: number;
 
-  @ViewColumn()
-  name: string;
+  @ViewColumn() name: string;
 
-  @ViewColumn()
-  description: string;
+  @ViewColumn() description: string;
 
-  @ViewColumn()
-  category: string;
+  @ViewColumn() code: string;
 
-  @ViewColumn()
-  department: string;
+  @ViewColumn() category: string;
+
+  @ViewColumn() department: string;
+
+  @ViewColumn() variants: string[];
 }

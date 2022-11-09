@@ -12,8 +12,8 @@ import {
 export class Department extends BaseEntity {
   @Col({
     type: 'string',
-
     unique: true,
+    nullable: false,
   })
-  name: string;
+  department: string;
 }

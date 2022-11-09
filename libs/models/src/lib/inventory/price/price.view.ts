@@ -13,23 +13,26 @@ import { Price } from './price.entity';
 
       .addSelect('price.cost', 'cost')
 
-      .addSelect('product.name', 'product')
+      .addSelect('sku.', 'sku')
+
+      .addSelect('pricelevel.', 'pricelevel')
 
       .from(Price, 'price')
 
-      .leftJoin('product', 'product');
+      .leftJoin('sku', 'sku')
+
+      .leftJoin('pricelevel', 'pricelevel');
   },
 })
 export class PriceView {
   @ViewColumn() id: number;
   @ViewColumn() uuid: number;
 
-  @ViewColumn()
-  price: number;
+  @ViewColumn() price: currency;
 
-  @ViewColumn()
-  cost: number;
+  @ViewColumn() cost: currency;
 
-  @ViewColumn()
-  product: string;
+  @ViewColumn() sku: string;
+
+  @ViewColumn() pricelevel: string;
 }

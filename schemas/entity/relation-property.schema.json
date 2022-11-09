@@ -23,6 +23,13 @@
       "maxLength": 50,
       "default": "label"
     },
+    "mainProperty": {
+      "type": "string",
+      "description": "Main property is the human readable resprestative of the relation entity. For example, name of a category, price value of a price, username of a user entity etc.",
+      "minLength": 1,
+      "maxLength": 50,
+      "default": "name"
+    },
     "icon": {
       "type": "string",
       "description": "What is the property icon name?",
@@ -64,8 +71,16 @@
     "inputElement": {
       "type": "string",
       "description": "Which HTML input element is used for the property?",
-      "enum": ["radio", "checkbox", "select", "search-item"],
-      "default": "select"
+      "enum": [
+        "radio",
+        "checkbox",
+        "select-one",
+        "select-many",
+        "search-one",
+        "search-many",
+        "checkbox-group"
+      ],
+      "default": "select-one"
     },
     "from": {
       "type": "string",
@@ -79,8 +94,15 @@
       "minLength": 1,
       "maxLength": 50,
       "default": "product"
+    },
+    "description": {
+      "type": "string",
+      "description": "What is the role of this property?",
+      "minLength": 1,
+      "maxLength": 500,
+      "default": "description"
     }
   },
-  "required": ["name", "type", "inputElement", "from"],
+  "required": ["name", "type", "inputElement", "mainProperty", "from"],
   "additionalProperties": false
 }

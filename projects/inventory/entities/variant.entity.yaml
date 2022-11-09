@@ -9,11 +9,13 @@ properties:
 
   - name: code
     type: string
+    description: Short version of the entity value like x500, 1TBOB etc.
     maxLength: 4
     minLength: 1
     inputElement: text
 
   - name: feature
     type: many-to-one
-    inputElement: search-item
+    inputElement: search-one
     from: feature
+    mainProperty: feature

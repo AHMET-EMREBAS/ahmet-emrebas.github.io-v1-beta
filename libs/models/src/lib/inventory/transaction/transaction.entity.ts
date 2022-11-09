@@ -8,12 +8,14 @@ import {
   OneToOne,
 } from 'typeorm';
 
+import { Order } from '../order';
+
 @Entity()
 export class Transaction extends BaseEntity {
   @Col({
-    type: 'boolean',
-
-    nullable: true,
+    type: 'enum',
+    unique: false,
+    nullable: false,
   })
-  complete: boolean;
+  complete: enum;
 }

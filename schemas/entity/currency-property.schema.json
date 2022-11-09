@@ -1,0 +1,82 @@
+{
+  "$id": "CurrencyPropertySchema",
+  "title": "Currency Property Schema",
+  "description": "Property defination of an entity",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "What is the property name?",
+      "minLength": 1,
+      "maxLength": 50,
+      "default": "name"
+    },
+    "type": {
+      "type": "string",
+      "description": "What is the property type?",
+      "enum": ["currency"],
+      "default": "currency"
+    },
+    "label": {
+      "type": "string",
+      "description": "What is the visible property label?",
+      "minLength": 1,
+      "maxLength": 50,
+      "default": "Money"
+    },
+    "icon": {
+      "type": "string",
+      "description": "What is the property icon name?",
+      "minLength": 1,
+      "maxLength": 30,
+      "default": "icon"
+    },
+    "group": {
+      "type": "string",
+      "enum": ["Primary", "Secondary", "Others"],
+      "description": "What is the property's input group? It is used for seperating inputs into different forms for better user experience",
+      "minLength": 3,
+      "maxLength": 50,
+      "default": "Primary"
+    },
+    "min": {
+      "type": "number",
+      "description": "What is the minimum value of the property?",
+      "default": 1
+    },
+    "max": {
+      "type": "number",
+      "description": "What is the maximum value of the property?",
+      "default": 100
+    },
+    "update": {
+      "type": "boolean",
+      "description": "Is update operation allowed for the property?",
+      "default": false
+    },
+    "query": {
+      "type": "boolean",
+      "description": "Is query operation allowed for the property?",
+      "default": false
+    },
+    "required": {
+      "type": "boolean",
+      "description": "Is the property required?",
+      "default": false
+    },
+    "inputElement": {
+      "type": "string",
+      "description": "Which HTML input element is used for the property?",
+      "enum": ["currency"],
+      "default": "currency"
+    },
+    "description": {
+      "type": "string",
+      "description": "What is the role of this property?",
+      "minLength": 1,
+      "maxLength": 500,
+      "default": "description"
+    }
+  },
+  "required": ["name", "type", "inputElement", "min", "max"],
+  "additionalProperties": false
+}

@@ -10,6 +10,7 @@ import {
   IsEmail,
   IsNegative,
   IsNotEmpty,
+  IsNumber,
   IsNumberString,
   IsOptional,
   IsPositive,
@@ -18,6 +19,7 @@ import {
   MaxLength,
   Min,
   MinLength,
+  ValidateNested,
 } from 'class-validator';
 import {
   BooleanTransformer,
@@ -54,6 +56,7 @@ export type MyAPiPropertyOptions = Partial<
       isDate?: boolean;
       isBoolean?: boolean;
       isNumber?: boolean;
+      isNumberArray?: boolean;
       isNumberString?: boolean;
       exclude?: boolean;
       trim?: boolean;
@@ -90,10 +93,15 @@ export function Property(o: MyAPiPropertyOptions) {
   if (o.isBoolean) v.push(IsBoolean());
   if (o.isAlphanumeric) v.push(IsAlphanumeric());
   if (o.isNumberString) v.push(IsNumberString());
+  if (o.isNumberArray) {
+    v.push(ValidateNested({ each: true }));
+    v.push(IsNumber());
+  }
 
   if (o.trim) v.push(TrimTransformer());
 
-  if (o.type == 'int') v.push(IntTransformer(o.default));
+  if (o.type == 'integer') v.push(IntTransformer(o.default));
+  if (o.type == 'number') v.push(FloatTransformer(o.default));
   if (o.type == 'float') v.push(FloatTransformer(o.default));
 
   if (o.type === 'boolean') v.push(BooleanTransformer(o.default));

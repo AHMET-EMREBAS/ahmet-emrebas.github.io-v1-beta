@@ -12,3 +12,4 @@ properties:
     type: one-to-many
     inputElement: search-item
     from: order
+    mainProperty: user

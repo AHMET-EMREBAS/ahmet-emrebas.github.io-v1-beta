@@ -8,6 +8,13 @@
       "type": "string",
       "description": "Entity Name"
     },
+    "description": {
+      "type": "string",
+      "description": "What is the role of this property?",
+      "minLength": 1,
+      "maxLength": 500,
+      "default": "description"
+    },
     "mainProperty": {
       "type": "string",
       "description": "What is the main/title property of this entity?",
@@ -44,6 +51,15 @@
           },
           {
             "$ref": "./generated-text-property.schema.json"
+          },
+          {
+            "$ref": "./email-property.schema.json"
+          },
+          {
+            "$ref": "./password-property.schema.json"
+          },
+          {
+            "$ref": "./currency-property.schema.json"
           }
         ]
       }

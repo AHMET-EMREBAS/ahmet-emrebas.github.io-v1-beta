@@ -16,7 +16,7 @@ import { <%= classname %> } from './<%= filename %>.interface';
 
 <% for(const COLUMN of relations) { %> 
 
-import { <%= COLUMN.name[0].toUpperCase() + COLUMN.name.substring(1) +'Service' %>} from '../<%- COLUMN.name %>';
+import { <%= COLUMN.upperFirst()+'Service' %>} from '../<%- COLUMN.name %>';
 <% } %>
 
 
@@ -24,7 +24,7 @@ import { <%= COLUMN.name[0].toUpperCase() + COLUMN.name.substring(1) +'Service' 
 export class <%= classname %>Service extends NgrxDataService<<%= classname %>> {
   public override columns: { header: string; field: keyof <%= classname %> }[] = [
  <% for(const c of viewColumns) { %> 
-    {      field: '<%= c.name %>',      header: '<%= c.name?.toUpperCase() %>',    },
+    {      field: '<%= c.name %>',      header: '<%= c.label || c.upperFirst() %>',    },
 <% } %>
   ];
 
@@ -72,7 +72,7 @@ export class <%= classname %>Service extends NgrxDataService<<%= classname %>> {
     router: Router,
     confirmService: ConfirmationService,
      <% for(const COLUMN of relations) { %> 
-        public readonly <%- COLUMN.name %>Service:<%= COLUMN.name[0].toUpperCase() + COLUMN.name.substring(1) +'Service' %>,
+        public readonly <%- COLUMN.name %>Service:<%= COLUMN.upperFirst() +'Service' %>,
     <% } %>
   ) {
     super('<%= classname %>', sef, httpClient, router, confirmService);

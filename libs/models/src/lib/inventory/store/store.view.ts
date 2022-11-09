@@ -11,20 +11,12 @@ import { Store } from './store.entity';
 
       .addSelect('store.name', 'name')
 
-      .addSelect('pricelevel.name', 'pricelevel')
-
-      .from(Store, 'store')
-
-      .leftJoin('pricelevel', 'pricelevel');
+      .from(Store, 'store');
   },
 })
 export class StoreView {
   @ViewColumn() id: number;
   @ViewColumn() uuid: number;
 
-  @ViewColumn()
-  name: string;
-
-  @ViewColumn()
-  pricelevel: number;
+  @ViewColumn() name: string;
 }

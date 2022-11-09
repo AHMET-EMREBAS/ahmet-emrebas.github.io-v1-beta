@@ -1,4 +1,3 @@
-import { readFileSync } from 'fs';
 import {
   camelCase,
   kebabCase,
@@ -12,36 +11,38 @@ import {
   Tree,
 } from '@nrwl/devkit';
 
+import {
+  getColumns,
+  getRelationColumns,
+  loadMetaData,
+} from '../utils';
 import { EntityGeneratorSchema } from './schema';
 
 const mapName = ([key, value]) => ({ name: key, ...(value as any) });
 
 export default async function (tree: Tree, options: EntityGeneratorSchema) {
-  const { project, name } = options;
+  const projectName = options.project;
+  const entityName = options.name;
 
-  const target = `/libs/models/src/lib/${project}`;
+  const targetDirectory = `/libs/models/src/lib/${projectName}`;
 
-  const filename = kebabCase(name);
-  const classname = upperFirst(camelCase(name));
+  const filename = kebabCase(entityName);
+  const classname = upperFirst(camelCase(entityName));
 
-  const ssot = JSON.parse(
-    readFileSync(join(tree.root, 'projects', project, 'ssot.json')).toString()
-  );
+  const entityMetadata = loadMetaData(tree, projectName, entityName);
 
-  const entityObj = ssot[filename]['entity'];
-  const viewObj = ssot[filename]['view'];
+  const columns = getColumns(entityMetadata);
+  const relations = getRelationColumns(entityMetadata);
 
-  const columns = Object.entries(entityObj.columns).map(mapName);
-  const relations = Object.entries(entityObj.relations || {}).map(mapName);
-  const viewColumns = Object.entries(viewObj.columns).map(mapName);
+  const viewColumns = [...columns, ...relations];
 
-  generateFiles(tree, join(__dirname, 'files'), target, {
+  generateFiles(tree, join(__dirname, 'files2'), targetDirectory, {
     filename,
     classname,
     columns,
     relations,
     viewColumns,
-    project,
+    project: projectName,
     temp: '',
   });
 

@@ -23,18 +23,21 @@ properties:
 
   - name: category
     type: many-to-one
-    inputElement: search-item
+    inputElement: search-one
     from: category
     required: false
+    mainProperty: name
 
   - name: department
     type: many-to-one
-    inputElement: search-item
+    inputElement: search-one
     from: department
     required: false
+    mainProperty: name
 
   - name: variants
     type: many-to-many
-    inputElement: search-item
+    inputElement: search-many
     from: variant
     required: false
+    mainProperty: name

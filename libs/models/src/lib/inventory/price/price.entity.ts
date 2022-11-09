@@ -8,21 +8,31 @@ import {
   OneToOne,
 } from 'typeorm';
 
-import { Product } from '../product';
+import { Sku } from '../sku';
+
+import { Pricelevel } from '../pricelevel';
 
 @Entity()
 export class Price extends BaseEntity {
   @Col({
-    type: 'decimal',
+    type: 'currency',
+    unique: false,
+    nullable: false,
   })
-  price: number;
+  price: currency;
 
   @Col({
-    type: 'decimal',
+    type: 'currency',
+    unique: false,
+    nullable: false,
   })
-  cost: number;
+  cost: currency;
 
-  @ManyToOne(() => Product)
+  @ManyToOne(() => Sku)
   @JoinColumn()
-  product: Product;
+  sku: Sku;
+
+  @ManyToOne(() => Pricelevel)
+  @JoinColumn()
+  pricelevel: Pricelevel;
 }

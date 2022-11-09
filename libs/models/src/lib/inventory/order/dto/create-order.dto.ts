@@ -2,38 +2,38 @@ import { Property } from 'swagger-property';
 
 export class CreateOrderDto {
   @Property({
-    name: 'quantity',
-
-    id: 'quantity-quantity-input',
-
-    type: 'int',
-
-    valueType: 'number',
-
-    inputType: 'number-input',
-
-    required: true,
+    min: 0,
+    max: 999999999999,
   })
-  quantity: number;
+  quantity: integer;
 
   @Property({
-    type: 'number',
-    inputType: 'select',
-    target: 'product',
+    min: 0,
+    max: 999999999999,
   })
-  product: number;
+  unitprice: number;
 
   @Property({
-    type: 'number',
-    inputType: 'select',
-    target: 'pricelevel',
+    min: 1,
+    max: 100,
   })
-  pricelevel: number;
+  discount: number;
+
+  @Property({})
+  taxExempt: boolean;
 
   @Property({
-    type: 'number',
-    inputType: 'select',
-    target: 'transaction',
+    isNumber: true,
+  })
+  sku: number;
+
+  @Property({
+    isNumber: true,
+  })
+  store: number;
+
+  @Property({
+    isNumber: true,
   })
   transaction: number;
 }

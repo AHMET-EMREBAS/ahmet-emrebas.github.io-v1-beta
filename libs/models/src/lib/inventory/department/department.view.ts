@@ -9,7 +9,7 @@ import { Department } from './department.entity';
       .select('department.id', 'id')
       .addSelect('department.uuid', 'uuid')
 
-      .addSelect('department.name', 'name')
+      .addSelect('department.department', 'department')
 
       .from(Department, 'department');
   },
@@ -18,6 +18,5 @@ export class DepartmentView {
   @ViewColumn() id: number;
   @ViewColumn() uuid: number;
 
-  @ViewColumn()
-  name: string;
+  @ViewColumn() department: string;
 }

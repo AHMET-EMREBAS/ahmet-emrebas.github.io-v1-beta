@@ -1,16 +1,16 @@
 name: price
 mainProperty: price
 properties:
-  - name: cost
-    type: number
-    min: 0
-    max: 999999999999
+  - name: price
+    type: currency
+    min: 1
+    max: 9999999999999
     inputElement: currency
 
-  - name: price
-    type: number
+  - name: cost
+    type: currency
     min: 0
-    max: 999999999999
+    max: 99999999999999
     inputElement: currency
 
   - name: sku

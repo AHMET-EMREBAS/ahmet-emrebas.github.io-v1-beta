@@ -40,7 +40,7 @@ import { Update<%= classname %>Component } from './update-<%= filename %>';
 
 <% for(const COLUMN of relations) { %> 
 
-import { <%= COLUMN.name[0].toUpperCase() + COLUMN.name.substring(1) +'Service' %>} from '../<%- COLUMN.name %>';
+import { <%= COLUMN.upperFirst() +'Service' %>} from '../<%- COLUMN.name %>';
 <% } %>
 
 import { RadioInputModule } from 'material/form/radio-input';
@@ -89,7 +89,7 @@ import { NumberInputModule } from 'material/form/number-input';
     <%= classname %>FormService,
 
 <% for(const COLUMN of relations) { %> 
-      <%= COLUMN.name[0].toUpperCase() + COLUMN.name.substring(1) +'Service' %>,
+      <%= COLUMN.upperFist() +'Service' %>,
 <% } %>
 
     {

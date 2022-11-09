@@ -1,0 +1,60 @@
+import { BaseEntity, Col } from 'core';
+import { 
+  Entity,
+  JoinColumn,
+  JoinTable, 
+  ManyToOne,
+  ManyToMany, 
+  OneToOne
+} from 'typeorm';
+
+<% if(relations?.length > 0) { %> 
+
+  <% for(const c of relations) { %>   
+    import { <%- c.upperFirst( c.from) %> } from '../<%- c.from %>';
+  <% } %>
+   
+<% } %>
+
+
+@Entity()
+export class <%= classname %> extends BaseEntity {
+
+  
+    <% for(const c of columns) { %>     
+
+      @Col({
+        type:'<%- c.type  %>',
+        unique:<%- !!c.unique  %>,
+        nullable:<%- c.required === false %>,
+       })
+     
+      <%- c.name %>:<%- c.type %>;
+
+    <% } %>
+
+
+    <% for(const c of relations) { %>     
+
+        <% if(c.type ==='many-to-one') { %>
+                @ManyToOne(()=><%- c.upperFirst( c.from) %>)
+                @JoinColumn()
+                <%- c.name %>: <%- c.upperFirst( c.from) %>
+        <% } %>
+
+        <% if(c.type ==='one-to-one') { %>
+                @OneToOne(()=><%- c.upperFirst( c.from) %>)
+                @JoinColumn()
+                <%- c.name %>: <%- c.upperFirst( c.from) %>
+        <% } %>
+        
+        <% if(c.type ==='many-to-many') { %>
+                @ManyToMany(()=><%- c.upperFirst( c.from) %>)
+                @JoinTable()
+                <%- c.name %>: <%- c.upperFirst( c.from) %>[]
+        <% } %>
+
+
+
+    <% } %>
+}

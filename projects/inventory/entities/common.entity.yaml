@@ -1,5 +1,6 @@
 name: common
 mainProperty: id
+description: Common properties used for all entities.
 properties:
   - name: id
     type: id

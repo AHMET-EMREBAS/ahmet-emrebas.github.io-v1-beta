@@ -8,26 +8,49 @@ import {
   OneToOne,
 } from 'typeorm';
 
-import { Product } from '../product';
+import { Sku } from '../sku';
 
-import { Pricelevel } from '../pricelevel';
+import { Store } from '../store';
 
 import { Transaction } from '../transaction';
 
 @Entity()
 export class Order extends BaseEntity {
   @Col({
-    type: 'int',
+    type: 'integer',
+    unique: false,
+    nullable: false,
   })
-  quantity: number;
+  quantity: integer;
 
-  @ManyToOne(() => Product)
-  @JoinColumn()
-  product: Product;
+  @Col({
+    type: 'number',
+    unique: false,
+    nullable: false,
+  })
+  unitprice: number;
 
-  @ManyToOne(() => Pricelevel)
+  @Col({
+    type: 'number',
+    unique: false,
+    nullable: false,
+  })
+  discount: number;
+
+  @Col({
+    type: 'boolean',
+    unique: false,
+    nullable: false,
+  })
+  taxExempt: boolean;
+
+  @ManyToOne(() => Sku)
   @JoinColumn()
-  pricelevel: Pricelevel;
+  sku: Sku;
+
+  @ManyToOne(() => Store)
+  @JoinColumn()
+  store: Store;
 
   @ManyToOne(() => Transaction)
   @JoinColumn()

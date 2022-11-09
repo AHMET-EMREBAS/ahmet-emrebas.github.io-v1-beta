@@ -11,15 +11,21 @@ import { Order } from './order.entity';
 
       .addSelect('order.quantity', 'quantity')
 
-      .addSelect('product.name', 'product')
+      .addSelect('order.unitprice', 'unitprice')
 
-      .addSelect('store.name', 'pricelevel')
+      .addSelect('order.discount', 'discount')
 
-      .addSelect('transaction.id', 'transaction')
+      .addSelect('order.taxExempt', 'taxExempt')
+
+      .addSelect('sku.sku', 'sku')
+
+      .addSelect('store.name', 'store')
+
+      .addSelect('transaction.name', 'transaction')
 
       .from(Order, 'order')
 
-      .leftJoin('product', 'product')
+      .leftJoin('sku', 'sku')
 
       .leftJoin('store', 'store')
 
@@ -30,15 +36,17 @@ export class OrderView {
   @ViewColumn() id: number;
   @ViewColumn() uuid: number;
 
-  @ViewColumn()
-  quantity: number;
+  @ViewColumn() quantity: integer;
 
-  @ViewColumn()
-  product: string;
+  @ViewColumn() unitprice: number;
 
-  @ViewColumn()
-  pricelevel: string;
+  @ViewColumn() discount: number;
 
-  @ViewColumn()
-  transaction: string;
+  @ViewColumn() taxExempt: boolean;
+
+  @ViewColumn() sku: string;
+
+  @ViewColumn() store: string;
+
+  @ViewColumn() transaction: string;
 }

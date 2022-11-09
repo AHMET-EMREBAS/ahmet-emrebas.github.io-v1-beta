@@ -11,18 +11,18 @@ import { Transaction } from './transaction.entity';
 
       .addSelect('transaction.complete', 'complete')
 
-      .addSelect('transaction.createdAt', 'createdAt')
+      .addSelect('order.user', 'orders')
 
-      .from(Transaction, 'transaction');
+      .from(Transaction, 'transaction')
+
+      .leftJoin('order', 'order');
   },
 })
 export class TransactionView {
   @ViewColumn() id: number;
   @ViewColumn() uuid: number;
 
-  @ViewColumn()
-  complete: string;
+  @ViewColumn() complete: enum;
 
-  @ViewColumn()
-  createdAt: string;
+  @ViewColumn() orders: string[];
 }

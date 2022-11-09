@@ -19,22 +19,25 @@ properties:
     max: 100
     inputElement: number
 
-  - name: sku
-    type: many-to-one
-    inputElement: search-item
-    from: sku
-
-  - name: store
-    type: many-to-one
-    inputElement: search-item
-    from: store
-
   - name: taxExempt
     type: boolean
     inputElement: checkbox
     label: Tax Exempt
 
+  - name: sku
+    type: many-to-one
+    inputElement: search-item
+    from: sku
+    mainProperty: sku
+
+  - name: store
+    type: many-to-one
+    inputElement: search-item
+    from: store
+    mainProperty: name
+
   - name: transaction
     type: many-to-one
     inputElement: search-item
     from: transaction
+    mainProperty: name

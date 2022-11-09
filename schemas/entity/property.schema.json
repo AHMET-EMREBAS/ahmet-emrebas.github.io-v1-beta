@@ -110,7 +110,9 @@
         "radio",
         "checkbox",
         "switch",
-        "select"
+        "select-one",
+        "select-many",
+        "enum"
       ],
       "default": "text"
     },
@@ -119,6 +121,13 @@
       "description": "What is the entity name of this relation?",
       "minLength": 3,
       "maxLength": 50
+    },
+    "description": {
+      "type": "string",
+      "description": "What is the role of this property?",
+      "minLength": 1,
+      "maxLength": 500,
+      "default": "description"
     }
   },
   "required": ["name", "type", "inputElement"],
