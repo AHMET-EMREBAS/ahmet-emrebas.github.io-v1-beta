@@ -1,10 +1,10 @@
 {
   "$id": "EntitySchema",
   "title": "Entity Schema",
-  "description": "Entity defination",
+  "description": "Entity Definition",
   "type": "object",
   "properties": {
-    "entityName": {
+    "name": {
       "type": "string",
       "description": "Entity Name"
     },
@@ -16,5 +16,5 @@
       }
     }
   },
-  "required": ["properties", "entityName"]
+  "required": ["properties", "name"]
 }

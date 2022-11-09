@@ -1,8 +1,26 @@
-entityName: Product
+name: product
 properties:
   - name: name
-    isRequired: true
+    type: string
+    max: 100
+    minLength: 200
+  - name: name
+    type: string
     minLength: 3
-    maxLength: 12
-    unique: true
+    maxLength: 50
+    min: 1
+    max: 100
+    update: false
+    query: false
     required: false
+    unique: true
+  - name: name
+    type: string
+    minLength: 3
+    maxLength: 50
+    min: 1
+    max: 100
+    update: false
+    query: false
+    required: false
+    unique: true

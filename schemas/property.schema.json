@@ -1,41 +1,57 @@
 {
-  "$id": "PropertyFragment",
-  "title": "Properties Fragment",
+  "$id": "PropertySchema",
+  "title": "Property Schema",
   "description": "Property defination of an entity",
   "properties": {
     "name": {
       "type": "string",
       "minLength": 3,
-      "maxLength": 10
+      "maxLength": 50,
+      "default": "name"
     },
-    "valueType": {
+    "type": {
       "type": "string",
-      "enum": ["string", "number", "Date", "boolean", "RefClass"]
+      "enum": ["string", "number", "integer", "boolean"],
+      "default": "string"
     },
     "minLength": {
-      "type": "integer"
+      "type": "integer",
+      "minimum": 0,
+      "default": 3
     },
     "maxLength": {
-      "type": "integer"
+      "type": "integer",
+      "minimum": 0,
+      "default": 50
     },
     "min": {
-      "type": "integer"
+      "type": "number",
+      "default": 1
     },
     "max": {
-      "type": "integer"
+      "type": "number",
+      "default": 100
     },
     "update": {
-      "type": "boolean"
+      "type": "boolean",
+      "description": "Would you like to update this field?",
+      "default": false
     },
     "query": {
-      "type": "boolean"
+      "type": "boolean",
+      "description": "Would you like to provide query operation on this field?",
+      "default": false
     },
     "required": {
-      "type": "boolean"
+      "type": "boolean",
+      "description": "Is the field required?",
+      "default": false
     },
     "unique": {
-      "type": "boolean"
+      "type": "boolean",
+      "description": "Is the field unique?",
+      "default": true
     }
   },
-  "required": ["unique", "required", "name"]
+  "required": ["name", "type"]
 }
