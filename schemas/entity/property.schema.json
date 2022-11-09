@@ -6,7 +6,7 @@
     "name": {
       "type": "string",
       "description": "What is the property name?",
-      "minLength": 3,
+      "minLength": 1,
       "maxLength": 50,
       "default": "name"
     },

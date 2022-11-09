@@ -26,6 +26,15 @@
           },
           {
             "$ref": "./enum-property.schema.json"
+          },
+          {
+            "$ref": "./id-property.schema.json"
+          },
+          {
+            "$ref": "./uuid-property.schema.json"
+          },
+          {
+            "$ref": "./date-property.schema.json"
           }
         ]
       }

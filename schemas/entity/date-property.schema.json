@@ -1,6 +1,6 @@
 {
-  "$id": "EnumPropertySchema",
-  "title": "Enum Property Schema",
+  "$id": "DatePropertySchema",
+  "title": "Date Property Schema",
   "description": "Property defination of an entity",
   "properties": {
     "name": {
@@ -13,8 +13,8 @@
     "type": {
       "type": "string",
       "description": "What is the property type?",
-      "enum": ["enum"],
-      "default": "enum"
+      "enum": ["date"],
+      "default": "date"
     },
     "label": {
       "type": "string",
@@ -30,7 +30,6 @@
       "maxLength": 30,
       "default": "icon"
     },
-
     "group": {
       "type": "string",
       "enum": ["Primary", "Secondary", "Others"],
@@ -38,6 +37,14 @@
       "minLength": 3,
       "maxLength": 50,
       "default": "Primary"
+    },
+    "before": {
+      "type": "number",
+      "description": "What is the minimum value of the property?"
+    },
+    "after": {
+      "type": "number",
+      "description": "What is the maximum value of the property?"
     },
     "update": {
       "type": "boolean",
@@ -62,18 +69,14 @@
     "uiElement": {
       "type": "string",
       "description": "Which HTML input element is used for the property?",
-      "enum": ["autocomplete", "radio", "select"],
-      "default": "select"
+      "enum": ["date"],
+      "default": "date"
     },
-    "enum": {
-      "type": "array",
-      "description": "What are the enum values?",
-      "items": {
-        "type": "string"
-      },
-      "default": ["option 1", "option 2", "option 2"]
+    "generated": {
+      "type": "string",
+      "enum": ["CreateTime", "UpdateTime", "DeleteTime"]
     }
   },
-  "required": ["name", "type", "uiElement", "enum"],
+  "required": ["name", "type", "uiElement"],
   "additionalProperties": false
 }

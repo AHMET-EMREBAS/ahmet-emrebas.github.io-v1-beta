@@ -1,0 +1,31 @@
+name: product
+properties:
+  - name: id
+    type: id
+    uiElement: number
+    generated: true
+
+  - name: uuid
+    type: uuid
+    uiElement: text
+    generated: true
+
+  - name: name
+    type: string
+    minLength: 3
+    maxLength: 50
+    uiElement: text
+
+  - name: description
+    type: string
+    minLength: 3
+    maxLength: 50
+    uiElement: textarea
+
+  - name: category
+    type: many-to-one
+    uiElement: select
+    from: category
+    valueKey: id
+    labelKey: name
+    required: false
