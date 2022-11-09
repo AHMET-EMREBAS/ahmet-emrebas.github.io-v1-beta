@@ -5,21 +5,28 @@ properties:
     type: string
     minLength: 3
     maxLength: 50
-    uiElement: text
+    inputElement: text
+    unique: true
+
+  - name: barcode
+    type: string
+    minLength: 10
+    maxLength: 13
+    inputElement: 'text'
 
   - name: description
     type: string
     minLength: 3
     maxLength: 50
-    uiElement: textarea
+    inputElement: textarea
 
-  - name: features
+  - name: variants
     type: many-to-many
-    uiElement: search-item
-    from: feature
+    inputElement: search-item
+    from: variant
     parent: product
 
   - name: product
     type: many-to-one
-    uiElement: search-item
+    inputElement: search-item
     from: product

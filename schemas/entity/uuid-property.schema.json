@@ -30,7 +30,7 @@
       "maxLength": 30,
       "default": "icon"
     },
-    "uiElement": {
+    "inputElement": {
       "type": "string",
       "description": "Which HTML input element is used for the property?",
       "enum": ["text"],
@@ -42,6 +42,6 @@
       "default": true
     }
   },
-  "required": ["name", "type", "uiElement", "generated"],
+  "required": ["name", "type", "inputElement", "generated"],
   "additionalProperties": false
 }

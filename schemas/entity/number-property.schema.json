@@ -63,13 +63,13 @@
       "description": "Is the property required?",
       "default": false
     },
-    "uiElement": {
+    "inputElement": {
       "type": "string",
       "description": "Which HTML input element is used for the property?",
       "enum": ["number", "number-range", "currency", "currency-range"],
       "default": "number"
     }
   },
-  "required": ["name", "type", "uiElement", "min", "max"],
+  "required": ["name", "type", "inputElement", "min", "max"],
   "additionalProperties": false
 }

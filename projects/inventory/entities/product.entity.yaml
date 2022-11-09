@@ -5,28 +5,36 @@ properties:
     type: string
     minLength: 3
     maxLength: 50
-    uiElement: text
+    inputElement: text
+    unique: true
 
   - name: description
     type: string
     minLength: 3
     maxLength: 50
-    uiElement: textarea
+    inputElement: textarea
 
   - name: code
     type: string
     minLength: 3
     maxLength: 50
-    uiElement: text
+    inputElement: text
+    unique: true
 
   - name: category
     type: many-to-one
-    uiElement: search-item
+    inputElement: search-item
     from: category
     required: false
 
   - name: department
     type: many-to-one
-    uiElement: search-item
+    inputElement: search-item
     from: department
+    required: false
+
+  - name: variants
+    type: many-to-many
+    inputElement: search-item
+    from: variant
     required: false

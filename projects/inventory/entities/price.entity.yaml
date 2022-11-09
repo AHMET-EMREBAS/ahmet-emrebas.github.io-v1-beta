@@ -1,0 +1,25 @@
+name: price
+mainProperty: price
+properties:
+  - name: cost
+    type: number
+    min: 0
+    max: 999999999999
+    inputElement: currency
+
+  - name: price
+    type: number
+    min: 0
+    max: 999999999999
+    inputElement: currency
+
+  - name: sku
+    type: many-to-one
+    inputElement: search-item
+    from: sku
+
+  - name: pricelevel
+    type: many-to-one
+    inputElement: search-item
+    from: pricelevel
+    label: Price Level

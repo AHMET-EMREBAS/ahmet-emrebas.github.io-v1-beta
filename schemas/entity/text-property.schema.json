@@ -71,12 +71,12 @@
       "description": "Is the property unique?",
       "default": true
     },
-    "uiElement": {
+    "inputElement": {
       "type": "string",
       "description": "Which HTML input element is used for the property?",
       "enum": ["text", "textarea", "texteditor"]
     }
   },
-  "required": ["name", "type", "uiElement", "minLength", "maxLength"],
+  "required": ["name", "type", "inputElement", "minLength", "maxLength"],
   "additionalProperties": false
 }

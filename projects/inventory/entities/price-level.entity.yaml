@@ -1,9 +1,10 @@
-name: category
-mainProperty: category
+name: pricelevel
+mainProperty: pricelevel
 properties:
-  - name: category
+  - name: pricelevel
     type: string
     minLength: 3
     maxLength: 50
     inputElement: text
     unique: true
+    label: Price Level

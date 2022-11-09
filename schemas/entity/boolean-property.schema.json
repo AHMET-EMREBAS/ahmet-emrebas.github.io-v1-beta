@@ -59,13 +59,13 @@
       "description": "Is the property unique?",
       "default": true
     },
-    "uiElement": {
+    "inputElement": {
       "type": "string",
       "description": "Which HTML input element is used for the property?",
       "enum": ["checkbox", "switch"],
       "default": "checkbox"
     }
   },
-  "required": ["name", "type", "uiElement"],
+  "required": ["name", "type", "inputElement"],
   "additionalProperties": false
 }

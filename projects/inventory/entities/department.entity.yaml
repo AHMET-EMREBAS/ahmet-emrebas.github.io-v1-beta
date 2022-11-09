@@ -1,8 +1,9 @@
 name: department
-mainProperty: name
+mainProperty: department
 properties:
-  - name: name
+  - name: department
     type: string
     minLength: 3
     maxLength: 50
-    uiElement: text
+    inputElement: text
+    unique: true

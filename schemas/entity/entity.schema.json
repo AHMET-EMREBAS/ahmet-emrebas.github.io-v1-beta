@@ -41,6 +41,9 @@
           },
           {
             "$ref": "./date-property.schema.json"
+          },
+          {
+            "$ref": "./generated-text-property.schema.json"
           }
         ]
       }

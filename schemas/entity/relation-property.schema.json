@@ -61,7 +61,7 @@
       "description": "Is the property required?",
       "default": false
     },
-    "uiElement": {
+    "inputElement": {
       "type": "string",
       "description": "Which HTML input element is used for the property?",
       "enum": ["radio", "checkbox", "select", "search-item"],
@@ -81,6 +81,6 @@
       "default": "product"
     }
   },
-  "required": ["name", "type", "uiElement", "from"],
+  "required": ["name", "type", "inputElement", "from"],
   "additionalProperties": false
 }

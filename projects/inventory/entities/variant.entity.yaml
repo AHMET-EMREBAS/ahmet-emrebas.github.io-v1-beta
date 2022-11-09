@@ -1,0 +1,19 @@
+name: variant
+mainProperty: value
+properties:
+  - name: value
+    type: string
+    minLength: 3
+    maxLength: 400
+    inputElement: text
+
+  - name: code
+    type: string
+    maxLength: 4
+    minLength: 1
+    inputElement: text
+
+  - name: feature
+    type: many-to-one
+    inputElement: search-item
+    from: feature

@@ -1,0 +1,18 @@
+name: quantity
+mainProperty: quantity
+properties:
+  - name: quantity
+    type: integer
+    min: -200
+    max: 999999999999
+    inputElement: number
+
+  - name: sku
+    type: many-to-one
+    inputElement: search-item
+    from: sku
+
+  - name: store
+    type: many-to-one
+    inputElement: search-item
+    from: store

@@ -1,7 +1,7 @@
-name: category
-mainProperty: category
+name: store
+mainProperty: name
 properties:
-  - name: category
+  - name: name
     type: string
     minLength: 3
     maxLength: 50

@@ -1,0 +1,40 @@
+name: order
+mainProperty: id
+properties:
+  - name: quantity
+    type: integer
+    min: 0
+    max: 999999999999
+    inputElement: number
+
+  - name: unitprice
+    type: number
+    inputElement: currency
+    min: 0
+    max: 999999999999
+
+  - name: discount
+    type: number
+    min: 1
+    max: 100
+    inputElement: number
+
+  - name: sku
+    type: many-to-one
+    inputElement: search-item
+    from: sku
+
+  - name: store
+    type: many-to-one
+    inputElement: search-item
+    from: store
+
+  - name: taxExempt
+    type: boolean
+    inputElement: checkbox
+    label: Tax Exempt
+
+  - name: transaction
+    type: many-to-one
+    inputElement: search-item
+    from: transaction

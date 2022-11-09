@@ -1,0 +1,31 @@
+name: location
+mainProperty: location
+properties:
+  - name: location
+    type: generated-string
+    generated: true
+    combinedBy:
+      - x
+      - y
+      - z
+    maxLength: 300
+    unique: true
+
+  - name: x
+    type: integer
+    min: 1
+    max: 9999999999999
+    inputElement: number
+
+  - name: y
+    type: integer
+    min: 1
+    max: 9999999999999
+    inputElement: number
+
+  - name: z
+    type: integer
+    min: 1
+    max: 9999999999999
+    inputElement: number
+    required: false

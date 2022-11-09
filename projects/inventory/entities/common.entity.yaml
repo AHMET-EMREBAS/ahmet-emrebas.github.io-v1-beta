@@ -3,30 +3,30 @@ mainProperty: id
 properties:
   - name: id
     type: id
-    uiElement: number
+    inputElement: number
     generated: true
     label: ID
 
   - name: uuid
     type: uuid
-    uiElement: text
+    inputElement: text
     generated: true
     label: UUID
 
   - name: createdAt
     type: date
-    uiElement: date
+    inputElement: date
     generated: CreateTime
     label: Created At
 
   - name: updatedAt
     type: date
-    uiElement: date
+    inputElement: date
     generated: UpdateTime
     label: Created At
 
   - name: deletedAt
     type: date
-    uiElement: date
+    inputElement: date
     generated: DeleteTime
     label: Updated At
