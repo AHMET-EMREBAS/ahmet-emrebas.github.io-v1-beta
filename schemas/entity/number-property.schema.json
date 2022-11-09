@@ -32,10 +32,11 @@
     },
     "group": {
       "type": "string",
-      "description": "What is the property' input group? It is used for seperating inputs into different forms for better user experience",
+      "enum": ["Primary", "Secondary", "Others"],
+      "description": "What is the property's input group? It is used for seperating inputs into different forms for better user experience",
       "minLength": 3,
       "maxLength": 50,
-      "default": "name"
+      "default": "Primary"
     },
     "min": {
       "type": "number",

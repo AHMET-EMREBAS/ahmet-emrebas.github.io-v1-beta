@@ -43,6 +43,14 @@
       "minimum": 0,
       "default": 50
     },
+    "group": {
+      "type": "string",
+      "enum": ["Primary", "Secondary", "Others"],
+      "description": "What is the property's input group? It is used for seperating inputs into different forms for better user experience",
+      "minLength": 3,
+      "maxLength": 50,
+      "default": "Primary"
+    },
     "update": {
       "type": "boolean",
       "description": "Is update operation allowed for the property?",
