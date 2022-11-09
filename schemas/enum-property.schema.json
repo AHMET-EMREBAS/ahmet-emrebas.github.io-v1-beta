@@ -1,6 +1,6 @@
 {
-  "$id": "RelationPropertySchema",
-  "title": "Relation Property Schema",
+  "$id": "EnumPropertySchema",
+  "title": "Enum Property Schema",
   "description": "Property defination of an entity",
   "properties": {
     "name": {
@@ -13,8 +13,8 @@
     "type": {
       "type": "string",
       "description": "What is the property type?",
-      "enum": ["many-to-many", "many-to-one", "one-to-many", "one-to-one"],
-      "default": "many-to-one"
+      "enum": ["enum"],
+      "default": "enum"
     },
     "label": {
       "type": "string",
@@ -30,6 +30,7 @@
       "maxLength": 30,
       "default": "icon"
     },
+
     "group": {
       "type": "string",
       "description": "What is the property' input group? It is used for seperating inputs into different forms for better user experience",
@@ -37,19 +38,11 @@
       "maxLength": 50,
       "default": "name"
     },
-    "minLength": {
-      "type": "integer",
-      "description": "What is the minimum length of the property?",
-      "minimum": 0,
-      "default": 3
+    "update": {
+      "type": "boolean",
+      "description": "Is update operation allowed for the property?",
+      "default": false
     },
-    "maxLength": {
-      "type": "integer",
-      "description": "What is the maximum length of the property?",
-      "minimum": 0,
-      "default": 50
-    },
-
     "query": {
       "type": "boolean",
       "description": "Is query operation allowed for the property?",
@@ -60,32 +53,26 @@
       "description": "Is the property required?",
       "default": false
     },
-
+    "unique": {
+      "type": "boolean",
+      "description": "Is the property unique?",
+      "default": true
+    },
     "uiElement": {
       "type": "string",
       "description": "Which HTML input element is used for the property?",
-      "enum": ["radio", "checkbox", "select"],
+      "enum": ["autocomplete", "radio", "select"],
       "default": "select"
     },
-    "from": {
-      "type": "string",
-      "description": "What is the entity name of this relation?",
-      "minLength": 3,
-      "maxLength": 50
-    },
-    "valueKey": {
-      "type": "string",
-      "description": "Property name of the relation entity which its value will be used as the option's value.",
-      "minLength": 1,
-      "maxLength": 50
-    },
-    "labelKey": {
-      "type": "string",
-      "description": "Property name of the relation entity which its value will be used as the option's label.",
-      "minLength": 1,
-      "maxLength": 50
+    "enum": {
+      "type": "array",
+      "description": "What are the enum values?",
+      "items": {
+        "type": "string"
+      },
+      "default": ["option 1", "option 2", "option 2"]
     }
   },
-  "required": ["name", "type", "uiElement", "from", "valueKey", "labelKey"],
+  "required": ["name", "type", "uiElement", "enum"],
   "additionalProperties": false
 }

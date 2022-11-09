@@ -5,76 +5,121 @@
   "properties": {
     "name": {
       "type": "string",
+      "description": "What is the property name?",
       "minLength": 3,
       "maxLength": 50,
       "default": "name"
     },
     "type": {
       "type": "string",
-      "enum": ["string", "number", "integer", "boolean", "array", "object"],
+      "description": "What is the property type?",
+      "enum": [
+        "string",
+        "number",
+        "enum",
+        "integer",
+        "boolean",
+        "date",
+        "array",
+        "object",
+        "many-to-many",
+        "many-to-one",
+        "one-to-many",
+        "one-to-one"
+      ],
       "default": "string"
+    },
+    "label": {
+      "type": "string",
+      "description": "What is the visible property label?",
+      "minLength": 1,
+      "maxLength": 50,
+      "default": "label"
+    },
+    "icon": {
+      "type": "string",
+      "description": "What is the property icon name?",
+      "minLength": 1,
+      "maxLength": 30,
+      "default": "icon"
+    },
+
+    "group": {
+      "type": "string",
+      "description": "What is the property' input group? It is used for seperating inputs into different forms for better user experience",
+      "minLength": 3,
+      "maxLength": 50,
+      "default": "name"
     },
     "minLength": {
       "type": "integer",
+      "description": "What is the minimum length of the property?",
       "minimum": 0,
       "default": 3
     },
     "maxLength": {
       "type": "integer",
+      "description": "What is the maximum length of the property?",
       "minimum": 0,
       "default": 50
     },
     "min": {
       "type": "number",
+      "description": "What is the minimum value of the property?",
       "default": 1
     },
     "max": {
       "type": "number",
+      "description": "What is the maximum value of the property?",
       "default": 100
     },
     "update": {
       "type": "boolean",
-      "description": "Would you like to update this field?",
+      "description": "Is update operation allowed for the property?",
       "default": false
     },
     "query": {
       "type": "boolean",
-      "description": "Would you like to provide query operation on this field?",
+      "description": "Is query operation allowed for the property?",
       "default": false
     },
     "required": {
       "type": "boolean",
-      "description": "Is the field required?",
+      "description": "Is the property required?",
       "default": false
     },
     "unique": {
       "type": "boolean",
-      "description": "Is the field unique?",
+      "description": "Is the property unique?",
       "default": true
     },
-    "input": {
+    "uiElement": {
       "type": "string",
-      "description": "Which HTML input element would you like to use for this property?",
+      "description": "Which HTML input element is used for the property?",
       "enum": [
         "text",
         "textarea",
         "texteditor",
         "number",
+        "number-range",
         "currency",
+        "currency-range",
         "date",
+        "date-range",
         "radio",
         "checkbox",
         "switch",
         "select"
-      ]
+      ],
+      "default": "text"
     },
     "from": {
       "type": "string",
-      "description": "Related entity name of this input.",
+      "description": "What is the entity name of this relation?",
       "minLength": 3,
       "maxLength": 50
     }
   },
-  "required": ["name", "type"],
+  "required": ["name", "type", "uiElement"],
   "additionalProperties": false
 }

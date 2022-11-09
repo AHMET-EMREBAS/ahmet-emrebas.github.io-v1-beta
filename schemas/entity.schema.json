@@ -11,19 +11,21 @@
     "properties": {
       "type": "array",
       "items": {
-        "type": "object",
         "oneOf": [
           {
             "$ref": "./text-property.schema.json"
           },
           {
-            "$ref": "./number-property.schema.json"
-          },
-          {
             "$ref": "./relation-property.schema.json"
           },
           {
+            "$ref": "./number-property.schema.json"
+          },
+          {
             "$ref": "./boolean-property.schema.json"
+          },
+          {
+            "$ref": "./enum-property.schema.json"
           }
         ]
       }
