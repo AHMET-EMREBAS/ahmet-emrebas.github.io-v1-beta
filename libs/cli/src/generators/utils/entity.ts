@@ -1,4 +1,7 @@
-import { readFileSync } from 'fs';
+import {
+  readdirSync,
+  readFileSync,
+} from 'fs';
 import { load } from 'js-yaml';
 import {
   kebabCase,
@@ -73,6 +76,12 @@ export const relationTypes: Readonly<string[]> = [
   'many-to-one',
 ];
 
+export const atomicTypes: Readonly<string[]> = [
+  'string',
+  'boolean',
+  'Date',
+  'number',
+];
 function isRelationColumn(p: PropertyOptions) {
   return relationTypes.includes(p.type);
 }
@@ -99,7 +108,11 @@ function appendUtilities(e: PropertyOptions) {
         return `string`;
       }
 
-      return e.type;
+      if (atomicTypes.includes(e.type)) {
+        return e.type;
+      }
+
+      return 'string';
     },
 
     getValidators: () => {
@@ -169,4 +182,10 @@ export function loadMetaData(
       )
     ).toString()
   ) as EntityOptions;
+}
+
+export function getModuleNames(tree: Tree, project) {
+  return readdirSync(join(tree.root, 'projects', project, 'entities')).map(
+    (e) => e.split('.')[0]
+  );
 }

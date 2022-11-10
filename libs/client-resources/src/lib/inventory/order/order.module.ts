@@ -30,9 +30,9 @@ import { OrderService } from './order.service';
 import { TableViewOrderComponent } from './table-view-order';
 import { UpdateOrderComponent } from './update-order';
 
-import { ProductService } from '../product';
+import { SkuService } from '../sku';
 
-import { PricelevelService } from '../pricelevel';
+import { StoreService } from '../store';
 
 import { TransactionService } from '../transaction';
 
@@ -81,9 +81,9 @@ import { NumberInputModule } from 'material/form/number-input';
     CanReadOrderGuard,
     OrderFormService,
 
-    ProductService,
+    SkuService,
 
-    PricelevelService,
+    StoreService,
 
     TransactionService,
 

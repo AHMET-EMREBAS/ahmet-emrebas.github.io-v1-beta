@@ -5,6 +5,7 @@ import {
   JoinTable, 
   ManyToOne,
   ManyToMany, 
+  OneToMany,
   OneToOne
 } from 'typeorm';
 
@@ -24,12 +25,12 @@ export class <%= classname %> extends BaseEntity {
     <% for(const c of columns) { %>     
 
       @Col({
-        type:'<%- c.type  %>',
+        type:'<%- c.valueType()  %>',
         unique:<%- !!c.unique  %>,
         nullable:<%- c.required === false %>,
        })
      
-      <%- c.name %>:<%- c.type %>;
+      <%- c.name %>:<%- c.valueType() %>;
 
     <% } %>
 
@@ -50,6 +51,12 @@ export class <%= classname %> extends BaseEntity {
         
         <% if(c.type ==='many-to-many') { %>
                 @ManyToMany(()=><%- c.upperFirst( c.from) %>)
+                @JoinTable()
+                <%- c.name %>: <%- c.upperFirst( c.from) %>[]
+        <% } %>
+
+        <% if(c.type ==='one-to-many') { %>
+                @OneToMany(()=><%- c.upperFirst( c.from) %>)
                 @JoinTable()
                 <%- c.name %>: <%- c.upperFirst( c.from) %>[]
         <% } %>

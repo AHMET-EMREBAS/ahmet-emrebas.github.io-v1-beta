@@ -20,12 +20,21 @@
   >
   </ae-currency-input>
 
-  <ae-select-input
+  <ae-search-one-input
     [updateField]="true"
     (updateEvent)="update($event, item.id!)"
-    [defaultValue]="item?.product"
-    [control]="control('product')"
-    [attributes]="formFields.product!"
+    [defaultValue]="item?.sku"
+    [control]="control('sku')"
+    [attributes]="formFields.sku!"
   >
-  </ae-select-input>
+  </ae-search-one-input>
+
+  <ae-search-one-input
+    [updateField]="true"
+    (updateEvent)="update($event, item.id!)"
+    [defaultValue]="item?.pricelevel"
+    [control]="control('pricelevel')"
+    [attributes]="formFields.pricelevel!"
+  >
+  </ae-search-one-input>
 </div>

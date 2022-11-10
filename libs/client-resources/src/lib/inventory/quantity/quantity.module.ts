@@ -30,7 +30,7 @@ import { QuantityService } from './quantity.service';
 import { TableViewQuantityComponent } from './table-view-quantity';
 import { UpdateQuantityComponent } from './update-quantity';
 
-import { ProductService } from '../product';
+import { SkuService } from '../sku';
 
 import { StoreService } from '../store';
 
@@ -79,7 +79,7 @@ import { NumberInputModule } from 'material/form/number-input';
     CanReadQuantityGuard,
     QuantityFormService,
 
-    ProductService,
+    SkuService,
 
     StoreService,
 

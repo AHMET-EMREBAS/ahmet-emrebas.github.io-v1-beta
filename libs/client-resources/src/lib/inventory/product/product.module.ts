@@ -34,6 +34,8 @@ import { CategoryService } from '../category';
 
 import { DepartmentService } from '../department';
 
+import { VariantService } from '../variant';
+
 import { RadioInputModule } from 'material/form/radio-input';
 import { SwitchInputModule } from 'material/form/switch-input';
 import { NumberInputModule } from 'material/form/number-input';
@@ -82,6 +84,8 @@ import { NumberInputModule } from 'material/form/number-input';
     CategoryService,
 
     DepartmentService,
+
+    VariantService,
 
     {
       provide: NgrxDataService,

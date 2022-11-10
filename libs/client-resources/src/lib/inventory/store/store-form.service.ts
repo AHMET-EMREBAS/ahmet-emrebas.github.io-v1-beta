@@ -16,47 +16,14 @@ export class StoreFormService {
   }
 
   private init() {
-    this.formManager
+    this.formManager.add({
+      id: 'store-name-input',
+      name: 'name',
+      inputType: 'text',
 
-      .add({
-        name: 'name',
-
-        id: 'store-name-input',
-
-        type: 'string',
-
-        valueType: 'string',
-
-        inputType: 'text-input',
-
-        minLength: 3,
-
-        maxLength: 10,
-
-        required: true,
-
-        unique: true,
-      })
-
-      .add({
-        name: 'pricelevel',
-
-        type: 'many-to-one',
-
-        target: 'Pricelevel',
-
-        valueType: 'string',
-
-        inputType: 'select-input',
-
-        required: true,
-
-        optionLabel: 'name',
-
-        optionValue: 'id',
-
-        asyncOptions: this.storeService.pricelevelService?.entities$,
-      });
+      minLength: 3,
+      maxLength: 50,
+    });
   }
 
   createForm() {

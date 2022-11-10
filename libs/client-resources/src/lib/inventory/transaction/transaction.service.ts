@@ -13,20 +13,10 @@ import { Transaction } from './transaction.interface';
 @Injectable()
 export class TransactionService extends NgrxDataService<Transaction> {
   public override columns: { header: string; field: keyof Transaction }[] = [
-    { field: 'complete', header: 'COMPLETE' },
-
-    { field: 'createdAt', header: 'CREATEDAT' },
+    { field: 'complete', header: 'Complete' },
   ];
 
-  public override globalFilterFields: string[] = [
-    'id',
-
-    'uuid',
-
-    'complete',
-
-    'createdAt',
-  ];
+  public override globalFilterFields: string[] = ['[object Object]'];
 
   public override contextMenuItems: MenuItem[] = [
     {

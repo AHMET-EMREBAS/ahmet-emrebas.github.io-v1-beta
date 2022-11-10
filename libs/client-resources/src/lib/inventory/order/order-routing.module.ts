@@ -15,20 +15,24 @@ export const routes: Routes = [
 
     children: [
       {
+        title: 'View Order',
         path: 'table-view',
         component: TableViewOrderComponent,
         canActivate: [CanReadOrderGuard],
       },
       {
+        title: 'Create Order',
         path: 'create',
         component: CreateOrderComponent,
         canActivate: [CanWriteOrderGuard],
       },
       {
+        title: 'Update Order',
         path: 'update/:id',
         component: UpdateOrderComponent,
       },
       {
+        title: 'Delete Order ',
         path: 'delete/:id',
         component: DeleteOrderComponent,
       },

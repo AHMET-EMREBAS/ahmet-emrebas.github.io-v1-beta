@@ -6,10 +6,11 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { TransactionPostController } from './transaction-post.controller';
 import { TransactionQueryController } from './transaction-query.controller';
 import { TransactionService } from './transaction.service';
+import { TransactionSubscriber } from './transaction.subscriber';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Transaction, TransactionView])],
   controllers: [TransactionQueryController, TransactionPostController],
-  providers: [TransactionService],
+  providers: [TransactionService, TransactionSubscriber],
 })
 export class TransactionModule {}

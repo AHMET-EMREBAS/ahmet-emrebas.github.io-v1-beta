@@ -1,0 +1,31 @@
+<div
+  class="flex flex-column md:flex-row flex-wrap gap-5 p-2"
+  *ngIf="item$ | async as item"
+>
+  <ae-undefined-input
+    [updateField]="true"
+    (updateEvent)="update($event, item.id!)"
+    [defaultValue]="item?.permission"
+    [control]="control('permission')"
+    [attributes]="formFields.permission!"
+  >
+  </ae-undefined-input>
+
+  <ae-radio-input
+    [updateField]="true"
+    (updateEvent)="update($event, item.id!)"
+    [defaultValue]="item?.operation"
+    [control]="control('operation')"
+    [attributes]="formFields.operation!"
+  >
+  </ae-radio-input>
+
+  <ae-search-one-input
+    [updateField]="true"
+    (updateEvent)="update($event, item.id!)"
+    [defaultValue]="item?.resource"
+    [control]="control('resource')"
+    [attributes]="formFields.resource!"
+  >
+  </ae-search-one-input>
+</div>

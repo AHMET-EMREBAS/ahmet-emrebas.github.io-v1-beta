@@ -17,23 +17,12 @@ export class PricelevelFormService {
 
   private init() {
     this.formManager.add({
-      name: 'name',
-
-      id: 'pricelevel-name-input',
-
-      type: 'string',
-
-      valueType: 'string',
-
-      inputType: 'text-input',
+      id: 'pricelevel-pricelevel-input',
+      name: 'pricelevel',
+      inputType: 'text',
 
       minLength: 3,
-
-      maxLength: 10,
-
-      required: true,
-
-      unique: true,
+      maxLength: 50,
     });
   }
 

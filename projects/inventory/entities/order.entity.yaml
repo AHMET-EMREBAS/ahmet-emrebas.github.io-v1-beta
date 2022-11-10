@@ -26,18 +26,18 @@ properties:
 
   - name: sku
     type: many-to-one
-    inputElement: search-item
+    inputElement: search-one
     from: sku
     mainProperty: sku
 
   - name: store
     type: many-to-one
-    inputElement: search-item
+    inputElement: search-one
     from: store
     mainProperty: name
 
   - name: transaction
     type: many-to-one
-    inputElement: search-item
+    inputElement: search-one
     from: transaction
-    mainProperty: name
+    mainProperty: complete

@@ -1,0 +1,26 @@
+<ae-form
+  [submitLabel]="submitLabel"
+  [formGroup]="formGroup"
+  (formSubmit)="onSubmit($event)"
+>
+  <ae-undefined-input
+    [defaultValue]="defaultValue?.permission"
+    [control]="control('permission')"
+    [attributes]="formFields.permission!"
+  >
+  </ae-undefined-input>
+
+  <ae-radio-input
+    [defaultValue]="defaultValue?.operation"
+    [control]="control('operation')"
+    [attributes]="formFields.operation!"
+  >
+  </ae-radio-input>
+
+  <ae-search-one-input
+    [defaultValue]="defaultValue?.resource"
+    [control]="control('resource')"
+    [attributes]="formFields.resource!"
+  >
+  </ae-search-one-input>
+</ae-form>

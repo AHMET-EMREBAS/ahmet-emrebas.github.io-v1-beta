@@ -15,20 +15,24 @@ export const routes: Routes = [
 
     children: [
       {
+        title: 'View Category',
         path: 'table-view',
         component: TableViewCategoryComponent,
         canActivate: [CanReadCategoryGuard],
       },
       {
+        title: 'Create Category',
         path: 'create',
         component: CreateCategoryComponent,
         canActivate: [CanWriteCategoryGuard],
       },
       {
+        title: 'Update Category',
         path: 'update/:id',
         component: UpdateCategoryComponent,
       },
       {
+        title: 'Delete Category ',
         path: 'delete/:id',
         component: DeleteCategoryComponent,
       },

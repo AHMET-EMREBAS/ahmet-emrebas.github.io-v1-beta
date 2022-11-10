@@ -21,24 +21,24 @@ export const routes: Routes = [
 
     children: [
       {
-        title: 'View <%= classname %>'
+        title: 'View <%= classname %>',
         path: 'table-view',
         component: TableView<%= classname %>Component,
         canActivate: [CanRead<%= classname %>Guard],
       },
       {
-        title: 'Create <%= classname %>'
+        title: 'Create <%= classname %>',
         path: 'create',
         component: Create<%= classname %>Component,
         canActivate: [CanWrite<%= classname %>Guard],
       },
       {
-        title: 'Update <%= classname %>'
+        title: 'Update <%= classname %>',
         path: 'update/:id',
         component: Update<%= classname %>Component,
       },
       {
-        title: 'Delete <%= classname %> '
+        title: 'Delete <%= classname %> ',
         path: 'delete/:id',
         component: Delete<%= classname %>Component,
       },

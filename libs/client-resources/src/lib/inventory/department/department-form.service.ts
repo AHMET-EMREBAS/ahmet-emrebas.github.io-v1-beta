@@ -17,23 +17,12 @@ export class DepartmentFormService {
 
   private init() {
     this.formManager.add({
-      name: 'name',
-
-      id: 'department-name-input',
-
-      type: 'string',
-
-      valueType: 'string',
-
-      inputType: 'text-input',
+      id: 'department-department-input',
+      name: 'department',
+      inputType: 'text',
 
       minLength: 3,
-
-      maxLength: 10,
-
-      required: true,
-
-      unique: true,
+      maxLength: 50,
     });
   }
 

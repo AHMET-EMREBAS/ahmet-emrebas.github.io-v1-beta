@@ -2,12 +2,12 @@
   class="flex flex-column md:flex-row flex-wrap gap-5 p-2"
   *ngIf="item$ | async as item"
 >
-  <ae-checkbox-input
+  <ae-select-input
     [updateField]="true"
     (updateEvent)="update($event, item.id!)"
     [defaultValue]="item?.complete"
     [control]="control('complete')"
     [attributes]="formFields.complete!"
   >
-  </ae-checkbox-input>
+  </ae-select-input>
 </div>

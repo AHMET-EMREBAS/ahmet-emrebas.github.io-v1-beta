@@ -11,30 +11,48 @@
   >
   </ae-text-input>
 
-  <ae-text-input
+  <ae-textarea-input
     [updateField]="true"
     (updateEvent)="update($event, item.id!)"
     [defaultValue]="item?.description"
     [control]="control('description')"
     [attributes]="formFields.description!"
   >
+  </ae-textarea-input>
+
+  <ae-text-input
+    [updateField]="true"
+    (updateEvent)="update($event, item.id!)"
+    [defaultValue]="item?.code"
+    [control]="control('code')"
+    [attributes]="formFields.code!"
+  >
   </ae-text-input>
 
-  <ae-select-input
+  <ae-search-one-input
     [updateField]="true"
     (updateEvent)="update($event, item.id!)"
     [defaultValue]="item?.category"
     [control]="control('category')"
     [attributes]="formFields.category!"
   >
-  </ae-select-input>
+  </ae-search-one-input>
 
-  <ae-select-input
+  <ae-search-one-input
     [updateField]="true"
     (updateEvent)="update($event, item.id!)"
     [defaultValue]="item?.department"
     [control]="control('department')"
     [attributes]="formFields.department!"
   >
-  </ae-select-input>
+  </ae-search-one-input>
+
+  <ae-search-many-input
+    [updateField]="true"
+    (updateEvent)="update($event, item.id!)"
+    [defaultValue]="item?.variants"
+    [control]="control('variants')"
+    [attributes]="formFields.variants!"
+  >
+  </ae-search-many-input>
 </div>

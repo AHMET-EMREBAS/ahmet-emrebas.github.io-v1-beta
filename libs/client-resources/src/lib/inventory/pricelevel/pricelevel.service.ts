@@ -13,10 +13,10 @@ import { Pricelevel } from './pricelevel.interface';
 @Injectable()
 export class PricelevelService extends NgrxDataService<Pricelevel> {
   public override columns: { header: string; field: keyof Pricelevel }[] = [
-    { field: 'name', header: 'NAME' },
+    { field: 'pricelevel', header: 'Price Level' },
   ];
 
-  public override globalFilterFields: string[] = ['id', 'uuid', 'name'];
+  public override globalFilterFields: string[] = ['[object Object]'];
 
   public override contextMenuItems: MenuItem[] = [
     {

@@ -30,8 +30,6 @@ import { StoreService } from './store.service';
 import { TableViewStoreComponent } from './table-view-store';
 import { UpdateStoreComponent } from './update-store';
 
-import { PricelevelService } from '../pricelevel';
-
 import { RadioInputModule } from 'material/form/radio-input';
 import { SwitchInputModule } from 'material/form/switch-input';
 import { NumberInputModule } from 'material/form/number-input';
@@ -76,8 +74,6 @@ import { NumberInputModule } from 'material/form/number-input';
     CanWriteStoreGuard,
     CanReadStoreGuard,
     StoreFormService,
-
-    PricelevelService,
 
     {
       provide: NgrxDataService,

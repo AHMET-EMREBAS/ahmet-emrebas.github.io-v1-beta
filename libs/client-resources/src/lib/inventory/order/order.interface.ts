@@ -5,11 +5,17 @@ export interface Order {
   updatedAt?: Date;
   deletedAt?: Date;
 
-  quantity: number;
+  quantity: string;
 
-  product: string;
+  unitprice: number;
 
-  pricelevel: string;
+  discount: number;
+
+  taxExempt: boolean;
+
+  sku: string;
+
+  store: string;
 
   transaction: string;
 }

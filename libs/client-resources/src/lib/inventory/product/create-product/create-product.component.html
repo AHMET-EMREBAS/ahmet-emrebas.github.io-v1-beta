@@ -10,24 +10,38 @@
   >
   </ae-text-input>
 
-  <ae-text-input
+  <ae-textarea-input
     [defaultValue]="defaultValue?.description"
     [control]="control('description')"
     [attributes]="formFields.description!"
   >
+  </ae-textarea-input>
+
+  <ae-text-input
+    [defaultValue]="defaultValue?.code"
+    [control]="control('code')"
+    [attributes]="formFields.code!"
+  >
   </ae-text-input>
 
-  <ae-select-input
+  <ae-search-one-input
     [defaultValue]="defaultValue?.category"
     [control]="control('category')"
     [attributes]="formFields.category!"
   >
-  </ae-select-input>
+  </ae-search-one-input>
 
-  <ae-select-input
+  <ae-search-one-input
     [defaultValue]="defaultValue?.department"
     [control]="control('department')"
     [attributes]="formFields.department!"
   >
-  </ae-select-input>
+  </ae-search-one-input>
+
+  <ae-search-many-input
+    [defaultValue]="defaultValue?.variants"
+    [control]="control('variants')"
+    [attributes]="formFields.variants!"
+  >
+  </ae-search-many-input>
 </ae-form>

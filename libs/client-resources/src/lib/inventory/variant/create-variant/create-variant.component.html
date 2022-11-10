@@ -1,0 +1,26 @@
+<ae-form
+  [submitLabel]="submitLabel"
+  [formGroup]="formGroup"
+  (formSubmit)="onSubmit($event)"
+>
+  <ae-text-input
+    [defaultValue]="defaultValue?.value"
+    [control]="control('value')"
+    [attributes]="formFields.value!"
+  >
+  </ae-text-input>
+
+  <ae-text-input
+    [defaultValue]="defaultValue?.code"
+    [control]="control('code')"
+    [attributes]="formFields.code!"
+  >
+  </ae-text-input>
+
+  <ae-search-one-input
+    [defaultValue]="defaultValue?.feature"
+    [control]="control('feature')"
+    [attributes]="formFields.feature!"
+  >
+  </ae-search-one-input>
+</ae-form>

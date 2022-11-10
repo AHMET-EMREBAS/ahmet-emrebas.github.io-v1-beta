@@ -18,20 +18,24 @@ export const routes: Routes = [
 
     children: [
       {
+        title: 'View Department',
         path: 'table-view',
         component: TableViewDepartmentComponent,
         canActivate: [CanReadDepartmentGuard],
       },
       {
+        title: 'Create Department',
         path: 'create',
         component: CreateDepartmentComponent,
         canActivate: [CanWriteDepartmentGuard],
       },
       {
+        title: 'Update Department',
         path: 'update/:id',
         component: UpdateDepartmentComponent,
       },
       {
+        title: 'Delete Department ',
         path: 'delete/:id',
         component: DeleteDepartmentComponent,
       },

@@ -1,20 +1,23 @@
 import { Observable } from 'rxjs';
 
 export type InputType =
-  | 'text-input'
-  | 'textarea-input'
-  | 'checkbox-input'
-  | 'number-input'
-  | 'date-input'
-  | 'email-input'
-  | 'number-range-input'
-  | 'date-range-input'
-  | 'password-input'
-  | 'radio-input'
-  | 'select-input'
-  | 'select-many-input'
-  | 'switch-input'
-  | 'currency-input';
+  | 'text'
+  | 'textarea'
+  | 'checkbox'
+  | 'number'
+  | 'date'
+  | 'email'
+  | 'number-range'
+  | 'date-range'
+  | 'password'
+  | 'radio'
+  | 'select'
+  | 'select-many'
+  | 'select-one'
+  | 'search-one'
+  | 'search-many'
+  | 'switch'
+  | 'currency';
 
 export type InputAttributes<T = any> = Partial<{
   id: string;
@@ -30,6 +33,9 @@ export type InputAttributes<T = any> = Partial<{
   maxLength: number;
   isEmail: boolean;
   isPassword: boolean;
+  isNumber: boolean;
+  isNumberArray: boolean;
+  isString: boolean;
   after: Date;
   before: Date;
   min: number;

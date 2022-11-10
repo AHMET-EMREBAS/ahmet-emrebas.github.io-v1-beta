@@ -15,11 +15,13 @@ properties:
 
   - name: sku
     type: many-to-one
-    inputElement: search-item
+    inputElement: search-one
     from: sku
+    mainProperty: sku
 
   - name: pricelevel
     type: many-to-one
-    inputElement: search-item
+    inputElement: search-one
     from: pricelevel
     label: Price Level
+    mainProperty: name

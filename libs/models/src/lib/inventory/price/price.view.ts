@@ -13,9 +13,9 @@ import { Price } from './price.entity';
 
       .addSelect('price.cost', 'cost')
 
-      .addSelect('sku.', 'sku')
+      .addSelect('sku.sku', 'sku')
 
-      .addSelect('pricelevel.', 'pricelevel')
+      .addSelect('pricelevel.name', 'pricelevel')
 
       .from(Price, 'price')
 
@@ -28,9 +28,9 @@ export class PriceView {
   @ViewColumn() id: number;
   @ViewColumn() uuid: number;
 
-  @ViewColumn() price: currency;
+  @ViewColumn() price: string;
 
-  @ViewColumn() cost: currency;
+  @ViewColumn() cost: string;
 
   @ViewColumn() sku: string;
 

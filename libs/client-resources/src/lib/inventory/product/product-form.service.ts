@@ -19,81 +19,57 @@ export class ProductFormService {
     this.formManager
 
       .add({
-        name: 'name',
-
         id: 'product-name-input',
-
-        type: 'string',
-
-        valueType: 'string',
-
-        inputType: 'text-input',
+        name: 'name',
+        inputType: 'text',
 
         minLength: 3,
-
-        maxLength: 10,
-
-        required: true,
-
-        unique: true,
+        maxLength: 50,
       })
 
       .add({
-        name: 'description',
-
         id: 'product-description-input',
-
-        type: 'string',
-
-        valueType: 'string',
-
-        inputType: 'text-input',
+        name: 'description',
+        inputType: 'textarea',
 
         minLength: 3,
-
-        maxLength: 400,
-
-        required: true,
+        maxLength: 50,
       })
 
       .add({
+        id: 'product-code-input',
+        name: 'code',
+        inputType: 'text',
+
+        minLength: 3,
+        maxLength: 50,
+      })
+
+      .add({
+        id: 'product-category-input',
         name: 'category',
-
-        type: 'many-to-one',
-
-        target: 'Category',
-
-        valueType: 'string',
-
-        inputType: 'select-input',
-
-        required: true,
-
-        optionLabel: 'name',
-
-        optionValue: 'id',
-
+        inputType: 'search-one',
+        required: false,
+        isNumber: true,
         asyncOptions: this.productService.categoryService?.entities$,
       })
 
       .add({
+        id: 'product-department-input',
         name: 'department',
-
-        type: 'many-to-one',
-
-        target: 'Department',
-
-        valueType: 'string',
-
-        inputType: 'select-input',
-
-        required: true,
-
-        optionLabel: 'name',
-
-        optionValue: 'id',
-
+        inputType: 'search-one',
+        required: false,
+        isNumber: true,
         asyncOptions: this.productService.departmentService?.entities$,
+      })
+
+      .add({
+        id: 'product-variants-input',
+        name: 'variants',
+        inputType: 'search-many',
+        required: false,
+        isNumberArray: true,
+        asyncOptions: this.productService.variantsService?.entities$,
       });
   }
 

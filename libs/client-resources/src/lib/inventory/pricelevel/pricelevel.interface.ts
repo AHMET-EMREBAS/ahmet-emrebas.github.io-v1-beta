@@ -5,5 +5,5 @@ export interface Pricelevel {
   updatedAt?: Date;
   deletedAt?: Date;
 
-  name: string;
+  pricelevel: string;
 }

@@ -7,9 +7,3 @@ properties:
     enum:
       - complete
       - canceled
-
-  - name: orders
-    type: one-to-many
-    inputElement: search-item
-    from: order
-    mainProperty: user

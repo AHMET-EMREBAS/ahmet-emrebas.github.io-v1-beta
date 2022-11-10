@@ -5,5 +5,5 @@ export interface Transaction {
   updatedAt?: Date;
   deletedAt?: Date;
 
-  complete: boolean;
+  complete: string;
 }

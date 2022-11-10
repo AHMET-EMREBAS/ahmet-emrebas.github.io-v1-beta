@@ -20,12 +20,12 @@ import { entityDataModuleConfig } from './ngrx.meta';
 
 
 const routes: Routes = [
-    <% for(const [big, small] of modules) { %> 
+    <% for(const m of modules) { %> 
     {
-        path: '<%- small %>',
+        path: '<%- m %>',
         loadChildren: () =>
-          import('client-resources/<%- project %>/<%- small %>').then(
-            (m) => m.<%- big %>Module
+          import('client-resources/<%- project %>/<%- m %>').then(
+            (m) => m.<%- m[0].toUpperCase() + m.slice(1) %>Module
           ),
       },
     <% } %>

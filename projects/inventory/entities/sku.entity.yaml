@@ -22,11 +22,13 @@ properties:
 
   - name: variants
     type: many-to-many
-    inputElement: search-item
+    inputElement: search-many
     from: variant
     parent: product
+    mainProperty: name
 
   - name: product
     type: many-to-one
-    inputElement: search-item
+    inputElement: search-many
     from: product
+    mainProperty: name

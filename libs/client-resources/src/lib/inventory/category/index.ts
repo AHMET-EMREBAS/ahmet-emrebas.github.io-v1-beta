@@ -5,6 +5,7 @@ export * from './category-form.service';
 export * from './category-routing.module';
 export * from './category.component';
 export * from './category.guard';
+export * from './category.interface';
 export * from './category.module';
 export * from './category.service';
 export * from './table-view-category';

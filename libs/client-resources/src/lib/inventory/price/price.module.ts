@@ -30,7 +30,9 @@ import { PriceService } from './price.service';
 import { TableViewPriceComponent } from './table-view-price';
 import { UpdatePriceComponent } from './update-price';
 
-import { ProductService } from '../product';
+import { SkuService } from '../sku';
+
+import { PricelevelService } from '../pricelevel';
 
 import { RadioInputModule } from 'material/form/radio-input';
 import { SwitchInputModule } from 'material/form/switch-input';
@@ -77,7 +79,9 @@ import { NumberInputModule } from 'material/form/number-input';
     CanReadPriceGuard,
     PriceFormService,
 
-    ProductService,
+    SkuService,
+
+    PricelevelService,
 
     {
       provide: NgrxDataService,

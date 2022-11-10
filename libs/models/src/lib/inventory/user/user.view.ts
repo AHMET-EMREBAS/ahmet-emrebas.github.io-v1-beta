@@ -24,9 +24,9 @@ export class UserView {
   @ViewColumn() id: number;
   @ViewColumn() uuid: number;
 
-  @ViewColumn() username: email;
+  @ViewColumn() username: string;
 
-  @ViewColumn() password: password;
+  @ViewColumn() password: string;
 
   @ViewColumn() permissions: string[];
 }

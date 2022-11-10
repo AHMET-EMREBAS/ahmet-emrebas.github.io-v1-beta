@@ -14,28 +14,36 @@ import { CategoryService } from '../category';
 
 import { DepartmentService } from '../department';
 
+import { VariantService } from '../variant';
+
 @Injectable()
 export class ProductService extends NgrxDataService<Product> {
   public override columns: { header: string; field: keyof Product }[] = [
-    { field: 'name', header: 'NAME' },
+    { field: 'name', header: 'Name' },
 
-    { field: 'description', header: 'DESCRIPTION' },
+    { field: 'description', header: 'Description' },
 
-    { field: 'category', header: 'CATEGORY' },
+    { field: 'code', header: 'Code' },
 
-    { field: 'department', header: 'DEPARTMENT' },
+    { field: 'category', header: 'Category' },
+
+    { field: 'department', header: 'Department' },
+
+    { field: 'variants', header: 'Variants' },
   ];
 
   public override globalFilterFields: string[] = [
-    'id',
+    '[object Object]',
 
-    'uuid',
+    '[object Object]',
 
-    'name',
+    '[object Object]',
 
-    'category',
+    '[object Object]',
 
-    'description',
+    '[object Object]',
+
+    '[object Object]',
   ];
 
   public override contextMenuItems: MenuItem[] = [
@@ -84,7 +92,9 @@ export class ProductService extends NgrxDataService<Product> {
 
     public readonly categoryService: CategoryService,
 
-    public readonly departmentService: DepartmentService
+    public readonly departmentService: DepartmentService,
+
+    public readonly variantService: VariantService
   ) {
     super('Product', sef, httpClient, router, confirmService);
   }

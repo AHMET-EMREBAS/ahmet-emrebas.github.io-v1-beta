@@ -19,55 +19,37 @@ export class PriceFormService {
     this.formManager
 
       .add({
-        name: 'price',
-
         id: 'price-price-input',
+        name: 'price',
+        inputType: 'currency',
 
-        type: 'decimal',
-
-        valueType: 'number',
-
-        inputType: 'currency-input',
-
-        min: 0,
-
-        required: true,
+        min: 1,
+        max: 9999999999999,
       })
 
       .add({
-        name: 'cost',
-
         id: 'price-cost-input',
-
-        type: 'decimal',
-
-        valueType: 'number',
-
-        inputType: 'currency-input',
+        name: 'cost',
+        inputType: 'currency',
 
         min: 0,
-
-        required: true,
+        max: 99999999999999,
       })
 
       .add({
-        name: 'product',
+        id: 'price-sku-input',
+        name: 'sku',
+        inputType: 'search-one',
+        isNumber: true,
+        asyncOptions: this.priceService.skuService?.entities$,
+      })
 
-        type: 'many-to-one',
-
-        target: 'Product',
-
-        valueType: 'string',
-
-        inputType: 'select-input',
-
-        required: true,
-
-        optionLabel: 'name',
-
-        optionValue: 'id',
-
-        asyncOptions: this.priceService.productService?.entities$,
+      .add({
+        id: 'price-pricelevel-input',
+        name: 'pricelevel',
+        inputType: 'search-one',
+        isNumber: true,
+        asyncOptions: this.priceService.pricelevelService?.entities$,
       });
   }
 

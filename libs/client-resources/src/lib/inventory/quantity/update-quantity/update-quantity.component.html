@@ -11,21 +11,21 @@
   >
   </ae-number-input>
 
-  <ae-select-input
+  <ae-search-one-input
     [updateField]="true"
     (updateEvent)="update($event, item.id!)"
-    [defaultValue]="item?.product"
-    [control]="control('product')"
-    [attributes]="formFields.product!"
+    [defaultValue]="item?.sku"
+    [control]="control('sku')"
+    [attributes]="formFields.sku!"
   >
-  </ae-select-input>
+  </ae-search-one-input>
 
-  <ae-select-input
+  <ae-search-one-input
     [updateField]="true"
     (updateEvent)="update($event, item.id!)"
     [defaultValue]="item?.store"
     [control]="control('store')"
     [attributes]="formFields.store!"
   >
-  </ae-select-input>
+  </ae-search-one-input>
 </div>

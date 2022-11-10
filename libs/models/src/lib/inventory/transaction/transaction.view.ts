@@ -11,18 +11,12 @@ import { Transaction } from './transaction.entity';
 
       .addSelect('transaction.complete', 'complete')
 
-      .addSelect('order.user', 'orders')
-
-      .from(Transaction, 'transaction')
-
-      .leftJoin('order', 'order');
+      .from(Transaction, 'transaction');
   },
 })
 export class TransactionView {
   @ViewColumn() id: number;
   @ViewColumn() uuid: number;
 
-  @ViewColumn() complete: enum;
-
-  @ViewColumn() orders: string[];
+  @ViewColumn() complete: string;
 }

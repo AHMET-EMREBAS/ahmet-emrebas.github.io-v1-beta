@@ -9,7 +9,11 @@ export interface Product {
 
   description: string;
 
+  code: string;
+
   category: string;
 
   department: string;
+
+  variants: string[];
 }

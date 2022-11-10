@@ -5,9 +5,9 @@ export interface Quantity {
   updatedAt?: Date;
   deletedAt?: Date;
 
-  quantity: number;
+  quantity: string;
 
-  product: string;
+  sku: string;
 
   store: string;
 }

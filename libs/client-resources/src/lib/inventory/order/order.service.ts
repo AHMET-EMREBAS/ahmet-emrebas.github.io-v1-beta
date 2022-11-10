@@ -10,36 +10,44 @@ import { EntityCollectionServiceElementsFactory } from '@ngrx/data';
 
 import { Order } from './order.interface';
 
-import { ProductService } from '../product';
+import { SkuService } from '../sku';
 
-import { PricelevelService } from '../pricelevel';
+import { StoreService } from '../store';
 
 import { TransactionService } from '../transaction';
 
 @Injectable()
 export class OrderService extends NgrxDataService<Order> {
   public override columns: { header: string; field: keyof Order }[] = [
-    { field: 'quantity', header: 'QUANTITY' },
+    { field: 'quantity', header: 'Quantity' },
 
-    { field: 'product', header: 'PRODUCT' },
+    { field: 'unitprice', header: 'Unitprice' },
 
-    { field: 'pricelevel', header: 'PRICELEVEL' },
+    { field: 'discount', header: 'Discount' },
 
-    { field: 'transaction', header: 'TRANSACTION' },
+    { field: 'taxExempt', header: 'Tax Exempt' },
+
+    { field: 'sku', header: 'Sku' },
+
+    { field: 'store', header: 'Store' },
+
+    { field: 'transaction', header: 'Transaction' },
   ];
 
   public override globalFilterFields: string[] = [
-    'id',
+    '[object Object]',
 
-    'uuid',
+    '[object Object]',
 
-    'quantity',
+    '[object Object]',
 
-    'product',
+    '[object Object]',
 
-    'pricelevel',
+    '[object Object]',
 
-    'transaction',
+    '[object Object]',
+
+    '[object Object]',
   ];
 
   public override contextMenuItems: MenuItem[] = [
@@ -80,9 +88,9 @@ export class OrderService extends NgrxDataService<Order> {
     router: Router,
     confirmService: ConfirmationService,
 
-    public readonly productService: ProductService,
+    public readonly skuService: SkuService,
 
-    public readonly pricelevelService: PricelevelService,
+    public readonly storeService: StoreService,
 
     public readonly transactionService: TransactionService
   ) {

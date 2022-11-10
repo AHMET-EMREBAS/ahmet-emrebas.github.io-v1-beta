@@ -5,6 +5,7 @@ import {
   JoinTable,
   ManyToOne,
   ManyToMany,
+  OneToMany,
   OneToOne,
 } from 'typeorm';
 
@@ -17,11 +18,11 @@ import { Transaction } from '../transaction';
 @Entity()
 export class Order extends BaseEntity {
   @Col({
-    type: 'integer',
+    type: 'string',
     unique: false,
     nullable: false,
   })
-  quantity: integer;
+  quantity: string;
 
   @Col({
     type: 'number',

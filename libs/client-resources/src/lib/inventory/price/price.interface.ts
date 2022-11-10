@@ -5,9 +5,11 @@ export interface Price {
   updatedAt?: Date;
   deletedAt?: Date;
 
-  price: number;
+  price: string;
 
-  cost: number;
+  cost: string;
 
-  product: string;
+  sku: string;
+
+  pricelevel: string;
 }

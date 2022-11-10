@@ -59,6 +59,10 @@ export function formControl(
   if (attr.isEmail) vs.push(Validators.email);
   if (attr.required) vs.push(Validators.required);
 
+  if (attr.isNumber) vs.push(Validators.pattern(/^[0-9]*$/));
+
+  if (attr.isString) vs.push(Validators.pattern(/^[a-zA-Z]*$/));
+
   if (attr.minLength) vs.push(Validators.minLength(attr.minLength));
 
   if (attr.maxLength) vs.push(Validators.maxLength(attr.maxLength));

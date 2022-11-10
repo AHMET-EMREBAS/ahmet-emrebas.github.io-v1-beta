@@ -10,28 +10,30 @@ import { EntityCollectionServiceElementsFactory } from '@ngrx/data';
 
 import { Price } from './price.interface';
 
-import { ProductService } from '../product';
+import { SkuService } from '../sku';
+
+import { PricelevelService } from '../pricelevel';
 
 @Injectable()
 export class PriceService extends NgrxDataService<Price> {
   public override columns: { header: string; field: keyof Price }[] = [
-    { field: 'price', header: 'PRICE' },
+    { field: 'price', header: 'Price' },
 
-    { field: 'cost', header: 'COST' },
+    { field: 'cost', header: 'Cost' },
 
-    { field: 'product', header: 'PRODUCT' },
+    { field: 'sku', header: 'Sku' },
+
+    { field: 'pricelevel', header: 'Price Level' },
   ];
 
   public override globalFilterFields: string[] = [
-    'id',
+    '[object Object]',
 
-    'uuid',
+    '[object Object]',
 
-    'price',
+    '[object Object]',
 
-    'cost',
-
-    'product',
+    '[object Object]',
   ];
 
   public override contextMenuItems: MenuItem[] = [
@@ -72,7 +74,9 @@ export class PriceService extends NgrxDataService<Price> {
     router: Router,
     confirmService: ConfirmationService,
 
-    public readonly productService: ProductService
+    public readonly skuService: SkuService,
+
+    public readonly pricelevelService: PricelevelService
   ) {
     super('Price', sef, httpClient, router, confirmService);
   }

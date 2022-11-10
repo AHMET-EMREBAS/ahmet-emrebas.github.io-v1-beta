@@ -5,7 +5,7 @@ export class CreateOrderDto {
     min: 0,
     max: 999999999999,
   })
-  quantity: integer;
+  quantity: string;
 
   @Property({
     min: 0,

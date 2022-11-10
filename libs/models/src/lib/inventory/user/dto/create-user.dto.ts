@@ -4,14 +4,14 @@ export class CreateUserDto {
   @Property({
     isEmail: true,
   })
-  username: email;
+  username: string;
 
   @Property({
     isPassword: true,
     minLength: 6,
     maxLength: 50,
   })
-  password: password;
+  password: string;
 
   @Property({
     isNumberArray: true,

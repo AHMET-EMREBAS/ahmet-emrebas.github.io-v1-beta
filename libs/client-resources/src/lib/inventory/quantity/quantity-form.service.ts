@@ -19,56 +19,27 @@ export class QuantityFormService {
     this.formManager
 
       .add({
-        name: 'quantity',
-
         id: 'quantity-quantity-input',
+        name: 'quantity',
+        inputType: 'number',
 
-        type: 'int',
-
-        valueType: 'number',
-
-        inputType: 'number-input',
-
-        required: true,
+        min: -200,
+        max: 999999999999,
       })
 
       .add({
-        name: 'product',
-
-        type: 'many-to-one',
-
-        target: 'Product',
-
-        valueType: 'string',
-
-        inputType: 'select-input',
-
-        required: true,
-
-        optionLabel: 'name',
-
-        optionValue: 'id',
-
-        asyncOptions: this.quantityService.productService?.entities$,
+        id: 'quantity-sku-input',
+        name: 'sku',
+        inputType: 'search-one',
+        isNumber: true,
+        asyncOptions: this.quantityService.skuService?.entities$,
       })
 
       .add({
+        id: 'quantity-store-input',
         name: 'store',
-
-        type: 'many-to-one',
-
-        target: 'Store',
-
-        valueType: 'string',
-
-        inputType: 'select-input',
-
-        required: true,
-
-        optionLabel: 'name',
-
-        optionValue: 'id',
-
+        inputType: 'search-one',
+        isNumber: true,
         asyncOptions: this.quantityService.storeService?.entities$,
       });
   }

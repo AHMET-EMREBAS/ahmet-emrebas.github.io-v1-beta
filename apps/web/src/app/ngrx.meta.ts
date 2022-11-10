@@ -2,45 +2,69 @@ import { EntityDataModuleConfig } from '@ngrx/data';
 
 export const entityDataModuleConfig: EntityDataModuleConfig = {
   pluralNames: {
-    Product: 'Product',
-
     Category: 'Category',
 
     Department: 'Department',
 
-    Pricelevel: 'Pricelevel',
+    Feature: 'Feature',
 
-    Store: 'Store',
-
-    Price: 'Price',
-
-    Quantity: 'Quantity',
+    Location: 'Location',
 
     Order: 'Order',
 
+    Permission: 'Permission',
+
+    Price: 'Price',
+
+    Pricelevel: 'Pricelevel',
+
+    Product: 'Product',
+
+    Quantity: 'Quantity',
+
+    Resource: 'Resource',
+
+    Sku: 'Sku',
+
+    Store: 'Store',
+
     Transaction: 'Transaction',
 
-    Sample: 'Sample',
+    User: 'User',
+
+    Variant: 'Variant',
   },
   entityMetadata: {
-    Product: {},
-
     Category: {},
 
     Department: {},
 
-    Pricelevel: {},
+    Feature: {},
 
-    Store: {},
-
-    Price: {},
-
-    Quantity: {},
+    Location: {},
 
     Order: {},
 
+    Permission: {},
+
+    Price: {},
+
+    Pricelevel: {},
+
+    Product: {},
+
+    Quantity: {},
+
+    Resource: {},
+
+    Sku: {},
+
+    Store: {},
+
     Transaction: {},
 
-    Sample: {},
+    User: {},
+
+    Variant: {},
   },
 };

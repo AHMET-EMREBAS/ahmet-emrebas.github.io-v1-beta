@@ -19,76 +19,59 @@ export class OrderFormService {
     this.formManager
 
       .add({
+        id: 'order-quantity-input',
         name: 'quantity',
+        inputType: 'number',
 
-        id: 'quantity-quantity-input',
-
-        type: 'int',
-
-        valueType: 'number',
-
-        inputType: 'number-input',
-
-        required: true,
+        min: 0,
+        max: 999999999999,
       })
 
       .add({
-        name: 'product',
+        id: 'order-unitprice-input',
+        name: 'unitprice',
+        inputType: 'currency',
 
-        type: 'many-to-one',
-
-        target: 'Product',
-
-        valueType: 'string',
-
-        inputType: 'select-input',
-
-        required: true,
-
-        optionLabel: 'name',
-
-        optionValue: 'id',
-
-        asyncOptions: this.orderService.productService?.entities$,
+        min: 0,
+        max: 999999999999,
       })
 
       .add({
-        name: 'pricelevel',
+        id: 'order-discount-input',
+        name: 'discount',
+        inputType: 'number',
 
-        type: 'many-to-one',
-
-        target: 'Pricelevel',
-
-        valueType: 'string',
-
-        inputType: 'select-input',
-
-        required: true,
-
-        optionLabel: 'name',
-
-        optionValue: 'id',
-
-        asyncOptions: this.orderService.pricelevelService?.entities$,
+        min: 1,
+        max: 100,
       })
 
       .add({
+        id: 'order-taxExempt-input',
+        name: 'taxExempt',
+        inputType: 'checkbox',
+      })
+
+      .add({
+        id: 'order-sku-input',
+        name: 'sku',
+        inputType: 'search-one',
+        isNumber: true,
+        asyncOptions: this.orderService.skuService?.entities$,
+      })
+
+      .add({
+        id: 'order-store-input',
+        name: 'store',
+        inputType: 'search-one',
+        isNumber: true,
+        asyncOptions: this.orderService.storeService?.entities$,
+      })
+
+      .add({
+        id: 'order-transaction-input',
         name: 'transaction',
-
-        type: 'many-to-one',
-
-        target: 'Transaction',
-
-        valueType: 'string',
-
-        inputType: 'select-input',
-
-        required: true,
-
-        optionLabel: 'id',
-
-        optionValue: 'id',
-
+        inputType: 'search-one',
+        isNumber: true,
         asyncOptions: this.orderService.transactionService?.entities$,
       });
   }

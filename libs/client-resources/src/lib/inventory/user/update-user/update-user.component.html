@@ -1,0 +1,31 @@
+<div
+  class="flex flex-column md:flex-row flex-wrap gap-5 p-2"
+  *ngIf="item$ | async as item"
+>
+  <ae-email-input
+    [updateField]="true"
+    (updateEvent)="update($event, item.id!)"
+    [defaultValue]="item?.username"
+    [control]="control('username')"
+    [attributes]="formFields.username!"
+  >
+  </ae-email-input>
+
+  <ae-password-input
+    [updateField]="true"
+    (updateEvent)="update($event, item.id!)"
+    [defaultValue]="item?.password"
+    [control]="control('password')"
+    [attributes]="formFields.password!"
+  >
+  </ae-password-input>
+
+  <ae-checkbox-group-input
+    [updateField]="true"
+    (updateEvent)="update($event, item.id!)"
+    [defaultValue]="item?.permissions"
+    [control]="control('permissions')"
+    [attributes]="formFields.permissions!"
+  >
+  </ae-checkbox-group-input>
+</div>

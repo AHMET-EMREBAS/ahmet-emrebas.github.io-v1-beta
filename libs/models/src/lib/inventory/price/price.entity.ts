@@ -5,6 +5,7 @@ import {
   JoinTable,
   ManyToOne,
   ManyToMany,
+  OneToMany,
   OneToOne,
 } from 'typeorm';
 
@@ -15,18 +16,18 @@ import { Pricelevel } from '../pricelevel';
 @Entity()
 export class Price extends BaseEntity {
   @Col({
-    type: 'currency',
+    type: 'string',
     unique: false,
     nullable: false,
   })
-  price: currency;
+  price: string;
 
   @Col({
-    type: 'currency',
+    type: 'string',
     unique: false,
     nullable: false,
   })
-  cost: currency;
+  cost: string;
 
   @ManyToOne(() => Sku)
   @JoinColumn()

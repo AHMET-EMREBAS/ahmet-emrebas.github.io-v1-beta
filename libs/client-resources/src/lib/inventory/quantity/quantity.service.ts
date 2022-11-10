@@ -10,32 +10,26 @@ import { EntityCollectionServiceElementsFactory } from '@ngrx/data';
 
 import { Quantity } from './quantity.interface';
 
-import { ProductService } from '../product';
+import { SkuService } from '../sku';
 
 import { StoreService } from '../store';
 
 @Injectable()
 export class QuantityService extends NgrxDataService<Quantity> {
   public override columns: { header: string; field: keyof Quantity }[] = [
-    { field: 'quantity', header: 'QUANTITY' },
+    { field: 'quantity', header: 'Quantity' },
 
-    { field: 'product', header: 'PRODUCT' },
+    { field: 'sku', header: 'Sku' },
 
-    { field: 'store', header: 'STORE' },
+    { field: 'store', header: 'Store' },
   ];
 
   public override globalFilterFields: string[] = [
-    'id',
+    '[object Object]',
 
-    'uuid',
+    '[object Object]',
 
-    'price',
-
-    'cost',
-
-    'product',
-
-    'store',
+    '[object Object]',
   ];
 
   public override contextMenuItems: MenuItem[] = [
@@ -82,7 +76,7 @@ export class QuantityService extends NgrxDataService<Quantity> {
     router: Router,
     confirmService: ConfirmationService,
 
-    public readonly productService: ProductService,
+    public readonly skuService: SkuService,
 
     public readonly storeService: StoreService
   ) {

@@ -21,7 +21,7 @@ import { Order } from './order.entity';
 
       .addSelect('store.name', 'store')
 
-      .addSelect('transaction.name', 'transaction')
+      .addSelect('transaction.complete', 'transaction')
 
       .from(Order, 'order')
 
@@ -36,7 +36,7 @@ export class OrderView {
   @ViewColumn() id: number;
   @ViewColumn() uuid: number;
 
-  @ViewColumn() quantity: integer;
+  @ViewColumn() quantity: string;
 
   @ViewColumn() unitprice: number;
 

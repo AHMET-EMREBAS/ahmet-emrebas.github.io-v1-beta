@@ -15,20 +15,24 @@ export const routes: Routes = [
 
     children: [
       {
+        title: 'View Store',
         path: 'table-view',
         component: TableViewStoreComponent,
         canActivate: [CanReadStoreGuard],
       },
       {
+        title: 'Create Store',
         path: 'create',
         component: CreateStoreComponent,
         canActivate: [CanWriteStoreGuard],
       },
       {
+        title: 'Update Store',
         path: 'update/:id',
         component: UpdateStoreComponent,
       },
       {
+        title: 'Delete Store ',
         path: 'delete/:id',
         component: DeleteStoreComponent,
       },

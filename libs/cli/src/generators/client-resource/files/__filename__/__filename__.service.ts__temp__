@@ -14,9 +14,8 @@ import { EntityCollectionServiceElementsFactory } from '@ngrx/data';
 import { <%= classname %> } from './<%= filename %>.interface';
 
 
-<% for(const COLUMN of relations) { %> 
-
-import { <%= COLUMN.upperFirst()+'Service' %>} from '../<%- COLUMN.name %>';
+<% for(const c of relations) { %> 
+   import { <%= c.upperFirst(c.from)+'Service' %>} from '../<%- c.from %>';
 <% } %>
 
 
@@ -24,7 +23,7 @@ import { <%= COLUMN.upperFirst()+'Service' %>} from '../<%- COLUMN.name %>';
 export class <%= classname %>Service extends NgrxDataService<<%= classname %>> {
   public override columns: { header: string; field: keyof <%= classname %> }[] = [
  <% for(const c of viewColumns) { %> 
-    {      field: '<%= c.name %>',      header: '<%= c.label || c.upperFirst() %>',    },
+    {      field: '<%= c.name %>',      header: '<%= c.label || c.upperFirst(c.name) %>',    },
 <% } %>
   ];
 
@@ -71,8 +70,8 @@ export class <%= classname %>Service extends NgrxDataService<<%= classname %>> {
     private readonly clipboard: Clipboard,
     router: Router,
     confirmService: ConfirmationService,
-     <% for(const COLUMN of relations) { %> 
-        public readonly <%- COLUMN.name %>Service:<%= COLUMN.upperFirst() +'Service' %>,
+     <% for(const c of relations) { %> 
+        public readonly <%- c.from %>Service:<%= c.upperFirst(c.from) +'Service' %>,
     <% } %>
   ) {
     super('<%= classname %>', sef, httpClient, router, confirmService);

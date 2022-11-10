@@ -10,17 +10,17 @@
   >
   </ae-number-input>
 
-  <ae-select-input
-    [defaultValue]="defaultValue?.product"
-    [control]="control('product')"
-    [attributes]="formFields.product!"
+  <ae-search-one-input
+    [defaultValue]="defaultValue?.sku"
+    [control]="control('sku')"
+    [attributes]="formFields.sku!"
   >
-  </ae-select-input>
+  </ae-search-one-input>
 
-  <ae-select-input
+  <ae-search-one-input
     [defaultValue]="defaultValue?.store"
     [control]="control('store')"
     [attributes]="formFields.store!"
   >
-  </ae-select-input>
+  </ae-search-one-input>
 </ae-form>

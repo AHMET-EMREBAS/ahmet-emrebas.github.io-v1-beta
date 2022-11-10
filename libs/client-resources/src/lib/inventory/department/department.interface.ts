@@ -5,5 +5,5 @@ export interface Department {
   updatedAt?: Date;
   deletedAt?: Date;
 
-  name: string;
+  department: string;
 }

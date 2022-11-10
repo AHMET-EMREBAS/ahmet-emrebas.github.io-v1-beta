@@ -5,17 +5,16 @@ import {
   JoinTable,
   ManyToOne,
   ManyToMany,
+  OneToMany,
   OneToOne,
 } from 'typeorm';
-
-import { Order } from '../order';
 
 @Entity()
 export class Transaction extends BaseEntity {
   @Col({
-    type: 'enum',
+    type: 'string',
     unique: false,
     nullable: false,
   })
-  complete: enum;
+  complete: string;
 }

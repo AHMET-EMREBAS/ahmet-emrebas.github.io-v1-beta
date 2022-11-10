@@ -16,12 +16,6 @@ import { entityDataModuleConfig } from './ngrx.meta';
 
 const routes: Routes = [
   {
-    path: 'product',
-    loadChildren: () =>
-      import('client-resources/inventory/product').then((m) => m.ProductModule),
-  },
-
-  {
     path: 'category',
     loadChildren: () =>
       import('client-resources/inventory/category').then(
@@ -38,6 +32,40 @@ const routes: Routes = [
   },
 
   {
+    path: 'feature',
+    loadChildren: () =>
+      import('client-resources/inventory/feature').then((m) => m.FeatureModule),
+  },
+
+  {
+    path: 'location',
+    loadChildren: () =>
+      import('client-resources/inventory/location').then(
+        (m) => m.LocationModule
+      ),
+  },
+
+  {
+    path: 'order',
+    loadChildren: () =>
+      import('client-resources/inventory/order').then((m) => m.OrderModule),
+  },
+
+  {
+    path: 'permission',
+    loadChildren: () =>
+      import('client-resources/inventory/permission').then(
+        (m) => m.PermissionModule
+      ),
+  },
+
+  {
+    path: 'price',
+    loadChildren: () =>
+      import('client-resources/inventory/price').then((m) => m.PriceModule),
+  },
+
+  {
     path: 'pricelevel',
     loadChildren: () =>
       import('client-resources/inventory/pricelevel').then(
@@ -46,15 +74,9 @@ const routes: Routes = [
   },
 
   {
-    path: 'store',
+    path: 'product',
     loadChildren: () =>
-      import('client-resources/inventory/store').then((m) => m.StoreModule),
-  },
-
-  {
-    path: 'price',
-    loadChildren: () =>
-      import('client-resources/inventory/price').then((m) => m.PriceModule),
+      import('client-resources/inventory/product').then((m) => m.ProductModule),
   },
 
   {
@@ -66,9 +88,23 @@ const routes: Routes = [
   },
 
   {
-    path: 'order',
+    path: 'resource',
     loadChildren: () =>
-      import('client-resources/inventory/order').then((m) => m.OrderModule),
+      import('client-resources/inventory/resource').then(
+        (m) => m.ResourceModule
+      ),
+  },
+
+  {
+    path: 'sku',
+    loadChildren: () =>
+      import('client-resources/inventory/sku').then((m) => m.SkuModule),
+  },
+
+  {
+    path: 'store',
+    loadChildren: () =>
+      import('client-resources/inventory/store').then((m) => m.StoreModule),
   },
 
   {
@@ -80,9 +116,15 @@ const routes: Routes = [
   },
 
   {
-    path: 'sample',
+    path: 'user',
     loadChildren: () =>
-      import('client-resources/inventory/sample').then((m) => m.SampleModule),
+      import('client-resources/inventory/user').then((m) => m.UserModule),
+  },
+
+  {
+    path: 'variant',
+    loadChildren: () =>
+      import('client-resources/inventory/variant').then((m) => m.VariantModule),
   },
 ];
 

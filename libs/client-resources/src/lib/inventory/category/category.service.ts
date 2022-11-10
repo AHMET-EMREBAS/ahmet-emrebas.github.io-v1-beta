@@ -3,22 +3,20 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { ICategory } from 'common/inventory/models';
 import { NgrxDataService } from 'material/data-services';
-import {
-  ConfirmationService,
-  MenuItem,
-} from 'primeng/api';
+import { ConfirmationService, MenuItem } from 'primeng/api';
 
 import { EntityCollectionServiceElementsFactory } from '@ngrx/data';
 
+import { Category } from './category.interface';
+
 @Injectable()
-export class CategoryService extends NgrxDataService<ICategory> {
-  public override columns: { header: string; field: keyof ICategory }[] = [
-    { field: 'name', header: 'NAME' },
+export class CategoryService extends NgrxDataService<Category> {
+  public override columns: { header: string; field: keyof Category }[] = [
+    { field: 'category', header: 'Category' },
   ];
 
-  public override globalFilterFields: string[] = ['id', 'uuid', 'name'];
+  public override globalFilterFields: string[] = ['[object Object]'];
 
   public override contextMenuItems: MenuItem[] = [
     {

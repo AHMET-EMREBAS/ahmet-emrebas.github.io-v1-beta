@@ -18,20 +18,24 @@ export const routes: Routes = [
 
     children: [
       {
+        title: 'View Transaction',
         path: 'table-view',
         component: TableViewTransactionComponent,
         canActivate: [CanReadTransactionGuard],
       },
       {
+        title: 'Create Transaction',
         path: 'create',
         component: CreateTransactionComponent,
         canActivate: [CanWriteTransactionGuard],
       },
       {
+        title: 'Update Transaction',
         path: 'update/:id',
         component: UpdateTransactionComponent,
       },
       {
+        title: 'Delete Transaction ',
         path: 'delete/:id',
         component: DeleteTransactionComponent,
       },

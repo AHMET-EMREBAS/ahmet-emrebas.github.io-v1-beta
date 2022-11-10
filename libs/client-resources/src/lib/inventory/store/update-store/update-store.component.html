@@ -10,13 +10,4 @@
     [attributes]="formFields.name!"
   >
   </ae-text-input>
-
-  <ae-select-input
-    [updateField]="true"
-    (updateEvent)="update($event, item.id!)"
-    [defaultValue]="item?.pricelevel"
-    [control]="control('pricelevel')"
-    [attributes]="formFields.pricelevel!"
-  >
-  </ae-select-input>
 </div>

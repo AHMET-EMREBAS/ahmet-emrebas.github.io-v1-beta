@@ -11,30 +11,57 @@
   >
   </ae-number-input>
 
-  <ae-select-input
+  <ae-currency-input
     [updateField]="true"
     (updateEvent)="update($event, item.id!)"
-    [defaultValue]="item?.product"
-    [control]="control('product')"
-    [attributes]="formFields.product!"
+    [defaultValue]="item?.unitprice"
+    [control]="control('unitprice')"
+    [attributes]="formFields.unitprice!"
   >
-  </ae-select-input>
+  </ae-currency-input>
 
-  <ae-select-input
+  <ae-number-input
     [updateField]="true"
     (updateEvent)="update($event, item.id!)"
-    [defaultValue]="item?.pricelevel"
-    [control]="control('pricelevel')"
-    [attributes]="formFields.pricelevel!"
+    [defaultValue]="item?.discount"
+    [control]="control('discount')"
+    [attributes]="formFields.discount!"
   >
-  </ae-select-input>
+  </ae-number-input>
 
-  <ae-select-input
+  <ae-checkbox-input
+    [updateField]="true"
+    (updateEvent)="update($event, item.id!)"
+    [defaultValue]="item?.taxExempt"
+    [control]="control('taxExempt')"
+    [attributes]="formFields.taxExempt!"
+  >
+  </ae-checkbox-input>
+
+  <ae-search-one-input
+    [updateField]="true"
+    (updateEvent)="update($event, item.id!)"
+    [defaultValue]="item?.sku"
+    [control]="control('sku')"
+    [attributes]="formFields.sku!"
+  >
+  </ae-search-one-input>
+
+  <ae-search-one-input
+    [updateField]="true"
+    (updateEvent)="update($event, item.id!)"
+    [defaultValue]="item?.store"
+    [control]="control('store')"
+    [attributes]="formFields.store!"
+  >
+  </ae-search-one-input>
+
+  <ae-search-one-input
     [updateField]="true"
     (updateEvent)="update($event, item.id!)"
     [defaultValue]="item?.transaction"
     [control]="control('transaction')"
     [attributes]="formFields.transaction!"
   >
-  </ae-select-input>
+  </ae-search-one-input>
 </div>

@@ -6,6 +6,4 @@ export interface Store {
   deletedAt?: Date;
 
   name: string;
-
-  pricelevel: string;
 }

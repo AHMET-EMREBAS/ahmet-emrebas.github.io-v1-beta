@@ -5,13 +5,13 @@ export class CreatePriceDto {
     min: 1,
     max: 9999999999999,
   })
-  price: currency;
+  price: string;
 
   @Property({
     min: 0,
     max: 99999999999999,
   })
-  cost: currency;
+  cost: string;
 
   @Property({
     isNumber: true,

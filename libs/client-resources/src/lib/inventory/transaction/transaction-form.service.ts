@@ -17,17 +17,9 @@ export class TransactionFormService {
 
   private init() {
     this.formManager.add({
-      name: 'complete',
-
       id: 'transaction-complete-input',
-
-      type: 'boolean',
-
-      valueType: 'boolean',
-
-      inputType: 'checkbox-input',
-
-      nullable: true,
+      name: 'complete',
+      inputType: 'select',
     });
   }
 

@@ -1,4 +1,3 @@
-import { readFileSync } from 'fs';
 import {
   camelCase,
   kebabCase,
@@ -16,12 +15,11 @@ import * as genClient from '../client-resource/generator';
 import * as genEntity from '../entity/generator';
 import {
   getColumns,
+  getModuleNames,
   getRelationColumns,
   loadMetaData,
 } from '../utils';
 import { ResourceGeneratorSchema } from './schema';
-
-const mapName = ([key, value]) => ({ name: key, ...(value as any) });
 
 async function genRest(tree: Tree, options: ResourceGeneratorSchema) {
   const { project, name } = options;
@@ -56,14 +54,8 @@ async function updateApiAppModule(
 ) {
   const target = `/apps/api/src`;
   const { project, name } = options;
-  const ssot = JSON.parse(
-    readFileSync(join(tree.root, 'projects', project, 'ssot.json')).toString()
-  );
 
-  const modules = Object.keys(ssot).map((e) => [
-    upperFirst(e),
-    e.toLowerCase(),
-  ]);
+  const modules = getModuleNames(tree, project);
 
   generateFiles(tree, join(__dirname, 'app-module'), target, {
     project,
@@ -78,14 +70,8 @@ async function updateClientAppModule(
 ) {
   const target = `/apps/web/src`;
   const { project, name } = options;
-  const ssot = JSON.parse(
-    readFileSync(join(tree.root, 'projects', project, 'ssot.json')).toString()
-  );
 
-  const modules = Object.keys(ssot).map((e) => [
-    upperFirst(e),
-    e.toLowerCase(),
-  ]);
+  const modules = getModuleNames(tree, project);
 
   generateFiles(tree, join(__dirname, 'web-app'), target, {
     project,
@@ -96,12 +82,10 @@ async function updateClientAppModule(
 
 async function generateAll(tree, _options) {
   const { project } = _options;
-  const ssot = JSON.parse(
-    readFileSync(join(tree.root, 'projects', project, 'ssot.json')).toString()
-  );
-  const names = Object.keys(ssot);
 
-  for (const n of names) {
+  const modules = getModuleNames(tree, project);
+
+  for (const n of modules) {
     const options = { ..._options, name: n };
     await genRest(tree, options);
     await genEntity.default(tree, options);

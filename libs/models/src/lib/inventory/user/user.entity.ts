@@ -5,6 +5,7 @@ import {
   JoinTable,
   ManyToOne,
   ManyToMany,
+  OneToMany,
   OneToOne,
 } from 'typeorm';
 
@@ -13,18 +14,18 @@ import { Permission } from '../permission';
 @Entity()
 export class User extends BaseEntity {
   @Col({
-    type: 'email',
+    type: 'string',
     unique: true,
     nullable: false,
   })
-  username: email;
+  username: string;
 
   @Col({
-    type: 'password',
+    type: 'string',
     unique: false,
     nullable: false,
   })
-  password: password;
+  password: string;
 
   @ManyToMany(() => Permission)
   @JoinTable()

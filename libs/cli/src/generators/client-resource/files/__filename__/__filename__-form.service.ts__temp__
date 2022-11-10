@@ -19,19 +19,20 @@ export class <%= classname %>FormService {
     this.formManager
     <% for(const COLUMN of columns) { %> 
       .add({
-        <% for( const [CN, CV] of Object.entries(COLUMN)) { %>
+        id: '<%- filename + '-' + COLUMN.name + '-input' %>',
+        name: '<%- COLUMN.name %>',
+        inputType: '<%- COLUMN.inputElement %>',
 
-         <%- CN %>: <% if(typeof CV ==='string') { %> '<%= CV %>', <% } else { %>  <%= CV %>, <% } %>
-
-        <% } %>
+       <%- COLUMN.getValidators() %>
       })
     <% } %>
 
      <% for(const COLUMN of relations) { %> 
       .add({
-        <% for( const [CN, CV] of Object.entries(COLUMN)) { %>
-         <%- CN %>: <% if(typeof CV ==='string') { %> '<%= CV %>', <% } else { %>  <%= CV %>, <% } %>
-        <% } %>
+        id: '<%- filename + '-' + COLUMN.name + '-input' %>',
+        name: '<%- COLUMN.name %>',
+        inputType: '<%- COLUMN.inputElement %>',
+        <%- COLUMN.getValidators() %>,
          <% if(COLUMN.from){ %> asyncOptions:this.<%= filename %>Service.<%- COLUMN.name %>Service?.entities$ <% }%>
       })
     <% } %>

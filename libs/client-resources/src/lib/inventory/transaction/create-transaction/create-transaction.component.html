@@ -3,10 +3,10 @@
   [formGroup]="formGroup"
   (formSubmit)="onSubmit($event)"
 >
-  <ae-checkbox-input
+  <ae-select-input
     [defaultValue]="defaultValue?.complete"
     [control]="control('complete')"
     [attributes]="formFields.complete!"
   >
-  </ae-checkbox-input>
+  </ae-select-input>
 </ae-form>

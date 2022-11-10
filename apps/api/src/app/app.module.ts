@@ -8,25 +8,34 @@ import { ScheduleModule } from '@nestjs/schedule';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-import { ProductSubscriber, ProductModule } from 'rest/inventory/product';
 import { CategorySubscriber, CategoryModule } from 'rest/inventory/category';
 import {
   DepartmentSubscriber,
   DepartmentModule,
 } from 'rest/inventory/department';
+import { FeatureSubscriber, FeatureModule } from 'rest/inventory/feature';
+import { LocationSubscriber, LocationModule } from 'rest/inventory/location';
+import { OrderSubscriber, OrderModule } from 'rest/inventory/order';
+import {
+  PermissionSubscriber,
+  PermissionModule,
+} from 'rest/inventory/permission';
+import { PriceSubscriber, PriceModule } from 'rest/inventory/price';
 import {
   PricelevelSubscriber,
   PricelevelModule,
 } from 'rest/inventory/pricelevel';
-import { StoreSubscriber, StoreModule } from 'rest/inventory/store';
-import { PriceSubscriber, PriceModule } from 'rest/inventory/price';
+import { ProductSubscriber, ProductModule } from 'rest/inventory/product';
 import { QuantitySubscriber, QuantityModule } from 'rest/inventory/quantity';
-import { OrderSubscriber, OrderModule } from 'rest/inventory/order';
+import { ResourceSubscriber, ResourceModule } from 'rest/inventory/resource';
+import { SkuSubscriber, SkuModule } from 'rest/inventory/sku';
+import { StoreSubscriber, StoreModule } from 'rest/inventory/store';
 import {
   TransactionSubscriber,
   TransactionModule,
 } from 'rest/inventory/transaction';
-import { SampleSubscriber, SampleModule } from 'rest/inventory/sample';
+import { UserSubscriber, UserModule } from 'rest/inventory/user';
+import { VariantSubscriber, VariantModule } from 'rest/inventory/variant';
 
 @Module({
   imports: [
@@ -53,41 +62,59 @@ import { SampleSubscriber, SampleModule } from 'rest/inventory/sample';
       database: 'tmp/database/main.sqlite',
       autoLoadEntities: true,
       subscribers: [
-        ProductSubscriber,
         CategorySubscriber,
         DepartmentSubscriber,
-        PricelevelSubscriber,
-        StoreSubscriber,
-        PriceSubscriber,
-        QuantitySubscriber,
+        FeatureSubscriber,
+        LocationSubscriber,
         OrderSubscriber,
+        PermissionSubscriber,
+        PriceSubscriber,
+        PricelevelSubscriber,
+        ProductSubscriber,
+        QuantitySubscriber,
+        ResourceSubscriber,
+        SkuSubscriber,
+        StoreSubscriber,
         TransactionSubscriber,
-        SampleSubscriber,
+        UserSubscriber,
+        VariantSubscriber,
       ],
       synchronize: true,
       dropSchema: true,
     }),
     AuthModule,
 
-    ProductModule,
-
     CategoryModule,
 
     DepartmentModule,
 
-    PricelevelModule,
+    FeatureModule,
 
-    StoreModule,
-
-    PriceModule,
-
-    QuantityModule,
+    LocationModule,
 
     OrderModule,
 
+    PermissionModule,
+
+    PriceModule,
+
+    PricelevelModule,
+
+    ProductModule,
+
+    QuantityModule,
+
+    ResourceModule,
+
+    SkuModule,
+
+    StoreModule,
+
     TransactionModule,
 
-    SampleModule,
+    UserModule,
+
+    VariantModule,
   ],
 })
 export class AppModule {}

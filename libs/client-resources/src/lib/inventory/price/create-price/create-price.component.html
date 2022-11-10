@@ -17,10 +17,17 @@
   >
   </ae-currency-input>
 
-  <ae-select-input
-    [defaultValue]="defaultValue?.product"
-    [control]="control('product')"
-    [attributes]="formFields.product!"
+  <ae-search-one-input
+    [defaultValue]="defaultValue?.sku"
+    [control]="control('sku')"
+    [attributes]="formFields.sku!"
   >
-  </ae-select-input>
+  </ae-search-one-input>
+
+  <ae-search-one-input
+    [defaultValue]="defaultValue?.pricelevel"
+    [control]="control('pricelevel')"
+    [attributes]="formFields.pricelevel!"
+  >
+  </ae-search-one-input>
 </ae-form>

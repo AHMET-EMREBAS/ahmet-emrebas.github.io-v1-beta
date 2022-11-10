@@ -15,20 +15,24 @@ export const routes: Routes = [
 
     children: [
       {
+        title: 'View Price',
         path: 'table-view',
         component: TableViewPriceComponent,
         canActivate: [CanReadPriceGuard],
       },
       {
+        title: 'Create Price',
         path: 'create',
         component: CreatePriceComponent,
         canActivate: [CanWritePriceGuard],
       },
       {
+        title: 'Update Price',
         path: 'update/:id',
         component: UpdatePriceComponent,
       },
       {
+        title: 'Delete Price ',
         path: 'delete/:id',
         component: DeletePriceComponent,
       },

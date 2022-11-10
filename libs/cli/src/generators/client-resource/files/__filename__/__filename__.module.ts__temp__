@@ -38,9 +38,8 @@ import { TableView<%= classname %>Component } from './table-view-<%= filename %>
 import { Update<%= classname %>Component } from './update-<%= filename %>';
 
 
-<% for(const COLUMN of relations) { %> 
-
-import { <%= COLUMN.upperFirst() +'Service' %>} from '../<%- COLUMN.name %>';
+<% for(const c of relations) { %> 
+       import { <%= c.upperFirst(c.from) +'Service' %>} from '../<%- c.from %>';
 <% } %>
 
 import { RadioInputModule } from 'material/form/radio-input';
@@ -88,8 +87,8 @@ import { NumberInputModule } from 'material/form/number-input';
     CanRead<%= classname %>Guard,
     <%= classname %>FormService,
 
-<% for(const COLUMN of relations) { %> 
-      <%= COLUMN.upperFist() +'Service' %>,
+<% for(const c of relations) { %> 
+      <%= c.upperFirst(c.from) +'Service' %>,
 <% } %>
 
     {

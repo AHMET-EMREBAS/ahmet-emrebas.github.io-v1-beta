@@ -5,7 +5,7 @@ import {
 
 <% if(relations?.length > 0) { %> 
     <% for(const r of relations) {%> 
-      import { <%- r.target %> } from 'models/<%= project %>/<%= r.target.toLowerCase() %>';
+      import { <%- r.upperFirst(r.from) %> } from 'models/<%= project %>/<%= r.from.toLowerCase() %>';
     <% } %>
 <% } %>
 
@@ -15,6 +15,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { <%= classname %>PostController } from './<%= filename %>-post.controller';
 import { <%= classname %>QueryController } from './<%= filename %>-query.controller';
 import { <%= classname %>Service } from './<%= filename %>.service';
+import { <%= classname %>Subscriber } from './<%= filename %>.subscriber';
+
 
 
 @Module({
@@ -24,13 +26,13 @@ import { <%= classname %>Service } from './<%= filename %>.service';
 
     <% if(relations?.length > 0) { %> 
       <% for(const r of relations) {%> 
-        <%- r.target %>, 
+        <%- r.upperFirst(r.from) %>, 
       <% } %>
     <% } %>
 
     ])],
   controllers: [<%= classname %>QueryController, <%= classname %>PostController],
-  providers: [<%= classname %>Service],
+  providers: [<%= classname %>Service ,<%= classname %>Subscriber],
   
 })
 export class <%= classname %>Module {}

@@ -6,10 +6,11 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { DepartmentPostController } from './department-post.controller';
 import { DepartmentQueryController } from './department-query.controller';
 import { DepartmentService } from './department.service';
+import { DepartmentSubscriber } from './department.subscriber';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Department, DepartmentView])],
   controllers: [DepartmentQueryController, DepartmentPostController],
-  providers: [DepartmentService],
+  providers: [DepartmentService, DepartmentSubscriber],
 })
 export class DepartmentModule {}

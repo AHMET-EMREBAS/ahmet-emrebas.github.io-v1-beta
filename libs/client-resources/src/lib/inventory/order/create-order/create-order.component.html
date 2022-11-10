@@ -10,24 +10,45 @@
   >
   </ae-number-input>
 
-  <ae-select-input
-    [defaultValue]="defaultValue?.product"
-    [control]="control('product')"
-    [attributes]="formFields.product!"
+  <ae-currency-input
+    [defaultValue]="defaultValue?.unitprice"
+    [control]="control('unitprice')"
+    [attributes]="formFields.unitprice!"
   >
-  </ae-select-input>
+  </ae-currency-input>
 
-  <ae-select-input
-    [defaultValue]="defaultValue?.pricelevel"
-    [control]="control('pricelevel')"
-    [attributes]="formFields.pricelevel!"
+  <ae-number-input
+    [defaultValue]="defaultValue?.discount"
+    [control]="control('discount')"
+    [attributes]="formFields.discount!"
   >
-  </ae-select-input>
+  </ae-number-input>
 
-  <ae-select-input
+  <ae-checkbox-input
+    [defaultValue]="defaultValue?.taxExempt"
+    [control]="control('taxExempt')"
+    [attributes]="formFields.taxExempt!"
+  >
+  </ae-checkbox-input>
+
+  <ae-search-one-input
+    [defaultValue]="defaultValue?.sku"
+    [control]="control('sku')"
+    [attributes]="formFields.sku!"
+  >
+  </ae-search-one-input>
+
+  <ae-search-one-input
+    [defaultValue]="defaultValue?.store"
+    [control]="control('store')"
+    [attributes]="formFields.store!"
+  >
+  </ae-search-one-input>
+
+  <ae-search-one-input
     [defaultValue]="defaultValue?.transaction"
     [control]="control('transaction')"
     [attributes]="formFields.transaction!"
   >
-  </ae-select-input>
+  </ae-search-one-input>
 </ae-form>

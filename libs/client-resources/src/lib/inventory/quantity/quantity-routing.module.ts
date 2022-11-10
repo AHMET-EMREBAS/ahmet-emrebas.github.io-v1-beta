@@ -15,20 +15,24 @@ export const routes: Routes = [
 
     children: [
       {
+        title: 'View Quantity',
         path: 'table-view',
         component: TableViewQuantityComponent,
         canActivate: [CanReadQuantityGuard],
       },
       {
+        title: 'Create Quantity',
         path: 'create',
         component: CreateQuantityComponent,
         canActivate: [CanWriteQuantityGuard],
       },
       {
+        title: 'Update Quantity',
         path: 'update/:id',
         component: UpdateQuantityComponent,
       },
       {
+        title: 'Delete Quantity ',
         path: 'delete/:id',
         component: DeleteQuantityComponent,
       },

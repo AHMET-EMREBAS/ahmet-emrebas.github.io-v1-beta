@@ -18,20 +18,24 @@ export const routes: Routes = [
 
     children: [
       {
+        title: 'View Pricelevel',
         path: 'table-view',
         component: TableViewPricelevelComponent,
         canActivate: [CanReadPricelevelGuard],
       },
       {
+        title: 'Create Pricelevel',
         path: 'create',
         component: CreatePricelevelComponent,
         canActivate: [CanWritePricelevelGuard],
       },
       {
+        title: 'Update Pricelevel',
         path: 'update/:id',
         component: UpdatePricelevelComponent,
       },
       {
+        title: 'Delete Pricelevel ',
         path: 'delete/:id',
         component: DeletePricelevelComponent,
       },
