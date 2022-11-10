@@ -62,6 +62,8 @@ MIT
 @ngrx/store
 MIT
 
+directive
+
 layout
 
 messanger

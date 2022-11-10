@@ -11,7 +11,7 @@ import {
 export class ScrollControlDirective implements AfterViewInit {
   @Input() toBottom!: boolean;
 
-  constructor(private readonly el: ElementRef<HTMLDivElement>) {}
+  constructor(public readonly el: ElementRef<HTMLDivElement>) {}
 
   ngAfterViewInit(): void {
     console.log('Scrolling ');
