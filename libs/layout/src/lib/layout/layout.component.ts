@@ -1,4 +1,8 @@
 import {
+  BreakpointObserver,
+  Breakpoints,
+} from '@angular/cdk/layout';
+import {
   Component,
   EventEmitter,
   Input,
@@ -6,6 +10,10 @@ import {
 } from '@angular/core';
 
 import { MenuItem } from 'primeng/api';
+import {
+  map,
+  shareReplay,
+} from 'rxjs';
 
 @Component({
   selector: 'ae-layout',
@@ -13,7 +21,14 @@ import { MenuItem } from 'primeng/api';
   styleUrls: ['./layout.component.scss'],
 })
 export class LayoutComponent {
-  @Output() menuEvent = new EventEmitter<string>();
+  leftSidebar = false;
+  rightSidebar = false;
+
+  @Output() bellClick = new EventEmitter();
+  @Output() appsClick = new EventEmitter();
+  @Output() messagesClick = new EventEmitter();
+  @Output() settingClick = new EventEmitter();
+  @Output() signoutEvent = new EventEmitter();
 
   @Input() menubarItems: MenuItem[] = [
     {
@@ -37,84 +52,41 @@ export class LayoutComponent {
         { label: 'Products' },
         { label: 'Orders' },
         { label: 'Transactions' },
-        { label: 'Reports' },
-        { label: 'Reports' },
-        { label: 'Reports' },
-        { label: 'Reports' },
-        { label: 'Reports' },
-        { label: 'Reports' },
-        { label: 'Reports' },
-        { label: 'Reports' },
-        { label: 'Reports' },
-        { label: 'Reports' },
-        { label: 'Reports' },
-        { label: 'Reports' },
-        { label: 'Reports' },
-        { label: 'Reports' },
-        { label: 'Reports' },
-        { label: 'Reports' },
-        { label: 'Reports' },
+        { label: 'Transactions' },
+      ],
+    },
+    {
+      label: 'Statistics',
+      items: [
+        { label: 'Sales Report' },
+        { label: 'Best Selling' },
+        { label: 'Stock' },
       ],
     },
   ];
 
   @Input() secondaryMenuItems: MenuItem[] = [
     {
-      label: 'Secondary Menu',
-      items: [
-        { label: 'Secondary 1' },
-        { label: 'Secondary 1' },
-        { label: 'Secondary 1' },
-        { label: 'Secondary 1' },
-        { label: 'Secondary 1' },
-        { label: 'Secondary 1' },
-        { label: 'Secondary 1' },
-        { label: 'Secondary 1' },
-      ],
+      label: 'Customers',
+      items: [{ label: 'Balance' }, { label: 'Pricing' }],
     },
   ];
-  @Input() otherMenuItems: MenuItem[] = [
-    {
-      label: 'Other Menu',
-      items: [
-        { label: 'Other 1' },
-        { label: 'Other 1' },
-        { label: 'Other 1' },
-        { label: 'Other 1' },
-        { label: 'Other 1' },
-        { label: 'Other 1' },
-        { label: 'Other 1' },
-        { label: 'Other 1' },
-        { label: 'Other 1' },
-        { label: 'Other 1' },
-        { label: 'Other 1' },
-        { label: 'Other 1' },
-        { label: 'Other 1' },
-        { label: 'Other 1' },
-        { label: 'Other 1' },
-        { label: 'Other 1' },
-        { label: 'Other 1' },
-        { label: 'Other 1' },
-        { label: 'Other 1' },
-        { label: 'Other 1' },
-        { label: 'Other 1' },
-        { label: 'Other 1' },
-        { label: 'Other 1' },
-        { label: 'Other 1' },
-      ],
-    },
-  ];
-  @Input() featureMenuItems: MenuItem[] = [
-    {
-      label: 'Feature Menu',
-      items: [
-        { label: 'Feature 1' },
-        { label: 'Feature 1' },
-        { label: 'Feature 1' },
-        { label: 'Feature 1' },
-        { label: 'Feature 1' },
-        { label: 'Feature 1' },
-      ],
-    },
-  ];
+  isHandset$ = this.breakPointObserver
+    .observe([
+      Breakpoints.Handset,
+      Breakpoints.HandsetLandscape,
+      Breakpoints.HandsetPortrait,
+      Breakpoints.Small,
+      Breakpoints.XSmall,
+    ])
+    .pipe(
+      map((r) => {
+        return r.matches;
+      }),
+      shareReplay()
+    );
+
+  isNotHandset$ = this.isHandset$.pipe(map((r) => !r));
+
+  constructor(private readonly breakPointObserver: BreakpointObserver) {}
 }

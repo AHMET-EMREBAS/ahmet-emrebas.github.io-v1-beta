@@ -1,19 +1,64 @@
-<div class="flex flex-column gap-2 h-full overflow-hidden">
+<!-- Bottom toolbar  -->
+<ng-template #bottomToolbar>
+    <p-toolbar>
+        <div class=" flex gap-2 lg:pl-4">
 
-    <p-menubar [model]="menubarItems">
+            <p-button styleClass="p-button-primary" icon="pi pi-th-large" pTooltip="Apps" tooltipPosition="top"
+                (click)="appsClick.emit()">
+            </p-button>
+
+            <p-button styleClass="p-button-secondary" icon="pi pi-cog" pTooltip="Settings" tooltipPosition="top"
+                (click)="settingClick.emit()">
+            </p-button>
+
+        </div>
+
+        <div class="flex gap-2 lg:pr-4">
+
+            <p-button styleClass="p-button-info" icon="pi pi-comments" pTooltip="Messages" tooltipPosition="top"
+                (click)="messagesClick.emit()">
+            </p-button>
+
+            <p-button styleClass="p-button-warning" icon="pi pi-bell" pTooltip="Notification" tooltipPosition="top"
+                (click)="bellClick.emit()">
+            </p-button>
+
+        </div>
+    </p-toolbar>
+
+</ng-template>
+
+
+<!-- Top menubar -->
+<ng-template #topMenubar let-items="items">
+    <p-menubar [model]="items">
         <ng-template pTemplate="start">
-            <img src="/assets/icons/icon-72x72.png" alt="Logo" width="50">
+            <div class="lg:pl-4 lg:pr-6 lg:mr-8">
+                <img src="/assets/icons/icon-72x72.png" alt="Logo" width="50">
+            </div>
+        </ng-template>
+        <ng-template pTemplate="end">
+            <div class="lg:pr-4">
+                <p-button styleClass="p-button-secondary" icon="pi pi-sign-out" (click)="signoutEvent.emit()">
+                </p-button>
+            </div>
         </ng-template>
     </p-menubar>
+</ng-template>
+
+
+
+<div class="flex flex-column gap-2 h-full overflow-hidden" *ngIf="isNotHandset$ | async ">
+
+
+    <ng-container *ngTemplateOutlet="topMenubar;context:{items:menubarItems}"></ng-container>
 
     <div class="flex flex-column p-2 h-full overflow-hidden">
 
         <div class="flex gap-2 h-full overflow-hidden overflow-y-auto">
 
-
             <div class="flex flex-column gap-2  justify-content-between h-full overflow-y-auto">
-                <p-menu [model]="primaryMenuItems"> </p-menu>
-                <p-menu [model]="secondaryMenuItems"> </p-menu>
+                <p-menu styleClass="p-2" [model]="primaryMenuItems"> </p-menu>
             </div>
 
             <div class="flex flex-column flex-grow-1 gap-2 h-full overflow-y-auto">
@@ -22,32 +67,45 @@
 
             <div class="flex flex-column gap-2  justify-content-between h-full overflow-y-auto">
 
-                <p-menu [model]="otherMenuItems"> </p-menu>
-                <p-menu [model]="featureMenuItems"> </p-menu>
+                <p-menu styleClass="p-2" [model]="secondaryMenuItems"> </p-menu>
+
             </div>
         </div>
     </div>
 
+    <ng-container *ngTemplateOutlet="bottomToolbar"></ng-container>
+</div>
 
-    <p-toolbar>
+<div class="flex flex-column gap-2 h-full overflow-hidden" *ngIf="isHandset$ | async">
+
+    <ng-container *ngTemplateOutlet="topMenubar;context:{items:menubarItems}"></ng-container>
 
 
 
-        <div class="p-toolbar-left">
+    <p-button [style]="{position:'fixed', left:'0px', top:'100px'}" icon="pi pi-arrow-right"
+        (click)="leftSidebar =!leftSidebar"></p-button>
 
-            <p-button styleClass="p-button-secondary" icon="pi pi-cog" pTooltip="Settings" tooltipPosition="top">
-            </p-button>
 
+    <p-button [style]="{position:'fixed', right:'0px', top:'100px'}" icon="pi pi-arrow-left"
+        (click)="rightSidebar =!rightSidebar"></p-button>
+
+
+    <p-sidebar [(visible)]="leftSidebar" [position]="'left'">
+        <div class="flex flex-column gap-2  justify-content-between h-full overflow-y-auto">
+            <p-menu styleClass="p-2 border-none w-full" [model]="primaryMenuItems"> </p-menu>
         </div>
+    </p-sidebar>
 
-        <div class="p-toolbar-right">
-
-            <p-button styleClass="p-button-warning" icon="pi pi-bell" pTooltip="Notifications" tooltipPosition="top">
-            </p-button>
-
+    <p-sidebar [(visible)]="rightSidebar" [position]="'right'">
+        <div class="flex flex-column gap-2  justify-content-between h-full overflow-y-auto">
+            <p-menu styleClass="p-2 border-none w-full" [model]="secondaryMenuItems"> </p-menu>
         </div>
+    </p-sidebar>
 
-    </p-toolbar>
 
+    <div class="flex flex-column p-2 h-full overflow-hidden">
+        <ng-content></ng-content>
+    </div>
 
+    <ng-container *ngTemplateOutlet="bottomToolbar"></ng-container>
 </div>
