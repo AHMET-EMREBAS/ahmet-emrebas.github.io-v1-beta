@@ -10,6 +10,7 @@ import {
 import { ServiceWorkerModule } from '@angular/service-worker';
 
 import { LayoutModule } from 'layout';
+import { MessangerModule } from 'messanger';
 
 import { EntityDataModule } from '@ngrx/data';
 import { EffectsModule } from '@ngrx/effects';
@@ -19,7 +20,30 @@ import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
 import { entityDataModuleConfig } from './app.ngrx';
 
-const routes: Routes = [];
+const routes: Routes = [
+  {
+    title: 'Home',
+    path: '',
+    children: [
+      // {
+      //   title:'Wellcome',
+      //   path: '',
+
+      // },
+      {
+        title: 'Messanger',
+        path: 'messanger',
+        loadChildren: () => import('messanger').then((m) => m.MessangerModule),
+      },
+      {
+        title: 'Notification',
+        path: 'notification',
+        loadChildren: () =>
+          import('notification').then((m) => m.NotificationModule),
+      },
+    ],
+  },
+];
 
 @NgModule({
   declarations: [AppComponent],
@@ -28,6 +52,7 @@ const routes: Routes = [];
     BrowserAnimationsModule,
     HttpClientModule,
     LayoutModule,
+    MessangerModule,
     StoreModule.forRoot({}, {}),
     EffectsModule.forRoot([]),
     EntityDataModule.forRoot({ ...entityDataModuleConfig }),

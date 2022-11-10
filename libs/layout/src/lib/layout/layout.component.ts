@@ -8,6 +8,10 @@ import {
   Input,
   Output,
 } from '@angular/core';
+import {
+  ActivatedRoute,
+  Router,
+} from '@angular/router';
 
 import { MenuItem } from 'primeng/api';
 import {
@@ -88,5 +92,9 @@ export class LayoutComponent {
 
   isNotHandset$ = this.isHandset$.pipe(map((r) => !r));
 
-  constructor(private readonly breakPointObserver: BreakpointObserver) {}
+  constructor(
+    private readonly breakPointObserver: BreakpointObserver,
+    private readonly route: ActivatedRoute,
+    private readonly router: Router
+  ) {}
 }

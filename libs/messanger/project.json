@@ -1,0 +1,42 @@
+{
+  "projectType": "library",
+  "root": "libs/messanger",
+  "sourceRoot": "libs/messanger/src",
+  "prefix": "ae",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/angular:package",
+      "outputs": ["dist/libs/messanger"],
+      "options": {
+        "project": "libs/messanger/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/messanger/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "libs/messanger/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/messanger"],
+      "options": {
+        "jestConfig": "libs/messanger/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/messanger/src/**/*.ts",
+          "libs/messanger/src/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

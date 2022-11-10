@@ -1,3 +1,7 @@
-<ae-layout>
-    <router-outlet></router-outlet>
+<ae-layout (messagesClick)="openMessanger()" (bellClick)="openNotification()">
+    <div main>
+
+        <router-outlet></router-outlet>
+    </div>
+
 </ae-layout>

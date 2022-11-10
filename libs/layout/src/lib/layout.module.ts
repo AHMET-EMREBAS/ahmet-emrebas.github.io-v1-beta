@@ -5,6 +5,7 @@ import {
   FormsModule,
   ReactiveFormsModule,
 } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 import { SharedModule } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
@@ -29,6 +30,7 @@ import { LayoutComponent } from './layout/layout.component';
     TooltipModule,
     MatLayoutModule,
     SidebarModule,
+    RouterModule,
   ],
   declarations: [LayoutComponent],
   exports: [LayoutComponent],

@@ -1,0 +1,42 @@
+{
+  "projectType": "library",
+  "root": "libs/notification",
+  "sourceRoot": "libs/notification/src",
+  "prefix": "ahmet-emrebas",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/angular:package",
+      "outputs": ["dist/libs/notification"],
+      "options": {
+        "project": "libs/notification/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/notification/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "libs/notification/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/notification"],
+      "options": {
+        "jestConfig": "libs/notification/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/notification/src/**/*.ts",
+          "libs/notification/src/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}
