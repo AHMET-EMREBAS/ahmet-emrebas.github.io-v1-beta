@@ -2,6 +2,7 @@
   "version": 2,
   "projects": {
     "api": "apps/api",
+    "directive": "libs/directive",
     "layout": "libs/layout",
     "messanger": "libs/messanger",
     "nativescript-mobile": "apps/nativescript-mobile",

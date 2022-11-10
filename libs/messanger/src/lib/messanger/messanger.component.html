@@ -1,1 +1,27 @@
-<p>messanger works!</p>
+<div class="bg-image flex flex-column justify-content-between flex-grow-1 h-full ">
+
+    <div class=" bottom-scroll flex flex-column flex-grow- gap-2 p-2 h-full overflow-y-auto">
+
+
+
+        <div *ngFor="let m of messages$ | async " aeScrollIntoView>
+            <div class="flex flex-column   message" [class.yours]="m.from" [class.mine]="!m.from">
+                <p class="message-text"> {{m.message}} </p>
+                <small class="time-indicator">{{m.time | date: 'medium'}}</small>
+                <small [class.read]="m.read"> ✓✓</small>
+            </div>
+        </div>
+
+
+    </div>
+
+    <div class=" flex gap-2 align-items-center p-2">
+
+        <textarea #messageInput class="message-input" [formControl]="messageInputControl" pInputTextarea
+            placeholder="Type your message" (keypress)="keypressHandler($event)" tabindex="1"></textarea>
+
+        <button #sendButton style="height: 50px; width: 50px;" pButton class="p-inputgroup-addon" icon="pi pi-send"
+            (click)="send()" tabindex="1"></button>
+    </div>
+
+</div>

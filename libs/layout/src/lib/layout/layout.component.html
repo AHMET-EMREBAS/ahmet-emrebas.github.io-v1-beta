@@ -47,6 +47,13 @@
 </ng-template>
 
 
+<ng-template #content>
+    <div class="flex flex-column  flex-grow-1 h-full overflow-y-auto">
+        <ng-content select="[main]"></ng-content>
+    </div>
+</ng-template>
+
+
 
 <div class="flex flex-column gap-2 h-full overflow-hidden" *ngIf="isNotHandset$ | async ">
 
@@ -61,9 +68,7 @@
                 <p-menu styleClass="p-2" [model]="primaryMenuItems"> </p-menu>
             </div>
 
-            <div class="flex flex-column flex-grow-1 gap-2 h-full overflow-y-auto">
-                <ng-content select="[main]"></ng-content>
-            </div>
+            <ng-container *ngTemplateOutlet="content"></ng-container>
 
             <div class="flex flex-column gap-2  justify-content-between h-full overflow-y-auto">
 
@@ -96,6 +101,8 @@
         </div>
     </p-sidebar>
 
+    <ng-container *ngTemplateOutlet="content"></ng-container>
+
     <p-sidebar [(visible)]="rightSidebar" [position]="'right'">
         <div class="flex flex-column gap-2  justify-content-between h-full overflow-y-auto">
             <p-menu styleClass="p-2 border-none w-full" [model]="secondaryMenuItems"> </p-menu>
@@ -103,9 +110,6 @@
     </p-sidebar>
 
 
-    <div class="flex flex-column p-2 h-full overflow-hidden">
-        <ng-content select="[main]"></ng-content>
-    </div>
 
     <ng-container *ngTemplateOutlet="bottomToolbar"></ng-container>
 </div>
