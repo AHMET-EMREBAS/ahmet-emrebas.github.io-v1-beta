@@ -14,20 +14,7 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {
-      "auth": ["libs/auth/src/index.ts"],
-      "cli": ["libs/cli/src/index.ts"],
-      "client-resources/*": ["libs/client-resources/src/lib/*"],
-      "common/*": ["libs/common/src/lib/*"],
-      "core": ["libs/core/src/index.ts"],
-      "material/*": ["libs/material/src/lib/*"],
-      "models/*": ["libs/models/src/lib/*"],
-      "rest/*": ["libs/rest/src/lib/*"],
-      "swagger-property": ["libs/swagger-property/src/index.ts"],
-      "transformers": ["libs/transformers/src/index.ts"],
-      "utilities": ["libs/utilities/src/index.ts"],
-      "validations": ["libs/validations/src/index.ts"]
-    }
+    "paths": {}
   },
   "exclude": ["node_modules", "tmp"]
 }

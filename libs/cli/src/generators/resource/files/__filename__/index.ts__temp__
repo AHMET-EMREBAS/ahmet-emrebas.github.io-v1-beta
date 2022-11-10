@@ -1,6 +1,0 @@
-export * from './<%= filename %>-post.controller';
-export * from './<%= filename %>-query.controller';
-export * from './<%= filename %>.module';
-export * from './<%= filename %>.names';
-export * from './<%= filename %>.service';
-export * from './<%= filename %>.subscriber';

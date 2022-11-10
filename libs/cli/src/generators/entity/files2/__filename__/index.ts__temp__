@@ -1,3 +1,0 @@
-export * from "./<%= filename %>.entity";
-export * from "./<%= filename %>.view";
-export * from "./dto";

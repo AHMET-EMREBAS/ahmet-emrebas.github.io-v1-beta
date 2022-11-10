@@ -1,7 +1,0 @@
-<ae-input-wrapper [control]="control" [attributes]="attributes" [updateField]="updateField"
-    (updateEvent)="updateEvent.emit($event)">
-    <p-inputNumber #input class="w-full" [style]="{width:'100%'}" [formControl]="control" mode="currency"
-        [currency]="attributes.currency!" [locale]="attributes.locale!" [aeSetAttribute]="attributes"
-        (onInput)="control.setValue($event.value || '')" (onFocus)="input.clear()" [autocomplete]="'off'">
-    </p-inputNumber>
-</ae-input-wrapper>

@@ -2,20 +2,7 @@
   "version": 2,
   "projects": {
     "api": "apps/api",
-    "auth": "libs/auth",
-    "cli": "libs/cli",
-    "cli-e2e": "apps/cli-e2e",
-    "client-resources": "libs/client-resources",
-    "common": "libs/common",
-    "core": "libs/core",
-    "material": "libs/material",
-    "models": "libs/models",
     "nativescript-mobile": "apps/nativescript-mobile",
-    "rest": "libs/rest",
-    "swagger-property": "libs/swagger-property",
-    "transformers": "libs/transformers",
-    "utilities": "libs/utilities",
-    "validations": "libs/validations",
     "web": "apps/web",
     "web-e2e": "apps/web-e2e"
   }

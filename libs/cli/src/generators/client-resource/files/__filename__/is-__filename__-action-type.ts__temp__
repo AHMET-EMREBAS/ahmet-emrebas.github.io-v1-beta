@@ -1,5 +1,0 @@
-import { EntityOp } from '@ngrx/data';
-
-export function is<%= classname %>ActionType(actionType: string, checkType: EntityOp) {
-  return actionType.endsWith(checkType);
-}

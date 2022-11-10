@@ -1,7 +1,0 @@
-<ae-input-wrapper [control]="control" [attributes]="attributes" [updateField]="updateField"
-    (updateEvent)="updateEvent.emit($event)">
-    <p-multiSelect #select [tabindex]="1" [defaultLabel]="attributes.label || 'Set label'" styleClass="w-full pr-6"
-        [options]="(getOptions() | async)!" [optionValue]="'id'" [optionLabel]="attributes.optionLabel!"
-        [style.width]="'100%'" [aeSetAttribute]="attributes" (onChange)="setValue($event)">
-    </p-multiSelect>
-</ae-input-wrapper>

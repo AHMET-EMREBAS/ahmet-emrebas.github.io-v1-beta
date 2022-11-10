@@ -15,125 +15,12 @@ import { StoreModule } from '@ngrx/store';
 
 import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
-import { IntroPageComponent } from './intro-page/intro-page.component';
-import { entityDataModuleConfig } from './ngrx.meta';
+import { entityDataModuleConfig } from './app.ngrx';
 
-const routes: Routes = [
-  {
-    path: 'category',
-    loadChildren: () =>
-      import('client-resources/inventory/category').then(
-        (m) => m.CategoryModule
-      ),
-  },
-
-  {
-    path: 'department',
-    loadChildren: () =>
-      import('client-resources/inventory/department').then(
-        (m) => m.DepartmentModule
-      ),
-  },
-
-  {
-    path: 'feature',
-    loadChildren: () =>
-      import('client-resources/inventory/feature').then((m) => m.FeatureModule),
-  },
-
-  {
-    path: 'location',
-    loadChildren: () =>
-      import('client-resources/inventory/location').then(
-        (m) => m.LocationModule
-      ),
-  },
-
-  {
-    path: 'order',
-    loadChildren: () =>
-      import('client-resources/inventory/order').then((m) => m.OrderModule),
-  },
-
-  {
-    path: 'permission',
-    loadChildren: () =>
-      import('client-resources/inventory/permission').then(
-        (m) => m.PermissionModule
-      ),
-  },
-
-  {
-    path: 'price',
-    loadChildren: () =>
-      import('client-resources/inventory/price').then((m) => m.PriceModule),
-  },
-
-  {
-    path: 'pricelevel',
-    loadChildren: () =>
-      import('client-resources/inventory/pricelevel').then(
-        (m) => m.PricelevelModule
-      ),
-  },
-
-  {
-    path: 'product',
-    loadChildren: () =>
-      import('client-resources/inventory/product').then((m) => m.ProductModule),
-  },
-
-  {
-    path: 'quantity',
-    loadChildren: () =>
-      import('client-resources/inventory/quantity').then(
-        (m) => m.QuantityModule
-      ),
-  },
-
-  {
-    path: 'resource',
-    loadChildren: () =>
-      import('client-resources/inventory/resource').then(
-        (m) => m.ResourceModule
-      ),
-  },
-
-  {
-    path: 'sku',
-    loadChildren: () =>
-      import('client-resources/inventory/sku').then((m) => m.SkuModule),
-  },
-
-  {
-    path: 'store',
-    loadChildren: () =>
-      import('client-resources/inventory/store').then((m) => m.StoreModule),
-  },
-
-  {
-    path: 'transaction',
-    loadChildren: () =>
-      import('client-resources/inventory/transaction').then(
-        (m) => m.TransactionModule
-      ),
-  },
-
-  {
-    path: 'user',
-    loadChildren: () =>
-      import('client-resources/inventory/user').then((m) => m.UserModule),
-  },
-
-  {
-    path: 'variant',
-    loadChildren: () =>
-      import('client-resources/inventory/variant').then((m) => m.VariantModule),
-  },
-];
+const routes: Routes = [];
 
 @NgModule({
-  declarations: [AppComponent, IntroPageComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

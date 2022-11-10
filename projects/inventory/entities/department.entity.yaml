@@ -1,9 +1,0 @@
-name: department
-mainProperty: department
-properties:
-  - name: department
-    type: string
-    minLength: 3
-    maxLength: 50
-    inputElement: text
-    unique: true

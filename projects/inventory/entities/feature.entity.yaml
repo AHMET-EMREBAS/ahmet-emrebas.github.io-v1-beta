@@ -1,9 +1,0 @@
-name: feature
-mainProperty: feature
-properties:
-  - name: feature
-    type: string
-    minLength: 3
-    maxLength: 50
-    inputElement: text
-    unique: true

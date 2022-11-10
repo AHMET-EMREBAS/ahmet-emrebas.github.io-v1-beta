@@ -1,9 +1,0 @@
-name: category
-mainProperty: category
-properties:
-  - name: category
-    type: string
-    minLength: 3
-    maxLength: 50
-    inputElement: text
-    unique: true

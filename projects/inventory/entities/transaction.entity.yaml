@@ -1,9 +1,0 @@
-name: transaction
-mainProperty: complete
-properties:
-  - name: complete
-    type: enum
-    inputElement: select
-    enum:
-      - complete
-      - canceled

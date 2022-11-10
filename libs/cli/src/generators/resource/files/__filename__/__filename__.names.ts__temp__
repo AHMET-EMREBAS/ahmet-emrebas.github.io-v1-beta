@@ -1,3 +1,0 @@
-import { resourceName } from 'core';
-
-export const <%= classname %>Names = resourceName('<%= filename %>');

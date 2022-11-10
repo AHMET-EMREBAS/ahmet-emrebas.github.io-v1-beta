@@ -1,9 +1,0 @@
-name: store
-mainProperty: name
-properties:
-  - name: name
-    type: string
-    minLength: 3
-    maxLength: 50
-    inputElement: text
-    unique: true

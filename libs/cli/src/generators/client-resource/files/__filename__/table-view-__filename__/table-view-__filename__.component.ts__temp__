@@ -1,8 +1,0 @@
-import { Component } from '@angular/core';
-
-@Component({
-  selector: 'ae-table-view-<%= filename %>',
-  templateUrl: './table-view-<%= filename %>.component.html',
-  styleUrls: ['./table-view-<%= filename %>.component.scss'],
-})
-export class TableView<%= classname %>Component {}
