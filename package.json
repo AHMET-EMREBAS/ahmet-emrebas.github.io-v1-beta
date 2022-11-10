@@ -1,7 +1,6 @@
 {
-  "name": "ahmet-emrebas",
-  "version": "0.0.0",
-  "license": "MIT",
+  "name": "ae",
+  "version": "0.0.1",
   "scripts": {
     "start": "nx serve",
     "build": "nx build",

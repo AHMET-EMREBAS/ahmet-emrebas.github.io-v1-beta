@@ -9,6 +9,8 @@ import {
 } from '@angular/router';
 import { ServiceWorkerModule } from '@angular/service-worker';
 
+import { LayoutModule } from 'layout';
+
 import { EntityDataModule } from '@ngrx/data';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
@@ -25,6 +27,7 @@ const routes: Routes = [];
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    LayoutModule,
     StoreModule.forRoot({}, {}),
     EffectsModule.forRoot([]),
     EntityDataModule.forRoot({ ...entityDataModuleConfig }),

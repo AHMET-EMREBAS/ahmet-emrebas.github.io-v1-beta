@@ -1,0 +1,53 @@
+<div class="flex flex-column gap-2 h-full overflow-hidden">
+
+    <p-menubar [model]="menubarItems">
+        <ng-template pTemplate="start">
+            <img src="/assets/icons/icon-72x72.png" alt="Logo" width="50">
+        </ng-template>
+    </p-menubar>
+
+    <div class="flex flex-column p-2 h-full overflow-hidden">
+
+        <div class="flex gap-2 h-full overflow-hidden overflow-y-auto">
+
+
+            <div class="flex flex-column gap-2  justify-content-between h-full overflow-y-auto">
+                <p-menu [model]="primaryMenuItems"> </p-menu>
+                <p-menu [model]="secondaryMenuItems"> </p-menu>
+            </div>
+
+            <div class="flex flex-column flex-grow-1 gap-2 h-full overflow-y-auto">
+                <ng-content></ng-content>
+            </div>
+
+            <div class="flex flex-column gap-2  justify-content-between h-full overflow-y-auto">
+
+                <p-menu [model]="otherMenuItems"> </p-menu>
+                <p-menu [model]="featureMenuItems"> </p-menu>
+            </div>
+        </div>
+    </div>
+
+
+    <p-toolbar>
+
+
+
+        <div class="p-toolbar-left">
+
+            <p-button styleClass="p-button-secondary" icon="pi pi-cog" pTooltip="Settings" tooltipPosition="top">
+            </p-button>
+
+        </div>
+
+        <div class="p-toolbar-right">
+
+            <p-button styleClass="p-button-warning" icon="pi pi-bell" pTooltip="Notifications" tooltipPosition="top">
+            </p-button>
+
+        </div>
+
+    </p-toolbar>
+
+
+</div>
