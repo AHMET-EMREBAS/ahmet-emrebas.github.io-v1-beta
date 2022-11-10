@@ -4,6 +4,7 @@ import {
 } from 'fs';
 import { load } from 'js-yaml';
 import {
+  camelCase,
   kebabCase,
   snakeCase,
   upperFirst,
@@ -96,7 +97,7 @@ function mapName(p: PropertyOptions) {
 function appendUtilities(e: PropertyOptions) {
   return {
     ...e,
-    upperFirst: (str: string) => upperFirst(str),
+    upperFirst: (str: string) => upperFirst(camelCase(str)),
     snakeCase: (str: string) => snakeCase(str),
     kebabCase: (str: string) => kebabCase(str),
 

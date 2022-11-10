@@ -3,11 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
 import { NgrxDataService } from 'material/data-services';
-import { CurrencyInputModule } from 'material/form/currency-input';
-import { FormModule } from 'material/form/form.module';
-import { SelectInputModule } from 'material/form/select-input';
-import { TextInputModule } from 'material/form/text-input';
-import { CheckboxInputModule } from 'material/form/checkbox-input';
+
 import { ResourceLayoutModule } from 'material/resource-layout';
 import { TableModule } from 'material/table';
 import { ConfirmationService, MessageService, SharedModule } from 'primeng/api';
@@ -29,6 +25,7 @@ import { CanReadProductGuard, CanWriteProductGuard } from './product.guard';
 import { ProductService } from './product.service';
 import { TableViewProductComponent } from './table-view-product';
 import { UpdateProductComponent } from './update-product';
+import { FormModule } from 'material/form';
 
 import { CategoryService } from '../category';
 
@@ -36,9 +33,13 @@ import { DepartmentService } from '../department';
 
 import { VariantService } from '../variant';
 
-import { RadioInputModule } from 'material/form/radio-input';
-import { SwitchInputModule } from 'material/form/switch-input';
-import { NumberInputModule } from 'material/form/number-input';
+import { TextInputModule } from 'material/form/text-input';
+
+import { TextareaInputModule } from 'material/form/textarea-input';
+
+import { SearchOneInputModule } from 'material/form/search-one-input';
+
+import { SearchManyInputModule } from 'material/form/search-many-input';
 
 @NgModule({
   declarations: [
@@ -64,13 +65,14 @@ import { NumberInputModule } from 'material/form/number-input';
     ConfirmDialogModule,
     CardModule,
     FormModule,
+
     TextInputModule,
-    SelectInputModule,
-    CurrencyInputModule,
-    CheckboxInputModule,
-    RadioInputModule,
-    SwitchInputModule,
-    NumberInputModule,
+
+    TextareaInputModule,
+
+    SearchOneInputModule,
+
+    SearchManyInputModule,
   ],
 
   providers: [

@@ -1,0 +1,8 @@
+<ae-input-wrapper [control]="control" [attributes]="attributes" [updateField]="updateField"
+    (updateEvent)="updateEvent.emit($event)">
+    <p-multiSelect [tabindex]="1" [defaultLabel]="attributes.label || 'Set label'" styleClass="w-full pr-6"
+        [formControl]="control" [selectionLimit]="attributes.selectionLimit || 10000"
+        [options]="(getOptions() | async)!" [optionValue]="'id'" [optionLabel]="attributes.optionLabel!"
+        [style.width]="'100%'" [aeSetAttribute]="attributes">
+    </p-multiSelect>
+</ae-input-wrapper>

@@ -3,11 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
 import { NgrxDataService } from 'material/data-services';
-import { CurrencyInputModule } from 'material/form/currency-input';
-import { FormModule } from 'material/form/form.module';
-import { SelectInputModule } from 'material/form/select-input';
-import { TextInputModule } from 'material/form/text-input';
-import { CheckboxInputModule } from 'material/form/checkbox-input';
+
 import { ResourceLayoutModule } from 'material/resource-layout';
 import { TableModule } from 'material/table';
 import {
@@ -36,15 +32,21 @@ import {
 import { <%= classname %>Service } from './<%= filename %>.service';
 import { TableView<%= classname %>Component } from './table-view-<%= filename %>';
 import { Update<%= classname %>Component } from './update-<%= filename %>';
-
+import {FormModule} from 'material/form';
 
 <% for(const c of relations) { %> 
        import { <%= c.upperFirst(c.from) +'Service' %>} from '../<%- c.from %>';
 <% } %>
 
-import { RadioInputModule } from 'material/form/radio-input';
-import { SwitchInputModule } from 'material/form/switch-input';
-import { NumberInputModule } from 'material/form/number-input';
+<% let i = [] %>
+<% for(const c of viewColumns) { %> 
+        <%  if(!i.includes(c.inputElement)) { %> 
+               import { <%- c.upperFirst(c.inputElement) %>InputModule } from 'material/form/<%- c.inputElement %>-input';
+        <% } %> 
+<% 
+       i.push(c.inputElement) ; 
+%>
+<% } %>
 
 @NgModule({
   declarations: [
@@ -70,13 +72,16 @@ import { NumberInputModule } from 'material/form/number-input';
     ConfirmDialogModule,
     CardModule,
     FormModule,
-    TextInputModule,
-    SelectInputModule,
-    CurrencyInputModule,
-    CheckboxInputModule,
-    RadioInputModule,
-    SwitchInputModule,
-    NumberInputModule
+
+<% let j = [] %>
+<% for(const c of viewColumns) { %> 
+        <%  if(!j.includes(c.inputElement)) { %> 
+                <%- c.upperFirst(c.inputElement) %>InputModule,
+        <% } %> 
+<% 
+       j.push(c.inputElement) ; 
+%>
+<% } %>
   ],
 
   providers: [

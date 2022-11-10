@@ -3,11 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
 import { NgrxDataService } from 'material/data-services';
-import { CurrencyInputModule } from 'material/form/currency-input';
-import { FormModule } from 'material/form/form.module';
-import { SelectInputModule } from 'material/form/select-input';
-import { TextInputModule } from 'material/form/text-input';
-import { CheckboxInputModule } from 'material/form/checkbox-input';
+
 import { ResourceLayoutModule } from 'material/resource-layout';
 import { TableModule } from 'material/table';
 import { ConfirmationService, MessageService, SharedModule } from 'primeng/api';
@@ -29,14 +25,15 @@ import { CanReadPriceGuard, CanWritePriceGuard } from './price.guard';
 import { PriceService } from './price.service';
 import { TableViewPriceComponent } from './table-view-price';
 import { UpdatePriceComponent } from './update-price';
+import { FormModule } from 'material/form';
 
 import { SkuService } from '../sku';
 
 import { PricelevelService } from '../pricelevel';
 
-import { RadioInputModule } from 'material/form/radio-input';
-import { SwitchInputModule } from 'material/form/switch-input';
-import { NumberInputModule } from 'material/form/number-input';
+import { CurrencyInputModule } from 'material/form/currency-input';
+
+import { SearchOneInputModule } from 'material/form/search-one-input';
 
 @NgModule({
   declarations: [
@@ -62,13 +59,10 @@ import { NumberInputModule } from 'material/form/number-input';
     ConfirmDialogModule,
     CardModule,
     FormModule,
-    TextInputModule,
-    SelectInputModule,
+
     CurrencyInputModule,
-    CheckboxInputModule,
-    RadioInputModule,
-    SwitchInputModule,
-    NumberInputModule,
+
+    SearchOneInputModule,
   ],
 
   providers: [
