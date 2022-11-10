@@ -1,0 +1,26 @@
+{
+  "$id": "ResourceSchema",
+  "description": "Resource Schemas",
+  "title": "Resource Schemas",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Resource name",
+      "minLength": 2,
+      "maxLength": 30,
+      "pattern": "^[a-z]*$"
+    },
+    "description": {
+      "type": "string",
+      "description": "Resource description",
+      "minLength": 2
+    },
+    "properties": {
+      "type": "array",
+      "items": {
+        "$ref": "./"
+      }
+    }
+  },
+  "required": ["name"]
+}

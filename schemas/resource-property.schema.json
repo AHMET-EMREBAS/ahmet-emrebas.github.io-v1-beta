@@ -1,0 +1,78 @@
+{
+  "$id": "PropertySchema",
+  "description": "Property Schemas",
+  "title": "Property Schemas",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Property name",
+      "minLength": 2,
+      "maxLength": 30,
+      "pattern": "^[a-z]*$"
+    },
+    "columnType": {
+      "type": "string",
+      "description": "Database table column type",
+      "enum": ["text", "date", "boolean", "numeric", "int", "number"]
+    },
+    "valueType": {
+      "type": "string",
+      "description": "Type of the class/inteface property.",
+      "enum": ["string", "boolean", "Date", "number"]
+    },
+    "description": {
+      "type": "string",
+      "description": "Property description",
+      "minLength": 2
+    },
+    "minLength": {
+      "type": "number",
+      "default": 0
+    },
+    "maxLength": {
+      "type": "number",
+      "default": 0
+    },
+    "min": {
+      "type": "number",
+      "default": 0
+    },
+    "max": {
+      "type": "number",
+      "default": 0
+    },
+    "unique": {
+      "type": "boolean",
+      "default": true
+    },
+    "isEmail": {
+      "type": "boolean",
+      "default": true
+    },
+    "isPassword": {
+      "type": "boolean",
+      "default": true
+    },
+    "inputElementType": {
+      "type": "string",
+      "enum": [
+        "text",
+        "number",
+        "checkbox",
+        "radio",
+        "select",
+        "search",
+        "date"
+      ]
+    },
+    "enumOptions": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "default": ["option 1", "option 2", "option 3"]
+    }
+  },
+  "required": ["name", "columnType", "valueType"]
+}
