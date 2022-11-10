@@ -21,7 +21,7 @@ export class LocationFormService {
       .add({
         id: 'location-location-input',
         name: 'location',
-        inputType: '',
+        inputType: 'text',
 
         maxLength: 300,
       })

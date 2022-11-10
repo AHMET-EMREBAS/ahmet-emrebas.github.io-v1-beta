@@ -2,7 +2,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import {
+  PreloadAllModules,
+  RouterModule,
+  Routes,
+} from '@angular/router';
 import { ServiceWorkerModule } from '@angular/service-worker';
 
 import { EntityDataModule } from '@ngrx/data';

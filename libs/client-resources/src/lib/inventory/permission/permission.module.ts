@@ -32,7 +32,7 @@ import { FormModule } from 'material/form';
 
 import { ResourceService } from '../resource';
 
-import { InputModule } from 'material/form/-input';
+import { TextInputModule } from 'material/form/text-input';
 
 import { RadioInputModule } from 'material/form/radio-input';
 
@@ -63,7 +63,7 @@ import { SearchOneInputModule } from 'material/form/search-one-input';
     CardModule,
     FormModule,
 
-    InputModule,
+    TextInputModule,
 
     RadioInputModule,
 

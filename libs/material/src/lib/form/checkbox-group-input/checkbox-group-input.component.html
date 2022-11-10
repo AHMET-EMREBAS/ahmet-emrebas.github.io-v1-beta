@@ -1,0 +1,6 @@
+<ae-input-wrapper [control]="control" [attributes]="attributes" [updateField]="updateField"
+    (updateEvent)="updateEvent.emit($event)">
+    <p-checkbox #input class="w-full" [style]="{width:'100%'}" [formControl]="control" [aeSetAttribute]="attributes"
+        [binary]="true">
+    </p-checkbox>
+</ae-input-wrapper>

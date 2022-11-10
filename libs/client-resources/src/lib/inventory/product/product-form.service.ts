@@ -69,7 +69,7 @@ export class ProductFormService {
         inputType: 'search-many',
         required: false,
         isNumberArray: true,
-        asyncOptions: this.productService.variantsService?.entities$,
+        asyncOptions: this.productService.variantService?.entities$,
       });
   }
 

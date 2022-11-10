@@ -33,7 +33,7 @@ export class <%= classname %>FormService {
         name: '<%- COLUMN.name %>',
         inputType: '<%- COLUMN.inputElement %>',
         <%- COLUMN.getValidators() %>,
-         <% if(COLUMN.from){ %> asyncOptions:this.<%= filename %>Service.<%- COLUMN.name %>Service?.entities$ <% }%>
+         <% if(COLUMN.from){ %> asyncOptions:this.<%= filename %>Service.<%- COLUMN.from %>Service?.entities$ <% }%>
       })
     <% } %>
   }

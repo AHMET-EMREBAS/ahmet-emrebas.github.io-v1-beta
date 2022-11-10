@@ -21,7 +21,7 @@ export class PermissionFormService {
       .add({
         id: 'permission-permission-input',
         name: 'permission',
-        inputType: '',
+        inputType: 'text',
       })
 
       .add({

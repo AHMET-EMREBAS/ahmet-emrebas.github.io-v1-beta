@@ -27,7 +27,7 @@ import { TableViewLocationComponent } from './table-view-location';
 import { UpdateLocationComponent } from './update-location';
 import { FormModule } from 'material/form';
 
-import { InputModule } from 'material/form/-input';
+import { TextInputModule } from 'material/form/text-input';
 
 import { NumberInputModule } from 'material/form/number-input';
 
@@ -56,7 +56,7 @@ import { NumberInputModule } from 'material/form/number-input';
     CardModule,
     FormModule,
 
-    InputModule,
+    TextInputModule,
 
     NumberInputModule,
   ],

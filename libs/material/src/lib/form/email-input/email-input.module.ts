@@ -9,5 +9,6 @@ import { EmailInputComponent } from './email-input.component';
 @NgModule({
   declarations: [EmailInputComponent],
   imports: [CommonModule, SharedInputModule, InputTextModule],
+  exports: [EmailInputComponent],
 })
 export class EmailInputModule {}

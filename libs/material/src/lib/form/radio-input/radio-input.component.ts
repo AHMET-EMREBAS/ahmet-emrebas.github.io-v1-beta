@@ -1,12 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+
+import { BaseInputComponent } from '../shared-input';
 
 @Component({
   selector: 'ae-radio-input',
   templateUrl: './radio-input.component.html',
   styleUrls: ['./radio-input.component.scss'],
 })
-export class RadioInputComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit(): void {}
-}
+export class RadioInputComponent extends BaseInputComponent {}

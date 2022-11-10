@@ -41,7 +41,7 @@ export class UserFormService {
         name: 'permissions',
         inputType: 'checkbox-group',
         isNumberArray: true,
-        asyncOptions: this.userService.permissionsService?.entities$,
+        asyncOptions: this.userService.permissionService?.entities$,
       });
   }
 

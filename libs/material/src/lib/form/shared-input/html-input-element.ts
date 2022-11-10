@@ -4,6 +4,7 @@ export type InputType =
   | 'text'
   | 'textarea'
   | 'checkbox'
+  | 'checkbox-group'
   | 'number'
   | 'date'
   | 'email'

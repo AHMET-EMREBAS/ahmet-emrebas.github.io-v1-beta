@@ -10,6 +10,7 @@ properties:
       - z
     maxLength: 300
     unique: true
+    inputElement: text
 
   - name: x
     type: integer

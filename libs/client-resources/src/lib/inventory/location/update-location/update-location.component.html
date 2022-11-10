@@ -2,14 +2,14 @@
   class="flex flex-column md:flex-row flex-wrap gap-5 p-2"
   *ngIf="item$ | async as item"
 >
-  <ae-undefined-input
+  <ae-text-input
     [updateField]="true"
     (updateEvent)="update($event, item.id!)"
     [defaultValue]="item?.location"
     [control]="control('location')"
     [attributes]="formFields.location!"
   >
-  </ae-undefined-input>
+  </ae-text-input>
 
   <ae-number-input
     [updateField]="true"

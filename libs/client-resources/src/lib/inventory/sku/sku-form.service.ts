@@ -50,7 +50,7 @@ export class SkuFormService {
         name: 'variants',
         inputType: 'search-many',
         isNumberArray: true,
-        asyncOptions: this.skuService.variantsService?.entities$,
+        asyncOptions: this.skuService.variantService?.entities$,
       })
 
       .add({

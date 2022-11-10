@@ -3,12 +3,12 @@
   [formGroup]="formGroup"
   (formSubmit)="onSubmit($event)"
 >
-  <ae-undefined-input
+  <ae-text-input
     [defaultValue]="defaultValue?.permission"
     [control]="control('permission')"
     [attributes]="formFields.permission!"
   >
-  </ae-undefined-input>
+  </ae-text-input>
 
   <ae-radio-input
     [defaultValue]="defaultValue?.operation"

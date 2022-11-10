@@ -1,12 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+
+import { BaseInputComponent } from '../shared-input';
 
 @Component({
   selector: 'ae-textarea-input',
   templateUrl: './textarea-input.component.html',
   styleUrls: ['./textarea-input.component.scss'],
 })
-export class TextareaInputComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit(): void {}
-}
+export class TextareaInputComponent extends BaseInputComponent {}
