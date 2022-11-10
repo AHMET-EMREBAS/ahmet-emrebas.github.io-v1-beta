@@ -25,11 +25,6 @@ const routes: Routes = [
     title: 'Home',
     path: '',
     children: [
-      // {
-      //   title:'Wellcome',
-      //   path: '',
-
-      // },
       {
         title: 'Messanger',
         path: 'messanger',
