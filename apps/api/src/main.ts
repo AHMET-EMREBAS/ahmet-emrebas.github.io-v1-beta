@@ -3,6 +3,7 @@ import * as cookieParser from 'cookie-parser';
 import { join } from 'path';
 import * as favicon from 'serve-favicon';
 
+import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import {
   DocumentBuilder,
@@ -30,6 +31,16 @@ async function bootstrap() {
 
   // Parse cookies
   app.use(cookieParser());
+
+  app.useGlobalPipes(
+    new ValidationPipe({
+      transform: true,
+      transformOptions: {
+        excludeExtraneousValues: true,
+      },
+      forbidUnknownValues: true,
+    })
+  );
 
   // Configure swagger documentation
   const config = new DocumentBuilder()

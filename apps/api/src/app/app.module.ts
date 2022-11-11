@@ -1,43 +1,20 @@
-import { join } from 'path';
-
 import {
-  CacheModule,
   Module,
+  ValidationPipeOptions,
 } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
-import { EventEmitterModule } from '@nestjs/event-emitter';
-import { ScheduleModule } from '@nestjs/schedule';
-import { ServeStaticModule } from '@nestjs/serve-static';
-import { TypeOrmModule } from '@nestjs/typeorm';
+
+import { CommonModules } from './app-common.module';
+import { ResouceModules } from './app-resource.module';
 
 @Module({
-  imports: [
-    ServeStaticModule.forRoot({
-      rootPath: join(__dirname, 'public'),
-    }),
-    ScheduleModule.forRoot(),
-    EventEmitterModule.forRoot({
-      global: true,
-      wildcard: true,
-      delimiter: '.',
-    }),
-    ConfigModule.forRoot({
-      isGlobal: true,
-      ignoreEnvFile: true,
-    }),
-    CacheModule.register({
-      isGlobal: true,
-      ttl: 5,
-      max: 10,
-    }),
-    TypeOrmModule.forRoot({
-      type: 'better-sqlite3',
-      database: 'tmp/database/main.sqlite',
-      autoLoadEntities: true,
-      subscribers: [],
-      synchronize: true,
-      dropSchema: true,
-    }),
+  imports: [...CommonModules, ...ResouceModules],
+  providers: [
+    {
+      provide: 'ValidationPipeOptions',
+      useValue: {
+        forbidUnknownValues: true,
+      } as ValidationPipeOptions,
+    },
   ],
 })
 export class AppModule {}
