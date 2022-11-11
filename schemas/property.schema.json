@@ -5,10 +5,10 @@
   "type": "object",
   "properties": {
     "Property Name": {
-      "$ref": "./names/property-names.schema.json"
+      "$ref": "./names/index.schema.json"
     },
     "Defination": {
-      "$ref": "./defination/defination.schema.json"
+      "$ref": "./defination/index.schema.json"
     },
     "Validation": {
       "$ref": "./validations/index.schema.json"

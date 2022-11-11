@@ -8,10 +8,12 @@ Properties:
       type: string
       minLength: 3
       maxLength: 20
-
     UI Metadata:
       type: text
-
     Column Metadata:
       columnType: date
       valueType: string
+Required Fields:
+  - name
+Unique Fields:
+  - name

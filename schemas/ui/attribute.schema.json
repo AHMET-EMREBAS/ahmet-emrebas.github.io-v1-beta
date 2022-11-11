@@ -1,0 +1,505 @@
+{
+  "$id": "Html element attributes.",
+  "title": "UI Element Metadata",
+  "description": "UI element metadata ",
+  "properties": {
+    "accept": {
+      "type": "string"
+    },
+    "accesskey": {
+      "type": "string"
+    },
+    "action": {
+      "type": "string"
+    },
+    "align": {
+      "type": "string"
+    },
+    "alt": {
+      "type": "string"
+    },
+    "async": {
+      "type": "string"
+    },
+    "autocomplete": {
+      "type": "string"
+    },
+    "autofocus": {
+      "type": "boolean"
+    },
+    "autoplay": {
+      "type": "string"
+    },
+    "bgcolor": {
+      "type": "string"
+    },
+    "border": {
+      "type": "string"
+    },
+    "charset": {
+      "type": "string"
+    },
+    "checked": {
+      "type": "boolean"
+    },
+    "cite": {
+      "type": "string"
+    },
+    "class": {
+      "type": "string"
+    },
+    "color": {
+      "type": "string"
+    },
+    "cols": {
+      "type": "string"
+    },
+    "colspan": {
+      "type": "string"
+    },
+    "content": {
+      "type": "string"
+    },
+    "contenteditable": {
+      "type": "boolean"
+    },
+    "controls": {
+      "type": "string"
+    },
+    "coords": {
+      "type": "string"
+    },
+    "data": {
+      "type": "string"
+    },
+    "datetime": {
+      "type": "string"
+    },
+    "default": {
+      "type": "string"
+    },
+    "defer": {
+      "type": "string"
+    },
+    "dir": {
+      "type": "string"
+    },
+    "dirname": {
+      "type": "string"
+    },
+    "disabled": {
+      "type": "boolean"
+    },
+    "download": {
+      "type": "string"
+    },
+    "draggable": {
+      "type": "boolean"
+    },
+    "enctype": {
+      "type": "string"
+    },
+    "for": {
+      "type": "string"
+    },
+    "form": {
+      "type": "string"
+    },
+    "formaction": {
+      "type": "string"
+    },
+    "headers": {
+      "type": "string"
+    },
+    "height": {
+      "type": "string"
+    },
+    "hidden": {
+      "type": "boolean"
+    },
+    "high": {
+      "type": "string"
+    },
+    "href": {
+      "type": "string"
+    },
+    "hreflang": {
+      "type": "string"
+    },
+    "http": {
+      "type": "string"
+    },
+    "id": {
+      "type": "string"
+    },
+    "ismap": {
+      "type": "string"
+    },
+    "kind": {
+      "type": "string"
+    },
+    "label": {
+      "type": "string"
+    },
+    "lang": {
+      "type": "string"
+    },
+    "list": {
+      "type": "string"
+    },
+    "loop": {
+      "type": "string"
+    },
+    "low": {
+      "type": "string"
+    },
+    "max": {
+      "type": "string"
+    },
+    "maxlength": {
+      "type": "string"
+    },
+    "media": {
+      "type": "string"
+    },
+    "method": {
+      "type": "string"
+    },
+    "min": {
+      "type": "number"
+    },
+    "minlength": {
+      "type": "boolean"
+    },
+    "multiple": {
+      "type": "string"
+    },
+    "muted": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "novalidate": {
+      "type": "string"
+    },
+    "onabort": {
+      "type": "string"
+    },
+    "onafterprint": {
+      "type": "string"
+    },
+    "onbeforeprint": {
+      "type": "string"
+    },
+    "onbeforeunload": {
+      "type": "string"
+    },
+    "onblur": {
+      "type": "string"
+    },
+    "oncanplay": {
+      "type": "string"
+    },
+    "oncanplaythrough": {
+      "type": "string"
+    },
+    "onchange": {
+      "type": "string"
+    },
+    "onclick": {
+      "type": "string"
+    },
+    "oncontextmenu": {
+      "type": "string"
+    },
+    "oncopy": {
+      "type": "string"
+    },
+    "oncuechange": {
+      "type": "string"
+    },
+    "oncut": {
+      "type": "string"
+    },
+    "ondblclick": {
+      "type": "string"
+    },
+    "ondrag": {
+      "type": "string"
+    },
+    "ondragend": {
+      "type": "string"
+    },
+    "ondragenter": {
+      "type": "string"
+    },
+    "ondragleave": {
+      "type": "string"
+    },
+    "ondragover": {
+      "type": "string"
+    },
+    "ondragstart": {
+      "type": "string"
+    },
+    "ondrop": {
+      "type": "string"
+    },
+    "ondurationchange": {
+      "type": "string"
+    },
+    "onemptied": {
+      "type": "string"
+    },
+    "onended": {
+      "type": "string"
+    },
+    "onerror": {
+      "type": "string"
+    },
+    "onfocus": {
+      "type": "string"
+    },
+    "onhashchange": {
+      "type": "string"
+    },
+    "oninput": {
+      "type": "string"
+    },
+    "oninvalid": {
+      "type": "string"
+    },
+    "onkeydown": {
+      "type": "string"
+    },
+    "onkeypress": {
+      "type": "string"
+    },
+    "onkeyup": {
+      "type": "string"
+    },
+    "onload": {
+      "type": "string"
+    },
+    "onloadeddata": {
+      "type": "string"
+    },
+    "onloadedmetadata": {
+      "type": "string"
+    },
+    "onloadstart": {
+      "type": "string"
+    },
+    "onmousedown": {
+      "type": "string"
+    },
+    "onmousemove": {
+      "type": "string"
+    },
+    "onmouseout": {
+      "type": "string"
+    },
+    "onmouseover": {
+      "type": "string"
+    },
+    "onmouseup": {
+      "type": "string"
+    },
+    "onmousewheel": {
+      "type": "string"
+    },
+    "onoffline": {
+      "type": "string"
+    },
+    "ononline": {
+      "type": "string"
+    },
+    "onpagehide": {
+      "type": "string"
+    },
+    "onpageshow": {
+      "type": "string"
+    },
+    "onpaste": {
+      "type": "string"
+    },
+    "onpause": {
+      "type": "string"
+    },
+    "onplay": {
+      "type": "string"
+    },
+    "onplaying": {
+      "type": "string"
+    },
+    "onpopstate": {
+      "type": "string"
+    },
+    "onprogress": {
+      "type": "string"
+    },
+    "onratechange": {
+      "type": "string"
+    },
+    "onreset": {
+      "type": "string"
+    },
+    "onresize": {
+      "type": "string"
+    },
+    "onscroll": {
+      "type": "string"
+    },
+    "onsearch": {
+      "type": "string"
+    },
+    "onseeked": {
+      "type": "string"
+    },
+    "onseeking": {
+      "type": "string"
+    },
+    "onselect": {
+      "type": "string"
+    },
+    "onstalled": {
+      "type": "string"
+    },
+    "onstorage": {
+      "type": "string"
+    },
+    "onsubmit": {
+      "type": "string"
+    },
+    "onsuspend": {
+      "type": "string"
+    },
+    "ontimeupdate": {
+      "type": "string"
+    },
+    "ontoggle": {
+      "type": "string"
+    },
+    "onunload": {
+      "type": "string"
+    },
+    "onvolumechange": {
+      "type": "string"
+    },
+    "onwaiting": {
+      "type": "string"
+    },
+    "onwheel": {
+      "type": "string"
+    },
+    "open": {
+      "type": "string"
+    },
+    "optimum": {
+      "type": "string"
+    },
+    "pattern": {
+      "type": "string"
+    },
+    "placeholder": {
+      "type": "string"
+    },
+    "poster": {
+      "type": "string"
+    },
+    "preload": {
+      "type": "string"
+    },
+    "readonly": {
+      "type": "string"
+    },
+    "rel": {
+      "type": "string"
+    },
+    "required": {
+      "type": "string"
+    },
+    "reversed": {
+      "type": "string"
+    },
+    "rows": {
+      "type": "string"
+    },
+    "rowspan": {
+      "type": "string"
+    },
+    "sandbox": {
+      "type": "string"
+    },
+    "scope": {
+      "type": "string"
+    },
+    "selected": {
+      "type": "string"
+    },
+    "shape": {
+      "type": "string"
+    },
+    "size": {
+      "type": "string"
+    },
+    "sizes": {
+      "type": "string"
+    },
+    "span": {
+      "type": "string"
+    },
+    "spellcheck": {
+      "type": "string"
+    },
+    "src": {
+      "type": "string"
+    },
+    "srcdoc": {
+      "type": "string"
+    },
+    "srclang": {
+      "type": "string"
+    },
+    "srcset": {
+      "type": "string"
+    },
+    "start": {
+      "type": "string"
+    },
+    "step": {
+      "type": "string"
+    },
+    "style": {
+      "type": "object"
+    },
+    "tabindex": {
+      "type": "string"
+    },
+    "target": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "translate": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string"
+    },
+    "usemap": {
+      "type": "string"
+    },
+    "value": {
+      "type": "string"
+    },
+    "width": {
+      "type": "string"
+    },
+    "wra": {
+      "type": "string"
+    }
+  }
+}

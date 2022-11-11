@@ -5,6 +5,9 @@
   "properties": {
     "type": {
       "$ref": "../types/input-element.schema.json"
+    },
+    "attributes": {
+      "$ref": "./attribute.schema.json"
     }
   },
   "required": ["type"]
