@@ -19,14 +19,14 @@
         "$ref": "./property.schema.json"
       }
     },
-    "Required Fields": {
+    "Required": {
       "type": "array",
       "items": {
         "type": "string",
         "minLength": 2
       }
     },
-    "Unique Fields": {
+    "Unique": {
       "type": "array",
       "items": {
         "type": "string",

@@ -4,7 +4,7 @@
   "title": "Property Schemas",
   "type": "object",
   "properties": {
-    "Property Name": {
+    "Property": {
       "$ref": "./names/index.schema.json"
     },
     "Defination": {
@@ -13,19 +13,13 @@
     "Validation": {
       "$ref": "./validations/index.schema.json"
     },
-    "Column Metadata": {
+    "Column": {
       "$ref": "./column/index.schema.json"
     },
-    "UI Metadata": {
+    "UI": {
       "$ref": "./ui/index.schema.json"
     }
   },
-  "required": [
-    "Property Name",
-    "Validation",
-    "Column Metadata",
-    "UI Metadata",
-    "Defination"
-  ],
+  "required": ["Property", "Validation", "Column", "UI", "Defination"],
   "additionalProperties": false
 }

@@ -3,6 +3,9 @@
   "title": "UI Element Metadata",
   "description": "UI element metadata ",
   "properties": {
+    "role": {
+      "type": "string"
+    },
     "accept": {
       "type": "string"
     },

@@ -1,39 +1,36 @@
 Name: product
 Description: Product resource defination
 Properties:
-  - Property Name: name
+  - Property: name
     Validation:
       type: string
       minLength: 0
       maxLength: 50
-
-    Column Metadata:
+    Column:
       columnType: text
       valueType: string
-
-    UI Metadata:
+    UI:
       type: textarea
-
     Defination:
       commerce: productName
 
-  - Property Name: description
+  - Property: description
     Defination:
       commerce: productDescription
     Validation:
       type: string
       minLength: 3
       maxLength: 500
-    Column Metadata:
+    Column:
       columnType: text
       valueType: string
-    UI Metadata:
+    UI:
       type: textarea
 
-Required Fields:
+Required:
   - name
   - category
   - department
 
-Unique Fields:
+Unique:
   - name
