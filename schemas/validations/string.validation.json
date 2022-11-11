@@ -31,6 +31,6 @@
       "default": ["option 1", "option 2", "option 3"]
     }
   },
-  "required": ["type", "minLength", "maxLength", "pattern"],
+  "required": ["type", "minLength", "maxLength"],
   "additionalProperties": false
 }
