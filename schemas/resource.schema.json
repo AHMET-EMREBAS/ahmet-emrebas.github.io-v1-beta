@@ -5,12 +5,7 @@
   "type": "object",
   "properties": {
     "Name": {
-      "type": "string",
-      "description": "ResourceName",
-      "minLength": 2,
-      "maxLength": 30,
-      "pattern": "^[a-z]*$",
-      "default": "name"
+      "$ref": "./names/resource.schema.json"
     },
     "Description": {
       "type": "string",
@@ -21,7 +16,7 @@
     "Properties": {
       "type": "array",
       "items": {
-        "$ref": "./resource-property.schema.json"
+        "$ref": "./property.schema.json"
       }
     },
     "Required Fields": {
@@ -37,7 +32,8 @@
         "type": "string",
         "minLength": 2
       }
-    }
+    },
+    "Relations": {}
   },
   "required": ["Name", "Description", "Properties"],
   "additionalProperties": false

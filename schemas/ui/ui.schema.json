@@ -4,7 +4,8 @@
   "description": "UI element metadata ",
   "properties": {
     "type": {
-      "$ref": "../types/input-element.type.json"
+      "$ref": "../types/input-element.schema.json"
     }
-  }
+  },
+  "required": ["type"]
 }

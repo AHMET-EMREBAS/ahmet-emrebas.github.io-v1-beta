@@ -1,0 +1,15 @@
+{
+  "$id": "RelationMeta",
+  "title": "Relation Meta",
+  "description": "Relation description",
+  "properties": {
+    "type": {
+      "$ref": "../types/relation.schema.json"
+    },
+    "joinColumn": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "additionalProperties": false
+}

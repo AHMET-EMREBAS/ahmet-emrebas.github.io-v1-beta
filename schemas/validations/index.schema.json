@@ -4,13 +4,13 @@
   "type": "object",
   "oneOf": [
     {
-      "$ref": "./number.validation.json"
+      "$ref": "./number.schema.json"
     },
     {
-      "$ref": "./string.validation.json"
+      "$ref": "./string.schema.json"
     },
     {
-      "$ref": "./specific.validation.json"
+      "$ref": "./specific.schema.json"
     }
   ]
 }

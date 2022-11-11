@@ -1,0 +1,31 @@
+{
+  "$id": "PropertySchema",
+  "description": "Property Schemas",
+  "title": "Property Schemas",
+  "type": "object",
+  "properties": {
+    "Property Name": {
+      "$ref": "./names/property-names.schema.json"
+    },
+    "Defination": {
+      "$ref": "./defination/defination.schema.json"
+    },
+    "Validation": {
+      "$ref": "./validations/index.schema.json"
+    },
+    "Column Metadata": {
+      "$ref": "./column/index.schema.json"
+    },
+    "UI Metadata": {
+      "$ref": "./ui/index.schema.json"
+    }
+  },
+  "required": [
+    "Property Name",
+    "Validation",
+    "Column Metadata",
+    "UI Metadata",
+    "Defination"
+  ],
+  "additionalProperties": false
+}

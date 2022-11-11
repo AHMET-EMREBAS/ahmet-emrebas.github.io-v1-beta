@@ -72,13 +72,10 @@
       "type": "string",
       "enum": [
         "number",
-        "number",
         "min",
         "max",
         "precision",
         "float",
-        "float",
-        "datetime",
         "datetime",
         "string",
         "uuid",
@@ -140,14 +137,13 @@
       "type": "string",
       "enum": [
         "randomize",
-        "randomize",
+
         "slugify",
         "replaceSymbolWithNumber",
         "replaceSymbols",
         "replaceCreditCardSymbols",
         "repeatString",
         "regexpStyleStringParse",
-        "shuffle",
         "shuffle",
         "mustache",
         "createCard",
@@ -255,14 +251,7 @@
         "max",
         "precision",
         "float",
-        "float",
         "arrayElement",
-        "arrayElement",
-        "arrayElement",
-        "arrayElements",
-        "arrayElements",
-        "arrayElements",
-        "objectElement",
         "objectElement",
         "uuid",
         "boolean",
@@ -290,7 +279,7 @@
         "semver"
       ]
     },
-    "time": { "type": "string", "enum": ["recent", "recent", "recent"] },
+    "time": { "type": "string", "enum": ["recent"] },
     "vehicle": {
       "type": "string",
       "enum": [

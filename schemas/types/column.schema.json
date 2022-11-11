@@ -1,0 +1,8 @@
+{
+  "$id": "ColumnType",
+  "title": "Column type",
+  "description": "Database table column type",
+  "type": "string",
+  "default": "text",
+  "enum": ["number", "int", "numeric", "text", "string", "enum", "date"]
+}

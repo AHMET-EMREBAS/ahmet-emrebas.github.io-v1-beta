@@ -1,0 +1,20 @@
+{
+  "$id": "ColumnMetadata",
+  "title": "Column Metadata",
+  "description": "Database column metadata.",
+  "properties": {
+    "columnType": {
+      "$ref": "../types/column.schema.json"
+    },
+    "valueType": {
+      "$ref": "../types/value.schema.json"
+    },
+    "description": {
+      "type": "string",
+      "description": "Property description",
+      "minLength": 2
+    }
+  },
+  "required": ["columnType", "valueType"],
+  "additionalProperties": false
+}

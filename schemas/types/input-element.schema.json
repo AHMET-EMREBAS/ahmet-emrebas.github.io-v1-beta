@@ -2,6 +2,7 @@
   "$id": "InputElementType",
   "title": "Input Element Type",
   "description": "Input element type for the property. Ex. select, input, textarea, checkbox etc.",
+  "type": "string",
   "enum": [
     "text",
     "email",

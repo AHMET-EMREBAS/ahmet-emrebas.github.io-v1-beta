@@ -1,6 +1,8 @@
 {
   "yaml.schemas": {
     "./schemas/resource.schema.json": "./projects/inventory/*.yaml",
-    "file:///c%3A/Users/aecst/Projects/ahmet-emrebas/schemas/resource.schema.json": "file:///c%3A/Users/aecst/Projects/ahmet-emrebas/projects/inventory/product.entity.yaml"
+    "file:///c%3A/Users/aecst/Projects/ahmet-emrebas/schemas/resource.schema.json": [
+      "file:///c%3A/Users/aecst/Projects/ahmet-emrebas/projects/**/*.yaml"
+    ]
   }
 }

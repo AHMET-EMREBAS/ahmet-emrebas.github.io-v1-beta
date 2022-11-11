@@ -1,0 +1,14 @@
+{
+  "$id": "PropertyNames",
+  "title": "Property Names",
+  "description": "Available Property Names. We can restrict the property names.",
+  "type": "string",
+  "oneOf": [
+    {
+      "$ref": "./resource.schema.json"
+    },
+    {
+      "$ref": "./other.schema.json"
+    }
+  ]
+}

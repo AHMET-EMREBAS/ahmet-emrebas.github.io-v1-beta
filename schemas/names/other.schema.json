@@ -1,0 +1,32 @@
+{
+  "$id": "ResouceNames",
+  "title": "Resouce Names",
+  "description": "Available Resouce Names",
+  "type": "string",
+  "enum": [
+    "id",
+    "uuid",
+    "name",
+    "description",
+    "price",
+    "cost",
+    "usedPrice",
+    "usedCost",
+    "category",
+    "department",
+    "quantity",
+    "sku",
+    "barcode",
+    "code",
+    "version",
+    "color",
+    "size",
+    "height",
+    "width",
+    "x",
+    "y",
+    "weight",
+    "speed",
+    "type"
+  ]
+}
