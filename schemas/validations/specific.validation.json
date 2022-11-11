@@ -1,0 +1,38 @@
+{
+  "$id": "SpecificValidation",
+  "title": "Specific  validation",
+  "description": "Specific  validation",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "const": "specific"
+    },
+    "uuid": {
+      "type": "boolean",
+      "default": true
+    },
+    "phone": {
+      "type": "boolean",
+      "default": true
+    },
+    "email": {
+      "type": "boolean",
+      "default": true
+    },
+    "password": {
+      "type": "boolean",
+      "default": true
+    },
+    "enumOptions": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "default": ["option 1", "option 2", "option 3"]
+    }
+  },
+  "required": ["type"],
+  "additionalProperties": false
+}

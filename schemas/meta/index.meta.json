@@ -1,0 +1,11 @@
+{
+  "$id": "AllMetadatas",
+  "title": "All Metadata",
+  "description": "Database column metadata.",
+  "type": "object",
+  "oneOf": [
+    {
+      "$ref": "./column.meta.json"
+    }
+  ]
+}

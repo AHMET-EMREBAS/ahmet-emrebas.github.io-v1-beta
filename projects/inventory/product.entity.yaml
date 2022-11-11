@@ -1,0 +1,26 @@
+Name: name
+Description: Product resource defination
+Properties:
+  - Property Name: name
+    Validation:
+      type: string
+      minLength: 0
+      maxLength: 0
+      pattern: ^[a-zA-Z\\W]$
+
+    Database Table Metadata:
+      columnType: text
+
+    UI Element Metadata:
+      type: checkbox
+
+    Defination:
+      address: city
+
+Required Fields:
+  - name
+  - category
+  - department
+
+Unique Fields:
+  - name

@@ -2,77 +2,35 @@
   "$id": "PropertySchema",
   "description": "Property Schemas",
   "title": "Property Schemas",
+  "type": "object",
   "properties": {
-    "name": {
+    "Property Name": {
       "type": "string",
       "description": "Property name",
-      "minLength": 2,
-      "maxLength": 30,
-      "pattern": "^[a-z]*$"
+      "default": "propertyname"
     },
-    "columnType": {
-      "type": "string",
-      "description": "Database table column type",
-      "enum": ["text", "date", "boolean", "numeric", "int", "number"]
+    "Defination": {
+      "$ref": "./defination/index.defination.json"
     },
-    "valueType": {
-      "type": "string",
-      "description": "Type of the class/inteface property.",
-      "enum": ["string", "boolean", "Date", "number"]
+    "Validation": {
+      "type": "object",
+      "$ref": "./validations/index.validation.json"
     },
-    "description": {
-      "type": "string",
-      "description": "Property description",
-      "minLength": 2
+    "Database Table Metadata": {
+      "type": "object",
+      "$ref": "./meta/index.meta.json"
     },
-    "minLength": {
-      "type": "number",
-      "default": 0
-    },
-    "maxLength": {
-      "type": "number",
-      "default": 0
-    },
-    "min": {
-      "type": "number",
-      "default": 0
-    },
-    "max": {
-      "type": "number",
-      "default": 0
-    },
-    "unique": {
-      "type": "boolean",
-      "default": true
-    },
-    "isEmail": {
-      "type": "boolean",
-      "default": true
-    },
-    "isPassword": {
-      "type": "boolean",
-      "default": true
-    },
-    "inputElementType": {
-      "type": "string",
-      "enum": [
-        "text",
-        "number",
-        "checkbox",
-        "radio",
-        "select",
-        "search",
-        "date"
-      ]
-    },
-    "enumOptions": {
-      "type": "array",
-      "items": {
-        "type": "string",
-        "minLength": 1
-      },
-      "default": ["option 1", "option 2", "option 3"]
+    "UI Element Metadata": {
+      "type": "object",
+      "$ref": "./ui-meta/index.ui.json"
     }
   },
-  "required": ["name", "columnType", "valueType"]
+  "required": [
+    "Property Name",
+    "Validation",
+    "Database Table Metadata",
+    "UI Element Metadata",
+    "Defination"
+  ],
+  "additionalProperties": false
 }

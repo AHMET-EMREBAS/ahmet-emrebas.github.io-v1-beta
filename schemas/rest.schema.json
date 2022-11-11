@@ -1,0 +1,5 @@
+{
+  "$id": "Rest Schema",
+  "title": "Rest Schema",
+  "description": "Rest api document for the resouce."
+}

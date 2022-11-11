@@ -1,0 +1,11 @@
+{
+  "$id": "AllUIMetaData",
+  "title": "All UI Meta Data",
+  "description": "All UI meta data",
+  "type": "object",
+  "oneOf": [
+    {
+      "$ref": "./ui.meta.json"
+    }
+  ]
+}

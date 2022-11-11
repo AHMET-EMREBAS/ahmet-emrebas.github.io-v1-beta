@@ -1,0 +1,17 @@
+{
+  "$id": "InputElementType",
+  "title": "Input Element Type",
+  "description": "Input element type for the property. Ex. select, input, textarea, checkbox etc.",
+  "enum": [
+    "text",
+    "email",
+    "number",
+    "select",
+    "checkbox",
+    "radio",
+    "date",
+    "datetime",
+    "range",
+    "textarea"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "$id": "AllValidations",
+  "title": "All Validations",
+  "type": "object",
+  "oneOf": [
+    {
+      "$ref": "./number.validation.json"
+    },
+    {
+      "$ref": "./string.validation.json"
+    },
+    {
+      "$ref": "./specific.validation.json"
+    }
+  ]
+}

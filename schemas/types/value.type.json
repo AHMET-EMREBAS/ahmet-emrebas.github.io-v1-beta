@@ -1,0 +1,28 @@
+{
+  "$id": "ValueType",
+  "title": "Value type",
+  "type": "string",
+  "description": "The datatype of this property shown in the class defination. For exmaple, ```` class A { property:<valueType> }  ````",
+  "enum": [
+    "string",
+    "bigint",
+    "number",
+    "boolean",
+    "Date",
+    "Product",
+    "Category",
+    "Department",
+    "Price",
+    "Pricelevel",
+    "Customer",
+    "Quantity",
+    "Feature",
+    "Variant",
+    "Message",
+    "Store",
+    "Order",
+    "Transaction",
+    "User",
+    "ID"
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "$id": "UIElementMetadata",
+  "title": "UI Element Metadata",
+  "description": "UI element metadata ",
+  "properties": {
+    "type": {
+      "$ref": "../types/input-element.type.json"
+    }
+  }
+}

@@ -1,0 +1,310 @@
+{
+  "$id": "PropertyDefination",
+  "title": "Property defination",
+  "description": "Property defination. It helps to generate fake data for this property.",
+  "type": "object",
+  "properties": {
+    "address": {
+      "type": "string",
+      "enum": [
+        "zipCodeByState",
+        "zipCode",
+        "city",
+        "cityPrefix",
+        "citySuffix",
+        "streetName",
+        "streetAddress",
+        "streetSuffix",
+        "streetPrefix",
+        "secondaryAddress",
+        "county",
+        "country",
+        "countryCode",
+        "state",
+        "stateAbbr",
+        "latitude",
+        "longitude",
+        "direction",
+        "cardinalDirection",
+        "ordinalDirection",
+        "nearbyGPSCoordinate",
+        "coordinate",
+        "radius",
+        "isMetric",
+        "timeZone"
+      ]
+    },
+    "commerce": {
+      "type": "string",
+      "enum": [
+        "color",
+        "department",
+        "productName",
+        "price",
+        "productAdjective",
+        "productMaterial",
+        "product",
+        "productDescription"
+      ]
+    },
+
+    "company": {
+      "type": "string",
+      "enum": [
+        "suffixes",
+        "companyName",
+        "companySuffix",
+        "catchPhrase",
+        "bs",
+        "catchPhraseAdjective",
+        "catchPhraseDescriptor",
+        "catchPhraseNoun",
+        "bsAdjective",
+        "bsBuzz",
+        "bsNoun"
+      ]
+    },
+    "database": {
+      "type": "string",
+      "enum": ["column", "type", "collation", "engine"]
+    },
+    "datatype": {
+      "type": "string",
+      "enum": [
+        "number",
+        "number",
+        "min",
+        "max",
+        "precision",
+        "float",
+        "float",
+        "datetime",
+        "datetime",
+        "string",
+        "uuid",
+        "boolean",
+        "hexaDecimal",
+        "json",
+        "array"
+      ]
+    },
+    "date": {
+      "type": "string",
+      "enum": [
+        "past",
+        "future",
+        "between",
+        "recent",
+        "soon",
+        "month",
+        "weekday"
+      ]
+    },
+    "finance": {
+      "type": "string",
+      "enum": [
+        "account",
+        "accountName",
+        "routingNumber",
+        "mask",
+        "amount",
+        "transactionType",
+        "currencyCode",
+        "currencyName",
+        "currencySymbol",
+        "bitcoinAddress",
+        "iban",
+        "bic",
+        "litecoinAddress",
+        "creditCardNumber",
+        "creditCardCVV",
+        "ethereumAddress",
+        "transactionDescription"
+      ]
+    },
+    "git": {
+      "type": "string",
+      "enum": [
+        "branch",
+        "commitEntry",
+        "commitMessage",
+        "commitSha",
+        "shortSha"
+      ]
+    },
+    "hacker": {
+      "type": "string",
+      "enum": ["abbreviation", "adjective", "noun", "verb", "ingverb", "phrase"]
+    },
+    "helpers": {
+      "type": "string",
+      "enum": [
+        "randomize",
+        "randomize",
+        "slugify",
+        "replaceSymbolWithNumber",
+        "replaceSymbols",
+        "replaceCreditCardSymbols",
+        "repeatString",
+        "regexpStyleStringParse",
+        "shuffle",
+        "shuffle",
+        "mustache",
+        "createCard",
+        "contextualCard",
+        "userCard",
+        "createTransaction"
+      ]
+    },
+    "image": {
+      "type": "string",
+      "enum": [
+        "image",
+        "avatar",
+        "imageUrl",
+        "width",
+        "height",
+        "category",
+        "randomize",
+        "https",
+        "abstract",
+        "animals",
+        "business",
+        "cats",
+        "city",
+        "food",
+        "nightlife",
+        "fashion",
+        "people",
+        "nature",
+        "sports",
+        "technics",
+        "transport",
+        "dataUri"
+      ]
+    },
+    "internet": {
+      "type": "string",
+      "enum": [
+        "avatar",
+        "email",
+        "exampleEmail",
+        "userName",
+        "protocol",
+        "url",
+        "domainName",
+        "domainSuffix",
+        "domainWord",
+        "ip",
+        "ipv6",
+        "port",
+        "userAgent",
+        "color",
+        "baseRed255",
+        "baseGreen255",
+        "baseBlue255",
+        "mac",
+        "password",
+        "len",
+        "memorable",
+        "pattern",
+        "prefix"
+      ]
+    },
+    "lorem": {
+      "type": "string",
+      "enum": [
+        "word",
+        "words",
+        "sentence",
+        "slug",
+        "sentences",
+        "paragraph",
+        "paragraphs",
+        "text",
+        "lines"
+      ]
+    },
+    "name": {
+      "type": "string",
+      "enum": [
+        "firstName",
+        "lastName",
+        "middleName",
+        "findName",
+        "jobTitle",
+        "gender",
+        "prefix",
+        "suffix",
+        "title",
+        "jobDescriptor",
+        "jobArea",
+        "jobType"
+      ]
+    },
+    "music": { "type": "string", "enum": ["genre"] },
+    "phone": {
+      "type": "string",
+      "enum": ["phoneNumber", "phoneNumberFormat", "phoneFormats"]
+    },
+    "random": {
+      "type": "string",
+      "enum": [
+        "number",
+        "min",
+        "max",
+        "precision",
+        "float",
+        "float",
+        "arrayElement",
+        "arrayElement",
+        "arrayElement",
+        "arrayElements",
+        "arrayElements",
+        "arrayElements",
+        "objectElement",
+        "objectElement",
+        "uuid",
+        "boolean",
+        "word",
+        "words",
+        "image",
+        "locale",
+        "alpha",
+        "alphaNumeric",
+        "hexaDecimal"
+      ]
+    },
+    "system": {
+      "type": "string",
+      "enum": [
+        "fileName",
+        "commonFileName",
+        "mimeType",
+        "commonFileType",
+        "commonFileExt",
+        "fileType",
+        "fileExt",
+        "directoryPath",
+        "filePath",
+        "semver"
+      ]
+    },
+    "time": { "type": "string", "enum": ["recent", "recent", "recent"] },
+    "vehicle": {
+      "type": "string",
+      "enum": [
+        "vehicle",
+        "manufacturer",
+        "model",
+        "type",
+        "fuel",
+        "vin",
+        "color",
+        "vrm",
+        "bicycle"
+      ]
+    },
+    "additionalProperties": false
+  }
+}

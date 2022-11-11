@@ -1,0 +1,29 @@
+{
+  "$id": "ColumnMetadata",
+  "title": "Column Metadata",
+  "description": "Database column metadata.",
+  "properties": {
+    "columnType": {
+      "$ref": "../types/column.type.json"
+    },
+    "valueType": {
+      "$ref": "../types/value.type.json"
+    },
+    "relationType": {
+      "$ref": "../types/relation.type.json"
+    },
+    "joinColumn": {
+      "type": "boolean",
+      "default": true
+    },
+    "joinTable": {
+      "type": "boolean",
+      "default": true
+    },
+    "description": {
+      "type": "string",
+      "description": "Property description",
+      "minLength": 2
+    }
+  }
+}

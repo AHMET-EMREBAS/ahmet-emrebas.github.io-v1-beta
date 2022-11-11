@@ -2,25 +2,43 @@
   "$id": "ResourceSchema",
   "description": "Resource Schemas",
   "title": "Resource Schemas",
+  "type": "object",
   "properties": {
-    "name": {
+    "Name": {
       "type": "string",
-      "description": "Resource name",
+      "description": "ResourceName",
       "minLength": 2,
       "maxLength": 30,
-      "pattern": "^[a-z]*$"
+      "pattern": "^[a-z]*$",
+      "default": "name"
     },
-    "description": {
+    "Description": {
       "type": "string",
       "description": "Resource description",
-      "minLength": 2
+      "minLength": 2,
+      "default": "Description"
     },
-    "properties": {
+    "Properties": {
       "type": "array",
       "items": {
-        "$ref": "./"
+        "$ref": "./resource-property.schema.json"
+      }
+    },
+    "Required Fields": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 2
+      }
+    },
+    "Unique Fields": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 2
       }
     }
   },
-  "required": ["name"]
+  "required": ["Name", "Description", "Properties"],
+  "additionalProperties": false
 }
