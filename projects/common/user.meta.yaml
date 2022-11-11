@@ -1,0 +1,36 @@
+Name: user
+Description: User resource metadata
+Properties:
+  - Property: username
+    Description: Username
+    Defination:
+      internet: userName
+    Validation:
+      type: specific
+      email: true
+    UI:
+      type: email
+    Column:
+      columnType: text
+      valueType: string
+
+  - Property: password
+    Description: User password
+    Defination:
+      internet: password
+    Validation:
+      type: specific
+      password: true
+    Column:
+      columnType: text
+      valueType: string
+      hash: true
+    UI:
+      type: password
+
+Required:
+  - username
+  - password
+
+Unique:
+  - username

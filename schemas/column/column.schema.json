@@ -9,10 +9,21 @@
     "valueType": {
       "$ref": "../types/value.schema.json"
     },
+
     "description": {
       "type": "string",
       "description": "Property description",
       "minLength": 2
+    },
+    "update": {
+      "type": "boolean",
+      "description": "If false, this propery cannot be updated twice!",
+      "default": false
+    },
+    "hash": {
+      "type": "boolean",
+      "description": "If true, the data is hashed.",
+      "default": true
     }
   },
   "required": ["columnType", "valueType"],

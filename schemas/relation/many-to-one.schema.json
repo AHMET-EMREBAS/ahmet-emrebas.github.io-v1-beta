@@ -1,0 +1,32 @@
+{
+  "$id": "ManyToOneRelation",
+  "title": "Many to one relation",
+  "description": "Many to One relation",
+  "properties": {
+    "ManyToOne": {
+      "type": "object",
+      "properties": {
+        "target": {
+          "type": "string",
+          "$ref": "../names/resource.schema.json"
+        },
+        "joinColumn": {
+          "type": "boolean",
+          "default": true
+        },
+        "eager": {
+          "type": "boolean",
+          "default": true
+        },
+        "viewColumns": {
+          "type": "array",
+          "items": {
+            "$ref": "./view-columns.schema.json"
+          }
+        }
+      },
+      "required": ["target", "joinColumn", "eager"]
+    }
+  },
+  "additionalProperties": false
+}

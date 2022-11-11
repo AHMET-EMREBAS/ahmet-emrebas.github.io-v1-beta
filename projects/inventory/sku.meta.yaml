@@ -1,0 +1,35 @@
+Name: sku
+Description: Stock tracking unit
+Properties:
+  - Property: sku
+    Description: Product version/variant
+    Validation:
+      type: string
+      minLength: 0
+      maxLength: 50
+    Column:
+      columnType: text
+      valueType: string
+    UI:
+      type: text
+    Defination:
+      random: alpha
+
+  - Property: description
+    Description: Sku description
+    Defination:
+      commerce: productDescription
+    Validation:
+      type: string
+      minLength: 3
+      maxLength: 500
+    Column:
+      columnType: text
+      valueType: string
+    UI:
+      type: textarea
+
+Required:
+  - name
+Unique:
+  - name

@@ -58,6 +58,7 @@
     "asin",
     "publisher",
     "printer",
-    "bestseller"
+    "bestseller",
+    "sku"
   ]
 }

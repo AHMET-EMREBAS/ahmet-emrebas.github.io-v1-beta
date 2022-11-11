@@ -1,0 +1,32 @@
+{
+  "$id": "OneToManyRelation",
+  "title": "One to many relation",
+  "description": "One to many relation",
+  "properties": {
+    "OneToMany": {
+      "type": "object",
+      "properties": {
+        "target": {
+          "type": "string",
+          "$ref": "../names/resource.schema.json"
+        },
+        "joinTable": {
+          "type": "boolean",
+          "default": true
+        },
+        "eager": {
+          "type": "boolean",
+          "default": true
+        },
+        "viewColumns": {
+          "type": "array",
+          "items": {
+            "$ref": "./view-columns.schema.json"
+          }
+        }
+      },
+      "required": ["target", "joinTable", "eager"]
+    }
+  },
+  "additionalProperties": false
+}

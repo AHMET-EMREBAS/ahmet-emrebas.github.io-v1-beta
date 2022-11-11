@@ -6,10 +6,29 @@
     "type": {
       "$ref": "../types/relation.schema.json"
     },
+    "target": {
+      "type": "string",
+      "$ref": "../names/resource.schema.json"
+    },
     "joinColumn": {
       "type": "boolean",
       "default": true
+    },
+    "joinTable": {
+      "type": "boolean",
+      "default": true
+    },
+    "eager": {
+      "type": "boolean",
+      "default": true
+    },
+    "viewColumns": {
+      "type": "array",
+      "items": {
+        "$ref": "./view-columns.schema.json"
+      }
     }
   },
-  "additionalProperties": false
+  "additionalProperties": false,
+  "required": ["target", "type"]
 }

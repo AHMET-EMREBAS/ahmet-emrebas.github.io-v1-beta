@@ -2,6 +2,7 @@ Name: product
 Description: Product resource defination
 Properties:
   - Property: name
+    Description: Product name
     Validation:
       type: string
       minLength: 0
@@ -15,6 +16,7 @@ Properties:
       commerce: productName
 
   - Property: description
+    Description: Product description
     Defination:
       commerce: productDescription
     Validation:
@@ -26,6 +28,17 @@ Properties:
       valueType: string
     UI:
       type: textarea
+
+Relations:
+  - ManyToOne:
+      target: category
+      joinColumn: true
+      eager: true
+      viewColumns:
+        - column: name
+          as: category
+        - column: id
+          as: categoryId
 
 Required:
   - name

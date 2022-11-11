@@ -1,5 +1,19 @@
 {
   "$id": "Rest Schema",
   "title": "Rest Schema",
-  "description": "Rest api document for the resouce."
+  "description": "Rest api document for the resouce.",
+  "type": "object",
+  "properties": {
+    "READ:ALL": {
+      "type": "object",
+      "description": "Read all entities as a list",
+      "properties": {
+        "AccessPolicy": {
+          "type": "string",
+          "enum": ["PUBLIC", "AUTH", "PERMISSION", "ADMIN", "SUPERUSER"],
+          "default": "PERMISSION"
+        }
+      }
+    }
+  }
 }

@@ -7,6 +7,10 @@
     "Property": {
       "$ref": "./names/index.schema.json"
     },
+    "Description": {
+      "type": "string",
+      "maxLength": 30
+    },
     "Defination": {
       "$ref": "./defination/index.schema.json"
     },
@@ -14,12 +18,20 @@
       "$ref": "./validations/index.schema.json"
     },
     "Column": {
+      "type": "object",
       "$ref": "./column/index.schema.json"
     },
     "UI": {
       "$ref": "./ui/index.schema.json"
     }
   },
-  "required": ["Property", "Validation", "Column", "UI", "Defination"],
+  "required": [
+    "Property",
+    "Description",
+    "Defination",
+    "Validation",
+    "Column",
+    "UI"
+  ],
   "additionalProperties": false
 }

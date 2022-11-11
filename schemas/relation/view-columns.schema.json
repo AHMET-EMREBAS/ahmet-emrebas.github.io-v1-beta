@@ -1,0 +1,19 @@
+{
+  "$id": "ViewColumns",
+  "title": "View Columns",
+  "description": "Table view columns.",
+  "type": "object",
+  "properties": {
+    "column": {
+      "type": "string",
+      "description": "Actual column name of the entity",
+      "minLength": 1
+    },
+    "as": {
+      "type": "string",
+      "description": "More descriptive represantive of the column name. EX. name --> productName,",
+      "minLength": 1
+    }
+  },
+  "required": ["column", "as"]
+}
