@@ -4,9 +4,15 @@ import {
   MinLength,
 } from 'class-validator';
 
+import {
+  Field,
+  InputType,
+} from '@nestjs/graphql';
 import { ApiProperty } from '@nestjs/swagger';
 
+@InputType()
 export class CreateSampleDto {
+  @Field()
   @ApiProperty({
     type: 'string',
     minLength: 3,

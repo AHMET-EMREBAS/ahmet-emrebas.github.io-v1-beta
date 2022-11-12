@@ -1,1 +1,3 @@
-export * from './lib/core.module';
+export * from './lib/entity';
+export * from './lib/dto';
+export * from './lib/transformers';

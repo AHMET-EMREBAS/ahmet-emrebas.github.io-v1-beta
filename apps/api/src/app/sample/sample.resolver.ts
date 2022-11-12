@@ -10,26 +10,31 @@ import {
 } from '@nestjs/graphql';
 import { InjectRepository } from '@nestjs/typeorm';
 
-import { SampleEntity } from './entity/sample.entity';
-import { SampleModel } from './entity/sample.model';
+import { CreateSampleDto } from './dto/create-sample.dto';
+import { Sample } from './entity/sample.entity';
 
 const pubSub = new PubSub();
 
-@Resolver((of) => SampleModel)
+@Resolver((of) => Sample)
 export class SampleResolver {
   constructor(
-    @InjectRepository(SampleEntity)
-    private readonly repo: Repository<SampleEntity>
+    @InjectRepository(Sample)
+    private readonly repo: Repository<Sample>
   ) {}
 
-  @Query((returns) => [SampleModel], { description: 'Read all samples' })
+  @Query((returns) => [Sample], { description: 'Read all samples' })
   readAll() {
     return this.repo.find();
   }
 
-  @Query((returns) => SampleModel)
+  @Query((returns) => Sample)
   readOne(@Args('id') id: number) {
     return this.repo.findOneBy({ id });
+  }
+
+  @Mutation((r) => Sample)
+  writeOne(@Args('sample') body: CreateSampleDto) {
+    return this.repo.save(body);
   }
 
   @Mutation((returns) => Boolean)
@@ -38,7 +43,7 @@ export class SampleResolver {
     return !!deleted;
   }
 
-  @Subscription((returns) => SampleModel)
+  @Subscription((returns) => Sample)
   onWriteOne() {
     return pubSub.asyncIterator('sampleAdded');
   }

@@ -1,13 +1,13 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-import { SampleEntity } from './entity/sample.entity';
+import { SampleView } from './entity/sample-view.entity';
+import { Sample } from './entity/sample.entity';
 import { SampleController } from './sample.controller';
-import { SampleResolver } from './sample.resolver';
 
 @Module({
   controllers: [SampleController],
-  imports: [TypeOrmModule.forFeature([SampleEntity])],
-  providers: [SampleResolver],
+  imports: [TypeOrmModule.forFeature([Sample, SampleView])],
+  providers: [SampleController],
 })
 export class SampleModule {}

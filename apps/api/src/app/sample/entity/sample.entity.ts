@@ -1,12 +1,24 @@
+import { BaseEntity } from 'core/entity';
 import {
   Column,
   Entity,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
-@Entity({ name: 'sample' })
-export class SampleEntity {
-  @PrimaryGeneratedColumn() id: number;
+import {
+  Field,
+  Int,
+  ObjectType,
+} from '@nestjs/graphql';
 
-  @Column({ type: 'text' }) name: string;
+@Entity()
+@ObjectType()
+export class Sample extends BaseEntity {
+  @Field(() => Int)
+  @PrimaryGeneratedColumn()
+  id: number;
+
+  @Field(() => String)
+  @Column({ type: 'text' })
+  name: string;
 }
