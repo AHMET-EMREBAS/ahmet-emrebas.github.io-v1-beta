@@ -29,7 +29,7 @@ export class SampleResolver {
 
   @Query((returns) => Sample)
   readOne(@Args('id') id: number) {
-    return this.repo.findOneBy({ id });
+    return this.repo.findOneBy({});
   }
 
   @Mutation((r) => Sample)

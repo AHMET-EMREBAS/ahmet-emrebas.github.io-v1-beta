@@ -37,6 +37,7 @@ async function bootstrap() {
       transform: true,
       transformOptions: {
         excludeExtraneousValues: true,
+        exposeUnsetFields: false,
       },
       forbidUnknownValues: true,
     })

@@ -40,6 +40,7 @@ export class SampleController {
     paginator: PaginatorDto
   ) {
     console.log(paginator);
+    paginator;
     return this.repo.find({
       ...paginator,
     });

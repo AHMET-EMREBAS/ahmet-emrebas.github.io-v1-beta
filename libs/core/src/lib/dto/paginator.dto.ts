@@ -1,14 +1,19 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import {
   Expose,
   Transform,
 } from 'class-transformer';
 import {
   IsBoolean,
+  IsIn,
   IsNumber,
   IsOptional,
+  IsString,
   Max,
   Min,
 } from 'class-validator';
+import { FindOptionsOrder } from 'typeorm';
 
 import {
   Field,
@@ -30,7 +35,7 @@ export class PaginatorDto {
     nullable: true,
     default: 20,
   })
-  @Field(() => Int, { defaultValue: 20, nullable: true })
+  @Field((value) => Int, { defaultValue: 20, nullable: true })
   @Expose()
   @IsOptional()
   @Min(0)
@@ -44,7 +49,7 @@ export class PaginatorDto {
     nullable: true,
     default: 0,
   })
-  @Field(() => Int, { defaultValue: 0, nullable: true })
+  @Field((value) => Int, { defaultValue: 0, nullable: true })
   @Expose()
   @IsOptional()
   @Min(0)
@@ -52,15 +57,42 @@ export class PaginatorDto {
   @Transform(({ value }) => parseIntOrDefault(value, 0))
   skip: number;
 
-  @IsOptional()
   @ApiProperty({
     nullable: true,
     default: false,
     enum: [true, false],
   })
-  @Field(() => Boolean, { defaultValue: false, nullable: true })
+  @Field((value) => Boolean, { defaultValue: false, nullable: true })
+  @IsOptional()
   @IsBoolean()
   @Transform(({ value }) => parseBoolean(value))
   @Expose()
   withDeleted: boolean;
+
+  @ApiProperty({ maxLength: 30 })
+  @Field((value) => String, { defaultValue: 'id', nullable: true })
+  @IsOptional()
+  @IsString()
+  @Transform(({ value }) =>
+    typeof value === 'string' && value.length > 0 ? value : 'id'
+  )
+  orderBy?: string;
+
+  @ApiProperty({ enum: ['ASC', 'DESC'] })
+  @Field((value) => String, { defaultValue: 'ASC', nullable: true })
+  @IsOptional()
+  @IsIn(['ASC', 'DESC'])
+  @Transform(({ value }) =>
+    typeof value === 'string' && value.length > 0 ? value : 'id'
+  )
+  orderDir?: string;
+
+  @Expose()
+  @Transform(({ obj }) => {
+    if (obj.orderBy && obj.orderDir) {
+      return { [obj.orderBy]: obj.orderDir };
+    }
+    return undefined;
+  })
+  order: FindOptionsOrder<any>;
 }
