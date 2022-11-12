@@ -22,7 +22,7 @@ export class SampleResolver {
     private readonly repo: Repository<SampleEntity>
   ) {}
 
-  @Query((returns) => [SampleModel])
+  @Query((returns) => [SampleModel], { description: 'Read all samples' })
   readAll() {
     return this.repo.find();
   }

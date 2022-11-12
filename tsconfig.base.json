@@ -15,11 +15,14 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "common": ["libs/common/src/index.ts"],
+      "core": ["libs/core/src/index.ts"],
       "directive": ["libs/directive/src/index.ts"],
       "gen": ["libs/gen/src/index.ts"],
       "layout": ["libs/layout/src/index.ts"],
       "messanger": ["libs/messanger/src/index.ts"],
-      "notification": ["libs/notification/src/index.ts"]
+      "notification": ["libs/notification/src/index.ts"],
+      "util": ["libs/util/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

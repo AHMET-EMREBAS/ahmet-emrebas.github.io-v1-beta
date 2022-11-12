@@ -2,6 +2,8 @@
   "version": 2,
   "projects": {
     "api": "apps/api",
+    "common": "libs/common",
+    "core": "libs/core",
     "directive": "libs/directive",
     "gen": "libs/gen",
     "gen-e2e": "apps\\gen-e2e",
@@ -9,6 +11,7 @@
     "messanger": "libs/messanger",
     "nativescript-mobile": "apps/nativescript-mobile",
     "notification": "libs/notification",
+    "util": "libs/util",
     "web": "apps/web",
     "web-e2e": "apps/web-e2e"
   }
