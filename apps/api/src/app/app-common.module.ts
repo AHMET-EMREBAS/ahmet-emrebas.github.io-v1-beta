@@ -1,18 +1,22 @@
-import { join } from 'path';
+import { ApolloServerPluginLandingPageLocalDefault } from 'apollo-server-core';
 
+import {
+  ApolloDriver,
+  ApolloDriverConfig,
+} from '@nestjs/apollo';
 import { CacheModule } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { EventEmitterModule } from '@nestjs/event-emitter';
+import { GraphQLModule } from '@nestjs/graphql';
 import { ScheduleModule } from '@nestjs/schedule';
-import { ServeStaticModule } from '@nestjs/serve-static';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { Subscribers } from './app-subscribers';
 
 export const CommonModules: Readonly<any[]> = [
-  ServeStaticModule.forRoot({
-    rootPath: join(__dirname, 'public'),
-  }),
+  // ServeStaticModule.forRoot({
+  //   rootPath: join(__dirname, 'public'),
+  // }),
   ScheduleModule.forRoot(),
   EventEmitterModule.forRoot({
     global: true,
@@ -35,5 +39,12 @@ export const CommonModules: Readonly<any[]> = [
     subscribers: [...Subscribers],
     synchronize: true,
     dropSchema: true,
+  }),
+  GraphQLModule.forRoot<ApolloDriverConfig>({
+    driver: ApolloDriver,
+    installSubscriptionHandlers: true,
+    autoSchemaFile: true,
+    playground: false,
+    plugins: [ApolloServerPluginLandingPageLocalDefault()],
   }),
 ];

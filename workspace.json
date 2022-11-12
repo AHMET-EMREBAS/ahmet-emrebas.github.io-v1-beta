@@ -3,6 +3,8 @@
   "projects": {
     "api": "apps/api",
     "directive": "libs/directive",
+    "gen": "libs/gen",
+    "gen-e2e": "apps\\gen-e2e",
     "layout": "libs/layout",
     "messanger": "libs/messanger",
     "nativescript-mobile": "apps/nativescript-mobile",

@@ -16,6 +16,7 @@
     "baseUrl": ".",
     "paths": {
       "directive": ["libs/directive/src/index.ts"],
+      "gen": ["libs/gen/src/index.ts"],
       "layout": ["libs/layout/src/index.ts"],
       "messanger": ["libs/messanger/src/index.ts"],
       "notification": ["libs/notification/src/index.ts"]

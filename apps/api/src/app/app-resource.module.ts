@@ -1,4 +1,3 @@
-import { ResourceModule as CategoryModule } from './resources/category';
-import { ResourceModule as DepartmentModule } from './resources/department';
+import { SampleModule } from './sample/sample.module';
 
-export const ResouceModules = [CategoryModule, DepartmentModule];
+export const ResouceModules = [SampleModule];

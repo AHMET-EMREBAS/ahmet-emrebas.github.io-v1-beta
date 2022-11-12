@@ -28,9 +28,19 @@ Properties:
     UI:
       type: password
 
+Relations:
+  - ManyToMany:
+      target: permission
+      joinTable: true
+      eager: true
+      viewColumns:
+        - column: description
+          as: description
+
 Required:
   - username
   - password
+  - permission
 
 Unique:
   - username

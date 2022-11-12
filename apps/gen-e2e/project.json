@@ -1,0 +1,16 @@
+{
+  "root": "apps\\gen-e2e",
+  "projectType": "application",
+  "sourceRoot": "apps\\gen-e2e/src",
+  "targets": {
+    "e2e": {
+      "executor": "@nrwl/nx-plugin:e2e",
+      "options": {
+        "target": "gen:build",
+        "jestConfig": "apps/gen-e2e/jest.config.js"
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["gen"]
+}
