@@ -10,20 +10,20 @@ import {
   ObjectType,
 } from '@nestjs/graphql';
 
-import { Sample } from './sample.entity';
+import { <%- classname %> } from './<%- name %>.entity';
 
 @ObjectType()
 @ViewEntity({
   expression: (ds: DataSource) => {
     return ds
       .createQueryBuilder()
-      .select('sample.id', 'id')
-      .addSelect('sample.uuid', 'uuid')
-      .addSelect('sample.name', 'name')
-      .from(Sample, 'sample');
+      .select('<%- name %>.id', 'id')
+      .addSelect('<%- name %>.uuid', 'uuid')
+      .addSelect('<%- name %>.name', 'name')
+      .from(<%- classname %>, '<%- name %>');
   },
 })
-export class SampleView {
+export class <%- classname %>View {
   @Field((type) => Int)
   @ViewColumn()
   id: number;

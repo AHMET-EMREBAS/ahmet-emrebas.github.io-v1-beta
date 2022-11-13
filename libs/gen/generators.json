@@ -12,6 +12,16 @@
       "factory": "./src/generators/resource/generator",
       "schema": "./src/generators/resource/schema.json",
       "description": "resource generator"
+    },
+    "entity": {
+      "factory": "./src/generators/entity/generator",
+      "schema": "./src/generators/entity/schema.json",
+      "description": "entity generator"
+    },
+    "rest": {
+      "factory": "./src/generators/rest/generator",
+      "schema": "./src/generators/rest/schema.json",
+      "description": "rest generator"
     }
   }
 }

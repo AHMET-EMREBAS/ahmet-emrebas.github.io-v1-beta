@@ -5,6 +5,8 @@ import {
   Repository,
 } from 'typeorm';
 
+import { InternalServerErrorException } from '@nestjs/common';
+
 export class ResourceViewService<T> {
   constructor(public readonly __repo: Repository<T>) {}
 
@@ -12,26 +14,31 @@ export class ResourceViewService<T> {
     try {
       return this.__repo.find(options);
     } catch (err) {
-      // Ignore error
+      throw new InternalServerErrorException();
     }
-    return;
   }
 
   findOne(options?: FindOneOptions<T>) {
     try {
       return this.__repo.findOne(options);
     } catch (err) {
-      // Ignore error
+      throw new InternalServerErrorException();
     }
-    return;
   }
 
   findOneBy(options?: FindOptionsWhere<T> | FindOptionsWhere<T>[]) {
     try {
       return this.__repo.findOneBy(options);
     } catch (err) {
-      // Ignore error
+      throw new InternalServerErrorException();
     }
-    return;
+  }
+
+  count(options?: FindManyOptions<T>) {
+    try {
+      return this.__repo.count(options);
+    } catch (err) {
+      throw new InternalServerErrorException();
+    }
   }
 }

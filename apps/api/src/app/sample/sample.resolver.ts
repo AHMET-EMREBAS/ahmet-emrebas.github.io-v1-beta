@@ -13,6 +13,7 @@ import {
 } from '@nestjs/graphql';
 
 import { CreateSampleDto } from './dto/create-sample.dto';
+import { UpdateSampleDto } from './dto/update-sample.dto';
 import { Sample } from './entity/sample.entity';
 import { SampleViewService } from './sample-view.service';
 import { SampleService } from './sample.service';
@@ -51,8 +52,8 @@ export class SampleResolver {
     return this.service.save(body);
   }
 
-  @Mutation((r) => Sample)
-  update(@Args('id') id: number, @Args('sample') body: CreateSampleDto) {
+  @Mutation(() => Boolean)
+  update(@Args('id') id: number, @Args('sample') body: UpdateSampleDto) {
     return this.service.update(id, body);
   }
 

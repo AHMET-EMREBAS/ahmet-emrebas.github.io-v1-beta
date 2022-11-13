@@ -10,6 +10,8 @@ import {
 } from 'typeorm/query-builder/QueryPartialEntity';
 import { v4 } from 'uuid';
 
+import { InternalServerErrorException } from '@nestjs/common';
+
 export class ResourceService<T> {
   constructor(public readonly __repo: Repository<T>) {}
 
@@ -17,108 +19,96 @@ export class ResourceService<T> {
     try {
       return this.__repo.find(options);
     } catch (err) {
-      //   Ignore error
+      throw new InternalServerErrorException();
     }
-    return;
   }
 
   findOne(options?: FindOneOptions<T>) {
     try {
       return this.__repo.findOne(options);
     } catch (err) {
-      //   Ignore error
+      throw new InternalServerErrorException();
     }
-    return;
   }
 
   findOneBy(options?: FindOptionsWhere<T> | FindOptionsWhere<T>[]) {
     try {
       return this.__repo.findOneBy(options);
     } catch (err) {
-      //   Ignore error
+      throw new InternalServerErrorException();
     }
-    return;
   }
 
   findAndCount(options?: FindManyOptions<T>) {
     try {
       return this.__repo.findAndCount(options);
     } catch (err) {
-      //   Ignore error
+      throw new InternalServerErrorException();
     }
-    return;
   }
 
   findAndCountBy(options: FindOptionsWhere<T> | FindOptionsWhere<T>[]) {
     try {
       return this.__repo.findAndCountBy(options);
     } catch (err) {
-      //   Ignore error
+      throw new InternalServerErrorException();
     }
-    return;
   }
 
   findBy(options: FindOptionsWhere<T> | FindOptionsWhere<T>[]) {
     try {
       return this.__repo.findBy(options);
     } catch (err) {
-      //   Ignore error
+      throw new InternalServerErrorException();
     }
-    return;
   }
 
   findOneOrFail(options: FindOneOptions<T>) {
     try {
       return this.__repo.findOneOrFail(options);
     } catch (err) {
-      //   Ignore error
+      throw new InternalServerErrorException();
     }
-    return;
   }
 
   findOneByOrFail(options: FindOptionsWhere<T> | FindOptionsWhere<T>[]) {
     try {
       return this.__repo.findOneByOrFail(options);
     } catch (err) {
-      //   Ignore error
+      throw new InternalServerErrorException();
     }
-    return;
   }
 
   create(t: DeepPartial<T>) {
     try {
       return this.__repo.create({ ...t, uuid: v4() });
     } catch (err) {
-      //   Ignore error
+      throw new InternalServerErrorException();
     }
-    return;
   }
 
   save(t: T) {
     try {
       return this.__repo.save({ ...t, uuid: v4() });
     } catch (err) {
-      //   Ignore error
+      throw new InternalServerErrorException();
     }
-    return;
   }
 
-  update(id: number, updated: QueryDeepPartialEntity<T>) {
+  async update(id: number, updated: QueryDeepPartialEntity<T>) {
     try {
-      return this.__repo.update(id, updated);
+      return (await this.__repo.update(id, updated)).affected > 0;
     } catch (err) {
-      //   Ignore error
+      throw new InternalServerErrorException();
     }
-    return;
   }
 
-  delete(id: number) {
+  async delete(id: number) {
     try {
-      return this.__repo.delete(id);
+      return (await this.__repo.delete(id)).affected > 0;
     } catch (err) {
-      //   Ignore error
+      throw new InternalServerErrorException();
     }
-    return;
   }
 
   async recover(id: number) {
@@ -129,27 +119,24 @@ export class ResourceService<T> {
       });
       return await this.__repo.recover(found);
     } catch (err) {
-      //   Ignore error
+      throw new InternalServerErrorException();
     }
-    return;
   }
 
   count(options?: FindManyOptions<T>) {
     try {
       return this.__repo.count(options);
     } catch (err) {
-      //   Ignore error
+      throw new InternalServerErrorException();
     }
-    return;
   }
 
-  softDelete(id: number) {
+  async softDelete(id: number) {
     try {
-      return this.__repo.softDelete(id);
+      return (await this.__repo.softDelete(id)).affected > 0;
     } catch (err) {
-      //   Ignore error
+      throw new InternalServerErrorException();
     }
-    return;
   }
 
   add(id: number, relationId: number, relationName: string) {
@@ -160,9 +147,8 @@ export class ResourceService<T> {
         .of(id)
         .add(relationId);
     } catch (err) {
-      //   Ignore error
+      throw new InternalServerErrorException();
     }
-    return;
   }
 
   set(id: number, relationId: number, relationName: string) {
@@ -173,9 +159,8 @@ export class ResourceService<T> {
         .of(id)
         .set(relationId);
     } catch (err) {
-      //   Ignore error
+      throw new InternalServerErrorException();
     }
-    return;
   }
 
   unset(id: number, relationName: string) {
@@ -186,9 +171,8 @@ export class ResourceService<T> {
         .of(id)
         .set(null);
     } catch (err) {
-      //   Ignore error
+      throw new InternalServerErrorException();
     }
-    return;
   }
 
   remove(id: number, relationId: number, relationName: string) {
@@ -199,8 +183,7 @@ export class ResourceService<T> {
         .of(id)
         .remove(relationId);
     } catch (err) {
-      //   Ignore error
+      throw new InternalServerErrorException();
     }
-    return;
   }
 }
