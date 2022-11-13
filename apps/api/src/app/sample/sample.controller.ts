@@ -1,5 +1,7 @@
-import { PaginatorDto } from 'core/dto';
-import { Repository } from 'typeorm';
+import {
+  PaginatorDto,
+  ViewDto,
+} from 'core/dto';
 
 import {
   Body,
@@ -9,60 +11,55 @@ import {
   Param,
   Post,
   Put,
-  Query as ReqQuery,
-} from '@nestjs/common';
-import {
-  Args,
-  Mutation,
   Query,
-} from '@nestjs/graphql';
-import { InjectRepository } from '@nestjs/typeorm';
+} from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 
 import { CreateSampleDto } from './dto/create-sample.dto';
 import { UpdateSampleDto } from './dto/update-sample.dto';
-import { SampleView } from './entity/sample-view.entity';
-import { Sample } from './entity/sample.entity';
+import { SampleViewService } from './sample-view.service';
+import { SampleService } from './sample.service';
 
+@ApiTags('sample')
 @Controller('sample')
 export class SampleController {
   constructor(
-    @InjectRepository(Sample)
-    private readonly repo: Repository<Sample>,
-    @InjectRepository(Sample)
-    private readonly view: Repository<SampleView>
+    private readonly service: SampleService,
+    private readonly viewService: SampleViewService
   ) {}
 
-  @Query((returns) => [Sample], { description: 'Read all samples' })
   @Get()
-  readAll(
-    @Args('paginator', { nullable: true })
-    @ReqQuery()
-    paginator: PaginatorDto
-  ) {
-    console.log(paginator);
-    paginator;
-    return this.repo.find({
+  read(@Query() paginator: PaginatorDto, @Query() view: ViewDto) {
+    if (view.view === true) {
+      return this.viewService.find({
+        ...paginator,
+      });
+    }
+    return this.service.find({
       ...paginator,
     });
   }
 
-  @Mutation((r) => Sample)
-  @Post()
-  writeOne(@Args('sample') @Body() body: CreateSampleDto) {
-    console.log(body);
-
-    return this.repo.save(body);
+  @Get('id')
+  readById(@Param('id') id: number, @Query() view: ViewDto) {
+    if (view.view === true) {
+      return this.viewService.findOneBy({ id });
+    }
+    return this.service.findOneBy({ id });
   }
 
-  @Mutation((returns) => Sample)
+  @Post()
+  write(@Body() body: CreateSampleDto) {
+    return this.service.save(body);
+  }
+
   @Put(':id')
   update(@Param('id') id: number, @Body() body: UpdateSampleDto) {
-    return this.repo.update(id, body);
+    return this.service.update(id, body);
   }
 
-  @Mutation((returns) => Boolean)
   @Delete(':id')
   delete(@Param('id') id: number) {
-    return this.repo.delete(id);
+    return this.service.delete(id);
   }
 }

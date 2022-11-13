@@ -15,26 +15,30 @@ import {
 @ObjectType({ isAbstract: true })
 export class BaseEntity {
   @PrimaryGeneratedColumn()
-  @Field(() => Int)
-  id: number;
+  @Field(() => Int, { nullable: true })
+  id?: number;
+
+  @Column({ type: 'text', unique: true, nullable: true })
+  @Field(() => String, { nullable: true })
+  uuid?: string;
 
   @CreateDateColumn()
   @Field(() => Date, { nullable: true })
-  createdAt: Date;
+  createdAt?: Date;
 
   @UpdateDateColumn()
   @Field(() => Date, { nullable: true })
-  updatedAt: Date;
+  updatedAt?: Date;
 
   @DeleteDateColumn()
   @Field(() => Date, { nullable: true })
-  deletedAt: Date;
+  deletedAt?: Date;
 
-  @Field(() => Boolean, { nullable: true })
   @Column({ default: true })
-  active: boolean;
+  @Field(() => Boolean, { nullable: true })
+  active?: boolean;
 
-  @Field(() => String, { nullable: true })
   @Column({ type: 'text', nullable: true })
-  version: string;
+  @Field(() => String, { nullable: true })
+  version?: string;
 }

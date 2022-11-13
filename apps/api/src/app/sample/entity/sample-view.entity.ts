@@ -17,8 +17,10 @@ import { Sample } from './sample.entity';
   expression: (ds: DataSource) => {
     return ds
       .createQueryBuilder()
-      .select('sample.name', 'name')
+      .select('sample.id', 'id')
+      .addSelect('sample.uuid', 'uuid')
 
+      .addSelect('sample.name', 'name')
       .from(Sample, 'sample');
   },
 })
@@ -26,6 +28,10 @@ export class SampleView {
   @Field((type) => Int)
   @ViewColumn()
   id: number;
+
+  @Field((type) => Int)
+  @ViewColumn()
+  uuid: number;
 
   @Field(() => String)
   @ViewColumn()

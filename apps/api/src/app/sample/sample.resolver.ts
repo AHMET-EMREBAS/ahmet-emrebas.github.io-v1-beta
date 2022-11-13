@@ -1,5 +1,8 @@
+import {
+  PaginatorDto,
+  ViewDto,
+} from 'core/dto';
 import { PubSub } from 'graphql-subscriptions';
-import { Repository } from 'typeorm';
 
 import {
   Args,
@@ -8,43 +11,58 @@ import {
   Resolver,
   Subscription,
 } from '@nestjs/graphql';
-import { InjectRepository } from '@nestjs/typeorm';
 
 import { CreateSampleDto } from './dto/create-sample.dto';
 import { Sample } from './entity/sample.entity';
+import { SampleViewService } from './sample-view.service';
+import { SampleService } from './sample.service';
 
 const pubSub = new PubSub();
 
-@Resolver((of) => Sample)
+@Resolver(() => Sample)
 export class SampleResolver {
   constructor(
-    @InjectRepository(Sample)
-    private readonly repo: Repository<Sample>
+    private readonly service: SampleService,
+    private readonly viewService: SampleViewService
   ) {}
 
-  @Query((returns) => [Sample], { description: 'Read all samples' })
-  readAll() {
-    return this.repo.find();
+  @Query(() => [Sample])
+  read(
+    @Args('paginator', { nullable: true }) paginator: PaginatorDto,
+    @Args('view', { nullable: true }) view: ViewDto
+  ) {
+    if (view.view === true) {
+      return this.viewService.find({
+        ...paginator,
+      });
+    }
+    return this.service.find({
+      ...paginator,
+    });
   }
 
-  @Query((returns) => Sample)
-  readOne(@Args('id') id: number) {
-    return this.repo.findOneBy({});
+  @Query(() => Sample)
+  readById(@Args('id') id: number) {
+    return this.service.findOneBy({ id });
+  }
+
+  @Mutation(() => Sample)
+  write(@Args('sample') body: CreateSampleDto) {
+    return this.service.save(body);
   }
 
   @Mutation((r) => Sample)
-  writeOne(@Args('sample') body: CreateSampleDto) {
-    return this.repo.save(body);
+  update(@Args('id') id: number, @Args('sample') body: CreateSampleDto) {
+    return this.service.update(id, body);
   }
 
-  @Mutation((returns) => Boolean)
-  async deleteOne(@Args('id') id: string) {
-    const deleted = await this.repo.delete(id);
-    return !!deleted;
+  @Mutation(() => Boolean)
+  delete(@Args('id') id: number) {
+    return this.service.delete(id);
   }
 
-  @Subscription((returns) => Sample)
-  onWriteOne() {
-    return pubSub.asyncIterator('sampleAdded');
+  @Subscription(() => Sample)
+  onSave() {
+    return pubSub.asyncIterator('savedSample');
   }
 }

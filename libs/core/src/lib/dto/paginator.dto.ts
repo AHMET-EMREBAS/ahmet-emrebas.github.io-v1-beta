@@ -32,7 +32,7 @@ export class PaginatorDto {
   @ApiProperty({
     minimum: 1,
     maximum: 100,
-    nullable: true,
+    required: false,
     default: 20,
   })
   @Field((value) => Int, { defaultValue: 20, nullable: true })
@@ -46,7 +46,7 @@ export class PaginatorDto {
 
   @ApiProperty({
     minimum: 0,
-    nullable: true,
+    required: false,
     default: 0,
   })
   @Field((value) => Int, { defaultValue: 0, nullable: true })
@@ -58,9 +58,9 @@ export class PaginatorDto {
   skip: number;
 
   @ApiProperty({
-    nullable: true,
+    type: 'boolean',
+    required: false,
     default: false,
-    enum: [true, false],
   })
   @Field((value) => Boolean, { defaultValue: false, nullable: true })
   @IsOptional()
@@ -69,7 +69,7 @@ export class PaginatorDto {
   @Expose()
   withDeleted: boolean;
 
-  @ApiProperty({ maxLength: 30 })
+  @ApiProperty({ maxLength: 30, required: false })
   @Field((value) => String, { defaultValue: 'id', nullable: true })
   @IsOptional()
   @IsString()
@@ -78,7 +78,7 @@ export class PaginatorDto {
   )
   orderBy?: string;
 
-  @ApiProperty({ enum: ['ASC', 'DESC'] })
+  @ApiProperty({ enum: ['ASC', 'DESC'], required: false })
   @Field((value) => String, { defaultValue: 'ASC', nullable: true })
   @IsOptional()
   @IsIn(['ASC', 'DESC'])
