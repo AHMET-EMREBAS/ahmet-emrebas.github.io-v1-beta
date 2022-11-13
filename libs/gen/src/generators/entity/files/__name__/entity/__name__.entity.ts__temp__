@@ -2,7 +2,19 @@ import { BaseEntity } from 'core/entity';
 import {
   Column,
   Entity,
+  JoinColumn,
+  JoinTable,
+  ManyToOne,
+  OneToOne, 
+  OneToMany, 
+  ManyToMany
 } from 'typeorm';
+
+<% for(const o of options.Relations) { %> 
+
+import { <%- o.target  %>  } from '../../<%- o.name %>'
+
+<% } %>
 
 import {
   Field,
@@ -12,7 +24,23 @@ import {
 @Entity()
 @ObjectType()
 export class <%- classname %> extends BaseEntity {
-  @Field(() => String)
-  @Column({ type: 'text' })
-  name: string;
+
+<% for(const o of options.Properties) { %> 
+  
+  @Field()
+  @Column({type: '<%- o.Column.columnType %>', nullable: <%- !options.Required.includes(o.Property) %>, unique:  <%- options.Unique.includes(o.Property) %>  })
+  <%- o.Property %>: <%- o.Column.valueType %>;
+
+
+<% } %>
+
+<% for(const o of options.Relations) { %> 
+
+  @<%- o.type %>(()=> <%- o.target %>, { eager: <%- o.eager===true %>, nullable: <%- o.nullable===true %>})
+  <% if(o.joinColumn) { %>  @JoinColumn()  <% } %> 
+  <% if(o.joinTable) { %>  @JoinTable()  <% } %> 
+  <%- o.name %>: <%- o.target %> 
+
+<% } %>
+
 }

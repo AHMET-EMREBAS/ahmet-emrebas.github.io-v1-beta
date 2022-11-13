@@ -12,6 +12,16 @@ import {
 
 import { <%- classname %> } from './<%- name %>.entity';
 
+
+<% for(const o of options.Relations) { %> 
+
+import { <%- o.target  %>  } from '../../<%- o.name %>'
+
+<% } %>
+
+
+
+
 @ObjectType()
 @ViewEntity({
   expression: (ds: DataSource) => {
@@ -19,20 +29,57 @@ import { <%- classname %> } from './<%- name %>.entity';
       .createQueryBuilder()
       .select('<%- name %>.id', 'id')
       .addSelect('<%- name %>.uuid', 'uuid')
-      .addSelect('<%- name %>.name', 'name')
-      .from(<%- classname %>, '<%- name %>');
+
+
+        <% for(const o of options.Properties) { %> 
+            .addSelect('<%- name %>.<%- o.Property %>', '<%- o.Property %>')
+        <% } %>
+
+        <% for(const o of options.Relations) { %> 
+          
+            <% for(const v of o.viewColumns) { %> 
+                  .addSelect('<%- o.name %>.<%- v.column %>', '<%- v.as %>')
+            <% } %>
+        <% } %>
+
+
+      .from(<%- classname %>, '<%- name %>')
+
+      <% for(const o of options.Relations) { %> 
+        .leftJoin(<%- o.target %>, '<%- o.name %>')
+      <% } %> 
   },
 })
 export class <%- classname %>View {
-  @Field((type) => Int)
+  @Field()
   @ViewColumn()
   id: number;
 
-  @Field((type) => Int)
+  @Field()
   @ViewColumn()
-  uuid: number;
+  uuid: string;
 
-  @Field(() => String)
+
+<% for(const o of options.Properties) { %> 
+  
+  @Field()
   @ViewColumn()
-  name: string;
+  <%- o.Property %>: <%- o.Column.valueType %>;
+
+
+<% } %>
+
+<% for(const o of options.Relations) { %> 
+
+    <% for(const v of o.viewColumns) { %> 
+
+        @Field()
+        @ViewColumn()
+        <%- v.as %>: <%- v.valueType %>
+
+    <% } %>
+<% } %>
+
+
+
 }

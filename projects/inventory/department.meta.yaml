@@ -1,21 +1,16 @@
-Name: Category
-Description: Category schema
+Name: Department
+Description: Department metadata
 Properties:
   - Property: name
-
-    Description: Category name
-
+    Description: Department name
     Defination:
       commerce: department
-
     Validation:
       type: string
       minLength: 3
       maxLength: 20
-
     UI:
       type: text
-
     Column:
       columnType: date
       valueType: string

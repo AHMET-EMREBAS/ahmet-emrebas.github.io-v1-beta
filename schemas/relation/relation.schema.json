@@ -10,6 +10,9 @@
       "type": "string",
       "$ref": "../names/resource.schema.json"
     },
+    "name": {
+      "type": "string"
+    },
     "joinColumn": {
       "type": "boolean",
       "default": true
@@ -22,6 +25,10 @@
       "type": "boolean",
       "default": true
     },
+    "nullable": {
+      "type": "boolean",
+      "default": true
+    },
     "viewColumns": {
       "type": "array",
       "items": {
@@ -30,5 +37,5 @@
     }
   },
   "additionalProperties": false,
-  "required": ["target", "type"]
+  "required": ["target", "name", "type"]
 }

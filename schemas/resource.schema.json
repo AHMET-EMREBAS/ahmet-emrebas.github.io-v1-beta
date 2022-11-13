@@ -42,20 +42,7 @@
       "type": "array",
       "description": "Resource reslationships",
       "items": {
-        "oneOf": [
-          {
-            "$ref": "./relation/many-to-many.schema.json"
-          },
-          {
-            "$ref": "./relation/many-to-one.schema.json"
-          },
-          {
-            "$ref": "./relation/one-to-many.schema.json"
-          },
-          {
-            "$ref": "./relation/one-to-one.schema.json"
-          }
-        ]
+        "$ref": "./relation/relation.schema.json"
       }
     }
   },

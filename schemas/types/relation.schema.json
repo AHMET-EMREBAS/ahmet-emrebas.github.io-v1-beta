@@ -4,5 +4,5 @@
   "default": "many-to-one",
   "description": "Database Table relation type. It indicated that this column is for description of a relationship.",
   "type": "string",
-  "enum": ["one-to-one", "one-to-many", "many-to-many", "many-to-one"]
+  "enum": ["OneToOne", "OneToMany", "ManyToMany", "ManyToOne"]
 }

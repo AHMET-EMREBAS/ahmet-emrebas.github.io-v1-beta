@@ -13,7 +13,10 @@
       "type": "string",
       "description": "More descriptive represantive of the column name. EX. name --> productName,",
       "minLength": 1
+    },
+    "valueType": {
+      "type": "string"
     }
   },
-  "required": ["column", "as"]
+  "required": ["column", "as", "valueType"]
 }

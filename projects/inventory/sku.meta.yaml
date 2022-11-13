@@ -1,4 +1,4 @@
-Name: sku
+Name: SKU
 Description: Stock tracking unit
 Properties:
   - Property: sku

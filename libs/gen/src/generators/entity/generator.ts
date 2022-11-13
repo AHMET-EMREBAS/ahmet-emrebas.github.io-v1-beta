@@ -16,16 +16,22 @@ export default async function (tree: Tree, options: EntityGeneratorSchema) {
     tree.root,
     'projects',
     options.project,
-    `${options.name}+.meta.yaml`
+    `${options.name}.meta.yaml`
   );
   const fileContent = (await readFile(schemaPath)).toString();
 
   const schemaOptions = load(fileContent);
 
-  generateFiles(tree, join(__dirname, 'files'), '', {
+  const target = join('libs', 'models', 'src', 'lib', options.project);
+
+  console.log(schemaOptions);
+  console.log(target);
+
+  await generateFiles(tree, join(__dirname, 'files'), target, {
     name: options.name,
     classname: names(options.name).className,
     options: schemaOptions,
+    temp: '',
   });
   await formatFiles(tree);
 }

@@ -1,4 +1,4 @@
-Name: product
+Name: Product
 Description: Product resource defination
 Properties:
   - Property: name
@@ -30,15 +30,28 @@ Properties:
       type: textarea
 
 Relations:
-  - ManyToOne:
-      target: category
-      joinColumn: true
-      eager: true
-      viewColumns:
-        - column: name
-          as: category
-        - column: id
-          as: categoryId
+  - type: ManyToOne
+    target: Category
+    name: category
+    eager: true
+    joinColumn: true
+    viewColumns:
+      - column: name
+        as: category
+        valueType: string
+      - column: id
+        as: categoryId
+        valueType: number
+
+  - type: ManyToOne
+    target: Department
+    name: department
+    eager: true
+    joinColumn: true
+    viewColumns:
+      - column: name
+        as: department
+        valueType: string
 
 Required:
   - name
