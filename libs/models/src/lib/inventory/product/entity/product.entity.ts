@@ -29,9 +29,9 @@ export class Product extends BaseEntity {
 
   @ManyToOne(() => Category, { eager: true, nullable: false })
   @JoinColumn()
-  category: Category;
+  category?: Category;
 
   @ManyToOne(() => Department, { eager: true, nullable: false })
   @JoinColumn()
-  department: Department;
+  department?: Department;
 }

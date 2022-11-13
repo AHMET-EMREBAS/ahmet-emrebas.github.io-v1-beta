@@ -1,6 +1,10 @@
 import { Expose } from 'class-transformer';
-import { Field, InputType } from '@nestjs/graphql';
 import { Validations } from 'core/validations';
+
+import {
+  Field,
+  InputType,
+} from '@nestjs/graphql';
 
 @InputType()
 export class UpdateProductDto {

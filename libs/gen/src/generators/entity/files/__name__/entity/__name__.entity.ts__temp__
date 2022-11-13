@@ -39,7 +39,7 @@ export class <%- classname %> extends BaseEntity {
   @<%- o.type %>(()=> <%- o.target %>, { eager: <%- o.eager===true %>, nullable: <%- o.nullable===true %>})
   <% if(o.joinColumn) { %>  @JoinColumn()  <% } %> 
   <% if(o.joinTable) { %>  @JoinTable()  <% } %> 
-  <%- o.name %>: <%- o.target %> 
+  <%- o.name %>?: <%- o.target %> 
 
 <% } %>
 

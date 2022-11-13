@@ -1,6 +1,8 @@
 import { Expose } from 'class-transformer';
-import {  Field,  InputType,} from '@nestjs/graphql';
-import { Validations} from 'core/validations'
+import {  Field,  InputType} from '@nestjs/graphql';
+import { Validations } from 'core/validations'
+import { ID } from 'core/dto'
+import { ValidateNested } from 'class-validator';
 
 @InputType()
 export class Create<%- classname %>Dto {
@@ -19,6 +21,26 @@ export class Create<%- classname %>Dto {
   @Expose()
   <%- o.Property %>: <%- o.Column.valueType %>;
 
+
+  <% } %>
+
+
+
+  <% for(const o of options.Relations) { %> 
+  
+    <% if(o.type.endsWith('One')) { %>   
+        @Field()
+        @Validations({    minimum:1  })
+        @Expose()
+        <%- o.name %>Id: number;
+    <% } else { %> 
+
+        @Field()
+        @ValidateNested()
+        @Expose()
+        <%- o.name %>Ids: ID[];
+
+    <% } %>
 
   <% } %>
 }
