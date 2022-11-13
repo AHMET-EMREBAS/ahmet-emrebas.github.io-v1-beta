@@ -61,3 +61,10 @@ Required:
 
 Unique:
   - name
+
+SearchFields:
+  - id
+  - uuid
+  - name
+  - barcode
+  - description

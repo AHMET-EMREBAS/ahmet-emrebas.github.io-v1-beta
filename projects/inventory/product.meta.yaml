@@ -60,3 +60,11 @@ Required:
 
 Unique:
   - name
+
+SearchFields:
+  - id
+  - uuid
+  - name
+  - description
+  - category
+  - department

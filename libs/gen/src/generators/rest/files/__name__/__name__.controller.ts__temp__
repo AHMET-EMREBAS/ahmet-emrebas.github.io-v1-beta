@@ -42,7 +42,7 @@ export class <%- classname %>Controller {
     const q = {
       ...paginatorDto,
       where: query.toContains([
-        <% for(const f of options.SearchFields) { %> <%- f %>, <%} %>
+        <% for(const f of options.SearchFields) { %> '<%- f %>', <%} %>
       ]),
     };
 

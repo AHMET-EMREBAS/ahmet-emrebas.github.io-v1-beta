@@ -6,11 +6,11 @@ import {
   <%- classname %>View
 } from 'models/<%- project %>/<%- name %>';
 
-import { <%- classname %>ViewService } from './sample-view.service';
-import { <%- classname %>Controller } from './sample.controller';
-import { <%- classname %>Resolver } from './sample.resolver';
-import { <%- classname %>Service } from './sample.service';
-import { <%- classname %>Subscriber } from './sample.subscriber';
+import { <%- classname %>ViewService } from './<%- name %>-view.service';
+import { <%- classname %>Controller } from './<%- name %>.controller';
+import { <%- classname %>Resolver } from './<%- name %>.resolver';
+import { <%- classname %>Service } from './<%- name %>.service';
+import { <%- classname %>Subscriber } from './<%- name %>.subscriber';
 
 @Module({
   controllers: [<%- classname %>Controller],

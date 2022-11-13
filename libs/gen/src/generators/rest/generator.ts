@@ -1,69 +1,38 @@
+import { readFile } from 'fs-extra';
+import { load } from 'js-yaml';
+import { join } from 'path';
+
 import {
-  addProjectConfiguration,
   formatFiles,
   generateFiles,
-  getWorkspaceLayout,
   names,
-  offsetFromRoot,
   Tree,
 } from '@nrwl/devkit';
-import * as path from 'path';
+
 import { RestGeneratorSchema } from './schema';
 
-interface NormalizedSchema extends RestGeneratorSchema {
-  projectName: string;
-  projectRoot: string;
-  projectDirectory: string;
-  parsedTags: string[]
-}
-
-function normalizeOptions(tree: Tree, options: RestGeneratorSchema): NormalizedSchema {
-  const name = names(options.name).fileName;
-  const projectDirectory = options.directory
-    ? `${names(options.directory).fileName}/${name}`
-    : name;
-  const projectName = projectDirectory.replace(new RegExp('/', 'g'), '-');
-  const projectRoot = `${getWorkspaceLayout(tree).libsDir}/${projectDirectory}`;
-  const parsedTags = options.tags
-    ? options.tags.split(',').map((s) => s.trim())
-    : [];
-
-  return {
-    ...options,
-    projectName,
-    projectRoot,
-    projectDirectory,
-    parsedTags,
-  };
-}
-
-function addFiles(tree: Tree, options: NormalizedSchema) {
-    const templateOptions = {
-      ...options,
-      ...names(options.name),
-      offsetFromRoot: offsetFromRoot(options.projectRoot),
-      template: ''
-    };
-    generateFiles(tree, path.join(__dirname, 'files'), options.projectRoot, templateOptions);
-}
-
 export default async function (tree: Tree, options: RestGeneratorSchema) {
-  const normalizedOptions = normalizeOptions(tree, options);
-  addProjectConfiguration(
-    tree,
-    normalizedOptions.projectName,
-    {
-      root: normalizedOptions.projectRoot,
-      projectType: 'library',
-      sourceRoot: `${normalizedOptions.projectRoot}/src`,
-      targets: {
-        build: {
-          executor: "gen:build",
-        },
-      },
-      tags: normalizedOptions.parsedTags,
-    }
+  const schemaPath = join(
+    tree.root,
+    'projects',
+    options.project,
+    `${options.name}.meta.yaml`
   );
-  addFiles(tree, normalizedOptions);
+  const fileContent = (await readFile(schemaPath)).toString();
+
+  const schemaOptions = load(fileContent);
+
+  const target = join('libs', 'rest', 'src', 'lib', options.project);
+
+  console.log(schemaOptions);
+  console.log(target);
+
+  await generateFiles(tree, join(__dirname, 'files'), target, {
+    name: options.name,
+    classname: names(options.name).className,
+    project: options.project,
+    options: schemaOptions,
+    temp: '',
+  });
   await formatFiles(tree);
 }

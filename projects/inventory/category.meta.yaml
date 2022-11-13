@@ -25,3 +25,8 @@ Required:
 
 Unique:
   - name
+
+SearchFields:
+  - id
+  - uuid
+  - name

@@ -41,6 +41,14 @@
         "minLength": 2
       }
     },
+    "SearchFields": {
+      "type": "array",
+      "description": "Search fields",
+      "items": {
+        "type": "string",
+        "minLength": 2
+      }
+    },
     "Unique": {
       "type": "array",
       "description": "Unique fields",
@@ -57,6 +65,6 @@
       }
     }
   },
-  "required": ["Name", "Description", "Properties"],
+  "required": ["Name", "Description", "Properties", "SearchFields"],
   "additionalProperties": false
 }
