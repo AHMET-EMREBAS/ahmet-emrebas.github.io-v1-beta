@@ -4,4 +4,4 @@ import {
 } from 'typeorm';
 
 @EventSubscriber()
-export class SampleSubscriber implements EntitySubscriberInterface {}
+export class <%- classname %>Subscriber implements EntitySubscriberInterface {}

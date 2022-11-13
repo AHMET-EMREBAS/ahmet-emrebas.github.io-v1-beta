@@ -1,8 +1,8 @@
 Name: SKU
 Description: Stock tracking unit
 Properties:
-  - Property: sku
-    Description: Product version/variant
+  - Property: name
+    Description: SKU name
     Validation:
       type: string
       minLength: 0
@@ -14,6 +14,20 @@ Properties:
       type: text
     Defination:
       random: alpha
+
+  - Property: barcode
+    Description: SKU Barcode
+    Validation:
+      type: string
+      minLength: 10
+      maxLength: 13
+    Column:
+      columnType: text
+      valueType: string
+    UI:
+      type: text
+    Defination:
+      random: alphaNumeric
 
   - Property: description
     Description: Sku description
@@ -29,7 +43,21 @@ Properties:
     UI:
       type: textarea
 
+Relations:
+  - type: ManyToOne
+    target: Product
+    name: product
+    eager: true
+    joinColumn: true
+    viewColumns:
+      - column: name
+        as: productName
+        valueType: string
+
 Required:
   - name
+  - sku
+  - product
+
 Unique:
   - name

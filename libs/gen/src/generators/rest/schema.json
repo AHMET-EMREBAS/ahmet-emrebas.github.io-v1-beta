@@ -5,12 +5,21 @@
   "title": "",
   "type": "object",
   "properties": {
-    "name": {
+    "project": {
       "type": "string",
       "description": "",
       "$default": {
         "$source": "argv",
         "index": 0
+      },
+      "x-prompt": "What project would you like to use?"
+    },
+    "name": {
+      "type": "string",
+      "description": "",
+      "$default": {
+        "$source": "argv",
+        "index": 1
       },
       "x-prompt": "What name would you like to use?"
     },
@@ -18,7 +27,7 @@
       "type": "string",
       "description": "Add tags to the project (used for linting)",
       "alias": "t"
-    }, 
+    },
     "directory": {
       "type": "string",
       "description": "A directory where the project is placed",

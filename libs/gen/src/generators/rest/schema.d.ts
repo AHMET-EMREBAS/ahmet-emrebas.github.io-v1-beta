@@ -1,5 +1,6 @@
 export interface RestGeneratorSchema {
-    name: string;
-    tags?: string;
-    directory?: string;
+  name: string;
+  project: string;
+  tags?: string;
+  directory?: string;
 }

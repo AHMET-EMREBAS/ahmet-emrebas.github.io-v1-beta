@@ -139,6 +139,13 @@ export class ResourceService<T> {
     }
   }
 
+  /**
+   * Add many to  many relation ship
+   * @param id
+   * @param relationId
+   * @param relationName
+   * @returns
+   */
   add(id: number, relationId: number, relationName: string) {
     try {
       return this.__repo
@@ -151,6 +158,13 @@ export class ResourceService<T> {
     }
   }
 
+  /**
+   * Add many to one relationship
+   * @param id
+   * @param relationId
+   * @param relationName
+   * @returns
+   */
   set(id: number, relationId: number, relationName: string) {
     try {
       return this.__repo
@@ -163,6 +177,12 @@ export class ResourceService<T> {
     }
   }
 
+  /**
+   * Remove many to one relationship
+   * @param id
+   * @param relationName
+   * @returns
+   */
   unset(id: number, relationName: string) {
     try {
       return this.__repo
@@ -175,6 +195,13 @@ export class ResourceService<T> {
     }
   }
 
+  /**
+   * Remove many to many relationship
+   * @param id
+   * @param relationId
+   * @param relationName
+   * @returns
+   */
   remove(id: number, relationId: number, relationName: string) {
     try {
       return this.__repo

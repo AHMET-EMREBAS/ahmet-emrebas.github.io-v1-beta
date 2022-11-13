@@ -1,0 +1,107 @@
+import {
+  PaginatorDto,
+  QueryDto,
+  ViewDto,
+} from 'core/dto';
+
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+  Query,
+} from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
+
+import { 
+
+  Create<%- classname %>Dto,
+  Update<%- classname %>Dto
+} from 'models/<%- project %>/<%- name %>';
+
+import { <%- classname %>ViewService } from './<%- name %>-view.service';
+import { <%- classname %>Service } from './<%- name %>.service';
+
+@ApiTags('<%- name %>')
+@Controller('<%- name %>')
+export class <%- classname %>Controller {
+  constructor(
+    private readonly service: <%- classname %>Service,
+    private readonly viewService: <%- classname %>ViewService
+  ) {}
+
+  @Get()
+  read(
+    @Query() paginatorDto: PaginatorDto,
+    @Query() viewDto: ViewDto,
+    @Query() query: QueryDto
+  ) {
+    const q = {
+      ...paginatorDto,
+      where: query.toContains([
+        <% for(const f of options.SearchFields) { %> <%- f %>, <%} %>
+      ]),
+    };
+
+    if (viewDto.view === true) {
+      return this.viewService.find(q);
+    }
+    return this.service.find(q);
+  }
+
+  @Get(':id')
+  readById(@Param('id') id: number, @Query() view: ViewDto) {
+    if (view.view === true) {
+      return this.viewService.findOneBy();
+    }
+    return this.service.findOneBy({ id });
+  }
+
+  @Post()
+  write(@Body() body: Create<%- classname %>Dto) {
+    return this.service.save(body);
+  }
+
+  @Put(':id')
+  update(@Param('id') id: number, @Body() body: Update<%- classname %>Dto) {
+    return this.service.update(id, body);
+  }
+
+  @Delete(':id')
+  delete(@Param('id') id: number) {
+    return this.service.delete(id);
+  }
+
+  <% for( const r of options.Relations) { %> 
+
+
+      <% if(r.type.endsWith('One')) { %> 
+            @Post(':id/<%- r.name %>/:<%- r.name %>Id')
+            set<%- r.name %>(id: number, <%- r.name %>Id: number) {
+              return this.service.set(id, <%- r.name %>Id, '<%- r.name %>');
+            }
+
+            @Post(':id/<%- r.name %>')
+            unset<%- r.name %>(id: number) {
+              return this.service.unset(id, '<%- r.name %>');
+            }
+      <% } else { %> 
+
+            @Post(':id/<% r.name %>/:rid')
+            add<%- r.name %>(id: number, rid: number) {
+              return this.service.add(id, rid, '<% r.name %>');
+            }
+
+            @Post(':id/<% r.name %>/:rid')
+            remove<%- r.name %>(id: number, rid: number) {
+              return this.service.remove(id, rid, '<% r.name %>');
+            }
+
+      <% } %>
+
+  <% } %>
+
+}

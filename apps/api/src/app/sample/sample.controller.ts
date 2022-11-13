@@ -1,5 +1,6 @@
 import {
   PaginatorDto,
+  QueryDto,
   ViewDto,
 } from 'core/dto';
 
@@ -15,8 +16,10 @@ import {
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 
-import { CreateSampleDto } from './dto/create-sample.dto';
-import { UpdateSampleDto } from './dto/update-sample.dto';
+import {
+  CreateSampleDto,
+  UpdateSampleDto,
+} from './dto';
 import { SampleViewService } from './sample-view.service';
 import { SampleService } from './sample.service';
 
@@ -29,21 +32,26 @@ export class SampleController {
   ) {}
 
   @Get()
-  read(@Query() paginator: PaginatorDto, @Query() view: ViewDto) {
-    if (view.view === true) {
-      return this.viewService.find({
-        ...paginator,
-      });
+  read(
+    @Query() paginatorDto: PaginatorDto,
+    @Query() viewDto: ViewDto,
+    @Query() query: QueryDto
+  ) {
+    const q = {
+      ...paginatorDto,
+      where: query.toContains(['name', 'id', 'uuid']),
+    };
+
+    if (viewDto.view === true) {
+      return this.viewService.find(q);
     }
-    return this.service.find({
-      ...paginator,
-    });
+    return this.service.find(q);
   }
 
-  @Get('id')
+  @Get(':id')
   readById(@Param('id') id: number, @Query() view: ViewDto) {
     if (view.view === true) {
-      return this.viewService.findOneBy({ id });
+      return this.viewService.findOneBy();
     }
     return this.service.findOneBy({ id });
   }
@@ -61,5 +69,25 @@ export class SampleController {
   @Delete(':id')
   delete(@Param('id') id: number) {
     return this.service.delete(id);
+  }
+
+  @Post(':id/category/:categoryId')
+  setCategory(id: number, categoryId: number) {
+    return this.service.set(id, categoryId, 'category');
+  }
+
+  @Post(':id/category')
+  unsetCategory(id: number) {
+    return this.service.unset(id, 'category');
+  }
+
+  @Post(':id/department/:rid')
+  addDepartment(id: number, rid: number) {
+    return this.service.add(id, rid, 'department');
+  }
+
+  @Post(':id/department/:rid')
+  removeDepartment(id: number, rid: number) {
+    return this.service.remove(id, rid, 'department');
   }
 }

@@ -30,7 +30,7 @@ export class SampleView {
 
   @Field((type) => Int)
   @ViewColumn()
-  uuid: number;
+  uuid: string;
 
   @Field(() => String)
   @ViewColumn()

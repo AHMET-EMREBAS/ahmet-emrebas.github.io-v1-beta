@@ -8,6 +8,17 @@
       "description": "Resource name",
       "$ref": "./names/resource.schema.json"
     },
+    "Parent": {
+      "description": "Resource parent",
+      "$ref": "./names/resource.schema.json"
+    },
+    "Children": {
+      "description": "Resource parent",
+      "type": "array",
+      "items": {
+        "$ref": "./names/resource.schema.json"
+      }
+    },
     "Description": {
       "type": "string",
       "description": "Resource description",

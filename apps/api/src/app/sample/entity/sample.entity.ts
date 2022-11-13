@@ -2,9 +2,6 @@ import { BaseEntity } from 'core/entity';
 import {
   Column,
   Entity,
-  JoinColumn,
-  JoinTable,
-  ManyToOne,
 } from 'typeorm';
 
 import {
@@ -18,9 +15,4 @@ export class Sample extends BaseEntity {
   @Field(() => String)
   @Column({ type: 'text' })
   name: string;
-
-  @ManyToOne(() => NamedNodeMap, { eager: true })
-  @JoinColumn()
-  @JoinTable()
-  cate: any;
 }
