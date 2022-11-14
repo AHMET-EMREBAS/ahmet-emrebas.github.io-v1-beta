@@ -3,7 +3,8 @@
     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
     [totalRecords]="20" (onSort)="sortEvent.emit($event)" (onFilter)="filterEvent.emit($event)"
     (onPage)="pageEvent.emit($event)" styleClass="p-datatable-gridlines  p-datatable-striped" responsiveLayout="scroll"
-    (onFilter)="filterEvent.emit($event)" (selectionChange)="selectEvent.emit($event)">
+    (onFilter)="filterEvent.emit($event)" (onGlobalFilter)="filterEvent.emit($event)"
+    (selectionChange)="selectEvent.emit($event)">
 
     <ng-template pTemplate="caption">
         <p-toolbar>
@@ -17,7 +18,7 @@
                 <span class="p-input-icon-left">
                     <i class="pi pi-search"></i>
                     <input pInputText type="text" [formControl]="searchControl"
-                        (input)="filterEvent.emit(searchControl.value)" placeholder="Global Search" />
+                        (input)="tableRef.filterGlobal(searchControl.value,'contains')" placeholder="Global Search" />
                 </span>
             </div>
         </p-toolbar>
@@ -30,7 +31,10 @@
                 <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
             </th>
 
-            <th *ngFor="let col of columns"> {{col.header}} </th>
+            <th *ngFor="let col of columns">
+                {{col.header}}
+                <p-columnFilter type="text" [field]="col.field" display="menu"></p-columnFilter>
+            </th>
         </tr>
     </ng-template>
 
