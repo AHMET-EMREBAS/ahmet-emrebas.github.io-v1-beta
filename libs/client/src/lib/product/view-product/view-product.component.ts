@@ -14,6 +14,11 @@ import { ProductService } from '../product.service';
   styleUrls: ['./view-product.component.scss'],
 })
 export class ViewProductComponent implements OnInit {
+  rows = 10;
+  first = 0;
+  filters = [];
+  sort = [];
+
   items$ = this.productService.entities$.pipe(take(20));
   columns: ColumnOption[] = [
     { header: 'id', field: 'id' },
@@ -42,7 +47,7 @@ export class ViewProductComponent implements OnInit {
       });
   }
 
-  handleEvent(event: any) {
+  handleEvent(event: any, name: 'sort' | 'page' | 'select' | 'filter') {
     console.log(event);
   }
 }

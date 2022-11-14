@@ -19,6 +19,11 @@ export type FilterEvent = {
   filters?: { [key: string]: FilterMetadata[] };
 };
 
+export type SortEvent = {
+  field: string;
+  order: 1 | -1;
+};
+
 export type PageEvent = {
   first: number;
   rows: number;
@@ -40,7 +45,7 @@ export class TableComponent {
     { header: 'uuid', field: 'uuid' },
   ];
 
-  @Output() sortEvent = new EventEmitter<{ [key: string]: string }>();
+  @Output() sortEvent = new EventEmitter<SortEvent>();
   @Output() filterEvent = new EventEmitter<FilterEvent>();
   @Output() pageEvent = new EventEmitter<PageEvent>();
   @Output() selectEvent = new EventEmitter<Record<string, any>[]>();
