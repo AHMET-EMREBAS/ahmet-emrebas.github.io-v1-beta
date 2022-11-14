@@ -1,6 +1,14 @@
-import { DataSource, ViewColumn, ViewEntity } from 'typeorm';
+import { ICategory } from 'common/inventory/interfaces/category';
+import {
+  DataSource,
+  ViewColumn,
+  ViewEntity,
+} from 'typeorm';
 
-import { Field, Int, ObjectType } from '@nestjs/graphql';
+import {
+  Field,
+  ObjectType,
+} from '@nestjs/graphql';
 
 import { Category } from './category.entity';
 
@@ -17,7 +25,7 @@ import { Category } from './category.entity';
       .from(Category, 'category');
   },
 })
-export class CategoryView {
+export class CategoryView implements ICategory {
   @Field()
   @ViewColumn()
   id: number;

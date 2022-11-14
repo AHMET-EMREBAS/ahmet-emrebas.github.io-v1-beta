@@ -3,8 +3,10 @@ import { Field, InputType, Int } from '@nestjs/graphql';
 import { Validations } from 'core/validations';
 import { ID } from 'core/dto';
 
+import { IPricelevel } from 'common/inventory/interfaces/pricelevel';
+
 @InputType()
-export class UpdatePricelevelDto {
+export class UpdatePricelevelDto implements Partial<IPricelevel> {
   @Field()
   @Validations({
     type: 'string',

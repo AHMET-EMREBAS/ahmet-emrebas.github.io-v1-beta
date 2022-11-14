@@ -24,9 +24,6 @@ export default async function (tree: Tree, options: EntityGeneratorSchema) {
 
   const target = join('libs', 'models', 'src', 'lib', options.project);
 
-  console.log(schemaOptions);
-  console.log(target);
-
   await generateFiles(tree, join(__dirname, 'files'), target, {
     name: options.name,
     classname: names(options.name).className,

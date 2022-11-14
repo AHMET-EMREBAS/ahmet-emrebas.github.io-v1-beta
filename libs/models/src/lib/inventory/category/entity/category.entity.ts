@@ -14,6 +14,6 @@ import {
 @ObjectType()
 export class Category extends BaseEntity implements ICategory {
   @Field()
-  @Column({ type: 'date', nullable: false, unique: true })
+  @Column({ type: 'text', nullable: false, unique: true })
   name: string;
 }

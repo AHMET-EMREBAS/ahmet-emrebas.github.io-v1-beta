@@ -1,1 +1,1 @@
-export * from './lib/inventory/interfaces';
+export * from './lib';

@@ -3,10 +3,12 @@ import { Field, InputType, Int } from '@nestjs/graphql';
 import { Validations } from 'core/validations';
 import { ID } from 'core/dto';
 
+import { ISku } from 'common/inventory/interfaces/sku';
+
 import { Product } from '../../product';
 
 @InputType()
-export class UpdateSkuDto {
+export class UpdateSkuDto implements Partial<ISku<Product>> {
   @Field()
   @Validations({
     type: 'string',

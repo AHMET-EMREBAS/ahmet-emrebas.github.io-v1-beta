@@ -10,13 +10,15 @@ import {
   ManyToMany,
 } from 'typeorm';
 
+import { ISku } from 'common/inventory/interfaces/sku';
+
 import { Product } from '../../product';
 
 import { Field, ObjectType } from '@nestjs/graphql';
 
 @Entity()
 @ObjectType()
-export class Sku extends BaseEntity {
+export class Sku extends BaseEntity implements ISku<Product> {
   @Field()
   @Column({ type: 'text', nullable: false, unique: true })
   name: string;

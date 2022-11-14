@@ -4,8 +4,10 @@ import { Validations } from 'core/validations';
 import { ID } from 'core/dto';
 import { ValidateNested } from 'class-validator';
 
+import { IDepartment } from 'common/inventory/interfaces/department';
+
 @InputType()
-export class CreateDepartmentDto {
+export class CreateDepartmentDto implements IDepartment {
   @Field()
   @Validations({
     type: 'string',

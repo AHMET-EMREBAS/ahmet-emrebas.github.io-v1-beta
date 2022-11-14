@@ -1,22 +1,15 @@
-import {
-  PaginatorDto,
-  QueryDto,
-  ViewDto,
-} from 'core/dto';
+import { PaginatorDto, QueryDto, ViewDto } from 'core/dto';
 import { PubSub } from 'graphql-subscriptions';
+import { ILike } from 'typeorm';
+
+import { Args, Mutation, Query, Resolver, Subscription } from '@nestjs/graphql';
+
 import {
   Category,
+  CategoryView,
   CreateCategoryDto,
   UpdateCategoryDto,
 } from 'models/inventory/category';
-
-import {
-  Args,
-  Mutation,
-  Query,
-  Resolver,
-  Subscription,
-} from '@nestjs/graphql';
 
 import { CategoryViewService } from './category-view.service';
 import { CategoryService } from './category.service';

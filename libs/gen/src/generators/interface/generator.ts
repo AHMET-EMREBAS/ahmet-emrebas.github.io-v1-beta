@@ -31,9 +31,6 @@ export default async function (tree: Tree, options: InterfaceGeneratorSchema) {
     'interfaces'
   );
 
-  console.log(schemaOptions);
-  console.log(target);
-
   await generateFiles(tree, join(__dirname, 'files'), target, {
     name: options.name,
     classname: names(options.name).className,

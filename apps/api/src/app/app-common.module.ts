@@ -38,7 +38,7 @@ export const CommonModules: Readonly<any[]> = [
     autoLoadEntities: true,
     subscribers: [...Subscribers],
     synchronize: true,
-    // dropSchema: true,
+    dropSchema: true,
   }),
   GraphQLModule.forRoot<ApolloDriverConfig>({
     driver: ApolloDriver,

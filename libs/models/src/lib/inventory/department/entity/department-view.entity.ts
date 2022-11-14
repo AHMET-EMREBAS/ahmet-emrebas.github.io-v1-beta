@@ -4,6 +4,8 @@ import { Field, Int, ObjectType } from '@nestjs/graphql';
 
 import { Department } from './department.entity';
 
+import { IDepartment } from 'common/inventory/interfaces/department';
+
 @ObjectType()
 @ViewEntity({
   expression: (ds: DataSource) => {
@@ -17,7 +19,7 @@ import { Department } from './department.entity';
       .from(Department, 'department');
   },
 })
-export class DepartmentView {
+export class DepartmentView implements IDepartment {
   @Field()
   @ViewColumn()
   id: number;

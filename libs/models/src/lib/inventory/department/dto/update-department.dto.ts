@@ -3,8 +3,10 @@ import { Field, InputType, Int } from '@nestjs/graphql';
 import { Validations } from 'core/validations';
 import { ID } from 'core/dto';
 
+import { IDepartment } from 'common/inventory/interfaces/department';
+
 @InputType()
-export class UpdateDepartmentDto {
+export class UpdateDepartmentDto implements Partial<IDepartment> {
   @Field()
   @Validations({
     type: 'string',

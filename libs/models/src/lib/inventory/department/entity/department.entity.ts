@@ -10,12 +10,14 @@ import {
   ManyToMany,
 } from 'typeorm';
 
+import { IDepartment } from 'common/inventory/interfaces/department';
+
 import { Field, ObjectType } from '@nestjs/graphql';
 
 @Entity()
 @ObjectType()
-export class Department extends BaseEntity {
+export class Department extends BaseEntity implements IDepartment {
   @Field()
-  @Column({ type: 'date', nullable: false, unique: true })
+  @Column({ type: 'text', nullable: false, unique: true })
   name: string;
 }

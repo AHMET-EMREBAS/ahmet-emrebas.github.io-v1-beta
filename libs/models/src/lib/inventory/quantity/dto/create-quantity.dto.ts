@@ -4,12 +4,14 @@ import { Validations } from 'core/validations';
 import { ID } from 'core/dto';
 import { ValidateNested } from 'class-validator';
 
+import { IQuantity } from 'common/inventory/interfaces/quantity';
+
 import { Sku } from '../../sku';
 
 import { Store } from '../../store';
 
 @InputType()
-export class CreateQuantityDto {
+export class CreateQuantityDto implements IQuantity<Sku, Store> {
   @Field()
   @Validations({
     type: 'number',

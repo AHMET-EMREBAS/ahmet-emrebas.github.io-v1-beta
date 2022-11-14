@@ -4,6 +4,8 @@ import { Field, Int, ObjectType } from '@nestjs/graphql';
 
 import { Pricelevel } from './pricelevel.entity';
 
+import { IPricelevel } from 'common/inventory/interfaces/pricelevel';
+
 @ObjectType()
 @ViewEntity({
   expression: (ds: DataSource) => {
@@ -17,7 +19,7 @@ import { Pricelevel } from './pricelevel.entity';
       .from(Pricelevel, 'pricelevel');
   },
 })
-export class PricelevelView {
+export class PricelevelView implements IPricelevel {
   @Field()
   @ViewColumn()
   id: number;

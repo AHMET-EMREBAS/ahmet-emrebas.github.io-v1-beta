@@ -4,6 +4,8 @@ import { Field, Int, ObjectType } from '@nestjs/graphql';
 
 import { Quantity } from './quantity.entity';
 
+import { IQuantity } from 'common/inventory/interfaces/quantity';
+
 import { Sku } from '../../sku';
 
 import { Store } from '../../store';
@@ -29,7 +31,7 @@ import { Store } from '../../store';
       .leftJoin(Store, 'store');
   },
 })
-export class QuantityView {
+export class QuantityView implements IQuantity<string, string> {
   @Field()
   @ViewColumn()
   id: number;

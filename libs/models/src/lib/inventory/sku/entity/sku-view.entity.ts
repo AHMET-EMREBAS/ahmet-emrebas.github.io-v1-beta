@@ -4,6 +4,8 @@ import { Field, Int, ObjectType } from '@nestjs/graphql';
 
 import { Sku } from './sku.entity';
 
+import { ISku } from 'common/inventory/interfaces/sku';
+
 import { Product } from '../../product';
 
 @ObjectType()
@@ -27,7 +29,7 @@ import { Product } from '../../product';
       .leftJoin(Product, 'product');
   },
 })
-export class SkuView {
+export class SkuView implements ISku<string> {
   @Field()
   @ViewColumn()
   id: number;

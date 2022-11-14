@@ -4,10 +4,12 @@ import { Validations } from 'core/validations';
 import { ID } from 'core/dto';
 import { ValidateNested } from 'class-validator';
 
+import { ISku } from 'common/inventory/interfaces/sku';
+
 import { Product } from '../../product';
 
 @InputType()
-export class CreateSkuDto {
+export class CreateSkuDto implements ISku<Product> {
   @Field()
   @Validations({
     type: 'string',

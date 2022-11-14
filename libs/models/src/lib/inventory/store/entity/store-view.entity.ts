@@ -4,6 +4,8 @@ import { Field, Int, ObjectType } from '@nestjs/graphql';
 
 import { Store } from './store.entity';
 
+import { IStore } from 'common/inventory/interfaces/store';
+
 import { Pricelevel } from '../../pricelevel';
 
 @ObjectType()
@@ -23,7 +25,7 @@ import { Pricelevel } from '../../pricelevel';
       .leftJoin(Pricelevel, 'pricelevel');
   },
 })
-export class StoreView {
+export class StoreView implements IStore<string> {
   @Field()
   @ViewColumn()
   id: number;

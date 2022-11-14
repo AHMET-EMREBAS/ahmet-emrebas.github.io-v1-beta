@@ -4,10 +4,12 @@ import { Validations } from 'core/validations';
 import { ID } from 'core/dto';
 import { ValidateNested } from 'class-validator';
 
+import { IStore } from 'common/inventory/interfaces/store';
+
 import { Pricelevel } from '../../pricelevel';
 
 @InputType()
-export class CreateStoreDto {
+export class CreateStoreDto implements IStore<Pricelevel> {
   @Field()
   @Validations({
     type: 'string',
