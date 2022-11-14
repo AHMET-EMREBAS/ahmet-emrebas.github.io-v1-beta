@@ -2,6 +2,8 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
+import { TableModule } from 'material/table';
+
 import { CreateProductComponent } from './create-product/';
 import { DeleteProductComponent } from './delete-product/';
 import { ProductComponent } from './product.component';
@@ -19,6 +21,7 @@ import { ViewProductComponent } from './view-product';
   ],
   imports: [
     CommonModule,
+    TableModule,
     RouterModule.forChild([
       {
         path: '',
