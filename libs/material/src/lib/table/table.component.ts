@@ -3,15 +3,18 @@ import {
   EventEmitter,
   Input,
   Output,
+  ViewChild,
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 import { FilterMetadata } from 'primeng/api';
+import { Table } from 'primeng/table';
 import { BehaviorSubject } from 'rxjs';
 
-export type ColumnOption = {
+export type ColumnOption<T> = {
   header: string;
-  field: string;
+  field: keyof T & string;
+  mapper?: (item: T) => any;
 };
 
 export type FilterEvent = {
@@ -34,13 +37,15 @@ export type PageEvent = {
   styleUrls: ['./table.component.scss'],
 })
 export class TableComponent {
+  @ViewChild('table') table!: Table;
+
   searchControl = new FormControl('');
   selectedItems = [];
   selectedItems$ = new BehaviorSubject<any>([]);
 
   @Input() data: Record<string, any>[] = [];
 
-  @Input() columns: ColumnOption[] = [
+  @Input() columns: ColumnOption<any>[] = [
     { header: '#', field: 'id' },
     { header: 'uuid', field: 'uuid' },
   ];
@@ -48,9 +53,9 @@ export class TableComponent {
   @Output() sortEvent = new EventEmitter<SortEvent>();
   @Output() filterEvent = new EventEmitter<FilterEvent>();
   @Output() pageEvent = new EventEmitter<PageEvent>();
-  @Output() selectEvent = new EventEmitter<Record<string, any>[]>();
-  @Output() editEvent = new EventEmitter<Record<string, any>[]>();
+  @Output() selectEvent = new EventEmitter<any[]>();
+  @Output() editEvent = new EventEmitter();
   @Output() newEvent = new EventEmitter();
-  @Output() deleteEvent = new EventEmitter<Record<string, any>[]>();
-  @Output() clearEvent = new EventEmitter<any>();
+  @Output() deleteEvent = new EventEmitter();
+  @Output() clearEvent = new EventEmitter();
 }

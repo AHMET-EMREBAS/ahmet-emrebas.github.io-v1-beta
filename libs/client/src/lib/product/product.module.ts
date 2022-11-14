@@ -4,6 +4,9 @@ import { RouterModule } from '@angular/router';
 
 import { FormModule } from 'material/form';
 import { TableModule } from 'material/table';
+import { ButtonModule } from 'primeng/button';
+import { ToolbarModule } from 'primeng/toolbar';
+import { TooltipModule } from 'primeng/tooltip';
 
 import { CreateProductComponent } from './create-product/';
 import { DeleteProductComponent } from './delete-product/';
@@ -24,6 +27,10 @@ import { ViewProductComponent } from './view-product';
     CommonModule,
     TableModule,
     FormModule,
+    ToolbarModule,
+    ButtonModule,
+    TooltipModule,
+
     RouterModule.forChild([
       {
         path: '',

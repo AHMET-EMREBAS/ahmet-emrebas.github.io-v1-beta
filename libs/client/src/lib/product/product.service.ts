@@ -5,17 +5,15 @@ import {
   IDepartment,
   IProduct,
 } from 'common/inventory/interfaces';
+import { NgrxBaseCollecitonService } from 'material/ngrx';
 
-import {
-  EntityCollectionServiceBase,
-  EntityCollectionServiceElementsFactory,
-} from '@ngrx/data';
+import { EntityCollectionServiceElementsFactory } from '@ngrx/data';
 
 @Injectable({ providedIn: 'root' })
-export class ProductService extends EntityCollectionServiceBase<
-  IProduct<ICategory, IDepartment>
+export class ProductService extends NgrxBaseCollecitonService<
+  Partial<IProduct<ICategory, IDepartment>>
 > {
-  constructor(serviceElementsFactory: EntityCollectionServiceElementsFactory) {
-    super('Product', serviceElementsFactory);
+  constructor(sef: EntityCollectionServiceElementsFactory) {
+    super('Product', sef);
   }
 }

@@ -4,6 +4,10 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import {
+  ActivatedRoute,
+  Router,
+} from '@angular/router';
 
 import { InputOptions } from 'material/form';
 
@@ -15,6 +19,8 @@ import { ProductService } from '../product.service';
   styleUrls: ['./create-product.component.scss'],
 })
 export class CreateProductComponent {
+  title = 'Create Product';
+
   formGroup = new FormGroup({
     name: new FormControl('', [
       Validators.required,
@@ -56,6 +62,8 @@ export class CreateProductComponent {
       type: 'select',
       required: true,
       options: this.getOptions('category'),
+      optionLabel: 'name',
+      optionValue: 'id',
     },
     {
       name: 'department',
@@ -63,6 +71,8 @@ export class CreateProductComponent {
       type: 'select',
       required: true,
       options: this.getOptions('department'),
+      optionLabel: 'name',
+      optionValue: 'id',
     },
     {
       name: 'active',
@@ -71,33 +81,37 @@ export class CreateProductComponent {
     },
   ];
 
-  constructor(private readonly productService: ProductService) {
+  constructor(
+    private readonly productService: ProductService,
+    private readonly router: Router,
+    private readonly route: ActivatedRoute
+  ) {
     localStorage.setItem(
       'category',
       JSON.stringify([
-        { id: 1, label: 'Category 1' },
-        { id: 2, label: 'Category 2' },
-        { id: 3, label: 'Category 3' },
-        { id: 4, label: 'Category 4' },
-        { id: 5, label: 'Category 6' },
-        { id: 6, label: 'Category 6' },
-        { id: 7, label: 'Category 7' },
+        { id: 1, name: 'Category 1' },
+        { id: 2, name: 'Category 2' },
+        { id: 3, name: 'Category 3' },
+        { id: 4, name: 'Category 4' },
+        { id: 5, name: 'Category 6' },
+        { id: 6, name: 'Category 6' },
+        { id: 7, name: 'Category 7' },
       ])
     );
 
     localStorage.setItem(
       'department',
       JSON.stringify([
-        { id: 1, label: 'Department 1' },
-        { id: 2, label: 'Department 2' },
-        { id: 3, label: 'Department 3' },
-        { id: 3, label: 'Department 3' },
-        { id: 3, label: 'Department 3' },
-        { id: 4, label: 'Department 4' },
-        { id: 4, label: 'Department 4' },
-        { id: 5, label: 'Department 5' },
-        { id: 6, label: 'Department 6' },
-        { id: 7, label: 'Department 7' },
+        { id: 1, name: 'Department 1' },
+        { id: 2, name: 'Department 2' },
+        { id: 3, name: 'Department 3' },
+        { id: 3, name: 'Department 3' },
+        { id: 3, name: 'Department 3' },
+        { id: 4, name: 'Department 4' },
+        { id: 4, name: 'Department 4' },
+        { id: 5, name: 'Department 5' },
+        { id: 6, name: 'Department 6' },
+        { id: 7, name: 'Department 7' },
       ])
     );
   }

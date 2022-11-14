@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+} from '@angular/core';
 
 @Component({
   selector: 'ae-delete-product',
@@ -6,6 +9,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./delete-product.component.scss'],
 })
 export class DeleteProductComponent implements OnInit {
+  title = 'Delete Product';
   constructor() {}
 
   ngOnInit(): void {}

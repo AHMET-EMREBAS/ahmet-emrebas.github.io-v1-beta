@@ -6,8 +6,15 @@ import {
 } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
-export type InputOptions = Partial<
-  HTMLInputElement & { options: { id: number; label: string }[] }
+import { Observable } from 'rxjs';
+
+export type InputOptions<T = Record<string, any>> = Partial<
+  HTMLInputElement & {
+    options: T[];
+    asyncOptions: Observable<T[]>;
+    optionLabel: string;
+    optionValue: string;
+  }
 >;
 @Component({
   selector: 'ae-form',
