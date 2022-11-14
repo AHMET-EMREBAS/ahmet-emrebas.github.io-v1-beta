@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
+import { FormModule } from 'material/form';
 import { TableModule } from 'material/table';
 
 import { CreateProductComponent } from './create-product/';
@@ -22,6 +23,7 @@ import { ViewProductComponent } from './view-product';
   imports: [
     CommonModule,
     TableModule,
+    FormModule,
     RouterModule.forChild([
       {
         path: '',

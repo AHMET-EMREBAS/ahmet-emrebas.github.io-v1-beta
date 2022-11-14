@@ -2,6 +2,10 @@ import {
   Component,
   OnInit,
 } from '@angular/core';
+import {
+  ActivatedRoute,
+  Router,
+} from '@angular/router';
 
 import { ColumnOption } from 'material/table';
 import { take } from 'rxjs';
@@ -30,7 +34,11 @@ export class ViewProductComponent implements OnInit {
     { header: 'Create Time', field: 'createdAt' },
     { header: 'Delete Time', field: 'deletedAt' },
   ];
-  constructor(private readonly productService: ProductService) {}
+  constructor(
+    private readonly productService: ProductService,
+    private readonly router: Router,
+    private readonly route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     let i = 0;
@@ -49,5 +57,9 @@ export class ViewProductComponent implements OnInit {
 
   handleEvent(event: any, name: 'sort' | 'page' | 'select' | 'filter') {
     console.log(event);
+  }
+
+  newItem() {
+    this.router.navigate(['Create'], { relativeTo: this.route });
   }
 }

@@ -1,5 +1,4 @@
 <ae-table [data]="(items$ | async)!" [columns]="columns" (filterEvent)="handleEvent($event, 'filter')"
     (sortEvent)="handleEvent($event, 'sort')" (pageEvent)="handleEvent($event, 'page')"
-    (selectEvent)="handleEvent($event, 'select')" (newEvent)="handleEvent($event, 'page')"
-    (editEvent)="handleEvent($event, 'page')" (deleteEvent)="handleEvent($event, 'page')"
-    (clearEvent)="handleEvent($event, 'page')"></ae-table>
+    (selectEvent)="handleEvent($event, 'select')" (newEvent)="newItem()" (editEvent)="handleEvent($event, 'page')"
+    (deleteEvent)="handleEvent($event, 'page')" (clearEvent)="handleEvent($event, 'page')"></ae-table>
