@@ -16,8 +16,8 @@
         </div>
 
         <div class="flex  justify-content-between  gap-2">
-            <button pButton icon="pi pi-filter-slash" (click)="tableRef.clear()" pTooltip="Clear filter"
-                tooltipPosition="bottom"></button>
+            <button pButton icon="pi pi-filter-slash" (click)="tableRef.clear(); clearEvent.emit()"
+                pTooltip="Clear filter" tooltipPosition="bottom"></button>
             <span class="p-input-icon-left">
                 <i class="pi pi-search"></i>
                 <input pInputText type="text" [formControl]="searchControl"
@@ -27,6 +27,10 @@
     </div>
 </p-toolbar>
 
+
+
+
+
 <p-table #tableRef [value]="data" dataKey="id" [lazy]="true" [columns]="columns" [(selection)]="selectedItems"
     [rowHover]="true" [rows]="10" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50, 100]"
     [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
@@ -34,10 +38,9 @@
     (onPage)="pageEvent.emit($event)" styleClass="p-datatable-gridlines  p-datatable-striped" responsiveLayout="scroll"
     (onFilter)="filterEvent.emit($event)" (selectionChange)="selectEvent.emit($event)">
 
+    <ng-template pTemplate="header">
 
-
-    <ng-template pTemplate="header" let-columns>
-        <tr>
+        <tr class="header-row">
             <th>
                 <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
             </th>

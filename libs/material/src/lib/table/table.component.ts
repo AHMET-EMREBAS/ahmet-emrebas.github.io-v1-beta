@@ -52,4 +52,5 @@ export class TableComponent {
   @Output() editEvent = new EventEmitter<Record<string, any>[]>();
   @Output() newEvent = new EventEmitter();
   @Output() deleteEvent = new EventEmitter<Record<string, any>[]>();
+  @Output() clearEvent = new EventEmitter<any>();
 }

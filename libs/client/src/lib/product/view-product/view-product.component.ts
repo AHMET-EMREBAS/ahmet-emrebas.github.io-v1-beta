@@ -35,7 +35,7 @@ export class ViewProductComponent implements OnInit {
   ngOnInit(): void {
     let i = 0;
     ' '
-      .repeat(20)
+      .repeat(100)
       .split('')
       .forEach((e) => {
         i++;
