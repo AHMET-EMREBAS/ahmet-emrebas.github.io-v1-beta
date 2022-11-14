@@ -33,4 +33,6 @@ export class TableComponent {
   @Output() filterEvent = new EventEmitter<any>();
   @Output() pageEvent = new EventEmitter<any>();
   @Output() selectEvent = new EventEmitter<any>();
+  @Output() editEvent = new EventEmitter<any>();
+  @Output() newEvent = new EventEmitter();
 }

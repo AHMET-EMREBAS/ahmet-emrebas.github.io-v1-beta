@@ -2,6 +2,8 @@
 <ng-template #bottomToolbar>
     <p-toolbar>
         <div class=" flex gap-2 lg:pl-4">
+            <p-button *ngIf="isHandset$ | async" icon="pi pi-arrow-right" (click)="leftSidebar =!leftSidebar">
+            </p-button>
 
             <p-button styleClass="p-button-primary" icon="pi pi-th-large" pTooltip="Apps" tooltipPosition="top"
                 (click)="appsClick.emit()">
@@ -23,6 +25,8 @@
                 (click)="bellClick.emit()">
             </p-button>
 
+            <p-button *ngIf="isHandset$ | async" icon="pi pi-arrow-left" (click)="rightSidebar =!rightSidebar">
+            </p-button>
         </div>
     </p-toolbar>
 
@@ -64,13 +68,13 @@
 
         <div class="flex gap-2 h-full overflow-hidden overflow-y-auto">
 
-            <div class="flex flex-column gap-2  justify-content-between h-full overflow-y-auto">
+            <div class="menu-container flex flex-column gap-2  justify-content-between h-full overflow-y-auto">
                 <p-menu styleClass="p-2" [model]="primaryMenuItems"> </p-menu>
             </div>
 
             <ng-container *ngTemplateOutlet="content"></ng-container>
 
-            <div class="flex flex-column gap-2  justify-content-between h-full overflow-y-auto">
+            <div class="menu-container flex flex-column gap-2  justify-content-between h-full overflow-y-auto">
 
                 <p-menu styleClass="p-2" [model]="secondaryMenuItems"> </p-menu>
 
@@ -87,12 +91,7 @@
 
 
 
-    <p-button [style]="{position:'fixed', left:'0px', top:'100px'}" icon="pi pi-arrow-right"
-        (click)="leftSidebar =!leftSidebar"></p-button>
 
-
-    <p-button [style]="{position:'fixed', right:'0px', top:'100px'}" icon="pi pi-arrow-left"
-        (click)="rightSidebar =!rightSidebar"></p-button>
 
 
     <p-sidebar [(visible)]="leftSidebar" [position]="'left'">

@@ -1,3 +1,32 @@
+<p-toolbar styleClass="md:sticky top-0 z-5">
+    <div class="flex flex-grow-1 flex-column-reverse  flex-column gap-2  md:flex-row  md:justify-content-between">
+
+        <div class="flex  gap-2 justify-content-between ">
+            <div class="flex gap-2 ">
+
+                <button class="p-button-success" pButton icon="pi pi-plus" pTooltip="New" tooltipPosition="bottom"
+                    (click)="newEvent.emit()"></button>
+
+                <button pButton icon="pi pi-pencil" pTooltip="Edit selection" tooltipPosition="bottom"
+                    (click)="editEvent.emit(selectedItems)"></button>
+            </div>
+
+            <button class="p-button-danger" pButton icon="pi pi-trash" (click)="tableRef.clear()"
+                pTooltip="Delete Selection" tooltipPosition="bottom"></button>
+        </div>
+
+        <div class="flex  justify-content-between  gap-2">
+            <button pButton icon="pi pi-filter-slash" (click)="tableRef.clear()" pTooltip="Clear filter"
+                tooltipPosition="bottom"></button>
+            <span class="p-input-icon-left">
+                <i class="pi pi-search"></i>
+                <input pInputText type="text" [formControl]="searchControl"
+                    (input)="tableRef.filterGlobal(searchControl.value,'contains')" placeholder="Global Search" />
+            </span>
+        </div>
+    </div>
+</p-toolbar>
+
 <p-table #tableRef [value]="data" dataKey="id" [lazy]="true" [columns]="columns" [(selection)]="selectedItems"
     [rowHover]="true" [rows]="10" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50, 100]"
     [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
@@ -6,32 +35,6 @@
     (onFilter)="filterEvent.emit($event)" (onGlobalFilter)="filterEvent.emit($event)"
     (selectionChange)="selectEvent.emit($event)">
 
-    <ng-template pTemplate="caption">
-        <p-toolbar>
-            <div
-                class="flex flex-grow-1 flex-column-reverse  flex-column gap-2  md:flex-row  md:justify-content-between">
-
-                <div class="flex  gap-2 justify-content-between ">
-                    <button class="p-button-success" pButton icon="pi pi-plus" pTooltip="New"
-                        tooltipPosition="bottom"></button>
-
-                    <button class="p-button-danger" pButton icon="pi pi-trash" (click)="tableRef.clear()"
-                        pTooltip="Delete Selection" tooltipPosition="bottom"></button>
-                </div>
-
-                <div class="flex  justify-content-between  gap-2">
-                    <button pButton icon="pi pi-filter-slash" (click)="tableRef.clear()" pTooltip="Clear filter"
-                        tooltipPosition="bottom"></button>
-                    <span class="p-input-icon-left">
-                        <i class="pi pi-search"></i>
-                        <input pInputText type="text" [formControl]="searchControl"
-                            (input)="tableRef.filterGlobal(searchControl.value,'contains')"
-                            placeholder="Global Search" />
-                    </span>
-                </div>
-            </div>
-        </p-toolbar>
-    </ng-template>
 
 
     <ng-template pTemplate="header" let-columns>
