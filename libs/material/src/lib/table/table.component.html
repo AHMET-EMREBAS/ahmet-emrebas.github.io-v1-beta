@@ -7,23 +7,28 @@
     (selectionChange)="selectEvent.emit($event)">
 
     <ng-template pTemplate="caption">
-        <p-toolbar class="gap-2">
-            <div class="flex  gap-2">
-                <button class="p-button-success" pButton icon="pi pi-plus" pTooltip="New"
-                    tooltipPosition="bottom"></button>
+        <p-toolbar>
+            <div
+                class="flex flex-grow-1 flex-column-reverse  flex-column gap-2  md:flex-row  md:justify-content-between">
 
-                <button class="p-button-danger" pButton icon="pi pi-trash" (click)="tableRef.clear()"
-                    pTooltip="Delete Selection" tooltipPosition="bottom"></button>
-            </div>
+                <div class="flex  gap-2 justify-content-between ">
+                    <button class="p-button-success" pButton icon="pi pi-plus" pTooltip="New"
+                        tooltipPosition="bottom"></button>
 
-            <div class="flex gap-2">
-                <button pButton icon="pi pi-filter-slash" (click)="tableRef.clear()" pTooltip="Clear filter"
-                    tooltipPosition="bottom"></button>
-                <span class="p-input-icon-left">
-                    <i class="pi pi-search"></i>
-                    <input pInputText type="text" [formControl]="searchControl"
-                        (input)="tableRef.filterGlobal(searchControl.value,'contains')" placeholder="Global Search" />
-                </span>
+                    <button class="p-button-danger" pButton icon="pi pi-trash" (click)="tableRef.clear()"
+                        pTooltip="Delete Selection" tooltipPosition="bottom"></button>
+                </div>
+
+                <div class="flex  justify-content-between  gap-2">
+                    <button pButton icon="pi pi-filter-slash" (click)="tableRef.clear()" pTooltip="Clear filter"
+                        tooltipPosition="bottom"></button>
+                    <span class="p-input-icon-left">
+                        <i class="pi pi-search"></i>
+                        <input pInputText type="text" [formControl]="searchControl"
+                            (input)="tableRef.filterGlobal(searchControl.value,'contains')"
+                            placeholder="Global Search" />
+                    </span>
+                </div>
             </div>
         </p-toolbar>
     </ng-template>
@@ -31,7 +36,7 @@
 
     <ng-template pTemplate="header" let-columns>
         <tr>
-            <th style="width: 3rem">
+            <th>
                 <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
             </th>
 
