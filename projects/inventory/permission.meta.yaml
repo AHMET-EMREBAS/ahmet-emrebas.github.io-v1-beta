@@ -1,7 +1,7 @@
-Name: permission
+Name: Permission
 Description: Permission schema
 Properties:
-  - Property: permission
+  - Property: name
     Description: Permission string
     Defination:
       datatype: string
@@ -30,7 +30,10 @@ Properties:
       type: text
 
 Required:
-  - permission
+  - name
 
 Unique:
-  - permission
+  - name
+
+SearchFields:
+  - name

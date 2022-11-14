@@ -1,4 +1,4 @@
-Name: user
+Name: User
 Description: User resource metadata
 Properties:
   - Property: username
@@ -29,17 +29,23 @@ Properties:
       type: password
 
 Relations:
-  - ManyToMany:
-      target: permission
-      joinTable: true
-      eager: true
-      viewColumns:
-        - column: description
-          as: description
+  - type: ManyToMany
+    target: Permission
+    name: permission
+    eager: true
+    joinTable: true
+    viewColumns:
+      - column: name
+        as: permission
+        valueType: string
 
 Required:
   - username
   - password
+  - permission
+
+SearchFields:
+  - username
   - permission
 
 Unique:

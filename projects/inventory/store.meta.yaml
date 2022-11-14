@@ -1,0 +1,38 @@
+Name: Store
+Description: Store
+Properties:
+  - Property: name
+    Description: Store name
+    Defination:
+      company: companyName
+    Validation:
+      type: string
+      minLength: 2
+      maxLength: 30
+
+    Column:
+      columnType: text
+      valueType: string
+
+    UI:
+      type: text
+
+SearchFields:
+  - name
+
+Required:
+  - name
+
+Unique:
+  - name
+
+Relations:
+  - type: ManyToOne
+    target: Pricelevel
+    name: pricelevel
+    eager: true
+    joinColumn: true
+    viewColumns:
+      - column: name
+        as: pricelevel
+        valueType: string

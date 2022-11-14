@@ -22,6 +22,11 @@
       "factory": "./src/generators/rest/generator",
       "schema": "./src/generators/rest/schema.json",
       "description": "rest generator"
+    },
+    "interface": {
+      "factory": "./src/generators/interface/generator",
+      "schema": "./src/generators/interface/schema.json",
+      "description": "interface generator"
     }
   }
 }

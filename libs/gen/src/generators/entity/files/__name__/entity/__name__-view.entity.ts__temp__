@@ -12,8 +12,9 @@ import {
 
 import { <%- classname %> } from './<%- name %>.entity';
 
+import { I<%- classname %> } from 'common/<%- project %>/interfaces/<%- name %>';
 
-<% for(const o of options.Relations) { %> 
+<% for(const o of options.Relations || []) { %> 
 
 import { <%- o.target  %>  } from '../../<%- o.name %>'
 
@@ -35,7 +36,7 @@ import { <%- o.target  %>  } from '../../<%- o.name %>'
             .addSelect('<%- name %>.<%- o.Property %>', '<%- o.Property %>')
         <% } %>
 
-        <% for(const o of options.Relations) { %> 
+        <% for(const o of options.Relations || []) { %> 
           
             <% for(const v of o.viewColumns) { %> 
                   .addSelect('<%- o.name %>.<%- v.column %>', '<%- v.as %>')
@@ -45,12 +46,22 @@ import { <%- o.target  %>  } from '../../<%- o.name %>'
 
       .from(<%- classname %>, '<%- name %>')
 
-      <% for(const o of options.Relations) { %> 
+      <% for(const o of options.Relations || []) { %> 
         .leftJoin(<%- o.target %>, '<%- o.name %>')
       <% } %> 
   },
 })
-export class <%- classname %>View {
+export class <%- classname %>View 
+
+<% if(options.Relations?.length > 0) { %> 
+    implements I<%- classname %><   <% for(const o of options.Relations || []) { %>  string,   <% } %> >
+<% } else { %> 
+  implements I<%- classname %>
+<% } %>
+
+
+
+{
   @Field()
   @ViewColumn()
   id: number;
@@ -69,7 +80,7 @@ export class <%- classname %>View {
 
 <% } %>
 
-<% for(const o of options.Relations) { %> 
+<% for(const o of options.Relations || []) { %> 
 
     <% for(const v of o.viewColumns) { %> 
 

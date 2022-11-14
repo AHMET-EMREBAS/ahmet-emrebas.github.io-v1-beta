@@ -1,7 +1,4 @@
-import {
-  PaginatorDto,
-  ViewDto,
-} from 'core/dto';
+import {  PaginatorDto,  QueryDto,  ViewDto} from 'core/dto';
 import { PubSub } from 'graphql-subscriptions';
 import { ILike } from 'typeorm';
 
@@ -34,44 +31,46 @@ export class <%- classname %>Resolver {
   ) {}
 
   @Query(() => [<%- classname %>])
-  read(
-    @Args('paginator', { nullable: true }) paginator: PaginatorDto,
-    @Args('view', { nullable: true }) view: ViewDto
+  read<%- classname %>(
+    @Args('paginator') paginatorDto: PaginatorDto,
+    @Args('view') viewDto: ViewDto,
+    @Args('query') query: QueryDto
   ) {
-    if (view.view === true) {
-      return this.viewService.find({
-        where: {
-          name: ILike('some'),
-        },
-      });
+   const q = {
+      ...paginatorDto,
+      where: query.toContains([
+        <% for(const f of options.SearchFields  || []) { %> '<%- f %>', <%} %>
+      ]),
+    };
+
+    if (viewDto.view === true) {
+      return this.viewService.find(q);
     }
-    return this.service.find({
-      ...paginator,
-    });
+    return this.service.find(q);
   }
 
   @Query(() => <%- classname %>)
-  readById(@Args('id') id: number) {
+  read<%- classname %>ById(@Args('id') id: number) {
     return this.service.findOneBy({ id });
   }
 
   @Mutation(() => <%- classname %>)
-  write(@Args('<%- name %>') body: Create<%- classname %>Dto) {
+  write<%- classname %>(@Args('<%- name %>') body: Create<%- classname %>Dto) {
     return this.service.save(body);
   }
 
   @Mutation(() => Boolean)
-  update(@Args('id') id: number, @Args('<%- name %>') body: Update<%- classname %>Dto) {
+  update<%- classname %>(@Args('id') id: number, @Args('<%- name %>') body: Update<%- classname %>Dto) {
     return this.service.update(id, body);
   }
 
   @Mutation(() => Boolean)
-  delete(@Args('id') id: number) {
+  delete<%- classname %>(@Args('id') id: number) {
     return this.service.delete(id);
   }
 
   @Subscription(() => <%- classname %>)
-  onSave() {
+  onSave<%- classname %>() {
     return pubSub.asyncIterator('saved<%- classname %>');
   }
 }

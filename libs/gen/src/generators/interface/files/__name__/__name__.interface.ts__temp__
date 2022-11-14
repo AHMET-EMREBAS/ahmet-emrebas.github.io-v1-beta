@@ -1,0 +1,15 @@
+export interface I<%- classname %><
+<% for(const o of options.Relations || []) { %> 
+  <%- o.target %>,
+<% } %>
+> {
+
+<% for(const o of options.Properties) { %> 
+  <%- o.Property %>: <%- o.Column.valueType %>;
+<% } %>
+
+<% for(const o of options.Relations || []) { %> 
+  <%- o.name %>?: <%- o.target %> 
+<% } %>
+
+}

@@ -12,7 +12,7 @@ Properties:
     UI:
       type: text
     Column:
-      columnType: date
+      columnType: text
       valueType: string
 
 Required:

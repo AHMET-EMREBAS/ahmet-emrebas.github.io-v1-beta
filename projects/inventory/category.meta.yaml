@@ -10,14 +10,14 @@ Properties:
 
     Validation:
       type: string
-      minLength: 3
+      minLength: 0
       maxLength: 20
 
     UI:
       type: text
 
     Column:
-      columnType: date
+      columnType: text
       valueType: string
 
 Required:

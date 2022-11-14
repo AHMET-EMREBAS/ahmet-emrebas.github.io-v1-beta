@@ -1,4 +1,4 @@
-Name: SKU
+Name: Sku
 Description: Stock tracking unit
 Properties:
   - Property: name
@@ -6,7 +6,7 @@ Properties:
     Validation:
       type: string
       minLength: 0
-      maxLength: 50
+      maxLength: 30
     Column:
       columnType: text
       valueType: string
@@ -51,16 +51,17 @@ Relations:
     joinColumn: true
     viewColumns:
       - column: name
-        as: productName
+        as: product
         valueType: string
 
 Required:
   - name
-  - sku
+  - barcode
   - product
 
 Unique:
   - name
+  - barcode
 
 SearchFields:
   - id
@@ -68,3 +69,4 @@ SearchFields:
   - name
   - barcode
   - description
+  - product

@@ -1,0 +1,59 @@
+Name: Price
+Description: Price
+Properties:
+  - Property: price
+    Description: price
+    Defination:
+      commerce: price
+    Validation:
+      type: number
+      minimum: 0
+      maximum: 999999999999
+    Column:
+      columnType: numeric
+      valueType: number
+    UI:
+      type: number
+
+  - Property: cost
+    Description: cost
+    Defination:
+      commerce: price
+    Validation:
+      type: number
+      minimum: 0
+      maximum: 999999999999
+    Column:
+      columnType: numeric
+      valueType: number
+    UI:
+      type: number
+
+SearchFields:
+  - price
+  - cost
+
+Required:
+  - price
+    - cost
+
+Relations:
+  - type: ManyToOne
+    target: Sku
+    name: sku
+    eager: true
+    joinColumn: true
+    viewColumns:
+      - column: barcode
+        as: barcode
+        valueType: string
+
+  - type: ManyToOne
+    target: Pricelevel
+    name: pricelevel
+    eager: true
+    joinColumn: true
+    viewColumns:
+      - column: name
+        as: pricelevel
+        valueType: string

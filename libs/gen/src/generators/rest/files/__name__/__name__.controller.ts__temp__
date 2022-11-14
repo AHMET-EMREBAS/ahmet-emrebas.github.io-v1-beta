@@ -34,7 +34,7 @@ export class <%- classname %>Controller {
   ) {}
 
   @Get()
-  read(
+  read<%- classname %>(
     @Query() paginatorDto: PaginatorDto,
     @Query() viewDto: ViewDto,
     @Query() query: QueryDto
@@ -53,7 +53,7 @@ export class <%- classname %>Controller {
   }
 
   @Get(':id')
-  readById(@Param('id') id: number, @Query() view: ViewDto) {
+  read<%- classname %>ById(@Param('id') id: number, @Query() view: ViewDto) {
     if (view.view === true) {
       return this.viewService.findOneBy();
     }
@@ -61,42 +61,42 @@ export class <%- classname %>Controller {
   }
 
   @Post()
-  write(@Body() body: Create<%- classname %>Dto) {
+  write<%- classname %>(@Body() body: Create<%- classname %>Dto) {
     return this.service.save(body);
   }
 
   @Put(':id')
-  update(@Param('id') id: number, @Body() body: Update<%- classname %>Dto) {
+  update<%- classname %>(@Param('id') id: number, @Body() body: Update<%- classname %>Dto) {
     return this.service.update(id, body);
   }
 
   @Delete(':id')
-  delete(@Param('id') id: number) {
+  delete<%- classname %>(@Param('id') id: number) {
     return this.service.delete(id);
   }
 
-  <% for( const r of options.Relations) { %> 
+  <% for( const r of options.Relations || []) { %> 
 
 
       <% if(r.type.endsWith('One')) { %> 
             @Post(':id/<%- r.name %>/:<%- r.name %>Id')
-            set<%- r.name %>(id: number, <%- r.name %>Id: number) {
+            set<%- r.name %>To<%- classname %>(id: number, <%- r.name %>Id: number) {
               return this.service.set(id, <%- r.name %>Id, '<%- r.name %>');
             }
 
             @Post(':id/<%- r.name %>')
-            unset<%- r.name %>(id: number) {
+            unset<%- r.name %>From<%- classname %>(id: number) {
               return this.service.unset(id, '<%- r.name %>');
             }
       <% } else { %> 
 
             @Post(':id/<% r.name %>/:rid')
-            add<%- r.name %>(id: number, rid: number) {
+            add<%- r.name %>To<%- classname %>(id: number, rid: number) {
               return this.service.add(id, rid, '<% r.name %>');
             }
 
             @Post(':id/<% r.name %>/:rid')
-            remove<%- r.name %>(id: number, rid: number) {
+            remove<%- r.name %>From<%- classname %>(id: number, rid: number) {
               return this.service.remove(id, rid, '<% r.name %>');
             }
 

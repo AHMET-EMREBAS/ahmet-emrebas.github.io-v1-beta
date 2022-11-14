@@ -26,7 +26,7 @@ export class ProductController {
   ) {}
 
   @Get()
-  read(
+  readProduct(
     @Query() paginatorDto: PaginatorDto,
     @Query() viewDto: ViewDto,
     @Query() query: QueryDto
@@ -50,7 +50,7 @@ export class ProductController {
   }
 
   @Get(':id')
-  readById(@Param('id') id: number, @Query() view: ViewDto) {
+  readProductById(@Param('id') id: number, @Query() view: ViewDto) {
     if (view.view === true) {
       return this.viewService.findOneBy();
     }
@@ -58,37 +58,37 @@ export class ProductController {
   }
 
   @Post()
-  write(@Body() body: CreateProductDto) {
+  writeProduct(@Body() body: CreateProductDto) {
     return this.service.save(body);
   }
 
   @Put(':id')
-  update(@Param('id') id: number, @Body() body: UpdateProductDto) {
+  updateProduct(@Param('id') id: number, @Body() body: UpdateProductDto) {
     return this.service.update(id, body);
   }
 
   @Delete(':id')
-  delete(@Param('id') id: number) {
+  deleteProduct(@Param('id') id: number) {
     return this.service.delete(id);
   }
 
   @Post(':id/category/:categoryId')
-  setcategory(id: number, categoryId: number) {
+  setcategoryToProduct(id: number, categoryId: number) {
     return this.service.set(id, categoryId, 'category');
   }
 
   @Post(':id/category')
-  unsetcategory(id: number) {
+  unsetcategoryFromProduct(id: number) {
     return this.service.unset(id, 'category');
   }
 
   @Post(':id/department/:departmentId')
-  setdepartment(id: number, departmentId: number) {
+  setdepartmentToProduct(id: number, departmentId: number) {
     return this.service.set(id, departmentId, 'department');
   }
 
   @Post(':id/department')
-  unsetdepartment(id: number) {
+  unsetdepartmentFromProduct(id: number) {
     return this.service.unset(id, 'department');
   }
 }

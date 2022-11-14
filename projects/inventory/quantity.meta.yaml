@@ -1,0 +1,49 @@
+Name: Quantity
+Description: Quantity
+Properties:
+  - Property: quantity
+    Description: Sku quantity
+    Defination:
+      random: number
+    Validation:
+      type: number
+      minimum: -200
+      maximum: 999999999999
+
+    Column:
+      columnType: int
+      valueType: number
+
+    UI:
+      type: number
+
+SearchFields:
+  - quantity
+  - store
+  - sku
+
+Required:
+  - quantity
+  - sku
+  - store
+
+Relations:
+  - type: ManyToOne
+    target: Sku
+    name: sku
+    eager: true
+    joinColumn: true
+    viewColumns:
+      - column: name
+        as: sku
+        valueType: string
+
+  - type: ManyToOne
+    target: Store
+    name: store
+    eager: true
+    joinColumn: true
+    viewColumns:
+      - column: name
+        as: store
+        valueType: string

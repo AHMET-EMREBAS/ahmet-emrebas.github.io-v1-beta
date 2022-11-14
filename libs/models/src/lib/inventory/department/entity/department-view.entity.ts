@@ -11,7 +11,9 @@ import { Department } from './department.entity';
       .createQueryBuilder()
       .select('department.id', 'id')
       .addSelect('department.uuid', 'uuid')
+
       .addSelect('department.name', 'name')
+
       .from(Department, 'department');
   },
 })

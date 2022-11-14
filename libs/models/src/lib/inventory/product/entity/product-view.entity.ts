@@ -4,6 +4,8 @@ import { Field, Int, ObjectType } from '@nestjs/graphql';
 
 import { Product } from './product.entity';
 
+import { IProduct } from 'common/inventory/interfaces/product';
+
 import { Category } from '../../category';
 
 import { Department } from '../../department';
@@ -22,8 +24,6 @@ import { Department } from '../../department';
 
       .addSelect('category.name', 'category')
 
-      .addSelect('category.id', 'categoryId')
-
       .addSelect('department.name', 'department')
 
       .from(Product, 'product')
@@ -33,7 +33,7 @@ import { Department } from '../../department';
       .leftJoin(Department, 'department');
   },
 })
-export class ProductView {
+export class ProductView implements IProduct<string, string> {
   @Field()
   @ViewColumn()
   id: number;
@@ -53,10 +53,6 @@ export class ProductView {
   @Field()
   @ViewColumn()
   category: string;
-
-  @Field()
-  @ViewColumn()
-  categoryId: number;
 
   @Field()
   @ViewColumn()

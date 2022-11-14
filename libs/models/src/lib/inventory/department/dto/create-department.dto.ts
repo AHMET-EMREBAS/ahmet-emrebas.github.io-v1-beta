@@ -1,6 +1,8 @@
 import { Expose } from 'class-transformer';
-import { Field, InputType } from '@nestjs/graphql';
+import { Field, InputType, Int } from '@nestjs/graphql';
 import { Validations } from 'core/validations';
+import { ID } from 'core/dto';
+import { ValidateNested } from 'class-validator';
 
 @InputType()
 export class CreateDepartmentDto {

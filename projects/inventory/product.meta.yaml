@@ -39,9 +39,6 @@ Relations:
       - column: name
         as: category
         valueType: string
-      - column: id
-        as: categoryId
-        valueType: number
 
   - type: ManyToOne
     target: Department

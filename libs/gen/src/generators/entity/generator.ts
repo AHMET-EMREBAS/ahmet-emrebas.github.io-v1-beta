@@ -31,6 +31,7 @@ export default async function (tree: Tree, options: EntityGeneratorSchema) {
     name: options.name,
     classname: names(options.name).className,
     options: schemaOptions,
+    project: options.project,
     temp: '',
   });
   await formatFiles(tree);

@@ -20,7 +20,7 @@ import { Product } from '../../product';
 
       .addSelect('sku.description', 'description')
 
-      .addSelect('product.name', 'productName')
+      .addSelect('product.name', 'product')
 
       .from(Sku, 'sku')
 
@@ -50,5 +50,5 @@ export class SkuView {
 
   @Field()
   @ViewColumn()
-  productName: string;
+  product: string;
 }

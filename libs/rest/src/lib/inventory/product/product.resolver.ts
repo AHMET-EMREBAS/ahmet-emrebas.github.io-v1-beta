@@ -1,4 +1,4 @@
-import { PaginatorDto, ViewDto } from 'core/dto';
+import { PaginatorDto, QueryDto, ViewDto } from 'core/dto';
 import { PubSub } from 'graphql-subscriptions';
 import { ILike } from 'typeorm';
 
@@ -24,44 +24,54 @@ export class ProductResolver {
   ) {}
 
   @Query(() => [Product])
-  read(
-    @Args('paginator', { nullable: true }) paginator: PaginatorDto,
-    @Args('view', { nullable: true }) view: ViewDto
+  readProduct(
+    @Args('paginator') paginatorDto: PaginatorDto,
+    @Args('view') viewDto: ViewDto,
+    @Args('query') query: QueryDto
   ) {
-    if (view.view === true) {
-      return this.viewService.find({
-        where: {
-          name: ILike('some'),
-        },
-      });
+    const q = {
+      ...paginatorDto,
+      where: query.toContains([
+        'id',
+        'uuid',
+        'name',
+        'description',
+        'category',
+        'department',
+      ]),
+    };
+
+    if (viewDto.view === true) {
+      return this.viewService.find(q);
     }
-    return this.service.find({
-      ...paginator,
-    });
+    return this.service.find(q);
   }
 
   @Query(() => Product)
-  readById(@Args('id') id: number) {
+  readProductById(@Args('id') id: number) {
     return this.service.findOneBy({ id });
   }
 
   @Mutation(() => Product)
-  write(@Args('product') body: CreateProductDto) {
+  writeProduct(@Args('product') body: CreateProductDto) {
     return this.service.save(body);
   }
 
   @Mutation(() => Boolean)
-  update(@Args('id') id: number, @Args('product') body: UpdateProductDto) {
+  updateProduct(
+    @Args('id') id: number,
+    @Args('product') body: UpdateProductDto
+  ) {
     return this.service.update(id, body);
   }
 
   @Mutation(() => Boolean)
-  delete(@Args('id') id: number) {
+  deleteProduct(@Args('id') id: number) {
     return this.service.delete(id);
   }
 
   @Subscription(() => Product)
-  onSave() {
+  onSaveProduct() {
     return pubSub.asyncIterator('savedProduct');
   }
 }

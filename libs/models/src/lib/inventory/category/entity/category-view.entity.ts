@@ -11,7 +11,9 @@ import { Category } from './category.entity';
       .createQueryBuilder()
       .select('category.id', 'id')
       .addSelect('category.uuid', 'uuid')
+
       .addSelect('category.name', 'name')
+
       .from(Category, 'category');
   },
 })

@@ -1,9 +1,14 @@
 import { Expose } from 'class-transformer';
-import { Field, InputType } from '@nestjs/graphql';
+import { ICategory } from 'common/inventory/interfaces';
 import { Validations } from 'core/validations';
 
+import {
+  Field,
+  InputType,
+} from '@nestjs/graphql';
+
 @InputType()
-export class UpdateCategoryDto {
+export class UpdateCategoryDto implements Partial<ICategory> {
   @Field()
   @Validations({
     type: 'string',

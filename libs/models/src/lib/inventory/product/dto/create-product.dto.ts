@@ -1,13 +1,17 @@
 import { Expose } from 'class-transformer';
+import { Field, InputType, Int } from '@nestjs/graphql';
 import { Validations } from 'core/validations';
+import { ID } from 'core/dto';
+import { ValidateNested } from 'class-validator';
 
-import {
-  Field,
-  InputType,
-} from '@nestjs/graphql';
+import { IProduct } from 'common/inventory/interfaces/product';
+
+import { Category } from '../../category';
+
+import { Department } from '../../department';
 
 @InputType()
-export class CreateProductDto {
+export class CreateProductDto implements IProduct<Category, Department> {
   @Field()
   @Validations({
     type: 'string',
@@ -30,13 +34,13 @@ export class CreateProductDto {
   @Expose()
   description: string;
 
-  @Field()
+  @Field(() => Int)
   @Validations({ minimum: 1 })
   @Expose()
-  categoryId: number;
+  category: Category;
 
-  @Field()
+  @Field(() => Int)
   @Validations({ minimum: 1 })
   @Expose()
-  departmentId: number;
+  department: Department;
 }

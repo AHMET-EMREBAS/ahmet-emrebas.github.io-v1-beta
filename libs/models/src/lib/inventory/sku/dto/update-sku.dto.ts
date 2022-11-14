@@ -1,6 +1,9 @@
 import { Expose } from 'class-transformer';
-import { Field, InputType } from '@nestjs/graphql';
+import { Field, InputType, Int } from '@nestjs/graphql';
 import { Validations } from 'core/validations';
+import { ID } from 'core/dto';
+
+import { Product } from '../../product';
 
 @InputType()
 export class UpdateSkuDto {
@@ -10,7 +13,7 @@ export class UpdateSkuDto {
 
     minLength: 0,
 
-    maxLength: 50,
+    maxLength: 30,
   })
   @Expose()
   name: string;
@@ -36,4 +39,9 @@ export class UpdateSkuDto {
   })
   @Expose()
   description: string;
+
+  @Field(() => Int)
+  @Validations({ minimum: 1 })
+  @Expose()
+  product: Product;
 }

@@ -10,6 +10,8 @@ import {
   ManyToMany,
 } from 'typeorm';
 
+import { IProduct } from 'common/inventory/interfaces/product';
+
 import { Category } from '../../category';
 
 import { Department } from '../../department';
@@ -18,7 +20,10 @@ import { Field, ObjectType } from '@nestjs/graphql';
 
 @Entity()
 @ObjectType()
-export class Product extends BaseEntity {
+export class Product
+  extends BaseEntity
+  implements IProduct<Category, Department>
+{
   @Field()
   @Column({ type: 'text', nullable: false, unique: true })
   name: string;

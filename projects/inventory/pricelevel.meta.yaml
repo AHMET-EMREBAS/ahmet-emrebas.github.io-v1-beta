@@ -1,22 +1,32 @@
-Name: department
-Description: Department metadata
+Name: Pricelevel
+Description: Pricelevel schema
 Properties:
   - Property: name
-    Description: Department name
+
+    Description: Pricelevel name
+
     Defination:
-      commerce: department
+      commerce: productDescription
+
     Validation:
       type: string
       minLength: 3
       maxLength: 20
+
     UI:
       type: text
+
     Column:
-      columnType: date
+      columnType: text
       valueType: string
 
 Required:
   - name
 
 Unique:
+  - name
+
+SearchFields:
+  - id
+  - uuid
   - name

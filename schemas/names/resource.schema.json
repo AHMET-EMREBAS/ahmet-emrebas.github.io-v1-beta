@@ -17,11 +17,19 @@
     "Comment",
     "Review",
     "Rate",
-    "SKU",
+    "Sku",
     "Pricelevel",
     "Customer",
     "Promotion",
     "Notification",
-    "Log"
+    "Log",
+    "Role",
+    "Permission",
+    "Project",
+    "Sprint",
+    "Task",
+    "Issue",
+    "Tag",
+    "Employee"
   ]
 }

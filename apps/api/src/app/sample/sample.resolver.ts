@@ -1,9 +1,9 @@
 import {
   PaginatorDto,
+  QueryDto,
   ViewDto,
 } from 'core/dto';
 import { PubSub } from 'graphql-subscriptions';
-import { ILike } from 'typeorm';
 
 import {
   Args,
@@ -28,21 +28,21 @@ export class SampleResolver {
     private readonly viewService: SampleViewService
   ) {}
 
-  @Query(() => [Sample])
+  @Query()
   read(
-    @Args('paginator', { nullable: true }) paginator: PaginatorDto,
-    @Args('view', { nullable: true }) view: ViewDto
+    @Args('paginator') paginatorDto: PaginatorDto,
+    @Args('view') viewDto: ViewDto,
+    @Args('query') query: QueryDto
   ) {
-    if (view.view === true) {
-      return this.viewService.find({
-        where: {
-          name: ILike('some'),
-        },
-      });
+    const q = {
+      ...paginatorDto,
+      where: query.toContains(['name', 'id', 'uuid']),
+    };
+
+    if (viewDto.view === true) {
+      return this.viewService.find(q);
     }
-    return this.service.find({
-      ...paginator,
-    });
+    return this.service.find(q);
   }
 
   @Query(() => Sample)
