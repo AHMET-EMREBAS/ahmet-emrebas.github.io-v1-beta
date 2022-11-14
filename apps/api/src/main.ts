@@ -19,7 +19,7 @@ const PORT = process.env.PORT || 3333;
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  // app.setGlobalPrefix('api');
+  app.setGlobalPrefix(GLOBAL_PREFIX);
 
   // Enable request from different origins
   app.enableCors();
