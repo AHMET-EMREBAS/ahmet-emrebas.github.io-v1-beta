@@ -55,30 +55,14 @@ export class CreateProductComponent {
       placeholder: 'Select Category',
       type: 'select',
       required: true,
-      options: [
-        { id: 1, label: ' Option 1' },
-        { id: 2, label: ' Option 2' },
-        { id: 3, label: ' Option 3' },
-        { id: 4, label: ' Option 4' },
-        { id: 5, label: ' Option 5' },
-        { id: 6, label: ' Option 6' },
-      ],
+      options: this.getOptions('category'),
     },
     {
       name: 'department',
       placeholder: 'Select Department',
       type: 'select',
       required: true,
-      options: [
-        { id: 1, label: ' Option 1' },
-        { id: 2, label: ' Option 2' },
-        { id: 3, label: ' Option 3' },
-        { id: 4, label: ' Option 4' },
-        { id: 4, label: ' Option 4' },
-        { id: 5, label: ' Option 5' },
-        { id: 5, label: ' Option 5' },
-        { id: 6, label: ' Option 6' },
-      ],
+      options: this.getOptions('department'),
     },
     {
       name: 'active',
@@ -87,7 +71,36 @@ export class CreateProductComponent {
     },
   ];
 
-  constructor(private readonly productService: ProductService) {}
+  constructor(private readonly productService: ProductService) {
+    localStorage.setItem(
+      'category',
+      JSON.stringify([
+        { id: 1, label: 'Category 1' },
+        { id: 2, label: 'Category 2' },
+        { id: 3, label: 'Category 3' },
+        { id: 4, label: 'Category 4' },
+        { id: 5, label: 'Category 6' },
+        { id: 6, label: 'Category 6' },
+        { id: 7, label: 'Category 7' },
+      ])
+    );
+
+    localStorage.setItem(
+      'department',
+      JSON.stringify([
+        { id: 1, label: 'Department 1' },
+        { id: 2, label: 'Department 2' },
+        { id: 3, label: 'Department 3' },
+        { id: 3, label: 'Department 3' },
+        { id: 3, label: 'Department 3' },
+        { id: 4, label: 'Department 4' },
+        { id: 4, label: 'Department 4' },
+        { id: 5, label: 'Department 5' },
+        { id: 6, label: 'Department 6' },
+        { id: 7, label: 'Department 7' },
+      ])
+    );
+  }
 
   submit() {
     console.log(this.formGroup.value);
@@ -96,5 +109,9 @@ export class CreateProductComponent {
       name: this.formGroup.value.name || '',
       description: this.formGroup.value.description || '',
     });
+  }
+
+  getOptions(name: string) {
+    return JSON.parse(localStorage.getItem(name) || '[]');
   }
 }
