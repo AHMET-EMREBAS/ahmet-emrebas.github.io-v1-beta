@@ -2,6 +2,7 @@
   "version": 2,
   "projects": {
     "api": "apps/api",
+    "client": "libs/client",
     "common": "libs/common",
     "core": "libs/core",
     "directive": "libs/directive",
