@@ -6,11 +6,22 @@ import {
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
+import { FilterMetadata } from 'primeng/api';
 import { BehaviorSubject } from 'rxjs';
 
 export type ColumnOption = {
   header: string;
   field: string;
+};
+
+export type FilterEvent = {
+  filteredValue?: any[];
+  filters?: { [key: string]: FilterMetadata[] };
+};
+
+export type PageEvent = {
+  first: number;
+  rows: number;
 };
 @Component({
   selector: 'ae-table',
@@ -30,9 +41,10 @@ export class TableComponent {
   ];
 
   @Output() sortEvent = new EventEmitter<{ [key: string]: string }>();
-  @Output() filterEvent = new EventEmitter<any>();
-  @Output() pageEvent = new EventEmitter<any>();
-  @Output() selectEvent = new EventEmitter<any>();
-  @Output() editEvent = new EventEmitter<any>();
+  @Output() filterEvent = new EventEmitter<FilterEvent>();
+  @Output() pageEvent = new EventEmitter<PageEvent>();
+  @Output() selectEvent = new EventEmitter<Record<string, any>[]>();
+  @Output() editEvent = new EventEmitter<Record<string, any>[]>();
   @Output() newEvent = new EventEmitter();
+  @Output() deleteEvent = new EventEmitter<Record<string, any>[]>();
 }

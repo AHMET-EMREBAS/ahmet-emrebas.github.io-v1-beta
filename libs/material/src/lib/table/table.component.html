@@ -11,8 +11,8 @@
                     (click)="editEvent.emit(selectedItems)"></button>
             </div>
 
-            <button class="p-button-danger" pButton icon="pi pi-trash" (click)="tableRef.clear()"
-                pTooltip="Delete Selection" tooltipPosition="bottom"></button>
+            <button class="p-button-danger" pButton icon="pi pi-trash" pTooltip="Delete Selection"
+                tooltipPosition="bottom" (click)="deleteEvent.emit(selectedItems)"></button>
         </div>
 
         <div class="flex  justify-content-between  gap-2">
@@ -32,8 +32,7 @@
     [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
     [totalRecords]="20" (onSort)="sortEvent.emit($event)" (onFilter)="filterEvent.emit($event)"
     (onPage)="pageEvent.emit($event)" styleClass="p-datatable-gridlines  p-datatable-striped" responsiveLayout="scroll"
-    (onFilter)="filterEvent.emit($event)" (onGlobalFilter)="filterEvent.emit($event)"
-    (selectionChange)="selectEvent.emit($event)">
+    (onFilter)="filterEvent.emit($event)" (selectionChange)="selectEvent.emit($event)">
 
 
 
