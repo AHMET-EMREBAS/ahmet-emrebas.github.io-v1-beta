@@ -1,1 +1,2 @@
-<ae-table [data]="items$ | async"></ae-table>
+<ae-table [data]="(items$ | async)!" [columns]="columns" (filterEvent)="handleEvent($event)"
+    (sortEvent)="handleEvent($event)" (pageEvent)="handleEvent($event)" (selectEvent)="handleEvent($event)"></ae-table>
