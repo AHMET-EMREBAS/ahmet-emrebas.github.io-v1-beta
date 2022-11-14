@@ -9,6 +9,7 @@
     "gen": "libs/gen",
     "gen-e2e": "apps/gen-e2e",
     "layout": "libs/layout",
+    "material": "libs/material",
     "messanger": "libs/messanger",
     "models": "libs/models",
     "nativescript-mobile": "apps/nativescript-mobile",

@@ -21,6 +21,7 @@
       "directive": ["libs/directive/src/index.ts"],
       "gen": ["libs/gen/src/index.ts"],
       "layout": ["libs/layout/src/index.ts"],
+      "material/*": ["libs/material/src/lib/*"],
       "messanger": ["libs/messanger/src/index.ts"],
       "models/*": ["libs/models/src/lib/*"],
       "notification": ["libs/notification/src/index.ts"],

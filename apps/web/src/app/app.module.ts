@@ -10,7 +10,6 @@ import {
 import { ServiceWorkerModule } from '@angular/service-worker';
 
 import { LayoutModule } from 'layout';
-import { MessangerModule } from 'messanger';
 
 import { EntityDataModule } from '@ngrx/data';
 import { EffectsModule } from '@ngrx/effects';
@@ -26,13 +25,19 @@ const routes: Routes = [
     path: '',
     children: [
       {
+        title: 'Inventory',
+        path: 'Inventory',
+        loadChildren: () =>
+          import('./inventory').then((m) => m.InventoryModule),
+      },
+      {
         title: 'Messanger',
-        path: 'messanger',
+        path: 'Messanger',
         loadChildren: () => import('messanger').then((m) => m.MessangerModule),
       },
       {
         title: 'Notification',
-        path: 'notification',
+        path: 'Notification',
         loadChildren: () =>
           import('notification').then((m) => m.NotificationModule),
       },
@@ -47,7 +52,6 @@ const routes: Routes = [
     BrowserAnimationsModule,
     HttpClientModule,
     LayoutModule,
-    MessangerModule,
     StoreModule.forRoot({}, {}),
     EffectsModule.forRoot([]),
     EntityDataModule.forRoot({ ...entityDataModuleConfig }),
