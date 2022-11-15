@@ -1,10 +1,4 @@
 import {
-  PaginatorDto,
-  QueryDto,
-  ViewDto,
-} from 'core/dto';
-
-import {
   Body,
   Controller,
   Delete,
@@ -13,9 +7,17 @@ import {
   Post,
   Put,
   Query,
+  Patch,
+  BadRequestException
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-
+import {
+  FunctionsDto,
+  PaginatorDto,
+  QueryDto,
+  ViewDto,
+} from 'core/dto';
+ 
 import { 
 
   Create<%- classname %>Dto,
@@ -74,6 +76,15 @@ export class <%- classname %>Controller {
   delete<%- classname %>(@Param('id') id: number) {
     return this.service.delete(id);
   }
+
+  @Patch()
+  functions(@Query() functions: FunctionsDto) {
+    if (functions.query === 'count') {
+      return this.service.count();
+    }
+    throw new BadRequestException('Must provide a fucntion name.');
+  }
+
 
   <% for( const r of options.Relations || []) { %> 
 

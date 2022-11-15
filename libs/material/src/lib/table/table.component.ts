@@ -49,6 +49,7 @@ export class TableComponent implements OnInit {
   selectedItems$ = new BehaviorSubject<any>([]);
 
   @Input() data: Record<string, any>[] = [];
+  @Input() totalRecords = 1000000;
 
   @Input() columns: ColumnOption<any>[] = [
     { header: '#', field: 'id' },

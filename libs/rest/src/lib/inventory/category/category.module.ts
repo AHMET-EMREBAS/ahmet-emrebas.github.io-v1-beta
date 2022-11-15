@@ -1,7 +1,10 @@
+import {
+  Category,
+  CategoryView,
+} from 'models/inventory/category';
+
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-
-import { Category, CategoryView } from 'models/inventory/category';
 
 import { CategoryViewService } from './category-view.service';
 import { CategoryController } from './category.controller';

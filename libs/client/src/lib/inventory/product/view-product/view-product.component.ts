@@ -1,10 +1,16 @@
-import { Component, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import {
+  Component,
+  ViewChild,
+} from '@angular/core';
+import {
+  ActivatedRoute,
+  Router,
+} from '@angular/router';
 
 import {
-  IReadProduct,
   IReadCategory,
   IReadDepartment,
+  IReadProduct,
 } from 'common/inventory/interfaces';
 import {
   ColumnOption,
@@ -14,11 +20,9 @@ import {
   TableComponent,
 } from 'material/table';
 
-import { ProductService } from '../product.service';
-
 import { CategoryService } from '../../category';
-
 import { DepartmentService } from '../../department';
+import { ProductService } from '../product.service';
 
 @Component({
   selector: 'ae-view-product',
@@ -27,6 +31,9 @@ import { DepartmentService } from '../../department';
 })
 export class ViewProductComponent {
   @ViewChild('dataTable') dataTable!: TableComponent;
+
+  totalRecords$ = this.productService.allCount$;
+
   rows = 10;
   first = 0;
   filters = [];

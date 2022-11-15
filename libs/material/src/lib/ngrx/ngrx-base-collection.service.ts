@@ -1,3 +1,5 @@
+import { HttpClient } from '@angular/common/http';
+
 import { BaseInterface } from 'common/base';
 import { BehaviorSubject } from 'rxjs';
 
@@ -10,19 +12,22 @@ export class NgrxBaseCollecitonService<
   T extends BaseInterface
 > extends EntityCollectionServiceBase<T> {
   private readonly selections$ = new BehaviorSubject<T[]>([]);
+
+  readonly allCount$ = this.httpClient?.patch(
+    `/api/${this.entityName.toLowerCase()}/?query=count`,
+    {}
+  );
+
   constructor(
     entityName: string,
-    serviceElementsFactory: EntityCollectionServiceElementsFactory
+    serviceElementsFactory: EntityCollectionServiceElementsFactory,
+    private readonly httpClient?: HttpClient
   ) {
     super(entityName, serviceElementsFactory);
   }
 
   updateSelection(items: T[]) {
-    console.log('Updating selection ');
-    console.log(items);
     this.selections$.next([...items]);
-
-    console.log('Updated seelction ');
     console.log(this.selections$.getValue());
   }
 

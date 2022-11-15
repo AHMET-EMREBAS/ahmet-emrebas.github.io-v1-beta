@@ -37,6 +37,7 @@ export class View<%- classname %>Component {
   filters = [];
   sort = [];
 
+  totalRecords$ = this.<%- name %>Service.allCount$;
   items$ = this.<%- name %>Service.entities$
 
   columns: ColumnOption<IRead<%- classname %>>[] = [
