@@ -62,7 +62,9 @@
                 <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
             </td>
             <td *ngFor="let col of columns">
+                {{col.prefix}}
                 {{ col.mapper ? col.mapper(rowData[col.field]) : rowData[col.field]}}
+                {{col.suffix}}
             </td>
         </tr>
     </ng-template>

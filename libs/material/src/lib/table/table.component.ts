@@ -14,7 +14,9 @@ import { BehaviorSubject } from 'rxjs';
 export type ColumnOption<T> = {
   header: string;
   field: keyof T & string;
-  mapper?: (item: T) => any;
+  mapper?: (item?: T) => string | number | undefined;
+  prefix?: string;
+  suffix?: string;
 };
 
 export type FilterEvent = {

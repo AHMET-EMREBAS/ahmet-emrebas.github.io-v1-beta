@@ -1,4 +1,4 @@
-import { BaseInterface } from '../../base';
+import { BaseInterface } from '../../../base';
 
 export interface ICategory extends BaseInterface {
   name: string;

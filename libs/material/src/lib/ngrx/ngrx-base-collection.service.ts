@@ -1,3 +1,4 @@
+import { BaseInterface } from 'common/base';
 import { BehaviorSubject } from 'rxjs';
 
 import {
@@ -6,7 +7,7 @@ import {
 } from '@ngrx/data';
 
 export class NgrxBaseCollecitonService<
-  T
+  T extends BaseInterface
 > extends EntityCollectionServiceBase<T> {
   private readonly selections$ = new BehaviorSubject<T[]>([]);
   constructor(
@@ -27,10 +28,15 @@ export class NgrxBaseCollecitonService<
 
   getItemToBeUpdated() {
     const selectedItems = this.selections$.getValue();
-    console.log(selectedItems);
-
-    const updatedItem = selectedItems[0];
-    // this.selections$.next(selectedItems);
+    const updatedItem = selectedItems.pop();
+    this.selections$.next(selectedItems);
     return updatedItem;
+  }
+
+  deleteItem() {
+    const d = this.selections$.getValue().pop();
+    if (d) {
+      this.removeOneFromCache(d);
+    }
   }
 }

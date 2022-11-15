@@ -4,8 +4,6 @@
     [noValidate]="false">
     <div class="flex flex-column  justify-content-start align-items-start" *ngFor=" let field of fields">
         <label [for]="field.name">{{field.placeholder}} </label>
-
-
         <ng-container
             *ngIf="['text', 'number', 'date', 'datetime', 'range', 'email', 'password'].includes(field.type || 'text')">
             <input [id]="field.name" [formControlName]="field.name!" [type]="field.type || 'text'"
@@ -27,9 +25,9 @@
 
 
         <ng-container *ngIf="field.type ==='select'">
-            <p-dropdown [options]="field.options || (field.asyncOptions | async)!" [formControlName]="field.name!"
-                [optionValue]="field.optionValue!" [optionLabel]="field.optionLabel!"></p-dropdown>
-
+            <p-dropdown styleClass="w-full" class="w-full" [options]="field.options || (field.asyncOptions | async)!"
+                [formControlName]="field.name!" [optionValue]="field.optionValue!" [optionLabel]="field.optionLabel!">
+            </p-dropdown>
         </ng-container>
     </div>
 

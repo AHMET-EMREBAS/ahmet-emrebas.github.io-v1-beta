@@ -1,0 +1,43 @@
+import { Component } from '@angular/core';
+import {
+  FormBuilder,
+  FormGroup,
+} from '@angular/forms';
+import {
+  ActivatedRoute,
+  Router,
+} from '@angular/router';
+
+import { InputOptions } from 'material/form';
+
+import { <%- classname %>Service } from '../<%- name %>.service';
+
+@Component({
+  selector: 'ae-create-<%- name %>',
+  templateUrl: './create-<%- name %>.component.html',
+  styleUrls: ['./create-<%- name %>.component.scss'],
+})
+export class Create<%- classname %>Component {
+  submitted = false;
+  title = 'Create <%- classname %>';
+  formGroup = new FormGroup({
+
+
+
+  });
+  fields: InputOptions[] = [];
+  constructor(
+    private readonly <%- name %>Service: <%- classname %>Service,
+    private readonly router: Router,
+    private readonly route: ActivatedRoute,
+    private readonly fb: FormBuilder
+  ) {}
+
+  submit() {
+    if (this.submitted === false)
+      if (this.formGroup.valid) {
+        this.submitted = true;
+        this.<%- name %>Service.add(this.formGroup.value);
+      }
+  }
+}

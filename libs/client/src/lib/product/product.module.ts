@@ -4,7 +4,14 @@ import { RouterModule } from '@angular/router';
 
 import { FormModule } from 'material/form';
 import { TableModule } from 'material/table';
+import {
+  ConfirmationService,
+  MessageService,
+} from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { MessageModule } from 'primeng/message';
+import { ToastModule } from 'primeng/toast';
 import { ToolbarModule } from 'primeng/toolbar';
 import { TooltipModule } from 'primeng/tooltip';
 
@@ -30,7 +37,9 @@ import { ViewProductComponent } from './view-product';
     ToolbarModule,
     ButtonModule,
     TooltipModule,
-
+    ConfirmDialogModule,
+    MessageModule,
+    ToastModule,
     RouterModule.forChild([
       {
         path: '',
@@ -60,6 +69,6 @@ import { ViewProductComponent } from './view-product';
       },
     ]),
   ],
-  providers: [ProductService],
+  providers: [ProductService, ConfirmationService, MessageService],
 })
 export class ProductModule {}

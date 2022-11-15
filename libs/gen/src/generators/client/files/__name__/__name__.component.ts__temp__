@@ -1,0 +1,70 @@
+import {
+  Component,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
+import {
+  ActivatedRoute,
+  Router,
+} from '@angular/router';
+
+import { MessageService } from 'primeng/api';
+import { Subscription } from 'rxjs';
+
+import { <%- classname %>Service } from './<%- name %>.service';
+
+@Component({
+  selector: 'ae-<%- name %>',
+  templateUrl: './<%- name %>.component.html',
+  styleUrls: ['./<%- name %>.component.scss'],
+})
+export class <%- classname %>Component implements OnInit, OnDestroy {
+  sub!: Subscription;
+  constructor(
+    private readonly router: Router,
+    private readonly route: ActivatedRoute,
+    private readonly service: <%- classname %>Service,
+    private readonly messageService: MessageService
+  ) {}
+
+  ngOnInit(): void {
+    this.sub = this.service.entityActions$.subscribe((event) => {
+      console.log(event);
+      if (event.type.endsWith('add-one')) {
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Created new <%- name %>',
+        });
+        this.goHome();
+      }
+      if (event.type.endsWith('add-one/error')) {
+        this.messageService.add({
+          severity: 'warning',
+          summary: 'Something went wrong creating the <%- name %>',
+        });
+      }
+
+      if (event.type.endsWith('update-one')) {
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Updated the <%- name %>',
+        });
+        this.goHome();
+      }
+      if (event.type.endsWith('update-one/error')) {
+        this.messageService.add({
+          severity: 'warning',
+          summary: 'Something went wrong updating the <%- name %>',
+        });
+      }
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
+
+  goHome() {
+    this.router.navigate(['Inventory', '<%- classname %>']);
+  }
+}

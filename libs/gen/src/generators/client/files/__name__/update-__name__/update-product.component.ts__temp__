@@ -1,0 +1,60 @@
+import {
+  AfterViewInit,
+  Component,
+} from '@angular/core';
+import {
+  FormBuilder,
+  FormGroup,
+} from '@angular/forms';
+import {
+  ActivatedRoute,
+  Router,
+} from '@angular/router';
+
+import {
+  ICategory,
+  IDepartment,
+  I<%- classname %>,
+} from 'common/inventory/interfaces';
+import {
+  InputOptions,
+  setFormGroupValue,
+} from 'material/form';
+
+import { <%- classname %>Service } from '../<%- name %>.service';
+
+@Component({
+  selector: 'ae-update-<%- name %>',
+  templateUrl: './update-<%- name %>.component.html',
+  styleUrls: ['./update-<%- name %>.component.scss'],
+})
+export class Update<%- classname %>Component implements AfterViewInit {
+  title = 'Update <%- classname %>';
+  private itemToBeUpdated!: Partial<I<%- classname %><ICategory, IDepartment>>;
+
+  formGroup = new FormGroup({});
+
+  fields: InputOptions[] = [];
+
+  constructor(
+    private readonly service: <%- classname %>Service,
+    private readonly router: Router,
+    private readonly route: ActivatedRoute,
+    private readonly fb: FormBuilder
+  ) {}
+  ngAfterViewInit(): void {
+    const item = this.service.getItemToBeUpdated();
+    if (item) setFormGroupValue(this.formGroup, item);
+  }
+
+  submit() {
+    this.service.updateOneInCache({
+      id: this.itemToBeUpdated.id,
+      ...this.formGroup.value,
+    } as any);
+  }
+
+  getOptions(name: string) {
+    return JSON.parse(localStorage.getItem(name) || '[]');
+  }
+}

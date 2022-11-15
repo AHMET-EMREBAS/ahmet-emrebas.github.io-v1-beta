@@ -19,7 +19,6 @@ import {
   SortEvent,
   TableComponent,
 } from 'material/table';
-import { take } from 'rxjs';
 
 import { ProductService } from '../product.service';
 
@@ -35,47 +34,13 @@ export class ViewProductComponent {
   filters = [];
   sort = [];
 
-  items$ = this.service.entities$.pipe(take(20));
-  columns: ColumnOption<IProduct<ICategory, IDepartment>>[] = [
-    { header: '#', field: 'id' },
-    { header: 'UUID', field: 'uuid' },
-    { header: 'Name', field: 'name' },
-    { header: 'Description', field: 'description' },
-
-    { header: 'Category', field: 'category', mapper: (c: ICategory) => c.name },
-    {
-      header: 'Department',
-      field: 'department',
-      mapper: (c: IDepartment) => c.name,
-    },
-
-    { header: 'Create Time', field: 'createdAt' },
-    { header: 'Update Time', field: 'updatedAt' },
-    { header: 'Delete Time', field: 'deletedAt' },
-  ];
+  items$ = this.service.entities$.pipe();
+  columns: ColumnOption<IProduct<ICategory, IDepartment>>[] = [];
   constructor(
     private readonly service: ProductService,
     private readonly router: Router,
     private readonly route: ActivatedRoute
-  ) {
-    this.service.addOneToCache({
-      id: 1,
-      name: 'SOme ',
-      description: ' SOm descrip',
-      category: {
-        id: 3,
-        name: 'SOme cat',
-      },
-      department: {
-        id: 3,
-        name: 'some dep ',
-      },
-    });
-  }
-
-  handleEvent(event: any, name: 'sort' | 'page' | 'select' | 'filter') {
-    console.log(event);
-  }
+  ) {}
 
   newItem() {
     this.goTo('Create');
@@ -110,5 +75,19 @@ export class ViewProductComponent {
 
   filterData(event: FilterEvent) {
     console.log(event);
+  }
+
+  handleEvent() {
+    setTimeout(() => {
+      const table = this.dataTable.table;
+      this.service.clearCache();
+      this.service.getWithQuery({
+        take: table.rows + '',
+        skip: table.first + '',
+        where: JSON.stringify(table.filters),
+        sortField: table.sortField,
+        sortOrder: table.sortOrder + '',
+      });
+    });
   }
 }
