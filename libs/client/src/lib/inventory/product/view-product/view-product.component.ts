@@ -1,24 +1,26 @@
-import { Component, ViewChild, AfterViewInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import {
+  AfterViewInit,
+  Component,
+  ViewChild,
+} from '@angular/core';
+import {
+  ActivatedRoute,
+  Router,
+} from '@angular/router';
 
 import {
-  IReadProduct,
   IReadCategory,
   IReadDepartment,
+  IReadProduct,
 } from 'common/inventory/interfaces';
 import {
   ColumnOption,
-  FilterEvent,
-  PageEvent,
-  SortEvent,
   TableComponent,
 } from 'material/table';
 
-import { ProductService } from '../product.service';
-
 import { CategoryService } from '../../category';
-
 import { DepartmentService } from '../../department';
+import { ProductService } from '../product.service';
 
 @Component({
   selector: 'ae-view-product',
@@ -85,15 +87,12 @@ export class ViewProductComponent implements AfterViewInit {
     private readonly productService: ProductService,
     private readonly router: Router,
     private readonly route: ActivatedRoute,
-
     private readonly categoryService: CategoryService,
     private readonly departmentService: DepartmentService
   ) {}
 
   ngAfterViewInit(): void {
     this.productService.query(this.dataTable.table);
-
-    // this.categoryService.getAll();   this.departmentService.getAll();
   }
 
   newItem() {
@@ -119,29 +118,7 @@ export class ViewProductComponent implements AfterViewInit {
     this.productService.updateSelection([...event]);
   }
 
-  sortItems(event: SortEvent) {
-    console.log(event);
-  }
-
-  pageData(event: PageEvent) {
-    console.log(event);
-  }
-
-  filterData(event: FilterEvent) {
-    console.log(event);
-  }
-
   handleEvent() {
-    setTimeout(() => {
-      const table = this.dataTable.table;
-      this.productService.clearCache();
-      this.productService.getWithQuery({
-        take: table.rows + '',
-        skip: table.first + '',
-        where: JSON.stringify(table.filters),
-        sortField: table.sortField,
-        sortOrder: table.sortOrder + '',
-      });
-    });
+    this.productService.query(this.dataTable.table);
   }
 }

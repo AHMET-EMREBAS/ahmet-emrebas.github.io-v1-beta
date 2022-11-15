@@ -51,6 +51,8 @@ export class TableComponent implements OnInit {
   @Input() data: Record<string, any>[] = [];
   @Input() totalRecords = 1000000;
 
+  @Input() globalFilterFields: string[] = ['id', 'uuid', 'name'];
+
   @Input() columns: ColumnOption<any>[] = [
     { header: '#', field: 'id' },
     { header: 'uuid', field: 'uuid' },
@@ -69,6 +71,7 @@ export class TableComponent implements OnInit {
 
   ngOnInit(): void {
     this.visibleColumns = [...this.columns];
+    this.globalFilterFields = [...this.columns.map((e) => e.field)];
   }
   showSettingDialog() {
     this.settingDialog = true;

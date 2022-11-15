@@ -75,19 +75,27 @@ export class PaginatorDto {
   @MaxLength(50)
   sortField?: string;
 
-  @ApiProperty({ enum: ['ASC', 'DESC'], required: false })
-  @Field((value) => String, { defaultValue: 'ASC', nullable: true })
-  @IsIn(['1', '-1', 'asc', 'desc', 'ASC', 'DESC'])
+  @ApiProperty({ enum: ['1', '-1'], required: false })
+  @Field((value) => String, { defaultValue: '1', nullable: true })
+  @IsIn(['1', '-1'])
   @IsOptional()
   sortOrder?: string;
+
+  @ApiProperty({ enum: ['1', '-1'], required: false })
+  @Field((value) => String, { defaultValue: '1', nullable: true })
+  @IsIn(['1', '-1'])
+  @IsOptional()
+  nullsOrder?: string;
 
   @Expose()
   @Transform(({ obj }) => {
     const field = obj.sortField || 'id';
     const sortDir = obj.sortOrder === '1' ? 'ASC' : 'DESC';
-
     return {
-      [field]: sortDir,
+      [field]: {
+        direction: sortDir,
+        nulls: obj.nullsOrder == '1' ? 'first' : 'last',
+      },
     };
   })
   order: FindOptionsOrder<any>;

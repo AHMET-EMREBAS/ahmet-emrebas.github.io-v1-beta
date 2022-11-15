@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { IReadCategory } from 'common/inventory/interfaces';
@@ -17,13 +17,14 @@ import { CategoryService } from '../category.service';
   templateUrl: './view-category.component.html',
   styleUrls: ['./view-category.component.scss'],
 })
-export class ViewCategoryComponent {
+export class ViewCategoryComponent implements AfterViewInit {
   @ViewChild('dataTable') dataTable!: TableComponent;
   rows = 10;
   first = 0;
   filters = [];
   sort = [];
 
+  totalRecords$ = this.categoryService.allCount$;
   items$ = this.categoryService.entities$;
 
   columns: ColumnOption<IReadCategory>[] = [
@@ -59,8 +60,12 @@ export class ViewCategoryComponent {
     private readonly categoryService: CategoryService,
     private readonly router: Router,
     private readonly route: ActivatedRoute
-  ) {
-    this.categoryService.getAll();
+  ) {}
+
+  ngAfterViewInit(): void {
+    this.categoryService.query(this.dataTable.table);
+
+    //
   }
 
   newItem() {
@@ -86,29 +91,8 @@ export class ViewCategoryComponent {
     this.categoryService.updateSelection([...event]);
   }
 
-  sortItems(event: SortEvent) {
-    console.log(event);
-  }
-
-  pageData(event: PageEvent) {
-    console.log(event);
-  }
-
-  filterData(event: FilterEvent) {
-    console.log(event);
-  }
-
   handleEvent() {
-    setTimeout(() => {
-      const table = this.dataTable.table;
-      this.categoryService.clearCache();
-      this.categoryService.getWithQuery({
-        take: table.rows + '',
-        skip: table.first + '',
-        where: JSON.stringify(table.filters),
-        sortField: table.sortField,
-        sortOrder: table.sortOrder + '',
-      });
-    });
+    this.categoryService.clearCache();
+    this.categoryService.query(this.dataTable.table);
   }
 }

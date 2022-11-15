@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 import { IReadCategory } from 'common/inventory/interfaces';
 
@@ -12,7 +13,10 @@ import { EntityCollectionServiceElementsFactory } from '@ngrx/data';
 export class CategoryService extends NgrxBaseCollecitonService<
   Partial<IReadCategory>
 > {
-  constructor(sef: EntityCollectionServiceElementsFactory) {
-    super('Category', sef);
+  constructor(
+    sef: EntityCollectionServiceElementsFactory,
+    httpClient: HttpClient
+  ) {
+    super('Category', sef, httpClient);
   }
 }

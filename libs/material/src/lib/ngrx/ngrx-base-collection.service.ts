@@ -53,11 +53,14 @@ export class NgrxBaseCollecitonService<
   }
 
   query(table: Table) {
+    this.clearCache();
     this.getWithQuery({
+      view: 'true',
       take: table.rows + '',
       skip: table.first + '',
       sortOrder: table.sortOrder + '',
-      sortField: table.sortField,
+      sortField: table.sortField || 'id',
+      where: JSON.stringify(table.filters),
     });
   }
 }

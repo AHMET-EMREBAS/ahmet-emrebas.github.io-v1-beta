@@ -17,6 +17,10 @@ import { Department } from '../../department';
       .createQueryBuilder()
       .select('product.id', 'id')
       .addSelect('product.uuid', 'uuid')
+      .addSelect('product.createdAt', 'createdAt')
+      .addSelect('product.updatedAt', 'updatedAt')
+      .addSelect('product.deletedAt', 'deletedAt')
+      .addSelect('product.active', 'active')
 
       .addSelect('product.name', 'name')
 
@@ -28,9 +32,13 @@ import { Department } from '../../department';
 
       .from(Product, 'product')
 
-      .leftJoin(Category, 'category')
+      .leftJoin(Category, 'category', 'category.id = product.categoryId')
 
-      .leftJoin(Department, 'department');
+      .leftJoin(
+        Department,
+        'department',
+        'department.id = product.departmentId'
+      );
   },
 })
 export class ProductView implements IProduct<string, string> {
@@ -57,4 +65,20 @@ export class ProductView implements IProduct<string, string> {
   @Field()
   @ViewColumn()
   department: string;
+
+  @Field()
+  @ViewColumn()
+  createdAt: Date;
+
+  @Field()
+  @ViewColumn()
+  updatedAt: Date;
+
+  @Field()
+  @ViewColumn()
+  deletedAt: Date;
+
+  @Field()
+  @ViewColumn()
+  active: boolean;
 }

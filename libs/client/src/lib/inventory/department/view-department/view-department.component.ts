@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { IReadDepartment } from 'common/inventory/interfaces';
@@ -17,13 +17,14 @@ import { DepartmentService } from '../department.service';
   templateUrl: './view-department.component.html',
   styleUrls: ['./view-department.component.scss'],
 })
-export class ViewDepartmentComponent {
+export class ViewDepartmentComponent implements AfterViewInit {
   @ViewChild('dataTable') dataTable!: TableComponent;
   rows = 10;
   first = 0;
   filters = [];
   sort = [];
 
+  totalRecords$ = this.departmentService.allCount$;
   items$ = this.departmentService.entities$;
 
   columns: ColumnOption<IReadDepartment>[] = [
@@ -59,8 +60,12 @@ export class ViewDepartmentComponent {
     private readonly departmentService: DepartmentService,
     private readonly router: Router,
     private readonly route: ActivatedRoute
-  ) {
-    this.departmentService.getAll();
+  ) {}
+
+  ngAfterViewInit(): void {
+    this.departmentService.query(this.dataTable.table);
+
+    //
   }
 
   newItem() {
@@ -86,29 +91,8 @@ export class ViewDepartmentComponent {
     this.departmentService.updateSelection([...event]);
   }
 
-  sortItems(event: SortEvent) {
-    console.log(event);
-  }
-
-  pageData(event: PageEvent) {
-    console.log(event);
-  }
-
-  filterData(event: FilterEvent) {
-    console.log(event);
-  }
-
   handleEvent() {
-    setTimeout(() => {
-      const table = this.dataTable.table;
-      this.departmentService.clearCache();
-      this.departmentService.getWithQuery({
-        take: table.rows + '',
-        skip: table.first + '',
-        where: JSON.stringify(table.filters),
-        sortField: table.sortField,
-        sortOrder: table.sortOrder + '',
-      });
-    });
+    this.departmentService.clearCache();
+    this.departmentService.query(this.dataTable.table);
   }
 }

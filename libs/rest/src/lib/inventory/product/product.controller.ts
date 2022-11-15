@@ -2,6 +2,7 @@ import {
   FunctionsDto,
   PaginatorDto,
   ViewDto,
+  WhereDto,
 } from 'core/dto';
 import {
   CreateProductDto,
@@ -36,15 +37,12 @@ export class ProductController {
   @Get()
   readProduct(
     @Query() paginatorDto: PaginatorDto,
-    @Query() viewDto: ViewDto
-    // @Query() whereDto: WhereDto
+    @Query() viewDto: ViewDto,
+    @Query() whereDto: WhereDto
   ) {
-    // console.log(whereDto);
-    console.log(paginatorDto);
-
     const q = {
       ...paginatorDto,
-      // where: whereDto.where,
+      where: whereDto.where,
     };
 
     if (viewDto.view === true) {

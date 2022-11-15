@@ -88,7 +88,6 @@ export class View<%- classname %>Component implements AfterViewInit {
     private readonly <%- name %>Service: <%- classname %>Service,
     private readonly router: Router,
     private readonly route: ActivatedRoute,
-    
     <% for(const o of options.Relations || []) { %>  private readonly <%- o.name %>Service: <%- o.target %>Service, <% } %>
   ) {
 
@@ -96,13 +95,8 @@ export class View<%- classname %>Component implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-   this.<%- name %>Service.query(this.dataTable.table); 
-
-  //<% for(const o of options.Relations || []) { %> this.<%- o.name %>Service.getAll();  <% } %>
-  
+   this.<%- name %>Service.query(this.dataTable.table);   
   }
-
-
 
   newItem() {
     this.goTo('create');
@@ -127,29 +121,7 @@ export class View<%- classname %>Component implements AfterViewInit {
     this.<%- name %>Service.updateSelection([...event]);
   }
 
-  sortItems(event: SortEvent) {
-    console.log(event);
-  }
-
-  pageData(event: PageEvent) {
-    console.log(event);
-  }
-
-  filterData(event: FilterEvent) {
-    console.log(event);
-  }
-
   handleEvent() {
-    setTimeout(() => {
-      const table = this.dataTable.table;
-      this.<%- name %>Service.clearCache();
-      this.<%- name %>Service.getWithQuery({
-        take: table.rows + '',
-        skip: table.first + '',
-        where: JSON.stringify(table.filters),
-        sortField: table.sortField,
-        sortOrder: table.sortOrder + '',
-      });
-    });
+      this.<%- name %>Service.query(this.dataTable.table); 
   }
 }

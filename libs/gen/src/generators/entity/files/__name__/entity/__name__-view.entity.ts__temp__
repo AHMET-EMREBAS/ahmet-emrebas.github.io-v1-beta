@@ -30,6 +30,11 @@ import { <%- o.target  %>  } from '../../<%- o.name %>'
       .createQueryBuilder()
       .select('<%- name %>.id', 'id')
       .addSelect('<%- name %>.uuid', 'uuid')
+      .addSelect('<%- name %>.createdAt', 'createdAt')
+      .addSelect('<%- name %>.updatedAt', 'updatedAt')
+      .addSelect('<%- name %>.deletedAt', 'deletedAt')
+      .addSelect('<%- name %>.active', 'active')
+      
 
 
         <% for(const o of options.Properties) { %> 
@@ -47,7 +52,7 @@ import { <%- o.target  %>  } from '../../<%- o.name %>'
       .from(<%- classname %>, '<%- name %>')
 
       <% for(const o of options.Relations || []) { %> 
-        .leftJoin(<%- o.target %>, '<%- o.name %>')
+        .leftJoin(<%- o.target %>, '<%- o.name %>', '<%- o.name %>.id = <%- name %>.<%- o.name %>Id')
       <% } %> 
   },
 })
@@ -71,6 +76,8 @@ export class <%- classname %>View
   uuid: string;
 
 
+
+
 <% for(const o of options.Properties) { %> 
   
   @Field()
@@ -91,6 +98,21 @@ export class <%- classname %>View
     <% } %>
 <% } %>
 
+  @Field()
+  @ViewColumn()
+  createdAt: Date;
+
+  @Field()
+  @ViewColumn()
+  updatedAt: Date;
+
+  @Field()
+  @ViewColumn()
+  deletedAt: Date;
+
+  @Field()
+  @ViewColumn()
+  active: boolean;
 
 
 }

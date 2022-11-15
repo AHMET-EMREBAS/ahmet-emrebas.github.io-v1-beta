@@ -1,13 +1,6 @@
 import { Component } from '@angular/core';
-import {
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
-import {
-  ActivatedRoute,
-  Router,
-} from '@angular/router';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { InputOptions } from 'material/form';
 

@@ -63,9 +63,10 @@
 <p-table #table [value]="data" dataKey="id" [lazy]="true" [columns]="visibleColumns" [(selection)]="selectedItems"
     [rowHover]="true" [rows]="10" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50, 100]"
     [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
-    [totalRecords]="totalRecords" (onSort)="sortEvent.emit($event)" (onFilter)="filterEvent.emit($event)"
-    (onPage)="pageEvent.emit($event)" styleClass="p-datatable-gridlines  p-datatable-striped" responsiveLayout="scroll"
-    (onFilter)="filterEvent.emit($event)" (selectionChange)="selectEvent.emit($event)" [sortField]="'id'">
+    [totalRecords]="totalRecords" (onSort)="sortEvent.emit($event)" (onPage)="pageEvent.emit($event)"
+    styleClass="p-datatable-gridlines  p-datatable-striped" responsiveLayout="scroll"
+    (onFilter)="filterEvent.emit($event)" (selectionChange)="selectEvent.emit($event)" [sortField]="'id'"
+    [globalFilterFields]="globalFilterFields">
 
     <ng-template pTemplate="header">
 
@@ -94,8 +95,7 @@
             </td>
             <td *ngFor="let col of visibleColumns">
                 {{col.prefix}}
-                {{ col.mapper ? col.mapper(rowData[col.field]) : ['createdAt', 'updatedAt',
-                'deletedAt'].includes(col.field) ? (rowData[col.field] | date: 'short'):rowData[col.field] }}
+                {{rowData[col.field] }}
                 {{col.suffix}}
             </td>
         </tr>
