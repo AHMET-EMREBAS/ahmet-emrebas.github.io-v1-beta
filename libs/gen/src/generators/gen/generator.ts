@@ -1,73 +1,26 @@
-import {
-  addProjectConfiguration,
-  formatFiles,
-  generateFiles,
-  getWorkspaceLayout,
-  names,
-  offsetFromRoot,
-  Tree,
-} from '@nrwl/devkit';
-import * as path from 'path';
+import { readdirSync } from 'fs';
+import { join } from 'path';
+
+import { Tree } from '@nrwl/devkit';
+
+import * as generateClients from '../client/generator';
+import * as generateEntities from '../entity/generator';
+import * as generateInterfaces from '../interface/generator';
+import * as generateRest from '../rest/generator';
 import { GenGeneratorSchema } from './schema';
 
-interface NormalizedSchema extends GenGeneratorSchema {
-  projectName: string;
-  projectRoot: string;
-  projectDirectory: string;
-  parsedTags: string[];
-}
-
-function normalizeOptions(
-  tree: Tree,
-  options: GenGeneratorSchema
-): NormalizedSchema {
-  const name = names(options.name).fileName;
-  const projectDirectory = options.directory
-    ? `${names(options.directory).fileName}/${name}`
-    : name;
-  const projectName = projectDirectory.replace(new RegExp('/', 'g'), '-');
-  const projectRoot = `${getWorkspaceLayout(tree).libsDir}/${projectDirectory}`;
-  const parsedTags = options.tags
-    ? options.tags.split(',').map((s) => s.trim())
-    : [];
-
-  return {
-    ...options,
-    projectName,
-    projectRoot,
-    projectDirectory,
-    parsedTags,
-  };
-}
-
-function addFiles(tree: Tree, options: NormalizedSchema) {
-  const templateOptions = {
-    ...options,
-    ...names(options.name),
-    offsetFromRoot: offsetFromRoot(options.projectRoot),
-    template: '',
-  };
-  generateFiles(
-    tree,
-    path.join(__dirname, 'files'),
-    options.projectRoot,
-    templateOptions
-  );
-}
-
 export default async function (tree: Tree, options: GenGeneratorSchema) {
-  const normalizedOptions = normalizeOptions(tree, options);
-  addProjectConfiguration(tree, normalizedOptions.projectName, {
-    root: normalizedOptions.projectRoot,
-    projectType: 'library',
-    sourceRoot: `${normalizedOptions.projectRoot}/src`,
-    targets: {
-      build: {
-        executor: 'gen:build',
-      },
-    },
-    tags: normalizedOptions.parsedTags,
-  });
-  addFiles(tree, normalizedOptions);
-  await formatFiles(tree);
+  const projectDir = join(tree.root, 'projects', options.project);
+
+  const dirs = readdirSync(projectDir);
+  const resouceNames = dirs.map((e) => e.split('.')[0]);
+
+  console.log('..........START');
+  for (const rn of resouceNames) {
+    await generateInterfaces.default(tree, { ...options, name: rn });
+    await generateEntities.default(tree, { ...options, name: rn });
+    await generateClients.default(tree, { ...options, name: rn });
+    await generateRest.default(tree, { ...options, name: rn });
+  }
+  console.log('...........END');
 }

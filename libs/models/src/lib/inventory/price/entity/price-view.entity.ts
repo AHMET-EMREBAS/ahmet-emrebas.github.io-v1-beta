@@ -17,6 +17,10 @@ import { Pricelevel } from '../../pricelevel';
       .createQueryBuilder()
       .select('price.id', 'id')
       .addSelect('price.uuid', 'uuid')
+      .addSelect('price.createdAt', 'createdAt')
+      .addSelect('price.updatedAt', 'updatedAt')
+      .addSelect('price.deletedAt', 'deletedAt')
+      .addSelect('price.active', 'active')
 
       .addSelect('price.price', 'price')
 
@@ -28,9 +32,9 @@ import { Pricelevel } from '../../pricelevel';
 
       .from(Price, 'price')
 
-      .leftJoin(Sku, 'sku')
+      .leftJoin(Sku, 'sku', 'sku.id = price.skuId')
 
-      .leftJoin(Pricelevel, 'pricelevel');
+      .leftJoin(Pricelevel, 'pricelevel', 'pricelevel.id = price.pricelevelId');
   },
 })
 export class PriceView implements IPrice<string, string> {
@@ -57,4 +61,20 @@ export class PriceView implements IPrice<string, string> {
   @Field()
   @ViewColumn()
   pricelevel: string;
+
+  @Field()
+  @ViewColumn()
+  createdAt: Date;
+
+  @Field()
+  @ViewColumn()
+  updatedAt: Date;
+
+  @Field()
+  @ViewColumn()
+  deletedAt: Date;
+
+  @Field()
+  @ViewColumn()
+  active: boolean;
 }

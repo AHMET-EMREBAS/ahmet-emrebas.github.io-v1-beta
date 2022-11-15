@@ -13,6 +13,10 @@ import { IPermission } from 'common/inventory/interfaces/permission';
       .createQueryBuilder()
       .select('permission.id', 'id')
       .addSelect('permission.uuid', 'uuid')
+      .addSelect('permission.createdAt', 'createdAt')
+      .addSelect('permission.updatedAt', 'updatedAt')
+      .addSelect('permission.deletedAt', 'deletedAt')
+      .addSelect('permission.active', 'active')
 
       .addSelect('permission.name', 'name')
 
@@ -37,4 +41,20 @@ export class PermissionView implements IPermission {
   @Field()
   @ViewColumn()
   description: string;
+
+  @Field()
+  @ViewColumn()
+  createdAt: Date;
+
+  @Field()
+  @ViewColumn()
+  updatedAt: Date;
+
+  @Field()
+  @ViewColumn()
+  deletedAt: Date;
+
+  @Field()
+  @ViewColumn()
+  active: boolean;
 }

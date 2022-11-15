@@ -17,6 +17,10 @@ import { Store } from '../../store';
       .createQueryBuilder()
       .select('quantity.id', 'id')
       .addSelect('quantity.uuid', 'uuid')
+      .addSelect('quantity.createdAt', 'createdAt')
+      .addSelect('quantity.updatedAt', 'updatedAt')
+      .addSelect('quantity.deletedAt', 'deletedAt')
+      .addSelect('quantity.active', 'active')
 
       .addSelect('quantity.quantity', 'quantity')
 
@@ -26,9 +30,9 @@ import { Store } from '../../store';
 
       .from(Quantity, 'quantity')
 
-      .leftJoin(Sku, 'sku')
+      .leftJoin(Sku, 'sku', 'sku.id = quantity.skuId')
 
-      .leftJoin(Store, 'store');
+      .leftJoin(Store, 'store', 'store.id = quantity.storeId');
   },
 })
 export class QuantityView implements IQuantity<string, string> {
@@ -51,4 +55,20 @@ export class QuantityView implements IQuantity<string, string> {
   @Field()
   @ViewColumn()
   store: string;
+
+  @Field()
+  @ViewColumn()
+  createdAt: Date;
+
+  @Field()
+  @ViewColumn()
+  updatedAt: Date;
+
+  @Field()
+  @ViewColumn()
+  deletedAt: Date;
+
+  @Field()
+  @ViewColumn()
+  active: boolean;
 }

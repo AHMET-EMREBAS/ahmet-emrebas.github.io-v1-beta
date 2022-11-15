@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 import { IReadStore } from 'common/inventory/interfaces';
 
@@ -12,7 +13,10 @@ import { EntityCollectionServiceElementsFactory } from '@ngrx/data';
 export class StoreService extends NgrxBaseCollecitonService<
   Partial<IReadStore>
 > {
-  constructor(sef: EntityCollectionServiceElementsFactory) {
-    super('Store', sef);
+  constructor(
+    sef: EntityCollectionServiceElementsFactory,
+    httpClient: HttpClient
+  ) {
+    super('Store', sef, httpClient);
   }
 }

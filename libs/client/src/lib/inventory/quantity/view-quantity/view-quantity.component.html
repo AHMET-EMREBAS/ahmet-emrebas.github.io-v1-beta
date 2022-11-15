@@ -3,6 +3,7 @@
   [data]="(items$ | async)!"
   [columns]="columns"
   (filterEvent)="handleEvent()"
+  [totalRecords]="(totalRecords$ | async)!"
   (sortEvent)="handleEvent()"
   (pageEvent)="handleEvent()"
   (selectEvent)="selectItems($event)"

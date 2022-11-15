@@ -1,5 +1,3 @@
-import { PaginatorDto, QueryDto, ViewDto } from 'core/dto';
-
 import {
   Body,
   Controller,
@@ -9,8 +7,17 @@ import {
   Post,
   Put,
   Query,
+  Patch,
+  BadRequestException,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
+import {
+  FunctionsDto,
+  PaginatorDto,
+  QueryDto,
+  ViewDto,
+  WhereDto,
+} from 'core/dto';
 
 import {
   CreateDepartmentDto,
@@ -32,11 +39,11 @@ export class DepartmentController {
   readDepartment(
     @Query() paginatorDto: PaginatorDto,
     @Query() viewDto: ViewDto,
-    @Query() query: QueryDto
+    @Query() whereDto: WhereDto
   ) {
     const q = {
       ...paginatorDto,
-      where: query.toContains(['id', 'uuid', 'name']),
+      where: whereDto.where,
     };
 
     if (viewDto.view === true) {
@@ -66,5 +73,13 @@ export class DepartmentController {
   @Delete(':id')
   deleteDepartment(@Param('id') id: number) {
     return this.service.delete(id);
+  }
+
+  @Patch()
+  functions(@Query() functions: FunctionsDto) {
+    if (functions.query === 'count') {
+      return this.service.count();
+    }
+    throw new BadRequestException('Must provide a fucntion name.');
   }
 }

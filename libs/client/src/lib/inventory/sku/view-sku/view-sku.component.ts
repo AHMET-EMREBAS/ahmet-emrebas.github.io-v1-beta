@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { IReadSku, IReadProduct } from 'common/inventory/interfaces';
@@ -19,13 +19,14 @@ import { ProductService } from '../../product';
   templateUrl: './view-sku.component.html',
   styleUrls: ['./view-sku.component.scss'],
 })
-export class ViewSkuComponent {
+export class ViewSkuComponent implements AfterViewInit {
   @ViewChild('dataTable') dataTable!: TableComponent;
   rows = 10;
   first = 0;
   filters = [];
   sort = [];
 
+  totalRecords$ = this.skuService.allCount$;
   items$ = this.skuService.entities$;
 
   columns: ColumnOption<IReadSku>[] = [
@@ -77,11 +78,11 @@ export class ViewSkuComponent {
     private readonly skuService: SkuService,
     private readonly router: Router,
     private readonly route: ActivatedRoute,
-
     private readonly productService: ProductService
-  ) {
-    this.skuService.getAll();
-    this.productService.getAll();
+  ) {}
+
+  ngAfterViewInit(): void {
+    this.skuService.query(this.dataTable.table);
   }
 
   newItem() {
@@ -107,29 +108,7 @@ export class ViewSkuComponent {
     this.skuService.updateSelection([...event]);
   }
 
-  sortItems(event: SortEvent) {
-    console.log(event);
-  }
-
-  pageData(event: PageEvent) {
-    console.log(event);
-  }
-
-  filterData(event: FilterEvent) {
-    console.log(event);
-  }
-
   handleEvent() {
-    setTimeout(() => {
-      const table = this.dataTable.table;
-      this.skuService.clearCache();
-      this.skuService.getWithQuery({
-        take: table.rows + '',
-        skip: table.first + '',
-        where: JSON.stringify(table.filters),
-        sortField: table.sortField,
-        sortOrder: table.sortOrder + '',
-      });
-    });
+    this.skuService.query(this.dataTable.table);
   }
 }

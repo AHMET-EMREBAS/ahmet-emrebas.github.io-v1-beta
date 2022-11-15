@@ -1,16 +1,10 @@
-import { ICategory } from 'common/inventory/interfaces/category';
-import {
-  DataSource,
-  ViewColumn,
-  ViewEntity,
-} from 'typeorm';
+import { DataSource, ViewColumn, ViewEntity } from 'typeorm';
 
-import {
-  Field,
-  ObjectType,
-} from '@nestjs/graphql';
+import { Field, Int, ObjectType } from '@nestjs/graphql';
 
 import { Category } from './category.entity';
+
+import { ICategory } from 'common/inventory/interfaces/category';
 
 @ObjectType()
 @ViewEntity({
@@ -19,6 +13,10 @@ import { Category } from './category.entity';
       .createQueryBuilder()
       .select('category.id', 'id')
       .addSelect('category.uuid', 'uuid')
+      .addSelect('category.createdAt', 'createdAt')
+      .addSelect('category.updatedAt', 'updatedAt')
+      .addSelect('category.deletedAt', 'deletedAt')
+      .addSelect('category.active', 'active')
 
       .addSelect('category.name', 'name')
 
@@ -37,4 +35,20 @@ export class CategoryView implements ICategory {
   @Field()
   @ViewColumn()
   name: string;
+
+  @Field()
+  @ViewColumn()
+  createdAt: Date;
+
+  @Field()
+  @ViewColumn()
+  updatedAt: Date;
+
+  @Field()
+  @ViewColumn()
+  deletedAt: Date;
+
+  @Field()
+  @ViewColumn()
+  active: boolean;
 }

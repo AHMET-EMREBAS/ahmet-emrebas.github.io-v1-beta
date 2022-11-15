@@ -41,7 +41,7 @@ export class PaginatorDto {
   @Min(0)
   @Max(100)
   @IsNumber()
-  @Transform(({ value }) => parseIntOrDefault(value, 20) % 101)
+  @Transform(({ value }) => parseIntOrDefault(value, 1000) % 1000)
   take: number;
 
   @ApiProperty({

@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import {
@@ -25,13 +25,14 @@ import { StoreService } from '../../store';
   templateUrl: './view-quantity.component.html',
   styleUrls: ['./view-quantity.component.scss'],
 })
-export class ViewQuantityComponent {
+export class ViewQuantityComponent implements AfterViewInit {
   @ViewChild('dataTable') dataTable!: TableComponent;
   rows = 10;
   first = 0;
   filters = [];
   sort = [];
 
+  totalRecords$ = this.quantityService.allCount$;
   items$ = this.quantityService.entities$;
 
   columns: ColumnOption<IReadQuantity>[] = [
@@ -79,13 +80,12 @@ export class ViewQuantityComponent {
     private readonly quantityService: QuantityService,
     private readonly router: Router,
     private readonly route: ActivatedRoute,
-
     private readonly skuService: SkuService,
     private readonly storeService: StoreService
-  ) {
-    this.quantityService.getAll();
-    this.skuService.getAll();
-    this.storeService.getAll();
+  ) {}
+
+  ngAfterViewInit(): void {
+    this.quantityService.query(this.dataTable.table);
   }
 
   newItem() {
@@ -111,29 +111,7 @@ export class ViewQuantityComponent {
     this.quantityService.updateSelection([...event]);
   }
 
-  sortItems(event: SortEvent) {
-    console.log(event);
-  }
-
-  pageData(event: PageEvent) {
-    console.log(event);
-  }
-
-  filterData(event: FilterEvent) {
-    console.log(event);
-  }
-
   handleEvent() {
-    setTimeout(() => {
-      const table = this.dataTable.table;
-      this.quantityService.clearCache();
-      this.quantityService.getWithQuery({
-        take: table.rows + '',
-        skip: table.first + '',
-        where: JSON.stringify(table.filters),
-        sortField: table.sortField,
-        sortOrder: table.sortOrder + '',
-      });
-    });
+    this.quantityService.query(this.dataTable.table);
   }
 }

@@ -15,6 +15,10 @@ import { Pricelevel } from '../../pricelevel';
       .createQueryBuilder()
       .select('store.id', 'id')
       .addSelect('store.uuid', 'uuid')
+      .addSelect('store.createdAt', 'createdAt')
+      .addSelect('store.updatedAt', 'updatedAt')
+      .addSelect('store.deletedAt', 'deletedAt')
+      .addSelect('store.active', 'active')
 
       .addSelect('store.name', 'name')
 
@@ -22,7 +26,7 @@ import { Pricelevel } from '../../pricelevel';
 
       .from(Store, 'store')
 
-      .leftJoin(Pricelevel, 'pricelevel');
+      .leftJoin(Pricelevel, 'pricelevel', 'pricelevel.id = store.pricelevelId');
   },
 })
 export class StoreView implements IStore<string> {
@@ -41,4 +45,20 @@ export class StoreView implements IStore<string> {
   @Field()
   @ViewColumn()
   pricelevel: string;
+
+  @Field()
+  @ViewColumn()
+  createdAt: Date;
+
+  @Field()
+  @ViewColumn()
+  updatedAt: Date;
+
+  @Field()
+  @ViewColumn()
+  deletedAt: Date;
+
+  @Field()
+  @ViewColumn()
+  active: boolean;
 }

@@ -64,8 +64,6 @@ export class ViewDepartmentComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     this.departmentService.query(this.dataTable.table);
-
-    //
   }
 
   newItem() {
@@ -92,7 +90,6 @@ export class ViewDepartmentComponent implements AfterViewInit {
   }
 
   handleEvent() {
-    this.departmentService.clearCache();
     this.departmentService.query(this.dataTable.table);
   }
 }

@@ -1,27 +1,25 @@
 import {
-  FunctionsDto,
-  PaginatorDto,
-  ViewDto,
-  WhereDto,
-} from 'core/dto';
-import {
-  CreateProductDto,
-  UpdateProductDto,
-} from 'models/inventory/product';
-
-import {
-  BadRequestException,
   Body,
   Controller,
   Delete,
   Get,
   Param,
-  Patch,
   Post,
   Put,
   Query,
+  Patch,
+  BadRequestException,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
+import {
+  FunctionsDto,
+  PaginatorDto,
+  QueryDto,
+  ViewDto,
+  WhereDto,
+} from 'core/dto';
+
+import { CreateProductDto, UpdateProductDto } from 'models/inventory/product';
 
 import { ProductViewService } from './product-view.service';
 import { ProductService } from './product.service';

@@ -13,6 +13,10 @@ import { IDepartment } from 'common/inventory/interfaces/department';
       .createQueryBuilder()
       .select('department.id', 'id')
       .addSelect('department.uuid', 'uuid')
+      .addSelect('department.createdAt', 'createdAt')
+      .addSelect('department.updatedAt', 'updatedAt')
+      .addSelect('department.deletedAt', 'deletedAt')
+      .addSelect('department.active', 'active')
 
       .addSelect('department.name', 'name')
 
@@ -31,4 +35,20 @@ export class DepartmentView implements IDepartment {
   @Field()
   @ViewColumn()
   name: string;
+
+  @Field()
+  @ViewColumn()
+  createdAt: Date;
+
+  @Field()
+  @ViewColumn()
+  updatedAt: Date;
+
+  @Field()
+  @ViewColumn()
+  deletedAt: Date;
+
+  @Field()
+  @ViewColumn()
+  active: boolean;
 }

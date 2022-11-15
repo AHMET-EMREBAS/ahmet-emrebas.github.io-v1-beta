@@ -1,5 +1,3 @@
-import { PaginatorDto, QueryDto, ViewDto } from 'core/dto';
-
 import {
   Body,
   Controller,
@@ -9,8 +7,17 @@ import {
   Post,
   Put,
   Query,
+  Patch,
+  BadRequestException,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
+import {
+  FunctionsDto,
+  PaginatorDto,
+  QueryDto,
+  ViewDto,
+  WhereDto,
+} from 'core/dto';
 
 import { CreatePriceDto, UpdatePriceDto } from 'models/inventory/price';
 
@@ -29,11 +36,11 @@ export class PriceController {
   readPrice(
     @Query() paginatorDto: PaginatorDto,
     @Query() viewDto: ViewDto,
-    @Query() query: QueryDto
+    @Query() whereDto: WhereDto
   ) {
     const q = {
       ...paginatorDto,
-      where: query.toContains(['price', 'cost']),
+      where: whereDto.where,
     };
 
     if (viewDto.view === true) {
@@ -63,6 +70,14 @@ export class PriceController {
   @Delete(':id')
   deletePrice(@Param('id') id: number) {
     return this.service.delete(id);
+  }
+
+  @Patch()
+  functions(@Query() functions: FunctionsDto) {
+    if (functions.query === 'count') {
+      return this.service.count();
+    }
+    throw new BadRequestException('Must provide a fucntion name.');
   }
 
   @Post(':id/sku/:skuId')

@@ -15,6 +15,10 @@ import { Product } from '../../product';
       .createQueryBuilder()
       .select('sku.id', 'id')
       .addSelect('sku.uuid', 'uuid')
+      .addSelect('sku.createdAt', 'createdAt')
+      .addSelect('sku.updatedAt', 'updatedAt')
+      .addSelect('sku.deletedAt', 'deletedAt')
+      .addSelect('sku.active', 'active')
 
       .addSelect('sku.name', 'name')
 
@@ -26,7 +30,7 @@ import { Product } from '../../product';
 
       .from(Sku, 'sku')
 
-      .leftJoin(Product, 'product');
+      .leftJoin(Product, 'product', 'product.id = sku.productId');
   },
 })
 export class SkuView implements ISku<string> {
@@ -53,4 +57,20 @@ export class SkuView implements ISku<string> {
   @Field()
   @ViewColumn()
   product: string;
+
+  @Field()
+  @ViewColumn()
+  createdAt: Date;
+
+  @Field()
+  @ViewColumn()
+  updatedAt: Date;
+
+  @Field()
+  @ViewColumn()
+  deletedAt: Date;
+
+  @Field()
+  @ViewColumn()
+  active: boolean;
 }

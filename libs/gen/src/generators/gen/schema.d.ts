@@ -1,5 +1,5 @@
 export interface GenGeneratorSchema {
-  name: string;
+  project: string;
   tags?: string;
   directory?: string;
 }

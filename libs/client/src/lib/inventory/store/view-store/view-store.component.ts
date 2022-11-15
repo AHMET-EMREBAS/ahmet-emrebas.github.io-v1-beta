@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { IReadStore, IReadPricelevel } from 'common/inventory/interfaces';
@@ -19,13 +19,14 @@ import { PricelevelService } from '../../pricelevel';
   templateUrl: './view-store.component.html',
   styleUrls: ['./view-store.component.scss'],
 })
-export class ViewStoreComponent {
+export class ViewStoreComponent implements AfterViewInit {
   @ViewChild('dataTable') dataTable!: TableComponent;
   rows = 10;
   first = 0;
   filters = [];
   sort = [];
 
+  totalRecords$ = this.storeService.allCount$;
   items$ = this.storeService.entities$;
 
   columns: ColumnOption<IReadStore>[] = [
@@ -67,11 +68,11 @@ export class ViewStoreComponent {
     private readonly storeService: StoreService,
     private readonly router: Router,
     private readonly route: ActivatedRoute,
-
     private readonly pricelevelService: PricelevelService
-  ) {
-    this.storeService.getAll();
-    this.pricelevelService.getAll();
+  ) {}
+
+  ngAfterViewInit(): void {
+    this.storeService.query(this.dataTable.table);
   }
 
   newItem() {
@@ -97,29 +98,7 @@ export class ViewStoreComponent {
     this.storeService.updateSelection([...event]);
   }
 
-  sortItems(event: SortEvent) {
-    console.log(event);
-  }
-
-  pageData(event: PageEvent) {
-    console.log(event);
-  }
-
-  filterData(event: FilterEvent) {
-    console.log(event);
-  }
-
   handleEvent() {
-    setTimeout(() => {
-      const table = this.dataTable.table;
-      this.storeService.clearCache();
-      this.storeService.getWithQuery({
-        take: table.rows + '',
-        skip: table.first + '',
-        where: JSON.stringify(table.filters),
-        sortField: table.sortField,
-        sortOrder: table.sortOrder + '',
-      });
-    });
+    this.storeService.query(this.dataTable.table);
   }
 }
