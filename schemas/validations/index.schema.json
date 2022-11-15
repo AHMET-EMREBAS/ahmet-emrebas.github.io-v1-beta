@@ -11,6 +11,12 @@
     },
     {
       "$ref": "./specific.schema.json"
+    },
+    {
+      "$ref": "./date.schema.json"
+    },
+    {
+      "$ref": "./enum.schema.json"
     }
   ]
 }

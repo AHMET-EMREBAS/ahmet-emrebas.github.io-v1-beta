@@ -1,0 +1,97 @@
+Name: Issue
+Properties:
+  - Property: name
+    Defination:
+      lorem: text
+    Validation:
+      type: string
+      minLength: 3
+      maxLength: 30
+
+    Column:
+      columnType: text
+      valueType: string
+
+    UI:
+      type: text
+
+  - Property: description
+    Defination:
+      lorem: text
+    Validation:
+      type: string
+      minLength: 0
+      maxLength: 400
+
+    Column:
+      columnType: text
+      valueType: string
+
+    UI:
+      type: textarea
+
+  - Property: due
+    Validation:
+      type: date
+
+    Column:
+      columnType: date
+      valueType: Date
+    UI:
+      type: datetime-local
+
+  - Property: status
+    Validation:
+      type: enum
+
+    Column:
+      columnType: text
+      valueType: string
+    UI:
+      type: select
+      options:
+        - done
+        - inprogress
+        - new
+
+SearchFields:
+  - name
+  - description
+  - due
+  - status
+
+Required:
+  - name
+
+Unique:
+  - name
+
+Relations:
+  - type: ManyToOne
+    target: Sprint
+    name: sprint
+    nullable: true
+    joinColumn: true
+    eager: true
+    viewColumns:
+      - column: name
+        as: sprint
+        valueType: string
+
+  - type: ManyToOne
+    target: User
+    name: user
+    eager: true
+    joinColumn: true
+    joinTable: true
+    nullable: true
+    viewColumns:
+      - column: username
+        as: username
+        valueType: string
+
+  - type: OneToMany
+    target: Comment
+    name: comment
+    eager: true
+    nullable: true

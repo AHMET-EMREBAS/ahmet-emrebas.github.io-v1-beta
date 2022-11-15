@@ -14,14 +14,6 @@
     "max": {
       "type": "number",
       "default": 0
-    },
-    "enumOptions": {
-      "type": "array",
-      "items": {
-        "type": "number",
-        "minLength": 1
-      },
-      "default": [1, 2, 3, 4, 5, 6]
     }
   },
   "required": ["type", "min", "max"],

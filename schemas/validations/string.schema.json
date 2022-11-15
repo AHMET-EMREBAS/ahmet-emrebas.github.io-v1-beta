@@ -21,14 +21,6 @@
       "type": "string",
       "minLength": 1,
       "default": "^[a-zA-Z\\W]$"
-    },
-    "enumOptions": {
-      "type": "array",
-      "items": {
-        "type": "string",
-        "minLength": 1
-      },
-      "default": ["option 1", "option 2", "option 3"]
     }
   },
   "required": ["type", "minLength", "maxLength"],

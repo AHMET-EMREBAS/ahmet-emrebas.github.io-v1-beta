@@ -1,0 +1,13 @@
+{
+  "$id": "EnumValidation",
+  "title": "Enum  validation",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "const": "enum"
+    }
+  },
+  "required": ["type"],
+  "additionalProperties": false
+}

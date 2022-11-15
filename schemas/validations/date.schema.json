@@ -1,0 +1,13 @@
+{
+  "$id": "DateValidation",
+  "title": "Date validation",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "const": "date"
+    }
+  },
+  "required": ["type"],
+  "additionalProperties": false
+}

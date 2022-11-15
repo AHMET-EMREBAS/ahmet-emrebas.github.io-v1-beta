@@ -1,0 +1,23 @@
+Name: Project
+Properties:
+  - Property: name
+    Defination:
+      lorem: text
+    Validation:
+      type: string
+      minLength: 3
+      maxLength: 30
+
+    Column:
+      columnType: text
+      valueType: string
+
+    UI:
+      type: text
+
+SearchFields:
+  - name
+Required:
+  - name
+Unique:
+  - name

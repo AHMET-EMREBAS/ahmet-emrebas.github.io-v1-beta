@@ -1,0 +1,59 @@
+Name: Comment
+Properties:
+  - Property: name
+    Label: Comment
+    Defination:
+      lorem: text
+    Validation:
+      type: string
+      minLength: 3
+      maxLength: 400
+
+    Column:
+      columnType: text
+      valueType: string
+
+    UI:
+      type: textarea
+
+  - Property: description
+    Defination:
+      lorem: text
+    Validation:
+      type: string
+      minLength: 3
+      maxLength: 400
+
+    Column:
+      columnType: text
+      valueType: string
+
+    UI:
+      type: textarea
+
+SearchFields:
+  - name
+
+Required:
+  - name
+
+Relations:
+  - type: ManyToOne
+    target: Issue
+    name: issue
+    eager: true
+    joinColumn: true
+    viewColumns:
+      - column: name
+        as: issue
+        valueType: string
+
+  - type: ManyToOne
+    target: User
+    name: user
+    eager: true
+    joinColumn: true
+    viewColumns:
+      - column: username
+        as: username
+        valueType: string

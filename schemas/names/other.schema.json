@@ -65,6 +65,8 @@
     "username",
     "password",
     "permissions",
-    "roles"
+    "roles",
+    "due",
+    "status"
   ]
 }

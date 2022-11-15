@@ -1,0 +1,51 @@
+Name: User
+Properties:
+  - Property: username
+    Description: Username
+    Defination:
+      internet: userName
+    Validation:
+      type: specific
+      email: true
+    UI:
+      type: email
+    Column:
+      columnType: text
+      valueType: string
+
+  - Property: password
+    Description: User password
+    Defination:
+      internet: password
+    Validation:
+      type: specific
+      password: true
+    Column:
+      columnType: text
+      valueType: string
+      hash: true
+    UI:
+      type: password
+
+Relations:
+  - type: ManyToMany
+    target: Permission
+    name: permission
+    eager: true
+    joinTable: true
+    viewColumns:
+      - column: name
+        as: permission
+        valueType: string
+
+Required:
+  - username
+  - password
+  - permission
+
+SearchFields:
+  - username
+  - permission
+
+Unique:
+  - username

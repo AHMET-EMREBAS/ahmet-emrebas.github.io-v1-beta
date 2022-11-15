@@ -1,7 +1,6 @@
 {
   "$id": "SpecificValidation",
   "title": "Specific  validation",
-  "description": "Specific  validation",
   "type": "object",
   "properties": {
     "type": {
@@ -23,14 +22,6 @@
     "password": {
       "type": "boolean",
       "default": true
-    },
-    "enumOptions": {
-      "type": "array",
-      "items": {
-        "type": "string",
-        "minLength": 1
-      },
-      "default": ["option 1", "option 2", "option 3"]
     }
   },
   "required": ["type"],

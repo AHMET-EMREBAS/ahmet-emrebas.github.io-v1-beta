@@ -29,6 +29,6 @@
       "$ref": "./ui/index.schema.json"
     }
   },
-  "required": ["Property", "Defination", "Validation", "Column", "UI"],
+  "required": ["Property", "Validation", "Column", "UI"],
   "additionalProperties": false
 }
