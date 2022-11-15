@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { InputOptions } from 'material/form';
@@ -18,11 +18,32 @@ import { DepartmentService } from '../../department';
 export class CreateProductComponent {
   submitted = false;
   title = 'Create Product';
-  formGroup = new FormGroup({});
+  formGroup = new FormGroup({
+    name: new FormControl('', [
+      Validators.required,
+
+      Validators.minLength(0),
+
+      Validators.maxLength(50),
+    ]),
+
+    description: new FormControl('', [
+      Validators.minLength(3),
+
+      Validators.maxLength(500),
+    ]),
+
+    category: new FormControl('', [Validators.required]),
+
+    department: new FormControl('', [Validators.required]),
+  });
+
   fields: InputOptions[] = [
     {
       name: 'name',
       type: 'text',
+
+      required: true,
 
       minLength: 0,
 
@@ -37,15 +58,33 @@ export class CreateProductComponent {
 
       maxLength: 500,
     },
+
+    {
+      name: 'category',
+      type: 'select',
+      asyncOptions: this.categoryService.entities$,
+      optionValue: 'id',
+      optionLabel: 'name',
+
+      required: true,
+    },
+
+    {
+      name: 'department',
+      type: 'select',
+      asyncOptions: this.departmentService.entities$,
+      optionValue: 'id',
+      optionLabel: 'name',
+
+      required: true,
+    },
   ];
+
   constructor(
     private readonly productService: ProductService,
     private readonly router: Router,
     private readonly route: ActivatedRoute,
-    private readonly fb: FormBuilder,
-
     private readonly categoryService: CategoryService,
-
     private readonly departmentService: DepartmentService
   ) {}
 
@@ -53,7 +92,7 @@ export class CreateProductComponent {
     if (this.submitted === false)
       if (this.formGroup.valid) {
         this.submitted = true;
-        this.productService.add(this.formGroup.value);
+        this.productService.add(this.formGroup.value as any);
       }
   }
 }

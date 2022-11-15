@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { InputOptions } from 'material/form';
@@ -14,20 +14,40 @@ import { DepartmentService } from '../department.service';
 export class CreateDepartmentComponent {
   submitted = false;
   title = 'Create Department';
-  formGroup = new FormGroup({});
-  fields: InputOptions[] = [];
+  formGroup = new FormGroup({
+    name: new FormControl('', [
+      Validators.required,
+
+      Validators.minLength(3),
+
+      Validators.maxLength(20),
+    ]),
+  });
+
+  fields: InputOptions[] = [
+    {
+      name: 'name',
+      type: 'text',
+
+      required: true,
+
+      minLength: 3,
+
+      maxLength: 20,
+    },
+  ];
+
   constructor(
     private readonly departmentService: DepartmentService,
     private readonly router: Router,
-    private readonly route: ActivatedRoute,
-    private readonly fb: FormBuilder
+    private readonly route: ActivatedRoute
   ) {}
 
   submit() {
     if (this.submitted === false)
       if (this.formGroup.valid) {
         this.submitted = true;
-        this.departmentService.add(this.formGroup.value);
+        this.departmentService.add(this.formGroup.value as any);
       }
   }
 }
