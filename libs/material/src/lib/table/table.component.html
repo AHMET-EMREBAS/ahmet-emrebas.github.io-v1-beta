@@ -65,7 +65,7 @@
     [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
     [totalRecords]="totalRecords" (onSort)="sortEvent.emit($event)" (onFilter)="filterEvent.emit($event)"
     (onPage)="pageEvent.emit($event)" styleClass="p-datatable-gridlines  p-datatable-striped" responsiveLayout="scroll"
-    (onFilter)="filterEvent.emit($event)" (selectionChange)="selectEvent.emit($event)">
+    (onFilter)="filterEvent.emit($event)" (selectionChange)="selectEvent.emit($event)" [sortField]="'id'">
 
     <ng-template pTemplate="header">
 

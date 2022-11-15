@@ -1,7 +1,6 @@
 import {
   FunctionsDto,
   PaginatorDto,
-  QueryDto,
   ViewDto,
 } from 'core/dto';
 import {
@@ -37,19 +36,15 @@ export class ProductController {
   @Get()
   readProduct(
     @Query() paginatorDto: PaginatorDto,
-    @Query() viewDto: ViewDto,
-    @Query() query: QueryDto
+    @Query() viewDto: ViewDto
+    // @Query() whereDto: WhereDto
   ) {
+    // console.log(whereDto);
+    console.log(paginatorDto);
+
     const q = {
       ...paginatorDto,
-      where: query.toContains([
-        'id',
-        'uuid',
-        'name',
-        'description',
-        'category',
-        'department',
-      ]),
+      // where: whereDto.where,
     };
 
     if (viewDto.view === true) {
@@ -81,6 +76,14 @@ export class ProductController {
     return this.service.delete(id);
   }
 
+  @Patch()
+  functions(@Query() functions: FunctionsDto) {
+    if (functions.query === 'count') {
+      return this.service.count();
+    }
+    throw new BadRequestException('Must provide a fucntion name.');
+  }
+
   @Post(':id/category/:categoryId')
   setcategoryToProduct(id: number, categoryId: number) {
     return this.service.set(id, categoryId, 'category');
@@ -99,13 +102,5 @@ export class ProductController {
   @Post(':id/department')
   unsetdepartmentFromProduct(id: number) {
     return this.service.unset(id, 'department');
-  }
-
-  @Patch()
-  functions(@Query() functions: FunctionsDto) {
-    if (functions.query === 'count') {
-      return this.service.count();
-    }
-    throw new BadRequestException('Must provide a fucntion name.');
   }
 }

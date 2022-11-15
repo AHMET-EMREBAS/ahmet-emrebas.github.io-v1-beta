@@ -16,6 +16,7 @@ import {
   PaginatorDto,
   QueryDto,
   ViewDto,
+  WhereDto
 } from 'core/dto';
  
 import { 
@@ -39,13 +40,11 @@ export class <%- classname %>Controller {
   read<%- classname %>(
     @Query() paginatorDto: PaginatorDto,
     @Query() viewDto: ViewDto,
-    @Query() query: QueryDto
+    @Query() whereDto: WhereDto
   ) {
     const q = {
       ...paginatorDto,
-      where: query.toContains([
-        <% for(const f of options.SearchFields) { %> '<%- f %>', <%} %>
-      ]),
+      where: whereDto.where,
     };
 
     if (viewDto.view === true) {

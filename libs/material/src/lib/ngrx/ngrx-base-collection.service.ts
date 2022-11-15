@@ -1,7 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 
 import { BaseInterface } from 'common/base';
-import { BehaviorSubject } from 'rxjs';
+import { Table } from 'primeng/table';
+import {
+  BehaviorSubject,
+  map,
+} from 'rxjs';
 
 import {
   EntityCollectionServiceBase,
@@ -13,10 +17,13 @@ export class NgrxBaseCollecitonService<
 > extends EntityCollectionServiceBase<T> {
   private readonly selections$ = new BehaviorSubject<T[]>([]);
 
-  readonly allCount$ = this.httpClient?.patch(
-    `/api/${this.entityName.toLowerCase()}/?query=count`,
-    {}
-  );
+  readonly allCount$ = this.httpClient
+    ?.patch<number>(`/api/${this.entityName.toLowerCase()}/?query=count`, {})
+    .pipe(
+      map((data) => {
+        return data;
+      })
+    );
 
   constructor(
     entityName: string,
@@ -43,5 +50,14 @@ export class NgrxBaseCollecitonService<
     if (d) {
       this.delete(d);
     }
+  }
+
+  query(table: Table) {
+    this.getWithQuery({
+      take: table.rows + '',
+      skip: table.first + '',
+      sortOrder: table.sortOrder + '',
+      sortField: table.sortField,
+    });
   }
 }

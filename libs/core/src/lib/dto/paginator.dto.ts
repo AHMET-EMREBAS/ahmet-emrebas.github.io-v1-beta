@@ -9,8 +9,8 @@ import {
   IsIn,
   IsNumber,
   IsOptional,
-  IsString,
   Max,
+  MaxLength,
   Min,
 } from 'class-validator';
 import { FindOptionsOrder } from 'typeorm';
@@ -72,27 +72,23 @@ export class PaginatorDto {
   @ApiProperty({ maxLength: 30, required: false })
   @Field((value) => String, { defaultValue: 'id', nullable: true })
   @IsOptional()
-  @IsString()
-  @Transform(({ value }) =>
-    typeof value === 'string' && value.length > 0 ? value : 'id'
-  )
-  orderBy?: string;
+  @MaxLength(50)
+  sortField?: string;
 
   @ApiProperty({ enum: ['ASC', 'DESC'], required: false })
   @Field((value) => String, { defaultValue: 'ASC', nullable: true })
+  @IsIn(['1', '-1', 'asc', 'desc', 'ASC', 'DESC'])
   @IsOptional()
-  @IsIn(['ASC', 'DESC'])
-  @Transform(({ value }) =>
-    typeof value === 'string' && value.length > 0 ? value : 'id'
-  )
-  orderDir?: string;
+  sortOrder?: string;
 
   @Expose()
   @Transform(({ obj }) => {
-    if (obj.orderBy && obj.orderDir) {
-      return { [obj.orderBy]: obj.orderDir };
-    }
-    return undefined;
+    const field = obj.sortField || 'id';
+    const sortDir = obj.sortOrder === '1' ? 'ASC' : 'DESC';
+
+    return {
+      [field]: sortDir,
+    };
   })
   order: FindOptionsOrder<any>;
 }

@@ -1,6 +1,7 @@
 import {
   Component,
   ViewChild,
+  AfterViewInit
 } from '@angular/core';
 import {
   ActivatedRoute,
@@ -30,7 +31,7 @@ import { <%- o.target %>Service } from '../../<%- o.name %>';
   templateUrl: './view-<%- name %>.component.html',
   styleUrls: ['./view-<%- name %>.component.scss'],
 })
-export class View<%- classname %>Component {
+export class View<%- classname %>Component implements AfterViewInit {
   @ViewChild('dataTable') dataTable!: TableComponent;
   rows = 10;
   first = 0;
@@ -91,10 +92,17 @@ export class View<%- classname %>Component {
     <% for(const o of options.Relations || []) { %>  private readonly <%- o.name %>Service: <%- o.target %>Service, <% } %>
   ) {
 
-   this.<%- name %>Service.getAll(); 
-  <% for(const o of options.Relations || []) { %> this.<%- o.name %>Service.getAll();  <% } %>
 
   }
+
+  ngAfterViewInit(): void {
+   this.<%- name %>Service.query(this.dataTable.table); 
+
+  //<% for(const o of options.Relations || []) { %> this.<%- o.name %>Service.getAll();  <% } %>
+  
+  }
+
+
 
   newItem() {
     this.goTo('create');

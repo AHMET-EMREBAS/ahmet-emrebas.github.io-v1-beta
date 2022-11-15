@@ -1,16 +1,10 @@
-import {
-  Component,
-  ViewChild,
-} from '@angular/core';
-import {
-  ActivatedRoute,
-  Router,
-} from '@angular/router';
+import { Component, ViewChild, AfterViewInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import {
+  IReadProduct,
   IReadCategory,
   IReadDepartment,
-  IReadProduct,
 } from 'common/inventory/interfaces';
 import {
   ColumnOption,
@@ -20,25 +14,25 @@ import {
   TableComponent,
 } from 'material/table';
 
-import { CategoryService } from '../../category';
-import { DepartmentService } from '../../department';
 import { ProductService } from '../product.service';
+
+import { CategoryService } from '../../category';
+
+import { DepartmentService } from '../../department';
 
 @Component({
   selector: 'ae-view-product',
   templateUrl: './view-product.component.html',
   styleUrls: ['./view-product.component.scss'],
 })
-export class ViewProductComponent {
+export class ViewProductComponent implements AfterViewInit {
   @ViewChild('dataTable') dataTable!: TableComponent;
-
-  totalRecords$ = this.productService.allCount$;
-
   rows = 10;
   first = 0;
   filters = [];
   sort = [];
 
+  totalRecords$ = this.productService.allCount$;
   items$ = this.productService.entities$;
 
   columns: ColumnOption<IReadProduct>[] = [
@@ -94,10 +88,12 @@ export class ViewProductComponent {
 
     private readonly categoryService: CategoryService,
     private readonly departmentService: DepartmentService
-  ) {
-    this.productService.getAll();
-    this.categoryService.getAll();
-    this.departmentService.getAll();
+  ) {}
+
+  ngAfterViewInit(): void {
+    this.productService.query(this.dataTable.table);
+
+    // this.categoryService.getAll();   this.departmentService.getAll();
   }
 
   newItem() {
