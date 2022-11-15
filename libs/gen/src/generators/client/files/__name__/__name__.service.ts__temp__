@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import {I<%- classname %> } from 'common/<%- project %>/interfaces';
+import {IRead<%- classname %> } from 'common/<%- project %>/interfaces';
 
 import { NgrxBaseCollecitonService } from 'material/ngrx';
 
@@ -10,24 +10,7 @@ import { EntityCollectionServiceElementsFactory } from '@ngrx/data';
 
 
 @Injectable({ providedIn: 'root' })
-export class <%- classname %>Service extends NgrxBaseCollecitonService<
-  Partial<I<%- classname %><ICategory, IDepartment>>
-> {
-  categories$ = of([
-    { id: 1, name: 'Car' },
-    {
-      id: 2,
-      name: 'Home living',
-    },
-  ]);
-  departments$ = of([
-    { id: 1, name: 'Car' },
-    {
-      id: 2,
-      name: 'Home living',
-    },
-  ]);
-
+export class <%- classname %>Service extends NgrxBaseCollecitonService<Partial<IRead<%- classname %>>> {
   constructor(sef: EntityCollectionServiceElementsFactory) {
     super('<%- classname %>', sef);
   }

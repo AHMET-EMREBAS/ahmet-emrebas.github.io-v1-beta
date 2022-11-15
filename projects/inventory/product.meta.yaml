@@ -11,7 +11,7 @@ Properties:
       columnType: text
       valueType: string
     UI:
-      type: textarea
+      type: text
     Defination:
       commerce: productName
 

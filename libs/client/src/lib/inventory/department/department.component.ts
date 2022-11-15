@@ -4,19 +4,19 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { Subscription } from 'rxjs';
 
-import { CategoryService } from './category.service';
+import { DepartmentService } from './department.service';
 
 @Component({
-  selector: 'ae-category',
-  templateUrl: './category.component.html',
-  styleUrls: ['./category.component.scss'],
+  selector: 'ae-department',
+  templateUrl: './department.component.html',
+  styleUrls: ['./department.component.scss'],
 })
-export class CategoryComponent implements OnInit, OnDestroy {
+export class DepartmentComponent implements OnInit, OnDestroy {
   sub!: Subscription;
   constructor(
     private readonly router: Router,
     private readonly route: ActivatedRoute,
-    private readonly service: CategoryService,
+    private readonly service: DepartmentService,
     private readonly messageService: MessageService
   ) {}
 
@@ -26,28 +26,28 @@ export class CategoryComponent implements OnInit, OnDestroy {
       if (event.type.endsWith('add-one')) {
         this.messageService.add({
           severity: 'success',
-          summary: 'Created new category',
+          summary: 'Created new department',
         });
         this.goHome();
       }
       if (event.type.endsWith('add-one/error')) {
         this.messageService.add({
           severity: 'warning',
-          summary: 'Something went wrong creating the category',
+          summary: 'Something went wrong creating the department',
         });
       }
 
       if (event.type.endsWith('update-one')) {
         this.messageService.add({
           severity: 'success',
-          summary: 'Updated the category',
+          summary: 'Updated the department',
         });
         this.goHome();
       }
       if (event.type.endsWith('update-one/error')) {
         this.messageService.add({
           severity: 'warning',
-          summary: 'Something went wrong updating the category',
+          summary: 'Something went wrong updating the department',
         });
       }
     });
@@ -58,6 +58,6 @@ export class CategoryComponent implements OnInit, OnDestroy {
   }
 
   goHome() {
-    this.router.navigate(['inventory', 'category']);
+    this.router.navigate(['inventory', 'department']);
   }
 }

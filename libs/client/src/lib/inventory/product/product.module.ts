@@ -12,20 +12,24 @@ import { ToastModule } from 'primeng/toast';
 import { ToolbarModule } from 'primeng/toolbar';
 import { TooltipModule } from 'primeng/tooltip';
 
-import { CreateCategoryComponent } from './create-category/';
-import { DeleteCategoryComponent } from './delete-category/';
-import { CategoryComponent } from './category.component';
-import { CategoryService } from './category.service';
-import { UpdateCategoryComponent } from './update-category/';
-import { ViewCategoryComponent } from './view-category';
+import { CreateProductComponent } from './create-product/';
+import { DeleteProductComponent } from './delete-product/';
+import { ProductComponent } from './product.component';
+import { ProductService } from './product.service';
+import { UpdateProductComponent } from './update-product/';
+import { ViewProductComponent } from './view-product';
+
+import { CategoryService } from '../category';
+
+import { DepartmentService } from '../department';
 
 @NgModule({
   declarations: [
-    CategoryComponent,
-    CreateCategoryComponent,
-    UpdateCategoryComponent,
-    DeleteCategoryComponent,
-    ViewCategoryComponent,
+    ProductComponent,
+    CreateProductComponent,
+    UpdateProductComponent,
+    DeleteProductComponent,
+    ViewProductComponent,
   ],
   imports: [
     CommonModule,
@@ -40,32 +44,38 @@ import { ViewCategoryComponent } from './view-category';
     RouterModule.forChild([
       {
         path: '',
-        component: CategoryComponent,
+        component: ProductComponent,
         children: [
           {
-            title: 'View Category',
+            title: 'View Product',
             path: '',
-            component: ViewCategoryComponent,
+            component: ViewProductComponent,
           },
           {
-            title: 'Create Category',
+            title: 'Create Product',
             path: 'create',
-            component: CreateCategoryComponent,
+            component: CreateProductComponent,
           },
           {
-            title: 'Update Category',
+            title: 'Update Product',
             path: 'update',
-            component: UpdateCategoryComponent,
+            component: UpdateProductComponent,
           },
           {
-            title: 'Delete Category',
+            title: 'Delete Product',
             path: 'delete',
-            component: DeleteCategoryComponent,
+            component: DeleteProductComponent,
           },
         ],
       },
     ]),
   ],
-  providers: [CategoryService, ConfirmationService, MessageService],
+  providers: [
+    ProductService,
+    CategoryService,
+    DepartmentService,
+    ConfirmationService,
+    MessageService,
+  ],
 })
-export class CategoryModule {}
+export class ProductModule {}

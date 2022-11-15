@@ -1,3 +1,7 @@
 import { IProduct } from './product.interface';
 
-export type ICreateProduct = IProduct<o.target, o.target>;
+import { ICategory } from '../category';
+
+import { IDepartment } from '../department';
+
+export type IReadProduct = IProduct<ICategory, IDepartment>;

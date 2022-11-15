@@ -1,11 +1,20 @@
 import { BaseInterface } from '../../../base';
 
 
-export interface I<%- classname %><
+
+export interface I<%- classname %>
+
+
+<% if(options.Relations?.length > 0 ) { %> 
+
+<
 <% for(const o of options.Relations || []) { %> 
   <%- o.target %>,
 <% } %>
->  extends BaseInterface {
+>
+
+<% } %>
+  extends BaseInterface {
 
 <% for(const o of options.Properties) { %> 
   <%- o.Property %>: <%- o.Column.valueType %>;
@@ -16,3 +25,4 @@ export interface I<%- classname %><
 <% } %>
 
 }
+

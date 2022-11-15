@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { IReadCategory } from 'common/inventory/interfaces';
+import { IReadDepartment } from 'common/inventory/interfaces';
 
 import { NgrxBaseCollecitonService } from 'material/ngrx';
 
@@ -9,10 +9,10 @@ import { of } from 'rxjs';
 import { EntityCollectionServiceElementsFactory } from '@ngrx/data';
 
 @Injectable({ providedIn: 'root' })
-export class CategoryService extends NgrxBaseCollecitonService<
-  Partial<IReadCategory>
+export class DepartmentService extends NgrxBaseCollecitonService<
+  Partial<IReadDepartment>
 > {
   constructor(sef: EntityCollectionServiceElementsFactory) {
-    super('Category', sef);
+    super('Department', sef);
   }
 }

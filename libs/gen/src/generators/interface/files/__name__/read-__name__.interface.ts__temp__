@@ -1,17 +1,22 @@
 import { I<%- classname %> } from './<%- name %>.interface';
 
+
+<% for(const o of options.Relations || []) { %> 
+    import { I<%- o.target %> } from '../<%- o.name %>';
+<% } %>
+
 <% if(options.Relations?.length > 0 ) { %> 
-export type  ICreate<%- classname %> = I<%- classname %><
+export type  IRead<%- classname %> = I<%- classname %><
 <% for(const o of options.Relations || []) { %> 
      <% if(o.type.endsWith('One')) {%> 
-      o.target,
+      I<%- o.target %>,
     <% } else {  %> 
-     <%- o.target %>[],
+     I<%- o.target %>[],
     <% } %>
 <% } %>
 > 
 
 <% } else { %> 
-export type  ICreate<%- classname %> = I<%- classname %>
+export type  IRead<%- classname %> = I<%- classname %>
 <% } %>
 

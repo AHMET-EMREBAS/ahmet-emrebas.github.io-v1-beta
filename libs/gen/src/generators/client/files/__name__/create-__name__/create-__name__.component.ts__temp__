@@ -12,6 +12,12 @@ import { InputOptions } from 'material/form';
 
 import { <%- classname %>Service } from '../<%- name %>.service';
 
+<% for(const o of options.Relations || []) { %> 
+
+import { <%- o.target %>Service } from '../../<%- o.name %>';
+
+<% } %>
+
 @Component({
   selector: 'ae-create-<%- name %>',
   templateUrl: './create-<%- name %>.component.html',
@@ -25,12 +31,31 @@ export class Create<%- classname %>Component {
 
 
   });
-  fields: InputOptions[] = [];
+  fields: InputOptions[] = [
+
+    <% for(const f of options.Properties) { %> 
+    
+    {
+    name: '<%- f.Property %>', 
+    type: '<%- f.UI.type %>',
+    <% for(const [vk, vv] of Object.entries(f.Validation || [])) { %> 
+    <% if(vk ==='type') {  continue; %> <% } %>
+     <%- vk %>: <% if(typeof vv ==='string') {  %> '<%- vv %>' <%} else { %>  <%- vv %> <%} %> ,
+    <% } %>
+    },
+
+    <% } %>
+  ];
   constructor(
     private readonly <%- name %>Service: <%- classname %>Service,
     private readonly router: Router,
     private readonly route: ActivatedRoute,
-    private readonly fb: FormBuilder
+    private readonly fb: FormBuilder,
+
+<% for(const o of options.Relations || []) { %> 
+     private readonly <%- o.name %>Service: <%- o.target %>Service,
+<% } %>
+
   ) {}
 
   submit() {

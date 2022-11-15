@@ -12,20 +12,20 @@ import { ToastModule } from 'primeng/toast';
 import { ToolbarModule } from 'primeng/toolbar';
 import { TooltipModule } from 'primeng/tooltip';
 
-import { CreateCategoryComponent } from './create-category/';
-import { DeleteCategoryComponent } from './delete-category/';
-import { CategoryComponent } from './category.component';
-import { CategoryService } from './category.service';
-import { UpdateCategoryComponent } from './update-category/';
-import { ViewCategoryComponent } from './view-category';
+import { CreateDepartmentComponent } from './create-department/';
+import { DeleteDepartmentComponent } from './delete-department/';
+import { DepartmentComponent } from './department.component';
+import { DepartmentService } from './department.service';
+import { UpdateDepartmentComponent } from './update-department/';
+import { ViewDepartmentComponent } from './view-department';
 
 @NgModule({
   declarations: [
-    CategoryComponent,
-    CreateCategoryComponent,
-    UpdateCategoryComponent,
-    DeleteCategoryComponent,
-    ViewCategoryComponent,
+    DepartmentComponent,
+    CreateDepartmentComponent,
+    UpdateDepartmentComponent,
+    DeleteDepartmentComponent,
+    ViewDepartmentComponent,
   ],
   imports: [
     CommonModule,
@@ -40,32 +40,32 @@ import { ViewCategoryComponent } from './view-category';
     RouterModule.forChild([
       {
         path: '',
-        component: CategoryComponent,
+        component: DepartmentComponent,
         children: [
           {
-            title: 'View Category',
+            title: 'View Department',
             path: '',
-            component: ViewCategoryComponent,
+            component: ViewDepartmentComponent,
           },
           {
-            title: 'Create Category',
+            title: 'Create Department',
             path: 'create',
-            component: CreateCategoryComponent,
+            component: CreateDepartmentComponent,
           },
           {
-            title: 'Update Category',
+            title: 'Update Department',
             path: 'update',
-            component: UpdateCategoryComponent,
+            component: UpdateDepartmentComponent,
           },
           {
-            title: 'Delete Category',
+            title: 'Delete Department',
             path: 'delete',
-            component: DeleteCategoryComponent,
+            component: DeleteDepartmentComponent,
           },
         ],
       },
     ]),
   ],
-  providers: [CategoryService, ConfirmationService, MessageService],
+  providers: [DepartmentService, ConfirmationService, MessageService],
 })
-export class CategoryModule {}
+export class DepartmentModule {}
