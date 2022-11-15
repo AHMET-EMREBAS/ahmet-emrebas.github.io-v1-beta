@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { ICategory, IDepartment, ICategory } from 'common/inventory/interfaces';
+import { IReadCategory } from 'common/inventory/interfaces';
 import {
   ColumnOption,
   FilterEvent,
@@ -24,35 +24,66 @@ export class ViewCategoryComponent {
   filters = [];
   sort = [];
 
-  items$ = this.service.entities$.pipe();
-  columns: ColumnOption<ICategory<ICategory, IDepartment>>[] = [];
+  items$ = this.categoryService.entities$;
+
+  columns: ColumnOption<IReadCategory>[] = [
+    {
+      header: '#',
+      field: 'id',
+    },
+    {
+      header: 'UUID',
+      field: 'uuid',
+    },
+
+    {
+      header: 'Category name',
+      field: 'name',
+    },
+
+    {
+      header: 'Create Time',
+      field: 'createdAt',
+    },
+    {
+      header: 'Update Time',
+      field: 'updatedAt',
+    },
+    {
+      header: 'Delete Time',
+      field: 'deletedAt',
+    },
+  ];
+
   constructor(
-    private readonly service: CategoryService,
+    private readonly categoryService: CategoryService,
     private readonly router: Router,
     private readonly route: ActivatedRoute
-  ) {}
+  ) {
+    this.categoryService.getAll();
+  }
 
   newItem() {
-    this.goTo('Create');
+    this.goTo('create');
   }
 
   editItems() {
-    this.goTo('Update');
+    this.goTo('update');
   }
 
   deleteItems(event: any) {
-    this.goTo('Delete');
+    this.goTo('delete');
   }
 
   goTo(
-    path: 'Create' | 'Update' | 'Delete',
+    path: 'create' | 'update' | 'delete',
     queryParams?: Record<string, any>
   ) {
     this.router.navigate([path], { relativeTo: this.route, queryParams });
   }
 
   selectItems(event: any) {
-    this.service.updateSelection([...event]);
+    this.categoryService.updateSelection([...event]);
   }
 
   sortItems(event: SortEvent) {
@@ -70,8 +101,8 @@ export class ViewCategoryComponent {
   handleEvent() {
     setTimeout(() => {
       const table = this.dataTable.table;
-      this.service.clearCache();
-      this.service.getWithQuery({
+      this.categoryService.clearCache();
+      this.categoryService.getWithQuery({
         take: table.rows + '',
         skip: table.first + '',
         where: JSON.stringify(table.filters),

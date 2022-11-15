@@ -1,30 +1,14 @@
-import {
-  AfterViewInit,
-  Component,
-} from '@angular/core';
-import {
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
-import {
-  ActivatedRoute,
-  Router,
-} from '@angular/router';
-
-import {
-  ICategory,
-  IDepartment,
-  IProduct,
-} from 'common/inventory/interfaces';
-import {
-  InputOptions,
-  setFormGroupValue,
-} from 'material/form';
+import { AfterViewInit, Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { IReadProduct } from 'common/inventory/interfaces';
+import { InputOptions, setFormGroupValue } from 'material/form';
+import { ProductService } from '../product.service';
 
 import { CategoryService } from '../../category';
+
 import { DepartmentService } from '../../department';
-import { ProductService } from '../product.service';
+
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'ae-update-product',
@@ -33,7 +17,7 @@ import { ProductService } from '../product.service';
 })
 export class UpdateProductComponent implements AfterViewInit {
   title = 'Update Product';
-  private itemToBeUpdated!: Partial<IProduct<ICategory, IDepartment>>;
+  private itemToBeUpdated!: Partial<IReadProduct>;
 
   formGroup = new FormGroup({
     name: new FormControl('', [
@@ -98,26 +82,44 @@ export class UpdateProductComponent implements AfterViewInit {
   ];
 
   constructor(
-    private readonly service: ProductService,
+    private readonly productService: ProductService,
     private readonly router: Router,
     private readonly route: ActivatedRoute,
     private readonly categoryService: CategoryService,
     private readonly departmentService: DepartmentService
-  ) {}
+  ) {
+    this.productService.getAll();
+    this.categoryService.getAll();
+    this.departmentService.getAll();
+  }
 
   ngAfterViewInit(): void {
-    const item = this.service.getItemToBeUpdated();
-    if (item) setFormGroupValue(this.formGroup, item);
+    const item = this.productService.getItemToBeUpdated();
+    if (item) {
+      this.itemToBeUpdated = item;
+      setFormGroupValue(this.formGroup, item);
+    }
   }
 
   submit() {
-    this.service.update({
+    this.productService.update({
       id: this.itemToBeUpdated.id,
-      ...this.formGroup.value,
-    } as any);
+
+      name: this.value('name'),
+
+      description: this.value('description'),
+
+      category: this.value('category').id,
+
+      department: this.value('department').id,
+    });
   }
 
   getOptions(name: string) {
     return JSON.parse(localStorage.getItem(name) || '[]');
+  }
+
+  private value(key: string) {
+    return this.formGroup.get(key)?.value;
   }
 }

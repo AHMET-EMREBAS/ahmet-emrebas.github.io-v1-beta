@@ -41,7 +41,9 @@ export class CreateCategoryComponent {
     private readonly categoryService: CategoryService,
     private readonly router: Router,
     private readonly route: ActivatedRoute
-  ) {}
+  ) {
+    this.categoryService.getAll();
+  }
 
   submit() {
     if (this.submitted === false)

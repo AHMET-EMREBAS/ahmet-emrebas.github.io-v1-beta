@@ -26,18 +26,18 @@ const routes: Routes = [
     children: [
       {
         title: 'Inventory',
-        path: 'Inventory',
+        path: 'inventory',
         loadChildren: () =>
           import('./inventory').then((m) => m.InventoryModule),
       },
       {
         title: 'Messanger',
-        path: 'Messanger',
+        path: 'messanger',
         loadChildren: () => import('messanger').then((m) => m.MessangerModule),
       },
       {
         title: 'Notification',
-        path: 'Notification',
+        path: 'notification',
         loadChildren: () =>
           import('notification').then((m) => m.NotificationModule),
       },

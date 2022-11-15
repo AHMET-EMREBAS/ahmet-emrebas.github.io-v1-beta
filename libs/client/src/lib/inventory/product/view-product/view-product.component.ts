@@ -1,7 +1,11 @@
 import { Component, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { ICategory, IDepartment, IProduct } from 'common/inventory/interfaces';
+import {
+  IReadProduct,
+  IReadCategory,
+  IReadDepartment,
+} from 'common/inventory/interfaces';
 import {
   ColumnOption,
   FilterEvent,
@@ -11,6 +15,10 @@ import {
 } from 'material/table';
 
 import { ProductService } from '../product.service';
+
+import { CategoryService } from '../../category';
+
+import { DepartmentService } from '../../department';
 
 @Component({
   selector: 'ae-view-product',
@@ -24,35 +32,88 @@ export class ViewProductComponent {
   filters = [];
   sort = [];
 
-  items$ = this.service.entities$.pipe();
-  columns: ColumnOption<IProduct<ICategory, IDepartment>>[] = [];
+  items$ = this.productService.entities$;
+
+  columns: ColumnOption<IReadProduct>[] = [
+    {
+      header: '#',
+      field: 'id',
+    },
+    {
+      header: 'UUID',
+      field: 'uuid',
+    },
+
+    {
+      header: 'name',
+      field: 'name',
+    },
+
+    {
+      header: 'description',
+      field: 'description',
+    },
+
+    {
+      header: 'category',
+      field: 'category',
+      mapper: (item?: IReadCategory) => item?.name,
+    },
+
+    {
+      header: 'department',
+      field: 'department',
+      mapper: (item?: IReadDepartment) => item?.name,
+    },
+
+    {
+      header: 'Create Time',
+      field: 'createdAt',
+    },
+    {
+      header: 'Update Time',
+      field: 'updatedAt',
+    },
+    {
+      header: 'Delete Time',
+      field: 'deletedAt',
+    },
+  ];
+
   constructor(
-    private readonly service: ProductService,
+    private readonly productService: ProductService,
     private readonly router: Router,
-    private readonly route: ActivatedRoute
-  ) {}
+    private readonly route: ActivatedRoute,
+
+    private readonly categoryService: CategoryService,
+    private readonly departmentService: DepartmentService
+  ) {
+    this.productService.getAll();
+    this.categoryService.getAll();
+    this.departmentService.getAll();
+  }
 
   newItem() {
-    this.goTo('Create');
+    this.goTo('create');
   }
 
   editItems() {
-    this.goTo('Update');
+    this.goTo('update');
   }
 
   deleteItems(event: any) {
-    this.goTo('Delete');
+    this.goTo('delete');
   }
 
   goTo(
-    path: 'Create' | 'Update' | 'Delete',
+    path: 'create' | 'update' | 'delete',
     queryParams?: Record<string, any>
   ) {
     this.router.navigate([path], { relativeTo: this.route, queryParams });
   }
 
   selectItems(event: any) {
-    this.service.updateSelection([...event]);
+    this.productService.updateSelection([...event]);
   }
 
   sortItems(event: SortEvent) {
@@ -70,8 +131,8 @@ export class ViewProductComponent {
   handleEvent() {
     setTimeout(() => {
       const table = this.dataTable.table;
-      this.service.clearCache();
-      this.service.getWithQuery({
+      this.productService.clearCache();
+      this.productService.getWithQuery({
         take: table.rows + '',
         skip: table.first + '',
         where: JSON.stringify(table.filters),

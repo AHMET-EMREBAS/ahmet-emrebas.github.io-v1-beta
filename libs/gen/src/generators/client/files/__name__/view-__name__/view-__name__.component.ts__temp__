@@ -7,11 +7,9 @@ import {
   Router,
 } from '@angular/router';
 
-import {
-  ICategory,
-  IDepartment,
-  I<%- classname %>,
-} from 'common/inventory/interfaces';
+import {  
+  IRead<%- classname %>, <% for(const col of options.Relations || []) { %>   IRead<%- col.target %>, <% } %> 
+} from 'common/<%- project %>/interfaces';
 import {
   ColumnOption,
   FilterEvent,
@@ -21,6 +19,11 @@ import {
 } from 'material/table';
 
 import { <%- classname %>Service } from '../<%- name %>.service';
+
+ <% for(const o of options.Relations || []) { %> 
+import { <%- o.target %>Service } from '../../<%- o.name %>'; 
+<% } %>
+
 
 @Component({
   selector: 'ae-view-<%- name %>',
@@ -34,35 +37,85 @@ export class View<%- classname %>Component {
   filters = [];
   sort = [];
 
-  items$ = this.service.entities$.pipe();
-  columns: ColumnOption<I<%- classname %><ICategory, IDepartment>>[] = [];
+  items$ = this.<%- name %>Service.entities$
+
+  columns: ColumnOption<IRead<%- classname %>>[] = [
+
+{ 
+  header:"#", 
+  field:"id",
+},
+{ 
+  header:"UUID", 
+  field:"uuid",
+},
+
+<% for(const f of options.Properties) { %> 
+{
+  header:'<%- f.label || f.Property %>', 
+  field:'<%- f.Property %>' 
+},
+<% } %>
+
+<% for(const col of options.Relations || []) { %> 
+
+    { 
+      header: '<%- col.label || col.name %>', 
+      field: '<%- col.name %>', 
+      mapper:(item?: IRead<%- col.target %>)=>item?.name
+    },
+<% } %>
+
+
+
+    { 
+      header:"Create Time", 
+      field:"createdAt",
+    },
+    { 
+      header:"Update Time", 
+      field:"updatedAt",
+    },
+    { 
+      header:"Delete Time", 
+      field:"deletedAt",
+    },
+  ];
+
   constructor(
-    private readonly service: <%- classname %>Service,
+    private readonly <%- name %>Service: <%- classname %>Service,
     private readonly router: Router,
-    private readonly route: ActivatedRoute
-  ) {}
+    private readonly route: ActivatedRoute,
+    
+    <% for(const o of options.Relations || []) { %>  private readonly <%- o.name %>Service: <%- o.target %>Service, <% } %>
+  ) {
+
+   this.<%- name %>Service.getAll(); 
+  <% for(const o of options.Relations || []) { %> this.<%- o.name %>Service.getAll();  <% } %>
+
+  }
 
   newItem() {
-    this.goTo('Create');
+    this.goTo('create');
   }
 
   editItems() {
-    this.goTo('Update');
+    this.goTo('update');
   }
 
   deleteItems(event: any) {
-    this.goTo('Delete');
+    this.goTo('delete');
   }
 
   goTo(
-    path: 'Create' | 'Update' | 'Delete',
+    path: 'create' | 'update' | 'delete',
     queryParams?: Record<string, any>
   ) {
     this.router.navigate([path], { relativeTo: this.route, queryParams });
   }
 
   selectItems(event: any) {
-    this.service.updateSelection([...event]);
+    this.<%- name %>Service.updateSelection([...event]);
   }
 
   sortItems(event: SortEvent) {
@@ -80,8 +133,8 @@ export class View<%- classname %>Component {
   handleEvent() {
     setTimeout(() => {
       const table = this.dataTable.table;
-      this.service.clearCache();
-      this.service.getWithQuery({
+      this.<%- name %>Service.clearCache();
+      this.<%- name %>Service.getWithQuery({
         take: table.rows + '',
         skip: table.first + '',
         where: JSON.stringify(table.filters),

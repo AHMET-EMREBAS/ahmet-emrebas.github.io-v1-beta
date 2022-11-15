@@ -11,6 +11,10 @@
       "type": "string",
       "maxLength": 30
     },
+    "Label": {
+      "type": "string",
+      "maxLength": 10
+    },
     "Defination": {
       "$ref": "./defination/index.schema.json"
     },
@@ -25,13 +29,6 @@
       "$ref": "./ui/index.schema.json"
     }
   },
-  "required": [
-    "Property",
-    "Description",
-    "Defination",
-    "Validation",
-    "Column",
-    "UI"
-  ],
+  "required": ["Property", "Defination", "Validation", "Column", "UI"],
   "additionalProperties": false
 }

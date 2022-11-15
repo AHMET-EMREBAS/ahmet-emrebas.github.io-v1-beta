@@ -1,6 +1,6 @@
 import { AfterViewInit, Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ICategory, IDepartment, ICategory } from 'common/inventory/interfaces';
+import { IReadCategory } from 'common/inventory/interfaces';
 import { InputOptions, setFormGroupValue } from 'material/form';
 import { CategoryService } from '../category.service';
 
@@ -13,7 +13,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class UpdateCategoryComponent implements AfterViewInit {
   title = 'Update Category';
-  private itemToBeUpdated!: Partial<ICategory<ICategory, IDepartment>>;
+  private itemToBeUpdated!: Partial<IReadCategory>;
 
   formGroup = new FormGroup({
     name: new FormControl('', [
@@ -39,24 +39,34 @@ export class UpdateCategoryComponent implements AfterViewInit {
   ];
 
   constructor(
-    private readonly service: CategoryService,
+    private readonly categoryService: CategoryService,
     private readonly router: Router,
     private readonly route: ActivatedRoute
-  ) {}
+  ) {
+    this.categoryService.getAll();
+  }
 
   ngAfterViewInit(): void {
-    const item = this.service.getItemToBeUpdated();
-    if (item) setFormGroupValue(this.formGroup, item);
+    const item = this.categoryService.getItemToBeUpdated();
+    if (item) {
+      this.itemToBeUpdated = item;
+      setFormGroupValue(this.formGroup, item);
+    }
   }
 
   submit() {
-    this.service.update({
+    this.categoryService.update({
       id: this.itemToBeUpdated.id,
-      ...this.formGroup.value,
-    } as any);
+
+      name: this.value('name'),
+    });
   }
 
   getOptions(name: string) {
     return JSON.parse(localStorage.getItem(name) || '[]');
+  }
+
+  private value(key: string) {
+    return this.formGroup.get(key)?.value;
   }
 }

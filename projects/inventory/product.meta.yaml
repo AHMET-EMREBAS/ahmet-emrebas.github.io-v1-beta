@@ -2,7 +2,6 @@ Name: Product
 Description: Product resource defination
 Properties:
   - Property: name
-    Description: Product name
     Validation:
       type: string
       minLength: 0

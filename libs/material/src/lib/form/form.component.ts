@@ -28,6 +28,6 @@ export class FormComponent {
   @Output() submitEvent = new EventEmitter();
 
   submit() {
-    this.submitEvent.emit({});
+    this.submitEvent.emit();
   }
 }

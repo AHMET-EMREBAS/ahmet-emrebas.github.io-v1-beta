@@ -7,9 +7,7 @@ import {
   Router,
 } from '@angular/router';
 import {
-  ICategory,
-  IDepartment,
-  I<%- classname %>,
+  IRead<%- classname %>,
 } from 'common/inventory/interfaces';
 import {
   InputOptions,
@@ -32,7 +30,7 @@ import {
 })
 export class Update<%- classname %>Component implements AfterViewInit {
   title = 'Update <%- classname %>';
-  private itemToBeUpdated!: Partial<I<%- classname %><ICategory, IDepartment>>;
+  private itemToBeUpdated!: Partial<IRead<%- classname %>>;
 
 formGroup = new FormGroup({
     <% for(const f of options.Properties) { %> 
@@ -96,25 +94,43 @@ formGroup = new FormGroup({
   ];
 
   constructor(
-    private readonly service: <%- classname %>Service,
+    private readonly <%- name %>Service: <%- classname %>Service,
     private readonly router: Router,
     private readonly route: ActivatedRoute,
     <% for(const o of options.Relations || []) { %>  private readonly <%- o.name %>Service: <%- o.target %>Service, <% } %>
-  ) {}
+  ) {
+  this.<%- name %>Service.getAll(); 
+    <% for(const o of options.Relations || []) { %> this.<%- o.name %>Service.getAll();  <% } %>
+ 
+  }
+
 
   ngAfterViewInit(): void {
-    const item = this.service.getItemToBeUpdated();
-    if (item) setFormGroupValue(this.formGroup, item);
+    const item = this.<%- name %>Service.getItemToBeUpdated();
+    if (item) {
+      this.itemToBeUpdated = item;
+      setFormGroupValue(this.formGroup, item);
+    }
   }
 
   submit() {
-    this.service.update({
+   this.<%- name %>Service.update({
       id: this.itemToBeUpdated.id,
-      ...this.formGroup.value,
-    } as any);
+       <% for(const f of options.Properties) { %> 
+          <%- f.Property %>: this.value('<%- f.Property %>'),
+       <%  } %>
+       <% for(const f of options.Relations || []) { %> 
+          <%- f.name %>: this.value('<%- f.name %>').id,
+       <%  } %>
+    });
   }
+
 
   getOptions(name: string) {
     return JSON.parse(localStorage.getItem(name) || '[]');
+  }
+
+    private value(key: string) {
+    return this.formGroup.get(key)?.value;
   }
 }

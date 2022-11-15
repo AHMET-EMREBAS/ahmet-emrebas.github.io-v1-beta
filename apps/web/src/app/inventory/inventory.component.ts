@@ -1,7 +1,4 @@
-import {
-  Component,
-  OnInit,
-} from '@angular/core';
+import { Component } from '@angular/core';
 
 import { MenuItem } from 'primeng/api';
 
@@ -10,34 +7,43 @@ import { MenuItem } from 'primeng/api';
   templateUrl: './inventory.component.html',
   styleUrls: ['./inventory.component.scss'],
 })
-export class InventoryComponent implements OnInit {
+export class InventoryComponent {
   primaryMenuItems: MenuItem[] = [
     {
       label: 'Main Resources',
       items: [
-        { label: 'Product', routerLink: ['Product'] },
-        { label: 'SKU', routerLink: ['SKU'] },
+        { label: 'Product', routerLink: ['product'] },
+        { label: 'SKU', routerLink: ['sku'] },
+      ],
+    },
+    { separator: true },
+    {
+      label: 'Meta',
+
+      items: [
+        { label: 'Category', routerLink: ['category'] },
+        { label: 'Department', routerLink: ['department'] },
       ],
     },
     { separator: true },
     {
       label: 'Stock',
-      items: [{ label: 'Quantity', routerLink: ['Quantity'] }],
+      items: [{ label: 'Quantity', routerLink: ['quantity'] }],
     },
     { separator: true },
     {
       label: 'Pricing',
       items: [
         { label: 'Price', routerLink: ['Price'] },
-        { label: 'Price Level', routerLink: ['Pricelevel'] },
-        { label: 'Promotion', routerLink: ['Promotion'] },
+        { label: 'Price Level', routerLink: ['pricelevel'] },
+        { label: 'Promotion', routerLink: ['promotion'] },
       ],
     },
     { separator: true },
     {
       label: 'Sales',
       items: [
-        { label: 'Transaction', routerLink: ['Transaction'] },
+        { label: 'Transaction', routerLink: ['transaction'] },
         { label: 'Order', routerLink: ['Order'] },
       ],
     },
@@ -45,8 +51,8 @@ export class InventoryComponent implements OnInit {
     {
       label: 'Reports',
       items: [
-        { label: 'Sale Report', routerLink: ['SaleReport'] },
-        { label: 'Stock Analisis', routerLink: ['StockAnalisis'] },
+        { label: 'Sale Report', routerLink: ['salereport'] },
+        { label: 'Stock Analisis', routerLink: ['stockanalisis'] },
       ],
     },
   ];
@@ -62,8 +68,4 @@ export class InventoryComponent implements OnInit {
   ];
 
   menubarItems: MenuItem[] = [];
-
-  constructor() {}
-
-  ngOnInit(): void {}
 }

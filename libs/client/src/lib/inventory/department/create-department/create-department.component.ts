@@ -41,7 +41,9 @@ export class CreateDepartmentComponent {
     private readonly departmentService: DepartmentService,
     private readonly router: Router,
     private readonly route: ActivatedRoute
-  ) {}
+  ) {
+    this.departmentService.getAll();
+  }
 
   submit() {
     if (this.submitted === false)

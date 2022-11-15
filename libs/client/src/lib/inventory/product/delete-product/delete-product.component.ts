@@ -13,7 +13,7 @@ export class DeleteProductComponent implements OnInit {
   title = 'Delete Product';
   constructor(
     private readonly confirmService: ConfirmationService,
-    private readonly service: ProductService
+    private readonly productService: ProductService
   ) {}
 
   ngOnInit(): void {
@@ -24,7 +24,7 @@ export class DeleteProductComponent implements OnInit {
       acceptButtonStyleClass: 'p-button-danger',
       acceptLabel: 'Yes, delete item.',
       accept: () => {
-        this.service.deleteItem();
+        this.productService.deleteItem();
       },
     });
   }

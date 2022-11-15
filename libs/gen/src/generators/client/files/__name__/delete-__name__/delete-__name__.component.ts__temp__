@@ -16,7 +16,7 @@ export class Delete<%- classname %>Component implements OnInit {
   title = 'Delete <%- classname %>';
   constructor(
     private readonly confirmService: ConfirmationService,
-    private readonly service: <%- classname %>Service
+    private readonly <%- name %>Service: <%- classname %>Service
   ) {}
 
   ngOnInit(): void {
@@ -27,7 +27,7 @@ export class Delete<%- classname %>Component implements OnInit {
       acceptButtonStyleClass: 'p-button-danger',
       acceptLabel: 'Yes, delete item.',
       accept: () => {
-        this.service.deleteItem();
+        this.<%- name %>Service.deleteItem();
       },
     });
   }

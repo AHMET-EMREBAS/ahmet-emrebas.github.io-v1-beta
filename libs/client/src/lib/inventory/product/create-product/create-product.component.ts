@@ -86,7 +86,11 @@ export class CreateProductComponent {
     private readonly route: ActivatedRoute,
     private readonly categoryService: CategoryService,
     private readonly departmentService: DepartmentService
-  ) {}
+  ) {
+    this.productService.getAll();
+    this.categoryService.getAll();
+    this.departmentService.getAll();
+  }
 
   submit() {
     if (this.submitted === false)

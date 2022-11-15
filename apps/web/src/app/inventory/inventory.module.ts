@@ -19,9 +19,23 @@ import { InventoryComponent } from './inventory.component';
         children: [
           {
             title: 'Product Module',
-            path: 'Product',
+            path: 'product',
             loadChildren: () =>
-              import('client/product').then((m) => m.ProductModule),
+              import('client/inventory/product').then((m) => m.ProductModule),
+          },
+          {
+            title: 'Category Module',
+            path: 'category',
+            loadChildren: () =>
+              import('client/inventory/category').then((m) => m.CategoryModule),
+          },
+          {
+            title: 'Department Module',
+            path: 'department',
+            loadChildren: () =>
+              import('client/inventory/department').then(
+                (m) => m.DepartmentModule
+              ),
           },
         ],
       },
