@@ -22,7 +22,7 @@ export class CreateStoreDto implements IStore<Pricelevel> {
   name: string;
 
   @Field(() => Int)
-  @Validations({ minimum: 1 })
+  @Validations({ min: 1 })
   @Expose()
   pricelevel: Pricelevel;
 }

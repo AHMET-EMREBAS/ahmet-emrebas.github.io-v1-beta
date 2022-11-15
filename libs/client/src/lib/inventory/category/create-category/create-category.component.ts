@@ -28,6 +28,7 @@ export class CreateCategoryComponent {
     {
       name: 'name',
       type: 'text',
+      placeholder: 'name',
 
       required: true,
 
@@ -46,10 +47,17 @@ export class CreateCategoryComponent {
   }
 
   submit() {
-    if (this.submitted === false)
+    if (this.submitted === false) {
       if (this.formGroup.valid) {
         this.submitted = true;
-        this.categoryService.add(this.formGroup.value as any);
+        this.categoryService.add({
+          name: this.value('name'),
+        });
       }
+    }
+  }
+
+  private value(key: string) {
+    return this.formGroup.get(key)?.value;
   }
 }

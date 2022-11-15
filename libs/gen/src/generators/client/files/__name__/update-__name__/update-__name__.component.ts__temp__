@@ -61,7 +61,7 @@ formGroup = new FormGroup({
     {
       name: '<%- f.Property %>', 
       type: '<%- f.UI.type %>',  
-
+      placeholder: '<%- f.Label || f.Property %>', 
       <% if(options.Required?.includes(f.Property)) { %> 
             required:true,
        <% } %>
@@ -78,7 +78,7 @@ formGroup = new FormGroup({
 
     {
       name: '<%- r.name %>', 
-      type: 'select',      
+      type: 'select',  placeholder: '<%- r.label || r.name %>',           
       asyncOptions:  this.<%- r.name %>Service.entities$,
       optionValue:'id', 
       optionLabel: 'name',
@@ -114,15 +114,18 @@ formGroup = new FormGroup({
   }
 
   submit() {
-   this.<%- name %>Service.update({
-      id: this.itemToBeUpdated.id,
-       <% for(const f of options.Properties) { %> 
-          <%- f.Property %>: this.value('<%- f.Property %>'),
-       <%  } %>
-       <% for(const f of options.Relations || []) { %> 
-          <%- f.name %>: this.value('<%- f.name %>').id,
-       <%  } %>
-    });
+
+    if(this.formGroup.valid){ 
+      this.<%- name %>Service.update({
+          id: this.itemToBeUpdated.id,
+          <% for(const f of options.Properties) { %> 
+              <%- f.Property %>: this.value('<%- f.Property %>'),
+          <%  } %>
+          <% for(const f of options.Relations || []) { %> 
+              <%- f.name %>: this.value('<%- f.name %>')?.id,
+          <%  } %>
+        });
+    }
   }
 
 
@@ -130,7 +133,7 @@ formGroup = new FormGroup({
     return JSON.parse(localStorage.getItem(name) || '[]');
   }
 
-    private value(key: string) {
+  private value(key: string) {
     return this.formGroup.get(key)?.value;
   }
 }

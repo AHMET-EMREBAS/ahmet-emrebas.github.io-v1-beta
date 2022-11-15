@@ -24,6 +24,12 @@ import { InventoryComponent } from './inventory.component';
               import('client/inventory/product').then((m) => m.ProductModule),
           },
           {
+            title: 'Sku Module',
+            path: 'sku',
+            loadChildren: () =>
+              import('client/inventory/sku').then((m) => m.SkuModule),
+          },
+          {
             title: 'Category Module',
             path: 'category',
             loadChildren: () =>
@@ -36,6 +42,32 @@ import { InventoryComponent } from './inventory.component';
               import('client/inventory/department').then(
                 (m) => m.DepartmentModule
               ),
+          },
+          {
+            title: 'Quantity Module',
+            path: 'quantity',
+            loadChildren: () =>
+              import('client/inventory/quantity').then((m) => m.QuantityModule),
+          },
+          {
+            title: 'Pricelevel Module',
+            path: 'pricelevel',
+            loadChildren: () =>
+              import('client/inventory/pricelevel').then(
+                (m) => m.PricelevelModule
+              ),
+          },
+          {
+            title: 'Store Module',
+            path: 'store',
+            loadChildren: () =>
+              import('client/inventory/store').then((m) => m.StoreModule),
+          },
+          {
+            title: 'Price Module',
+            path: 'price',
+            loadChildren: () =>
+              import('client/inventory/price').then((m) => m.PriceModule),
           },
         ],
       },

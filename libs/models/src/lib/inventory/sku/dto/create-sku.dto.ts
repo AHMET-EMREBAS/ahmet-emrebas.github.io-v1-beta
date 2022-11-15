@@ -36,7 +36,7 @@ export class CreateSkuDto implements ISku<Product> {
   @Validations({
     type: 'string',
 
-    minLength: 3,
+    minLength: 0,
 
     maxLength: 500,
   })
@@ -44,7 +44,7 @@ export class CreateSkuDto implements ISku<Product> {
   description: string;
 
   @Field(() => Int)
-  @Validations({ minimum: 1 })
+  @Validations({ min: 1 })
   @Expose()
   product: Product;
 }

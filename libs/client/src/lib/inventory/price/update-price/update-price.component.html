@@ -1,0 +1,20 @@
+<p-toolbar>
+  <p-button
+    icon="pi pi-arrow-left"
+    [routerLink]="['../']"
+    routerLinkActive="router-link-active"
+    routerLinkActive="router-link-active"
+    pTooltip="Go Back"
+    tooltipPosition="bottom"
+  >
+  </p-button>
+  <strong> {{ title }} </strong>
+</p-toolbar>
+
+<div class="flex flex-column p-2 w-full">
+  <ae-form
+    [formGroup]="formGroup"
+    [fields]="fields"
+    (submitEvent)="submit()"
+  ></ae-form>
+</div>

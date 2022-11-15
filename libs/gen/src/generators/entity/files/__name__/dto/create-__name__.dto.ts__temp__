@@ -56,7 +56,7 @@ export class Create<%- classname %>Dto
   
     <% if(o.type.endsWith('One')) { %>   
         @Field(()=>Int)
-        @Validations({    minimum:1  })
+        @Validations({    min:1  })
         @Expose()
         <%- o.name %>: <%- o.target %>;
     <% } else { %> 

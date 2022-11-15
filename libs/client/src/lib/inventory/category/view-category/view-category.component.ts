@@ -37,7 +37,7 @@ export class ViewCategoryComponent {
     },
 
     {
-      header: 'Category name',
+      header: 'name',
       field: 'name',
     },
 

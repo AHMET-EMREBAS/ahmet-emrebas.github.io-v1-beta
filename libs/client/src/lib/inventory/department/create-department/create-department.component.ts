@@ -28,6 +28,7 @@ export class CreateDepartmentComponent {
     {
       name: 'name',
       type: 'text',
+      placeholder: 'name',
 
       required: true,
 
@@ -46,10 +47,17 @@ export class CreateDepartmentComponent {
   }
 
   submit() {
-    if (this.submitted === false)
+    if (this.submitted === false) {
       if (this.formGroup.valid) {
         this.submitted = true;
-        this.departmentService.add(this.formGroup.value as any);
+        this.departmentService.add({
+          name: this.value('name'),
+        });
       }
+    }
+  }
+
+  private value(key: string) {
+    return this.formGroup.get(key)?.value;
   }
 }

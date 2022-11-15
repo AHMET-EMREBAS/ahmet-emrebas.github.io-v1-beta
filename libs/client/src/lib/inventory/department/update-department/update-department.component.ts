@@ -29,6 +29,7 @@ export class UpdateDepartmentComponent implements AfterViewInit {
     {
       name: 'name',
       type: 'text',
+      placeholder: 'name',
 
       required: true,
 
@@ -55,11 +56,13 @@ export class UpdateDepartmentComponent implements AfterViewInit {
   }
 
   submit() {
-    this.departmentService.update({
-      id: this.itemToBeUpdated.id,
+    if (this.formGroup.valid) {
+      this.departmentService.update({
+        id: this.itemToBeUpdated.id,
 
-      name: this.value('name'),
-    });
+        name: this.value('name'),
+      });
+    }
   }
 
   getOptions(name: string) {

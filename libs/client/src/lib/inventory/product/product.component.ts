@@ -1,12 +1,5 @@
-import {
-  Component,
-  OnDestroy,
-  OnInit,
-} from '@angular/core';
-import {
-  ActivatedRoute,
-  Router,
-} from '@angular/router';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { MessageService } from 'primeng/api';
 import { Subscription } from 'rxjs';
@@ -29,33 +22,52 @@ export class ProductComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.sub = this.service.entityActions$.subscribe((event) => {
-      console.log(event);
-      if (event.type.endsWith('add-one')) {
+      if (event.type.endsWith('add-one/success')) {
         this.messageService.add({
           severity: 'success',
-          summary: 'Created new product',
+          summary: 'Created',
         });
         this.goHome();
-      }
-      if (event.type.endsWith('add-one/error')) {
-        this.messageService.add({
-          severity: 'warning',
-          summary: 'Something went wrong creating the product',
-        });
       }
 
-      if (event.type.endsWith('update-one')) {
+      if (event.type.endsWith('delete-one/success')) {
         this.messageService.add({
           severity: 'success',
-          summary: 'Updated the product',
+          summary: 'Deleted',
         });
         this.goHome();
       }
+
+      if (event.type.endsWith('update-one/success')) {
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Updated',
+        });
+        this.goHome();
+      }
+
+      if (event.type.endsWith('add-one/error')) {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Not Created',
+        });
+        this.goHome();
+      }
+
+      if (event.type.endsWith('delete-one/error')) {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Not Deleted',
+        });
+        this.goHome();
+      }
+
       if (event.type.endsWith('update-one/error')) {
         this.messageService.add({
-          severity: 'warning',
-          summary: 'Something went wrong updating the product',
+          severity: 'error',
+          summary: 'Not Updated',
         });
+        this.goHome();
       }
     });
   }

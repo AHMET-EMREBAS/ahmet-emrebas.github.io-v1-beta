@@ -17,7 +17,7 @@ export class UpdateProductDto
   @Validations({
     type: 'string',
 
-    minLength: 0,
+    minLength: 3,
 
     maxLength: 50,
   })
@@ -28,7 +28,7 @@ export class UpdateProductDto
   @Validations({
     type: 'string',
 
-    minLength: 3,
+    minLength: 0,
 
     maxLength: 500,
   })
@@ -36,12 +36,12 @@ export class UpdateProductDto
   description: string;
 
   @Field(() => Int)
-  @Validations({ minimum: 1 })
+  @Validations({ min: 1 })
   @Expose()
   category: Category;
 
   @Field(() => Int)
-  @Validations({ minimum: 1 })
+  @Validations({ min: 1 })
   @Expose()
   department: Department;
 }

@@ -1,4 +1,6 @@
-export interface ISku<Product> {
+import { BaseInterface } from '../../../base';
+
+export interface ISku<Product> extends BaseInterface {
   name: string;
 
   barcode: string;

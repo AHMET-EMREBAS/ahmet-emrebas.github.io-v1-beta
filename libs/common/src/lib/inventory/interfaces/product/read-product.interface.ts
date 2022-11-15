@@ -1,7 +1,7 @@
 import { IProduct } from './product.interface';
 
-import { ICategory } from '../category';
+import { IReadCategory } from '../category';
 
-import { IDepartment } from '../department';
+import { IReadDepartment } from '../department';
 
-export type IReadProduct = IProduct<ICategory, IDepartment>;
+export type IReadProduct = IProduct<IReadCategory, IReadDepartment>;

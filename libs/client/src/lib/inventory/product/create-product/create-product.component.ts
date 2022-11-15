@@ -22,30 +22,31 @@ export class CreateProductComponent {
     name: new FormControl('', [
       Validators.required,
 
-      Validators.minLength(0),
+      Validators.minLength(3),
 
       Validators.maxLength(50),
     ]),
 
     description: new FormControl('', [
-      Validators.minLength(3),
+      Validators.minLength(0),
 
       Validators.maxLength(500),
     ]),
 
-    category: new FormControl('', [Validators.required]),
+    category: new FormControl('', []),
 
-    department: new FormControl('', [Validators.required]),
+    department: new FormControl('', []),
   });
 
   fields: InputOptions[] = [
     {
       name: 'name',
       type: 'text',
+      placeholder: 'name',
 
       required: true,
 
-      minLength: 0,
+      minLength: 3,
 
       maxLength: 50,
     },
@@ -53,8 +54,9 @@ export class CreateProductComponent {
     {
       name: 'description',
       type: 'textarea',
+      placeholder: 'description',
 
-      minLength: 3,
+      minLength: 0,
 
       maxLength: 500,
     },
@@ -62,21 +64,19 @@ export class CreateProductComponent {
     {
       name: 'category',
       type: 'select',
+      placeholder: 'category',
       asyncOptions: this.categoryService.entities$,
       optionValue: 'id',
       optionLabel: 'name',
-
-      required: true,
     },
 
     {
       name: 'department',
       type: 'select',
+      placeholder: 'department',
       asyncOptions: this.departmentService.entities$,
       optionValue: 'id',
       optionLabel: 'name',
-
-      required: true,
     },
   ];
 
@@ -93,10 +93,23 @@ export class CreateProductComponent {
   }
 
   submit() {
-    if (this.submitted === false)
+    if (this.submitted === false) {
       if (this.formGroup.valid) {
         this.submitted = true;
-        this.productService.add(this.formGroup.value as any);
+        this.productService.add({
+          name: this.value('name'),
+
+          description: this.value('description'),
+
+          category: this.value('category')?.id,
+
+          department: this.value('department')?.id,
+        });
       }
+    }
+  }
+
+  private value(key: string) {
+    return this.formGroup.get(key)?.value;
   }
 }

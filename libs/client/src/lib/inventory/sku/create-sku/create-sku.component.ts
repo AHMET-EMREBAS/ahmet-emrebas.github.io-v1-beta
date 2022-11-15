@@ -1,0 +1,122 @@
+import { Component } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+
+import { InputOptions } from 'material/form';
+
+import { SkuService } from '../sku.service';
+
+import { ProductService } from '../../product';
+
+@Component({
+  selector: 'ae-create-sku',
+  templateUrl: './create-sku.component.html',
+  styleUrls: ['./create-sku.component.scss'],
+})
+export class CreateSkuComponent {
+  submitted = false;
+  title = 'Create Sku';
+  formGroup = new FormGroup({
+    name: new FormControl('', [
+      Validators.required,
+
+      Validators.minLength(0),
+
+      Validators.maxLength(30),
+    ]),
+
+    barcode: new FormControl('', [
+      Validators.required,
+
+      Validators.minLength(10),
+
+      Validators.maxLength(13),
+    ]),
+
+    description: new FormControl('', [
+      Validators.minLength(0),
+
+      Validators.maxLength(500),
+    ]),
+
+    product: new FormControl('', [Validators.required]),
+  });
+
+  fields: InputOptions[] = [
+    {
+      name: 'name',
+      type: 'text',
+      placeholder: 'name',
+
+      required: true,
+
+      minLength: 0,
+
+      maxLength: 30,
+    },
+
+    {
+      name: 'barcode',
+      type: 'text',
+      placeholder: 'barcode',
+
+      required: true,
+
+      minLength: 10,
+
+      maxLength: 13,
+    },
+
+    {
+      name: 'description',
+      type: 'textarea',
+      placeholder: 'description',
+
+      minLength: 0,
+
+      maxLength: 500,
+    },
+
+    {
+      name: 'product',
+      type: 'select',
+      placeholder: 'product',
+      asyncOptions: this.productService.entities$,
+      optionValue: 'id',
+      optionLabel: 'name',
+
+      required: true,
+    },
+  ];
+
+  constructor(
+    private readonly skuService: SkuService,
+    private readonly router: Router,
+    private readonly route: ActivatedRoute,
+    private readonly productService: ProductService
+  ) {
+    this.skuService.getAll();
+    this.productService.getAll();
+  }
+
+  submit() {
+    if (this.submitted === false) {
+      if (this.formGroup.valid) {
+        this.submitted = true;
+        this.skuService.add({
+          name: this.value('name'),
+
+          barcode: this.value('barcode'),
+
+          description: this.value('description'),
+
+          product: this.value('product')?.id,
+        });
+      }
+    }
+  }
+
+  private value(key: string) {
+    return this.formGroup.get(key)?.value;
+  }
+}

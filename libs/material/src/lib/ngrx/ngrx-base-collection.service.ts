@@ -36,7 +36,7 @@ export class NgrxBaseCollecitonService<
   deleteItem() {
     const d = this.selections$.getValue().pop();
     if (d) {
-      this.removeOneFromCache(d);
+      this.delete(d);
     }
   }
 }

@@ -15,20 +15,20 @@ export class UpdateQuantityDto implements Partial<IQuantity<Sku, Store>> {
   @Validations({
     type: 'number',
 
-    minimum: -200,
+    min: -200,
 
-    maximum: 999999999999,
+    max: 999999999999,
   })
   @Expose()
   quantity: number;
 
   @Field(() => Int)
-  @Validations({ minimum: 1 })
+  @Validations({ min: 1 })
   @Expose()
   sku: Sku;
 
   @Field(() => Int)
-  @Validations({ minimum: 1 })
+  @Validations({ min: 1 })
   @Expose()
   store: Store;
 }

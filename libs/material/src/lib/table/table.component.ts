@@ -2,6 +2,7 @@ import {
   Component,
   EventEmitter,
   Input,
+  OnInit,
   Output,
   ViewChild,
 } from '@angular/core';
@@ -13,8 +14,8 @@ import { BehaviorSubject } from 'rxjs';
 
 export type ColumnOption<T> = {
   header: string;
-  field: keyof T & string;
-  mapper?: (item?: T) => string | number | undefined;
+  field: string;
+  mapper?: (item?: any) => any;
   prefix?: string;
   suffix?: string;
 };
@@ -38,7 +39,9 @@ export type PageEvent = {
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss'],
 })
-export class TableComponent {
+export class TableComponent implements OnInit {
+  settingDialog = false;
+
   @ViewChild('table') table!: Table;
 
   searchControl = new FormControl('');
@@ -52,6 +55,8 @@ export class TableComponent {
     { header: 'uuid', field: 'uuid' },
   ];
 
+  visibleColumns!: ColumnOption<any>[];
+
   @Output() sortEvent = new EventEmitter<SortEvent>();
   @Output() filterEvent = new EventEmitter<FilterEvent>();
   @Output() pageEvent = new EventEmitter<PageEvent>();
@@ -60,4 +65,11 @@ export class TableComponent {
   @Output() newEvent = new EventEmitter();
   @Output() deleteEvent = new EventEmitter();
   @Output() clearEvent = new EventEmitter();
+
+  ngOnInit(): void {
+    this.visibleColumns = [...this.columns];
+  }
+  showSettingDialog() {
+    this.settingDialog = true;
+  }
 }

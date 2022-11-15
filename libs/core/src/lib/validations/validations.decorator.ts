@@ -1,3 +1,4 @@
+import { Transform } from 'class-transformer';
 import {
   IsNotEmpty,
   IsOptional,
@@ -14,8 +15,8 @@ export interface ValidationOptins {
   type?: string;
   minLength?: number;
   maxLength?: number;
-  minimum?: number;
-  maximum?: number;
+  min?: number;
+  max?: number;
   password?: boolean;
   email?: boolean;
   required?: boolean;
@@ -26,13 +27,26 @@ export function Validations(o: ValidationOptins) {
 
   if (o.minLength) v.push(MinLength(o.minLength));
   if (o.maxLength) v.push(MaxLength(o.maxLength));
-  if (o.minimum) v.push(Min(o.minimum));
-  if (o.maximum) v.push(Max(o.maximum));
+  if (o.min) v.push(Min(o.min));
+  if (o.max) v.push(Max(o.max));
 
   if (o.required === true) {
     v.push(IsNotEmpty());
   } else {
     v.push(IsOptional());
+  }
+
+  if (o.type === 'number') {
+    v.push(
+      Transform(({ value }) => {
+        const v = parseFloat(value);
+
+        if (isNaN(v)) {
+          return 0;
+        }
+        return v;
+      })
+    );
   }
 
   return applyDecorators(ApiProperty({ ...o }), ...v);

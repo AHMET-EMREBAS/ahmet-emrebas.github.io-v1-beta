@@ -21,7 +21,7 @@ Properties:
       datatype: string
     Validation:
       type: string
-      minLength: 3
+      minLength: 0
       maxLength: 50
     Column:
       columnType: text

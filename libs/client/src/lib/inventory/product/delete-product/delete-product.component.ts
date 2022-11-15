@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ConfirmationService } from 'primeng/api';
 
 import { ProductService } from '../product.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'ae-delete-product',
@@ -13,7 +14,9 @@ export class DeleteProductComponent implements OnInit {
   title = 'Delete Product';
   constructor(
     private readonly confirmService: ConfirmationService,
-    private readonly productService: ProductService
+    private readonly productService: ProductService,
+    private readonly router: Router,
+    private readonly route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -25,6 +28,9 @@ export class DeleteProductComponent implements OnInit {
       acceptLabel: 'Yes, delete item.',
       accept: () => {
         this.productService.deleteItem();
+      },
+      reject: () => {
+        this.router.navigate(['../'], { relativeTo: this.route });
       },
     });
   }

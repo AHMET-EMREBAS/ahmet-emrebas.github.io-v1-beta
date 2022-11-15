@@ -23,30 +23,31 @@ export class UpdateProductComponent implements AfterViewInit {
     name: new FormControl('', [
       Validators.required,
 
-      Validators.minLength(0),
+      Validators.minLength(3),
 
       Validators.maxLength(50),
     ]),
 
     description: new FormControl('', [
-      Validators.minLength(3),
+      Validators.minLength(0),
 
       Validators.maxLength(500),
     ]),
 
-    category: new FormControl('', [Validators.required]),
+    category: new FormControl('', []),
 
-    department: new FormControl('', [Validators.required]),
+    department: new FormControl('', []),
   });
 
   fields: InputOptions[] = [
     {
       name: 'name',
       type: 'text',
+      placeholder: 'name',
 
       required: true,
 
-      minLength: 0,
+      minLength: 3,
 
       maxLength: 50,
     },
@@ -54,8 +55,9 @@ export class UpdateProductComponent implements AfterViewInit {
     {
       name: 'description',
       type: 'textarea',
+      placeholder: 'description',
 
-      minLength: 3,
+      minLength: 0,
 
       maxLength: 500,
     },
@@ -63,21 +65,19 @@ export class UpdateProductComponent implements AfterViewInit {
     {
       name: 'category',
       type: 'select',
+      placeholder: 'category',
       asyncOptions: this.categoryService.entities$,
       optionValue: 'id',
       optionLabel: 'name',
-
-      required: true,
     },
 
     {
       name: 'department',
       type: 'select',
+      placeholder: 'department',
       asyncOptions: this.departmentService.entities$,
       optionValue: 'id',
       optionLabel: 'name',
-
-      required: true,
     },
   ];
 
@@ -102,17 +102,19 @@ export class UpdateProductComponent implements AfterViewInit {
   }
 
   submit() {
-    this.productService.update({
-      id: this.itemToBeUpdated.id,
+    if (this.formGroup.valid) {
+      this.productService.update({
+        id: this.itemToBeUpdated.id,
 
-      name: this.value('name'),
+        name: this.value('name'),
 
-      description: this.value('description'),
+        description: this.value('description'),
 
-      category: this.value('category').id,
+        category: this.value('category')?.id,
 
-      department: this.value('department').id,
-    });
+        department: this.value('department')?.id,
+      });
+    }
   }
 
   getOptions(name: string) {

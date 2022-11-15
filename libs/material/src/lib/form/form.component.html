@@ -1,12 +1,12 @@
 <div class="info" *ngIf="!formGroup">FormGroup is not provided!</div>
 
-<form class="flex flex-column gap-5 " *ngIf="formGroup" [formGroup]="formGroup" (ngSubmit)="submit()"
+<form class="ae-form flex flex-column gap-5 " *ngIf="formGroup" [formGroup]="formGroup" (ngSubmit)="submit()"
     [noValidate]="false">
     <div class="flex flex-column  justify-content-start align-items-start" *ngFor=" let field of fields">
-        <label [for]="field.name">{{field.placeholder}} </label>
+        <label [for]="field.name + '-input'">{{field.placeholder | titlecase}} </label>
         <ng-container
             *ngIf="['text', 'number', 'date', 'datetime', 'range', 'email', 'password'].includes(field.type || 'text')">
-            <input [id]="field.name" [formControlName]="field.name!" [type]="field.type || 'text'"
+            <input [id]="field.name + '-input'" [formControlName]="field.name!" [type]="field.type || 'text'"
                 [attr.required]="field.required" [attr.minlength]="field.minLength" [attr.maxlength]="field.maxLength"
                 [attr.min]="field.min" [attr.max]="field.max">
         </ng-container>

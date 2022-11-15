@@ -7,8 +7,11 @@ import {
 
 import { SharedModule } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
+import { DialogModule } from 'primeng/dialog';
 import { InputTextModule } from 'primeng/inputtext';
+import { MultiSelectModule } from 'primeng/multiselect';
 import { TableModule as PrimeTableModule } from 'primeng/table';
+import { TabViewModule } from 'primeng/tabview';
 import { ToolbarModule } from 'primeng/toolbar';
 import { TooltipModule } from 'primeng/tooltip';
 
@@ -26,6 +29,9 @@ import { TableComponent } from './table.component';
     ButtonModule,
     InputTextModule,
     TooltipModule,
+    DialogModule,
+    TabViewModule,
+    MultiSelectModule,
   ],
   exports: [TableComponent],
 })

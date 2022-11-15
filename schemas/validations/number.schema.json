@@ -7,11 +7,11 @@
       "type": "string",
       "const": "number"
     },
-    "minimum": {
+    "min": {
       "type": "number",
       "default": 0
     },
-    "maximum": {
+    "max": {
       "type": "number",
       "default": 0
     },
@@ -24,6 +24,6 @@
       "default": [1, 2, 3, 4, 5, 6]
     }
   },
-  "required": ["type", "minimum", "maximum"],
+  "required": ["type", "min", "max"],
   "additionalProperties": false
 }

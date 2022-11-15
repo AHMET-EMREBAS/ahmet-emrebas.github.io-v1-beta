@@ -4,7 +4,7 @@ Properties:
   - Property: name
     Validation:
       type: string
-      minLength: 0
+      minLength: 3
       maxLength: 50
     Column:
       columnType: text
@@ -20,7 +20,7 @@ Properties:
       commerce: productDescription
     Validation:
       type: string
-      minLength: 3
+      minLength: 0
       maxLength: 500
     Column:
       columnType: text
@@ -34,6 +34,7 @@ Relations:
     name: category
     eager: true
     joinColumn: true
+    nullable: true
     viewColumns:
       - column: name
         as: category
@@ -43,6 +44,7 @@ Relations:
     target: Department
     name: department
     eager: true
+    nullable: true
     joinColumn: true
     viewColumns:
       - column: name
@@ -51,8 +53,6 @@ Relations:
 
 Required:
   - name
-  - category
-  - department
 
 Unique:
   - name

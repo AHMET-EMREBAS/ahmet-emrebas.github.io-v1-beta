@@ -6,6 +6,11 @@ import {
 import { ConfirmationService } from 'primeng/api';
 
 import { <%- classname %>Service } from '../<%- name %>.service';
+import {
+  ActivatedRoute,
+  Router,
+} from '@angular/router';
+
 
 @Component({
   selector: 'ae-delete-<%- name %>',
@@ -16,7 +21,9 @@ export class Delete<%- classname %>Component implements OnInit {
   title = 'Delete <%- classname %>';
   constructor(
     private readonly confirmService: ConfirmationService,
-    private readonly <%- name %>Service: <%- classname %>Service
+    private readonly <%- name %>Service: <%- classname %>Service,
+    private readonly router:Router, 
+    private readonly route:ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -28,6 +35,9 @@ export class Delete<%- classname %>Component implements OnInit {
       acceptLabel: 'Yes, delete item.',
       accept: () => {
         this.<%- name %>Service.deleteItem();
+      },
+      reject: () => {
+        this.router.navigate(['../'], { relativeTo: this.route });
       },
     });
   }

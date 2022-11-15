@@ -56,13 +56,14 @@ export class Create<%- classname %>Component {
     {
       name: '<%- f.Property %>', 
       type: '<%- f.UI.type %>',  
-
+      placeholder: '<%- f.Label || f.Property %>', 
       <% if(options.Required?.includes(f.Property)) { %> 
             required:true,
        <% } %>
 
       <% for(const [vk, vv] of Object.entries(f.Validation || [])) { %> 
           <% if(vk ==='type') {  continue; %> <% } %>
+          
           <%- vk %>: <% if(typeof vv ==='string') {  %> '<%- vv %>' <%} else { %>  <%- vv %> <%} %> ,
       <% } %>
     },
@@ -73,7 +74,8 @@ export class Create<%- classname %>Component {
 
     {
       name: '<%- r.name %>', 
-      type: 'select',      
+      type: 'select', 
+      placeholder: '<%- r.label || r.name %>',     
       asyncOptions:  this.<%- r.name %>Service.entities$,
       optionValue:'id', 
       optionLabel: 'name',
@@ -81,7 +83,6 @@ export class Create<%- classname %>Component {
             required:true,
        <% } %>
     },
-
     <% } %>
 
 
@@ -101,10 +102,23 @@ export class Create<%- classname %>Component {
   }
 
   submit() {
-    if (this.submitted === false)
+    if (this.submitted === false){
       if (this.formGroup.valid) {
         this.submitted = true;
-        this.<%- name %>Service.add(this.formGroup.value as any);
+        this.<%- name %>Service.add({
+          <% for(const f of options.Properties) { %> 
+              <%- f.Property %>: this.value('<%- f.Property %>'),
+          <%  } %>
+
+          <% for(const f of options.Relations || []) { %> 
+              <%- f.name %>: this.value('<%- f.name %>')?.id,
+          <%  } %>
+         });
       }
+    }
+  }
+
+  private value(key: string) {
+    return this.formGroup.get(key)?.value;
   }
 }

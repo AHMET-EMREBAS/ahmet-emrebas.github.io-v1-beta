@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ConfirmationService } from 'primeng/api';
 
 import { CategoryService } from '../category.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'ae-delete-category',
@@ -13,7 +14,9 @@ export class DeleteCategoryComponent implements OnInit {
   title = 'Delete Category';
   constructor(
     private readonly confirmService: ConfirmationService,
-    private readonly categoryService: CategoryService
+    private readonly categoryService: CategoryService,
+    private readonly router: Router,
+    private readonly route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -25,6 +28,9 @@ export class DeleteCategoryComponent implements OnInit {
       acceptLabel: 'Yes, delete item.',
       accept: () => {
         this.categoryService.deleteItem();
+      },
+      reject: () => {
+        this.router.navigate(['../'], { relativeTo: this.route });
       },
     });
   }

@@ -10,22 +10,14 @@ import { MenuItem } from 'primeng/api';
 export class InventoryComponent {
   primaryMenuItems: MenuItem[] = [
     {
-      label: 'Main Resources',
+      label: 'Product',
       items: [
         { label: 'Product', routerLink: ['product'] },
-        { label: 'SKU', routerLink: ['sku'] },
+        { label: 'Sku', routerLink: ['sku'] },
       ],
     },
     { separator: true },
-    {
-      label: 'Meta',
 
-      items: [
-        { label: 'Category', routerLink: ['category'] },
-        { label: 'Department', routerLink: ['department'] },
-      ],
-    },
-    { separator: true },
     {
       label: 'Stock',
       items: [{ label: 'Quantity', routerLink: ['quantity'] }],
@@ -34,7 +26,7 @@ export class InventoryComponent {
     {
       label: 'Pricing',
       items: [
-        { label: 'Price', routerLink: ['Price'] },
+        { label: 'Price', routerLink: ['price'] },
         { label: 'Price Level', routerLink: ['pricelevel'] },
         { label: 'Promotion', routerLink: ['promotion'] },
       ],
@@ -44,7 +36,7 @@ export class InventoryComponent {
       label: 'Sales',
       items: [
         { label: 'Transaction', routerLink: ['transaction'] },
-        { label: 'Order', routerLink: ['Order'] },
+        { label: 'Order', routerLink: ['order'] },
       ],
     },
     { separator: true },
@@ -58,6 +50,20 @@ export class InventoryComponent {
   ];
 
   secondaryMenuItems: MenuItem[] = [
+    {
+      label: 'Meta',
+
+      items: [
+        { label: 'Category', routerLink: ['category'] },
+        { label: 'Department', routerLink: ['department'] },
+      ],
+    },
+    { separator: true },
+    {
+      label: 'Store',
+      items: [{ label: 'Store', routerLink: ['store'] }],
+    },
+    { separator: true },
     {
       label: 'Aministration',
       items: [

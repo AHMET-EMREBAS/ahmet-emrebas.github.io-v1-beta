@@ -37,7 +37,7 @@ export class ViewDepartmentComponent {
     },
 
     {
-      header: 'Department name',
+      header: 'name',
       field: 'name',
     },
 

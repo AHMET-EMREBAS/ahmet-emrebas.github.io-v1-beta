@@ -29,6 +29,7 @@ export class UpdateCategoryComponent implements AfterViewInit {
     {
       name: 'name',
       type: 'text',
+      placeholder: 'name',
 
       required: true,
 
@@ -55,11 +56,13 @@ export class UpdateCategoryComponent implements AfterViewInit {
   }
 
   submit() {
-    this.categoryService.update({
-      id: this.itemToBeUpdated.id,
+    if (this.formGroup.valid) {
+      this.categoryService.update({
+        id: this.itemToBeUpdated.id,
 
-      name: this.value('name'),
-    });
+        name: this.value('name'),
+      });
+    }
   }
 
   getOptions(name: string) {

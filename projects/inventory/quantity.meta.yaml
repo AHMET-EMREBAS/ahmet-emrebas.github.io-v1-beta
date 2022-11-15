@@ -7,8 +7,8 @@ Properties:
       random: number
     Validation:
       type: number
-      minimum: -200
-      maximum: 999999999999
+      min: -200
+      max: 999999999999
 
     Column:
       columnType: int

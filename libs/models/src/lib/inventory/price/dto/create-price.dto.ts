@@ -16,9 +16,9 @@ export class CreatePriceDto implements IPrice<Sku, Pricelevel> {
   @Validations({
     type: 'number',
 
-    minimum: 0,
+    min: 0,
 
-    maximum: 999999999999,
+    max: 999999999999,
   })
   @Expose()
   price: number;
@@ -27,20 +27,20 @@ export class CreatePriceDto implements IPrice<Sku, Pricelevel> {
   @Validations({
     type: 'number',
 
-    minimum: 0,
+    min: 0,
 
-    maximum: 999999999999,
+    max: 999999999999,
   })
   @Expose()
   cost: number;
 
   @Field(() => Int)
-  @Validations({ minimum: 1 })
+  @Validations({ min: 1 })
   @Expose()
   sku: Sku;
 
   @Field(() => Int)
-  @Validations({ minimum: 1 })
+  @Validations({ min: 1 })
   @Expose()
   pricelevel: Pricelevel;
 }

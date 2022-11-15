@@ -7,8 +7,8 @@ Properties:
       commerce: price
     Validation:
       type: number
-      minimum: 0
-      maximum: 999999999999
+      min: 0
+      max: 999999999999
     Column:
       columnType: numeric
       valueType: number
@@ -21,8 +21,8 @@ Properties:
       commerce: price
     Validation:
       type: number
-      minimum: 0
-      maximum: 999999999999
+      min: 0
+      max: 999999999999
     Column:
       columnType: numeric
       valueType: number
