@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 
-import { BaseInterface } from 'common/base/';
 import { Table } from 'primeng/table';
 import {
   BehaviorSubject,
@@ -13,7 +12,7 @@ import {
 } from '@ngrx/data';
 
 export class NgrxBaseCollecitonService<
-  T extends BaseInterface
+  T
 > extends EntityCollectionServiceBase<T> {
   private readonly selections$ = new BehaviorSubject<T[]>([]);
 

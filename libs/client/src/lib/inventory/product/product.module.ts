@@ -4,7 +4,10 @@ import { RouterModule } from '@angular/router';
 
 import { FormModule } from 'material/form';
 import { TableModule } from 'material/table';
-import { ConfirmationService, MessageService } from 'primeng/api';
+import {
+  ConfirmationService,
+  MessageService,
+} from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { MessageModule } from 'primeng/message';
@@ -12,16 +15,14 @@ import { ToastModule } from 'primeng/toast';
 import { ToolbarModule } from 'primeng/toolbar';
 import { TooltipModule } from 'primeng/tooltip';
 
+import { CategoryService } from '../category';
+import { DepartmentService } from '../department';
 import { CreateProductComponent } from './create-product/';
 import { DeleteProductComponent } from './delete-product/';
 import { ProductComponent } from './product.component';
 import { ProductService } from './product.service';
 import { UpdateProductComponent } from './update-product/';
 import { ViewProductComponent } from './view-product';
-
-import { CategoryService } from '../category';
-
-import { DepartmentService } from '../department';
 
 @NgModule({
   declarations: [
