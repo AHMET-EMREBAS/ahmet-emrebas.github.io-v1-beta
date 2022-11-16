@@ -42,6 +42,7 @@ Relations:
     target: Sku
     name: sku
     eager: true
+    nullable: true
     joinColumn: true
     viewColumns:
       - column: barcode
@@ -51,6 +52,7 @@ Relations:
   - type: ManyToOne
     target: Pricelevel
     name: pricelevel
+    nullable: true
     eager: true
     joinColumn: true
     viewColumns:
