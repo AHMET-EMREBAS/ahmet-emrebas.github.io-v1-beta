@@ -68,9 +68,15 @@ export class BaseUrlInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     const apiReq = request.clone({ url: `${this.baseUrl}/${request.url}` });
+
+    if (request.url.includes('http://') || request.url.includes('https://')) {
+      return next.handle(request);
+    }
+
     if (request.url.includes('api')) {
       return next.handle(apiReq);
     }
+
     return next.handle(request);
   }
 }
