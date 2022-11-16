@@ -1,16 +1,23 @@
-import { PaginatorDto, QueryDto, ViewDto } from 'core/dto';
+import {
+  PaginatorDto,
+  QueryDto,
+  ViewDto,
+} from 'core/dto';
 import { PubSub } from 'graphql-subscriptions';
-import { ILike } from 'typeorm';
-
-import { Args, Mutation, Query, Resolver, Subscription } from '@nestjs/graphql';
 
 import {
-  User,
-  UserView,
+  Args,
+  Mutation,
+  Query,
+  Resolver,
+  Subscription,
+} from '@nestjs/graphql';
+
+import {
   CreateUserDto,
   UpdateUserDto,
+  User,
 } from '../../models/user';
-
 import { UserViewService } from './user-view.service';
 import { UserService } from './user.service';
 

@@ -1,26 +1,28 @@
 import {
+  FunctionsDto,
+  PaginatorDto,
+  ViewDto,
+  WhereDto,
+} from 'core/dto';
+
+import {
+  BadRequestException,
   Body,
   Controller,
   Delete,
   Get,
   Param,
+  Patch,
   Post,
   Put,
   Query,
-  Patch,
-  BadRequestException,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
+
 import {
-  FunctionsDto,
-  PaginatorDto,
-  QueryDto,
-  ViewDto,
-  WhereDto,
-} from 'core/dto';
-
-import { CreateUserDto, UpdateUserDto } from '../../models/user';
-
+  CreateUserDto,
+  UpdateUserDto,
+} from '../../models/user';
 import { UserViewService } from './user-view.service';
 import { UserService } from './user.service';
 
@@ -80,12 +82,12 @@ export class UserController {
     throw new BadRequestException('Must provide a fucntion name.');
   }
 
-  @Post(':id//:rid')
+  @Post(':id/:rid')
   addpermissionToUser(id: number, rid: number) {
     return this.service.add(id, rid, '');
   }
 
-  @Post(':id//:rid')
+  @Post(':id/:rid')
   removepermissionFromUser(id: number, rid: number) {
     return this.service.remove(id, rid, '');
   }
