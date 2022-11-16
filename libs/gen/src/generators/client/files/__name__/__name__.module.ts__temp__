@@ -20,6 +20,7 @@ import { SharedResourceModule } from 'material/resource';
 
 
 
+
 @NgModule({
   declarations: [
     <%- classname %>Component,
