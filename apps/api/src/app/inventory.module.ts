@@ -1,47 +1,48 @@
 import { commerce } from 'faker';
-import { Category } from 'models/inventory/category';
-import { Department } from 'models/inventory/department';
-import { Price } from 'models/inventory/price';
-import { Pricelevel } from 'models/inventory/pricelevel';
-import { Product } from 'models/inventory/product';
-import { Quantity } from 'models/inventory/quantity';
-import { Sku } from 'models/inventory/sku';
-import { Store } from 'models/inventory/store';
-import {
-  CategoryModule,
-  CategoryService,
-} from 'rest/inventory/category';
-import {
-  DepartmentModule,
-  DepartmentService,
-} from 'rest/inventory/department';
-import {
-  PriceModule,
-  PriceService,
-} from 'rest/inventory/price';
-import { PricelevelModule } from 'rest/inventory/pricelevel';
-import {
-  ProductModule,
-  ProductService,
-} from 'rest/inventory/product';
-import {
-  QuantityModule,
-  QuantityService,
-} from 'rest/inventory/quantity';
-import {
-  SkuModule,
-  SkuService,
-} from 'rest/inventory/sku';
-import {
-  StoreModule,
-  StoreService,
-} from 'rest/inventory/store';
 
 import {
   Module,
   OnModuleInit,
 } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+
+import { Category } from './inventory/models/category';
+import { Department } from './inventory/models/department';
+import { Price } from './inventory/models/price';
+import { Pricelevel } from './inventory/models/pricelevel';
+import { Product } from './inventory/models/product';
+import { Quantity } from './inventory/models/quantity';
+import { Sku } from './inventory/models/sku';
+import { Store } from './inventory/models/store';
+import {
+  CategoryModule,
+  CategoryService,
+} from './inventory/rest/category';
+import {
+  DepartmentModule,
+  DepartmentService,
+} from './inventory/rest/department';
+import {
+  PriceModule,
+  PriceService,
+} from './inventory/rest/price';
+import { PricelevelModule } from './inventory/rest/pricelevel';
+import {
+  ProductModule,
+  ProductService,
+} from './inventory/rest/product';
+import {
+  QuantityModule,
+  QuantityService,
+} from './inventory/rest/quantity';
+import {
+  SkuModule,
+  SkuService,
+} from './inventory/rest/sku';
+import {
+  StoreModule,
+  StoreService,
+} from './inventory/rest/store';
 
 export const ResouceModules = [
   ProductModule,

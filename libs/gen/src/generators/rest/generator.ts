@@ -22,7 +22,7 @@ export default async function (tree: Tree, options: RestGeneratorSchema) {
 
   const schemaOptions = load(fileContent);
 
-  const target = join('libs', 'rest', 'src', 'lib', options.project);
+  const target = join('apps', 'api', 'src', 'app', options.project, 'rest');
 
   await generateFiles(tree, join(__dirname, 'files'), target, {
     name: options.name,

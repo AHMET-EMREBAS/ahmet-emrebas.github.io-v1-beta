@@ -4,7 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { 
   <%- classname %>, 
   <%- classname %>View
-} from 'models/<%- project %>/<%- name %>';
+} from '../../models/<%- name %>';
 
 import { <%- classname %>ViewService } from './<%- name %>-view.service';
 import { <%- classname %>Controller } from './<%- name %>.controller';

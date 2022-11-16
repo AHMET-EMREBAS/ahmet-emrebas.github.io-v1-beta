@@ -22,7 +22,7 @@ export default async function (tree: Tree, options: EntityGeneratorSchema) {
 
   const schemaOptions = load(fileContent);
 
-  const target = join('libs', 'models', 'src', 'lib', options.project);
+  const target = join('apps', 'api', 'src', 'app', options.project, 'models');
 
   await generateFiles(tree, join(__dirname, 'files'), target, {
     name: options.name,

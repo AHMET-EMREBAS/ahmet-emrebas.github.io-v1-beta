@@ -2,7 +2,6 @@
   "version": 2,
   "projects": {
     "api": "apps/api",
-    "client": "libs/client",
     "common": "libs/common",
     "core": "libs/core",
     "directive": "libs/directive",
@@ -11,10 +10,8 @@
     "layout": "libs/layout",
     "material": "libs/material",
     "messanger": "libs/messanger",
-    "models": "libs/models",
     "nativescript-mobile": "apps/nativescript-mobile",
     "notification": "libs/notification",
-    "rest": "libs/rest",
     "util": "libs/util",
     "web": "apps/web",
     "web-e2e": "apps/web-e2e"

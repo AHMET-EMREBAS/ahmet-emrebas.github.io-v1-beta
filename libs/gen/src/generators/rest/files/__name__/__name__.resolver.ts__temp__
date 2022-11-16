@@ -16,7 +16,7 @@ import {
   <%- classname %>View, 
   Create<%- classname %>Dto,
   Update<%- classname %>Dto
-} from 'models/<%- project %>/<%- name %>';
+} from '../../models/<%- name %>';
 
 import { <%- classname %>ViewService } from './<%- name %>-view.service';
 import { <%- classname %>Service } from './<%- name %>.service';
