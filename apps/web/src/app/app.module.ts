@@ -11,7 +11,10 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 
 import { LayoutModule } from 'layout';
 
-import { EntityDataModule } from '@ngrx/data';
+import {
+  DefaultDataServiceConfig,
+  EntityDataModule,
+} from '@ngrx/data';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
@@ -73,5 +76,13 @@ const routes: Routes = [
     }),
   ],
   bootstrap: [AppComponent],
+  providers: [
+    {
+      provide: 'DefaultDataServiceConfig',
+      useValue: {
+        root: 'http://localhost:3333',
+      } as DefaultDataServiceConfig,
+    },
+  ],
 })
 export class AppModule {}
