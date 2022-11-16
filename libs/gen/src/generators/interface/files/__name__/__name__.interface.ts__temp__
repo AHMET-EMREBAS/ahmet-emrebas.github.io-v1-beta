@@ -6,10 +6,10 @@ export interface I<%- classname %>
 
 
 <% if(options.Relations?.length > 0 ) { %> 
-
+<% let i = 1 %>
 <
 <% for(const o of options.Relations || []) { %> 
-  <%- o.target %>,
+  <%- o.target + i++ %>,
 <% } %>
 >
 
@@ -20,8 +20,9 @@ export interface I<%- classname %>
   <%- o.Property %>: <%- o.Column.valueType %>;
 <% } %>
 
+<% let j = 1 %>
 <% for(const o of options.Relations || []) { %> 
-  <%- o.name %>?: <%- o.target %> 
+  <%- o.name %>?: <%- o.target + j++ %> 
 <% } %>
 
 }

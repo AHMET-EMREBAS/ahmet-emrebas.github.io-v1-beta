@@ -1,9 +1,13 @@
 import { I<%- classname %> } from './<%- name %>.interface';
 
 
-<% for(const o of options.Relations || []) { %> 
-    import { IRead<%- o.target %> } from '../<%- o.name %>';
+<% for(const target of new Set(options.Relations?.map(e=>e.target) || [])) { %> 
+
+import { IRead<%- target %> } from '../<%- target.toLowerCase() %>';
+
 <% } %>
+
+
 
 <% if(options.Relations?.length > 0 ) { %> 
 export type  IRead<%- classname %> = I<%- classname %><

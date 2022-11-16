@@ -1,9 +1,9 @@
 import { BaseInterface } from '../../../base';
 
-export interface IMessage<User, User1> extends BaseInterface {
+export interface IMessage<User1, User2> extends BaseInterface {
   message: string;
 
-  to?: User;
+  to?: User1;
 
-  from?: User1;
+  from?: User2;
 }
