@@ -19,21 +19,21 @@ import {
   WhereDto,
 } from 'core/dto';
 
-import { CreateUserDto, UpdateUserDto } from '../../models/user';
+import { CreateMessageDto, UpdateMessageDto } from '../../models/message';
 
-import { UserViewService } from './user-view.service';
-import { UserService } from './user.service';
+import { MessageViewService } from './message-view.service';
+import { MessageService } from './message.service';
 
-@ApiTags('user')
-@Controller('user')
-export class UserController {
+@ApiTags('message')
+@Controller('message')
+export class MessageController {
   constructor(
-    private readonly service: UserService,
-    private readonly viewService: UserViewService
+    private readonly service: MessageService,
+    private readonly viewService: MessageViewService
   ) {}
 
   @Get()
-  readUser(
+  readMessage(
     @Query() paginatorDto: PaginatorDto,
     @Query() viewDto: ViewDto,
     @Query() whereDto: WhereDto
@@ -50,7 +50,7 @@ export class UserController {
   }
 
   @Get(':id')
-  readUserById(@Param('id') id: number, @Query() view: ViewDto) {
+  readMessageById(@Param('id') id: number, @Query() view: ViewDto) {
     if (view.view === true) {
       return this.viewService.findOneBy();
     }
@@ -58,17 +58,17 @@ export class UserController {
   }
 
   @Post()
-  writeUser(@Body() body: CreateUserDto) {
+  writeMessage(@Body() body: CreateMessageDto) {
     return this.service.save(body);
   }
 
   @Put(':id')
-  updateUser(@Param('id') id: number, @Body() body: UpdateUserDto) {
+  updateMessage(@Param('id') id: number, @Body() body: UpdateMessageDto) {
     return this.service.update(id, body);
   }
 
   @Delete(':id')
-  deleteUser(@Param('id') id: number) {
+  deleteMessage(@Param('id') id: number) {
     return this.service.delete(id);
   }
 
@@ -80,13 +80,23 @@ export class UserController {
     throw new BadRequestException('Must provide a fucntion name.');
   }
 
-  @Post(':id//:rid')
-  addpermissionToUser(id: number, rid: number) {
-    return this.service.add(id, rid, '');
+  @Post(':id/to/:toId')
+  settoToMessage(id: number, toId: number) {
+    return this.service.set(id, toId, 'to');
   }
 
-  @Post(':id//:rid')
-  removepermissionFromUser(id: number, rid: number) {
-    return this.service.remove(id, rid, '');
+  @Post(':id/to')
+  unsettoFromMessage(id: number) {
+    return this.service.unset(id, 'to');
+  }
+
+  @Post(':id/from/:fromId')
+  setfromToMessage(id: number, fromId: number) {
+    return this.service.set(id, fromId, 'from');
+  }
+
+  @Post(':id/from')
+  unsetfromFromMessage(id: number) {
+    return this.service.unset(id, 'from');
   }
 }

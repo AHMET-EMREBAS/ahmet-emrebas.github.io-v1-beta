@@ -1,9 +1,9 @@
 import { BaseInterface } from '../../../base';
 
-export interface IQuantity<Sku, Store> extends BaseInterface {
+export interface IQuantity<Sku1, Store2> extends BaseInterface {
   quantity: number;
 
-  sku?: Sku;
+  sku?: Sku1;
 
-  store?: Store;
+  store?: Store2;
 }

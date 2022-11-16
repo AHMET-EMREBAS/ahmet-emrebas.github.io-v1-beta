@@ -1,17 +1,12 @@
-import { IUser } from 'common/inventory/interfaces/user';
-import {
-  DataSource,
-  ViewColumn,
-  ViewEntity,
-} from 'typeorm';
+import { DataSource, ViewColumn, ViewEntity } from 'typeorm';
 
-import {
-  Field,
-  ObjectType,
-} from '@nestjs/graphql';
+import { Field, Int, ObjectType } from '@nestjs/graphql';
+
+import { User } from './user.entity';
+
+import { IUser } from 'common/inventory/interfaces/user';
 
 import { Permission } from '../../permission';
-import { User } from './user.entity';
 
 @ObjectType()
 @ViewEntity({

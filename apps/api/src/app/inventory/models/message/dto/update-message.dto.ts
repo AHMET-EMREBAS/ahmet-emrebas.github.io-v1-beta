@@ -5,45 +5,30 @@ import { ID } from 'core/dto';
 
 import { ValidateNested } from 'class-validator';
 
-import { IProduct } from 'common/inventory/interfaces/product';
+import { IMessage } from 'common/inventory/interfaces/message';
 
-import { Category } from '../../category';
-
-import { Department } from '../../department';
+import { User } from '../../user';
 
 @InputType()
-export class UpdateProductDto
-  implements Partial<IProduct<Category, Department>>
-{
-  @Field()
-  @Validations({
-    type: 'string',
-
-    minLength: 3,
-
-    maxLength: 50,
-  })
-  @Expose()
-  name: string;
-
+export class UpdateMessageDto implements Partial<IMessage<User, User>> {
   @Field()
   @Validations({
     type: 'string',
 
     minLength: 0,
 
-    maxLength: 500,
+    maxLength: 400,
   })
   @Expose()
-  description: string;
+  message: string;
 
   @Field(() => Int)
   @Validations({ min: 1 })
   @Expose()
-  category: Category;
+  to: User;
 
   @Field(() => Int)
   @Validations({ min: 1 })
   @Expose()
-  department: Department;
+  from: User;
 }

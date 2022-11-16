@@ -30,7 +30,7 @@ Relations:
     joinColumn: true
     viewColumns:
       - column: username
-        as: username
+        as: to
         valueType: string
 
   - type: ManyToOne
@@ -40,5 +40,5 @@ Relations:
     joinColumn: true
     viewColumns:
       - column: username
-        as: username
+        as: from
         valueType: string

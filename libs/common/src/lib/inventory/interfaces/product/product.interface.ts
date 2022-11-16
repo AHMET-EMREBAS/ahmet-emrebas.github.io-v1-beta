@@ -1,11 +1,11 @@
 import { BaseInterface } from '../../../base';
 
-export interface IProduct<Category, Department> extends BaseInterface {
+export interface IProduct<Category1, Department2> extends BaseInterface {
   name: string;
 
   description: string;
 
-  category?: Category;
+  category?: Category1;
 
-  department?: Department;
+  department?: Department2;
 }

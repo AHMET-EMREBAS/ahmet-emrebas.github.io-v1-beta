@@ -3,6 +3,8 @@ import { Field, InputType, Int } from '@nestjs/graphql';
 import { Validations } from 'core/validations';
 import { ID } from 'core/dto';
 
+import { ValidateNested } from 'class-validator';
+
 import { IQuantity } from 'common/inventory/interfaces/quantity';
 
 import { Sku } from '../../sku';

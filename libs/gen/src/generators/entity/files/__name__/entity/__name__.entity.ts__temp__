@@ -14,9 +14,9 @@ import {
 import { I<%- classname %> } from 'common/<%- project %>/interfaces/<%- name %>';
 
 
-<% for(const o of options.Relations || []) { %> 
+<% for(const target of new Set(options.Relations?.map(e=>e.target) || [])) { %> 
 
-import { <%- o.target  %>  } from '../../<%- o.name %>'
+import { <%- target  %>  } from '../../<%- target.toLowerCase() %>';
 
 <% } %>
 
@@ -62,7 +62,7 @@ export class <%- classname %> extends BaseEntity
   @<%- o.type %>(()=> <%- o.target %>, { eager: <%- o.eager===true %>, nullable: <%- o.nullable===true %>})
   <% if(o.joinColumn) { %>  @JoinColumn()  <% } %> 
   <% if(o.joinTable) { %>  @JoinTable()  <% } %> 
-  <%- o.name %>?: <%- o.target %> 
+  <%- o.name %>?:  <% if(o.type.endsWith('Many')) { %> <%- o.target %>[]; <% } else {  %> <%- o.target %>; <% } %>
 
 <% } %>
 

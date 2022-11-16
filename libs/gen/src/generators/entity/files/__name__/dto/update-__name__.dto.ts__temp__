@@ -7,15 +7,15 @@ import {
 import { Validations} from 'core/validations'
 import { ID} from 'core/dto'
 
+import { ValidateNested } from 'class-validator';
+
 import { I<%- classname %> } from 'common/<%- project %>/interfaces/<%- name %>';
 
+<% for(const target of new Set(options.Relations?.map(e=>e.target) || [])) { %> 
 
-<% for(const o of options.Relations || []) { %> 
-
-import { <%- o.target  %>  } from '../../<%- o.name %>'
+import { <%- target  %>  } from '../../<%- target.toLowerCase() %>';
 
 <% } %>
-
 
 @InputType()
 export class Update<%- classname %>Dto

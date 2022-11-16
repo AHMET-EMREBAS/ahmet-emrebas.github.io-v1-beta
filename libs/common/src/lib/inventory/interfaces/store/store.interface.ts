@@ -1,7 +1,7 @@
 import { BaseInterface } from '../../../base';
 
-export interface IStore<Pricelevel> extends BaseInterface {
+export interface IStore<Pricelevel1> extends BaseInterface {
   name: string;
 
-  pricelevel?: Pricelevel;
+  pricelevel?: Pricelevel1;
 }

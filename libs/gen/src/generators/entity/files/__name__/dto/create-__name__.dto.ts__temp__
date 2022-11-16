@@ -6,9 +6,9 @@ import { ValidateNested } from 'class-validator';
 
 import { I<%- classname %> } from 'common/<%- project %>/interfaces/<%- name %>';
 
-<% for(const o of options.Relations || []) { %> 
+<% for(const target of new Set(options.Relations?.map(e=>e.target) || [])) { %> 
 
-import { <%- o.target  %>  } from '../../<%- o.name %>';
+import { <%- target  %>  } from '../../<%- target.toLowerCase() %>';
 
 <% } %>
 

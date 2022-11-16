@@ -1,13 +1,11 @@
 import { Expose } from 'class-transformer';
-import { ValidateNested } from 'class-validator';
-import { IUser } from 'common/inventory/interfaces/user';
-import { ID } from 'core/dto';
+import { Field, InputType, Int } from '@nestjs/graphql';
 import { Validations } from 'core/validations';
+import { ID } from 'core/dto';
 
-import {
-  Field,
-  InputType,
-} from '@nestjs/graphql';
+import { ValidateNested } from 'class-validator';
+
+import { IUser } from 'common/inventory/interfaces/user';
 
 import { Permission } from '../../permission';
 

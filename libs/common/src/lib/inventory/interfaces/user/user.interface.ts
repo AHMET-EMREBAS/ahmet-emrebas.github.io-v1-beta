@@ -1,9 +1,9 @@
 import { BaseInterface } from '../../../base';
 
-export interface IUser<Permission> extends BaseInterface {
+export interface IUser<Permission1> extends BaseInterface {
   username: string;
 
   password: string;
 
-  permission?: Permission;
+  permission?: Permission1;
 }
