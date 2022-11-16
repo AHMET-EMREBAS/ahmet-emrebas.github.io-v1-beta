@@ -18,7 +18,7 @@ export class NgrxBaseCollecitonService<
   private readonly selections$ = new BehaviorSubject<T[]>([]);
 
   readonly allCount$ = this.httpClient
-    ?.patch<number>(`/api/${this.entityName.toLowerCase()}/?query=count`, {})
+    ?.patch<number>(`api/${this.entityName.toLowerCase()}/?query=count`, {})
     .pipe(
       map((data) => {
         return data;

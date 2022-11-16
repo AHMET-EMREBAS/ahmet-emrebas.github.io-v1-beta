@@ -1,5 +1,16 @@
-import { HttpClientModule } from '@angular/common/http';
-import { NgModule } from '@angular/core';
+import {
+  HTTP_INTERCEPTORS,
+  HttpClientModule,
+  HttpEvent,
+  HttpHandler,
+  HttpInterceptor,
+  HttpRequest,
+} from '@angular/common/http';
+import {
+  Inject,
+  Injectable,
+  NgModule,
+} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
@@ -10,10 +21,13 @@ import {
 import { ServiceWorkerModule } from '@angular/service-worker';
 
 import { LayoutModule } from 'layout';
+import { Observable } from 'rxjs';
 
 import {
-  DefaultDataServiceConfig,
+  DefaultHttpUrlGenerator,
+  DefaultPluralizer,
   EntityDataModule,
+  HttpUrlGenerator,
 } from '@ngrx/data';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
@@ -21,6 +35,47 @@ import { StoreModule } from '@ngrx/store';
 import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
 import { entityDataModuleConfig } from './app.ngrx';
+
+DefaultPluralizer;
+const BASE_API_URL = 'BASE_API_URL';
+const BASE_URL_VALUE = 'http://localhost:3333';
+
+@Injectable()
+export class NgrxHttpUrlGenerator extends DefaultHttpUrlGenerator {
+  constructor(@Inject(BASE_API_URL) public readonly baseURL: string) {
+    super(new DefaultPluralizer([]));
+  }
+
+  override entityResource(
+    entityName: string,
+    root: string,
+    trailingSlashEndpoints: boolean
+  ): string {
+    return `${this.baseURL}/api/${entityName.toLowerCase()}`;
+  }
+
+  override collectionResource(entityName: string, root: string): string {
+    return `${this.baseURL}/api/${entityName.toLowerCase()}`;
+  }
+}
+
+@Injectable()
+export class BaseUrlInterceptor implements HttpInterceptor {
+  constructor(@Inject(BASE_API_URL) private baseUrl: string) {}
+
+  intercept(
+    request: HttpRequest<any>,
+    next: HttpHandler
+  ): Observable<HttpEvent<any>> {
+    const apiReq = request.clone({ url: `${this.baseUrl}/${request.url}` });
+    // console.log('INTERCEPTING .......................................');
+
+    if (request.url.startsWith('/api')) {
+      return next.handle(apiReq);
+    }
+    return next.handle(request);
+  }
+}
 
 const routes: Routes = [
   {
@@ -78,10 +133,18 @@ const routes: Routes = [
   bootstrap: [AppComponent],
   providers: [
     {
-      provide: 'DefaultDataServiceConfig',
-      useValue: {
-        root: 'http://localhost:3333',
-      } as DefaultDataServiceConfig,
+      provide: BASE_API_URL,
+      useValue: BASE_URL_VALUE,
+    },
+    NgrxHttpUrlGenerator,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: BaseUrlInterceptor,
+      multi: true,
+    },
+    {
+      provide: HttpUrlGenerator,
+      useClass: NgrxHttpUrlGenerator,
     },
   ],
 })
