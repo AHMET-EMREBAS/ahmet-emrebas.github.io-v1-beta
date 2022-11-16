@@ -67,6 +67,12 @@ import { InventoryComponent } from './inventory.component';
             loadChildren: () => import('./user').then((m) => m.UserModule),
           },
           {
+            title: 'Permission Module',
+            path: 'permission',
+            loadChildren: () =>
+              import('./permission').then((m) => m.PermissionModule),
+          },
+          {
             title: 'Message Module',
             path: 'message',
             loadChildren: () =>

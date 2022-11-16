@@ -34,6 +34,7 @@ Relations:
     name: permission
     eager: true
     joinTable: true
+    nullable: true
     onDelete: SET NULL
     viewColumns:
       - column: name
@@ -43,11 +44,8 @@ Relations:
 Required:
   - username
   - password
-  - permission
-
 SearchFields:
   - username
-  - permission
 
 Unique:
   - username

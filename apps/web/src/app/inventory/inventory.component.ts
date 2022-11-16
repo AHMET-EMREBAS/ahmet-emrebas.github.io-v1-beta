@@ -63,7 +63,8 @@ export class InventoryComponent {
     {
       label: 'Aministration',
       items: [
-        { label: 'Employee', routerLink: ['user'] },
+        { label: 'Users', routerLink: ['user'] },
+        { label: 'Permission', routerLink: ['permission'] },
         { label: 'Customer', routerLink: ['customer'] },
       ],
     },

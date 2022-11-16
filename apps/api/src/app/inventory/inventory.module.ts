@@ -8,12 +8,15 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { Category } from './models/category';
 import { Department } from './models/department';
+import { Message } from './models/message';
+import { Permission } from './models/permission';
 import { Price } from './models/price';
 import { Pricelevel } from './models/pricelevel';
 import { Product } from './models/product';
 import { Quantity } from './models/quantity';
 import { Sku } from './models/sku';
 import { Store } from './models/store';
+import { User } from './models/user';
 import {
   CategoryModule,
   CategoryService,
@@ -22,11 +25,19 @@ import {
   DepartmentModule,
   DepartmentService,
 } from './rest/department';
+import { MessageModule } from './rest/message';
+import {
+  PermissionModule,
+  PermissionService,
+} from './rest/permission';
 import {
   PriceModule,
   PriceService,
 } from './rest/price';
-import { PricelevelModule } from './rest/pricelevel';
+import {
+  PricelevelModule,
+  PricelevelService,
+} from './rest/pricelevel';
 import {
   ProductModule,
   ProductService,
@@ -43,6 +54,10 @@ import {
   StoreModule,
   StoreService,
 } from './rest/store';
+import {
+  UserModule,
+  UserService,
+} from './rest/user';
 
 export const ResouceModules = [
   ProductModule,
@@ -54,6 +69,9 @@ export const ResouceModules = [
   PricelevelModule,
   StoreModule,
   SkuModule,
+  MessageModule,
+  UserModule,
+  PermissionModule,
   TypeOrmModule.forFeature([
     Product,
     Category,
@@ -63,6 +81,9 @@ export const ResouceModules = [
     Price,
     Pricelevel,
     Sku,
+    Message,
+    User,
+    Permission,
   ]),
 ];
 
@@ -76,16 +97,55 @@ export const ResouceModules = [
     PriceService,
     StoreService,
     QuantityService,
+    PermissionService,
+    UserService,
+    PricelevelService,
+    StoreService,
   ],
 })
 export class InventoryModule implements OnModuleInit {
   constructor(
     private readonly categoryService: CategoryService,
     private readonly departmentService: DepartmentService,
-    private readonly productService: ProductService
+    private readonly productService: ProductService,
+    private readonly permissionService: PermissionService,
+    private readonly priceLevelService: PricelevelService,
+    private readonly storeService: StoreService,
+    private readonly userService: UserService
   ) {}
 
   async onModuleInit() {
+    for (const e of ['primary', 'secondary', 'retail', 'wholesale', 'vip']) {
+      await this.priceLevelService.save({ name: e });
+    }
+
+    for (const e of ['Houston Retail Store ', 'Auistion Wholesale store']) {
+      await this.storeService.save({ name: e });
+    }
+
+    for (const e of [
+      'PRODUCT',
+      'USER',
+      'CATEGORY',
+      'DEPARTMENT',
+      'SKU',
+      'STORE',
+      'PRICE',
+    ]) {
+      await this.permissionService.save({
+        name: `WRITE:${e}`,
+        description: `Write ${e.toLowerCase()}`,
+      });
+      await this.permissionService.save({
+        name: `READ:${e}`,
+        description: `Read ${e.toLowerCase()}`,
+      });
+      await this.permissionService.save({
+        name: `MANAGE:${e}`,
+        description: `Read ${e.toLowerCase()}`,
+      });
+    }
+
     for (let i = 0; i < 50; i++) {
       let cat: any;
       let dep: any;

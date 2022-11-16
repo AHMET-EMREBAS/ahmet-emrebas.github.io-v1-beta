@@ -1,10 +1,16 @@
-import { Expose } from 'class-transformer';
-import { Field, InputType, Int } from '@nestjs/graphql';
-import { Validations } from 'core/validations';
-import { ID } from 'core/dto';
+import {
+  Expose,
+  Transform,
+} from 'class-transformer';
 import { ValidateNested } from 'class-validator';
-
 import { IUser } from 'common/inventory/interfaces/user';
+import { ID } from 'core/dto';
+import { Validations } from 'core/validations';
+
+import {
+  Field,
+  InputType,
+} from '@nestjs/graphql';
 
 import { Permission } from '../../permission';
 
@@ -30,6 +36,12 @@ export class CreateUserDto implements IUser<Permission[]> {
 
   @Field(() => ID)
   @ValidateNested()
+  @Transform(({ value }) => {
+    if (value?.push) {
+      return value.map((e) => ({ id: e }));
+    }
+    return { id: value };
+  })
   @Expose()
   permission: Permission[];
 }
