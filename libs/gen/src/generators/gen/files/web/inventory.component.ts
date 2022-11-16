@@ -53,7 +53,6 @@ export class InventoryComponent {
   ];
 
   secondaryMenuItems: MenuItem[] = [
-    { label: 'Inbox', items: [{ label: 'Messages', routerLink: ['message'] }] },
     { separator: true },
     {
       label: 'Store',

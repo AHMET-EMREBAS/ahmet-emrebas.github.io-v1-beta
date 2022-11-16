@@ -32,11 +32,19 @@ export class Product
   @Column({ type: 'text', nullable: true, unique: false })
   description: string;
 
-  @ManyToOne(() => Category, { eager: true, nullable: true })
+  @ManyToOne(() => Category, {
+    eager: true,
+    nullable: true,
+    onDelete: 'SET NULL',
+  })
   @JoinColumn()
   category?: Category;
 
-  @ManyToOne(() => Department, { eager: true, nullable: true })
+  @ManyToOne(() => Department, {
+    eager: true,
+    nullable: true,
+    onDelete: 'SET NULL',
+  })
   @JoinColumn()
   department?: Department;
 }

@@ -33,6 +33,7 @@ Relations:
     eager: true
     nullable: true
     joinColumn: true
+    onDelete: SET NULL
     viewColumns:
       - column: name
         as: pricelevel

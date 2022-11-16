@@ -6,43 +6,43 @@ import {
 } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-import { Category } from './inventory/models/category';
-import { Department } from './inventory/models/department';
-import { Price } from './inventory/models/price';
-import { Pricelevel } from './inventory/models/pricelevel';
-import { Product } from './inventory/models/product';
-import { Quantity } from './inventory/models/quantity';
-import { Sku } from './inventory/models/sku';
-import { Store } from './inventory/models/store';
+import { Category } from './models/category';
+import { Department } from './models/department';
+import { Price } from './models/price';
+import { Pricelevel } from './models/pricelevel';
+import { Product } from './models/product';
+import { Quantity } from './models/quantity';
+import { Sku } from './models/sku';
+import { Store } from './models/store';
 import {
   CategoryModule,
   CategoryService,
-} from './inventory/rest/category';
+} from './rest/category';
 import {
   DepartmentModule,
   DepartmentService,
-} from './inventory/rest/department';
+} from './rest/department';
 import {
   PriceModule,
   PriceService,
-} from './inventory/rest/price';
-import { PricelevelModule } from './inventory/rest/pricelevel';
+} from './rest/price';
+import { PricelevelModule } from './rest/pricelevel';
 import {
   ProductModule,
   ProductService,
-} from './inventory/rest/product';
+} from './rest/product';
 import {
   QuantityModule,
   QuantityService,
-} from './inventory/rest/quantity';
+} from './rest/quantity';
 import {
   SkuModule,
   SkuService,
-} from './inventory/rest/sku';
+} from './rest/sku';
 import {
   StoreModule,
   StoreService,
-} from './inventory/rest/store';
+} from './rest/store';
 
 export const ResouceModules = [
   ProductModule,

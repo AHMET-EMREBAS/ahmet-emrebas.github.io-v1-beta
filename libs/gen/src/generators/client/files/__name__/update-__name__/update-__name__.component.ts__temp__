@@ -99,7 +99,8 @@ formGroup = new FormGroup({
     private readonly route: ActivatedRoute,
     <% for(const o of options.Relations || []) { %>  private readonly <%- o.name %>Service: <%- o.target %>Service, <% } %>
   ) {
-  this.<%- name %>Service.getAll(); 
+  
+  
     <% for(const o of options.Relations || []) { %> this.<%- o.name %>Service.getAll();  <% } %>
  
   }

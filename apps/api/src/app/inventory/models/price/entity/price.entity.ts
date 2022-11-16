@@ -29,11 +29,15 @@ export class Price extends BaseEntity implements IPrice<Sku, Pricelevel> {
   @Column({ type: 'numeric', nullable: true, unique: false })
   cost: number;
 
-  @ManyToOne(() => Sku, { eager: true, nullable: true })
+  @ManyToOne(() => Sku, { eager: true, nullable: true, onDelete: 'CASCADE' })
   @JoinColumn()
   sku?: Sku;
 
-  @ManyToOne(() => Pricelevel, { eager: true, nullable: true })
+  @ManyToOne(() => Pricelevel, {
+    eager: true,
+    nullable: true,
+    onDelete: 'SET NULL',
+  })
   @JoinColumn()
   pricelevel?: Pricelevel;
 }

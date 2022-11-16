@@ -1,14 +1,26 @@
-import { AfterViewInit, Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import {
+  AfterViewInit,
+  Component,
+} from '@angular/core';
+import {
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import {
+  ActivatedRoute,
+  Router,
+} from '@angular/router';
+
 import { IReadProduct } from 'common/inventory/interfaces';
-import { InputOptions, setFormGroupValue } from 'material/form';
-import { ProductService } from '../product.service';
+import {
+  InputOptions,
+  setFormGroupValue,
+} from 'material/form';
 
 import { CategoryService } from '../../category';
-
 import { DepartmentService } from '../../department';
-
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ProductService } from '../product.service';
 
 @Component({
   selector: 'ae-update-product',
@@ -88,7 +100,6 @@ export class UpdateProductComponent implements AfterViewInit {
     private readonly categoryService: CategoryService,
     private readonly departmentService: DepartmentService
   ) {
-    this.productService.getAll();
     this.categoryService.getAll();
     this.departmentService.getAll();
   }

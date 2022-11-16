@@ -1,7 +1,14 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import {
+  Component,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
+import {
+  ActivatedRoute,
+  Router,
+} from '@angular/router';
 
-import { MessageService } from 'primeng/api';
+import { MessageService as SystemMesseageService } from 'primeng/api';
 import { Subscription } from 'rxjs';
 
 import { MessageService } from './message.service';
@@ -17,7 +24,7 @@ export class MessageComponent implements OnInit, OnDestroy {
     private readonly router: Router,
     private readonly route: ActivatedRoute,
     private readonly service: MessageService,
-    private readonly messageService: MessageService
+    private readonly messageService: SystemMesseageService
   ) {}
 
   ngOnInit(): void {

@@ -59,7 +59,7 @@ export class <%- classname %> extends BaseEntity
 
 <% for(const o of options.Relations || []) { %> 
 
-  @<%- o.type %>(()=> <%- o.target %>, { eager: <%- o.eager===true %>, nullable: <%- o.nullable===true %>})
+  @<%- o.type %>(()=> <%- o.target %>, { eager: <%- o.eager===true %>, nullable: <%- o.nullable===true %>, onDelete: '<%- o.onDelete || 'RESTRICT' %>'})
   <% if(o.joinColumn) { %>  @JoinColumn()  <% } %> 
   <% if(o.joinTable) { %>  @JoinTable()  <% } %> 
   <%- o.name %>?:  <% if(o.type.endsWith('Many')) { %> <%- o.target %>[]; <% } else {  %> <%- o.target %>; <% } %>

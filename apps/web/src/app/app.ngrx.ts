@@ -10,6 +10,9 @@ export const entityDataModuleConfig: EntityDataModuleConfig = {
     Store: 'Store',
     Pricelevel: 'Pricelevel',
     Price: 'Price',
+    Message: 'Message',
+    User: 'User',
+    Permission: 'Permission',
   },
   entityMetadata: {
     Product: {},
@@ -20,5 +23,8 @@ export const entityDataModuleConfig: EntityDataModuleConfig = {
     Store: {},
     Pricelevel: {},
     Price: {},
+    Message: {},
+    User: {},
+    Permission: {},
   },
 };

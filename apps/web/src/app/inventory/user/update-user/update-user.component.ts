@@ -1,12 +1,25 @@
-import { AfterViewInit, Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import {
+  AfterViewInit,
+  Component,
+} from '@angular/core';
+import {
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import {
+  ActivatedRoute,
+  Router,
+} from '@angular/router';
+
 import { IReadUser } from 'common/inventory/interfaces';
-import { InputOptions, setFormGroupValue } from 'material/form';
-import { UserService } from '../user.service';
+import {
+  InputOptions,
+  setFormGroupValue,
+} from 'material/form';
 
 import { PermissionService } from '../../permission';
-
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'ae-update-user',
@@ -18,17 +31,9 @@ export class UpdateUserComponent implements AfterViewInit {
   private itemToBeUpdated!: Partial<IReadUser>;
 
   formGroup = new FormGroup({
-    username: new FormControl('', [
-      Validators.required,
+    username: new FormControl('', [Validators.required, Validators.email]),
 
-      Validators.email(true),
-    ]),
-
-    password: new FormControl('', [
-      Validators.required,
-
-      Validators.password(true),
-    ]),
+    password: new FormControl('', [Validators.required]),
 
     permission: new FormControl('', [Validators.required]),
   });

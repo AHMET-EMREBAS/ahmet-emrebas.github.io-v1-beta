@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component ,OnInit } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -24,7 +24,7 @@ import { <%- o.target %>Service } from '../../<%- o.name %>';
   templateUrl: './create-<%- name %>.component.html',
   styleUrls: ['./create-<%- name %>.component.scss'],
 })
-export class Create<%- classname %>Component {
+export class Create<%- classname %>Component implements OnInit {
   submitted = false;
   title = 'Create <%- classname %>';
   formGroup = new FormGroup({
@@ -95,10 +95,12 @@ export class Create<%- classname %>Component {
     private readonly route: ActivatedRoute,
   <% for(const o of options.Relations || []) { %>  private readonly <%- o.name %>Service: <%- o.target %>Service, <% } %>
   ) {
+  }
 
+  ngOnInit(): void {
 
-    this.<%- name %>Service.getAll(); 
     <% for(const o of options.Relations || []) { %> this.<%- o.name %>Service.getAll();  <% } %>
+
   }
 
   submit() {

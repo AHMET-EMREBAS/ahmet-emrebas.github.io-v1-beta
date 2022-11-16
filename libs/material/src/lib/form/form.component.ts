@@ -21,6 +21,8 @@ export type InputOptions<T = Record<string, any>> = Partial<
     optionValue: string;
     min: number;
     max: number;
+    password: boolean;
+    email: boolean;
   }
 >;
 @Component({

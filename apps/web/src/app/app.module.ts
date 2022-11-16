@@ -51,7 +51,7 @@ export class NgrxHttpUrlGenerator extends DefaultHttpUrlGenerator {
     root: string,
     trailingSlashEndpoints: boolean
   ): string {
-    return `${this.baseURL}/api/${entityName.toLowerCase()}`;
+    return `${this.baseURL}/api/${entityName.toLowerCase()}/`;
   }
 
   override collectionResource(entityName: string, root: string): string {

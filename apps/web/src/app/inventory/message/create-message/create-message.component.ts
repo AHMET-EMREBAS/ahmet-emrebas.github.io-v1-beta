@@ -1,14 +1,18 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import {
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import {
+  ActivatedRoute,
+  Router,
+} from '@angular/router';
 
 import { InputOptions } from 'material/form';
 
+import { UserService } from '../../user';
 import { MessageService } from '../message.service';
-
-import { UserService } from '../../to';
-
-import { UserService } from '../../from';
 
 @Component({
   selector: 'ae-create-message',

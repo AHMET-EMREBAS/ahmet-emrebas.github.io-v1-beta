@@ -49,6 +49,7 @@ Relations:
     name: product
     eager: true
     joinColumn: true
+    onDelete: CASCADE
     viewColumns:
       - column: name
         as: product

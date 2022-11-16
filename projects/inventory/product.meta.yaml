@@ -35,6 +35,7 @@ Relations:
     eager: true
     joinColumn: true
     nullable: true
+    onDelete: SET NULL
     viewColumns:
       - column: name
         as: category
@@ -46,6 +47,7 @@ Relations:
     eager: true
     nullable: true
     joinColumn: true
+    onDelete: SET NULL
     viewColumns:
       - column: name
         as: department

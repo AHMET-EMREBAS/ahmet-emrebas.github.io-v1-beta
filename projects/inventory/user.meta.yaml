@@ -34,6 +34,7 @@ Relations:
     name: permission
     eager: true
     joinTable: true
+    onDelete: SET NULL
     viewColumns:
       - column: name
         as: permission

@@ -31,7 +31,11 @@ export class Sku extends BaseEntity implements ISku<Product> {
   @Column({ type: 'text', nullable: true, unique: false })
   description: string;
 
-  @ManyToOne(() => Product, { eager: true, nullable: false })
+  @ManyToOne(() => Product, {
+    eager: true,
+    nullable: false,
+    onDelete: 'CASCADE',
+  })
   @JoinColumn()
   product?: Product;
 }

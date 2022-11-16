@@ -10,6 +10,7 @@ import { InventoryComponent } from './inventory.component';
   declarations: [InventoryComponent],
   imports: [
     CommonModule,
+
     LayoutModule,
     RouterModule.forChild([
       {

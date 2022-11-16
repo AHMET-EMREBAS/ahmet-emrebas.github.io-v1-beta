@@ -25,6 +25,10 @@
       "type": "boolean",
       "default": true
     },
+    "onDelete": {
+      "type": "string",
+      "enum": ["CASCADE", "SET NULL", "RESTRICT"]
+    },
     "nullable": {
       "type": "boolean",
       "default": true

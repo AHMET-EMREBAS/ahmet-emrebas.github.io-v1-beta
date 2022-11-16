@@ -1,24 +1,24 @@
-import { Component, ViewChild, AfterViewInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import {
+  AfterViewInit,
+  Component,
+  ViewChild,
+} from '@angular/core';
+import {
+  ActivatedRoute,
+  Router,
+} from '@angular/router';
 
 import {
   IReadMessage,
   IReadUser,
-  IReadUser,
 } from 'common/inventory/interfaces';
 import {
   ColumnOption,
-  FilterEvent,
-  PageEvent,
-  SortEvent,
   TableComponent,
 } from 'material/table';
 
+import { UserService } from '../../user';
 import { MessageService } from '../message.service';
-
-import { UserService } from '../../to';
-
-import { UserService } from '../../from';
 
 @Component({
   selector: 'ae-view-message',
@@ -53,13 +53,13 @@ export class ViewMessageComponent implements AfterViewInit {
     {
       header: 'to',
       field: 'to',
-      mapper: (item?: IReadUser) => item?.name,
+      mapper: (item?: IReadUser) => item?.username,
     },
 
     {
       header: 'from',
       field: 'from',
-      mapper: (item?: IReadUser) => item?.name,
+      mapper: (item?: IReadUser) => item?.username,
     },
 
     {

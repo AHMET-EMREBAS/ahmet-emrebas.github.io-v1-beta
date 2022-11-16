@@ -1,12 +1,18 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import {
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import {
+  ActivatedRoute,
+  Router,
+} from '@angular/router';
 
 import { InputOptions } from 'material/form';
 
-import { UserService } from '../user.service';
-
 import { PermissionService } from '../../permission';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'ae-create-user',
@@ -17,17 +23,9 @@ export class CreateUserComponent {
   submitted = false;
   title = 'Create User';
   formGroup = new FormGroup({
-    username: new FormControl('', [
-      Validators.required,
+    username: new FormControl('', [Validators.required, Validators.email]),
 
-      Validators.email(true),
-    ]),
-
-    password: new FormControl('', [
-      Validators.required,
-
-      Validators.password(true),
-    ]),
+    password: new FormControl('', [Validators.required]),
 
     permission: new FormControl('', [Validators.required]),
   });

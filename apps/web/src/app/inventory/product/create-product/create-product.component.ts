@@ -1,14 +1,19 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import {
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import {
+  ActivatedRoute,
+  Router,
+} from '@angular/router';
 
 import { InputOptions } from 'material/form';
 
-import { ProductService } from '../product.service';
-
 import { CategoryService } from '../../category';
-
 import { DepartmentService } from '../../department';
+import { ProductService } from '../product.service';
 
 @Component({
   selector: 'ae-create-product',
@@ -87,7 +92,6 @@ export class CreateProductComponent {
     private readonly categoryService: CategoryService,
     private readonly departmentService: DepartmentService
   ) {
-    this.productService.getAll();
     this.categoryService.getAll();
     this.departmentService.getAll();
   }

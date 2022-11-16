@@ -18,6 +18,10 @@
           "type": "boolean",
           "default": true
         },
+        "onDelete": {
+          "type": "string",
+          "enum": ["CASCADE", "SET NULL", "RESTRICT"]
+        },
         "viewColumns": {
           "type": "array",
           "items": {

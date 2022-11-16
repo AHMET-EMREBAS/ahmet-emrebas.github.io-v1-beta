@@ -27,7 +27,11 @@ export class User extends BaseEntity implements IUser<Permission[]> {
   @Column({ type: 'text', nullable: false, unique: false })
   password: string;
 
-  @ManyToMany(() => Permission, { eager: true, nullable: false })
+  @ManyToMany(() => Permission, {
+    eager: true,
+    nullable: false,
+    onDelete: 'SET NULL',
+  })
   @JoinTable()
   permission?: Permission[];
 }
