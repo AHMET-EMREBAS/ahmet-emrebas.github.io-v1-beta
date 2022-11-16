@@ -59,9 +59,7 @@ export class UpdatePermissionComponent implements AfterViewInit {
     private readonly permissionService: PermissionService,
     private readonly router: Router,
     private readonly route: ActivatedRoute
-  ) {
-    this.permissionService.getAll();
-  }
+  ) {}
 
   ngAfterViewInit(): void {
     const item = this.permissionService.getItemToBeUpdated();

@@ -2,22 +2,14 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { FormModule } from 'material/form';
-import { TableModule } from 'material/table';
-import { ConfirmationService, MessageService } from 'primeng/api';
-import { ButtonModule } from 'primeng/button';
-import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { MessageModule } from 'primeng/message';
-import { ToastModule } from 'primeng/toast';
-import { ToolbarModule } from 'primeng/toolbar';
-import { TooltipModule } from 'primeng/tooltip';
-
 import { CreateQuantityComponent } from './create-quantity/';
 import { DeleteQuantityComponent } from './delete-quantity/';
 import { QuantityComponent } from './quantity.component';
 import { QuantityService } from './quantity.service';
 import { UpdateQuantityComponent } from './update-quantity/';
 import { ViewQuantityComponent } from './view-quantity';
+
+import { SharedResourceModule } from 'material/resource';
 
 import { SkuService } from '../sku';
 
@@ -33,14 +25,7 @@ import { StoreService } from '../store';
   ],
   imports: [
     CommonModule,
-    TableModule,
-    FormModule,
-    ToolbarModule,
-    ButtonModule,
-    TooltipModule,
-    ConfirmDialogModule,
-    MessageModule,
-    ToastModule,
+    SharedResourceModule,
     RouterModule.forChild([
       {
         path: '',
@@ -70,12 +55,6 @@ import { StoreService } from '../store';
       },
     ]),
   ],
-  providers: [
-    QuantityService,
-    SkuService,
-    StoreService,
-    ConfirmationService,
-    MessageService,
-  ],
+  providers: [QuantityService, SkuService, StoreService],
 })
 export class QuantityModule {}

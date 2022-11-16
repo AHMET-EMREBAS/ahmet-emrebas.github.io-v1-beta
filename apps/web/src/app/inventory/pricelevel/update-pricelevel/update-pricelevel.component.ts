@@ -43,9 +43,7 @@ export class UpdatePricelevelComponent implements AfterViewInit {
     private readonly pricelevelService: PricelevelService,
     private readonly router: Router,
     private readonly route: ActivatedRoute
-  ) {
-    this.pricelevelService.getAll();
-  }
+  ) {}
 
   ngAfterViewInit(): void {
     const item = this.pricelevelService.getItemToBeUpdated();

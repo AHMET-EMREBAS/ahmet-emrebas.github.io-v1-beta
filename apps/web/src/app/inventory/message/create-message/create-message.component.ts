@@ -1,25 +1,19 @@
-import { Component } from '@angular/core';
-import {
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
-import {
-  ActivatedRoute,
-  Router,
-} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { InputOptions } from 'material/form';
 
-import { UserService } from '../../user';
 import { MessageService } from '../message.service';
+
+import { UserService } from '../../user';
 
 @Component({
   selector: 'ae-create-message',
   templateUrl: './create-message.component.html',
   styleUrls: ['./create-message.component.scss'],
 })
-export class CreateMessageComponent {
+export class CreateMessageComponent implements OnInit {
   submitted = false;
   title = 'Create Message';
   formGroup = new FormGroup({
@@ -74,8 +68,9 @@ export class CreateMessageComponent {
     private readonly route: ActivatedRoute,
     private readonly toService: UserService,
     private readonly fromService: UserService
-  ) {
-    this.messageService.getAll();
+  ) {}
+
+  ngOnInit(): void {
     this.toService.getAll();
     this.fromService.getAll();
   }

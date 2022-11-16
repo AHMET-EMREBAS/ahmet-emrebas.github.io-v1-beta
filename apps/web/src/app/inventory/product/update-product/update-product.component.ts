@@ -1,26 +1,14 @@
-import {
-  AfterViewInit,
-  Component,
-} from '@angular/core';
-import {
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
-import {
-  ActivatedRoute,
-  Router,
-} from '@angular/router';
-
+import { AfterViewInit, Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IReadProduct } from 'common/inventory/interfaces';
-import {
-  InputOptions,
-  setFormGroupValue,
-} from 'material/form';
+import { InputOptions, setFormGroupValue } from 'material/form';
+import { ProductService } from '../product.service';
 
 import { CategoryService } from '../../category';
+
 import { DepartmentService } from '../../department';
-import { ProductService } from '../product.service';
+
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'ae-update-product',

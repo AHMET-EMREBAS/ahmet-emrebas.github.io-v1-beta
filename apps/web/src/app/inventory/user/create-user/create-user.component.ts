@@ -1,31 +1,33 @@
-import { Component } from '@angular/core';
-import {
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
-import {
-  ActivatedRoute,
-  Router,
-} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { InputOptions } from 'material/form';
 
-import { PermissionService } from '../../permission';
 import { UserService } from '../user.service';
+
+import { PermissionService } from '../../permission';
 
 @Component({
   selector: 'ae-create-user',
   templateUrl: './create-user.component.html',
   styleUrls: ['./create-user.component.scss'],
 })
-export class CreateUserComponent {
+export class CreateUserComponent implements OnInit {
   submitted = false;
   title = 'Create User';
   formGroup = new FormGroup({
     username: new FormControl('', [Validators.required, Validators.email]),
 
-    password: new FormControl('', [Validators.required]),
+    password: new FormControl('', [
+      Validators.required,
+
+      Validators.pattern(/[A-Z]{1,}/),
+      Validators.pattern(/[a-z]{1,}/),
+      Validators.pattern(/[0-9]{1,}/),
+      Validators.pattern(/[~!@#$%^&*()_+=-]{1,}/),
+      Validators.minLength(6),
+    ]),
 
     permission: new FormControl('', [Validators.required]),
   });
@@ -68,8 +70,9 @@ export class CreateUserComponent {
     private readonly router: Router,
     private readonly route: ActivatedRoute,
     private readonly permissionService: PermissionService
-  ) {
-    this.userService.getAll();
+  ) {}
+
+  ngOnInit(): void {
     this.permissionService.getAll();
   }
 

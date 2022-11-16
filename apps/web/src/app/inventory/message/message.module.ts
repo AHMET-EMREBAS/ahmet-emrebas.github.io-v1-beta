@@ -2,15 +2,16 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { SharedResourceModule } from 'material/resource';
-
-import { UserService } from '../user';
 import { CreateMessageComponent } from './create-message/';
 import { DeleteMessageComponent } from './delete-message/';
 import { MessageComponent } from './message.component';
 import { MessageService } from './message.service';
 import { UpdateMessageComponent } from './update-message/';
 import { ViewMessageComponent } from './view-message';
+
+import { SharedResourceModule } from 'material/resource';
+
+import { UserService } from '../user';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,6 @@ import { ViewMessageComponent } from './view-message';
       },
     ]),
   ],
-  providers: [MessageService, UserService],
+  providers: [MessageService, UserService, UserService],
 })
 export class MessageModule {}

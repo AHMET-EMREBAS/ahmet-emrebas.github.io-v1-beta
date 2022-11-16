@@ -84,7 +84,6 @@ export class UpdatePriceComponent implements AfterViewInit {
     private readonly skuService: SkuService,
     private readonly pricelevelService: PricelevelService
   ) {
-    this.priceService.getAll();
     this.skuService.getAll();
     this.pricelevelService.getAll();
   }

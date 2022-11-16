@@ -2,6 +2,7 @@ import { Component, ViewChild, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { IReadPricelevel } from 'common/inventory/interfaces';
+
 import {
   ColumnOption,
   FilterEvent,

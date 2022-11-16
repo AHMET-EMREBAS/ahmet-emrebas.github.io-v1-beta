@@ -2,18 +2,14 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { SharedResourceModule } from 'material/resource';
-import {
-  ConfirmationService,
-  MessageService,
-} from 'primeng/api';
-
-import { CategoryComponent } from './category.component';
-import { CategoryService } from './category.service';
 import { CreateCategoryComponent } from './create-category/';
 import { DeleteCategoryComponent } from './delete-category/';
+import { CategoryComponent } from './category.component';
+import { CategoryService } from './category.service';
 import { UpdateCategoryComponent } from './update-category/';
 import { ViewCategoryComponent } from './view-category';
+
+import { SharedResourceModule } from 'material/resource';
 
 @NgModule({
   declarations: [
@@ -55,6 +51,6 @@ import { ViewCategoryComponent } from './view-category';
       },
     ]),
   ],
-  providers: [CategoryService, ConfirmationService, MessageService],
+  providers: [CategoryService],
 })
 export class CategoryModule {}

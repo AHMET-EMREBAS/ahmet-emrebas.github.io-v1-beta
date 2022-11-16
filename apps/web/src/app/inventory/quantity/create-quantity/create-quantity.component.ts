@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -15,7 +15,7 @@ import { StoreService } from '../../store';
   templateUrl: './create-quantity.component.html',
   styleUrls: ['./create-quantity.component.scss'],
 })
-export class CreateQuantityComponent {
+export class CreateQuantityComponent implements OnInit {
   submitted = false;
   title = 'Create Quantity';
   formGroup = new FormGroup({
@@ -74,8 +74,9 @@ export class CreateQuantityComponent {
     private readonly route: ActivatedRoute,
     private readonly skuService: SkuService,
     private readonly storeService: StoreService
-  ) {
-    this.quantityService.getAll();
+  ) {}
+
+  ngOnInit(): void {
     this.skuService.getAll();
     this.storeService.getAll();
   }

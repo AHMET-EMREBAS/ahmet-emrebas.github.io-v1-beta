@@ -58,7 +58,6 @@ export class UpdateStoreComponent implements AfterViewInit {
     private readonly route: ActivatedRoute,
     private readonly pricelevelService: PricelevelService
   ) {
-    this.storeService.getAll();
     this.pricelevelService.getAll();
   }
 

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -11,7 +11,7 @@ import { PermissionService } from '../permission.service';
   templateUrl: './create-permission.component.html',
   styleUrls: ['./create-permission.component.scss'],
 })
-export class CreatePermissionComponent {
+export class CreatePermissionComponent implements OnInit {
   submitted = false;
   title = 'Create Permission';
   formGroup = new FormGroup({
@@ -58,9 +58,9 @@ export class CreatePermissionComponent {
     private readonly permissionService: PermissionService,
     private readonly router: Router,
     private readonly route: ActivatedRoute
-  ) {
-    this.permissionService.getAll();
-  }
+  ) {}
+
+  ngOnInit(): void {}
 
   submit() {
     if (this.submitted === false) {

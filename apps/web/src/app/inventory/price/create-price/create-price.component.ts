@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -15,7 +15,7 @@ import { PricelevelService } from '../../pricelevel';
   templateUrl: './create-price.component.html',
   styleUrls: ['./create-price.component.scss'],
 })
-export class CreatePriceComponent {
+export class CreatePriceComponent implements OnInit {
   submitted = false;
   title = 'Create Price';
   formGroup = new FormGroup({
@@ -82,8 +82,9 @@ export class CreatePriceComponent {
     private readonly route: ActivatedRoute,
     private readonly skuService: SkuService,
     private readonly pricelevelService: PricelevelService
-  ) {
-    this.priceService.getAll();
+  ) {}
+
+  ngOnInit(): void {
     this.skuService.getAll();
     this.pricelevelService.getAll();
   }

@@ -76,7 +76,6 @@ export class UpdateQuantityComponent implements AfterViewInit {
     private readonly skuService: SkuService,
     private readonly storeService: StoreService
   ) {
-    this.quantityService.getAll();
     this.skuService.getAll();
     this.storeService.getAll();
   }

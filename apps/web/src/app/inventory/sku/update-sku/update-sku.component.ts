@@ -96,7 +96,6 @@ export class UpdateSkuComponent implements AfterViewInit {
     private readonly route: ActivatedRoute,
     private readonly productService: ProductService
   ) {
-    this.skuService.getAll();
     this.productService.getAll();
   }
 

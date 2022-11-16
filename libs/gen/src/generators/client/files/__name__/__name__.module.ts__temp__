@@ -9,18 +9,16 @@ import { <%- classname %>Service } from './<%- name %>.service';
 import { Update<%- classname %>Component } from './update-<%- name %>/';
 import { View<%- classname %>Component } from './view-<%- name %>';
 
- 
-  
-  
-
-
-
 import { SharedResourceModule } from 'material/resource';
-<% for(const o of options.Relations || []) { %> 
 
-import { <%- o.target %>Service } from '../<%- o.name %>';
+
+<% for(const target of new Set(options.Relations?.map(e=>e.target) || [])) { %> 
+
+  import { <%- target %>Service } from '../<%- target?.toLowerCase() %>';
 
 <% } %>
+
+
 
 @NgModule({
   declarations: [

@@ -2,6 +2,7 @@ import { Component, ViewChild, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { IReadSku, IReadProduct } from 'common/inventory/interfaces';
+
 import {
   ColumnOption,
   FilterEvent,

@@ -1,14 +1,7 @@
-import {
-  Component,
-  OnDestroy,
-  OnInit,
-} from '@angular/core';
-import {
-  ActivatedRoute,
-  Router,
-} from '@angular/router';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
-import { MessageService as SystemMesseageService } from 'primeng/api';
+import { PrmMessageService } from 'material/resource';
 import { Subscription } from 'rxjs';
 
 import { MessageService } from './message.service';
@@ -23,14 +16,14 @@ export class MessageComponent implements OnInit, OnDestroy {
   constructor(
     private readonly router: Router,
     private readonly route: ActivatedRoute,
-    private readonly service: MessageService,
-    private readonly messageService: SystemMesseageService
+    private readonly resourceService: MessageService,
+    private readonly prmMessageService: PrmMessageService
   ) {}
 
   ngOnInit(): void {
-    this.sub = this.service.entityActions$.subscribe((event) => {
+    this.sub = this.resourceService.entityActions$.subscribe((event) => {
       if (event.type.endsWith('add-one/success')) {
-        this.messageService.add({
+        this.prmMessageService.add({
           severity: 'success',
           summary: 'Created',
         });
@@ -38,7 +31,7 @@ export class MessageComponent implements OnInit, OnDestroy {
       }
 
       if (event.type.endsWith('delete-one/success')) {
-        this.messageService.add({
+        this.prmMessageService.add({
           severity: 'success',
           summary: 'Deleted',
         });
@@ -46,7 +39,7 @@ export class MessageComponent implements OnInit, OnDestroy {
       }
 
       if (event.type.endsWith('update-one/success')) {
-        this.messageService.add({
+        this.prmMessageService.add({
           severity: 'success',
           summary: 'Updated',
         });
@@ -54,7 +47,7 @@ export class MessageComponent implements OnInit, OnDestroy {
       }
 
       if (event.type.endsWith('add-one/error')) {
-        this.messageService.add({
+        this.prmMessageService.add({
           severity: 'error',
           summary: 'Not Created',
         });
@@ -62,7 +55,7 @@ export class MessageComponent implements OnInit, OnDestroy {
       }
 
       if (event.type.endsWith('delete-one/error')) {
-        this.messageService.add({
+        this.prmMessageService.add({
           severity: 'error',
           summary: 'Not Deleted',
         });
@@ -70,7 +63,7 @@ export class MessageComponent implements OnInit, OnDestroy {
       }
 
       if (event.type.endsWith('update-one/error')) {
-        this.messageService.add({
+        this.prmMessageService.add({
           severity: 'error',
           summary: 'Not Updated',
         });

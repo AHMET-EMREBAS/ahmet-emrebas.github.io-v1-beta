@@ -1,25 +1,12 @@
-import {
-  AfterViewInit,
-  Component,
-} from '@angular/core';
-import {
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
-import {
-  ActivatedRoute,
-  Router,
-} from '@angular/router';
-
+import { AfterViewInit, Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IReadMessage } from 'common/inventory/interfaces';
-import {
-  InputOptions,
-  setFormGroupValue,
-} from 'material/form';
+import { InputOptions, setFormGroupValue } from 'material/form';
+import { MessageService } from '../message.service';
 
 import { UserService } from '../../user';
-import { MessageService } from '../message.service';
+
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'ae-update-message',
@@ -83,7 +70,6 @@ export class UpdateMessageComponent implements AfterViewInit {
     private readonly toService: UserService,
     private readonly fromService: UserService
   ) {
-    this.messageService.getAll();
     this.toService.getAll();
     this.fromService.getAll();
   }

@@ -43,9 +43,7 @@ export class UpdateCategoryComponent implements AfterViewInit {
     private readonly categoryService: CategoryService,
     private readonly router: Router,
     private readonly route: ActivatedRoute
-  ) {
-    this.categoryService.getAll();
-  }
+  ) {}
 
   ngAfterViewInit(): void {
     const item = this.categoryService.getItemToBeUpdated();

@@ -1,16 +1,13 @@
-import {
-  AfterViewInit,
-  Component,
-  ViewChild,
-} from '@angular/core';
-import {
-  ActivatedRoute,
-  Router,
-} from '@angular/router';
+import { Component, ViewChild, AfterViewInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { IReadCategory } from 'common/inventory/interfaces';
+
 import {
   ColumnOption,
+  FilterEvent,
+  PageEvent,
+  SortEvent,
   TableComponent,
 } from 'material/table';
 

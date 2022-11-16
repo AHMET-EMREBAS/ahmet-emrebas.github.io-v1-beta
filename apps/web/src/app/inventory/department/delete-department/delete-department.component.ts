@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
-import { ConfirmationService } from 'primeng/api';
+import { PrmConfirmationService } from 'material/resource';
 
 import { DepartmentService } from '../department.service';
-import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'ae-delete-department',
@@ -13,14 +13,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class DeleteDepartmentComponent implements OnInit {
   title = 'Delete Department';
   constructor(
-    private readonly confirmService: ConfirmationService,
+    private readonly prmConfirmationService: PrmConfirmationService,
     private readonly departmentService: DepartmentService,
     private readonly router: Router,
     private readonly route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
-    this.confirmService.confirm({
+    this.prmConfirmationService.confirm({
       message: 'Are you sure to delete the item?',
       header: 'Delete',
       icon: 'pi pi-times',

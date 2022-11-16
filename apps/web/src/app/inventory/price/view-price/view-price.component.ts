@@ -6,6 +6,7 @@ import {
   IReadSku,
   IReadPricelevel,
 } from 'common/inventory/interfaces';
+
 import {
   ColumnOption,
   FilterEvent,
@@ -58,7 +59,7 @@ export class ViewPriceComponent implements AfterViewInit {
     {
       header: 'sku',
       field: 'sku',
-      mapper: (item?: IReadSku) => item?.name,
+      mapper: (item?: IReadSku) => item?.barcode,
     },
 
     {

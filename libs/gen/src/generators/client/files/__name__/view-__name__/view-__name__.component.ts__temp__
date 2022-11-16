@@ -9,8 +9,12 @@ import {
 } from '@angular/router';
 
 import {  
-  IRead<%- classname %>, <% for(const col of options.Relations || []) { %>   IRead<%- col.target %>, <% } %> 
+  IRead<%- classname %>, 
+  <% for(const target of new Set(options.Relations?.map(e=>e.target) || [])) { %>   IRead<%- target %>, <% } %> 
+
 } from 'common/<%- project %>/interfaces';
+
+
 import {
   ColumnOption,
   FilterEvent,
@@ -21,8 +25,8 @@ import {
 
 import { <%- classname %>Service } from '../<%- name %>.service';
 
- <% for(const o of options.Relations || []) { %> 
-import { <%- o.target %>Service } from '../../<%- o.name %>'; 
+<% for(const target of new Set(options.Relations?.map(e=>e.target) || [])) { %> 
+    import { <%- target %>Service } from '../../<%- target.toLowerCase() %>'; 
 <% } %>
 
 
@@ -64,7 +68,7 @@ export class View<%- classname %>Component implements AfterViewInit {
     { 
       header: '<%- col.label || col.name %>', 
       field: '<%- col.name %>', 
-      mapper:(item?: IRead<%- col.target %>)=>item?.name
+      mapper:(item?: IRead<%- col.target %>)=>item?.<%- col.viewColumns[0].column %>
     },
 <% } %>
 

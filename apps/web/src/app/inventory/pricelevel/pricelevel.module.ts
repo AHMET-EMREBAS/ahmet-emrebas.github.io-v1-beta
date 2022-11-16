@@ -2,22 +2,14 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { FormModule } from 'material/form';
-import { TableModule } from 'material/table';
-import { ConfirmationService, MessageService } from 'primeng/api';
-import { ButtonModule } from 'primeng/button';
-import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { MessageModule } from 'primeng/message';
-import { ToastModule } from 'primeng/toast';
-import { ToolbarModule } from 'primeng/toolbar';
-import { TooltipModule } from 'primeng/tooltip';
-
 import { CreatePricelevelComponent } from './create-pricelevel/';
 import { DeletePricelevelComponent } from './delete-pricelevel/';
 import { PricelevelComponent } from './pricelevel.component';
 import { PricelevelService } from './pricelevel.service';
 import { UpdatePricelevelComponent } from './update-pricelevel/';
 import { ViewPricelevelComponent } from './view-pricelevel';
+
+import { SharedResourceModule } from 'material/resource';
 
 @NgModule({
   declarations: [
@@ -29,14 +21,7 @@ import { ViewPricelevelComponent } from './view-pricelevel';
   ],
   imports: [
     CommonModule,
-    TableModule,
-    FormModule,
-    ToolbarModule,
-    ButtonModule,
-    TooltipModule,
-    ConfirmDialogModule,
-    MessageModule,
-    ToastModule,
+    SharedResourceModule,
     RouterModule.forChild([
       {
         path: '',
@@ -66,6 +51,6 @@ import { ViewPricelevelComponent } from './view-pricelevel';
       },
     ]),
   ],
-  providers: [PricelevelService, ConfirmationService, MessageService],
+  providers: [PricelevelService],
 })
 export class PricelevelModule {}

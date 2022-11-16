@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
-import { ConfirmationService } from 'primeng/api';
+import { PrmConfirmationService } from 'material/resource';
 
 import { SkuService } from '../sku.service';
-import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'ae-delete-sku',
@@ -13,14 +13,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class DeleteSkuComponent implements OnInit {
   title = 'Delete Sku';
   constructor(
-    private readonly confirmService: ConfirmationService,
+    private readonly prmConfirmationService: PrmConfirmationService,
     private readonly skuService: SkuService,
     private readonly router: Router,
     private readonly route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
-    this.confirmService.confirm({
+    this.prmConfirmationService.confirm({
       message: 'Are you sure to delete the item?',
       header: 'Delete',
       icon: 'pi pi-times',

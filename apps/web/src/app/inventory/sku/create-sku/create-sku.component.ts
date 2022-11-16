@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -13,7 +13,7 @@ import { ProductService } from '../../product';
   templateUrl: './create-sku.component.html',
   styleUrls: ['./create-sku.component.scss'],
 })
-export class CreateSkuComponent {
+export class CreateSkuComponent implements OnInit {
   submitted = false;
   title = 'Create Sku';
   formGroup = new FormGroup({
@@ -94,8 +94,9 @@ export class CreateSkuComponent {
     private readonly router: Router,
     private readonly route: ActivatedRoute,
     private readonly productService: ProductService
-  ) {
-    this.skuService.getAll();
+  ) {}
+
+  ngOnInit(): void {
     this.productService.getAll();
   }
 

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -11,7 +11,7 @@ import { CategoryService } from '../category.service';
   templateUrl: './create-category.component.html',
   styleUrls: ['./create-category.component.scss'],
 })
-export class CreateCategoryComponent {
+export class CreateCategoryComponent implements OnInit {
   submitted = false;
   title = 'Create Category';
   formGroup = new FormGroup({
@@ -42,9 +42,9 @@ export class CreateCategoryComponent {
     private readonly categoryService: CategoryService,
     private readonly router: Router,
     private readonly route: ActivatedRoute
-  ) {
-    this.categoryService.getAll();
-  }
+  ) {}
+
+  ngOnInit(): void {}
 
   submit() {
     if (this.submitted === false) {

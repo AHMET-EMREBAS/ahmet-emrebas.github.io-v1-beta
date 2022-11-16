@@ -14,9 +14,16 @@ import {
   setFormGroupValue,
 } from 'material/form';
 import { <%- classname %>Service } from '../<%- name %>.service';
-<% for(const o of options.Relations || []) { %> 
-import { <%- o.target %>Service } from '../../<%- o.name %>';
+
+
+
+<% for(const target of new Set(options.Relations?.map(e=>e.target) || [])) { %> 
+
+  import { <%- target %>Service } from '../../<%- target?.toLowerCase() %>';
+
 <% } %>
+
+
 import {
   FormControl,
   FormGroup,
@@ -38,10 +45,33 @@ formGroup = new FormGroup({
       <% if(options.Required?.includes(f.Property)) { %> 
             Validators.required, 
        <% } %>
+
       <% for(const [vk, vv] of Object.entries(f.Validation || [])) { %> 
-          <% if(vk ==='type') {  continue; %> <% } %>
+          <% if(vk ==='type') { %> 
+          <% continue; %> 
+          <% } %>
+
+
+
+           <% if(vk ==='password') { %>
+            Validators.pattern(/[A-Z]{1,}/),  
+            Validators.pattern(/[a-z]{1,}/),  
+            Validators.pattern(/[0-9]{1,}/),  
+            Validators.pattern(/[~!@#$%^&*()_+=-]{1,}/),  
+            Validators.minLength(6),
+          <%  continue; } %>
+          
+          <% if(vk ==='email') {  %>
+              Validators.email,
+          <%  continue; } %>
+
+          <% if(vk ==='unique') {   %> 
+          <% continue; %> 
+          <%  } %>
+
           Validators.<%- vk %>(<%- vv %>),
       <% } %>
+
      ]), 
     <% } %>
     

@@ -1,26 +1,21 @@
-import { Component } from '@angular/core';
-import {
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
-import {
-  ActivatedRoute,
-  Router,
-} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { InputOptions } from 'material/form';
 
-import { CategoryService } from '../../category';
-import { DepartmentService } from '../../department';
 import { ProductService } from '../product.service';
+
+import { CategoryService } from '../../category';
+
+import { DepartmentService } from '../../department';
 
 @Component({
   selector: 'ae-create-product',
   templateUrl: './create-product.component.html',
   styleUrls: ['./create-product.component.scss'],
 })
-export class CreateProductComponent {
+export class CreateProductComponent implements OnInit {
   submitted = false;
   title = 'Create Product';
   formGroup = new FormGroup({
@@ -91,7 +86,9 @@ export class CreateProductComponent {
     private readonly route: ActivatedRoute,
     private readonly categoryService: CategoryService,
     private readonly departmentService: DepartmentService
-  ) {
+  ) {}
+
+  ngOnInit(): void {
     this.categoryService.getAll();
     this.departmentService.getAll();
   }

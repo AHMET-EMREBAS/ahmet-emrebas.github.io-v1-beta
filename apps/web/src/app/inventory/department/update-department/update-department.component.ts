@@ -43,9 +43,7 @@ export class UpdateDepartmentComponent implements AfterViewInit {
     private readonly departmentService: DepartmentService,
     private readonly router: Router,
     private readonly route: ActivatedRoute
-  ) {
-    this.departmentService.getAll();
-  }
+  ) {}
 
   ngAfterViewInit(): void {
     const item = this.departmentService.getItemToBeUpdated();

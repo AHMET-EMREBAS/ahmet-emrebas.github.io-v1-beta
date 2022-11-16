@@ -1,24 +1,19 @@
-import {
-  AfterViewInit,
-  Component,
-  ViewChild,
-} from '@angular/core';
-import {
-  ActivatedRoute,
-  Router,
-} from '@angular/router';
+import { Component, ViewChild, AfterViewInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+
+import { IReadMessage, IReadUser } from 'common/inventory/interfaces';
 
 import {
-  IReadMessage,
-  IReadUser,
-} from 'common/inventory/interfaces';
-import {
   ColumnOption,
+  FilterEvent,
+  PageEvent,
+  SortEvent,
   TableComponent,
 } from 'material/table';
 
-import { UserService } from '../../user';
 import { MessageService } from '../message.service';
+
+import { UserService } from '../../user';
 
 @Component({
   selector: 'ae-view-message',

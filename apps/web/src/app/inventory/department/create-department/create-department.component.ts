@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -11,7 +11,7 @@ import { DepartmentService } from '../department.service';
   templateUrl: './create-department.component.html',
   styleUrls: ['./create-department.component.scss'],
 })
-export class CreateDepartmentComponent {
+export class CreateDepartmentComponent implements OnInit {
   submitted = false;
   title = 'Create Department';
   formGroup = new FormGroup({
@@ -42,9 +42,9 @@ export class CreateDepartmentComponent {
     private readonly departmentService: DepartmentService,
     private readonly router: Router,
     private readonly route: ActivatedRoute
-  ) {
-    this.departmentService.getAll();
-  }
+  ) {}
+
+  ngOnInit(): void {}
 
   submit() {
     if (this.submitted === false) {
