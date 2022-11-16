@@ -23,7 +23,7 @@ export class Store extends BaseEntity implements IStore<Pricelevel> {
   @Column({ type: 'text', nullable: false, unique: true })
   name: string;
 
-  @ManyToOne(() => Pricelevel, { eager: true, nullable: false })
+  @ManyToOne(() => Pricelevel, { eager: true, nullable: true })
   @JoinColumn()
   pricelevel?: Pricelevel;
 }
