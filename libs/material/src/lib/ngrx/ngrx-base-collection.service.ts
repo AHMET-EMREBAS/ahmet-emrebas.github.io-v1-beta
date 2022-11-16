@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 
-import { BaseInterface } from 'common/base';
+import { BaseInterface } from 'common/base/';
 import { Table } from 'primeng/table';
 import {
   BehaviorSubject,

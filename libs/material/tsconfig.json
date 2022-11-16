@@ -13,6 +13,20 @@
       "path": "./tsconfig.spec.json"
     }
   ],
+  "paths": {
+    "client/*": ["libs/client/src/lib/*"],
+    "common/*": ["libs/common/src/lib/*"],
+    "core/*": ["libs/core/src/lib/*"],
+    "directive": ["libs/directive/src/index.ts"],
+    "gen": ["libs/gen/src/index.ts"],
+    "layout": ["libs/layout/src/index.ts"],
+    "material/*": ["libs/material/src/lib/*"],
+    "messanger": ["libs/messanger/src/index.ts"],
+    "models/*": ["libs/models/src/lib/*"],
+    "notification": ["libs/notification/src/index.ts"],
+    "rest/*": ["libs/rest/src/lib/*"],
+    "util/*": ["libs/util/src/lib/*"]
+  },
   "compilerOptions": {
     "forceConsistentCasingInFileNames": true,
     "strict": true,
