@@ -17,7 +17,6 @@
     "paths": {
       "client/*": ["libs/client/src/lib/*"],
       "common/*": ["libs/common/src/lib/*"],
-      "common": ["libs/common/src/lib/src/index.ts"],
       "core/*": ["libs/core/src/lib/*"],
       "directive": ["libs/directive/src/index.ts"],
       "gen": ["libs/gen/src/index.ts"],
