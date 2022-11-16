@@ -31,6 +31,7 @@ Relations:
     target: Pricelevel
     name: pricelevel
     eager: true
+    nullable: true
     joinColumn: true
     viewColumns:
       - column: name

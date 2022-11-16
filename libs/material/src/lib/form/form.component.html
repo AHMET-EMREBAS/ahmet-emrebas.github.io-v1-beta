@@ -25,7 +25,7 @@
 
 
         <ng-container *ngIf="field.type ==='select'">
-            <p-dropdown styleClass="w-full" class="w-full" [options]="field.options || (field.asyncOptions | async)!"
+            <p-dropdown styleClass="w-full" class="w-full" [options]="(getOptions(field.name!) | async)!"
                 [formControlName]="field.name!" [optionLabel]="field.optionLabel!">
             </p-dropdown>
         </ng-container>

@@ -7,7 +7,11 @@ import {
 } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
-import { Observable } from 'rxjs';
+import {
+  map,
+  Observable,
+  of,
+} from 'rxjs';
 
 export type InputOptions<T = Record<string, any>> = Partial<
   Omit<HTMLInputElement, 'min' | 'max'> & {
@@ -41,5 +45,26 @@ export class FormComponent implements AfterViewInit {
     if (element) {
       element.focus();
     }
+  }
+
+  getOptions(name: string) {
+    const found = this.fields.find((e) => e.name === name);
+
+    const common: any = {};
+    if (found?.optionLabel) {
+      common[found.optionLabel] = `Select ${found.name}`;
+    } else if (found?.name) {
+      common[found.name] = `Select ${found.name}`;
+    }
+
+    if (found?.options) {
+      return of([common, ...found.options]);
+    }
+
+    return found?.asyncOptions?.pipe(
+      map((data) => {
+        return [common, ...data];
+      })
+    );
   }
 }
