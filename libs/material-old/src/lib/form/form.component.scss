@@ -1,0 +1,23 @@
+input[type=text],
+input[type=date],
+input[type=number],
+input[type=email],
+input[type=password],
+select,
+textarea {
+
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+
+    resize: vertical;
+    max-height: 200px;
+
+}
+
+
+input[type=checkbox],
+input[type=radio] {
+    width: 30px;
+    height: 30px;
+}
