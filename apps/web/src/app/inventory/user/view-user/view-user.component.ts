@@ -1,19 +1,24 @@
-import { Component, ViewChild, AfterViewInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-
-import { IReadUser, IReadPermission } from 'common/inventory/interfaces';
+import {
+  AfterViewInit,
+  Component,
+  ViewChild,
+} from '@angular/core';
+import {
+  ActivatedRoute,
+  Router,
+} from '@angular/router';
 
 import {
+  IReadPermission,
+  IReadUser,
+} from 'common/inventory/interfaces';
+import {
   ColumnOption,
-  FilterEvent,
-  PageEvent,
-  SortEvent,
   TableComponent,
 } from 'material/table';
 
-import { UserService } from '../user.service';
-
 import { PermissionService } from '../../permission';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'ae-view-user',

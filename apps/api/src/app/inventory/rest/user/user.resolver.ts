@@ -31,7 +31,7 @@ export class UserResolver {
   ) {
     const q = {
       ...paginatorDto,
-      where: query.toContains(['username', 'permission']),
+      where: query.toContains(['username']),
     };
 
     if (viewDto.view === true) {

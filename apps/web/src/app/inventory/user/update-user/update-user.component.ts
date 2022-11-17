@@ -30,7 +30,7 @@ export class UpdateUserComponent implements AfterViewInit {
       Validators.minLength(6),
     ]),
 
-    permission: new FormControl('', [Validators.required]),
+    permission: new FormControl('', []),
   });
 
   fields: InputOptions[] = [
@@ -61,8 +61,6 @@ export class UpdateUserComponent implements AfterViewInit {
       asyncOptions: this.permissionService.entities$,
       optionValue: 'id',
       optionLabel: 'name',
-
-      required: true,
     },
   ];
 

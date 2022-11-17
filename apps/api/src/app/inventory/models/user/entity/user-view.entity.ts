@@ -1,19 +1,24 @@
-import { DataSource, ViewColumn, ViewEntity } from 'typeorm';
-
-import { Field, Int, ObjectType } from '@nestjs/graphql';
-
-import { User } from './user.entity';
-
 import { IUser } from 'common/inventory/interfaces/user';
+import {
+  DataSource,
+  ViewColumn,
+  ViewEntity,
+} from 'typeorm';
+
+import {
+  Field,
+  ObjectType,
+} from '@nestjs/graphql';
 
 import { Permission } from '../../permission';
+import { User } from './user.entity';
 
 @ObjectType()
 @ViewEntity({
   expression: (ds: DataSource) => {
     return ds
       .createQueryBuilder()
-      .select('user.id', 'id')
+      .select('user.id * permission.id', 'id')
       .addSelect('user.uuid', 'uuid')
       .addSelect('user.createdAt', 'createdAt')
       .addSelect('user.updatedAt', 'updatedAt')
@@ -28,7 +33,12 @@ import { Permission } from '../../permission';
 
       .from(User, 'user')
 
-      .leftJoin(Permission, 'permission', 'permission.id = user.permissionId');
+      .leftJoin('user-permission', 'permits', 'permits.userId = user.id')
+      .leftJoin(
+        Permission,
+        'permission',
+        'permission.id = permits.permissionId'
+      );
   },
 })
 export class UserView implements IUser<string> {

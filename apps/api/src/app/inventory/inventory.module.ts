@@ -122,6 +122,12 @@ export class InventoryModule implements OnModuleInit {
     for (const e of ['Houston Retail Store ', 'Auistion Wholesale store']) {
       await this.storeService.save({ name: e });
     }
+    for (const e of ['user1@gmail.com', 'user2@gmail.com']) {
+      await this.userService.save({
+        username: e,
+        password: 'Password124!$',
+      });
+    }
 
     for (const e of [
       'PRODUCT',
@@ -144,6 +150,12 @@ export class InventoryModule implements OnModuleInit {
         name: `MANAGE:${e}`,
         description: `Read ${e.toLowerCase()}`,
       });
+    }
+
+    for (const user of [1, 2]) {
+      for (let i = 1; i < 21; i++) {
+        await this.userService.add(user, i, 'permission');
+      }
     }
 
     for (let i = 0; i < 50; i++) {

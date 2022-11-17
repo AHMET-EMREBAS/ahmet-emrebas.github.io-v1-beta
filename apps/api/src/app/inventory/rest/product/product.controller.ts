@@ -1,26 +1,28 @@
 import {
+  FunctionsDto,
+  PaginatorDto,
+  ViewDto,
+  WhereDto,
+} from 'core/dto';
+
+import {
+  BadRequestException,
   Body,
   Controller,
   Delete,
   Get,
   Param,
+  Patch,
   Post,
   Put,
   Query,
-  Patch,
-  BadRequestException,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
+
 import {
-  FunctionsDto,
-  PaginatorDto,
-  QueryDto,
-  ViewDto,
-  WhereDto,
-} from 'core/dto';
-
-import { CreateProductDto, UpdateProductDto } from '../../models/product';
-
+  CreateProductDto,
+  UpdateProductDto,
+} from '../../models/product';
 import { ProductViewService } from './product-view.service';
 import { ProductService } from './product.service';
 
@@ -73,9 +75,11 @@ export class ProductController {
   }
 
   @Patch()
-  functions(@Query() functions: FunctionsDto) {
+  functions(@Query() whereQuery: WhereDto, @Query() functions: FunctionsDto) {
     if (functions.query === 'count') {
-      return this.service.count();
+      return this.viewService.count({
+        where: whereQuery.where,
+      });
     }
     throw new BadRequestException('Must provide a fucntion name.');
   }

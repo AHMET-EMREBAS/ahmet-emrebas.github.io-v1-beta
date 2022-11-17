@@ -29,7 +29,7 @@ export class CreateUserComponent implements OnInit {
       Validators.minLength(6),
     ]),
 
-    permission: new FormControl('', [Validators.required]),
+    permission: new FormControl('', []),
   });
 
   fields: InputOptions[] = [
@@ -60,8 +60,6 @@ export class CreateUserComponent implements OnInit {
       asyncOptions: this.permissionService.entities$,
       optionValue: 'id',
       optionLabel: 'name',
-
-      required: true,
     },
   ];
 

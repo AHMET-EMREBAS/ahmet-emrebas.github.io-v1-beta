@@ -4,7 +4,11 @@ import { BaseInterface } from 'common/base';
 import { Table } from 'primeng/table';
 import {
   BehaviorSubject,
+  debounceTime,
+  delay,
   map,
+  Observable,
+  switchMap,
 } from 'rxjs';
 
 import {
@@ -15,15 +19,32 @@ import {
 export class NgrxBaseCollecitonService<
   T extends BaseInterface
 > extends EntityCollectionServiceBase<T> {
+  table!: Table;
+  private readonly newQuery$ = new BehaviorSubject<any>({});
+
   private readonly selections$ = new BehaviorSubject<T[]>([]);
 
-  readonly allCount$ = this.httpClient
-    ?.patch<number>(`api/${this.entityName.toLowerCase()}/?query=count`, {})
-    .pipe(
-      map((data) => {
-        return data;
-      })
-    );
+  readonly allCount$ = this.newQuery$.pipe(
+    delay(400),
+    debounceTime(400),
+    switchMap(() => {
+      console.log('Counting ...');
+      return this.httpClient
+        ?.patch<number>(
+          `api/${this.entityName.toLowerCase()}/?query=count&${Object.entries(
+            this.getQuery(this.table)
+          )
+            .map((e) => e.join('='))
+            .join('&')}`,
+          {}
+        )
+        .pipe(
+          map((data) => {
+            return data;
+          })
+        ) as Observable<number>;
+    })
+  );
 
   constructor(
     entityName: string,
@@ -53,14 +74,20 @@ export class NgrxBaseCollecitonService<
   }
 
   query(table: Table) {
+    this.table = table;
     this.clearCache();
-    this.getWithQuery({
+    this.getWithQuery(this.getQuery(table));
+    this.newQuery$.next({});
+  }
+
+  private getQuery(table: Table) {
+    return {
       view: 'true',
       take: table.rows + '',
       skip: table.first + '',
       sortOrder: table.sortOrder + '',
       sortField: table.sortField || 'id',
       where: JSON.stringify(table.filters),
-    });
+    };
   }
 }
