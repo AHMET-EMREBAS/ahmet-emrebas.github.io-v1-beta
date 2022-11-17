@@ -8,10 +8,12 @@ import {
   ApolloDriverConfig,
 } from '@nestjs/apollo';
 import {
+  CacheInterceptor,
   CacheModule,
   Module,
 } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+import { APP_INTERCEPTOR } from '@nestjs/core';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ScheduleModule } from '@nestjs/schedule';
@@ -36,9 +38,9 @@ import { Subscribers } from './app-subscribers';
       ignoreEnvFile: true,
     }),
     CacheModule.register({
-      isGlobal: true,
-      ttl: 5,
-      max: 10,
+      isCacheableValue: (item) => item?.length > 0,
+      ttl: 10,
+      max: 100,
     }),
     TypeOrmModule.forRoot({
       type: 'better-sqlite3',
@@ -81,6 +83,12 @@ import { Subscribers } from './app-subscribers';
         },
       },
     }),
+  ],
+  providers: [
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: CacheInterceptor,
+    },
   ],
 })
 export class CommonModule {}

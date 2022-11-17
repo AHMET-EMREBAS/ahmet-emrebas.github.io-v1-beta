@@ -47,6 +47,16 @@
       "factory": "./src/generators/build/generator",
       "schema": "./src/generators/build/schema.json",
       "description": "build generator"
+    },
+    "api": {
+      "factory": "./src/generators/api/generator",
+      "schema": "./src/generators/api/schema.json",
+      "description": "api generator"
+    },
+    "web": {
+      "factory": "./src/generators/web/generator",
+      "schema": "./src/generators/web/schema.json",
+      "description": "web generator"
     }
   }
 }

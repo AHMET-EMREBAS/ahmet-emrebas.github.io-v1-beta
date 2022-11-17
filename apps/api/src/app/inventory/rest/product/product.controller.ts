@@ -1,31 +1,32 @@
 import {
-  Body,
-  Controller,
-  Delete,
-  Get,
-  Param,
-  Post,
-  Put,
-  Query,
-  Patch,
-  BadRequestException,
-} from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
-import {
   FunctionsDto,
   PaginatorDto,
-  QueryDto,
   ViewDto,
   WhereDto,
 } from 'core/dto';
 
 import {
+  BadRequestException,
+  Body,
+  CacheInterceptor,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+  Put,
+  Query,
+  UseInterceptors,
+} from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
+
+import {
+  CreateProductDto,
   Product,
   ProductView,
-  CreateProductDto,
   UpdateProductDto,
 } from '../../models/product';
-
 import { ProductViewService } from './product-view.service';
 import { ProductService } from './product.service';
 
@@ -38,11 +39,13 @@ export class ProductController {
   ) {}
 
   @Get()
+  @UseInterceptors(CacheInterceptor)
   readProduct(
     @Query() paginatorDto: PaginatorDto<Product | ProductView>,
     @Query() viewDto: ViewDto,
     @Query() whereDto: WhereDto
   ) {
+    console.log('Caching ? ');
     const q = {
       ...paginatorDto,
       where: whereDto.where,
