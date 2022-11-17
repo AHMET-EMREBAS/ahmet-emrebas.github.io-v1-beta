@@ -1,16 +1,9 @@
-/**
- * This is not a production server yet!
- * This is only a minimal backend to get started.
- */
-
 import * as cookieParser from 'cookie-parser';
+// import * as helmet from 'helmet';
 import { join } from 'path';
 import * as favicon from 'serve-favicon';
 
-import {
-  Logger,
-  ValidationPipe,
-} from '@nestjs/common';
+import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import {
   DocumentBuilder,
@@ -19,23 +12,17 @@ import {
 
 import { AppModule } from './app/app.module';
 
+const GLOBAL_PREFIX = 'api';
+
+const PORT = process.env.PORT || 3333;
+
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  const GLOBAL_PREFIX = 'api';
-
-  const PORT = process.env.PORT || 3333;
-
-  // Enable request from different origins
+  app.setGlobalPrefix(GLOBAL_PREFIX);
   app.enableCors();
-
   // app.use(helmet.default());
-
-  // Share teh favicon
   app.use(favicon(join(__dirname, 'favicon.ico')));
-
-  // Parse cookies
   app.use(cookieParser());
-
   app.useGlobalPipes(
     new ValidationPipe({
       transform: true,
@@ -47,7 +34,6 @@ async function bootstrap() {
     })
   );
 
-  // Configure swagger documentation
   const config = new DocumentBuilder()
     .setTitle('Store Management System')
     .setContact(
@@ -57,7 +43,6 @@ async function bootstrap() {
     )
     .setDescription('')
     .setVersion('1.0.0')
-
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
@@ -65,9 +50,6 @@ async function bootstrap() {
   SwaggerModule.setup(GLOBAL_PREFIX, app, document);
 
   await app.listen(PORT);
-  Logger.log(
-    `🚀 Application is running on: http://localhost:${PORT}/${GLOBAL_PREFIX}`
-  );
 }
 
 bootstrap();

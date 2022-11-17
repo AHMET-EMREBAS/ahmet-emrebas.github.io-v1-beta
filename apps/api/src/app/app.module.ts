@@ -7,25 +7,17 @@ import {
   ApolloDriver,
   ApolloDriverConfig,
 } from '@nestjs/apollo';
-import {
-  CacheInterceptor,
-  CacheModule,
-  Module,
-} from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
-import { APP_INTERCEPTOR } from '@nestjs/core';
+import { Module } from '@nestjs/common';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ScheduleModule } from '@nestjs/schedule';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-import { Subscribers } from './app-subscribers';
 import { InventoryModule } from './inventory';
 
 @Module({
   imports: [
-    InventoryModule,
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, 'public'),
     }),
@@ -35,16 +27,11 @@ import { InventoryModule } from './inventory';
       wildcard: true,
       delimiter: '.',
     }),
-    ConfigModule.forRoot({
-      isGlobal: true,
-      ignoreEnvFile: true,
-    }),
-    CacheModule.register({ isGlobal: true }),
     TypeOrmModule.forRoot({
       type: 'better-sqlite3',
       database: 'tmp/database/main.sqlite',
       autoLoadEntities: true,
-      subscribers: [...Subscribers],
+      subscribers: [],
       synchronize: true,
       dropSchema: true,
     }),
@@ -80,12 +67,7 @@ import { InventoryModule } from './inventory';
         },
       },
     }),
-  ],
-  providers: [
-    {
-      provide: APP_INTERCEPTOR,
-      useClass: CacheInterceptor,
-    },
+    InventoryModule,
   ],
 })
 export class AppModule {}

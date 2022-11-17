@@ -4,6 +4,7 @@
     "ae-auth": "apps/ae-auth",
     "ae-databridge": "apps/ae-databridge",
     "api": "apps/api",
+    "bootstrap": "libs/bootstrap",
     "common": "libs/common",
     "core": "libs/core",
     "directive": "libs/directive",

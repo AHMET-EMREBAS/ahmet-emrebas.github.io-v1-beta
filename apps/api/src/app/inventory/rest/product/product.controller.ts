@@ -8,7 +8,6 @@ import {
 import {
   BadRequestException,
   Body,
-  CacheInterceptor,
   Controller,
   Delete,
   Get,
@@ -17,7 +16,6 @@ import {
   Post,
   Put,
   Query,
-  UseInterceptors,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 
@@ -39,13 +37,11 @@ export class ProductController {
   ) {}
 
   @Get()
-  @UseInterceptors(CacheInterceptor)
   readProduct(
     @Query() paginatorDto: PaginatorDto<Product | ProductView>,
     @Query() viewDto: ViewDto,
     @Query() whereDto: WhereDto
   ) {
-    console.log('Caching ? ');
     const q = {
       ...paginatorDto,
       where: whereDto.where,

@@ -10,28 +10,16 @@ import {
   SwaggerModule,
 } from '@nestjs/swagger';
 
-import { AppModule } from './app/app.module';
+export async function bootstrap(module: any) {
+  const GLOBAL_PREFIX = 'api';
 
-const GLOBAL_PREFIX = 'api';
-
-const PORT = process.env.PORT || 3333;
-
-async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
-
+  const PORT = process.env.PORT || 3333;
+  const app = await NestFactory.create(module);
   app.setGlobalPrefix(GLOBAL_PREFIX);
-
-  // Enable request from different origins
   app.enableCors();
-
   // app.use(helmet.default());
-
-  // Share teh favicon
   app.use(favicon(join(__dirname, 'favicon.ico')));
-
-  // Parse cookies
   app.use(cookieParser());
-
   app.useGlobalPipes(
     new ValidationPipe({
       transform: true,
@@ -43,7 +31,6 @@ async function bootstrap() {
     })
   );
 
-  // Configure swagger documentation
   const config = new DocumentBuilder()
     .setTitle('Store Management System')
     .setContact(
@@ -53,15 +40,11 @@ async function bootstrap() {
     )
     .setDescription('')
     .setVersion('1.0.0')
-
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
 
   SwaggerModule.setup(GLOBAL_PREFIX, app, document);
 
-  // Start app
   await app.listen(PORT);
 }
-
-bootstrap();
