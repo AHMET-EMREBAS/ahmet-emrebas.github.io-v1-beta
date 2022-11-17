@@ -1,4 +1,4 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IReadStore } from 'common/inventory/interfaces';
 import { InputOptions, setFormGroupValue } from 'material/form';
@@ -14,7 +14,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   templateUrl: './update-store.component.html',
   styleUrls: ['./update-store.component.scss'],
 })
-export class UpdateStoreComponent implements AfterViewInit {
+export class UpdateStoreComponent implements AfterViewInit, OnInit {
   title = 'Update Store';
   private itemToBeUpdated!: Partial<IReadStore>;
 
@@ -58,8 +58,10 @@ export class UpdateStoreComponent implements AfterViewInit {
     private readonly router: Router,
     private readonly route: ActivatedRoute,
     private readonly pricelevelService: PricelevelService
-  ) {
-    this.pricelevelService.getAll();
+  ) {}
+
+  ngOnInit(): void {
+    this.pricelevelService.getAsOptions(['id', 'name']);
   }
 
   async ngAfterViewInit() {

@@ -97,7 +97,7 @@ export class CreateSkuComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.productService.getAll();
+    this.productService.getAsOptions(['id', 'name']);
   }
 
   submit() {

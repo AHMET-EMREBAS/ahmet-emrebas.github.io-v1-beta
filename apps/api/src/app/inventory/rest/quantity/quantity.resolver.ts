@@ -25,7 +25,7 @@ export class QuantityResolver {
 
   @Query(() => [Quantity])
   readQuantity(
-    @Args('paginator') paginatorDto: PaginatorDto,
+    @Args('paginator') paginatorDto: PaginatorDto<Quantity | QuantityView>,
     @Args('view') viewDto: ViewDto,
     @Args('query') query: QueryDto
   ) {

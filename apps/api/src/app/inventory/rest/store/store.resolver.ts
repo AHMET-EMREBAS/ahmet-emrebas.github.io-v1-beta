@@ -25,7 +25,7 @@ export class StoreResolver {
 
   @Query(() => [Store])
   readStore(
-    @Args('paginator') paginatorDto: PaginatorDto,
+    @Args('paginator') paginatorDto: PaginatorDto<Store | StoreView>,
     @Args('view') viewDto: ViewDto,
     @Args('query') query: QueryDto
   ) {

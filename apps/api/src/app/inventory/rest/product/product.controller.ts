@@ -19,7 +19,12 @@ import {
   WhereDto,
 } from 'core/dto';
 
-import { CreateProductDto, UpdateProductDto } from '../../models/product';
+import {
+  Product,
+  ProductView,
+  CreateProductDto,
+  UpdateProductDto,
+} from '../../models/product';
 
 import { ProductViewService } from './product-view.service';
 import { ProductService } from './product.service';
@@ -34,7 +39,7 @@ export class ProductController {
 
   @Get()
   readProduct(
-    @Query() paginatorDto: PaginatorDto,
+    @Query() paginatorDto: PaginatorDto<Product | ProductView>,
     @Query() viewDto: ViewDto,
     @Query() whereDto: WhereDto
   ) {

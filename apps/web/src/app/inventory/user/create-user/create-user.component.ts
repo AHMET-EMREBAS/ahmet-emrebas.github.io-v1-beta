@@ -71,7 +71,7 @@ export class CreateUserComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.permissionService.getAll();
+    this.permissionService.getAsOptions(['id', 'name']);
   }
 
   submit() {

@@ -59,7 +59,7 @@ export class CreateStoreComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.pricelevelService.getAll();
+    this.pricelevelService.getAsOptions(['id', 'name']);
   }
 
   submit() {

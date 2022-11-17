@@ -25,7 +25,7 @@ export class PricelevelResolver {
 
   @Query(() => [Pricelevel])
   readPricelevel(
-    @Args('paginator') paginatorDto: PaginatorDto,
+    @Args('paginator') paginatorDto: PaginatorDto<Pricelevel | PricelevelView>,
     @Args('view') viewDto: ViewDto,
     @Args('query') query: QueryDto
   ) {

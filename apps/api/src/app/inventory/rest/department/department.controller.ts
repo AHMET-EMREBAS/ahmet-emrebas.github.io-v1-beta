@@ -20,6 +20,8 @@ import {
 } from 'core/dto';
 
 import {
+  Department,
+  DepartmentView,
   CreateDepartmentDto,
   UpdateDepartmentDto,
 } from '../../models/department';
@@ -37,7 +39,7 @@ export class DepartmentController {
 
   @Get()
   readDepartment(
-    @Query() paginatorDto: PaginatorDto,
+    @Query() paginatorDto: PaginatorDto<Department | DepartmentView>,
     @Query() viewDto: ViewDto,
     @Query() whereDto: WhereDto
   ) {

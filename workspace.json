@@ -1,6 +1,7 @@
 {
   "version": 2,
   "projects": {
+    "ae-databridge": "apps/ae-databridge",
     "api": "apps/api",
     "common": "libs/common",
     "core": "libs/core",

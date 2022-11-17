@@ -19,7 +19,7 @@ import {
   WhereDto,
 } from 'core/dto';
 
-import { CreateSkuDto, UpdateSkuDto } from '../../models/sku';
+import { Sku, SkuView, CreateSkuDto, UpdateSkuDto } from '../../models/sku';
 
 import { SkuViewService } from './sku-view.service';
 import { SkuService } from './sku.service';
@@ -34,7 +34,7 @@ export class SkuController {
 
   @Get()
   readSku(
-    @Query() paginatorDto: PaginatorDto,
+    @Query() paginatorDto: PaginatorDto<Sku | SkuView>,
     @Query() viewDto: ViewDto,
     @Query() whereDto: WhereDto
   ) {

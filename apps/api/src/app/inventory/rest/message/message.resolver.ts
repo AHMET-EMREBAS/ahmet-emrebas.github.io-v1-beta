@@ -25,7 +25,7 @@ export class MessageResolver {
 
   @Query(() => [Message])
   readMessage(
-    @Args('paginator') paginatorDto: PaginatorDto,
+    @Args('paginator') paginatorDto: PaginatorDto<Message | MessageView>,
     @Args('view') viewDto: ViewDto,
     @Args('query') query: QueryDto
   ) {

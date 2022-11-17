@@ -19,7 +19,12 @@ import {
   WhereDto,
 } from 'core/dto';
 
-import { CreateQuantityDto, UpdateQuantityDto } from '../../models/quantity';
+import {
+  Quantity,
+  QuantityView,
+  CreateQuantityDto,
+  UpdateQuantityDto,
+} from '../../models/quantity';
 
 import { QuantityViewService } from './quantity-view.service';
 import { QuantityService } from './quantity.service';
@@ -34,7 +39,7 @@ export class QuantityController {
 
   @Get()
   readQuantity(
-    @Query() paginatorDto: PaginatorDto,
+    @Query() paginatorDto: PaginatorDto<Quantity | QuantityView>,
     @Query() viewDto: ViewDto,
     @Query() whereDto: WhereDto
   ) {

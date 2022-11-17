@@ -25,7 +25,7 @@ export class ProductResolver {
 
   @Query(() => [Product])
   readProduct(
-    @Args('paginator') paginatorDto: PaginatorDto,
+    @Args('paginator') paginatorDto: PaginatorDto<Product | ProductView>,
     @Args('view') viewDto: ViewDto,
     @Args('query') query: QueryDto
   ) {

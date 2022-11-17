@@ -19,7 +19,12 @@ import {
   WhereDto,
 } from 'core/dto';
 
-import { CreatePriceDto, UpdatePriceDto } from '../../models/price';
+import {
+  Price,
+  PriceView,
+  CreatePriceDto,
+  UpdatePriceDto,
+} from '../../models/price';
 
 import { PriceViewService } from './price-view.service';
 import { PriceService } from './price.service';
@@ -34,7 +39,7 @@ export class PriceController {
 
   @Get()
   readPrice(
-    @Query() paginatorDto: PaginatorDto,
+    @Query() paginatorDto: PaginatorDto<Price | PriceView>,
     @Query() viewDto: ViewDto,
     @Query() whereDto: WhereDto
   ) {

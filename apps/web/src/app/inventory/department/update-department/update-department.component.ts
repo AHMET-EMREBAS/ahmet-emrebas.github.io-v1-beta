@@ -1,4 +1,4 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IReadDepartment } from 'common/inventory/interfaces';
 import { InputOptions, setFormGroupValue } from 'material/form';
@@ -12,7 +12,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   templateUrl: './update-department.component.html',
   styleUrls: ['./update-department.component.scss'],
 })
-export class UpdateDepartmentComponent implements AfterViewInit {
+export class UpdateDepartmentComponent implements AfterViewInit, OnInit {
   title = 'Update Department';
   private itemToBeUpdated!: Partial<IReadDepartment>;
 
@@ -45,6 +45,8 @@ export class UpdateDepartmentComponent implements AfterViewInit {
     private readonly router: Router,
     private readonly route: ActivatedRoute
   ) {}
+
+  ngOnInit(): void {}
 
   async ngAfterViewInit() {
     const __item = this.departmentService.getItemToBeUpdated();

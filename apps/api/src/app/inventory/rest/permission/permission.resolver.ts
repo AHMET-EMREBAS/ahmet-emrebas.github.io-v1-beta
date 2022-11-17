@@ -25,7 +25,7 @@ export class PermissionResolver {
 
   @Query(() => [Permission])
   readPermission(
-    @Args('paginator') paginatorDto: PaginatorDto,
+    @Args('paginator') paginatorDto: PaginatorDto<Permission | PermissionView>,
     @Args('view') viewDto: ViewDto,
     @Args('query') query: QueryDto
   ) {

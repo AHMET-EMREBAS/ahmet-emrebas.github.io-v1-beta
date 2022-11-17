@@ -19,7 +19,12 @@ import {
   WhereDto,
 } from 'core/dto';
 
-import { CreateMessageDto, UpdateMessageDto } from '../../models/message';
+import {
+  Message,
+  MessageView,
+  CreateMessageDto,
+  UpdateMessageDto,
+} from '../../models/message';
 
 import { MessageViewService } from './message-view.service';
 import { MessageService } from './message.service';
@@ -34,7 +39,7 @@ export class MessageController {
 
   @Get()
   readMessage(
-    @Query() paginatorDto: PaginatorDto,
+    @Query() paginatorDto: PaginatorDto<Message | MessageView>,
     @Query() viewDto: ViewDto,
     @Query() whereDto: WhereDto
   ) {

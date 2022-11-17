@@ -20,7 +20,8 @@ import {
 } from 'core/dto';
  
 import { 
-
+  <%- classname %>,
+  <%- classname %>View,
   Create<%- classname %>Dto,
   Update<%- classname %>Dto
 } from '../../models/<%- name %>';
@@ -38,7 +39,7 @@ export class <%- classname %>Controller {
 
   @Get()
   read<%- classname %>(
-    @Query() paginatorDto: PaginatorDto,
+    @Query() paginatorDto: PaginatorDto<<%- classname %> | <%- classname %>View>,
     @Query() viewDto: ViewDto,
     @Query() whereDto: WhereDto
   ) {

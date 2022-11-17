@@ -25,7 +25,7 @@ export class PriceResolver {
 
   @Query(() => [Price])
   readPrice(
-    @Args('paginator') paginatorDto: PaginatorDto,
+    @Args('paginator') paginatorDto: PaginatorDto<Price | PriceView>,
     @Args('view') viewDto: ViewDto,
     @Args('query') query: QueryDto
   ) {

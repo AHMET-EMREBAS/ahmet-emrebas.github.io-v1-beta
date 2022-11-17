@@ -1,11 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 
 import { BaseInterface } from 'common/base';
+import { uniqBy } from 'lodash';
 import { Table } from 'primeng/table';
 import {
   BehaviorSubject,
   debounceTime,
   delay,
+  map,
   Observable,
   switchMap,
 } from 'rxjs';
@@ -80,5 +82,15 @@ export class NgrxBaseCollecitonService<
       sortField: table.sortField || 'id',
       where: JSON.stringify(table.filters),
     };
+  }
+
+  uniqueBy(key: keyof T & string) {
+    return this.entities$.pipe(map((data) => uniqBy(data, (e) => e[key])));
+  }
+
+  getAsOptions(keys: (keyof T & string)[]) {
+    return this.getWithQuery({
+      select: JSON.stringify(keys),
+    });
   }
 }

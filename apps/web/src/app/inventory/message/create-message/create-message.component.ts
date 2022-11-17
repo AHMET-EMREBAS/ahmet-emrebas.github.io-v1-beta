@@ -47,7 +47,7 @@ export class CreateMessageComponent implements OnInit {
       name: 'to',
       type: 'select',
       placeholder: 'to',
-      asyncOptions: this.toService.entities$,
+      asyncOptions: this.userService.entities$,
       optionValue: 'id',
       optionLabel: 'username',
     },
@@ -56,7 +56,7 @@ export class CreateMessageComponent implements OnInit {
       name: 'from',
       type: 'select',
       placeholder: 'from',
-      asyncOptions: this.fromService.entities$,
+      asyncOptions: this.userService.entities$,
       optionValue: 'id',
       optionLabel: 'username',
     },
@@ -66,13 +66,11 @@ export class CreateMessageComponent implements OnInit {
     private readonly messageService: MessageService,
     private readonly router: Router,
     private readonly route: ActivatedRoute,
-    private readonly toService: UserService,
-    private readonly fromService: UserService
+    private readonly userService: UserService
   ) {}
 
   ngOnInit(): void {
-    this.toService.getAll();
-    this.fromService.getAll();
+    this.userService.getAsOptions(['id', 'username']);
   }
 
   submit() {

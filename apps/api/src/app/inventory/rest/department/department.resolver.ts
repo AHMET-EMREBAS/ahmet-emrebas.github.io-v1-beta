@@ -25,7 +25,7 @@ export class DepartmentResolver {
 
   @Query(() => [Department])
   readDepartment(
-    @Args('paginator') paginatorDto: PaginatorDto,
+    @Args('paginator') paginatorDto: PaginatorDto<Department | DepartmentView>,
     @Args('view') viewDto: ViewDto,
     @Args('query') query: QueryDto
   ) {

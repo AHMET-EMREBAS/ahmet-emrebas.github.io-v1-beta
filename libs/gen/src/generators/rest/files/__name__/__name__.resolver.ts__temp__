@@ -32,7 +32,7 @@ export class <%- classname %>Resolver {
 
   @Query(() => [<%- classname %>])
   read<%- classname %>(
-    @Args('paginator') paginatorDto: PaginatorDto,
+    @Args('paginator') paginatorDto: PaginatorDto<<%- classname %> | <%- classname %>View>,
     @Args('view') viewDto: ViewDto,
     @Args('query') query: QueryDto
   ) {

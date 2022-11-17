@@ -19,7 +19,12 @@ import {
   WhereDto,
 } from 'core/dto';
 
-import { CreateCategoryDto, UpdateCategoryDto } from '../../models/category';
+import {
+  Category,
+  CategoryView,
+  CreateCategoryDto,
+  UpdateCategoryDto,
+} from '../../models/category';
 
 import { CategoryViewService } from './category-view.service';
 import { CategoryService } from './category.service';
@@ -34,7 +39,7 @@ export class CategoryController {
 
   @Get()
   readCategory(
-    @Query() paginatorDto: PaginatorDto,
+    @Query() paginatorDto: PaginatorDto<Category | CategoryView>,
     @Query() viewDto: ViewDto,
     @Query() whereDto: WhereDto
   ) {

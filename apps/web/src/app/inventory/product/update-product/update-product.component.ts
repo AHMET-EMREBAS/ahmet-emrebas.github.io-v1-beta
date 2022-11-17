@@ -1,34 +1,22 @@
-import {
-  AfterViewInit,
-  Component,
-} from '@angular/core';
-import {
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
-import {
-  ActivatedRoute,
-  Router,
-} from '@angular/router';
-
+import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IReadProduct } from 'common/inventory/interfaces';
-import {
-  InputOptions,
-  setFormGroupValue,
-} from 'material/form';
+import { InputOptions, setFormGroupValue } from 'material/form';
+import { ProductService } from '../product.service';
 import { firstValueFrom } from 'rxjs';
 
 import { CategoryService } from '../../category';
+
 import { DepartmentService } from '../../department';
-import { ProductService } from '../product.service';
+
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'ae-update-product',
   templateUrl: './update-product.component.html',
   styleUrls: ['./update-product.component.scss'],
 })
-export class UpdateProductComponent implements AfterViewInit {
+export class UpdateProductComponent implements AfterViewInit, OnInit {
   title = 'Update Product';
   private itemToBeUpdated!: Partial<IReadProduct>;
 
@@ -100,15 +88,16 @@ export class UpdateProductComponent implements AfterViewInit {
     private readonly route: ActivatedRoute,
     private readonly categoryService: CategoryService,
     private readonly departmentService: DepartmentService
-  ) {
-    this.categoryService.getAll();
-    this.departmentService.getAll();
+  ) {}
+
+  ngOnInit(): void {
+    this.categoryService.getAsOptions(['id', 'name']);
+
+    this.departmentService.getAsOptions(['id', 'name']);
   }
 
   async ngAfterViewInit() {
     const __item = this.productService.getItemToBeUpdated();
-    this.formGroup.markAsDirty();
-    this.formGroup.markAllAsTouched();
     if (__item) {
       this.itemToBeUpdated = await firstValueFrom(
         this.productService.getByKey(__item.id)
@@ -117,13 +106,17 @@ export class UpdateProductComponent implements AfterViewInit {
     }
   }
 
-  async submit() {
+  submit() {
     if (this.formGroup.valid) {
       this.productService.update({
         id: this.itemToBeUpdated.id,
+
         name: this.value('name'),
+
         description: this.value('description'),
+
         category: this.value('category')?.id,
+
         department: this.value('department')?.id,
       });
     }

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IReadMessage } from 'common/inventory/interfaces';
 import { InputOptions, setFormGroupValue } from 'material/form';
@@ -14,7 +14,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   templateUrl: './update-message.component.html',
   styleUrls: ['./update-message.component.scss'],
 })
-export class UpdateMessageComponent implements AfterViewInit {
+export class UpdateMessageComponent implements AfterViewInit, OnInit {
   title = 'Update Message';
   private itemToBeUpdated!: Partial<IReadMessage>;
 
@@ -49,7 +49,7 @@ export class UpdateMessageComponent implements AfterViewInit {
       name: 'to',
       type: 'select',
       placeholder: 'to',
-      asyncOptions: this.toService.entities$,
+      asyncOptions: this.userService.entities$,
       optionValue: 'id',
       optionLabel: 'name',
     },
@@ -58,7 +58,7 @@ export class UpdateMessageComponent implements AfterViewInit {
       name: 'from',
       type: 'select',
       placeholder: 'from',
-      asyncOptions: this.fromService.entities$,
+      asyncOptions: this.userService.entities$,
       optionValue: 'id',
       optionLabel: 'name',
     },
@@ -68,11 +68,11 @@ export class UpdateMessageComponent implements AfterViewInit {
     private readonly messageService: MessageService,
     private readonly router: Router,
     private readonly route: ActivatedRoute,
-    private readonly toService: UserService,
-    private readonly fromService: UserService
-  ) {
-    this.toService.getAll();
-    this.fromService.getAll();
+    private readonly userService: UserService
+  ) {}
+
+  ngOnInit(): void {
+    this.userService.getAsOptions(['id', 'username']);
   }
 
   async ngAfterViewInit() {

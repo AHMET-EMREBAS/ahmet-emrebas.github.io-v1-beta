@@ -1,4 +1,4 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IReadSku } from 'common/inventory/interfaces';
 import { InputOptions, setFormGroupValue } from 'material/form';
@@ -14,7 +14,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   templateUrl: './update-sku.component.html',
   styleUrls: ['./update-sku.component.scss'],
 })
-export class UpdateSkuComponent implements AfterViewInit {
+export class UpdateSkuComponent implements AfterViewInit, OnInit {
   title = 'Update Sku';
   private itemToBeUpdated!: Partial<IReadSku>;
 
@@ -96,8 +96,10 @@ export class UpdateSkuComponent implements AfterViewInit {
     private readonly router: Router,
     private readonly route: ActivatedRoute,
     private readonly productService: ProductService
-  ) {
-    this.productService.getAll();
+  ) {}
+
+  ngOnInit(): void {
+    this.productService.getAsOptions(['id', 'name']);
   }
 
   async ngAfterViewInit() {

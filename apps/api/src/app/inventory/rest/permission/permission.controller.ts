@@ -20,6 +20,8 @@ import {
 } from 'core/dto';
 
 import {
+  Permission,
+  PermissionView,
   CreatePermissionDto,
   UpdatePermissionDto,
 } from '../../models/permission';
@@ -37,7 +39,7 @@ export class PermissionController {
 
   @Get()
   readPermission(
-    @Query() paginatorDto: PaginatorDto,
+    @Query() paginatorDto: PaginatorDto<Permission | PermissionView>,
     @Query() viewDto: ViewDto,
     @Query() whereDto: WhereDto
   ) {

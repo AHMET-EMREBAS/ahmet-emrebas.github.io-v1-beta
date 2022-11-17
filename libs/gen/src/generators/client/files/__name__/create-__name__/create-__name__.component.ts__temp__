@@ -107,7 +107,7 @@ export class Create<%- classname %>Component implements OnInit {
       name: '<%- r.name %>', 
       type: 'select', 
       placeholder: '<%- r.label || r.name %>',     
-      asyncOptions:  this.<%- r.name %>Service.entities$,
+      asyncOptions:  this.<%- r.target.toLowerCase() %>Service.entities$,
       optionValue:'id', 
       optionLabel: '<%- r.viewColumns[0].column %>',
       <% if(options.Required?.includes(r.name)) { %> 
@@ -124,14 +124,15 @@ export class Create<%- classname %>Component implements OnInit {
     private readonly <%- name %>Service: <%- classname %>Service,
     private readonly router: Router,
     private readonly route: ActivatedRoute,
-  <% for(const o of options.Relations || []) { %>  private readonly <%- o.name %>Service: <%- o.target %>Service, <% } %>
+ <% for(const target of new Set(options.Relations?.map(e=>e.target) || [])) { %>  private readonly <%- target.toLowerCase() %>Service: <%- target %>Service, <% } %>
   ) {
   }
 
   ngOnInit(): void {
-
-    <% for(const o of options.Relations || []) { %> this.<%- o.name %>Service.getAll();  <% } %>
-
+    
+    <% for(const target of new Set(options.Relations?.map(e=>e.target) || [])) { %> 
+            this.<%- target.toLowerCase() %>Service.getAsOptions(['id', '<%- options.Relations.find(e=>e.target===target).viewColumns[0].column %>']);
+    <% } %>
   }
 
   submit() {

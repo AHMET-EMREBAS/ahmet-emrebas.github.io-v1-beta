@@ -20,7 +20,7 @@ export class SkuResolver {
 
   @Query(() => [Sku])
   readSku(
-    @Args('paginator') paginatorDto: PaginatorDto,
+    @Args('paginator') paginatorDto: PaginatorDto<Sku | SkuView>,
     @Args('view') viewDto: ViewDto,
     @Args('query') query: QueryDto
   ) {

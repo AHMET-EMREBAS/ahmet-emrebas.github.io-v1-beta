@@ -19,7 +19,12 @@ import {
   WhereDto,
 } from 'core/dto';
 
-import { CreateUserDto, UpdateUserDto } from '../../models/user';
+import {
+  User,
+  UserView,
+  CreateUserDto,
+  UpdateUserDto,
+} from '../../models/user';
 
 import { UserViewService } from './user-view.service';
 import { UserService } from './user.service';
@@ -34,7 +39,7 @@ export class UserController {
 
   @Get()
   readUser(
-    @Query() paginatorDto: PaginatorDto,
+    @Query() paginatorDto: PaginatorDto<User | UserView>,
     @Query() viewDto: ViewDto,
     @Query() whereDto: WhereDto
   ) {

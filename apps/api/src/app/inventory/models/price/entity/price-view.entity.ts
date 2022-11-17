@@ -28,9 +28,9 @@ import { Pricelevel } from '../../pricelevel';
 
       .addSelect('price.cost', 'cost')
 
-      .addSelect('sku.barcode', 'barcode')
-
       .addSelect('sku.name', 'sku')
+
+      .addSelect('sku.barcode', 'barcode')
 
       .addSelect('pricelevel.name', 'pricelevel')
 
@@ -64,11 +64,11 @@ export class PriceView implements IPrice<string, string> {
 
   @Field()
   @ViewColumn()
-  barcode: string;
+  sku: string;
 
   @Field()
   @ViewColumn()
-  sku: string;
+  barcode: string;
 
   @Field()
   @ViewColumn()

@@ -46,12 +46,12 @@ Relations:
     nullable: true
     joinColumn: true
     viewColumns:
-      - column: barcode
-        as: barcode
-        valueType: string
-
       - column: name
         as: sku
+        valueType: string
+
+      - column: barcode
+        as: barcode
         valueType: string
 
   - type: ManyToOne

@@ -28,6 +28,8 @@ import { Store } from '../../store';
 
       .addSelect('sku.name', 'sku')
 
+      .addSelect('sku.barcode', 'barcode')
+
       .addSelect('store.name', 'store')
 
       .from(Quantity, 'quantity')
@@ -57,6 +59,10 @@ export class QuantityView implements IQuantity<string, string> {
   @Field()
   @ViewColumn()
   sku: string;
+
+  @Field()
+  @ViewColumn()
+  barcode: string;
 
   @Field()
   @ViewColumn()

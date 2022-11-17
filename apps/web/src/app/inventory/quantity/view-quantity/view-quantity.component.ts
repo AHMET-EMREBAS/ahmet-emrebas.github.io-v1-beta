@@ -57,6 +57,11 @@ export class ViewQuantityComponent implements AfterViewInit {
     },
 
     {
+      header: 'barcode',
+      field: 'barcode',
+    },
+
+    {
       header: 'store',
       field: 'store',
     },

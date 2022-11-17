@@ -89,8 +89,9 @@ export class CreateProductComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.categoryService.getAll();
-    this.departmentService.getAll();
+    this.categoryService.getAsOptions(['id', 'name']);
+
+    this.departmentService.getAsOptions(['id', 'name']);
   }
 
   submit() {

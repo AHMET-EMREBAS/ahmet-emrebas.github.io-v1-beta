@@ -25,7 +25,7 @@ export class UserResolver {
 
   @Query(() => [User])
   readUser(
-    @Args('paginator') paginatorDto: PaginatorDto,
+    @Args('paginator') paginatorDto: PaginatorDto<User | UserView>,
     @Args('view') viewDto: ViewDto,
     @Args('query') query: QueryDto
   ) {

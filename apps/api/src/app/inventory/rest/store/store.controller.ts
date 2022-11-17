@@ -19,7 +19,12 @@ import {
   WhereDto,
 } from 'core/dto';
 
-import { CreateStoreDto, UpdateStoreDto } from '../../models/store';
+import {
+  Store,
+  StoreView,
+  CreateStoreDto,
+  UpdateStoreDto,
+} from '../../models/store';
 
 import { StoreViewService } from './store-view.service';
 import { StoreService } from './store.service';
@@ -34,7 +39,7 @@ export class StoreController {
 
   @Get()
   readStore(
-    @Query() paginatorDto: PaginatorDto,
+    @Query() paginatorDto: PaginatorDto<Store | StoreView>,
     @Query() viewDto: ViewDto,
     @Query() whereDto: WhereDto
   ) {

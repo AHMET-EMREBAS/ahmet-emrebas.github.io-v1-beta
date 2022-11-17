@@ -25,7 +25,7 @@ export class CategoryResolver {
 
   @Query(() => [Category])
   readCategory(
-    @Args('paginator') paginatorDto: PaginatorDto,
+    @Args('paginator') paginatorDto: PaginatorDto<Category | CategoryView>,
     @Args('view') viewDto: ViewDto,
     @Args('query') query: QueryDto
   ) {

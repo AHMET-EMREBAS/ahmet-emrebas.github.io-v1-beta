@@ -20,6 +20,8 @@ import {
 } from 'core/dto';
 
 import {
+  Pricelevel,
+  PricelevelView,
   CreatePricelevelDto,
   UpdatePricelevelDto,
 } from '../../models/pricelevel';
@@ -37,7 +39,7 @@ export class PricelevelController {
 
   @Get()
   readPricelevel(
-    @Query() paginatorDto: PaginatorDto,
+    @Query() paginatorDto: PaginatorDto<Pricelevel | PricelevelView>,
     @Query() viewDto: ViewDto,
     @Query() whereDto: WhereDto
   ) {

@@ -77,8 +77,9 @@ export class CreateQuantityComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.skuService.getAll();
-    this.storeService.getAll();
+    this.skuService.getAsOptions(['id', 'name']);
+
+    this.storeService.getAsOptions(['id', 'name']);
   }
 
   submit() {

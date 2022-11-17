@@ -63,7 +63,7 @@ export class CreatePriceComponent implements OnInit {
       placeholder: 'sku',
       asyncOptions: this.skuService.entities$,
       optionValue: 'id',
-      optionLabel: 'barcode',
+      optionLabel: 'name',
     },
 
     {
@@ -85,8 +85,9 @@ export class CreatePriceComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.skuService.getAll();
-    this.pricelevelService.getAll();
+    this.skuService.getAsOptions(['id', 'name']);
+
+    this.pricelevelService.getAsOptions(['id', 'name']);
   }
 
   submit() {

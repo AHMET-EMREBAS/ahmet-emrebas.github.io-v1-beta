@@ -1,4 +1,4 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IReadPermission } from 'common/inventory/interfaces';
 import { InputOptions, setFormGroupValue } from 'material/form';
@@ -12,7 +12,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   templateUrl: './update-permission.component.html',
   styleUrls: ['./update-permission.component.scss'],
 })
-export class UpdatePermissionComponent implements AfterViewInit {
+export class UpdatePermissionComponent implements AfterViewInit, OnInit {
   title = 'Update Permission';
   private itemToBeUpdated!: Partial<IReadPermission>;
 
@@ -61,6 +61,8 @@ export class UpdatePermissionComponent implements AfterViewInit {
     private readonly router: Router,
     private readonly route: ActivatedRoute
   ) {}
+
+  ngOnInit(): void {}
 
   async ngAfterViewInit() {
     const __item = this.permissionService.getItemToBeUpdated();

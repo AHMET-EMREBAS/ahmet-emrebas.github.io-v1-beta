@@ -1,18 +1,20 @@
-import { IUser } from 'common/inventory/interfaces/user';
 import { BaseEntity } from 'core/entity';
 import {
   Column,
   Entity,
+  JoinColumn,
   JoinTable,
+  ManyToOne,
+  OneToOne,
+  OneToMany,
   ManyToMany,
 } from 'typeorm';
 
-import {
-  Field,
-  ObjectType,
-} from '@nestjs/graphql';
+import { IUser } from 'common/inventory/interfaces/user';
 
 import { Permission } from '../../permission';
+
+import { Field, ObjectType } from '@nestjs/graphql';
 
 @Entity()
 @ObjectType()
@@ -29,7 +31,6 @@ export class User extends BaseEntity implements IUser<Permission[]> {
     eager: true,
     nullable: true,
     onDelete: 'CASCADE',
-    onUpdate: 'CASCADE',
   })
   @JoinTable({ name: 'user-permission' })
   permission?: Permission[];
