@@ -16,6 +16,8 @@ import { Department } from '../../department';
     return ds
       .createQueryBuilder()
       .select('product.id', 'id')
+      .addSelect(`ROW_NUMBER () OVER (ORDER BY product.id)`, 'index')
+
       .addSelect('product.uuid', 'uuid')
       .addSelect('product.createdAt', 'createdAt')
       .addSelect('product.updatedAt', 'updatedAt')
@@ -42,6 +44,10 @@ import { Department } from '../../department';
   },
 })
 export class ProductView implements IProduct<string, string> {
+  @Field()
+  @ViewColumn()
+  index: string;
+
   @Field()
   @ViewColumn()
   id: number;

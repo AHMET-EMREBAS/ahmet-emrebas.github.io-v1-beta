@@ -16,6 +16,8 @@ import { Store } from '../../store';
     return ds
       .createQueryBuilder()
       .select('quantity.id', 'id')
+      .addSelect(`ROW_NUMBER () OVER (ORDER BY quantity.id)`, 'index')
+
       .addSelect('quantity.uuid', 'uuid')
       .addSelect('quantity.createdAt', 'createdAt')
       .addSelect('quantity.updatedAt', 'updatedAt')
@@ -36,6 +38,10 @@ import { Store } from '../../store';
   },
 })
 export class QuantityView implements IQuantity<string, string> {
+  @Field()
+  @ViewColumn()
+  index: string;
+
   @Field()
   @ViewColumn()
   id: number;

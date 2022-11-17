@@ -35,7 +35,7 @@ Relations:
     eager: true
     joinTable: true
     nullable: true
-    onDelete: SET NULL
+    onDelete: CASCADE
     viewColumns:
       - column: name
         as: permission

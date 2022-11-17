@@ -12,6 +12,8 @@ import { IDepartment } from 'common/inventory/interfaces/department';
     return ds
       .createQueryBuilder()
       .select('department.id', 'id')
+      .addSelect(`ROW_NUMBER () OVER (ORDER BY department.id)`, 'index')
+
       .addSelect('department.uuid', 'uuid')
       .addSelect('department.createdAt', 'createdAt')
       .addSelect('department.updatedAt', 'updatedAt')
@@ -24,6 +26,10 @@ import { IDepartment } from 'common/inventory/interfaces/department';
   },
 })
 export class DepartmentView implements IDepartment {
+  @Field()
+  @ViewColumn()
+  index: string;
+
   @Field()
   @ViewColumn()
   id: number;

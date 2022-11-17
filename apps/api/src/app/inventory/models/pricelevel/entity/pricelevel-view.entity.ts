@@ -12,6 +12,8 @@ import { IPricelevel } from 'common/inventory/interfaces/pricelevel';
     return ds
       .createQueryBuilder()
       .select('pricelevel.id', 'id')
+      .addSelect(`ROW_NUMBER () OVER (ORDER BY pricelevel.id)`, 'index')
+
       .addSelect('pricelevel.uuid', 'uuid')
       .addSelect('pricelevel.createdAt', 'createdAt')
       .addSelect('pricelevel.updatedAt', 'updatedAt')
@@ -24,6 +26,10 @@ import { IPricelevel } from 'common/inventory/interfaces/pricelevel';
   },
 })
 export class PricelevelView implements IPricelevel {
+  @Field()
+  @ViewColumn()
+  index: string;
+
   @Field()
   @ViewColumn()
   id: number;

@@ -104,11 +104,8 @@ export class ResourceService<T> {
   }
 
   async delete(id: number) {
-    try {
-      return (await this.__repo.delete(id)).affected > 0;
-    } catch (err) {
-      throw new InternalServerErrorException();
-    }
+    const deleteResult = await this.__repo.delete(id);
+    return deleteResult.affected > 0;
   }
 
   async recover(id: number) {

@@ -14,6 +14,8 @@ import { Pricelevel } from '../../pricelevel';
     return ds
       .createQueryBuilder()
       .select('store.id', 'id')
+      .addSelect(`ROW_NUMBER () OVER (ORDER BY store.id)`, 'index')
+
       .addSelect('store.uuid', 'uuid')
       .addSelect('store.createdAt', 'createdAt')
       .addSelect('store.updatedAt', 'updatedAt')
@@ -30,6 +32,10 @@ import { Pricelevel } from '../../pricelevel';
   },
 })
 export class StoreView implements IStore<string> {
+  @Field()
+  @ViewColumn()
+  index: string;
+
   @Field()
   @ViewColumn()
   id: number;

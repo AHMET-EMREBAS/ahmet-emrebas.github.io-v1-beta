@@ -60,7 +60,7 @@ export class NgrxBaseCollecitonService<
   deleteItem() {
     const d = this.selections$.getValue().pop();
     if (d) {
-      this.delete(d);
+      this.delete(d.id as any);
     }
   }
 

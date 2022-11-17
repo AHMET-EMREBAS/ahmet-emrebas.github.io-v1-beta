@@ -12,6 +12,8 @@ import { ICategory } from 'common/inventory/interfaces/category';
     return ds
       .createQueryBuilder()
       .select('category.id', 'id')
+      .addSelect(`ROW_NUMBER () OVER (ORDER BY category.id)`, 'index')
+
       .addSelect('category.uuid', 'uuid')
       .addSelect('category.createdAt', 'createdAt')
       .addSelect('category.updatedAt', 'updatedAt')
@@ -24,6 +26,10 @@ import { ICategory } from 'common/inventory/interfaces/category';
   },
 })
 export class CategoryView implements ICategory {
+  @Field()
+  @ViewColumn()
+  index: string;
+
   @Field()
   @ViewColumn()
   id: number;

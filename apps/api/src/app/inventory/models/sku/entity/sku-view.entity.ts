@@ -14,6 +14,8 @@ import { Product } from '../../product';
     return ds
       .createQueryBuilder()
       .select('sku.id', 'id')
+      .addSelect(`ROW_NUMBER () OVER (ORDER BY sku.id)`, 'index')
+
       .addSelect('sku.uuid', 'uuid')
       .addSelect('sku.createdAt', 'createdAt')
       .addSelect('sku.updatedAt', 'updatedAt')
@@ -34,6 +36,10 @@ import { Product } from '../../product';
   },
 })
 export class SkuView implements ISku<string> {
+  @Field()
+  @ViewColumn()
+  index: string;
+
   @Field()
   @ViewColumn()
   id: number;

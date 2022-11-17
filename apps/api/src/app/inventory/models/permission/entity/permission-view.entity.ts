@@ -12,6 +12,8 @@ import { IPermission } from 'common/inventory/interfaces/permission';
     return ds
       .createQueryBuilder()
       .select('permission.id', 'id')
+      .addSelect(`ROW_NUMBER () OVER (ORDER BY permission.id)`, 'index')
+
       .addSelect('permission.uuid', 'uuid')
       .addSelect('permission.createdAt', 'createdAt')
       .addSelect('permission.updatedAt', 'updatedAt')
@@ -26,6 +28,10 @@ import { IPermission } from 'common/inventory/interfaces/permission';
   },
 })
 export class PermissionView implements IPermission {
+  @Field()
+  @ViewColumn()
+  index: string;
+
   @Field()
   @ViewColumn()
   id: number;

@@ -1,22 +1,25 @@
-import {
-  AfterViewInit,
-  Component,
-  ViewChild,
-} from '@angular/core';
-import {
-  ActivatedRoute,
-  Router,
-} from '@angular/router';
+import { Component, ViewChild, AfterViewInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
-import { IReadProduct } from 'common/inventory/interfaces';
+import {
+  IReadProduct,
+  IReadCategory,
+  IReadDepartment,
+} from 'common/inventory/interfaces';
+
 import {
   ColumnOption,
+  FilterEvent,
+  PageEvent,
+  SortEvent,
   TableComponent,
 } from 'material/table';
 
-import { CategoryService } from '../../category';
-import { DepartmentService } from '../../department';
 import { ProductService } from '../product.service';
+
+import { CategoryService } from '../../category';
+
+import { DepartmentService } from '../../department';
 
 @Component({
   selector: 'ae-view-product',

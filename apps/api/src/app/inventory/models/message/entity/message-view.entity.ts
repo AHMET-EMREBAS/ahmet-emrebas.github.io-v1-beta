@@ -14,6 +14,8 @@ import { User } from '../../user';
     return ds
       .createQueryBuilder()
       .select('message.id', 'id')
+      .addSelect(`ROW_NUMBER () OVER (ORDER BY message.id)`, 'index')
+
       .addSelect('message.uuid', 'uuid')
       .addSelect('message.createdAt', 'createdAt')
       .addSelect('message.updatedAt', 'updatedAt')
@@ -34,6 +36,10 @@ import { User } from '../../user';
   },
 })
 export class MessageView implements IMessage<string, string> {
+  @Field()
+  @ViewColumn()
+  index: string;
+
   @Field()
   @ViewColumn()
   id: number;
