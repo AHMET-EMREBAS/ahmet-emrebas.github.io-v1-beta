@@ -51,7 +51,17 @@ export class TableComponent implements OnInit {
 
   @Input() globalFilterFields!: string[];
 
-  @Input() columns!: ColumnOption<any>[];
+  @Input() columns: ColumnOption<any>[] = [
+    {
+      header: '#',
+      field: 'id',
+    },
+    {
+      header: '#',
+      field: 'index',
+    },
+    { header: 'uuid', field: 'uuid' },
+  ];
 
   @Input() visibleColumns!: ColumnOption<any>[];
 

@@ -63,7 +63,6 @@
         </div>
     </div>
 </p-toolbar>
-
 <p-table #table [value]="data" [lazy]="true" dataKey="index" [columns]="visibleColumns"
     a="//////////////////////////////////////////////////" [showCurrentPageReport]="true"
     a="//////////////////////////////////////////////////" [rowHover]="true"
@@ -105,7 +104,7 @@
     <ng-template pTemplate="body" let-rowData>
         <tr>
             <td>
-                <p-tableCheckbox [value]="rowData" inputId="index"></p-tableCheckbox>
+                <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
             </td>
             <td *ngFor="let col of visibleColumns">
                 {{col.prefix}}

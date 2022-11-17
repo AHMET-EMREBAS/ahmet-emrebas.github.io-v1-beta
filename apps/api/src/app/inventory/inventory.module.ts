@@ -166,7 +166,11 @@ export class InventoryModule implements OnModuleInit {
 
     for (const user of [1, 2]) {
       for (let i = 1; i < 21; i++) {
-        await this.userService.add(user, i, 'permission');
+        try {
+          await this.userService.add(user, i, 'permission');
+        } catch (err) {
+          // ignore/
+        }
       }
     }
 

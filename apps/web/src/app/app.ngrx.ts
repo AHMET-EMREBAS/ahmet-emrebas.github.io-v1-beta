@@ -4,7 +4,12 @@ import {
 } from '@ngrx/data';
 
 const defaultMetaData: Partial<EntityMetadata> = {
-  sortComparer: () => 1,
+  sortComparer: (a, b) => 100,
+  selectId: (item: any) => {
+    // While reading the data, item.index is used,
+    // Whiel writing the item.index is nulled, and actual item id is used.
+    return item.index || item.id;
+  },
 };
 export const entityDataModuleConfig: EntityDataModuleConfig = {
   pluralNames: {
