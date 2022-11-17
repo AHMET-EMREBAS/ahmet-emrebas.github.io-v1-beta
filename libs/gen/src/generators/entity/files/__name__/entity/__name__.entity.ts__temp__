@@ -61,7 +61,7 @@ export class <%- classname %> extends BaseEntity
 
   @<%- o.type %>(()=> <%- o.target %>, { eager: <%- o.eager===true %>, nullable: <%- o.nullable===true %>, onDelete: '<%- o.onDelete || 'RESTRICT' %>'})
   <% if(o.joinColumn) { %>  @JoinColumn()  <% } %> 
-  <% if(o.joinTable) { %>  @JoinTable()  <% } %> 
+  <% if(o.joinTable) { %>  @JoinTable({name:'<%- name %>-<%- o.target.toLowerCase() %>'})  <% } %> 
   <%- o.name %>?:  <% if(o.type.endsWith('Many')) { %> <%- o.target %>[]; <% } else {  %> <%- o.target %>; <% } %>
 
 <% } %>

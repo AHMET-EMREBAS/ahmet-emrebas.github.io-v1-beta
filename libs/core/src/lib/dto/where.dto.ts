@@ -48,31 +48,53 @@ export class WhereDto {
     if (!value) {
       return {};
     }
-    const query = [];
+
+    let queryType: 'global' | 'local';
+    let globalValue = '';
+
+    const localQuery = {};
+    const globalQuery = [];
 
     const filterObject = JSON.parse(value);
+
+    if (filterObject.global) {
+      queryType = 'global';
+      globalValue = filterObject.global.value;
+    } else {
+      queryType = 'local';
+    }
+
     const entries = Object.entries(filterObject);
 
-    const globalFilter = entries.find(
-      ([key, value]) => key === 'global'
-    )?.[1] as FilterMetadata;
+    function writeLocal(key: string, value: any) {
+      localQuery[key] = value;
+    }
+
+    function writeGlobal(key: string) {
+      globalQuery.push({ [key]: QUERIES.contains(globalValue) });
+    }
 
     for (const [key, value] of entries) {
-      if (globalFilter?.value) {
-        if (key === 'global') {
-          continue;
-        }
-        query.push({ [key]: QUERIES.contains(globalFilter.value) });
+      if (key === 'global') {
         continue;
       }
 
       for (const f of value as FilterMetadata[]) {
-        if (f.value && f.value !== 'undefined' && f.value !== 'null') {
-          query.push({ [key]: QUERIES[f.matchMode](f.value) });
+        if (queryType === 'local') {
+          if (f.value && f.value !== 'undefined' && f.value !== 'null') {
+            writeLocal(key, QUERIES[f.matchMode](f.value));
+          }
+          continue;
+        } else {
+          writeGlobal(key);
         }
       }
     }
-    return query.length > 0 ? query : {};
+    return queryType === 'local'
+      ? localQuery
+      : globalQuery.length > 0
+      ? globalQuery
+      : {};
   })
   where: any;
 }

@@ -1,28 +1,26 @@
 import {
-  FunctionsDto,
-  PaginatorDto,
-  ViewDto,
-  WhereDto,
-} from 'core/dto';
-
-import {
-  BadRequestException,
   Body,
   Controller,
   Delete,
   Get,
   Param,
-  Patch,
   Post,
   Put,
   Query,
+  Patch,
+  BadRequestException,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-
 import {
-  CreateUserDto,
-  UpdateUserDto,
-} from '../../models/user';
+  FunctionsDto,
+  PaginatorDto,
+  QueryDto,
+  ViewDto,
+  WhereDto,
+} from 'core/dto';
+
+import { CreateUserDto, UpdateUserDto } from '../../models/user';
+
 import { UserViewService } from './user-view.service';
 import { UserService } from './user.service';
 
@@ -77,9 +75,7 @@ export class UserController {
   @Patch()
   functions(@Query() whereDto: WhereDto, @Query() functions: FunctionsDto) {
     if (functions.query === 'count') {
-      return this.viewService.count({
-        where: whereDto.where,
-      });
+      return this.viewService.count({ where: whereDto.where });
     }
     throw new BadRequestException('Must provide a fucntion name.');
   }

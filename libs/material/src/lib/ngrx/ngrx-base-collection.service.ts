@@ -6,7 +6,6 @@ import {
   BehaviorSubject,
   debounceTime,
   delay,
-  map,
   Observable,
   switchMap,
 } from 'rxjs';
@@ -28,21 +27,14 @@ export class NgrxBaseCollecitonService<
     delay(400),
     debounceTime(400),
     switchMap(() => {
-      console.log('Counting ...');
-      return this.httpClient
-        ?.patch<number>(
-          `api/${this.entityName.toLowerCase()}/?query=count&${Object.entries(
-            this.getQuery(this.table)
-          )
-            .map((e) => e.join('='))
-            .join('&')}`,
-          {}
+      return this.httpClient?.patch<number>(
+        `api/${this.entityName.toLowerCase()}/?query=count&${Object.entries(
+          this.getQuery(this.table)
         )
-        .pipe(
-          map((data) => {
-            return data;
-          })
-        ) as Observable<number>;
+          .map((e) => e.join('='))
+          .join('&')}`,
+        {}
+      ) as Observable<number>;
     })
   );
 

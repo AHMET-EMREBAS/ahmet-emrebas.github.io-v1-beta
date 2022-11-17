@@ -73,9 +73,9 @@ export class SkuController {
   }
 
   @Patch()
-  functions(@Query() functions: FunctionsDto) {
+  functions(@Query() whereDto: WhereDto, @Query() functions: FunctionsDto) {
     if (functions.query === 'count') {
-      return this.service.count();
+      return this.viewService.count({ where: whereDto.where });
     }
     throw new BadRequestException('Must provide a fucntion name.');
   }

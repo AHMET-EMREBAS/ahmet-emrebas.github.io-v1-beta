@@ -1,18 +1,20 @@
-import { IUser } from 'common/inventory/interfaces/user';
 import { BaseEntity } from 'core/entity';
 import {
   Column,
   Entity,
+  JoinColumn,
   JoinTable,
+  ManyToOne,
+  OneToOne,
+  OneToMany,
   ManyToMany,
 } from 'typeorm';
 
-import {
-  Field,
-  ObjectType,
-} from '@nestjs/graphql';
+import { IUser } from 'common/inventory/interfaces/user';
 
 import { Permission } from '../../permission';
+
+import { Field, ObjectType } from '@nestjs/graphql';
 
 @Entity()
 @ObjectType()

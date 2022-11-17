@@ -51,7 +51,18 @@ import { <%- target  %>  } from '../../<%- target.toLowerCase() %>';
       .from(<%- classname %>, '<%- name %>')
 
       <% for(const o of options.Relations || []) { %> 
-        .leftJoin(<%- o.target %>, '<%- o.name %>', '<%- o.name %>.id = <%- name %>.<%- o.name %>Id')
+
+        <% if(o.type.endsWith('Many')) { %> 
+
+            
+            .leftJoin('<%- name %>-<%- o.target.toLowerCase() %>','<%- name %><%- o.target %>','<%- name %><%- o.target %>.<%- name %>Id = <%- name %>.id')
+
+            .leftJoin(<%- o.target %>, '<%- o.name %>', '<%- o.target.toLowerCase() %>.id = <%- name %><%- o.target %>.<%- o.target.toLowerCase() %>Id ')
+        
+        <% } else { %>
+            .leftJoin(<%- o.target %>, '<%- o.name %>', '<%- o.name %>.id = <%- name %>.<%- o.name %>Id')
+        <% } %>
+
       <% } %> 
   },
 })

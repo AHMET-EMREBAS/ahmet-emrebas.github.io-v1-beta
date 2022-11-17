@@ -33,11 +33,16 @@ import { User } from './user.entity';
 
       .from(User, 'user')
 
-      .leftJoin('user-permission', 'permits', 'permits.userId = user.id')
+      .leftJoin(
+        'user-permission',
+        'userPermission',
+        'userPermission.userId = user.id'
+      )
+
       .leftJoin(
         Permission,
         'permission',
-        'permission.id = permits.permissionId'
+        'permission.id = userPermission.permissionId '
       );
   },
 })
