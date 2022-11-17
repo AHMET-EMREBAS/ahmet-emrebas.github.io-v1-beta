@@ -1,4 +1,9 @@
 import { EntityDataModuleConfig } from '@ngrx/data';
+import { IdSelector } from '@ngrx/entity';
+
+const selectId: IdSelector<any> = (item: any) => {
+  return JSON.stringify(item);
+};
 
 export const entityDataModuleConfig: EntityDataModuleConfig = {
   pluralNames: {
@@ -15,16 +20,16 @@ export const entityDataModuleConfig: EntityDataModuleConfig = {
     Permission: 'Permission',
   },
   entityMetadata: {
-    Product: {},
-    Category: {},
-    Department: {},
-    Sku: {},
-    Quantity: {},
-    Store: {},
-    Pricelevel: {},
-    Price: {},
-    Message: {},
-    User: {},
-    Permission: {},
+    Product: { selectId },
+    Category: { selectId },
+    Department: { selectId },
+    Sku: { selectId },
+    Quantity: { selectId },
+    Store: { selectId },
+    Pricelevel: { selectId },
+    Price: { selectId },
+    Message: { selectId },
+    User: { selectId },
+    Permission: { selectId },
   },
 };

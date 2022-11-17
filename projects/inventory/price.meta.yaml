@@ -50,6 +50,10 @@ Relations:
         as: barcode
         valueType: string
 
+      - column: name
+        as: sku
+        valueType: string
+
   - type: ManyToOne
     target: Pricelevel
     name: pricelevel

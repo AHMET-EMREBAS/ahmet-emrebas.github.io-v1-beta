@@ -39,6 +39,7 @@ export class FormComponent implements AfterViewInit {
   submit() {
     this.submitEvent.emit();
   }
+
   ngAfterViewInit(): void {
     const element = document.querySelector(
       '.ae-form input'
@@ -68,5 +69,16 @@ export class FormComponent implements AfterViewInit {
         return [common, ...data];
       })
     );
+  }
+
+  fieldType(fType: string | undefined) {
+    if (!fType) {
+      return 'text';
+    }
+    if (fType === 'number') {
+      return 'text';
+    }
+
+    return fType;
   }
 }

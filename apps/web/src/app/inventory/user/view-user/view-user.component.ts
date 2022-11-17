@@ -53,7 +53,6 @@ export class ViewUserComponent implements AfterViewInit {
     {
       header: 'permission',
       field: 'permission',
-      mapper: (item?: IReadPermission) => item?.name,
     },
 
     {

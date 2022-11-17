@@ -28,6 +28,8 @@ import { <%- target  %>  } from '../../<%- target.toLowerCase() %>';
     return ds
       .createQueryBuilder()
       .select('<%- name %>.id', 'id')
+      .addSelect(`ROW_NUMBER () OVER (ORDER BY <%- name %>.id)`, 'index')
+
       .addSelect('<%- name %>.uuid', 'uuid')
       .addSelect('<%- name %>.createdAt', 'createdAt')
       .addSelect('<%- name %>.updatedAt', 'updatedAt')
@@ -77,6 +79,12 @@ export class <%- classname %>View
 
 
 {
+
+
+  @Field()
+  @ViewColumn()
+  index: string;
+
   @Field()
   @ViewColumn()
   id: number;

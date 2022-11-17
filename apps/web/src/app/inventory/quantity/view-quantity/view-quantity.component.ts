@@ -54,13 +54,11 @@ export class ViewQuantityComponent implements AfterViewInit {
     {
       header: 'sku',
       field: 'sku',
-      mapper: (item?: IReadSku) => item?.name,
     },
 
     {
       header: 'store',
       field: 'store',
-      mapper: (item?: IReadStore) => item?.name,
     },
 
     {

@@ -1,25 +1,22 @@
-import { Component, ViewChild, AfterViewInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-
 import {
-  IReadProduct,
-  IReadCategory,
-  IReadDepartment,
-} from 'common/inventory/interfaces';
+  AfterViewInit,
+  Component,
+  ViewChild,
+} from '@angular/core';
+import {
+  ActivatedRoute,
+  Router,
+} from '@angular/router';
 
+import { IReadProduct } from 'common/inventory/interfaces';
 import {
   ColumnOption,
-  FilterEvent,
-  PageEvent,
-  SortEvent,
   TableComponent,
 } from 'material/table';
 
-import { ProductService } from '../product.service';
-
 import { CategoryService } from '../../category';
-
 import { DepartmentService } from '../../department';
+import { ProductService } from '../product.service';
 
 @Component({
   selector: 'ae-view-product',
@@ -59,13 +56,11 @@ export class ViewProductComponent implements AfterViewInit {
     {
       header: 'category',
       field: 'category',
-      mapper: (item?: IReadCategory) => item?.name,
     },
 
     {
       header: 'department',
       field: 'department',
-      mapper: (item?: IReadDepartment) => item?.name,
     },
 
     {

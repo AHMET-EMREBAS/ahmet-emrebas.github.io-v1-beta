@@ -18,7 +18,9 @@ import { User } from './user.entity';
   expression: (ds: DataSource) => {
     return ds
       .createQueryBuilder()
-      .select('user.id * permission.id', 'id')
+      .select('user.id', 'id')
+      .addSelect(`ROW_NUMBER () OVER (ORDER BY user.id)`, 'index')
+
       .addSelect('user.uuid', 'uuid')
       .addSelect('user.createdAt', 'createdAt')
       .addSelect('user.updatedAt', 'updatedAt')
@@ -47,6 +49,10 @@ import { User } from './user.entity';
   },
 })
 export class UserView implements IUser<string> {
+  @Field()
+  @ViewColumn()
+  index: string;
+
   @Field()
   @ViewColumn()
   id: number;

@@ -63,7 +63,7 @@ export class CreatePriceComponent implements OnInit {
       placeholder: 'sku',
       asyncOptions: this.skuService.entities$,
       optionValue: 'id',
-      optionLabel: 'name',
+      optionLabel: 'barcode',
     },
 
     {

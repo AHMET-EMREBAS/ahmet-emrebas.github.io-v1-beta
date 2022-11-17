@@ -58,7 +58,6 @@ export class ViewSkuComponent implements AfterViewInit {
     {
       header: 'product',
       field: 'product',
-      mapper: (item?: IReadProduct) => item?.name,
     },
 
     {

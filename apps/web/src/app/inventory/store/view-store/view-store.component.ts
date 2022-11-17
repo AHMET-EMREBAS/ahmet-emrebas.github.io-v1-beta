@@ -48,7 +48,6 @@ export class ViewStoreComponent implements AfterViewInit {
     {
       header: 'pricelevel',
       field: 'pricelevel',
-      mapper: (item?: IReadPricelevel) => item?.name,
     },
 
     {

@@ -57,15 +57,18 @@ export class ViewPriceComponent implements AfterViewInit {
     },
 
     {
+      header: 'barcode',
+      field: 'barcode',
+    },
+
+    {
       header: 'sku',
       field: 'sku',
-      mapper: (item?: IReadSku) => item?.barcode,
     },
 
     {
       header: 'pricelevel',
       field: 'pricelevel',
-      mapper: (item?: IReadPricelevel) => item?.name,
     },
 
     {

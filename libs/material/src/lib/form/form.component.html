@@ -6,7 +6,7 @@
         <label [for]="field.name + '-input'">{{field.placeholder | titlecase}} </label>
         <ng-container
             *ngIf="['text', 'number', 'date', 'datetime', 'range', 'email', 'password'].includes(field.type || 'text')">
-            <input [id]="field.name + '-input'" [formControlName]="field.name!" [type]="field.type || 'text'"
+            <input [id]="field.name + '-input'" [formControlName]="field.name!" [type]="fieldType(field.type)"
                 [attr.required]="field.required" [attr.minlength]="field.minLength" [attr.maxlength]="field.maxLength"
                 [attr.min]="field.min" [attr.max]="field.max">
         </ng-container>

@@ -49,7 +49,7 @@ export class CreateMessageComponent implements OnInit {
       placeholder: 'to',
       asyncOptions: this.toService.entities$,
       optionValue: 'id',
-      optionLabel: 'name',
+      optionLabel: 'username',
     },
 
     {
@@ -58,7 +58,7 @@ export class CreateMessageComponent implements OnInit {
       placeholder: 'from',
       asyncOptions: this.fromService.entities$,
       optionValue: 'id',
-      optionLabel: 'name',
+      optionLabel: 'username',
     },
   ];
 

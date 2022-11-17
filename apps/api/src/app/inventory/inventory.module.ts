@@ -94,13 +94,13 @@ export const ResouceModules = [
     ProductService,
     DepartmentService,
     SkuService,
-    PriceService,
     StoreService,
     QuantityService,
     PermissionService,
     UserService,
     PricelevelService,
     StoreService,
+    PriceService,
   ],
 })
 export class InventoryModule implements OnModuleInit {
@@ -111,15 +111,27 @@ export class InventoryModule implements OnModuleInit {
     private readonly permissionService: PermissionService,
     private readonly priceLevelService: PricelevelService,
     private readonly storeService: StoreService,
-    private readonly userService: UserService
+    private readonly userService: UserService,
+    private readonly priceService: PriceService
   ) {}
 
   async onModuleInit() {
-    for (const e of ['primary', 'secondary', 'retail', 'wholesale', 'vip']) {
+    for (const e of [
+      'default',
+      'primary',
+      'secondary',
+      'retail',
+      'wholesale',
+      'vip',
+    ]) {
       await this.priceLevelService.save({ name: e });
     }
 
-    for (const e of ['Houston Retail Store ', 'Auistion Wholesale store']) {
+    for (const e of [
+      'Main',
+      'Houston Retail Store ',
+      'Auistion Wholesale store',
+    ]) {
       await this.storeService.save({ name: e });
     }
     for (const e of ['user1@gmail.com', 'user2@gmail.com']) {

@@ -48,7 +48,6 @@ export class NgrxBaseCollecitonService<
 
   updateSelection(items: T[]) {
     this.selections$.next([...items]);
-    console.log(this.selections$.getValue());
   }
 
   getItemToBeUpdated() {

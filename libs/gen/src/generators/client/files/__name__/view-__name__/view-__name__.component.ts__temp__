@@ -65,11 +65,20 @@ export class View<%- classname %>Component implements AfterViewInit {
 
 <% for(const col of options.Relations || []) { %> 
 
+   <% if(col.viewColumns?.length>0) { %>
+
+     <% for(const v of col.viewColumns) { %> 
+      
     { 
-      header: '<%- col.label || col.name %>', 
-      field: '<%- col.name %>', 
-      mapper:(item?: IRead<%- col.target %>)=>item?.<%- col.viewColumns[0].column %>
+      header: '<%- v.as %>', 
+      field: '<%- v.as %>'
     },
+
+     <% } %>
+
+
+   <% } %>
+   
 <% } %>
 
 

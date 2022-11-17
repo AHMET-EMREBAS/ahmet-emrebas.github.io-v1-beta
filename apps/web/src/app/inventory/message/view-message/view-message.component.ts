@@ -48,13 +48,11 @@ export class ViewMessageComponent implements AfterViewInit {
     {
       header: 'to',
       field: 'to',
-      mapper: (item?: IReadUser) => item?.username,
     },
 
     {
       header: 'from',
       field: 'from',
-      mapper: (item?: IReadUser) => item?.username,
     },
 
     {
