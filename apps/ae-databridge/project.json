@@ -2,6 +2,7 @@
   "root": "apps/ae-databridge",
   "sourceRoot": "apps/ae-databridge/src",
   "projectType": "application",
+  "version": "1.0.0",
   "targets": {
     "build": {
       "executor": "@nrwl/node:webpack",

@@ -29,3 +29,26 @@ nx generate @nrwl/nx-plugin:generator my-generator --project=cli
 nx run appname:extract-i18n
 
 ```
+
+### How to do x-prompt
+
+```
+
+ "x-prompt": {
+        "messsage": "Select the application to publish : ",
+        "type": "list",
+        "multiselect": true,
+        "items": [
+          {
+            "value": "ae-databridge",
+            "label": "Databridge Application"
+          },
+          {
+            "value": "ae-auth",
+            "label": "Authentication Service"
+          }
+        ]
+      }
+
+
+```
