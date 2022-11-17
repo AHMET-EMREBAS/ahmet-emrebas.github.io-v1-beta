@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { IReadSku } from 'common/inventory/interfaces';
 import { InputOptions, setFormGroupValue } from 'material/form';
 import { SkuService } from '../sku.service';
+import { firstValueFrom } from 'rxjs';
 
 import { ProductService } from '../../product';
 
@@ -99,11 +100,13 @@ export class UpdateSkuComponent implements AfterViewInit {
     this.productService.getAll();
   }
 
-  ngAfterViewInit(): void {
-    const item = this.skuService.getItemToBeUpdated();
-    if (item) {
-      this.itemToBeUpdated = item;
-      setFormGroupValue(this.formGroup, item);
+  async ngAfterViewInit() {
+    const __item = this.skuService.getItemToBeUpdated();
+    if (__item) {
+      this.itemToBeUpdated = await firstValueFrom(
+        this.skuService.getByKey(__item.id)
+      );
+      setFormGroupValue(this.formGroup, this.itemToBeUpdated);
     }
   }
 

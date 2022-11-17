@@ -10,7 +10,6 @@ import { FormControl } from '@angular/forms';
 
 import { FilterMetadata } from 'primeng/api';
 import { Table } from 'primeng/table';
-import { BehaviorSubject } from 'rxjs';
 
 export type ColumnOption<T> = {
   header: string;
@@ -46,19 +45,15 @@ export class TableComponent implements OnInit {
 
   searchControl = new FormControl('');
   selectedItems = [];
-  selectedItems$ = new BehaviorSubject<any>([]);
 
   @Input() data: Record<string, any>[] = [];
   @Input() totalRecords = 1000000;
 
-  @Input() globalFilterFields: string[] = ['id', 'uuid', 'name'];
+  @Input() globalFilterFields!: string[];
 
-  @Input() columns: ColumnOption<any>[] = [
-    { header: '#', field: 'id' },
-    { header: 'uuid', field: 'uuid' },
-  ];
+  @Input() columns!: ColumnOption<any>[];
 
-  visibleColumns!: ColumnOption<any>[];
+  @Input() visibleColumns!: ColumnOption<any>[];
 
   @Output() sortEvent = new EventEmitter<SortEvent>();
   @Output() filterEvent = new EventEmitter<FilterEvent>();
@@ -70,8 +65,12 @@ export class TableComponent implements OnInit {
   @Output() clearEvent = new EventEmitter();
 
   ngOnInit(): void {
-    this.visibleColumns = [...this.columns];
-    this.globalFilterFields = [...this.columns.map((e) => e.field)];
+    if (!this.visibleColumns) {
+      this.visibleColumns = [...this.columns];
+    }
+    if (!this.globalFilterFields) {
+      this.globalFilterFields = [...this.columns.map((e) => e.field)];
+    }
   }
   showSettingDialog() {
     this.settingDialog = true;

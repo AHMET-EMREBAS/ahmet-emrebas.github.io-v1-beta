@@ -42,31 +42,47 @@
         <div class="flex  justify-content-between  gap-2">
 
             <!-- Setting dialog -->
-            <button class="p-button-secondary" pButton icon="pi pi-cog" pTooltip="Clear filter" tooltipPosition="bottom"
+            <button class="p-button-secondary" pButton icon="pi pi-cog" pTooltip="Settings" tooltipPosition="bottom"
                 (click)="showSettingDialog()"></button>
 
 
-            <!-- Clear table filter  -->
-            <button pButton icon="pi pi-filter-slash" (click)="table.clear(); clearEvent.emit()" pTooltip="Clear filter"
-                tooltipPosition="bottom"></button>
 
-            <!-- Global search  -->
-            <span class="p-input-icon-left">
-                <i class="pi pi-search"></i>
-                <input pInputText type="text" [formControl]="searchControl"
-                    (input)="table.filterGlobal(searchControl.value,'contains')" placeholder="Global Search" />
-            </span>
+            <div class="flex gap-2">
+
+                <!-- Global search  -->
+                <span class="p-input-icon-left">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" [formControl]="searchControl"
+                        (input)="table.filterGlobal(searchControl.value,'contains')" placeholder="Global Search" />
+                </span>
+
+                <!-- Clear table filter  -->
+                <button pButton icon="pi pi-filter-slash" (click)="table.clear(); clearEvent.emit()"
+                    pTooltip="Clear filter" tooltipPosition="bottom"></button>
+            </div>
         </div>
     </div>
 </p-toolbar>
 
-<p-table #table [value]="data" [lazy]="true" dataKey="index" [columns]="visibleColumns" [(selection)]="selectedItems"
-    [rowHover]="true" [rows]="10" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50, 100]"
-    [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
-    [totalRecords]="totalRecords" (onSort)="sortEvent.emit($event)" (onPage)="pageEvent.emit($event)"
-    styleClass="p-datatable-gridlines  p-datatable-striped" responsiveLayout="scroll"
-    (onFilter)="filterEvent.emit($event)" (selectionChange)="selectEvent.emit($event)" [sortField]="'id'"
-    [globalFilterFields]="globalFilterFields">
+<p-table #table [value]="data" [lazy]="true" dataKey="index" [columns]="visibleColumns"
+    a="//////////////////////////////////////////////////" [showCurrentPageReport]="true"
+    a="//////////////////////////////////////////////////" [rowHover]="true"
+    a="//////////////////////////////////////////////////" [rowsPerPageOptions]="[10,25,50, 100]"
+    a="//////////////////////////////////////////////////////////" [paginator]="true"
+    a="////////////////////////////////////////////////// " [totalRecords]="totalRecords"
+    a="//////////////////////////////////////////////////" styleClass="p-datatable-gridlines  p-datatable-striped"
+    a="////////////////////////////////////////////////////" responsiveLayout="scroll"
+    a="///////////////////////////////" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    a="//////////////////////////////////////////////////" [rows]="10"
+    a="////////////////////////////////////////////////////////////" [filterDelay]="400"
+    a="////////////////////////////////////////////////////////////" [virtualScrollDelay]="400"
+    a="////////////////////////////////////////////////// " (onSort)="sortEvent.emit($event)"
+    a="///////////////////////////////////////////////////" (onPage)="pageEvent.emit($event)"
+    a="/////////////////////////////////////////////" (selectionChange)="selectEvent.emit($event)"
+    a="//////////////////////////////////////////////////" [(selection)]="selectedItems"
+    a="//////////////////////////////////////////" (onFilter)="filterEvent.emit($event)"
+    a="////////////////////////////////////////////////////////////" [sortField]="'index'"
+    a="//////////////////////////////////////////" [globalFilterFields]="globalFilterFields">
 
     <ng-template pTemplate="header">
 
@@ -88,10 +104,8 @@
 
     <ng-template pTemplate="body" let-rowData>
         <tr>
-
-
             <td>
-                <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
+                <p-tableCheckbox [value]="rowData" inputId="index"></p-tableCheckbox>
             </td>
             <td *ngFor="let col of visibleColumns">
                 {{col.prefix}}

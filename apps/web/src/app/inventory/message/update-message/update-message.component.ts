@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { IReadMessage } from 'common/inventory/interfaces';
 import { InputOptions, setFormGroupValue } from 'material/form';
 import { MessageService } from '../message.service';
+import { firstValueFrom } from 'rxjs';
 
 import { UserService } from '../../user';
 
@@ -74,11 +75,13 @@ export class UpdateMessageComponent implements AfterViewInit {
     this.fromService.getAll();
   }
 
-  ngAfterViewInit(): void {
-    const item = this.messageService.getItemToBeUpdated();
-    if (item) {
-      this.itemToBeUpdated = item;
-      setFormGroupValue(this.formGroup, item);
+  async ngAfterViewInit() {
+    const __item = this.messageService.getItemToBeUpdated();
+    if (__item) {
+      this.itemToBeUpdated = await firstValueFrom(
+        this.messageService.getByKey(__item.id)
+      );
+      setFormGroupValue(this.formGroup, this.itemToBeUpdated);
     }
   }
 

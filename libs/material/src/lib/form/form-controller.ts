@@ -6,7 +6,6 @@ export function setFormGroupValue(
 ) {
   const entries = Object.entries(value);
   for (const [key, value] of entries) {
-    console.log('setting key ', key, ' to ', ' vlue : ', value);
     formGroup.get(key)?.setValue(value);
   }
 }

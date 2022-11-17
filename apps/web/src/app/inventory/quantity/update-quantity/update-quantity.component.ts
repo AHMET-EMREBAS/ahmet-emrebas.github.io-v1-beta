@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { IReadQuantity } from 'common/inventory/interfaces';
 import { InputOptions, setFormGroupValue } from 'material/form';
 import { QuantityService } from '../quantity.service';
+import { firstValueFrom } from 'rxjs';
 
 import { SkuService } from '../../sku';
 
@@ -80,11 +81,13 @@ export class UpdateQuantityComponent implements AfterViewInit {
     this.storeService.getAll();
   }
 
-  ngAfterViewInit(): void {
-    const item = this.quantityService.getItemToBeUpdated();
-    if (item) {
-      this.itemToBeUpdated = item;
-      setFormGroupValue(this.formGroup, item);
+  async ngAfterViewInit() {
+    const __item = this.quantityService.getItemToBeUpdated();
+    if (__item) {
+      this.itemToBeUpdated = await firstValueFrom(
+        this.quantityService.getByKey(__item.id)
+      );
+      setFormGroupValue(this.formGroup, this.itemToBeUpdated);
     }
   }
 

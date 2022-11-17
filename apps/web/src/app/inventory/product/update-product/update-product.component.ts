@@ -1,14 +1,27 @@
-import { AfterViewInit, Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import {
+  AfterViewInit,
+  Component,
+} from '@angular/core';
+import {
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import {
+  ActivatedRoute,
+  Router,
+} from '@angular/router';
+
 import { IReadProduct } from 'common/inventory/interfaces';
-import { InputOptions, setFormGroupValue } from 'material/form';
-import { ProductService } from '../product.service';
+import {
+  InputOptions,
+  setFormGroupValue,
+} from 'material/form';
+import { firstValueFrom } from 'rxjs';
 
 import { CategoryService } from '../../category';
-
 import { DepartmentService } from '../../department';
-
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ProductService } from '../product.service';
 
 @Component({
   selector: 'ae-update-product',
@@ -92,25 +105,25 @@ export class UpdateProductComponent implements AfterViewInit {
     this.departmentService.getAll();
   }
 
-  ngAfterViewInit(): void {
-    const item = this.productService.getItemToBeUpdated();
-    if (item) {
-      this.itemToBeUpdated = item;
-      setFormGroupValue(this.formGroup, item);
+  async ngAfterViewInit() {
+    const __item = this.productService.getItemToBeUpdated();
+    this.formGroup.markAsDirty();
+    this.formGroup.markAllAsTouched();
+    if (__item) {
+      this.itemToBeUpdated = await firstValueFrom(
+        this.productService.getByKey(__item.id)
+      );
+      setFormGroupValue(this.formGroup, this.itemToBeUpdated);
     }
   }
 
-  submit() {
+  async submit() {
     if (this.formGroup.valid) {
       this.productService.update({
         id: this.itemToBeUpdated.id,
-
         name: this.value('name'),
-
         description: this.value('description'),
-
         category: this.value('category')?.id,
-
         department: this.value('department')?.id,
       });
     }

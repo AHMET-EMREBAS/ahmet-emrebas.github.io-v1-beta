@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { IReadStore } from 'common/inventory/interfaces';
 import { InputOptions, setFormGroupValue } from 'material/form';
 import { StoreService } from '../store.service';
+import { firstValueFrom } from 'rxjs';
 
 import { PricelevelService } from '../../pricelevel';
 
@@ -61,11 +62,13 @@ export class UpdateStoreComponent implements AfterViewInit {
     this.pricelevelService.getAll();
   }
 
-  ngAfterViewInit(): void {
-    const item = this.storeService.getItemToBeUpdated();
-    if (item) {
-      this.itemToBeUpdated = item;
-      setFormGroupValue(this.formGroup, item);
+  async ngAfterViewInit() {
+    const __item = this.storeService.getItemToBeUpdated();
+    if (__item) {
+      this.itemToBeUpdated = await firstValueFrom(
+        this.storeService.getByKey(__item.id)
+      );
+      setFormGroupValue(this.formGroup, this.itemToBeUpdated);
     }
   }
 

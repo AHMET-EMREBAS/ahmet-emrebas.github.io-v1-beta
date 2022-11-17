@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { IReadDepartment } from 'common/inventory/interfaces';
 import { InputOptions, setFormGroupValue } from 'material/form';
 import { DepartmentService } from '../department.service';
+import { firstValueFrom } from 'rxjs';
 
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
@@ -45,11 +46,13 @@ export class UpdateDepartmentComponent implements AfterViewInit {
     private readonly route: ActivatedRoute
   ) {}
 
-  ngAfterViewInit(): void {
-    const item = this.departmentService.getItemToBeUpdated();
-    if (item) {
-      this.itemToBeUpdated = item;
-      setFormGroupValue(this.formGroup, item);
+  async ngAfterViewInit() {
+    const __item = this.departmentService.getItemToBeUpdated();
+    if (__item) {
+      this.itemToBeUpdated = await firstValueFrom(
+        this.departmentService.getByKey(__item.id)
+      );
+      setFormGroupValue(this.formGroup, this.itemToBeUpdated);
     }
   }
 

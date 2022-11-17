@@ -25,9 +25,9 @@ import { Observable } from 'rxjs';
 
 import {
   DefaultHttpUrlGenerator,
-  DefaultPluralizer,
   EntityDataModule,
   HttpUrlGenerator,
+  Pluralizer,
 } from '@ngrx/data';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
@@ -35,15 +35,18 @@ import { StoreModule } from '@ngrx/store';
 import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
 import { entityDataModuleConfig } from './app.ngrx';
+import { UserService } from './inventory/user';
 
-DefaultPluralizer;
 const BASE_API_URL = 'BASE_API_URL';
 const BASE_URL_VALUE = 'http://localhost:3333';
 
 @Injectable()
 export class NgrxHttpUrlGenerator extends DefaultHttpUrlGenerator {
-  constructor(@Inject(BASE_API_URL) public readonly baseURL: string) {
-    super(new DefaultPluralizer([]));
+  constructor(
+    @Inject(BASE_API_URL) public readonly baseURL: string,
+    private pluralizer0: Pluralizer
+  ) {
+    super(pluralizer0);
   }
 
   override entityResource(
@@ -152,4 +155,8 @@ const routes: Routes = [
     },
   ],
 })
-export class AppModule {}
+export class AppModule {
+  constructor(private readonly userService: UserService) {
+    this.userService.entities$.subscribe(console.log);
+  }
+}

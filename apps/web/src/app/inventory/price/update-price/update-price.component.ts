@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { IReadPrice } from 'common/inventory/interfaces';
 import { InputOptions, setFormGroupValue } from 'material/form';
 import { PriceService } from '../price.service';
+import { firstValueFrom } from 'rxjs';
 
 import { SkuService } from '../../sku';
 
@@ -88,11 +89,13 @@ export class UpdatePriceComponent implements AfterViewInit {
     this.pricelevelService.getAll();
   }
 
-  ngAfterViewInit(): void {
-    const item = this.priceService.getItemToBeUpdated();
-    if (item) {
-      this.itemToBeUpdated = item;
-      setFormGroupValue(this.formGroup, item);
+  async ngAfterViewInit() {
+    const __item = this.priceService.getItemToBeUpdated();
+    if (__item) {
+      this.itemToBeUpdated = await firstValueFrom(
+        this.priceService.getByKey(__item.id)
+      );
+      setFormGroupValue(this.formGroup, this.itemToBeUpdated);
     }
   }
 

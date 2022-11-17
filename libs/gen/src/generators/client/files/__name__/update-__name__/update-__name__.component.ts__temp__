@@ -14,7 +14,7 @@ import {
   setFormGroupValue,
 } from 'material/form';
 import { <%- classname %>Service } from '../<%- name %>.service';
-
+import { firstValueFrom } from 'rxjs';
 
 
 <% for(const target of new Set(options.Relations?.map(e=>e.target) || [])) { %> 
@@ -134,15 +134,18 @@ formGroup = new FormGroup({
     <% for(const o of options.Relations || []) { %> this.<%- o.name %>Service.getAll();  <% } %>
  
   }
-
-
-  ngAfterViewInit(): void {
-    const item = this.<%- name %>Service.getItemToBeUpdated();
-    if (item) {
-      this.itemToBeUpdated = item;
-      setFormGroupValue(this.formGroup, item);
+  
+  
+  async ngAfterViewInit() {
+    const __item = this.<%- name %>Service.getItemToBeUpdated();
+    if (__item) {
+      this.itemToBeUpdated = await firstValueFrom(
+        this.<%- name %>Service.getByKey(__item.id)
+      );
+      setFormGroupValue(this.formGroup, this.itemToBeUpdated);
     }
   }
+
 
   submit() {
 

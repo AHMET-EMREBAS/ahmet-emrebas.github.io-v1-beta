@@ -1,28 +1,26 @@
 import {
-  FunctionsDto,
-  PaginatorDto,
-  ViewDto,
-  WhereDto,
-} from 'core/dto';
-
-import {
-  BadRequestException,
   Body,
   Controller,
   Delete,
   Get,
   Param,
-  Patch,
   Post,
   Put,
   Query,
+  Patch,
+  BadRequestException,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-
 import {
-  CreateUserDto,
-  UpdateUserDto,
-} from '../../models/user';
+  FunctionsDto,
+  PaginatorDto,
+  QueryDto,
+  ViewDto,
+  WhereDto,
+} from 'core/dto';
+
+import { CreateUserDto, UpdateUserDto } from '../../models/user';
+
 import { UserViewService } from './user-view.service';
 import { UserService } from './user.service';
 
@@ -71,8 +69,6 @@ export class UserController {
 
   @Delete(':id')
   deleteUser(@Param('id') id: number) {
-    console.log('Deleting user : ', id);
-
     return this.service.delete(id);
   }
 

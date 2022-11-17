@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { IReadPricelevel } from 'common/inventory/interfaces';
 import { InputOptions, setFormGroupValue } from 'material/form';
 import { PricelevelService } from '../pricelevel.service';
+import { firstValueFrom } from 'rxjs';
 
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
@@ -45,11 +46,13 @@ export class UpdatePricelevelComponent implements AfterViewInit {
     private readonly route: ActivatedRoute
   ) {}
 
-  ngAfterViewInit(): void {
-    const item = this.pricelevelService.getItemToBeUpdated();
-    if (item) {
-      this.itemToBeUpdated = item;
-      setFormGroupValue(this.formGroup, item);
+  async ngAfterViewInit() {
+    const __item = this.pricelevelService.getItemToBeUpdated();
+    if (__item) {
+      this.itemToBeUpdated = await firstValueFrom(
+        this.pricelevelService.getByKey(__item.id)
+      );
+      setFormGroupValue(this.formGroup, this.itemToBeUpdated);
     }
   }
 

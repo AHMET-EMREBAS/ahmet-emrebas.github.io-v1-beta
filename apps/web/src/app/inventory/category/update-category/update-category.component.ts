@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { IReadCategory } from 'common/inventory/interfaces';
 import { InputOptions, setFormGroupValue } from 'material/form';
 import { CategoryService } from '../category.service';
+import { firstValueFrom } from 'rxjs';
 
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
@@ -45,11 +46,13 @@ export class UpdateCategoryComponent implements AfterViewInit {
     private readonly route: ActivatedRoute
   ) {}
 
-  ngAfterViewInit(): void {
-    const item = this.categoryService.getItemToBeUpdated();
-    if (item) {
-      this.itemToBeUpdated = item;
-      setFormGroupValue(this.formGroup, item);
+  async ngAfterViewInit() {
+    const __item = this.categoryService.getItemToBeUpdated();
+    if (__item) {
+      this.itemToBeUpdated = await firstValueFrom(
+        this.categoryService.getByKey(__item.id)
+      );
+      setFormGroupValue(this.formGroup, this.itemToBeUpdated);
     }
   }
 

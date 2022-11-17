@@ -37,6 +37,8 @@ export class FormComponent implements AfterViewInit {
   @Output() submitEvent = new EventEmitter();
 
   submit() {
+    console.log('[Form Component] submitting');
+
     this.submitEvent.emit();
   }
 

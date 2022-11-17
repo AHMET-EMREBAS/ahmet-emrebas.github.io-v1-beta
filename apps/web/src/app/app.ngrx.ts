@@ -1,10 +1,11 @@
-import { EntityDataModuleConfig } from '@ngrx/data';
-import { IdSelector } from '@ngrx/entity';
+import {
+  EntityDataModuleConfig,
+  EntityMetadata,
+} from '@ngrx/data';
 
-const selectId: IdSelector<any> = (item: any) => {
-  return JSON.stringify(item);
+const defaultMetaData: Partial<EntityMetadata> = {
+  sortComparer: () => 1,
 };
-
 export const entityDataModuleConfig: EntityDataModuleConfig = {
   pluralNames: {
     Product: 'Product',
@@ -20,16 +21,16 @@ export const entityDataModuleConfig: EntityDataModuleConfig = {
     Permission: 'Permission',
   },
   entityMetadata: {
-    Product: { selectId },
-    Category: { selectId },
-    Department: { selectId },
-    Sku: { selectId },
-    Quantity: { selectId },
-    Store: { selectId },
-    Pricelevel: { selectId },
-    Price: { selectId },
-    Message: { selectId },
-    User: { selectId },
-    Permission: { selectId },
+    Product: defaultMetaData,
+    Category: defaultMetaData,
+    Department: defaultMetaData,
+    Sku: defaultMetaData,
+    Quantity: defaultMetaData,
+    Store: defaultMetaData,
+    Pricelevel: defaultMetaData,
+    Price: defaultMetaData,
+    Message: defaultMetaData,
+    User: defaultMetaData,
+    Permission: defaultMetaData,
   },
 };

@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { IReadPermission } from 'common/inventory/interfaces';
 import { InputOptions, setFormGroupValue } from 'material/form';
 import { PermissionService } from '../permission.service';
+import { firstValueFrom } from 'rxjs';
 
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
@@ -61,11 +62,13 @@ export class UpdatePermissionComponent implements AfterViewInit {
     private readonly route: ActivatedRoute
   ) {}
 
-  ngAfterViewInit(): void {
-    const item = this.permissionService.getItemToBeUpdated();
-    if (item) {
-      this.itemToBeUpdated = item;
-      setFormGroupValue(this.formGroup, item);
+  async ngAfterViewInit() {
+    const __item = this.permissionService.getItemToBeUpdated();
+    if (__item) {
+      this.itemToBeUpdated = await firstValueFrom(
+        this.permissionService.getByKey(__item.id)
+      );
+      setFormGroupValue(this.formGroup, this.itemToBeUpdated);
     }
   }
 

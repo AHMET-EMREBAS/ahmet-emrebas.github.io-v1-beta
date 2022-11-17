@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { IReadUser } from 'common/inventory/interfaces';
 import { InputOptions, setFormGroupValue } from 'material/form';
 import { UserService } from '../user.service';
+import { firstValueFrom } from 'rxjs';
 
 import { PermissionService } from '../../permission';
 
@@ -73,11 +74,13 @@ export class UpdateUserComponent implements AfterViewInit {
     this.permissionService.getAll();
   }
 
-  ngAfterViewInit(): void {
-    const item = this.userService.getItemToBeUpdated();
-    if (item) {
-      this.itemToBeUpdated = item;
-      setFormGroupValue(this.formGroup, item);
+  async ngAfterViewInit() {
+    const __item = this.userService.getItemToBeUpdated();
+    if (__item) {
+      this.itemToBeUpdated = await firstValueFrom(
+        this.userService.getByKey(__item.id)
+      );
+      setFormGroupValue(this.formGroup, this.itemToBeUpdated);
     }
   }
 
