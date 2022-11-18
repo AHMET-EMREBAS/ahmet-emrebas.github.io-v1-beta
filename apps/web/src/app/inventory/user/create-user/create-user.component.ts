@@ -1,12 +1,21 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import {
+  Component,
+  OnInit,
+} from '@angular/core';
+import {
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import {
+  ActivatedRoute,
+  Router,
+} from '@angular/router';
 
 import { InputOptions } from 'material/form';
 
-import { UserService } from '../user.service';
-
 import { PermissionService } from '../../permission';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'ae-create-user',
@@ -21,7 +30,6 @@ export class CreateUserComponent implements OnInit {
 
     password: new FormControl('', [
       Validators.required,
-
       Validators.pattern(/[A-Z]{1,}/),
       Validators.pattern(/[a-z]{1,}/),
       Validators.pattern(/[0-9]{1,}/),
@@ -88,6 +96,10 @@ export class CreateUserComponent implements OnInit {
 
           permission: this.value('permission')?.id,
         });
+      } else {
+        this.submitted = false;
+        console.log(this.formGroup.errors);
+        alert('Form is not valid!');
       }
     }
   }

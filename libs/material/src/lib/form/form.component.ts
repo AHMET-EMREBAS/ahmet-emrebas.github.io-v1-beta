@@ -74,4 +74,8 @@ export class FormComponent implements AfterViewInit {
 
     return fType;
   }
+
+  getFirstError(fieldName: string) {
+    return Object.entries(this.formGroup.get(fieldName)?.errors || {})[0];
+  }
 }

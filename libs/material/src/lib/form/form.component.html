@@ -1,26 +1,31 @@
 <div class="info" *ngIf="!formGroup">FormGroup is not provided!</div>
 
 
-<form class="ae-form flex flex-column gap-5 " *ngIf="formGroup" [formGroup]="formGroup" (ngSubmit)="submit()"
-    [noValidate]="false">
+<form #form="ngForm" class="ae-form flex flex-column gap-5 " *ngIf="formGroup" [formGroup]="formGroup"
+    (ngSubmit)="submit()" [noValidate]="false" autocomplete="off">
     <div class="flex flex-column  justify-content-start align-items-start" *ngFor=" let field of fields">
         <label [for]="field.name + '-input'">{{field.placeholder | titlecase}} </label>
-        <ng-container *ngIf="['text', 'date', 'datetime', 'range', 'email', 'password'].includes(field.type || 'text')">
-            <input [id]="field.name + '-input'" [formControlName]="field.name!" [type]="fieldType(field.type)"
-                [attr.required]="field.required" [attr.minlength]="field.minLength" [attr.maxlength]="field.maxLength"
-                [attr.min]="field.min" [attr.max]="field.max">
+        <ng-container *ngIf="['text', 'date', 'datetime', 'range', 'email'].includes(field.type || 'text')">
+            <input pInputText [id]="field.name + '-input'" [formControlName]="field.name!"
+                [type]="fieldType(field.type)" [attr.required]="field.required" [attr.minlength]="field.minLength"
+                [attr.maxlength]="field.maxLength" [attr.min]="field.min" [attr.max]="field.max">
+        </ng-container>
+
+        <ng-container *ngIf="['password'].includes(field.type || 'text')">
+            <ae-password class="w-full" [formGroup]="formGroup"></ae-password>
         </ng-container>
 
         <ng-container *ngIf="field.type ==='number'">
-            <p-inputNumber [id]="field.name + '-input'" [formControlName]="field.name!" [attr.required]="field.required"
-                [attr.min]="field.min" [attr.max]="field.max" [minFractionDigits]="2">
+            <p-inputNumber styleClass="w-full" class="w-full" [id]="field.name + '-input'"
+                [formControlName]="field.name!" [attr.required]="field.required" [attr.min]="field.min"
+                [attr.max]="field.max" [minFractionDigits]="2">
             </p-inputNumber>
         </ng-container>
 
         <ng-container *ngIf="field.type ==='currency'">
-            <p-inputNumber [id]="field.name + '-input'" [formControlName]="field.name!" [attr.required]="field.required"
-                [attr.min]="field.min" [attr.max]="field.max" inputId="locale-us" mode="decimal" locale="en-US"
-                [minFractionDigits]="2">
+            <p-inputNumber styleClass="w-full" class="w-full" [id]="field.name + '-input'"
+                [formControlName]="field.name!" [attr.required]="field.required" [attr.min]="field.min"
+                [attr.max]="field.max" inputId="locale-us" mode="decimal" locale="en-US" [minFractionDigits]="2">
             </p-inputNumber>
         </ng-container>
 
@@ -50,6 +55,17 @@
                 [filterBy]="field.optionLabel!" [showClear]="true"></p-multiSelect>
 
         </ng-container>
+
+        <div class="invalid" *ngIf="form.submitted">
+            <span *ngIf="getFirstError(field.name) as error">
+                <span>{{ error | json}}</span>
+                <span *ngIf="error[0] ==='required'"> Field is required! </span>
+                <span *ngIf="error[0] ==='email'"> Field is must be a valid email! </span>
+                <span *ngIf="error[0] ==='pattern'"> Field is must meet the required pattern! </span>
+                <span *ngIf="error[0] ==='minlength'"> Field is must be at least x character long! </span>
+                <span *ngIf="error[0] ==='maxlength'"> Field is must be at most x character long! </span>
+            </span>
+        </div>
     </div>
 
     <p-button type="submit" label="Submit"></p-button>

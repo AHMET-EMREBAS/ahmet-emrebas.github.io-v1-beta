@@ -16,9 +16,10 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { RadioButtonModule } from 'primeng/radiobutton';
 
 import { FormComponent } from './form.component';
+import { PasswordComponent } from './password/password.component';
 
 @NgModule({
-  declarations: [FormComponent],
+  declarations: [FormComponent, PasswordComponent],
   imports: [
     CommonModule,
     SharedModule,
