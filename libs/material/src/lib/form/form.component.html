@@ -2,7 +2,7 @@
 
 
 <form #form="ngForm" class="ae-form flex flex-column gap-5 " *ngIf="formGroup" [formGroup]="formGroup"
-    (ngSubmit)="submit()" [noValidate]="false" autocomplete="off">
+    (ngSubmit)="submit()" [noValidate]="false">
     <div class="flex flex-column  justify-content-start align-items-start" *ngFor=" let field of fields">
         <label [for]="field.name + '-input'">{{field.placeholder | titlecase}} </label>
         <ng-container *ngIf="['text', 'date', 'datetime', 'range', 'email'].includes(field.type || 'text')">
@@ -12,8 +12,9 @@
         </ng-container>
 
         <ng-container *ngIf="['password'].includes(field.type || 'text')">
-            <ae-password class="w-full" [formGroup]="formGroup"></ae-password>
+            <ae-password class="w-full" [formGroup]="formGroup" [field]="field"></ae-password>
         </ng-container>
+
 
         <ng-container *ngIf="field.type ==='number'">
             <p-inputNumber styleClass="w-full" class="w-full" [id]="field.name + '-input'"
@@ -56,7 +57,7 @@
 
         </ng-container>
 
-        <div class="invalid" *ngIf="form.submitted">
+        <!-- <div class="invalid" *ngIf="form.submitted">
             <span *ngIf="getFirstError(field.name) as error">
                 <span>{{ error | json}}</span>
                 <span *ngIf="error[0] ==='required'"> Field is required! </span>
@@ -65,7 +66,7 @@
                 <span *ngIf="error[0] ==='minlength'"> Field is must be at least x character long! </span>
                 <span *ngIf="error[0] ==='maxlength'"> Field is must be at most x character long! </span>
             </span>
-        </div>
+        </div> -->
     </div>
 
     <p-button type="submit" label="Submit"></p-button>

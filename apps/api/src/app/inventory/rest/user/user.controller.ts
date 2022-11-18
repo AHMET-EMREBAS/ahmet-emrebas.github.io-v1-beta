@@ -1,31 +1,30 @@
 import {
-  Body,
-  Controller,
-  Delete,
-  Get,
-  Param,
-  Post,
-  Put,
-  Query,
-  Patch,
-  BadRequestException,
-} from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
-import {
   FunctionsDto,
   PaginatorDto,
-  QueryDto,
   ViewDto,
   WhereDto,
 } from 'core/dto';
 
 import {
-  User,
-  UserView,
+  BadRequestException,
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+  Put,
+  Query,
+} from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
+
+import {
   CreateUserDto,
   UpdateUserDto,
+  User,
+  UserView,
 } from '../../models/user';
-
 import { UserViewService } from './user-view.service';
 import { UserService } from './user.service';
 
@@ -64,6 +63,8 @@ export class UserController {
 
   @Post()
   writeUser(@Body() body: CreateUserDto) {
+    console.log(body);
+
     return this.service.save(body);
   }
 
