@@ -15,6 +15,7 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { InventoryModule } from './inventory';
+import { ProductSubscriber } from './inventory/rest/product';
 
 @Module({
   imports: [
@@ -31,7 +32,7 @@ import { InventoryModule } from './inventory';
       type: 'better-sqlite3',
       database: 'tmp/database/main.sqlite',
       autoLoadEntities: true,
-      subscribers: [],
+      subscribers: [ProductSubscriber],
       synchronize: true,
       dropSchema: true,
     }),

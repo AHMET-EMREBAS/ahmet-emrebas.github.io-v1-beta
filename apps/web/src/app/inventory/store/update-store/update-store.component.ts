@@ -34,6 +34,7 @@ export class UpdateStoreComponent implements AfterViewInit, OnInit {
     {
       name: 'name',
       type: 'text',
+      group: 'Primary',
       placeholder: 'name',
 
       required: true,
@@ -46,6 +47,7 @@ export class UpdateStoreComponent implements AfterViewInit, OnInit {
     {
       name: 'pricelevel',
       type: 'select',
+      group: 'Primary',
       placeholder: 'pricelevel',
       asyncOptions: this.pricelevelService.entities$,
       optionValue: 'id',

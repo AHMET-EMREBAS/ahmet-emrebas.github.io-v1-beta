@@ -1,10 +1,8 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-import {
-  Category,
-  CategoryView,
-} from '../../models/category';
+import { Category, CategoryView } from '../../models/category';
+
 import { CategoryViewService } from './category-view.service';
 import { CategoryController } from './category.controller';
 import { CategoryResolver } from './category.resolver';

@@ -21,6 +21,7 @@ type IoExtra<T> = {
   max: number;
   password: boolean;
   email: boolean;
+  group: string;
 };
 
 type IoRequired = {

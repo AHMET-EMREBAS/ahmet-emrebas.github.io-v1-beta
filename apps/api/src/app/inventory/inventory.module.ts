@@ -126,7 +126,6 @@ export class InventoryModule implements OnModuleInit {
     ]) {
       await this.priceLevelService.save({ name: e });
     }
-
     for (const e of [
       'Main',
       'Houston Retail Store ',
@@ -140,7 +139,6 @@ export class InventoryModule implements OnModuleInit {
         password: 'Password124!$',
       });
     }
-
     for (const e of [
       'PRODUCT',
       'USER',
@@ -163,7 +161,6 @@ export class InventoryModule implements OnModuleInit {
         description: `Read ${e.toLowerCase()}`,
       });
     }
-
     for (const user of [1, 2]) {
       for (let i = 1; i < 21; i++) {
         try {
@@ -173,7 +170,6 @@ export class InventoryModule implements OnModuleInit {
         }
       }
     }
-
     for (let i = 0; i < 50; i++) {
       let cat: any;
       let dep: any;
@@ -189,7 +185,6 @@ export class InventoryModule implements OnModuleInit {
       } catch (err) {
         // ignore
       }
-
       for (let j = 0; j < 5; j++) {
         try {
           await this.productService.save({
@@ -197,6 +192,8 @@ export class InventoryModule implements OnModuleInit {
             description: commerce.productDescription(),
             category: cat,
             department: dep,
+            price: 100,
+            cost: 100,
           });
         } catch (err) {
           //

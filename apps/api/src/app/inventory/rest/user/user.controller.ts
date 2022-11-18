@@ -85,13 +85,13 @@ export class UserController {
     throw new BadRequestException('Must provide a fucntion name.');
   }
 
-  @Post(':id//:rid')
+  @Post(':id/permission/:rid')
   addpermissionToUser(id: number, rid: number) {
-    return this.service.add(id, rid, '');
+    return this.service.add(id, rid, 'permission');
   }
 
-  @Post(':id//:rid')
+  @Post(':id/permission/:rid')
   removepermissionFromUser(id: number, rid: number) {
-    return this.service.remove(id, rid, '');
+    return this.service.remove(id, rid, 'permission');
   }
 }

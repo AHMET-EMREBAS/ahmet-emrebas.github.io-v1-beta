@@ -2,6 +2,13 @@ import {
   EntitySubscriberInterface,
   EventSubscriber,
 } from 'typeorm';
+import {<%- classname %>} from '../../models/<%- name %>';
 
 @EventSubscriber()
-export class <%- classname %>Subscriber implements EntitySubscriberInterface {}
+export class <%- classname %>Subscriber implements EntitySubscriberInterface {
+
+   listenTo() {
+    return <%- classname %>;
+  }
+
+}

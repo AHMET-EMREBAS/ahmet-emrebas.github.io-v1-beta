@@ -36,6 +36,7 @@ export class CreateQuantityComponent implements OnInit {
     {
       name: 'quantity',
       type: 'number',
+      group: 'Primary',
       placeholder: 'quantity',
 
       required: true,
@@ -48,6 +49,7 @@ export class CreateQuantityComponent implements OnInit {
     {
       name: 'sku',
       type: 'select',
+      group: 'Primary',
       placeholder: 'sku',
       asyncOptions: this.skuService.entities$,
       optionValue: 'id',
@@ -59,6 +61,7 @@ export class CreateQuantityComponent implements OnInit {
     {
       name: 'store',
       type: 'select',
+      group: 'Primary',
       placeholder: 'store',
       asyncOptions: this.storeService.entities$,
       optionValue: 'id',

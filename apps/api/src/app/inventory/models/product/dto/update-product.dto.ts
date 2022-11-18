@@ -28,6 +28,28 @@ export class UpdateProductDto
 
   @Field()
   @Validations({
+    type: 'number',
+
+    min: 0,
+
+    max: 99999999999999,
+  })
+  @Expose()
+  price: number;
+
+  @Field()
+  @Validations({
+    type: 'number',
+
+    min: 0,
+
+    max: 99999999999999,
+  })
+  @Expose()
+  cost: number;
+
+  @Field()
+  @Validations({
     type: 'string',
 
     minLength: 0,

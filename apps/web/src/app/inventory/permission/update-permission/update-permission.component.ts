@@ -36,6 +36,7 @@ export class UpdatePermissionComponent implements AfterViewInit, OnInit {
     {
       name: 'name',
       type: 'text',
+      group: 'Primary',
       placeholder: 'name',
 
       required: true,
@@ -48,6 +49,7 @@ export class UpdatePermissionComponent implements AfterViewInit, OnInit {
     {
       name: 'description',
       type: 'text',
+      group: 'Primary',
       placeholder: 'description',
 
       minLength: 0,

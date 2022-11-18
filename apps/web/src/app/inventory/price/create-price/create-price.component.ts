@@ -40,6 +40,7 @@ export class CreatePriceComponent implements OnInit {
     {
       name: 'price',
       type: 'number',
+      group: 'Primary',
       placeholder: 'price',
 
       min: 0,
@@ -50,6 +51,7 @@ export class CreatePriceComponent implements OnInit {
     {
       name: 'cost',
       type: 'number',
+      group: 'Primary',
       placeholder: 'cost',
 
       min: 0,
@@ -60,6 +62,7 @@ export class CreatePriceComponent implements OnInit {
     {
       name: 'sku',
       type: 'select',
+      group: 'Primary',
       placeholder: 'sku',
       asyncOptions: this.skuService.entities$,
       optionValue: 'id',
@@ -69,6 +72,7 @@ export class CreatePriceComponent implements OnInit {
     {
       name: 'pricelevel',
       type: 'select',
+      group: 'Primary',
       placeholder: 'pricelevel',
       asyncOptions: this.pricelevelService.entities$,
       optionValue: 'id',

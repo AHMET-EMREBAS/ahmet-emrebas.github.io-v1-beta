@@ -48,6 +48,7 @@ export class UpdateSkuComponent implements AfterViewInit, OnInit {
     {
       name: 'name',
       type: 'text',
+      group: 'Primary',
       placeholder: 'name',
 
       required: true,
@@ -60,6 +61,7 @@ export class UpdateSkuComponent implements AfterViewInit, OnInit {
     {
       name: 'barcode',
       type: 'text',
+      group: 'Primary',
       placeholder: 'barcode',
 
       required: true,
@@ -72,6 +74,7 @@ export class UpdateSkuComponent implements AfterViewInit, OnInit {
     {
       name: 'description',
       type: 'textarea',
+      group: 'Primary',
       placeholder: 'description',
 
       minLength: 0,
@@ -82,6 +85,7 @@ export class UpdateSkuComponent implements AfterViewInit, OnInit {
     {
       name: 'product',
       type: 'select',
+      group: 'Primary',
       placeholder: 'product',
       asyncOptions: this.productService.entities$,
       optionValue: 'id',

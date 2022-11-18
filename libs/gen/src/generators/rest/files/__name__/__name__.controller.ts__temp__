@@ -101,14 +101,14 @@ export class <%- classname %>Controller {
             }
       <% } else { %> 
 
-            @Post(':id/<% r.name %>/:rid')
+            @Post(':id/<%- r.name %>/:rid')
             add<%- r.name %>To<%- classname %>(id: number, rid: number) {
-              return this.service.add(id, rid, '<% r.name %>');
+              return this.service.add(id, rid, '<%- r.name %>');
             }
 
-            @Post(':id/<% r.name %>/:rid')
+            @Post(':id/<%- r.name %>/:rid')
             remove<%- r.name %>From<%- classname %>(id: number, rid: number) {
-              return this.service.remove(id, rid, '<% r.name %>');
+              return this.service.remove(id, rid, '<%- r.name %>');
             }
 
       <% } %>

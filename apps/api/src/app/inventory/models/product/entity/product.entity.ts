@@ -29,6 +29,14 @@ export class Product
   name: string;
 
   @Field()
+  @Column({ type: 'numeric', nullable: true, unique: false })
+  price: number;
+
+  @Field()
+  @Column({ type: 'numeric', nullable: true, unique: false })
+  cost: number;
+
+  @Field()
   @Column({ type: 'text', nullable: true, unique: false })
   description: string;
 

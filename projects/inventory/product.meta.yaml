@@ -14,6 +14,32 @@ Properties:
     Defination:
       commerce: productName
 
+  - Property: price
+    Validation:
+      type: number
+      min: 0
+      max: 99999999999999
+    Column:
+      columnType: numeric
+      valueType: number
+
+    UI:
+      type: currency
+      group: Price
+
+  - Property: cost
+    Validation:
+      type: number
+      min: 0
+      max: 99999999999999
+    Column:
+      columnType: numeric
+      valueType: number
+
+    UI:
+      type: currency
+      group: Price
+
   - Property: description
     Description: Product description
     Defination:
@@ -30,6 +56,7 @@ Properties:
 
 Relations:
   - type: ManyToOne
+    group: Meta
     target: Category
     name: category
     eager: true
@@ -42,6 +69,7 @@ Relations:
         valueType: string
 
   - type: ManyToOne
+    group: Meta
     target: Department
     name: department
     eager: true

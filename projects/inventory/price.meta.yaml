@@ -11,6 +11,7 @@ Properties:
       max: 999999999999
     Column:
       columnType: numeric
+      default: 0
       valueType: number
     UI:
       type: number
@@ -25,6 +26,7 @@ Properties:
       max: 999999999999
     Column:
       columnType: numeric
+      default: 0
       valueType: number
     UI:
       type: number

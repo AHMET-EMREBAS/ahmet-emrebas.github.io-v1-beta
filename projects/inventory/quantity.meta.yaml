@@ -12,6 +12,7 @@ Properties:
 
     Column:
       columnType: int
+      default: 0
       valueType: number
 
     UI:

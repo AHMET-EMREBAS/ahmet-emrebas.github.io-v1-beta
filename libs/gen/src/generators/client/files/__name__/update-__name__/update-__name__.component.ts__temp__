@@ -92,6 +92,7 @@ formGroup = new FormGroup({
     {
       name: '<%- f.Property %>', 
       type: '<%- f.UI.type %>',  
+      group: '<%- f.UI.group || 'Primary' %>',  
       placeholder: '<%- f.Label || f.Property %>', 
       <% if(options.Required?.includes(f.Property)) { %> 
             required:true,
@@ -109,7 +110,9 @@ formGroup = new FormGroup({
 
     {
       name: '<%- r.name %>', 
-      type: 'select',  placeholder: '<%- r.label || r.name %>',           
+      type: <% if(r.type.endsWith('Many')) { %>  'select-many' <% } else { %> 'select' <% } %>, 
+      group: '<%- r.group || 'Primary' %>',  
+      placeholder: '<%- r.label || r.name %>',           
       asyncOptions:  this.<%- r.target.toLowerCase() %>Service.entities$,
       optionValue:'id', 
       optionLabel: 'name',

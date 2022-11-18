@@ -10,6 +10,9 @@
       "type": "string",
       "$ref": "../names/resource.schema.json"
     },
+    "group": {
+      "type": "string"
+    },
     "name": {
       "type": "string"
     },

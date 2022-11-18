@@ -1,14 +1,27 @@
 <div class="info" *ngIf="!formGroup">FormGroup is not provided!</div>
 
+
 <form class="ae-form flex flex-column gap-5 " *ngIf="formGroup" [formGroup]="formGroup" (ngSubmit)="submit()"
     [noValidate]="false">
     <div class="flex flex-column  justify-content-start align-items-start" *ngFor=" let field of fields">
         <label [for]="field.name + '-input'">{{field.placeholder | titlecase}} </label>
-        <ng-container
-            *ngIf="['text', 'number', 'date', 'datetime', 'range', 'email', 'password'].includes(field.type || 'text')">
+        <ng-container *ngIf="['text', 'date', 'datetime', 'range', 'email', 'password'].includes(field.type || 'text')">
             <input [id]="field.name + '-input'" [formControlName]="field.name!" [type]="fieldType(field.type)"
                 [attr.required]="field.required" [attr.minlength]="field.minLength" [attr.maxlength]="field.maxLength"
                 [attr.min]="field.min" [attr.max]="field.max">
+        </ng-container>
+
+        <ng-container *ngIf="field.type ==='number'">
+            <p-inputNumber [id]="field.name + '-input'" [formControlName]="field.name!" [attr.required]="field.required"
+                [attr.min]="field.min" [attr.max]="field.max" [minFractionDigits]="2">
+            </p-inputNumber>
+        </ng-container>
+
+        <ng-container *ngIf="field.type ==='currency'">
+            <p-inputNumber [id]="field.name + '-input'" [formControlName]="field.name!" [attr.required]="field.required"
+                [attr.min]="field.min" [attr.max]="field.max" inputId="locale-us" mode="decimal" locale="en-US"
+                [minFractionDigits]="2">
+            </p-inputNumber>
         </ng-container>
 
         <ng-container *ngIf="field.type ==='checkbox'">
@@ -29,6 +42,13 @@
                 [formControlName]="field.name!" [optionLabel]="field.optionLabel!" [filter]="true"
                 [filterBy]="field.optionLabel!" [showClear]="true">
             </p-dropdown>
+        </ng-container>
+
+        <ng-container *ngIf="field.type ==='select-many'">
+            <p-multiSelect styleClass="w-full" class="w-full" [options]="(getOptions(field.name!) | async)!"
+                [formControlName]="field.name!" [optionLabel]="field.optionLabel!" [filter]="true"
+                [filterBy]="field.optionLabel!" [showClear]="true"></p-multiSelect>
+
         </ng-container>
     </div>
 

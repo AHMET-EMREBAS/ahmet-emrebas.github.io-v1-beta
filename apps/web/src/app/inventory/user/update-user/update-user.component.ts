@@ -38,6 +38,7 @@ export class UpdateUserComponent implements AfterViewInit, OnInit {
     {
       name: 'username',
       type: 'email',
+      group: 'Primary',
       placeholder: 'username',
 
       required: true,
@@ -48,6 +49,7 @@ export class UpdateUserComponent implements AfterViewInit, OnInit {
     {
       name: 'password',
       type: 'password',
+      group: 'Primary',
       placeholder: 'password',
 
       required: true,
@@ -57,7 +59,8 @@ export class UpdateUserComponent implements AfterViewInit, OnInit {
 
     {
       name: 'permission',
-      type: 'select',
+      type: 'select-many',
+      group: 'Primary',
       placeholder: 'permission',
       asyncOptions: this.permissionService.entities$,
       optionValue: 'id',

@@ -28,6 +28,7 @@ export class CreateCategoryComponent implements OnInit {
     {
       name: 'name',
       type: 'text',
+      group: 'Primary',
       placeholder: 'name',
 
       required: true,

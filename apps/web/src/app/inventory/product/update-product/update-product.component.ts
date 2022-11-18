@@ -29,6 +29,18 @@ export class UpdateProductComponent implements AfterViewInit, OnInit {
       Validators.maxLength(50),
     ]),
 
+    price: new FormControl('', [
+      Validators.min(0),
+
+      Validators.max(99999999999999),
+    ]),
+
+    cost: new FormControl('', [
+      Validators.min(0),
+
+      Validators.max(99999999999999),
+    ]),
+
     description: new FormControl('', [
       Validators.minLength(0),
 
@@ -44,6 +56,7 @@ export class UpdateProductComponent implements AfterViewInit, OnInit {
     {
       name: 'name',
       type: 'text',
+      group: 'Primary',
       placeholder: 'name',
 
       required: true,
@@ -54,8 +67,31 @@ export class UpdateProductComponent implements AfterViewInit, OnInit {
     },
 
     {
+      name: 'price',
+      type: 'currency',
+      group: 'Price',
+      placeholder: 'price',
+
+      min: 0,
+
+      max: 99999999999999,
+    },
+
+    {
+      name: 'cost',
+      type: 'currency',
+      group: 'Price',
+      placeholder: 'cost',
+
+      min: 0,
+
+      max: 99999999999999,
+    },
+
+    {
       name: 'description',
       type: 'textarea',
+      group: 'Primary',
       placeholder: 'description',
 
       minLength: 0,
@@ -66,6 +102,7 @@ export class UpdateProductComponent implements AfterViewInit, OnInit {
     {
       name: 'category',
       type: 'select',
+      group: 'Meta',
       placeholder: 'category',
       asyncOptions: this.categoryService.entities$,
       optionValue: 'id',
@@ -75,6 +112,7 @@ export class UpdateProductComponent implements AfterViewInit, OnInit {
     {
       name: 'department',
       type: 'select',
+      group: 'Meta',
       placeholder: 'department',
       asyncOptions: this.departmentService.entities$,
       optionValue: 'id',
@@ -112,6 +150,10 @@ export class UpdateProductComponent implements AfterViewInit, OnInit {
         id: this.itemToBeUpdated.id,
 
         name: this.value('name'),
+
+        price: this.value('price'),
+
+        cost: this.value('cost'),
 
         description: this.value('description'),
 
