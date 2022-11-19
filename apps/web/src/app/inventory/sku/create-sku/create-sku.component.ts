@@ -1,12 +1,21 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import {
+  Component,
+  OnInit,
+} from '@angular/core';
+import {
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import {
+  ActivatedRoute,
+  Router,
+} from '@angular/router';
 
 import { InputOptions } from 'material/form';
 
-import { SkuService } from '../sku.service';
-
 import { ProductService } from '../../product';
+import { SkuService } from '../sku.service';
 
 @Component({
   selector: 'ae-create-sku',
@@ -88,7 +97,6 @@ export class CreateSkuComponent implements OnInit {
       asyncOptions: this.productService.entities$,
       optionValue: 'id',
       optionLabel: 'name',
-
       required: true,
     },
   ];
