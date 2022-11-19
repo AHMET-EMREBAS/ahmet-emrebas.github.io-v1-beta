@@ -68,7 +68,7 @@ export class Update<%- classname %>Dto
   <% if(o.Validation?.maxLength) { %> @MaxLength(<%- o.Validation.maxLength %>) <% } %>
   <% if(o.Validation?.min) { %> @Min(<%- o.Validation.min %>) <% } %>
   <% if(o.Validation?.max) { %> @Max(<%- o.Validation.max %>) <% } %>
-  <% if(o.Validation?.email) { %> @IsEmail(<%- o.Validation.email %>) <% } %>
+  <% if(o.Validation?.email) { %> @IsEmail() <% } %>
   <% if(options.Required?.includes(o.name)) { %> @IsNotEmpty() <% } else { %> @IsOptional()<% } %>
   @Expose()
   <%- o.Property %>: <%- o.Column.valueType %>;

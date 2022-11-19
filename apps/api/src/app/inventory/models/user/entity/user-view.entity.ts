@@ -26,7 +26,7 @@ import { Permission } from '../../permission';
 
       .addSelect('user.password', 'password')
 
-      .addSelect('permission.name', 'permission')
+      .addSelect('permission.description', 'permission')
 
       .from(User, 'user')
 

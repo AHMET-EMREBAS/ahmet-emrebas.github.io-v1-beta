@@ -66,7 +66,7 @@ export class CreateUserComponent implements OnInit {
       placeholder: 'permission',
       asyncOptions: this.permissionService.entities$,
       optionValue: 'id',
-      optionLabel: 'name',
+      optionLabel: 'description',
     },
   ];
 
@@ -78,7 +78,7 @@ export class CreateUserComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.permissionService.getAsOptions(['id', 'name']);
+    this.permissionService.getAsOptions(['id', 'description']);
   }
 
   submit() {

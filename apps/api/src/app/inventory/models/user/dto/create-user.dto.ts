@@ -27,7 +27,7 @@ export class CreateUserDto implements IUser<ID[]> {
     required: false,
     nullable: true,
   })
-  @IsEmail(true)
+  @IsEmail()
   @IsOptional()
   @Expose()
   username: string;

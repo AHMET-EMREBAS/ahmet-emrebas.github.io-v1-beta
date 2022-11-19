@@ -80,7 +80,7 @@ export class UpdateUserComponent implements AfterViewInit, OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.permissionService.getAsOptions(['id', 'name']);
+    this.permissionService.getAsOptions(['id', 'description']);
   }
 
   async ngAfterViewInit() {
