@@ -15,7 +15,6 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { InventoryModule } from './inventory';
-import { SkuService } from './inventory/rest/sku';
 import { ProductBuilderSubscriber } from './inventory/subscribers';
 
 @Module({
@@ -71,6 +70,6 @@ import { ProductBuilderSubscriber } from './inventory/subscribers';
     }),
     InventoryModule,
   ],
-  providers: [SkuService, ProductBuilderSubscriber],
+  providers: [ProductBuilderSubscriber],
 })
 export class AppModule {}

@@ -46,30 +46,27 @@
 
 
         <ng-container *ngIf="field.type ==='select'">
-            <p-dropdown styleClass="w-full" class="w-full" [options]="(getOptions(field.name!) | async)!"
+            <p-dropdown #dropdownRef styleClass="w-full" class="w-full" [options]="(getOptions(field.name!) | async)!"
                 [formControlName]="field.name!" [optionLabel]="field.optionLabel!" [filter]="true"
-                [filterBy]="field.optionLabel!" [showClear]="true" [dataKey]="'id'">
+                [filterBy]="field.optionLabel!" [showClear]="true" [dataKey]="'id'" (onChange)="refInput.value =$event">
             </p-dropdown>
+
+            <input #refInput [formControlName]="field.name!" class="hidden-input" [attr.required]="field.required"
+                (focus)="dropdownRef.focus()">
         </ng-container>
 
         <ng-container *ngIf="field.type ==='select-many'">
+
             <p-multiSelect #selectRef styleClass="w-full" class="w-full" [options]="(getOptions(field.name!) | async)!"
                 [formControlName]="field.name!" [optionLabel]="field.optionLabel!" [filter]="true"
-                [filterBy]="field.optionLabel!" [showClear]="true" display="chip" [dataKey]="'id'">
+                [filterBy]="field.optionLabel!" [showClear]="true" display="chip" [dataKey]="'id'"
+                (onChange)="refInput.value =$event">
             </p-multiSelect>
 
+            <input #refInput [formControlName]="field.name!" class="hidden-input" [attr.required]="field.required"
+                (focus)="selectRef.focus = true">
         </ng-container>
 
-        <!-- <div class="invalid" *ngIf="form.submitted">
-            <span *ngIf="getFirstError(field.name) as error">
-                <span>{{ error | json}}</span>
-                <span *ngIf="error[0] ==='required'"> Field is required! </span>
-                <span *ngIf="error[0] ==='email'"> Field is must be a valid email! </span>
-                <span *ngIf="error[0] ==='pattern'"> Field is must meet the required pattern! </span>
-                <span *ngIf="error[0] ==='minlength'"> Field is must be at least x character long! </span>
-                <span *ngIf="error[0] ==='maxlength'"> Field is must be at most x character long! </span>
-            </span>
-        </div> -->
     </div>
 
     <p-button type="submit" label="Submit"></p-button>

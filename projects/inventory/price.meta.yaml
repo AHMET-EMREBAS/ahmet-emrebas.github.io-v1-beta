@@ -44,7 +44,7 @@ Relations:
     target: Sku
     name: sku
     eager: true
-    onDelete: SET NULL
+    onDelete: CASCADE
     nullable: true
     joinColumn: true
     viewColumns:
@@ -60,7 +60,7 @@ Relations:
     target: Pricelevel
     name: pricelevel
     nullable: true
-    onDelete: SET NULL
+    onDelete: CASCADE
     eager: true
     joinColumn: true
     viewColumns:

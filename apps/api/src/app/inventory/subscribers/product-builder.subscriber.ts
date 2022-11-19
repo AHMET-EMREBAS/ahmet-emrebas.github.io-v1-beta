@@ -3,6 +3,7 @@ import {
   EntitySubscriberInterface,
   EventSubscriber,
   InsertEvent,
+  UpdateEvent,
 } from 'typeorm';
 
 import { Injectable } from '@nestjs/common';
@@ -63,11 +64,15 @@ export class ProductBuilderSubscriber implements EntitySubscriberInterface {
           price: entity.price || 0,
           cost: entity.cost || 0,
           sku: { id: sku.id },
-          priceLevel: { id: p.id },
+          pricelevel: { id: p.id },
         });
       } catch (err) {
         console.log(err);
       }
     }
+  }
+
+  afterUpdate(event: UpdateEvent<any>): void | Promise<any> {
+    console.log('Updating ... ');
   }
 }

@@ -1,3 +1,4 @@
 import { IUser } from './user.interface';
+import { IID } from '../../../base';
 
-export type ICreateUser = IUser<{ id: number }[]>;
+export type ICreateUser = IUser<IID[]>;

@@ -1,3 +1,4 @@
 import { IStore } from './store.interface';
+import { IID } from '../../../base';
 
-export type ICreateStore = IStore<number>;
+export type ICreateStore = IStore<IID>;

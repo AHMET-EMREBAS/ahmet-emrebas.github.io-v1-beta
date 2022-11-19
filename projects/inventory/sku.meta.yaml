@@ -49,7 +49,7 @@ Relations:
     name: product
     eager: true
     joinColumn: true
-    onDelete: SET NULL
+    onDelete: CASCADE
     viewColumns:
       - column: name
         as: product

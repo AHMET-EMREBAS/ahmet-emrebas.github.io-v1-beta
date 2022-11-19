@@ -8,6 +8,7 @@ import {
 import { FormGroup } from '@angular/forms';
 
 import {
+  map,
   Observable,
   of,
 } from 'rxjs';
@@ -64,7 +65,17 @@ export class FormComponent implements AfterViewInit {
 
   getOptions(name: string) {
     const found = this.fields.find((e) => e.name === name);
-    return found?.options ? of(found.options) : found?.asyncOptions;
+    return found?.options
+      ? of([
+          { [found.optionLabel || 'name']: `Select ${name}` },
+          ...found.options,
+        ])
+      : found?.asyncOptions?.pipe(
+          map((data: any) => [
+            { [found.optionLabel || 'name']: `Select ${name}` },
+            ...data,
+          ])
+        );
   }
 
   fieldType(fType: string) {
