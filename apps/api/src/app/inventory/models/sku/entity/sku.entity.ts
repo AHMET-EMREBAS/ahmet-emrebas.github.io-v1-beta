@@ -10,7 +10,7 @@ import {
   ManyToMany,
 } from 'typeorm';
 import { ID } from 'core/dto';
-import { hashPassword } from 'auth';
+import { hashPassword } from 'core/transformers';
 
 import { ISku } from 'common/inventory/interfaces/sku';
 

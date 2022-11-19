@@ -4,7 +4,6 @@
     "ae-auth": "apps/ae-auth",
     "ae-databridge": "apps/ae-databridge",
     "api": "apps/api",
-
     "bootstrap": "libs/bootstrap",
     "common": "libs/common",
     "core": "libs/core",
@@ -16,7 +15,6 @@
     "messanger": "libs/messanger",
     "nativescript-mobile": "apps/nativescript-mobile",
     "notification": "libs/notification",
-    "util": "libs/util",
     "web": "apps/web",
     "web-e2e": "apps/web-e2e"
   }

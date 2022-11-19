@@ -23,8 +23,7 @@
       "layout": ["libs/layout/src/index.ts"],
       "material/*": ["libs/material/src/lib/*"],
       "messanger": ["libs/messanger/src/index.ts"],
-      "notification": ["libs/notification/src/index.ts"],
-      "util/*": ["libs/util/src/lib/*"]
+      "notification": ["libs/notification/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
