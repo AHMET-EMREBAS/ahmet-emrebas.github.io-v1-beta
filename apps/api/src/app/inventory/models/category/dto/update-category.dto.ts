@@ -1,22 +1,32 @@
 import { Expose, Type } from 'class-transformer';
+import {
+  IsNotEmpty,
+  Max,
+  MaxLength,
+  Min,
+  MinLength,
+  IsNotEmptyObject,
+  IsOptional,
+  ValidateNested,
+  IsEmail,
+} from 'class-validator';
+
 import { Field, InputType, Int } from '@nestjs/graphql';
 import { Validations } from 'core/validations';
 import { ID } from 'core/dto';
 
-import { ValidateNested } from 'class-validator';
-
 import { ICategory } from 'common/inventory/interfaces/category';
+import { ApiProperty } from '@nestjs/swagger';
 
 @InputType()
 export class UpdateCategoryDto implements Partial<ICategory> {
   @Field()
-  @Validations({
+  @ApiProperty({
     type: 'string',
-
-    minLength: 0,
 
     maxLength: 20,
   })
+  @MaxLength(20)
   @Expose()
   name: string;
 }

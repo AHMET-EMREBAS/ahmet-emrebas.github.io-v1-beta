@@ -36,7 +36,7 @@ export class Create<%- classname %>Component implements OnInit {
   title = 'Create <%- classname %>';
   formGroup = new FormGroup({
     <% for(const f of options.Properties) { %> 
-     <%- f.Property %>: new FormControl('', [ 
+     <%- f.Property %>: new FormControl(undefined, [ 
       
       
       <% if(options.Required?.includes(f.Property)) { %> 
@@ -72,7 +72,7 @@ export class Create<%- classname %>Component implements OnInit {
     <% } %>
     
     <% for(const r of options.Relations || []) { %> 
-      <%- r.name %>: new FormControl('', [ 
+      <%- r.name %>: new FormControl(undefined, [ 
       <% if(options.Required?.includes(r.name)) { %> 
             Validators.required, 
        <% } %>

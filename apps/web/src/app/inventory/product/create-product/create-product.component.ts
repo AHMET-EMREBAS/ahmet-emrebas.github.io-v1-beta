@@ -19,7 +19,7 @@ export class CreateProductComponent implements OnInit {
   submitted = false;
   title = 'Create Product';
   formGroup = new FormGroup({
-    name: new FormControl('', [
+    name: new FormControl(undefined, [
       Validators.required,
 
       Validators.minLength(3),
@@ -27,33 +27,33 @@ export class CreateProductComponent implements OnInit {
       Validators.maxLength(50),
     ]),
 
-    price: new FormControl('', [
+    price: new FormControl(undefined, [
       Validators.min(0),
 
-      Validators.max(99999999999999),
+      Validators.max(999999999999),
     ]),
 
-    cost: new FormControl('', [
+    cost: new FormControl(undefined, [
       Validators.min(0),
 
-      Validators.max(99999999999999),
+      Validators.max(999999999999),
     ]),
 
-    quantity: new FormControl('', [
+    quantity: new FormControl(undefined, [
       Validators.min(0),
 
-      Validators.max(1000000000000000000),
+      Validators.max(999999999999),
     ]),
 
-    description: new FormControl('', [
+    description: new FormControl(undefined, [
       Validators.minLength(0),
 
       Validators.maxLength(500),
     ]),
 
-    category: new FormControl('', []),
+    category: new FormControl(undefined, []),
 
-    department: new FormControl('', []),
+    department: new FormControl(undefined, []),
   });
 
   fields: InputOptions[] = [
@@ -78,7 +78,7 @@ export class CreateProductComponent implements OnInit {
 
       min: 0,
 
-      max: 99999999999999,
+      max: 999999999999,
     },
 
     {
@@ -89,7 +89,7 @@ export class CreateProductComponent implements OnInit {
 
       min: 0,
 
-      max: 99999999999999,
+      max: 999999999999,
     },
 
     {
@@ -100,7 +100,7 @@ export class CreateProductComponent implements OnInit {
 
       min: 0,
 
-      max: 1000000000000000000,
+      max: 999999999999,
     },
 
     {
@@ -164,9 +164,9 @@ export class CreateProductComponent implements OnInit {
 
           description: this.value('description'),
 
-          category: this.value('category')?.id,
+          category: this.value('category'),
 
-          department: this.value('department')?.id,
+          department: this.value('department'),
         });
       }
     }

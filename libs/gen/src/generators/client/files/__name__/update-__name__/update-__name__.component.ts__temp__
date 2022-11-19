@@ -42,7 +42,7 @@ export class Update<%- classname %>Component implements AfterViewInit, OnInit {
 
 formGroup = new FormGroup({
     <% for(const f of options.Properties) { %> 
-     <%- f.Property %>: new FormControl('', [ 
+     <%- f.Property %>: new FormControl(undefined, [ 
       <% if(options.Required?.includes(f.Property)) { %> 
             Validators.required, 
        <% } %>
@@ -77,7 +77,7 @@ formGroup = new FormGroup({
     <% } %>
     
     <% for(const r of options.Relations || []) { %> 
-      <%- r.name %>: new FormControl('', [ 
+      <%- r.name %>: new FormControl(undefined, [ 
       <% if(options.Required?.includes(r.name)) { %> 
             Validators.required, 
        <% } %>

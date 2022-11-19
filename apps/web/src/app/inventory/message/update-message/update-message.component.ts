@@ -19,7 +19,7 @@ export class UpdateMessageComponent implements AfterViewInit, OnInit {
   private itemToBeUpdated!: Partial<IReadMessage>;
 
   formGroup = new FormGroup({
-    message: new FormControl('', [
+    message: new FormControl(undefined, [
       Validators.required,
 
       Validators.minLength(0),
@@ -27,9 +27,9 @@ export class UpdateMessageComponent implements AfterViewInit, OnInit {
       Validators.maxLength(400),
     ]),
 
-    to: new FormControl('', []),
+    to: new FormControl(undefined, []),
 
-    from: new FormControl('', []),
+    from: new FormControl(undefined, []),
   });
 
   fields: InputOptions[] = [
@@ -95,9 +95,9 @@ export class UpdateMessageComponent implements AfterViewInit, OnInit {
 
         message: this.value('message'),
 
-        to: this.value('to')?.id,
+        to: this.value('to'),
 
-        from: this.value('from')?.id,
+        from: this.value('from'),
       });
     }
   }

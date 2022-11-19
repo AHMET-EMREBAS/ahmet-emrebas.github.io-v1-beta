@@ -17,7 +17,7 @@ export class CreateSkuComponent implements OnInit {
   submitted = false;
   title = 'Create Sku';
   formGroup = new FormGroup({
-    name: new FormControl('', [
+    name: new FormControl(undefined, [
       Validators.required,
 
       Validators.minLength(0),
@@ -25,7 +25,7 @@ export class CreateSkuComponent implements OnInit {
       Validators.maxLength(30),
     ]),
 
-    barcode: new FormControl('', [
+    barcode: new FormControl(undefined, [
       Validators.required,
 
       Validators.minLength(10),
@@ -33,13 +33,13 @@ export class CreateSkuComponent implements OnInit {
       Validators.maxLength(13),
     ]),
 
-    description: new FormControl('', [
+    description: new FormControl(undefined, [
       Validators.minLength(0),
 
       Validators.maxLength(500),
     ]),
 
-    product: new FormControl('', [Validators.required]),
+    product: new FormControl(undefined, [Validators.required]),
   });
 
   fields: InputOptions[] = [
@@ -115,7 +115,7 @@ export class CreateSkuComponent implements OnInit {
 
           description: this.value('description'),
 
-          product: this.value('product')?.id,
+          product: this.value('product'),
         });
       }
     }

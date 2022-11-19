@@ -17,7 +17,7 @@ export class CreateStoreComponent implements OnInit {
   submitted = false;
   title = 'Create Store';
   formGroup = new FormGroup({
-    name: new FormControl('', [
+    name: new FormControl(undefined, [
       Validators.required,
 
       Validators.minLength(2),
@@ -25,7 +25,7 @@ export class CreateStoreComponent implements OnInit {
       Validators.maxLength(30),
     ]),
 
-    pricelevel: new FormControl('', []),
+    pricelevel: new FormControl(undefined, []),
   });
 
   fields: InputOptions[] = [
@@ -71,7 +71,7 @@ export class CreateStoreComponent implements OnInit {
         this.storeService.add({
           name: this.value('name'),
 
-          pricelevel: this.value('pricelevel')?.id,
+          pricelevel: this.value('pricelevel'),
         });
       }
     }

@@ -15,7 +15,7 @@ export class CreatePricelevelComponent implements OnInit {
   submitted = false;
   title = 'Create Pricelevel';
   formGroup = new FormGroup({
-    name: new FormControl('', [
+    name: new FormControl(undefined, [
       Validators.required,
 
       Validators.minLength(3),

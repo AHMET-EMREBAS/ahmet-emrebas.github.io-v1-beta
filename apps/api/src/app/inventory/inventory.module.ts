@@ -1,5 +1,3 @@
-import { commerce } from 'faker';
-
 import {
   Module,
   OnModuleInit,
@@ -116,92 +114,91 @@ export class InventoryModule implements OnModuleInit {
   ) {}
 
   async onModuleInit() {
-    for (const e of [
-      'default',
-      'primary',
-      'secondary',
-      'retail',
-      'wholesale',
-      'vip',
-    ]) {
-      await this.priceLevelService.save({ name: e });
-    }
-    for (const e of [
-      'Main',
-      'Houston Retail Store ',
-      'Auistion Wholesale store',
-    ]) {
-      await this.storeService.save({ name: e });
-    }
-    for (const e of ['user1@gmail.com', 'user2@gmail.com']) {
-      await this.userService.save({
-        username: e,
-        password: 'Password124!$',
-      });
-    }
-    for (const e of [
-      'PRODUCT',
-      'USER',
-      'CATEGORY',
-      'DEPARTMENT',
-      'SKU',
-      'STORE',
-      'PRICE',
-    ]) {
-      await this.permissionService.save({
-        name: `WRITE:${e}`,
-        description: `Write ${e.toLowerCase()}`,
-      });
-      await this.permissionService.save({
-        name: `READ:${e}`,
-        description: `Read ${e.toLowerCase()}`,
-      });
-      await this.permissionService.save({
-        name: `MANAGE:${e}`,
-        description: `Read ${e.toLowerCase()}`,
-      });
-    }
-    const permissions = await this.permissionService.find();
-
-    for (const user of [1, 2]) {
-      for (const p of permissions) {
-        try {
-          await this.userService.add(user, p.id, 'permission');
-        } catch (err) {
-          // ignore/
-        }
-      }
-    }
-    for (let i = 0; i < 50; i++) {
-      let cat: any;
-      let dep: any;
-      try {
-        cat = await this.categoryService.save({ name: commerce.department() });
-      } catch (err) {
-        // ignore
-      }
-      try {
-        dep = await this.departmentService.save({
-          name: commerce.department(),
-        });
-      } catch (err) {
-        // ignore
-      }
-      for (let j = 0; j < 5; j++) {
-        try {
-          await this.productService.save({
-            name: commerce.productName(),
-            description: commerce.productDescription(),
-            category: cat,
-            department: dep,
-            price: 100,
-            cost: 100,
-            quantity: 0,
-          });
-        } catch (err) {
-          //
-        }
-      }
-    }
+    // for (const e of [
+    //   'default',
+    //   'primary',
+    //   'secondary',
+    //   'retail',
+    //   'wholesale',
+    //   'vip',
+    // ]) {
+    //   await this.priceLevelService.save({ name: e });
+    // }
+    // for (const e of [
+    //   'Main',
+    //   'Houston Retail Store ',
+    //   'Auistion Wholesale store',
+    // ]) {
+    //   await this.storeService.save({ name: e });
+    // }
+    // for (const e of ['user1@gmail.com', 'user2@gmail.com']) {
+    //   await this.userService.save({
+    //     username: e,
+    //     password: 'Password124!$',
+    //   });
+    // }
+    // for (const e of [
+    //   'PRODUCT',
+    //   'USER',
+    //   'CATEGORY',
+    //   'DEPARTMENT',
+    //   'SKU',
+    //   'STORE',
+    //   'PRICE',
+    // ]) {
+    //   await this.permissionService.save({
+    //     name: `WRITE:${e}`,
+    //     description: `Write ${e.toLowerCase()}`,
+    //   });
+    //   await this.permissionService.save({
+    //     name: `READ:${e}`,
+    //     description: `Read ${e.toLowerCase()}`,
+    //   });
+    //   await this.permissionService.save({
+    //     name: `MANAGE:${e}`,
+    //     description: `Read ${e.toLowerCase()}`,
+    //   });
+    // }
+    // const permissions = await this.permissionService.find();
+    // for (const user of [1, 2]) {
+    //   for (const p of permissions) {
+    //     try {
+    //       await this.userService.add(user, p.id, 'permission');
+    //     } catch (err) {
+    //       // ignore/
+    //     }
+    //   }
+    // }
+    // for (let i = 0; i < 50; i++) {
+    //   let cat: any;
+    //   let dep: any;
+    //   try {
+    //     cat = await this.categoryService.save({ name: commerce.department() });
+    //   } catch (err) {
+    //     // ignore
+    //   }
+    //   try {
+    //     dep = await this.departmentService.save({
+    //       name: commerce.department(),
+    //     });
+    //   } catch (err) {
+    //     // ignore
+    //   }
+    //   for (let j = 0; j < 5; j++) {
+    //     try {
+    //       await this.productService.save({
+    //         name: commerce.productName(),
+    //         description: commerce.productDescription(),
+    //         category: cat,
+    //         department: dep,
+    //         price: 100,
+    //         cost: 100,
+    //         quantity: 0,
+    //       });
+    //     } catch (err) {
+    //       //
+    //     }
+    //   }
+    // }
   }
 }

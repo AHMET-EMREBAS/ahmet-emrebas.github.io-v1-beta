@@ -15,7 +15,7 @@ export class CreateDepartmentComponent implements OnInit {
   submitted = false;
   title = 'Create Department';
   formGroup = new FormGroup({
-    name: new FormControl('', [
+    name: new FormControl(undefined, [
       Validators.required,
 
       Validators.minLength(3),

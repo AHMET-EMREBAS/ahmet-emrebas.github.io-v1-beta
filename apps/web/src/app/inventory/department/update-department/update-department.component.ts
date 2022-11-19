@@ -17,7 +17,7 @@ export class UpdateDepartmentComponent implements AfterViewInit, OnInit {
   private itemToBeUpdated!: Partial<IReadDepartment>;
 
   formGroup = new FormGroup({
-    name: new FormControl('', [
+    name: new FormControl(undefined, [
       Validators.required,
 
       Validators.minLength(3),

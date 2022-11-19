@@ -1,8 +1,22 @@
-import { Expose, Type } from 'class-transformer';
+import {
+  Expose,
+  Type,
+} from 'class-transformer';
+import {
+  IsNotEmpty,
+  Max,
+  MaxLength,
+  Min,
+  MinLength,
+  IsNotEmptyObject,
+  IsOptional,
+  ValidateNested,
+  IsEmail
+} from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
 import {  Field,  InputType, Int} from '@nestjs/graphql';
 import { Validations } from 'core/validations'
 import { ID } from 'core/dto'
-import { ValidateNested } from 'class-validator';
 
 import { I<%- classname %> } from 'common/<%- project %>/interfaces/<%- name %>';
 
@@ -28,15 +42,19 @@ export class Create<%- classname %>Dto
   <% for(const o of options.Properties) { %> 
   
   @Field()
-  @Validations({
-    <% for(const [key, value] of Object.entries(o.Validation)) { %>
-      <% if(typeof value ==='string'){ %> 
-        <%- key %>: '<%- value %>',
-      <% } else { %>
-        <%- key %>: <%- value %>,
-      <% } %>
-    <%  } %>
+  @ApiProperty({
+   type: '<%-  o.Validation.type %>',
+    <% if(o.Validation?.minLength) { %> minLength: <%- o.Validation.minLength %>, <% } %>
+    <% if(o.Validation?.maxLength) { %> maxLength: <%- o.Validation.maxLength %>, <% } %>
+    <% if(o.Validation?.min) { %> minimum: <%- o.Validation.min %>, <% } %>
+    <% if(o.Validation?.max) { %> maximum: <%- o.Validation.max %>, <% } %>
+    <% if(o.Validation?.email) { %> format: 'email', <% } %>
   })
+  <% if(o.Validation?.minLength) { %> @MinLength(<%- o.Validation.minLength %>) <% } %>
+  <% if(o.Validation?.maxLength) { %> @MaxLength(<%- o.Validation.maxLength %>) <% } %>
+  <% if(o.Validation?.min) { %> @Min(<%- o.Validation.min %>) <% } %>
+  <% if(o.Validation?.max) { %> @Max(<%- o.Validation.max %>) <% } %>
+  <% if(o.Validation?.email) { %> @IsEmail(<%- o.Validation.email %>) <% } %>
   @Expose()
   <%- o.Property %>: <%- o.Column.valueType %>;
 
@@ -48,16 +66,24 @@ export class Create<%- classname %>Dto
   <% for(const o of options.Relations || []) { %> 
   
     <% if(o.type.endsWith('One')) { %>   
-        @Field(()=>Int)
-        @ValidateNested()
+      
+        @ApiProperty({ type: ID })
+        @Field(() => ID, { nullable: true })
         @Type(() => ID)
+        @IsOptional()
+        @ValidateNested()
+        @IsNotEmptyObject({ nullable:<%- !!!options.Required?.includes(o.name) %> })
         @Expose()
         <%- o.name %>: ID;
     <% } else { %> 
 
-        @Field(() => ID)
-        @ValidateNested({ each: true })
+
+        @ApiProperty({ type: [ID] })
+        @Field(() => [ID], { nullable: true })
         @Type(() => ID)
+        @IsOptional()
+        @ValidateNested({each:true})
+        @IsNotEmptyObject({ nullable:<%- !!!options.Required?.includes(o.name) %> })
         @Expose()
         <%- o.name %>: ID[];
 

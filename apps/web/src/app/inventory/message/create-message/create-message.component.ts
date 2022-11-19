@@ -17,7 +17,7 @@ export class CreateMessageComponent implements OnInit {
   submitted = false;
   title = 'Create Message';
   formGroup = new FormGroup({
-    message: new FormControl('', [
+    message: new FormControl(undefined, [
       Validators.required,
 
       Validators.minLength(0),
@@ -25,9 +25,9 @@ export class CreateMessageComponent implements OnInit {
       Validators.maxLength(400),
     ]),
 
-    to: new FormControl('', []),
+    to: new FormControl(undefined, []),
 
-    from: new FormControl('', []),
+    from: new FormControl(undefined, []),
   });
 
   fields: InputOptions[] = [
@@ -83,9 +83,9 @@ export class CreateMessageComponent implements OnInit {
         this.messageService.add({
           message: this.value('message'),
 
-          to: this.value('to')?.id,
+          to: this.value('to'),
 
-          from: this.value('from')?.id,
+          from: this.value('from'),
         });
       }
     }

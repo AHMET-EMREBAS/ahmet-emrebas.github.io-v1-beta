@@ -15,7 +15,7 @@ export class CreateCategoryComponent implements OnInit {
   submitted = false;
   title = 'Create Category';
   formGroup = new FormGroup({
-    name: new FormControl('', [
+    name: new FormControl(undefined, [
       Validators.required,
 
       Validators.minLength(0),

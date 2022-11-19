@@ -17,7 +17,7 @@ export class UpdatePricelevelComponent implements AfterViewInit, OnInit {
   private itemToBeUpdated!: Partial<IReadPricelevel>;
 
   formGroup = new FormGroup({
-    name: new FormControl('', [
+    name: new FormControl(undefined, [
       Validators.required,
 
       Validators.minLength(3),

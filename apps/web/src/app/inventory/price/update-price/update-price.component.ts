@@ -21,21 +21,21 @@ export class UpdatePriceComponent implements AfterViewInit, OnInit {
   private itemToBeUpdated!: Partial<IReadPrice>;
 
   formGroup = new FormGroup({
-    price: new FormControl('', [
+    price: new FormControl(undefined, [
       Validators.min(0),
 
       Validators.max(999999999999),
     ]),
 
-    cost: new FormControl('', [
+    cost: new FormControl(undefined, [
       Validators.min(0),
 
       Validators.max(999999999999),
     ]),
 
-    sku: new FormControl('', []),
+    sku: new FormControl(undefined, []),
 
-    pricelevel: new FormControl('', []),
+    pricelevel: new FormControl(undefined, []),
   });
 
   fields: InputOptions[] = [
@@ -115,9 +115,9 @@ export class UpdatePriceComponent implements AfterViewInit, OnInit {
 
         cost: this.value('cost'),
 
-        sku: this.value('sku')?.id,
+        sku: this.value('sku'),
 
-        pricelevel: this.value('pricelevel')?.id,
+        pricelevel: this.value('pricelevel'),
       });
     }
   }

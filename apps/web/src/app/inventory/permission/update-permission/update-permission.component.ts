@@ -17,7 +17,7 @@ export class UpdatePermissionComponent implements AfterViewInit, OnInit {
   private itemToBeUpdated!: Partial<IReadPermission>;
 
   formGroup = new FormGroup({
-    name: new FormControl('', [
+    name: new FormControl(undefined, [
       Validators.required,
 
       Validators.minLength(3),
@@ -25,7 +25,7 @@ export class UpdatePermissionComponent implements AfterViewInit, OnInit {
       Validators.maxLength(20),
     ]),
 
-    description: new FormControl('', [
+    description: new FormControl(undefined, [
       Validators.minLength(0),
 
       Validators.maxLength(50),

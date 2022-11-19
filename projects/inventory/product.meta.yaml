@@ -18,7 +18,7 @@ Properties:
     Validation:
       type: number
       min: 0
-      max: 99999999999999
+      max: 999999999999
     Column:
       columnType: numeric
       valueType: number
@@ -31,7 +31,7 @@ Properties:
     Validation:
       type: number
       min: 0
-      max: 99999999999999
+      max: 999999999999
     Column:
       columnType: numeric
       valueType: number
@@ -44,7 +44,7 @@ Properties:
     Validation:
       type: number
       min: 0
-      max: 999999999999999999
+      max: 999999999999
     Column:
       columnType: int
       valueType: number

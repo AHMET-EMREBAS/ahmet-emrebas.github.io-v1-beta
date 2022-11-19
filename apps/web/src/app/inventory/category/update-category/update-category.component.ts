@@ -17,7 +17,7 @@ export class UpdateCategoryComponent implements AfterViewInit, OnInit {
   private itemToBeUpdated!: Partial<IReadCategory>;
 
   formGroup = new FormGroup({
-    name: new FormControl('', [
+    name: new FormControl(undefined, [
       Validators.required,
 
       Validators.minLength(0),

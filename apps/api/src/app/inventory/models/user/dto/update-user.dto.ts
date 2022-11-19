@@ -1,35 +1,48 @@
 import { Expose, Type } from 'class-transformer';
+import {
+  IsNotEmpty,
+  Max,
+  MaxLength,
+  Min,
+  MinLength,
+  IsNotEmptyObject,
+  IsOptional,
+  ValidateNested,
+  IsEmail,
+} from 'class-validator';
+
 import { Field, InputType, Int } from '@nestjs/graphql';
 import { Validations } from 'core/validations';
 import { ID } from 'core/dto';
 
-import { ValidateNested } from 'class-validator';
-
 import { IUser } from 'common/inventory/interfaces/user';
+import { ApiProperty } from '@nestjs/swagger';
 
 @InputType()
 export class UpdateUserDto implements Partial<IUser<ID[]>> {
   @Field()
-  @Validations({
+  @ApiProperty({
     type: 'specific',
 
-    email: true,
+    format: 'email',
   })
+  @IsEmail(true)
   @Expose()
   username: string;
 
   @Field()
-  @Validations({
+  @ApiProperty({
     type: 'specific',
-
-    password: true,
   })
   @Expose()
   password: string;
 
-  @Field(() => ID)
-  @ValidateNested({ each: true })
+  @ApiProperty({ type: [ID] })
+  @Field(() => [ID], { nullable: true })
   @Type(() => ID)
+  @IsOptional()
+  @ValidateNested({ each: true })
+  @IsNotEmptyObject({ nullable: true })
   @Expose()
   permission: ID[];
 }

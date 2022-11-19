@@ -1,33 +1,51 @@
 import { Expose, Type } from 'class-transformer';
+import {
+  IsNotEmpty,
+  Max,
+  MaxLength,
+  Min,
+  MinLength,
+  IsNotEmptyObject,
+  IsOptional,
+  ValidateNested,
+  IsEmail,
+} from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
 import { Field, InputType, Int } from '@nestjs/graphql';
 import { Validations } from 'core/validations';
 import { ID } from 'core/dto';
-import { ValidateNested } from 'class-validator';
 
 import { IQuantity } from 'common/inventory/interfaces/quantity';
 
 @InputType()
 export class CreateQuantityDto implements IQuantity<ID, ID> {
   @Field()
-  @Validations({
+  @ApiProperty({
     type: 'number',
 
-    min: -200,
-
-    max: 999999999999,
+    minimum: -200,
+    maximum: 999999999999,
   })
+  @Min(-200)
+  @Max(999999999999)
   @Expose()
   quantity: number;
 
-  @Field(() => Int)
-  @ValidateNested()
+  @ApiProperty({ type: ID })
+  @Field(() => ID, { nullable: true })
   @Type(() => ID)
+  @IsOptional()
+  @ValidateNested()
+  @IsNotEmptyObject({ nullable: false })
   @Expose()
   sku: ID;
 
-  @Field(() => Int)
-  @ValidateNested()
+  @ApiProperty({ type: ID })
+  @Field(() => ID, { nullable: true })
   @Type(() => ID)
+  @IsOptional()
+  @ValidateNested()
+  @IsNotEmptyObject({ nullable: false })
   @Expose()
   store: ID;
 }

@@ -1,28 +1,15 @@
-import {
-  AfterViewInit,
-  Component,
-  OnInit,
-} from '@angular/core';
-import {
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
-import {
-  ActivatedRoute,
-  Router,
-} from '@angular/router';
-
+import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IReadQuantity } from 'common/inventory/interfaces';
-import {
-  InputOptions,
-  setFormGroupValue,
-} from 'material/form';
+import { InputOptions, setFormGroupValue } from 'material/form';
+import { QuantityService } from '../quantity.service';
 import { firstValueFrom } from 'rxjs';
 
 import { SkuService } from '../../sku';
+
 import { StoreService } from '../../store';
-import { QuantityService } from '../quantity.service';
+
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'ae-update-quantity',
@@ -34,7 +21,7 @@ export class UpdateQuantityComponent implements AfterViewInit, OnInit {
   private itemToBeUpdated!: Partial<IReadQuantity>;
 
   formGroup = new FormGroup({
-    quantity: new FormControl('', [
+    quantity: new FormControl(undefined, [
       Validators.required,
 
       Validators.min(-200),
@@ -42,9 +29,9 @@ export class UpdateQuantityComponent implements AfterViewInit, OnInit {
       Validators.max(999999999999),
     ]),
 
-    sku: new FormControl('', [Validators.required]),
+    sku: new FormControl(undefined, [Validators.required]),
 
-    store: new FormControl('', [Validators.required]),
+    store: new FormControl(undefined, [Validators.required]),
   });
 
   fields: InputOptions[] = [
@@ -106,8 +93,6 @@ export class UpdateQuantityComponent implements AfterViewInit, OnInit {
       this.itemToBeUpdated = await firstValueFrom(
         this.quantityService.getByKey(__item.id)
       );
-      console.log(this.itemToBeUpdated);
-
       setFormGroupValue(this.formGroup, this.itemToBeUpdated);
     }
   }

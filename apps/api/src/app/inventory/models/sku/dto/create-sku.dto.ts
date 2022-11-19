@@ -1,49 +1,61 @@
 import { Expose, Type } from 'class-transformer';
+import {
+  IsNotEmpty,
+  Max,
+  MaxLength,
+  Min,
+  MinLength,
+  IsNotEmptyObject,
+  IsOptional,
+  ValidateNested,
+  IsEmail,
+} from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
 import { Field, InputType, Int } from '@nestjs/graphql';
 import { Validations } from 'core/validations';
 import { ID } from 'core/dto';
-import { ValidateNested } from 'class-validator';
 
 import { ISku } from 'common/inventory/interfaces/sku';
 
 @InputType()
 export class CreateSkuDto implements ISku<ID> {
   @Field()
-  @Validations({
+  @ApiProperty({
     type: 'string',
-
-    minLength: 0,
 
     maxLength: 30,
   })
+  @MaxLength(30)
   @Expose()
   name: string;
 
   @Field()
-  @Validations({
+  @ApiProperty({
     type: 'string',
-
     minLength: 10,
-
     maxLength: 13,
   })
+  @MinLength(10)
+  @MaxLength(13)
   @Expose()
   barcode: string;
 
   @Field()
-  @Validations({
+  @ApiProperty({
     type: 'string',
-
-    minLength: 0,
 
     maxLength: 500,
   })
+  @MaxLength(500)
   @Expose()
   description: string;
 
-  @Field(() => Int)
-  @ValidateNested()
+  @ApiProperty({ type: ID })
+  @Field(() => ID, { nullable: true })
   @Type(() => ID)
+  @IsOptional()
+  @ValidateNested()
+  @IsNotEmptyObject({ nullable: false })
   @Expose()
   product: ID;
 }

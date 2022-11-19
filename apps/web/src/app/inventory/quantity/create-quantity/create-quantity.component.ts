@@ -19,7 +19,7 @@ export class CreateQuantityComponent implements OnInit {
   submitted = false;
   title = 'Create Quantity';
   formGroup = new FormGroup({
-    quantity: new FormControl('', [
+    quantity: new FormControl(undefined, [
       Validators.required,
 
       Validators.min(-200),
@@ -27,9 +27,9 @@ export class CreateQuantityComponent implements OnInit {
       Validators.max(999999999999),
     ]),
 
-    sku: new FormControl('', [Validators.required]),
+    sku: new FormControl(undefined, [Validators.required]),
 
-    store: new FormControl('', [Validators.required]),
+    store: new FormControl(undefined, [Validators.required]),
   });
 
   fields: InputOptions[] = [
@@ -92,9 +92,9 @@ export class CreateQuantityComponent implements OnInit {
         this.quantityService.add({
           quantity: this.value('quantity'),
 
-          sku: this.value('sku')?.id,
+          sku: this.value('sku'),
 
-          store: this.value('store')?.id,
+          store: this.value('store'),
         });
       }
     }

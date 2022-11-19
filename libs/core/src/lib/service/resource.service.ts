@@ -19,6 +19,7 @@ export class ResourceService<T> {
     try {
       return this.__repo.find(options);
     } catch (err) {
+      console.log(err);
       throw new InternalServerErrorException();
     }
   }
@@ -27,6 +28,7 @@ export class ResourceService<T> {
     try {
       return this.__repo.findOne(options);
     } catch (err) {
+      console.log(err);
       throw new InternalServerErrorException();
     }
   }
@@ -35,6 +37,7 @@ export class ResourceService<T> {
     try {
       return this.__repo.findOneBy(options);
     } catch (err) {
+      console.log(err);
       throw new InternalServerErrorException();
     }
   }
@@ -43,6 +46,7 @@ export class ResourceService<T> {
     try {
       return this.__repo.findAndCount(options);
     } catch (err) {
+      console.log(err);
       throw new InternalServerErrorException();
     }
   }
@@ -51,6 +55,7 @@ export class ResourceService<T> {
     try {
       return this.__repo.findAndCountBy(options);
     } catch (err) {
+      console.log(err);
       throw new InternalServerErrorException();
     }
   }
@@ -59,6 +64,7 @@ export class ResourceService<T> {
     try {
       return this.__repo.findBy(options);
     } catch (err) {
+      console.log(err);
       throw new InternalServerErrorException();
     }
   }
@@ -67,6 +73,7 @@ export class ResourceService<T> {
     try {
       return this.__repo.findOneOrFail(options);
     } catch (err) {
+      console.log(err);
       throw new InternalServerErrorException();
     }
   }
@@ -75,6 +82,7 @@ export class ResourceService<T> {
     try {
       return this.__repo.findOneByOrFail(options);
     } catch (err) {
+      console.log(err);
       throw new InternalServerErrorException();
     }
   }
@@ -83,6 +91,7 @@ export class ResourceService<T> {
     try {
       return this.__repo.create({ ...t, uuid: v4() });
     } catch (err) {
+      console.log(err);
       throw new InternalServerErrorException();
     }
   }
@@ -91,14 +100,16 @@ export class ResourceService<T> {
     try {
       return this.__repo.save({ ...t, uuid: v4() });
     } catch (err) {
+      console.log(err);
       throw new InternalServerErrorException();
     }
   }
 
   async update(id: number, updated: QueryDeepPartialEntity<T>) {
     try {
-      return (await this.__repo.update(id, updated)).affected > 0;
+      return await this.__repo.save({ ...updated, id: id } as any);
     } catch (err) {
+      console.log(err);
       throw new InternalServerErrorException();
     }
   }
@@ -116,6 +127,7 @@ export class ResourceService<T> {
       });
       return await this.__repo.recover(found);
     } catch (err) {
+      console.log(err);
       throw new InternalServerErrorException();
     }
   }
@@ -124,6 +136,7 @@ export class ResourceService<T> {
     try {
       return this.__repo.count(options);
     } catch (err) {
+      console.log(err);
       throw new InternalServerErrorException();
     }
   }
@@ -132,6 +145,7 @@ export class ResourceService<T> {
     try {
       return (await this.__repo.softDelete(id)).affected > 0;
     } catch (err) {
+      console.log(err);
       throw new InternalServerErrorException();
     }
   }
@@ -151,6 +165,7 @@ export class ResourceService<T> {
         .of(id)
         .add(relationId);
     } catch (err) {
+      console.log(err);
       throw new InternalServerErrorException();
     }
   }
@@ -170,6 +185,7 @@ export class ResourceService<T> {
         .of(id)
         .set(relationId);
     } catch (err) {
+      console.log(err);
       throw new InternalServerErrorException();
     }
   }
@@ -188,6 +204,7 @@ export class ResourceService<T> {
         .of(id)
         .set(null);
     } catch (err) {
+      console.log(err);
       throw new InternalServerErrorException();
     }
   }
@@ -207,6 +224,7 @@ export class ResourceService<T> {
         .of(id)
         .remove(relationId);
     } catch (err) {
+      console.log(err);
       throw new InternalServerErrorException();
     }
   }

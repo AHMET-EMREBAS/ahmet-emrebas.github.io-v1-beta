@@ -19,7 +19,7 @@ export class UpdateStoreComponent implements AfterViewInit, OnInit {
   private itemToBeUpdated!: Partial<IReadStore>;
 
   formGroup = new FormGroup({
-    name: new FormControl('', [
+    name: new FormControl(undefined, [
       Validators.required,
 
       Validators.minLength(2),
@@ -27,7 +27,7 @@ export class UpdateStoreComponent implements AfterViewInit, OnInit {
       Validators.maxLength(30),
     ]),
 
-    pricelevel: new FormControl('', []),
+    pricelevel: new FormControl(undefined, []),
   });
 
   fields: InputOptions[] = [
@@ -83,7 +83,7 @@ export class UpdateStoreComponent implements AfterViewInit, OnInit {
 
         name: this.value('name'),
 
-        pricelevel: this.value('pricelevel')?.id,
+        pricelevel: this.value('pricelevel'),
       });
     }
   }

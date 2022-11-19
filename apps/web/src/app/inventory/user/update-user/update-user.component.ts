@@ -1,27 +1,13 @@
-import {
-  AfterViewInit,
-  Component,
-  OnInit,
-} from '@angular/core';
-import {
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
-import {
-  ActivatedRoute,
-  Router,
-} from '@angular/router';
-
+import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IReadUser } from 'common/inventory/interfaces';
-import {
-  InputOptions,
-  setFormGroupValue,
-} from 'material/form';
+import { InputOptions, setFormGroupValue } from 'material/form';
+import { UserService } from '../user.service';
 import { firstValueFrom } from 'rxjs';
 
 import { PermissionService } from '../../permission';
-import { UserService } from '../user.service';
+
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'ae-update-user',
@@ -33,9 +19,13 @@ export class UpdateUserComponent implements AfterViewInit, OnInit {
   private itemToBeUpdated!: Partial<IReadUser>;
 
   formGroup = new FormGroup({
-    username: new FormControl('', [Validators.required, Validators.email]),
+    username: new FormControl(undefined, [
+      Validators.required,
 
-    password: new FormControl('', [
+      Validators.email,
+    ]),
+
+    password: new FormControl(undefined, [
       Validators.required,
 
       Validators.pattern(/[A-Z]{1,}/),
@@ -45,7 +35,7 @@ export class UpdateUserComponent implements AfterViewInit, OnInit {
       Validators.minLength(6),
     ]),
 
-    permission: new FormControl('', []),
+    permission: new FormControl(undefined, []),
   });
 
   fields: InputOptions[] = [
@@ -99,7 +89,6 @@ export class UpdateUserComponent implements AfterViewInit, OnInit {
       this.itemToBeUpdated = await firstValueFrom(
         this.userService.getByKey(__item.id)
       );
-      console.log(this.itemToBeUpdated);
       setFormGroupValue(this.formGroup, this.itemToBeUpdated);
     }
   }
@@ -113,7 +102,7 @@ export class UpdateUserComponent implements AfterViewInit, OnInit {
 
         password: this.value('password'),
 
-        permission: this.value('permission')?.id,
+        permission: this.value('permission'),
       });
     }
   }

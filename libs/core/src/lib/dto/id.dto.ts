@@ -1,4 +1,7 @@
-import { Expose } from 'class-transformer';
+import {
+  Expose,
+  Transform,
+} from 'class-transformer';
 import { IsNumber } from 'class-validator';
 
 import {
@@ -13,6 +16,7 @@ export class ID {
   @Field(() => Int)
   @ApiProperty({ type: 'number', minimum: 1 })
   @IsNumber()
+  @Transform(({ value }) => parseInt(value))
   @Expose()
   id: number;
 }

@@ -1,34 +1,50 @@
 import { Expose, Type } from 'class-transformer';
+import {
+  IsNotEmpty,
+  Max,
+  MaxLength,
+  Min,
+  MinLength,
+  IsNotEmptyObject,
+  IsOptional,
+  ValidateNested,
+  IsEmail,
+} from 'class-validator';
+
 import { Field, InputType, Int } from '@nestjs/graphql';
 import { Validations } from 'core/validations';
 import { ID } from 'core/dto';
 
-import { ValidateNested } from 'class-validator';
-
 import { IMessage } from 'common/inventory/interfaces/message';
+import { ApiProperty } from '@nestjs/swagger';
 
 @InputType()
 export class UpdateMessageDto implements Partial<IMessage<ID, ID>> {
   @Field()
-  @Validations({
+  @ApiProperty({
     type: 'string',
-
-    minLength: 0,
 
     maxLength: 400,
   })
+  @MaxLength(400)
   @Expose()
   message: string;
 
-  @Field(() => Int)
-  @ValidateNested()
+  @ApiProperty({ type: ID })
+  @Field(() => ID, { nullable: true })
   @Type(() => ID)
+  @IsOptional()
+  @ValidateNested()
+  @IsNotEmptyObject({ nullable: true })
   @Expose()
   to: ID;
 
-  @Field(() => Int)
-  @ValidateNested()
+  @ApiProperty({ type: ID })
+  @Field(() => ID, { nullable: true })
   @Type(() => ID)
+  @IsOptional()
+  @ValidateNested()
+  @IsNotEmptyObject({ nullable: true })
   @Expose()
   from: ID;
 }
