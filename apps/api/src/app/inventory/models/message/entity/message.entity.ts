@@ -24,11 +24,11 @@ export class Message extends BaseEntity implements IMessage<ID, ID> {
   @Column({ type: 'text', nullable: false, unique: false })
   message: string;
 
-  @ManyToOne(() => User, { eager: true, nullable: false, onDelete: 'CASCADE' })
+  @ManyToOne(() => User, { eager: true, nullable: false, onDelete: 'SET NULL' })
   @JoinColumn()
   to?: ID;
 
-  @ManyToOne(() => User, { eager: true, nullable: false, onDelete: 'CASCADE' })
+  @ManyToOne(() => User, { eager: true, nullable: false, onDelete: 'SET NULL' })
   @JoinColumn()
   from?: ID;
 }

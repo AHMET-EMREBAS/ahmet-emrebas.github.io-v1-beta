@@ -24,9 +24,13 @@ export class CreateDepartmentDto implements IDepartment {
     type: 'string',
     minLength: 3,
     maxLength: 20,
+
+    required: false,
+    nullable: true,
   })
   @MinLength(3)
   @MaxLength(20)
+  @IsOptional()
   @Expose()
   name: string;
 }

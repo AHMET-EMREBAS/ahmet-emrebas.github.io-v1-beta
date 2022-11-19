@@ -24,8 +24,12 @@ export class CreatePriceDto implements IPrice<ID, ID> {
     type: 'number',
 
     maximum: 999999999999,
+
+    required: false,
+    nullable: true,
   })
   @Max(999999999999)
+  @IsOptional()
   @Expose()
   price: number;
 
@@ -34,8 +38,12 @@ export class CreatePriceDto implements IPrice<ID, ID> {
     type: 'number',
 
     maximum: 999999999999,
+
+    required: false,
+    nullable: true,
   })
   @Max(999999999999)
+  @IsOptional()
   @Expose()
   cost: number;
 

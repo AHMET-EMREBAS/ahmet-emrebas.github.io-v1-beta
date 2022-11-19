@@ -54,33 +54,35 @@ export class Update<%- classname %>Dto
  {
   <% for(const o of options.Properties) { %> 
   
-   @Field()
-   @ApiProperty({
-    type: '<%-  o.Validation.type %>',
+  @Field() 
+  @ApiProperty({
+  type: '<%-  o.Validation.type %>',
     <% if(o.Validation?.minLength) { %> minLength: <%- o.Validation.minLength %>, <% } %>
     <% if(o.Validation?.maxLength) { %> maxLength: <%- o.Validation.maxLength %>, <% } %>
     <% if(o.Validation?.min) { %> minimum: <%- o.Validation.min %>, <% } %>
     <% if(o.Validation?.max) { %> maximum: <%- o.Validation.max %>, <% } %>
     <% if(o.Validation?.email) { %> format: 'email', <% } %>
+    <% if(options.Required?.includes(o.name)) { %> required:true, <% } else { %> required:false, nullable:true <% } %>
   })
   <% if(o.Validation?.minLength) { %> @MinLength(<%- o.Validation.minLength %>) <% } %>
   <% if(o.Validation?.maxLength) { %> @MaxLength(<%- o.Validation.maxLength %>) <% } %>
   <% if(o.Validation?.min) { %> @Min(<%- o.Validation.min %>) <% } %>
   <% if(o.Validation?.max) { %> @Max(<%- o.Validation.max %>) <% } %>
   <% if(o.Validation?.email) { %> @IsEmail(<%- o.Validation.email %>) <% } %>
+  <% if(options.Required?.includes(o.name)) { %> @IsNotEmpty() <% } else { %> @IsOptional()<% } %>
   @Expose()
   <%- o.Property %>: <%- o.Column.valueType %>;
   
   <% } %>
 
-    <% for(const o of options.Relations || []) { %> 
+<% for(const o of options.Relations || []) { %> 
   
    <% if(o.type.endsWith('One')) { %>   
       
         @ApiProperty({ type: ID })
         @Field(() => ID, { nullable: true })
         @Type(() => ID)
-        @IsOptional()
+        <% if(options.Required?.includes(o.name)) { %> @IsNotEmpty() <% } else { %> @IsOptional()<% } %>
         @ValidateNested()
         @IsNotEmptyObject({ nullable:<%- !!!options.Required?.includes(o.name) %> })
         @Expose()
@@ -91,7 +93,7 @@ export class Update<%- classname %>Dto
         @ApiProperty({ type: [ID] })
         @Field(() => [ID], { nullable: true })
         @Type(() => ID)
-        @IsOptional()
+        <% if(options.Required?.includes(o.name)) { %> @IsNotEmpty() <% } else { %> @IsOptional()<% } %>
         @ValidateNested({each:true})
         @IsNotEmptyObject({ nullable:<%- !!!options.Required?.includes(o.name) %> })
         @Expose()
@@ -99,5 +101,5 @@ export class Update<%- classname %>Dto
 
     <% } %>
 
-  <% } %>
+<% } %>
 }

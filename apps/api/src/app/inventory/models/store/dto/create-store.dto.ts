@@ -24,9 +24,13 @@ export class CreateStoreDto implements IStore<ID> {
     type: 'string',
     minLength: 2,
     maxLength: 30,
+
+    required: false,
+    nullable: true,
   })
   @MinLength(2)
   @MaxLength(30)
+  @IsOptional()
   @Expose()
   name: string;
 

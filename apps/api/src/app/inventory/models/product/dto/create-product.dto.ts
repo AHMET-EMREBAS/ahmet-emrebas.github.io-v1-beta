@@ -24,9 +24,13 @@ export class CreateProductDto implements IProduct<ID, ID> {
     type: 'string',
     minLength: 3,
     maxLength: 50,
+
+    required: false,
+    nullable: true,
   })
   @MinLength(3)
   @MaxLength(50)
+  @IsOptional()
   @Expose()
   name: string;
 
@@ -35,8 +39,12 @@ export class CreateProductDto implements IProduct<ID, ID> {
     type: 'number',
 
     maximum: 999999999999,
+
+    required: false,
+    nullable: true,
   })
   @Max(999999999999)
+  @IsOptional()
   @Expose()
   price: number;
 
@@ -45,8 +53,12 @@ export class CreateProductDto implements IProduct<ID, ID> {
     type: 'number',
 
     maximum: 999999999999,
+
+    required: false,
+    nullable: true,
   })
   @Max(999999999999)
+  @IsOptional()
   @Expose()
   cost: number;
 
@@ -55,8 +67,12 @@ export class CreateProductDto implements IProduct<ID, ID> {
     type: 'number',
 
     maximum: 999999999999,
+
+    required: false,
+    nullable: true,
   })
   @Max(999999999999)
+  @IsOptional()
   @Expose()
   quantity: number;
 
@@ -65,8 +81,12 @@ export class CreateProductDto implements IProduct<ID, ID> {
     type: 'string',
 
     maxLength: 500,
+
+    required: false,
+    nullable: true,
   })
   @MaxLength(500)
+  @IsOptional()
   @Expose()
   description: string;
 

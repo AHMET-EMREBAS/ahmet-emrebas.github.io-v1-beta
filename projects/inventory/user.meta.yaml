@@ -37,7 +37,7 @@ Relations:
     nullable: true
     onDelete: CASCADE
     viewColumns:
-      - column: name
+      - column: description
         as: permission
         valueType: string
 

@@ -25,16 +25,20 @@ export class CreateQuantityDto implements IQuantity<ID, ID> {
 
     minimum: -200,
     maximum: 999999999999,
+
+    required: false,
+    nullable: true,
   })
   @Min(-200)
   @Max(999999999999)
+  @IsOptional()
   @Expose()
   quantity: number;
 
   @ApiProperty({ type: ID })
   @Field(() => ID, { nullable: true })
   @Type(() => ID)
-  @IsOptional()
+  @IsNotEmpty()
   @ValidateNested()
   @IsNotEmptyObject({ nullable: false })
   @Expose()
@@ -43,7 +47,7 @@ export class CreateQuantityDto implements IQuantity<ID, ID> {
   @ApiProperty({ type: ID })
   @Field(() => ID, { nullable: true })
   @Type(() => ID)
-  @IsOptional()
+  @IsNotEmpty()
   @ValidateNested()
   @IsNotEmptyObject({ nullable: false })
   @Expose()

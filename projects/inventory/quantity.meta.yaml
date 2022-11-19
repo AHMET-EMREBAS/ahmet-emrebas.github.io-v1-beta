@@ -34,7 +34,7 @@ Relations:
     name: sku
     eager: true
     joinColumn: true
-    onDelete: CASCADE
+    onDelete: SET NULL
     viewColumns:
       - column: name
         as: sku

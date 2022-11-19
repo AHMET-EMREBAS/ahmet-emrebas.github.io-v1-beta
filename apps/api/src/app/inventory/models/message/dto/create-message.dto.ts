@@ -24,8 +24,12 @@ export class CreateMessageDto implements IMessage<ID, ID> {
     type: 'string',
 
     maxLength: 400,
+
+    required: false,
+    nullable: true,
   })
   @MaxLength(400)
+  @IsOptional()
   @Expose()
   message: string;
 

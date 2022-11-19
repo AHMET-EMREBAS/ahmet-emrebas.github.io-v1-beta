@@ -26,7 +26,7 @@ export class Quantity extends BaseEntity implements IQuantity<ID, ID> {
   @Column({ type: 'int', nullable: false, unique: false })
   quantity: number;
 
-  @ManyToOne(() => Sku, { eager: true, nullable: false, onDelete: 'CASCADE' })
+  @ManyToOne(() => Sku, { eager: true, nullable: false, onDelete: 'SET NULL' })
   @JoinColumn()
   sku?: ID;
 

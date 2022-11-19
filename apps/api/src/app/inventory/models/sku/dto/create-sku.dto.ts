@@ -24,8 +24,12 @@ export class CreateSkuDto implements ISku<ID> {
     type: 'string',
 
     maxLength: 30,
+
+    required: false,
+    nullable: true,
   })
   @MaxLength(30)
+  @IsOptional()
   @Expose()
   name: string;
 
@@ -34,9 +38,13 @@ export class CreateSkuDto implements ISku<ID> {
     type: 'string',
     minLength: 10,
     maxLength: 13,
+
+    required: false,
+    nullable: true,
   })
   @MinLength(10)
   @MaxLength(13)
+  @IsOptional()
   @Expose()
   barcode: string;
 
@@ -45,15 +53,19 @@ export class CreateSkuDto implements ISku<ID> {
     type: 'string',
 
     maxLength: 500,
+
+    required: false,
+    nullable: true,
   })
   @MaxLength(500)
+  @IsOptional()
   @Expose()
   description: string;
 
   @ApiProperty({ type: ID })
   @Field(() => ID, { nullable: true })
   @Type(() => ID)
-  @IsOptional()
+  @IsNotEmpty()
   @ValidateNested()
   @IsNotEmptyObject({ nullable: false })
   @Expose()

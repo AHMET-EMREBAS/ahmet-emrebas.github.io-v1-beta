@@ -49,12 +49,14 @@ export class Create<%- classname %>Dto
     <% if(o.Validation?.min) { %> minimum: <%- o.Validation.min %>, <% } %>
     <% if(o.Validation?.max) { %> maximum: <%- o.Validation.max %>, <% } %>
     <% if(o.Validation?.email) { %> format: 'email', <% } %>
+    <% if(options.Required?.includes(o.name)) { %> required:true, <% } else { %> required:false, nullable:true <% } %>
   })
   <% if(o.Validation?.minLength) { %> @MinLength(<%- o.Validation.minLength %>) <% } %>
   <% if(o.Validation?.maxLength) { %> @MaxLength(<%- o.Validation.maxLength %>) <% } %>
   <% if(o.Validation?.min) { %> @Min(<%- o.Validation.min %>) <% } %>
   <% if(o.Validation?.max) { %> @Max(<%- o.Validation.max %>) <% } %>
   <% if(o.Validation?.email) { %> @IsEmail(<%- o.Validation.email %>) <% } %>
+     <% if(options.Required?.includes(o.name)) { %> @IsNotEmpty() <% } else { %> @IsOptional()<% } %>
   @Expose()
   <%- o.Property %>: <%- o.Column.valueType %>;
 
@@ -70,7 +72,7 @@ export class Create<%- classname %>Dto
         @ApiProperty({ type: ID })
         @Field(() => ID, { nullable: true })
         @Type(() => ID)
-        @IsOptional()
+       <% if(options.Required?.includes(o.name)) { %> @IsNotEmpty() <% } else { %> @IsOptional()<% } %>
         @ValidateNested()
         @IsNotEmptyObject({ nullable:<%- !!!options.Required?.includes(o.name) %> })
         @Expose()
@@ -81,7 +83,7 @@ export class Create<%- classname %>Dto
         @ApiProperty({ type: [ID] })
         @Field(() => [ID], { nullable: true })
         @Type(() => ID)
-        @IsOptional()
+       <% if(options.Required?.includes(o.name)) { %> @IsNotEmpty() <% } else { %> @IsOptional()<% } %>
         @ValidateNested({each:true})
         @IsNotEmptyObject({ nullable:<%- !!!options.Required?.includes(o.name) %> })
         @Expose()

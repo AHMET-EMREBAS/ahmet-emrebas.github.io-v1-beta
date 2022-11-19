@@ -1,3 +1,5 @@
+import { upperFirst } from 'lodash';
+
 import {
   Module,
   OnModuleInit,
@@ -103,102 +105,44 @@ export const ResouceModules = [
 })
 export class InventoryModule implements OnModuleInit {
   constructor(
-    private readonly categoryService: CategoryService,
-    private readonly departmentService: DepartmentService,
-    private readonly productService: ProductService,
-    private readonly permissionService: PermissionService,
     private readonly priceLevelService: PricelevelService,
     private readonly storeService: StoreService,
-    private readonly userService: UserService,
-    private readonly priceService: PriceService
+    private readonly permissionService: PermissionService
   ) {}
 
   async onModuleInit() {
-    // for (const e of [
-    //   'default',
-    //   'primary',
-    //   'secondary',
-    //   'retail',
-    //   'wholesale',
-    //   'vip',
-    // ]) {
-    //   await this.priceLevelService.save({ name: e });
-    // }
-    // for (const e of [
-    //   'Main',
-    //   'Houston Retail Store ',
-    //   'Auistion Wholesale store',
-    // ]) {
-    //   await this.storeService.save({ name: e });
-    // }
-    // for (const e of ['user1@gmail.com', 'user2@gmail.com']) {
-    //   await this.userService.save({
-    //     username: e,
-    //     password: 'Password124!$',
-    //   });
-    // }
-    // for (const e of [
-    //   'PRODUCT',
-    //   'USER',
-    //   'CATEGORY',
-    //   'DEPARTMENT',
-    //   'SKU',
-    //   'STORE',
-    //   'PRICE',
-    // ]) {
-    //   await this.permissionService.save({
-    //     name: `WRITE:${e}`,
-    //     description: `Write ${e.toLowerCase()}`,
-    //   });
-    //   await this.permissionService.save({
-    //     name: `READ:${e}`,
-    //     description: `Read ${e.toLowerCase()}`,
-    //   });
-    //   await this.permissionService.save({
-    //     name: `MANAGE:${e}`,
-    //     description: `Read ${e.toLowerCase()}`,
-    //   });
-    // }
-    // const permissions = await this.permissionService.find();
-    // for (const user of [1, 2]) {
-    //   for (const p of permissions) {
-    //     try {
-    //       await this.userService.add(user, p.id, 'permission');
-    //     } catch (err) {
-    //       // ignore/
-    //     }
-    //   }
-    // }
-    // for (let i = 0; i < 50; i++) {
-    //   let cat: any;
-    //   let dep: any;
-    //   try {
-    //     cat = await this.categoryService.save({ name: commerce.department() });
-    //   } catch (err) {
-    //     // ignore
-    //   }
-    //   try {
-    //     dep = await this.departmentService.save({
-    //       name: commerce.department(),
-    //     });
-    //   } catch (err) {
-    //     // ignore
-    //   }
-    //   for (let j = 0; j < 5; j++) {
-    //     try {
-    //       await this.productService.save({
-    //         name: commerce.productName(),
-    //         description: commerce.productDescription(),
-    //         category: cat,
-    //         department: dep,
-    //         price: 100,
-    //         cost: 100,
-    //         quantity: 0,
-    //       });
-    //     } catch (err) {
-    //       //
-    //     }
-    //   }
-    // }
+    const retail = await this.priceLevelService.save({ name: 'retail' });
+    const wholesale = await this.priceLevelService.save({ name: 'wholesale' });
+    await this.storeService.save({
+      name: 'Wholesale Store',
+      pricelevel: { id: wholesale.id },
+    });
+    await this.storeService.save({
+      name: 'Retail Store',
+      pricelevel: { id: retail.id },
+    });
+    const resources = [
+      'product',
+      'category',
+      'department',
+      'price',
+      'quantity',
+      'store',
+      'pricelevel',
+      'user',
+      'permission',
+      'sku',
+    ];
+
+    const operations = ['read', 'write', 'manage'];
+
+    for (const o of operations) {
+      for (const r of resources) {
+        await this.permissionService.save({
+          name: [o, r].join(':').toUpperCase(),
+          description: [o, r].map(upperFirst).join(' '),
+        });
+      }
+    }
   }
 }

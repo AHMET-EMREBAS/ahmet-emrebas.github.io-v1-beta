@@ -24,15 +24,22 @@ export class CreateUserDto implements IUser<ID[]> {
     type: 'specific',
 
     format: 'email',
+    required: false,
+    nullable: true,
   })
   @IsEmail(true)
+  @IsOptional()
   @Expose()
   username: string;
 
   @Field()
   @ApiProperty({
     type: 'specific',
+
+    required: false,
+    nullable: true,
   })
+  @IsOptional()
   @Expose()
   password: string;
 

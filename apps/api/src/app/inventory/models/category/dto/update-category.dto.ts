@@ -25,8 +25,12 @@ export class UpdateCategoryDto implements Partial<ICategory> {
     type: 'string',
 
     maxLength: 20,
+
+    required: false,
+    nullable: true,
   })
   @MaxLength(20)
+  @IsOptional()
   @Expose()
   name: string;
 }

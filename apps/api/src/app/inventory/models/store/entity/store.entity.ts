@@ -27,7 +27,7 @@ export class Store extends BaseEntity implements IStore<ID> {
   @ManyToOne(() => Pricelevel, {
     eager: true,
     nullable: true,
-    onDelete: 'RESTRICT',
+    onDelete: 'SET NULL',
   })
   @JoinColumn()
   pricelevel?: ID;

@@ -24,9 +24,13 @@ export class CreatePermissionDto implements IPermission {
     type: 'string',
     minLength: 3,
     maxLength: 20,
+
+    required: false,
+    nullable: true,
   })
   @MinLength(3)
   @MaxLength(20)
+  @IsOptional()
   @Expose()
   name: string;
 
@@ -35,8 +39,12 @@ export class CreatePermissionDto implements IPermission {
     type: 'string',
 
     maxLength: 50,
+
+    required: false,
+    nullable: true,
   })
   @MaxLength(50)
+  @IsOptional()
   @Expose()
   description: string;
 }

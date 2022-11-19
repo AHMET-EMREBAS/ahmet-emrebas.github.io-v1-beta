@@ -28,6 +28,7 @@ export async function bootstrap(module: any) {
         exposeUnsetFields: false,
       },
       forbidUnknownValues: true,
+      stopAtFirstError: true,
     })
   );
 
