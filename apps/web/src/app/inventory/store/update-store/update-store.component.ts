@@ -5,6 +5,10 @@ import { InputOptions, setFormGroupValue } from 'material/form';
 import { StoreService } from '../store.service';
 import { firstValueFrom } from 'rxjs';
 
+import { MessageService as SystemMessageService } from 'primeng/api';
+
+import { groupBy } from 'lodash';
+
 import { PricelevelService } from '../../pricelevel';
 
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -55,9 +59,12 @@ export class UpdateStoreComponent implements AfterViewInit, OnInit {
     },
   ];
 
+  groups = Object.entries(groupBy(this.fields, 'group'));
+
   constructor(
     private readonly storeService: StoreService,
     private readonly router: Router,
+    private readonly systemMessageService: SystemMessageService,
     private readonly route: ActivatedRoute,
     private readonly pricelevelService: PricelevelService
   ) {}
@@ -84,6 +91,15 @@ export class UpdateStoreComponent implements AfterViewInit, OnInit {
         name: this.value('name'),
 
         pricelevel: this.value('pricelevel'),
+      });
+    } else {
+      const e = Object.entries(this.formGroup.controls).filter(
+        (e) => e[1].errors
+      )[0];
+
+      this.systemMessageService.add({
+        severity: 'error',
+        summary: `${e[0]} field is not valid!`,
       });
     }
   }

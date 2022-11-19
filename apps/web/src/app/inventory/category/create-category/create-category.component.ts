@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { MessageService as SystemMessageService } from 'primeng/api';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-
+import { groupBy } from 'lodash';
 import { InputOptions } from 'material/form';
 
 import { CategoryService } from '../category.service';
@@ -39,8 +40,11 @@ export class CreateCategoryComponent implements OnInit {
     },
   ];
 
+  groups = Object.entries(groupBy(this.fields, 'group'));
+
   constructor(
     private readonly categoryService: CategoryService,
+    private readonly systemMessageService: SystemMessageService,
     private readonly router: Router,
     private readonly route: ActivatedRoute
   ) {}
@@ -53,6 +57,15 @@ export class CreateCategoryComponent implements OnInit {
         this.submitted = true;
         this.categoryService.add({
           name: this.value('name'),
+        });
+      } else {
+        const e = Object.entries(this.formGroup.controls).filter(
+          (e) => e[1].errors
+        )[0];
+
+        this.systemMessageService.add({
+          severity: 'error',
+          summary: `${e[0]} field is not valid!`,
         });
       }
     }

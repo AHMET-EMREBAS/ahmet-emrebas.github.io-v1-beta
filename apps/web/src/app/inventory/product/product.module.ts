@@ -1,18 +1,21 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { MatStepperModule } from '@angular/material/stepper';
 import { RouterModule } from '@angular/router';
 
-import { SharedResourceModule } from 'material/resource';
-
-import { CategoryService } from '../category';
-import { DepartmentService } from '../department';
 import { CreateProductComponent } from './create-product/';
 import { DeleteProductComponent } from './delete-product/';
 import { ProductComponent } from './product.component';
 import { ProductService } from './product.service';
 import { UpdateProductComponent } from './update-product/';
 import { ViewProductComponent } from './view-product';
+
+import { SharedResourceModule } from 'material/resource';
+
+import { MatStepperModule } from '@angular/material/stepper';
+
+import { CategoryService } from '../category';
+
+import { DepartmentService } from '../department';
 
 @NgModule({
   declarations: [

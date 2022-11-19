@@ -11,6 +11,8 @@ import { ViewPermissionComponent } from './view-permission';
 
 import { SharedResourceModule } from 'material/resource';
 
+import { MatStepperModule } from '@angular/material/stepper';
+
 @NgModule({
   declarations: [
     PermissionComponent,
@@ -22,6 +24,7 @@ import { SharedResourceModule } from 'material/resource';
   imports: [
     CommonModule,
     SharedResourceModule,
+    MatStepperModule,
     RouterModule.forChild([
       {
         path: '',

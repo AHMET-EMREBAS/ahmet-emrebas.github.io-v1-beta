@@ -11,6 +11,8 @@ import { ViewMessageComponent } from './view-message';
 
 import { SharedResourceModule } from 'material/resource';
 
+import { MatStepperModule } from '@angular/material/stepper';
+
 import { UserService } from '../user';
 
 @NgModule({
@@ -24,6 +26,7 @@ import { UserService } from '../user';
   imports: [
     CommonModule,
     SharedResourceModule,
+    MatStepperModule,
     RouterModule.forChild([
       {
         path: '',

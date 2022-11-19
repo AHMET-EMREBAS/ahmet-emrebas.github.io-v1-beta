@@ -11,6 +11,8 @@ import { ViewUserComponent } from './view-user';
 
 import { SharedResourceModule } from 'material/resource';
 
+import { MatStepperModule } from '@angular/material/stepper';
+
 import { PermissionService } from '../permission';
 
 @NgModule({
@@ -24,6 +26,7 @@ import { PermissionService } from '../permission';
   imports: [
     CommonModule,
     SharedResourceModule,
+    MatStepperModule,
     RouterModule.forChild([
       {
         path: '',

@@ -11,6 +11,8 @@ import { ViewDepartmentComponent } from './view-department';
 
 import { SharedResourceModule } from 'material/resource';
 
+import { MatStepperModule } from '@angular/material/stepper';
+
 @NgModule({
   declarations: [
     DepartmentComponent,
@@ -22,6 +24,7 @@ import { SharedResourceModule } from 'material/resource';
   imports: [
     CommonModule,
     SharedResourceModule,
+    MatStepperModule,
     RouterModule.forChild([
       {
         path: '',

@@ -11,6 +11,7 @@ import { View<%- classname %>Component } from './view-<%- name %>';
 
 import { SharedResourceModule } from 'material/resource';
 
+import { MatStepperModule } from '@angular/material/stepper';
 
 <% for(const target of new Set(options.Relations?.map(e=>e.target) || [])) { %> 
 
@@ -30,8 +31,9 @@ import { SharedResourceModule } from 'material/resource';
     View<%- classname %>Component,
   ],
   imports: [
-   CommonModule,
-   SharedResourceModule,
+    CommonModule,
+    SharedResourceModule,
+    MatStepperModule,
     RouterModule.forChild([
       {
         path: '',

@@ -5,6 +5,10 @@ import { InputOptions, setFormGroupValue } from 'material/form';
 import { MessageService } from '../message.service';
 import { firstValueFrom } from 'rxjs';
 
+import { MessageService as SystemMessageService } from 'primeng/api';
+
+import { groupBy } from 'lodash';
+
 import { UserService } from '../../user';
 
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -67,9 +71,12 @@ export class UpdateMessageComponent implements AfterViewInit, OnInit {
     },
   ];
 
+  groups = Object.entries(groupBy(this.fields, 'group'));
+
   constructor(
     private readonly messageService: MessageService,
     private readonly router: Router,
+    private readonly systemMessageService: SystemMessageService,
     private readonly route: ActivatedRoute,
     private readonly userService: UserService
   ) {}
@@ -98,6 +105,15 @@ export class UpdateMessageComponent implements AfterViewInit, OnInit {
         to: this.value('to'),
 
         from: this.value('from'),
+      });
+    } else {
+      const e = Object.entries(this.formGroup.controls).filter(
+        (e) => e[1].errors
+      )[0];
+
+      this.systemMessageService.add({
+        severity: 'error',
+        summary: `${e[0]} field is not valid!`,
       });
     }
   }

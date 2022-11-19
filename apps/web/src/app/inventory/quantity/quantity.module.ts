@@ -11,6 +11,8 @@ import { ViewQuantityComponent } from './view-quantity';
 
 import { SharedResourceModule } from 'material/resource';
 
+import { MatStepperModule } from '@angular/material/stepper';
+
 import { SkuService } from '../sku';
 
 import { StoreService } from '../store';
@@ -26,6 +28,7 @@ import { StoreService } from '../store';
   imports: [
     CommonModule,
     SharedResourceModule,
+    MatStepperModule,
     RouterModule.forChild([
       {
         path: '',

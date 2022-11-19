@@ -5,6 +5,10 @@ import { InputOptions, setFormGroupValue } from 'material/form';
 import { UserService } from '../user.service';
 import { firstValueFrom } from 'rxjs';
 
+import { MessageService as SystemMessageService } from 'primeng/api';
+
+import { groupBy } from 'lodash';
+
 import { PermissionService } from '../../permission';
 
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -72,9 +76,12 @@ export class UpdateUserComponent implements AfterViewInit, OnInit {
     },
   ];
 
+  groups = Object.entries(groupBy(this.fields, 'group'));
+
   constructor(
     private readonly userService: UserService,
     private readonly router: Router,
+    private readonly systemMessageService: SystemMessageService,
     private readonly route: ActivatedRoute,
     private readonly permissionService: PermissionService
   ) {}
@@ -103,6 +110,15 @@ export class UpdateUserComponent implements AfterViewInit, OnInit {
         password: this.value('password'),
 
         permission: this.value('permission'),
+      });
+    } else {
+      const e = Object.entries(this.formGroup.controls).filter(
+        (e) => e[1].errors
+      )[0];
+
+      this.systemMessageService.add({
+        severity: 'error',
+        summary: `${e[0]} field is not valid!`,
       });
     }
   }

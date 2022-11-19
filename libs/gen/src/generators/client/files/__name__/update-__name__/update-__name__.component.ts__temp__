@@ -17,6 +17,10 @@ import {
 import { <%- classname %>Service } from '../<%- name %>.service';
 import { firstValueFrom } from 'rxjs';
 
+import { MessageService as SystemMessageService } from 'primeng/api';
+
+
+import { groupBy } from 'lodash';
 
 <% for(const target of new Set(options.Relations?.map(e=>e.target) || [])) { %> 
 
@@ -127,9 +131,13 @@ formGroup = new FormGroup({
 
   ];
 
+  groups = Object.entries(groupBy(this.fields, 'group'));
+
+
   constructor(
     private readonly <%- name %>Service: <%- classname %>Service,
     private readonly router: Router,
+    private readonly systemMessageService: SystemMessageService,
     private readonly route: ActivatedRoute,
     <% for(const target of new Set(options.Relations?.map(e=>e.target) || [])) { %>  private readonly <%- target.toLowerCase() %>Service: <%- target %>Service, <% } %>
   ) {  }
@@ -163,7 +171,16 @@ formGroup = new FormGroup({
               <%- f.name %>: this.value('<%- f.name %>'),
           <%  } %>
         });
-    }
+    } else { 
+            const e = Object.entries(this.formGroup.controls).filter(
+              (e) => e[1].errors
+            )[0];
+
+            this.systemMessageService.add({
+              severity: 'error',
+              summary: `${e[0]} field is not valid!`,
+            });
+      }
   }
 
 

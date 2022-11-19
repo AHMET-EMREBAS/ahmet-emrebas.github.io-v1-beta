@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { MessageService as SystemMessageService } from 'primeng/api';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-
+import { groupBy } from 'lodash';
 import { InputOptions } from 'material/form';
 
 import { UserService } from '../user.service';
@@ -70,8 +71,11 @@ export class CreateUserComponent implements OnInit {
     },
   ];
 
+  groups = Object.entries(groupBy(this.fields, 'group'));
+
   constructor(
     private readonly userService: UserService,
+    private readonly systemMessageService: SystemMessageService,
     private readonly router: Router,
     private readonly route: ActivatedRoute,
     private readonly permissionService: PermissionService
@@ -91,6 +95,15 @@ export class CreateUserComponent implements OnInit {
           password: this.value('password'),
 
           permission: this.value('permission'),
+        });
+      } else {
+        const e = Object.entries(this.formGroup.controls).filter(
+          (e) => e[1].errors
+        )[0];
+
+        this.systemMessageService.add({
+          severity: 'error',
+          summary: `${e[0]} field is not valid!`,
         });
       }
     }

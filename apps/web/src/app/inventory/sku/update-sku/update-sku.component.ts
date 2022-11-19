@@ -5,6 +5,10 @@ import { InputOptions, setFormGroupValue } from 'material/form';
 import { SkuService } from '../sku.service';
 import { firstValueFrom } from 'rxjs';
 
+import { MessageService as SystemMessageService } from 'primeng/api';
+
+import { groupBy } from 'lodash';
+
 import { ProductService } from '../../product';
 
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -95,9 +99,12 @@ export class UpdateSkuComponent implements AfterViewInit, OnInit {
     },
   ];
 
+  groups = Object.entries(groupBy(this.fields, 'group'));
+
   constructor(
     private readonly skuService: SkuService,
     private readonly router: Router,
+    private readonly systemMessageService: SystemMessageService,
     private readonly route: ActivatedRoute,
     private readonly productService: ProductService
   ) {}
@@ -128,6 +135,15 @@ export class UpdateSkuComponent implements AfterViewInit, OnInit {
         description: this.value('description'),
 
         product: this.value('product'),
+      });
+    } else {
+      const e = Object.entries(this.formGroup.controls).filter(
+        (e) => e[1].errors
+      )[0];
+
+      this.systemMessageService.add({
+        severity: 'error',
+        summary: `${e[0]} field is not valid!`,
       });
     }
   }

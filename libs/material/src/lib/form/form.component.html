@@ -2,8 +2,8 @@
 
 
 
-<form #form="ngForm" class="ae-form flex flex-column gap-5 pb-5 " *ngIf="formGroup" [formGroup]="formGroup"
-    (ngSubmit)="submit()" [noValidate]="false">
+<form #form="ngForm" class="form-style" *ngIf="formGroup" [formGroup]="formGroup" (ngSubmit)="submit()"
+    [noValidate]="false">
 
 
     <div class="flex flex-column  justify-content-start align-items-start" *ngFor=" let field of fields">
@@ -73,5 +73,6 @@
 
     </div>
 
-    <p-button type="submit" [label]="submitLabel"></p-button>
+    <ng-content></ng-content>
+    <p-button *ngIf="submitLabel" type="submit" [label]="submitLabel"></p-button>
 </form>

@@ -5,6 +5,10 @@ import { InputOptions, setFormGroupValue } from 'material/form';
 import { PriceService } from '../price.service';
 import { firstValueFrom } from 'rxjs';
 
+import { MessageService as SystemMessageService } from 'primeng/api';
+
+import { groupBy } from 'lodash';
+
 import { SkuService } from '../../sku';
 
 import { PricelevelService } from '../../pricelevel';
@@ -82,9 +86,12 @@ export class UpdatePriceComponent implements AfterViewInit, OnInit {
     },
   ];
 
+  groups = Object.entries(groupBy(this.fields, 'group'));
+
   constructor(
     private readonly priceService: PriceService,
     private readonly router: Router,
+    private readonly systemMessageService: SystemMessageService,
     private readonly route: ActivatedRoute,
     private readonly skuService: SkuService,
     private readonly pricelevelService: PricelevelService
@@ -118,6 +125,15 @@ export class UpdatePriceComponent implements AfterViewInit, OnInit {
         sku: this.value('sku'),
 
         pricelevel: this.value('pricelevel'),
+      });
+    } else {
+      const e = Object.entries(this.formGroup.controls).filter(
+        (e) => e[1].errors
+      )[0];
+
+      this.systemMessageService.add({
+        severity: 'error',
+        summary: `${e[0]} field is not valid!`,
       });
     }
   }

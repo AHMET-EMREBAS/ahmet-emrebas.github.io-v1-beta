@@ -12,9 +12,21 @@
 </p-toolbar>
 
 <div class="flex flex-column p-2 w-full">
-  <ae-form
-    [formGroup]="formGroup"
-    [fields]="fields"
-    (submitEvent)="submit()"
-  ></ae-form>
+  <mat-stepper #stepper labelPosition="bottom">
+    <mat-step
+      [label]="(group[0] === 'undefined' ? 'Others' : group[0]) | titlecase"
+      *ngFor="let group of groups"
+    >
+      <ae-form
+        [formGroup]="formGroup"
+        [fields]="group[1]"
+        [submitLabel]="false"
+      >
+      </ae-form>
+    </mat-step>
+  </mat-stepper>
+
+  <div class="flex justify-content-end">
+    <p-button label="Save User" (click)="submit()"></p-button>
+  </div>
 </div>

@@ -11,6 +11,8 @@ import { ViewPriceComponent } from './view-price';
 
 import { SharedResourceModule } from 'material/resource';
 
+import { MatStepperModule } from '@angular/material/stepper';
+
 import { SkuService } from '../sku';
 
 import { PricelevelService } from '../pricelevel';
@@ -26,6 +28,7 @@ import { PricelevelService } from '../pricelevel';
   imports: [
     CommonModule,
     SharedResourceModule,
+    MatStepperModule,
     RouterModule.forChild([
       {
         path: '',

@@ -11,6 +11,8 @@ import { ViewSkuComponent } from './view-sku';
 
 import { SharedResourceModule } from 'material/resource';
 
+import { MatStepperModule } from '@angular/material/stepper';
+
 import { ProductService } from '../product';
 
 @NgModule({
@@ -24,6 +26,7 @@ import { ProductService } from '../product';
   imports: [
     CommonModule,
     SharedResourceModule,
+    MatStepperModule,
     RouterModule.forChild([
       {
         path: '',

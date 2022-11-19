@@ -11,6 +11,8 @@ import { ViewStoreComponent } from './view-store';
 
 import { SharedResourceModule } from 'material/resource';
 
+import { MatStepperModule } from '@angular/material/stepper';
+
 import { PricelevelService } from '../pricelevel';
 
 @NgModule({
@@ -24,6 +26,7 @@ import { PricelevelService } from '../pricelevel';
   imports: [
     CommonModule,
     SharedResourceModule,
+    MatStepperModule,
     RouterModule.forChild([
       {
         path: '',

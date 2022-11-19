@@ -43,12 +43,10 @@ export class FormComponent implements AfterViewInit {
 
   @Input() formGroup!: FormGroup;
   @Input() fields!: InputOptions[];
-  @Input() submitLabel = 'Submit';
+  @Input() submitLabel: string | false = 'Submit';
   @Output() submitEvent = new EventEmitter();
 
   submit() {
-    console.log('[Form Component] submitting');
-
     this.submitEvent.emit();
   }
 

@@ -29,3 +29,11 @@ input[type=radio] {
     z-index: -2987349;
 
 }
+
+.form-style {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding: 5px;
+    padding-bottom: 200px;
+}

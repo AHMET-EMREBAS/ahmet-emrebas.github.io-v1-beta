@@ -11,6 +11,8 @@ import { ViewCategoryComponent } from './view-category';
 
 import { SharedResourceModule } from 'material/resource';
 
+import { MatStepperModule } from '@angular/material/stepper';
+
 @NgModule({
   declarations: [
     CategoryComponent,
@@ -22,6 +24,7 @@ import { SharedResourceModule } from 'material/resource';
   imports: [
     CommonModule,
     SharedResourceModule,
+    MatStepperModule,
     RouterModule.forChild([
       {
         path: '',

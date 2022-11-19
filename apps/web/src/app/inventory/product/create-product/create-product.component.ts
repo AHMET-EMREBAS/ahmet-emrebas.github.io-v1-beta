@@ -1,23 +1,15 @@
-import {
-  Component,
-  OnInit,
-} from '@angular/core';
-import {
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
-import {
-  ActivatedRoute,
-  Router,
-} from '@angular/router';
-
+import { Component, OnInit } from '@angular/core';
+import { MessageService as SystemMessageService } from 'primeng/api';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { groupBy } from 'lodash';
 import { InputOptions } from 'material/form';
 
-import { CategoryService } from '../../category';
-import { DepartmentService } from '../../department';
 import { ProductService } from '../product.service';
+
+import { CategoryService } from '../../category';
+
+import { DepartmentService } from '../../department';
 
 @Component({
   selector: 'ae-create-product',
@@ -136,6 +128,7 @@ export class CreateProductComponent implements OnInit {
     {
       name: 'department',
       type: 'select',
+      group: 'Meta',
       placeholder: 'department',
       asyncOptions: this.departmentService.entities$,
       optionValue: 'id',
@@ -147,6 +140,7 @@ export class CreateProductComponent implements OnInit {
 
   constructor(
     private readonly productService: ProductService,
+    private readonly systemMessageService: SystemMessageService,
     private readonly router: Router,
     private readonly route: ActivatedRoute,
     private readonly categoryService: CategoryService,
@@ -177,6 +171,15 @@ export class CreateProductComponent implements OnInit {
           category: this.value('category'),
 
           department: this.value('department'),
+        });
+      } else {
+        const e = Object.entries(this.formGroup.controls).filter(
+          (e) => e[1].errors
+        )[0];
+
+        this.systemMessageService.add({
+          severity: 'error',
+          summary: `${e[0]} field is not valid!`,
         });
       }
     }
