@@ -155,7 +155,9 @@ formGroup = new FormGroup({
         this.<%- name %>Service.getByKey(__item.id)
       );
       setFormGroupValue(this.formGroup, this.itemToBeUpdated);
+     return;
     }
+    this.router.navigate(['../'], { relativeTo: this.route });
   }
 
 

@@ -1,19 +1,30 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import {
+  AfterViewInit,
+  Component,
+  OnInit,
+} from '@angular/core';
+import {
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import {
+  ActivatedRoute,
+  Router,
+} from '@angular/router';
+
 import { IReadProduct } from 'common/inventory/interfaces';
-import { InputOptions, setFormGroupValue } from 'material/form';
-import { ProductService } from '../product.service';
+import { groupBy } from 'lodash';
+import {
+  InputOptions,
+  setFormGroupValue,
+} from 'material/form';
+import { MessageService as SystemMessageService } from 'primeng/api';
 import { firstValueFrom } from 'rxjs';
 
-import { MessageService as SystemMessageService } from 'primeng/api';
-
-import { groupBy } from 'lodash';
-
 import { CategoryService } from '../../category';
-
 import { DepartmentService } from '../../department';
-
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ProductService } from '../product.service';
 
 @Component({
   selector: 'ae-update-product',
@@ -164,8 +175,11 @@ export class UpdateProductComponent implements AfterViewInit, OnInit {
       this.itemToBeUpdated = await firstValueFrom(
         this.productService.getByKey(__item.id)
       );
+
       setFormGroupValue(this.formGroup, this.itemToBeUpdated);
+      return;
     }
+    this.router.navigate(['../'], { relativeTo: this.route });
   }
 
   submit() {
