@@ -4,7 +4,7 @@
     "ae-auth": "apps/ae-auth",
     "ae-databridge": "apps/ae-databridge",
     "api": "apps/api",
-    "auth": "libs/auth",
+
     "bootstrap": "libs/bootstrap",
     "common": "libs/common",
     "core": "libs/core",
