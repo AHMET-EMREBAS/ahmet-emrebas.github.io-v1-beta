@@ -1,4 +1,8 @@
 import { ApolloServerPluginLandingPageLocalDefault } from 'apollo-server-core';
+import {
+  AuthModule,
+  PermissionGuard,
+} from 'auth';
 import { join } from 'path';
 
 import { MailerModule } from '@nestjs-modules/mailer';
@@ -8,6 +12,7 @@ import {
   ApolloDriverConfig,
 } from '@nestjs/apollo';
 import { Module } from '@nestjs/common';
+import { APP_GUARD } from '@nestjs/core';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ScheduleModule } from '@nestjs/schedule';
@@ -15,6 +20,10 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { InventoryModule } from './inventory';
+import { Permission } from './inventory/models/permission';
+import { User } from './inventory/models/user';
+import { PermissionService } from './inventory/rest/permission';
+import { UserService } from './inventory/rest/user';
 import { ProductBuilderSubscriber } from './inventory/subscribers';
 
 @Module({
@@ -69,7 +78,19 @@ import { ProductBuilderSubscriber } from './inventory/subscribers';
       },
     }),
     InventoryModule,
+    AuthModule.register({
+      entities: [User, Permission],
+      service: UserService,
+    }),
   ],
-  providers: [ProductBuilderSubscriber],
+  providers: [
+    UserService,
+    PermissionService,
+    ProductBuilderSubscriber,
+    {
+      provide: APP_GUARD,
+      useClass: PermissionGuard,
+    },
+  ],
 })
 export class AppModule {}
