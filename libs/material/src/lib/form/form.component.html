@@ -10,25 +10,26 @@
         <ng-container *ngIf="['text', 'date', 'datetime', 'range', 'email'].includes(field.type || 'text')">
             <input [tabindex]="1" pInputText [id]="field.name + '-input'" [formControlName]="field.name!"
                 [type]="fieldType(field.type)" [attr.required]="field.required" [attr.minlength]="field.minLength"
-                [attr.maxlength]="field.maxLength" [attr.min]="field.min" [attr.max]="field.max">
+                [attr.maxlength]="field.maxLength" [attr.min]="field.min" [attr.max]="field.max" [autocomplete]="'off'">
         </ng-container>
 
         <ng-container *ngIf="['password'].includes(field.type || 'text')">
-            <ae-password [tabindex]="1" class="w-full" [formGroup]="formGroup" [field]="field"></ae-password>
+            <ae-password class="w-full" [formGroup]="formGroup" [field]="field"></ae-password>
         </ng-container>
 
 
         <ng-container *ngIf="field.type ==='number'">
             <p-inputNumber [tabindex]="'1'" styleClass="w-full" class="w-full" [id]="field.name + '-input'"
                 [formControlName]="field.name!" [attr.required]="field.required" [attr.min]="field.min"
-                [attr.max]="field.max">
+                [attr.max]="field.max" [autocomplete]="'off'">
             </p-inputNumber>
         </ng-container>
 
         <ng-container *ngIf="field.type ==='currency'">
             <p-inputNumber [tabindex]="'1'" styleClass="w-full" class="w-full" [id]="field.name + '-input'"
                 [formControlName]="field.name!" [attr.required]="field.required" [attr.min]="field.min"
-                [attr.max]="field.max" inputId="locale-us" mode="decimal" locale="en-US" [minFractionDigits]="2">
+                [attr.max]="field.max" inputId="locale-us" mode="decimal" locale="en-US" [minFractionDigits]="2"
+                [autocomplete]="'off'">
             </p-inputNumber>
         </ng-container>
 
@@ -41,7 +42,7 @@
 
             <textarea [id]="field.name" [tabindex]="1" [formControlName]="field.name!" [attr.required]="field.required"
                 [attr.minlength]="field.minLength" [attr.maxlength]="field.maxLength" [attr.min]="field.min"
-                [attr.max]="field.max"></textarea>
+                [attr.max]="field.max" [autocomplete]="'off'"></textarea>
         </ng-container>
 
 
@@ -49,7 +50,7 @@
             <p-dropdown #dropdownRef [tabindex]="1" styleClass="w-full" class="w-full"
                 [options]="(getOptions(field.name!) | async)!" [formControlName]="field.name!"
                 [optionLabel]="field.optionLabel!" [filter]="true" [filterBy]="field.optionLabel!" [showClear]="true"
-                [dataKey]="'id'" (onChange)="refInput.value =$event">
+                [dataKey]="'id'" (onChange)="refInput.value =$event" [placeholder]="'Select ' + field.name">
             </p-dropdown>
 
             <input #refInput tabindex="91724981742" [formControlName]="field.name!" class="hidden-input"
@@ -61,7 +62,8 @@
             <p-multiSelect #selectRef [tabindex]="1" styleClass="w-full" class="w-full"
                 [options]="(getOptions(field.name!) | async)!" [formControlName]="field.name!"
                 [optionLabel]="field.optionLabel!" [filter]="true" [filterBy]="field.optionLabel!" [showClear]="true"
-                display="chip" [dataKey]="'id'" (onChange)="refInput.value =$event">
+                display="chip" [dataKey]="'id'" (onChange)="refInput.value =$event"
+                [defaultLabel]="'Select ' + field.name">
             </p-multiSelect>
 
             <input tabindex="19872391872" #refInput [formControlName]="field.name!" class="hidden-input"
