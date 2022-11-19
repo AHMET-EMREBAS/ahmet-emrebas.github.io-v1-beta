@@ -1,3 +1,4 @@
+import { IID } from 'common/base';
 import { upperFirst } from 'lodash';
 
 import {
@@ -107,7 +108,8 @@ export class InventoryModule implements OnModuleInit {
   constructor(
     private readonly priceLevelService: PricelevelService,
     private readonly storeService: StoreService,
-    private readonly permissionService: PermissionService
+    private readonly permissionService: PermissionService,
+    private readonly userService: UserService
   ) {}
 
   async onModuleInit() {
@@ -122,27 +124,35 @@ export class InventoryModule implements OnModuleInit {
       pricelevel: { id: retail.id },
     });
     const resources = [
-      'product',
-      'category',
-      'department',
-      'price',
-      'quantity',
-      'store',
-      'pricelevel',
-      'user',
-      'permission',
-      'sku',
+      'Product',
+      'Category',
+      'Department',
+      'Price',
+      'Quantity',
+      'Store',
+      'Pricelevel',
+      'User',
+      'Permission',
+      'Sku',
     ];
 
-    const operations = ['read', 'write', 'manage'];
+    const operations = ['read', 'write', 'update', 'delete', 'functions'];
 
     for (const o of operations) {
       for (const r of resources) {
         await this.permissionService.save({
-          name: [o, r].join(':').toUpperCase(),
+          name: [o, r].join(''),
           description: [o, r].map(upperFirst).join(' '),
         });
       }
     }
+
+    await this.userService.save({
+      username: 'user@example.com',
+      password: 'user@example.com',
+      permission: (await this.permissionService.find({
+        select: ['id'],
+      })) as IID[],
+    });
   }
 }

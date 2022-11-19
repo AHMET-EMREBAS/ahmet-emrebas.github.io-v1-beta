@@ -78,7 +78,10 @@ export class CategoryController {
   }
 
   @Patch()
-  functions(@Query() whereDto: WhereDto, @Query() functions: FunctionsDto) {
+  functionsCategory(
+    @Query() whereDto: WhereDto,
+    @Query() functions: FunctionsDto
+  ) {
     if (functions.query === 'count') {
       return this.viewService.count({ where: whereDto.where });
     }

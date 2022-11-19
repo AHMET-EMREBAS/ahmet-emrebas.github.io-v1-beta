@@ -78,7 +78,10 @@ export class DepartmentController {
   }
 
   @Patch()
-  functions(@Query() whereDto: WhereDto, @Query() functions: FunctionsDto) {
+  functionsDepartment(
+    @Query() whereDto: WhereDto,
+    @Query() functions: FunctionsDto
+  ) {
     if (functions.query === 'count') {
       return this.viewService.count({ where: whereDto.where });
     }

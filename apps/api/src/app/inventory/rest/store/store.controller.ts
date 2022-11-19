@@ -78,7 +78,10 @@ export class StoreController {
   }
 
   @Patch()
-  functions(@Query() whereDto: WhereDto, @Query() functions: FunctionsDto) {
+  functionsStore(
+    @Query() whereDto: WhereDto,
+    @Query() functions: FunctionsDto
+  ) {
     if (functions.query === 'count') {
       return this.viewService.count({ where: whereDto.where });
     }

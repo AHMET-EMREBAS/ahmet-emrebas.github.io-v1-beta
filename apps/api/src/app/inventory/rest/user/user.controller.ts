@@ -78,7 +78,7 @@ export class UserController {
   }
 
   @Patch()
-  functions(@Query() whereDto: WhereDto, @Query() functions: FunctionsDto) {
+  functionsUser(@Query() whereDto: WhereDto, @Query() functions: FunctionsDto) {
     if (functions.query === 'count') {
       return this.viewService.count({ where: whereDto.where });
     }

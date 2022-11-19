@@ -78,7 +78,10 @@ export class PricelevelController {
   }
 
   @Patch()
-  functions(@Query() whereDto: WhereDto, @Query() functions: FunctionsDto) {
+  functionsPricelevel(
+    @Query() whereDto: WhereDto,
+    @Query() functions: FunctionsDto
+  ) {
     if (functions.query === 'count') {
       return this.viewService.count({ where: whereDto.where });
     }

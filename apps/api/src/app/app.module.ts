@@ -78,6 +78,7 @@ import { ProductBuilderSubscriber } from './inventory/subscribers';
       },
     }),
     InventoryModule,
+    TypeOrmModule.forFeature([User, Permission]),
     AuthModule.register({
       entities: [User, Permission],
       service: UserService,
@@ -85,6 +86,10 @@ import { ProductBuilderSubscriber } from './inventory/subscribers';
   ],
   providers: [
     UserService,
+    {
+      provide: 'USER_SERVICE',
+      useClass: UserService,
+    },
     PermissionService,
     ProductBuilderSubscriber,
     {

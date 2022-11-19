@@ -9,6 +9,7 @@ import {
 import { Reflector } from '@nestjs/core';
 
 import { IAuthUser } from '../auth-user';
+import { PUBLIC_RESOURCE_KEY } from '../decorators';
 import { JwtAuthGuard } from './jwt-auth.guard';
 
 @Injectable()
@@ -24,12 +25,25 @@ export class PermissionGuard extends JwtAuthGuard {
   async canActivate(
     context: ExecutionContext
   ): Promise<boolean | Observable<boolean>> {
+    const isPublicResource = this.reflector.getAllAndOverride(
+      PUBLIC_RESOURCE_KEY,
+      [context.getHandler(), context.getClass()]
+    );
+
+    if (isPublicResource) {
+      return true;
+    }
+
     const isAuthenticated = await super.canActivate(context);
+
+    console.log('Is authenticated ? : ', isAuthenticated);
 
     if (isAuthenticated) {
       const userIds = context.switchToHttp().getRequest<Request>()[
         'user'
       ] as Partial<IAuthUser>;
+
+      console.log('User Cookie : ', userIds);
 
       const user = await this.userService.findOneBy({
         id: userIds.id,
@@ -37,7 +51,15 @@ export class PermissionGuard extends JwtAuthGuard {
 
       const requiredPermission = context.getHandler().name;
 
-      if (user?.permission.find((e) => e.name === requiredPermission)) {
+      const foundPermission = user?.permission.find(
+        (e) => e.name === requiredPermission
+      );
+
+      console.log('Required Permission ? : ', requiredPermission);
+
+      console.log('Found permission : ', foundPermission);
+
+      if (foundPermission) {
         return true;
       }
     }
