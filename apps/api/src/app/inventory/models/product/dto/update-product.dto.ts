@@ -1,4 +1,4 @@
-import { Expose } from 'class-transformer';
+import { Expose, Type } from 'class-transformer';
 import { Field, InputType, Int } from '@nestjs/graphql';
 import { Validations } from 'core/validations';
 import { ID } from 'core/dto';
@@ -7,14 +7,8 @@ import { ValidateNested } from 'class-validator';
 
 import { IProduct } from 'common/inventory/interfaces/product';
 
-import { Category } from '../../category';
-
-import { Department } from '../../department';
-
 @InputType()
-export class UpdateProductDto
-  implements Partial<IProduct<Category, Department>>
-{
+export class UpdateProductDto implements Partial<IProduct<ID, ID>> {
   @Field()
   @Validations({
     type: 'string',
@@ -50,6 +44,17 @@ export class UpdateProductDto
 
   @Field()
   @Validations({
+    type: 'number',
+
+    min: 0,
+
+    max: 1000000000000000000,
+  })
+  @Expose()
+  quantity: number;
+
+  @Field()
+  @Validations({
     type: 'string',
 
     minLength: 0,
@@ -60,12 +65,14 @@ export class UpdateProductDto
   description: string;
 
   @Field(() => Int)
-  @Validations({ min: 1 })
+  @ValidateNested()
+  @Type(() => ID)
   @Expose()
-  category: Category;
+  category: ID;
 
   @Field(() => Int)
-  @Validations({ min: 1 })
+  @ValidateNested()
+  @Type(() => ID)
   @Expose()
-  department: Department;
+  department: ID;
 }

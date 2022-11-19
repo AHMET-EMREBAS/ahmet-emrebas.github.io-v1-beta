@@ -161,10 +161,12 @@ export class InventoryModule implements OnModuleInit {
         description: `Read ${e.toLowerCase()}`,
       });
     }
+    const permissions = await this.permissionService.find();
+
     for (const user of [1, 2]) {
-      for (let i = 1; i < 21; i++) {
+      for (const p of permissions) {
         try {
-          await this.userService.add(user, i, 'permission');
+          await this.userService.add(user, p.id, 'permission');
         } catch (err) {
           // ignore/
         }
@@ -194,6 +196,7 @@ export class InventoryModule implements OnModuleInit {
             department: dep,
             price: 100,
             cost: 100,
+            quantity: 0,
           });
         } catch (err) {
           //

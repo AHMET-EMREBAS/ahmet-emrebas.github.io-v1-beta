@@ -147,7 +147,7 @@ export class Create<%- classname %>Component implements OnInit {
           <%  } %>
 
           <% for(const f of options.Relations || []) { %> 
-              <%- f.name %>: this.value('<%- f.name %>')?.id,
+              <%- f.name %>: this.value('<%- f.name %>'),
           <%  } %>
          });
       }

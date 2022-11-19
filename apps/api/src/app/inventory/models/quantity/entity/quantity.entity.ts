@@ -9,6 +9,7 @@ import {
   OneToMany,
   ManyToMany,
 } from 'typeorm';
+import { ID } from 'core/dto';
 
 import { IQuantity } from 'common/inventory/interfaces/quantity';
 
@@ -20,14 +21,14 @@ import { Field, ObjectType } from '@nestjs/graphql';
 
 @Entity()
 @ObjectType()
-export class Quantity extends BaseEntity implements IQuantity<Sku, Store> {
+export class Quantity extends BaseEntity implements IQuantity<ID, ID> {
   @Field()
   @Column({ type: 'int', nullable: false, unique: false })
   quantity: number;
 
   @ManyToOne(() => Sku, { eager: true, nullable: false, onDelete: 'CASCADE' })
   @JoinColumn()
-  sku?: Sku;
+  sku?: ID;
 
   @ManyToOne(() => Store, {
     eager: true,
@@ -35,5 +36,5 @@ export class Quantity extends BaseEntity implements IQuantity<Sku, Store> {
     onDelete: 'SET NULL',
   })
   @JoinColumn()
-  store?: Store;
+  store?: ID;
 }

@@ -1,4 +1,4 @@
-import { Expose } from 'class-transformer';
+import { Expose, Type } from 'class-transformer';
 import { Field, InputType, Int } from '@nestjs/graphql';
 import { Validations } from 'core/validations';
 import { ID } from 'core/dto';
@@ -6,10 +6,8 @@ import { ValidateNested } from 'class-validator';
 
 import { IMessage } from 'common/inventory/interfaces/message';
 
-import { User } from '../../user';
-
 @InputType()
-export class CreateMessageDto implements IMessage<User, User> {
+export class CreateMessageDto implements IMessage<ID, ID> {
   @Field()
   @Validations({
     type: 'string',
@@ -22,12 +20,14 @@ export class CreateMessageDto implements IMessage<User, User> {
   message: string;
 
   @Field(() => Int)
-  @Validations({ min: 1 })
+  @ValidateNested()
+  @Type(() => ID)
   @Expose()
-  to: User;
+  to: ID;
 
   @Field(() => Int)
-  @Validations({ min: 1 })
+  @ValidateNested()
+  @Type(() => ID)
   @Expose()
-  from: User;
+  from: ID;
 }

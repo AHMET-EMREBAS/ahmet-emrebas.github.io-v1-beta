@@ -1,4 +1,4 @@
-import { Expose } from 'class-transformer';
+import { Expose, Type } from 'class-transformer';
 import { Field, InputType, Int } from '@nestjs/graphql';
 import { Validations } from 'core/validations';
 import { ID } from 'core/dto';
@@ -6,12 +6,8 @@ import { ValidateNested } from 'class-validator';
 
 import { IQuantity } from 'common/inventory/interfaces/quantity';
 
-import { Sku } from '../../sku';
-
-import { Store } from '../../store';
-
 @InputType()
-export class CreateQuantityDto implements IQuantity<Sku, Store> {
+export class CreateQuantityDto implements IQuantity<ID, ID> {
   @Field()
   @Validations({
     type: 'number',
@@ -24,12 +20,14 @@ export class CreateQuantityDto implements IQuantity<Sku, Store> {
   quantity: number;
 
   @Field(() => Int)
-  @Validations({ min: 1 })
+  @ValidateNested()
+  @Type(() => ID)
   @Expose()
-  sku: Sku;
+  sku: ID;
 
   @Field(() => Int)
-  @Validations({ min: 1 })
+  @ValidateNested()
+  @Type(() => ID)
   @Expose()
-  store: Store;
+  store: ID;
 }

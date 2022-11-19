@@ -160,7 +160,7 @@ formGroup = new FormGroup({
               <%- f.Property %>: this.value('<%- f.Property %>'),
           <%  } %>
           <% for(const f of options.Relations || []) { %> 
-              <%- f.name %>: this.value('<%- f.name %>')?.id,
+              <%- f.name %>: this.value('<%- f.name %>'),
           <%  } %>
         });
     }

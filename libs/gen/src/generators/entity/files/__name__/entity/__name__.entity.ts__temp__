@@ -9,7 +9,7 @@ import {
   OneToMany, 
   ManyToMany
 } from 'typeorm';
-
+import { ID } from 'core/dto'
 
 import { I<%- classname %> } from 'common/<%- project %>/interfaces/<%- name %>';
 
@@ -35,9 +35,9 @@ export class <%- classname %> extends BaseEntity
     implements I<%- classname %><   <% for(const o of options.Relations || []) { %>  
     
     <% if(o.type.endsWith('One')) { %>   
-       <%- o.target %>,
+       ID,
     <% } else { %> 
-      <%- o.target %>[],
+      ID[],
     <% } %>
 
       <% } %> >
@@ -62,7 +62,7 @@ export class <%- classname %> extends BaseEntity
   @<%- o.type %>(()=> <%- o.target %>, { eager: <%- o.eager===true %>, nullable: <%- o.nullable===true %>, onDelete: '<%- o.onDelete || 'RESTRICT' %>'})
   <% if(o.joinColumn) { %>  @JoinColumn()  <% } %> 
   <% if(o.joinTable) { %>  @JoinTable({name:'<%- name %>-<%- o.target.toLowerCase() %>'})  <% } %> 
-  <%- o.name %>?:  <% if(o.type.endsWith('Many')) { %> <%- o.target %>[]; <% } else {  %> <%- o.target %>; <% } %>
+  <%- o.name %>?:  <% if(o.type.endsWith('Many')) { %> ID[]; <% } else {  %> ID; <% } %>
 
 <% } %>
 

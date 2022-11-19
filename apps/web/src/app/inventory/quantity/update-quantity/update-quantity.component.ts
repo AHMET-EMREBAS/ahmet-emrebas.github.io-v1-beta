@@ -1,15 +1,28 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import {
+  AfterViewInit,
+  Component,
+  OnInit,
+} from '@angular/core';
+import {
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import {
+  ActivatedRoute,
+  Router,
+} from '@angular/router';
+
 import { IReadQuantity } from 'common/inventory/interfaces';
-import { InputOptions, setFormGroupValue } from 'material/form';
-import { QuantityService } from '../quantity.service';
+import {
+  InputOptions,
+  setFormGroupValue,
+} from 'material/form';
 import { firstValueFrom } from 'rxjs';
 
 import { SkuService } from '../../sku';
-
 import { StoreService } from '../../store';
-
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { QuantityService } from '../quantity.service';
 
 @Component({
   selector: 'ae-update-quantity',
@@ -93,6 +106,8 @@ export class UpdateQuantityComponent implements AfterViewInit, OnInit {
       this.itemToBeUpdated = await firstValueFrom(
         this.quantityService.getByKey(__item.id)
       );
+      console.log(this.itemToBeUpdated);
+
       setFormGroupValue(this.formGroup, this.itemToBeUpdated);
     }
   }
@@ -104,9 +119,9 @@ export class UpdateQuantityComponent implements AfterViewInit, OnInit {
 
         quantity: this.value('quantity'),
 
-        sku: this.value('sku')?.id,
+        sku: this.value('sku'),
 
-        store: this.value('store')?.id,
+        store: this.value('store'),
       });
     }
   }

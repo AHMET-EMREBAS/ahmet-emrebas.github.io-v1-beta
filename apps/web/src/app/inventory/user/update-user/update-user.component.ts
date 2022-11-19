@@ -1,13 +1,27 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import {
+  AfterViewInit,
+  Component,
+  OnInit,
+} from '@angular/core';
+import {
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import {
+  ActivatedRoute,
+  Router,
+} from '@angular/router';
+
 import { IReadUser } from 'common/inventory/interfaces';
-import { InputOptions, setFormGroupValue } from 'material/form';
-import { UserService } from '../user.service';
+import {
+  InputOptions,
+  setFormGroupValue,
+} from 'material/form';
 import { firstValueFrom } from 'rxjs';
 
 import { PermissionService } from '../../permission';
-
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'ae-update-user',
@@ -85,6 +99,7 @@ export class UpdateUserComponent implements AfterViewInit, OnInit {
       this.itemToBeUpdated = await firstValueFrom(
         this.userService.getByKey(__item.id)
       );
+      console.log(this.itemToBeUpdated);
       setFormGroupValue(this.formGroup, this.itemToBeUpdated);
     }
   }

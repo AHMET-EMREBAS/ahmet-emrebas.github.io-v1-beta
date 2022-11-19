@@ -7,6 +7,8 @@ export interface IProduct<Category1, Department2> extends BaseInterface {
 
   cost: number;
 
+  quantity: number;
+
   description: string;
 
   category?: Category1;

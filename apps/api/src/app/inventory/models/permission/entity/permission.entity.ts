@@ -9,6 +9,7 @@ import {
   OneToMany,
   ManyToMany,
 } from 'typeorm';
+import { ID } from 'core/dto';
 
 import { IPermission } from 'common/inventory/interfaces/permission';
 

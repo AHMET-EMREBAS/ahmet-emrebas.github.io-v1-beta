@@ -9,6 +9,7 @@ import {
   OneToMany,
   ManyToMany,
 } from 'typeorm';
+import { ID } from 'core/dto';
 
 import { IStore } from 'common/inventory/interfaces/store';
 
@@ -18,7 +19,7 @@ import { Field, ObjectType } from '@nestjs/graphql';
 
 @Entity()
 @ObjectType()
-export class Store extends BaseEntity implements IStore<Pricelevel> {
+export class Store extends BaseEntity implements IStore<ID> {
   @Field()
   @Column({ type: 'text', nullable: false, unique: true })
   name: string;
@@ -29,5 +30,5 @@ export class Store extends BaseEntity implements IStore<Pricelevel> {
     onDelete: 'RESTRICT',
   })
   @JoinColumn()
-  pricelevel?: Pricelevel;
+  pricelevel?: ID;
 }

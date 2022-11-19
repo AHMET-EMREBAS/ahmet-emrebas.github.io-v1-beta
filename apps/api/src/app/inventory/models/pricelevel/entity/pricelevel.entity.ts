@@ -9,6 +9,7 @@ import {
   OneToMany,
   ManyToMany,
 } from 'typeorm';
+import { ID } from 'core/dto';
 
 import { IPricelevel } from 'common/inventory/interfaces/pricelevel';
 

@@ -9,6 +9,7 @@ import {
   OneToMany,
   ManyToMany,
 } from 'typeorm';
+import { ID } from 'core/dto';
 
 import { IPrice } from 'common/inventory/interfaces/price';
 
@@ -20,7 +21,7 @@ import { Field, ObjectType } from '@nestjs/graphql';
 
 @Entity()
 @ObjectType()
-export class Price extends BaseEntity implements IPrice<Sku, Pricelevel> {
+export class Price extends BaseEntity implements IPrice<ID, ID> {
   @Field()
   @Column({ type: 'numeric', nullable: true, unique: false })
   price: number;
@@ -31,7 +32,7 @@ export class Price extends BaseEntity implements IPrice<Sku, Pricelevel> {
 
   @ManyToOne(() => Sku, { eager: true, nullable: true, onDelete: 'CASCADE' })
   @JoinColumn()
-  sku?: Sku;
+  sku?: ID;
 
   @ManyToOne(() => Pricelevel, {
     eager: true,
@@ -39,5 +40,5 @@ export class Price extends BaseEntity implements IPrice<Sku, Pricelevel> {
     onDelete: 'SET NULL',
   })
   @JoinColumn()
-  pricelevel?: Pricelevel;
+  pricelevel?: ID;
 }

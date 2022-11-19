@@ -39,6 +39,8 @@ export type InputOptions<T = R> = Partial<IoAttr & IoExtra<T>> & IoRequired;
   styleUrls: ['./form.component.scss'],
 })
 export class FormComponent implements AfterViewInit {
+  defaultValues = {};
+
   @Input() formGroup!: FormGroup;
   @Input() fields!: InputOptions[];
 

@@ -9,6 +9,7 @@ import {
   OneToMany,
   ManyToMany,
 } from 'typeorm';
+import { ID } from 'core/dto';
 
 import { IUser } from 'common/inventory/interfaces/user';
 
@@ -18,7 +19,7 @@ import { Field, ObjectType } from '@nestjs/graphql';
 
 @Entity()
 @ObjectType()
-export class User extends BaseEntity implements IUser<Permission[]> {
+export class User extends BaseEntity implements IUser<ID[]> {
   @Field()
   @Column({ type: 'text', nullable: false, unique: true })
   username: string;
@@ -33,5 +34,5 @@ export class User extends BaseEntity implements IUser<Permission[]> {
     onDelete: 'CASCADE',
   })
   @JoinTable({ name: 'user-permission' })
-  permission?: Permission[];
+  permission?: ID[];
 }

@@ -1,17 +1,10 @@
-import { Expose } from 'class-transformer';
+import { Expose, Type } from 'class-transformer';
 import {  Field,  InputType, Int} from '@nestjs/graphql';
 import { Validations } from 'core/validations'
 import { ID } from 'core/dto'
 import { ValidateNested } from 'class-validator';
 
 import { I<%- classname %> } from 'common/<%- project %>/interfaces/<%- name %>';
-
-<% for(const target of new Set(options.Relations?.map(e=>e.target) || [])) { %> 
-
-import { <%- target  %>  } from '../../<%- target.toLowerCase() %>';
-
-<% } %>
-
 
 @InputType()
 export class Create<%- classname %>Dto  
@@ -21,9 +14,9 @@ export class Create<%- classname %>Dto
     implements I<%- classname %><   <% for(const o of options.Relations || []) { %>  
     
     <% if(o.type.endsWith('One')) { %>   
-       <%- o.target %>,
+       ID,
     <% } else { %> 
-      <%- o.target %>[],
+      ID[],
     <% } %>
 
       <% } %> >
@@ -56,15 +49,17 @@ export class Create<%- classname %>Dto
   
     <% if(o.type.endsWith('One')) { %>   
         @Field(()=>Int)
-        @Validations({    min:1  })
+        @ValidateNested()
+        @Type(() => ID)
         @Expose()
-        <%- o.name %>: <%- o.target %>;
+        <%- o.name %>: ID;
     <% } else { %> 
 
-        @Field(()=>ID)
-        @ValidateNested()
+        @Field(() => ID)
+        @ValidateNested({ each: true })
+        @Type(() => ID)
         @Expose()
-        <%- o.name %>: <%- o.target %>[];
+        <%- o.name %>: ID[];
 
     <% } %>
 

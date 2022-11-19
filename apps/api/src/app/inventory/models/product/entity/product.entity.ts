@@ -9,6 +9,7 @@ import {
   OneToMany,
   ManyToMany,
 } from 'typeorm';
+import { ID } from 'core/dto';
 
 import { IProduct } from 'common/inventory/interfaces/product';
 
@@ -20,10 +21,7 @@ import { Field, ObjectType } from '@nestjs/graphql';
 
 @Entity()
 @ObjectType()
-export class Product
-  extends BaseEntity
-  implements IProduct<Category, Department>
-{
+export class Product extends BaseEntity implements IProduct<ID, ID> {
   @Field()
   @Column({ type: 'text', nullable: false, unique: true })
   name: string;
@@ -37,6 +35,10 @@ export class Product
   cost: number;
 
   @Field()
+  @Column({ type: 'int', nullable: true, unique: false })
+  quantity: number;
+
+  @Field()
   @Column({ type: 'text', nullable: true, unique: false })
   description: string;
 
@@ -46,7 +48,7 @@ export class Product
     onDelete: 'SET NULL',
   })
   @JoinColumn()
-  category?: Category;
+  category?: ID;
 
   @ManyToOne(() => Department, {
     eager: true,
@@ -54,5 +56,5 @@ export class Product
     onDelete: 'SET NULL',
   })
   @JoinColumn()
-  department?: Department;
+  department?: ID;
 }

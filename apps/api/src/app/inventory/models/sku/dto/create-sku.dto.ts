@@ -1,4 +1,4 @@
-import { Expose } from 'class-transformer';
+import { Expose, Type } from 'class-transformer';
 import { Field, InputType, Int } from '@nestjs/graphql';
 import { Validations } from 'core/validations';
 import { ID } from 'core/dto';
@@ -6,10 +6,8 @@ import { ValidateNested } from 'class-validator';
 
 import { ISku } from 'common/inventory/interfaces/sku';
 
-import { Product } from '../../product';
-
 @InputType()
-export class CreateSkuDto implements ISku<Product> {
+export class CreateSkuDto implements ISku<ID> {
   @Field()
   @Validations({
     type: 'string',
@@ -44,7 +42,8 @@ export class CreateSkuDto implements ISku<Product> {
   description: string;
 
   @Field(() => Int)
-  @Validations({ min: 1 })
+  @ValidateNested()
+  @Type(() => ID)
   @Expose()
-  product: Product;
+  product: ID;
 }

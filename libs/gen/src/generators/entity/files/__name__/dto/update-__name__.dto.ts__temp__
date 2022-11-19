@@ -1,35 +1,37 @@
-import { Expose } from 'class-transformer';
+import { Expose ,Type} from 'class-transformer';
 import {
   Field,
   InputType,
   Int
 } from '@nestjs/graphql';
 import { Validations} from 'core/validations'
-import { ID} from 'core/dto'
+import { ID } from 'core/dto'
 
 import { ValidateNested } from 'class-validator';
 
 import { I<%- classname %> } from 'common/<%- project %>/interfaces/<%- name %>';
 
-<% for(const target of new Set(options.Relations?.map(e=>e.target) || [])) { %> 
 
-import { <%- target  %>  } from '../../<%- target.toLowerCase() %>';
 
-<% } %>
 
 @InputType()
 export class Update<%- classname %>Dto
 
 <% if(options.Relations?.length > 0) { %> 
-    implements Partial<I<%- classname %><   <% for(const o of options.Relations || []) { %>  
+    implements Partial<I<%- classname %><   
     
-    <% if(o.type.endsWith('One')) { %>   
-       <%- o.target %>,
+<% for(const o of options.Relations || []) { %>  
+    
+   <% if(o.type.endsWith('One')) { %>   
+       ID,
     <% } else { %> 
-      <%- o.target %>[],
+      ID[],
     <% } %>
 
-      <% } %> >>
+<% } %> >
+>
+
+
 <% } else { %> 
   implements  Partial<I<%- classname %>>
 <% } %>
@@ -59,19 +61,21 @@ export class Update<%- classname %>Dto
 
     <% for(const o of options.Relations || []) { %> 
   
-    <% if(o.type.endsWith('One')) { %>   
+      <% if(o.type.endsWith('One')) { %>   
         @Field(()=>Int)
-        @Validations({    min:1  })
-        @Expose()
-        <%- o.name %>: <%- o.target %>;
-    <% } else { %> 
-
-        @Field(()=>ID)
         @ValidateNested()
+        @Type(() => ID)
         @Expose()
-        <%- o.name %>: <%- o.target %>[];
+        <%- o.name %>: ID;
+      <% } else { %> 
 
-    <% } %>
+          @Field(() => ID)
+          @ValidateNested({ each: true })
+          @Type(() => ID)
+          @Expose()
+          <%- o.name %>: ID[];
+
+      <% } %>
 
   <% } %>
 }

@@ -40,6 +40,19 @@ Properties:
       type: currency
       group: Price
 
+  - Property: quantity
+    Validation:
+      type: number
+      min: 0
+      max: 999999999999999999
+    Column:
+      columnType: int
+      valueType: number
+
+    UI:
+      type: number
+      group: Quantity
+
   - Property: description
     Description: Product description
     Defination:

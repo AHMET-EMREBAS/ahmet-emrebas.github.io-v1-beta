@@ -30,6 +30,8 @@ import { Department } from '../../department';
 
       .addSelect('product.cost', 'cost')
 
+      .addSelect('product.quantity', 'quantity')
+
       .addSelect('product.description', 'description')
 
       .addSelect('category.name', 'category')
@@ -71,6 +73,10 @@ export class ProductView implements IProduct<string, string> {
   @Field()
   @ViewColumn()
   cost: number;
+
+  @Field()
+  @ViewColumn()
+  quantity: number;
 
   @Field()
   @ViewColumn()

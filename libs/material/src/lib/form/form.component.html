@@ -51,9 +51,10 @@
         </ng-container>
 
         <ng-container *ngIf="field.type ==='select-many'">
-            <p-multiSelect styleClass="w-full" class="w-full" [options]="(getOptions(field.name!) | async)!"
+            <p-multiSelect #selectRef styleClass="w-full" class="w-full" [options]="(getOptions(field.name!) | async)!"
                 [formControlName]="field.name!" [optionLabel]="field.optionLabel!" [filter]="true"
-                [filterBy]="field.optionLabel!" [showClear]="true"></p-multiSelect>
+                [filterBy]="field.optionLabel!" [showClear]="true" display="chip" [dataKey]="'id'">
+            </p-multiSelect>
 
         </ng-container>
 

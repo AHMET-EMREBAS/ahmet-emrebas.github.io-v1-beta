@@ -9,6 +9,7 @@ import {
   OneToMany,
   ManyToMany,
 } from 'typeorm';
+import { ID } from 'core/dto';
 
 import { ISku } from 'common/inventory/interfaces/sku';
 
@@ -18,7 +19,7 @@ import { Field, ObjectType } from '@nestjs/graphql';
 
 @Entity()
 @ObjectType()
-export class Sku extends BaseEntity implements ISku<Product> {
+export class Sku extends BaseEntity implements ISku<ID> {
   @Field()
   @Column({ type: 'text', nullable: false, unique: true })
   name: string;
@@ -37,5 +38,5 @@ export class Sku extends BaseEntity implements ISku<Product> {
     onDelete: 'CASCADE',
   })
   @JoinColumn()
-  product?: Product;
+  product?: ID;
 }

@@ -39,6 +39,12 @@ export class CreateProductComponent implements OnInit {
       Validators.max(99999999999999),
     ]),
 
+    quantity: new FormControl('', [
+      Validators.min(0),
+
+      Validators.max(1000000000000000000),
+    ]),
+
     description: new FormControl('', [
       Validators.minLength(0),
 
@@ -84,6 +90,17 @@ export class CreateProductComponent implements OnInit {
       min: 0,
 
       max: 99999999999999,
+    },
+
+    {
+      name: 'quantity',
+      type: 'number',
+      group: 'Quantity',
+      placeholder: 'quantity',
+
+      min: 0,
+
+      max: 1000000000000000000,
     },
 
     {
@@ -142,6 +159,8 @@ export class CreateProductComponent implements OnInit {
           price: this.value('price'),
 
           cost: this.value('cost'),
+
+          quantity: this.value('quantity'),
 
           description: this.value('description'),
 
