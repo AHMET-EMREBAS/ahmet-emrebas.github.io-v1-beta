@@ -14,6 +14,8 @@ import { InputTextModule } from 'primeng/inputtext';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { RadioButtonModule } from 'primeng/radiobutton';
+import { StepsModule } from 'primeng/steps';
+import { TabMenuModule } from 'primeng/tabmenu';
 
 import { FormComponent } from './form.component';
 import { PasswordComponent } from './password/password.component';
@@ -33,6 +35,8 @@ import { PasswordComponent } from './password/password.component';
     ButtonModule,
     DropdownModule,
     InputNumberModule,
+    StepsModule,
+    TabMenuModule,
   ],
   exports: [FormComponent],
 })

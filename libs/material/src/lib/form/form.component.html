@@ -1,8 +1,10 @@
 <div class="info" *ngIf="!formGroup">FormGroup is not provided!</div>
 
 
-<form #form="ngForm" class="ae-form flex flex-column gap-5 " *ngIf="formGroup" [formGroup]="formGroup"
+<form #form="ngForm" class="ae-form flex flex-column gap-5 pb-5 " *ngIf="formGroup" [formGroup]="formGroup"
     (ngSubmit)="submit()" [noValidate]="false">
+
+
     <div class="flex flex-column  justify-content-start align-items-start" *ngFor=" let field of fields">
         <label [for]="field.name + '-input'">{{field.placeholder | titlecase}} </label>
         <ng-container *ngIf="['text', 'date', 'datetime', 'range', 'email'].includes(field.type || 'text')">
@@ -46,7 +48,7 @@
         <ng-container *ngIf="field.type ==='select'">
             <p-dropdown styleClass="w-full" class="w-full" [options]="(getOptions(field.name!) | async)!"
                 [formControlName]="field.name!" [optionLabel]="field.optionLabel!" [filter]="true"
-                [filterBy]="field.optionLabel!" [showClear]="true">
+                [filterBy]="field.optionLabel!" [showClear]="true" [dataKey]="'id'">
             </p-dropdown>
         </ng-container>
 
