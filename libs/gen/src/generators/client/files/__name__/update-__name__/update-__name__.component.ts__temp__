@@ -115,7 +115,7 @@ formGroup = new FormGroup({
       placeholder: '<%- r.label || r.name %>',           
       asyncOptions:  this.<%- r.target.toLowerCase() %>Service.entities$,
       optionValue:'id', 
-      optionLabel: 'name',
+      optionLabel: '<%- r.viewColumns[0].column %>',
       <% if(options.Required?.includes(r.name)) { %> 
             required:true,
        <% } %>
