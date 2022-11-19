@@ -29,7 +29,7 @@ export class CreateCategoryComponent implements OnInit {
     {
       name: 'name',
       type: 'text',
-      group: 'Primary',
+      group: 'Category',
       placeholder: 'name',
 
       required: true,

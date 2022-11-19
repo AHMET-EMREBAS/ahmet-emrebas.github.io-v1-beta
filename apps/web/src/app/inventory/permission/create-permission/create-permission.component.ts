@@ -35,7 +35,7 @@ export class CreatePermissionComponent implements OnInit {
     {
       name: 'name',
       type: 'text',
-      group: 'Primary',
+      group: 'Permission',
       placeholder: 'name',
 
       required: true,
@@ -48,7 +48,7 @@ export class CreatePermissionComponent implements OnInit {
     {
       name: 'description',
       type: 'text',
-      group: 'Primary',
+      group: 'Permission',
       placeholder: 'description',
 
       minLength: 0,

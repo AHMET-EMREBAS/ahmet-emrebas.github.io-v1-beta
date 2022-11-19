@@ -35,7 +35,7 @@ export class CreateMessageComponent implements OnInit {
     {
       name: 'message',
       type: 'text',
-      group: 'Primary',
+      group: 'Message',
       placeholder: 'message',
 
       required: true,
@@ -48,7 +48,7 @@ export class CreateMessageComponent implements OnInit {
     {
       name: 'to',
       type: 'select',
-      group: 'Primary',
+      group: 'To',
       placeholder: 'to',
       asyncOptions: this.userService.entities$,
       optionValue: 'id',
@@ -58,7 +58,7 @@ export class CreateMessageComponent implements OnInit {
     {
       name: 'from',
       type: 'select',
-      group: 'Primary',
+      group: 'To',
       placeholder: 'from',
       asyncOptions: this.userService.entities$,
       optionValue: 'id',

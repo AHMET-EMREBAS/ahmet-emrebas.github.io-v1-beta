@@ -45,8 +45,8 @@ export class UpdatePriceComponent implements AfterViewInit, OnInit {
   fields: InputOptions[] = [
     {
       name: 'price',
-      type: 'number',
-      group: 'Primary',
+      type: 'currency',
+      group: 'Price',
       placeholder: 'price',
 
       min: 0,
@@ -56,8 +56,8 @@ export class UpdatePriceComponent implements AfterViewInit, OnInit {
 
     {
       name: 'cost',
-      type: 'number',
-      group: 'Primary',
+      type: 'currency',
+      group: 'Price',
       placeholder: 'cost',
 
       min: 0,
@@ -68,7 +68,7 @@ export class UpdatePriceComponent implements AfterViewInit, OnInit {
     {
       name: 'sku',
       type: 'select',
-      group: 'Primary',
+      group: 'Meta',
       placeholder: 'sku',
       asyncOptions: this.skuService.entities$,
       optionValue: 'id',
@@ -78,7 +78,7 @@ export class UpdatePriceComponent implements AfterViewInit, OnInit {
     {
       name: 'pricelevel',
       type: 'select',
-      group: 'Primary',
+      group: 'Meta',
       placeholder: 'pricelevel',
       asyncOptions: this.pricelevelService.entities$,
       optionValue: 'id',
@@ -110,7 +110,9 @@ export class UpdatePriceComponent implements AfterViewInit, OnInit {
         this.priceService.getByKey(__item.id)
       );
       setFormGroupValue(this.formGroup, this.itemToBeUpdated);
+      return;
     }
+    this.router.navigate(['../'], { relativeTo: this.route });
   }
 
   submit() {

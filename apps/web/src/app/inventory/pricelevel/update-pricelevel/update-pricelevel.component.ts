@@ -34,7 +34,7 @@ export class UpdatePricelevelComponent implements AfterViewInit, OnInit {
     {
       name: 'name',
       type: 'text',
-      group: 'Primary',
+      group: 'Price Level',
       placeholder: 'name',
 
       required: true,
@@ -63,7 +63,9 @@ export class UpdatePricelevelComponent implements AfterViewInit, OnInit {
         this.pricelevelService.getByKey(__item.id)
       );
       setFormGroupValue(this.formGroup, this.itemToBeUpdated);
+      return;
     }
+    this.router.navigate(['../'], { relativeTo: this.route });
   }
 
   submit() {

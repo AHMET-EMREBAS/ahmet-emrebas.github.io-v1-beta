@@ -38,7 +38,7 @@ export class UpdateStoreComponent implements AfterViewInit, OnInit {
     {
       name: 'name',
       type: 'text',
-      group: 'Primary',
+      group: 'Store',
       placeholder: 'name',
 
       required: true,
@@ -51,7 +51,7 @@ export class UpdateStoreComponent implements AfterViewInit, OnInit {
     {
       name: 'pricelevel',
       type: 'select',
-      group: 'Primary',
+      group: 'Price Level',
       placeholder: 'pricelevel',
       asyncOptions: this.pricelevelService.entities$,
       optionValue: 'id',
@@ -80,7 +80,9 @@ export class UpdateStoreComponent implements AfterViewInit, OnInit {
         this.storeService.getByKey(__item.id)
       );
       setFormGroupValue(this.formGroup, this.itemToBeUpdated);
+      return;
     }
+    this.router.navigate(['../'], { relativeTo: this.route });
   }
 
   submit() {

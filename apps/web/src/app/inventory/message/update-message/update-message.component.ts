@@ -40,7 +40,7 @@ export class UpdateMessageComponent implements AfterViewInit, OnInit {
     {
       name: 'message',
       type: 'text',
-      group: 'Primary',
+      group: 'Message',
       placeholder: 'message',
 
       required: true,
@@ -53,7 +53,7 @@ export class UpdateMessageComponent implements AfterViewInit, OnInit {
     {
       name: 'to',
       type: 'select',
-      group: 'Primary',
+      group: 'To',
       placeholder: 'to',
       asyncOptions: this.userService.entities$,
       optionValue: 'id',
@@ -63,7 +63,7 @@ export class UpdateMessageComponent implements AfterViewInit, OnInit {
     {
       name: 'from',
       type: 'select',
-      group: 'Primary',
+      group: 'To',
       placeholder: 'from',
       asyncOptions: this.userService.entities$,
       optionValue: 'id',
@@ -92,7 +92,9 @@ export class UpdateMessageComponent implements AfterViewInit, OnInit {
         this.messageService.getByKey(__item.id)
       );
       setFormGroupValue(this.formGroup, this.itemToBeUpdated);
+      return;
     }
+    this.router.navigate(['../'], { relativeTo: this.route });
   }
 
   submit() {

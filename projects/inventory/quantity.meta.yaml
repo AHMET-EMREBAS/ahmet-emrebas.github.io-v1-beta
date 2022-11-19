@@ -17,16 +17,7 @@ Properties:
 
     UI:
       type: number
-
-SearchFields:
-  - quantity
-  - store
-  - sku
-
-Required:
-  - quantity
-  - sku
-  - store
+      group: Quantity
 
 Relations:
   - type: ManyToOne
@@ -36,6 +27,7 @@ Relations:
     nullable: true
     joinColumn: true
     onDelete: CASCADE
+    group: Meta
     viewColumns:
       - column: name
         as: sku
@@ -49,9 +41,20 @@ Relations:
     target: Store
     name: store
     eager: true
+    group: Meta
     joinColumn: true
     onDelete: CASCADE
     viewColumns:
       - column: name
         as: store
         valueType: string
+
+SearchFields:
+  - quantity
+  - store
+  - sku
+
+Required:
+  - quantity
+  - sku
+  - store

@@ -42,7 +42,7 @@ export class UpdateQuantityComponent implements AfterViewInit, OnInit {
     {
       name: 'quantity',
       type: 'number',
-      group: 'Primary',
+      group: 'Quantity',
       placeholder: 'quantity',
 
       required: true,
@@ -55,7 +55,7 @@ export class UpdateQuantityComponent implements AfterViewInit, OnInit {
     {
       name: 'sku',
       type: 'select',
-      group: 'Primary',
+      group: 'Meta',
       placeholder: 'sku',
       asyncOptions: this.skuService.entities$,
       optionValue: 'id',
@@ -67,7 +67,7 @@ export class UpdateQuantityComponent implements AfterViewInit, OnInit {
     {
       name: 'store',
       type: 'select',
-      group: 'Primary',
+      group: 'Meta',
       placeholder: 'store',
       asyncOptions: this.storeService.entities$,
       optionValue: 'id',
@@ -101,7 +101,9 @@ export class UpdateQuantityComponent implements AfterViewInit, OnInit {
         this.quantityService.getByKey(__item.id)
       );
       setFormGroupValue(this.formGroup, this.itemToBeUpdated);
+      return;
     }
+    this.router.navigate(['../'], { relativeTo: this.route });
   }
 
   submit() {

@@ -33,7 +33,7 @@ export class CreateStoreComponent implements OnInit {
     {
       name: 'name',
       type: 'text',
-      group: 'Primary',
+      group: 'Store',
       placeholder: 'name',
 
       required: true,
@@ -46,7 +46,7 @@ export class CreateStoreComponent implements OnInit {
     {
       name: 'pricelevel',
       type: 'select',
-      group: 'Primary',
+      group: 'Price Level',
       placeholder: 'pricelevel',
       asyncOptions: this.pricelevelService.entities$,
       optionValue: 'id',

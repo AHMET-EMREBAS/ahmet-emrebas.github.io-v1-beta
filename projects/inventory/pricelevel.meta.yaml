@@ -15,6 +15,7 @@ Properties:
 
     UI:
       type: text
+      group: Price Level
 
     Column:
       columnType: text

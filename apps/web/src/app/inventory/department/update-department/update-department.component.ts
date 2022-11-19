@@ -34,7 +34,7 @@ export class UpdateDepartmentComponent implements AfterViewInit, OnInit {
     {
       name: 'name',
       type: 'text',
-      group: 'Primary',
+      group: 'Department',
       placeholder: 'name',
 
       required: true,
@@ -63,7 +63,9 @@ export class UpdateDepartmentComponent implements AfterViewInit, OnInit {
         this.departmentService.getByKey(__item.id)
       );
       setFormGroupValue(this.formGroup, this.itemToBeUpdated);
+      return;
     }
+    this.router.navigate(['../'], { relativeTo: this.route });
   }
 
   submit() {

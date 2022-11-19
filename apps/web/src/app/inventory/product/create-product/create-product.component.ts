@@ -61,7 +61,7 @@ export class CreateProductComponent implements OnInit {
     {
       name: 'name',
       type: 'text',
-      group: 'Primary',
+      group: 'Product',
       placeholder: 'name',
 
       required: true,
@@ -107,7 +107,7 @@ export class CreateProductComponent implements OnInit {
     {
       name: 'description',
       type: 'textarea',
-      group: 'Primary',
+      group: 'Product',
       placeholder: 'description',
 
       minLength: 0,

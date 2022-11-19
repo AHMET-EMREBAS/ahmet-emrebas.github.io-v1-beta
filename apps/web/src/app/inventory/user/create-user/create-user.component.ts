@@ -41,7 +41,7 @@ export class CreateUserComponent implements OnInit {
     {
       name: 'username',
       type: 'email',
-      group: 'Primary',
+      group: 'Username',
       placeholder: 'username',
 
       required: true,
@@ -52,7 +52,7 @@ export class CreateUserComponent implements OnInit {
     {
       name: 'password',
       type: 'password',
-      group: 'Primary',
+      group: 'Password',
       placeholder: 'password',
 
       required: true,
@@ -63,7 +63,7 @@ export class CreateUserComponent implements OnInit {
     {
       name: 'permission',
       type: 'select-many',
-      group: 'Primary',
+      group: 'Permissions',
       placeholder: 'permission',
       asyncOptions: this.permissionService.entities$,
       optionValue: 'id',

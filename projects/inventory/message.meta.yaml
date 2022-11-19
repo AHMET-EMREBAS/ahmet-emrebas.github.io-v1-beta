@@ -16,6 +16,8 @@ Properties:
 
     UI:
       type: text
+      group: Message
+
 SearchFields:
   - message
 
@@ -26,6 +28,7 @@ Relations:
   - type: ManyToOne
     target: User
     name: to
+    group: To
     eager: true
     joinColumn: true
     onDelete: SET NULL
@@ -37,6 +40,7 @@ Relations:
   - type: ManyToOne
     target: User
     name: from
+    group: To
     eager: true
     onDelete: SET NULL
     joinColumn: true

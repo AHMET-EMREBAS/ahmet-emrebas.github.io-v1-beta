@@ -47,7 +47,7 @@ export class CreateSkuComponent implements OnInit {
     {
       name: 'name',
       type: 'text',
-      group: 'Primary',
+      group: 'Sku',
       placeholder: 'name',
 
       required: true,
@@ -60,7 +60,7 @@ export class CreateSkuComponent implements OnInit {
     {
       name: 'barcode',
       type: 'text',
-      group: 'Primary',
+      group: 'Sku',
       placeholder: 'barcode',
 
       required: true,
@@ -73,7 +73,7 @@ export class CreateSkuComponent implements OnInit {
     {
       name: 'description',
       type: 'textarea',
-      group: 'Primary',
+      group: 'Sku',
       placeholder: 'description',
 
       minLength: 0,
@@ -84,7 +84,7 @@ export class CreateSkuComponent implements OnInit {
     {
       name: 'product',
       type: 'select',
-      group: 'Primary',
+      group: 'Product',
       placeholder: 'product',
       asyncOptions: this.productService.entities$,
       optionValue: 'id',

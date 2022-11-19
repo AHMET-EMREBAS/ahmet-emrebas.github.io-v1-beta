@@ -14,7 +14,8 @@ Properties:
       default: 0
       valueType: number
     UI:
-      type: number
+      type: currency
+      group: Price
 
   - Property: cost
     Description: cost
@@ -29,15 +30,8 @@ Properties:
       default: 0
       valueType: number
     UI:
-      type: number
-
-SearchFields:
-  - price
-  - cost
-
-Required:
-  - price
-    - cost
+      type: currency
+      group: Price
 
 Relations:
   - type: ManyToOne
@@ -47,6 +41,7 @@ Relations:
     onDelete: CASCADE
     nullable: true
     joinColumn: true
+    group: Meta
     viewColumns:
       - column: name
         as: sku
@@ -60,6 +55,7 @@ Relations:
     target: Pricelevel
     name: pricelevel
     nullable: true
+    group: Meta
     onDelete: CASCADE
     eager: true
     joinColumn: true
@@ -67,3 +63,11 @@ Relations:
       - column: name
         as: pricelevel
         valueType: string
+
+SearchFields:
+  - price
+  - cost
+
+Required:
+  - price
+    - cost

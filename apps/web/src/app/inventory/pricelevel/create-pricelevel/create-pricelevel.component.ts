@@ -29,7 +29,7 @@ export class CreatePricelevelComponent implements OnInit {
     {
       name: 'name',
       type: 'text',
-      group: 'Primary',
+      group: 'Price Level',
       placeholder: 'name',
 
       required: true,

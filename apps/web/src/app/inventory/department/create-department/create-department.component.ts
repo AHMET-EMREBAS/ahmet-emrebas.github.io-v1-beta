@@ -29,7 +29,7 @@ export class CreateDepartmentComponent implements OnInit {
     {
       name: 'name',
       type: 'text',
-      group: 'Primary',
+      group: 'Department',
       placeholder: 'name',
 
       required: true,

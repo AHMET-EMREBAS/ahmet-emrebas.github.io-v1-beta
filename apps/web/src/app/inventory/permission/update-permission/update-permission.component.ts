@@ -40,7 +40,7 @@ export class UpdatePermissionComponent implements AfterViewInit, OnInit {
     {
       name: 'name',
       type: 'text',
-      group: 'Primary',
+      group: 'Permission',
       placeholder: 'name',
 
       required: true,
@@ -53,7 +53,7 @@ export class UpdatePermissionComponent implements AfterViewInit, OnInit {
     {
       name: 'description',
       type: 'text',
-      group: 'Primary',
+      group: 'Permission',
       placeholder: 'description',
 
       minLength: 0,
@@ -80,7 +80,9 @@ export class UpdatePermissionComponent implements AfterViewInit, OnInit {
         this.permissionService.getByKey(__item.id)
       );
       setFormGroupValue(this.formGroup, this.itemToBeUpdated);
+      return;
     }
+    this.router.navigate(['../'], { relativeTo: this.route });
   }
 
   submit() {
