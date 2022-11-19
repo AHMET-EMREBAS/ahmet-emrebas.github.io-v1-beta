@@ -10,6 +10,7 @@ import {
   ManyToMany,
 } from 'typeorm';
 import { ID } from 'core/dto';
+import { hashPassword } from 'auth';
 
 import { IQuantity } from 'common/inventory/interfaces/quantity';
 
@@ -23,7 +24,12 @@ import { Field, ObjectType } from '@nestjs/graphql';
 @ObjectType()
 export class Quantity extends BaseEntity implements IQuantity<ID, ID> {
   @Field()
-  @Column({ type: 'int', nullable: false, unique: false })
+  @Column({
+    type: 'int',
+    nullable: false,
+    unique: false,
+    transformer: [],
+  })
   quantity: number;
 
   @ManyToOne(() => Sku, { eager: true, nullable: true, onDelete: 'CASCADE' })

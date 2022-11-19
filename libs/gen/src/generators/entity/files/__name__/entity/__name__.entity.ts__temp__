@@ -10,7 +10,8 @@ import {
   ManyToMany
 } from 'typeorm';
 import { ID } from 'core/dto'
-
+import { hashPassword } from 'auth';
+ 
 import { I<%- classname %> } from 'common/<%- project %>/interfaces/<%- name %>';
 
 
@@ -51,7 +52,14 @@ export class <%- classname %> extends BaseEntity
 <% for(const o of options.Properties) { %> 
   
   @Field()
-  @Column({type: '<%- o.Column.columnType %>', nullable: <%- !options.Required?.includes(o.Property) %>, unique:  <%- !!options.Unique?.includes(o.Property) %>  })
+  @Column({
+  type: '<%- o.Column.columnType %>', 
+  nullable: <%- !options.Required?.includes(o.Property) %>, 
+  unique:  <%- !!options.Unique?.includes(o.Property) %>,
+   transformer: [
+      <% if(o.Column.hash) { %> { to: (value) => hashPassword(value), from: (value) => value }, <% } %>
+    ],
+  })
   <%- o.Property %>: <%- o.Column.valueType %>;
 
 

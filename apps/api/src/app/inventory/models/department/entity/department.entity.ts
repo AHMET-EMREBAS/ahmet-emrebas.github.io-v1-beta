@@ -10,6 +10,7 @@ import {
   ManyToMany,
 } from 'typeorm';
 import { ID } from 'core/dto';
+import { hashPassword } from 'auth';
 
 import { IDepartment } from 'common/inventory/interfaces/department';
 
@@ -19,6 +20,11 @@ import { Field, ObjectType } from '@nestjs/graphql';
 @ObjectType()
 export class Department extends BaseEntity implements IDepartment {
   @Field()
-  @Column({ type: 'text', nullable: false, unique: true })
+  @Column({
+    type: 'text',
+    nullable: false,
+    unique: true,
+    transformer: [],
+  })
   name: string;
 }

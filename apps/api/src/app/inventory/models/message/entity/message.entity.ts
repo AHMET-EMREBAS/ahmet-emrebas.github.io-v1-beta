@@ -10,6 +10,7 @@ import {
   ManyToMany,
 } from 'typeorm';
 import { ID } from 'core/dto';
+import { hashPassword } from 'auth';
 
 import { IMessage } from 'common/inventory/interfaces/message';
 
@@ -21,7 +22,12 @@ import { Field, ObjectType } from '@nestjs/graphql';
 @ObjectType()
 export class Message extends BaseEntity implements IMessage<ID, ID> {
   @Field()
-  @Column({ type: 'text', nullable: false, unique: false })
+  @Column({
+    type: 'text',
+    nullable: false,
+    unique: false,
+    transformer: [],
+  })
   message: string;
 
   @ManyToOne(() => User, { eager: true, nullable: false, onDelete: 'SET NULL' })

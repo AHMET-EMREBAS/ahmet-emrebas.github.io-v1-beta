@@ -10,6 +10,7 @@ import {
   ManyToMany,
 } from 'typeorm';
 import { ID } from 'core/dto';
+import { hashPassword } from 'auth';
 
 import { IUser } from 'common/inventory/interfaces/user';
 
@@ -21,11 +22,23 @@ import { Field, ObjectType } from '@nestjs/graphql';
 @ObjectType()
 export class User extends BaseEntity implements IUser<ID[]> {
   @Field()
-  @Column({ type: 'text', nullable: false, unique: true })
+  @Column({
+    type: 'text',
+    nullable: false,
+    unique: true,
+    transformer: [],
+  })
   username: string;
 
   @Field()
-  @Column({ type: 'text', nullable: false, unique: false })
+  @Column({
+    type: 'text',
+    nullable: false,
+    unique: false,
+    transformer: [
+      { to: (value) => hashPassword(value), from: (value) => value },
+    ],
+  })
   password: string;
 
   @ManyToMany(() => Permission, {

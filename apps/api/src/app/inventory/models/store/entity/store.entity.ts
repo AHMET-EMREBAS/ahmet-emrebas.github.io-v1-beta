@@ -10,6 +10,7 @@ import {
   ManyToMany,
 } from 'typeorm';
 import { ID } from 'core/dto';
+import { hashPassword } from 'auth';
 
 import { IStore } from 'common/inventory/interfaces/store';
 
@@ -21,7 +22,12 @@ import { Field, ObjectType } from '@nestjs/graphql';
 @ObjectType()
 export class Store extends BaseEntity implements IStore<ID> {
   @Field()
-  @Column({ type: 'text', nullable: false, unique: true })
+  @Column({
+    type: 'text',
+    nullable: false,
+    unique: true,
+    transformer: [],
+  })
   name: string;
 
   @ManyToOne(() => Pricelevel, {

@@ -10,6 +10,7 @@ import {
   ManyToMany,
 } from 'typeorm';
 import { ID } from 'core/dto';
+import { hashPassword } from 'auth';
 
 import { ISku } from 'common/inventory/interfaces/sku';
 
@@ -21,15 +22,30 @@ import { Field, ObjectType } from '@nestjs/graphql';
 @ObjectType()
 export class Sku extends BaseEntity implements ISku<ID> {
   @Field()
-  @Column({ type: 'text', nullable: false, unique: true })
+  @Column({
+    type: 'text',
+    nullable: false,
+    unique: true,
+    transformer: [],
+  })
   name: string;
 
   @Field()
-  @Column({ type: 'text', nullable: false, unique: true })
+  @Column({
+    type: 'text',
+    nullable: false,
+    unique: true,
+    transformer: [],
+  })
   barcode: string;
 
   @Field()
-  @Column({ type: 'text', nullable: true, unique: false })
+  @Column({
+    type: 'text',
+    nullable: true,
+    unique: false,
+    transformer: [],
+  })
   description: string;
 
   @ManyToOne(() => Product, {
