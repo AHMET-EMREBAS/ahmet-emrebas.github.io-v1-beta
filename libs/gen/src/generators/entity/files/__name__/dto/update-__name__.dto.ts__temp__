@@ -93,9 +93,8 @@ export class Update<%- classname %>Dto
         @ApiProperty({ type: [ID] })
         @Field(() => [ID], { nullable: true })
         @Type(() => ID)
-        <% if(options.Required?.includes(o.name)) { %> @IsNotEmpty() <% } else { %> @IsOptional({each:true})<% } %>
+       <% if(options.Required?.includes(o.name)) { %> @IsNotEmpty({each:true}) <% } else { %> @IsOptional({each:true})<% } %>
         @ValidateNested({each:true})
-        @IsNotEmptyObject({ nullable:<%- !!!options.Required?.includes(o.name) %> })
         @Expose()
         <%- o.name %>: ID[];
 

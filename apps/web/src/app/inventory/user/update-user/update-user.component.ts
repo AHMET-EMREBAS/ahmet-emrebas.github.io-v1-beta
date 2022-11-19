@@ -68,7 +68,7 @@ export class UpdateUserComponent implements AfterViewInit, OnInit {
       placeholder: 'permission',
       asyncOptions: this.permissionService.entities$,
       optionValue: 'id',
-      optionLabel: 'name',
+      optionLabel: 'description',
     },
   ];
 

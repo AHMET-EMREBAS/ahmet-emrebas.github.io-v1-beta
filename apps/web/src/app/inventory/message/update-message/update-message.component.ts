@@ -53,7 +53,7 @@ export class UpdateMessageComponent implements AfterViewInit, OnInit {
       placeholder: 'to',
       asyncOptions: this.userService.entities$,
       optionValue: 'id',
-      optionLabel: 'name',
+      optionLabel: 'username',
     },
 
     {
@@ -63,7 +63,7 @@ export class UpdateMessageComponent implements AfterViewInit, OnInit {
       placeholder: 'from',
       asyncOptions: this.userService.entities$,
       optionValue: 'id',
-      optionLabel: 'name',
+      optionLabel: 'username',
     },
   ];
 
