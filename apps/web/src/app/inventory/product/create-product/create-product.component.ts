@@ -1,14 +1,23 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import {
+  Component,
+  OnInit,
+} from '@angular/core';
+import {
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import {
+  ActivatedRoute,
+  Router,
+} from '@angular/router';
 
+import { groupBy } from 'lodash';
 import { InputOptions } from 'material/form';
 
-import { ProductService } from '../product.service';
-
 import { CategoryService } from '../../category';
-
 import { DepartmentService } from '../../department';
+import { ProductService } from '../product.service';
 
 @Component({
   selector: 'ae-create-product',
@@ -127,13 +136,14 @@ export class CreateProductComponent implements OnInit {
     {
       name: 'department',
       type: 'select',
-      group: 'Meta',
       placeholder: 'department',
       asyncOptions: this.departmentService.entities$,
       optionValue: 'id',
       optionLabel: 'name',
     },
   ];
+
+  groups = Object.entries(groupBy(this.fields, 'group'));
 
   constructor(
     private readonly productService: ProductService,

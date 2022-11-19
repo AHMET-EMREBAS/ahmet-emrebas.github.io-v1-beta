@@ -9,6 +9,7 @@ import { SharedModule } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { CheckboxModule } from 'primeng/checkbox';
 import { DropdownModule } from 'primeng/dropdown';
+import { FocusTrapModule } from 'primeng/focustrap';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputTextareaModule } from 'primeng/inputtextarea';
@@ -37,6 +38,7 @@ import { PasswordComponent } from './password/password.component';
     InputNumberModule,
     StepsModule,
     TabMenuModule,
+    FocusTrapModule,
   ],
   exports: [FormComponent],
 })

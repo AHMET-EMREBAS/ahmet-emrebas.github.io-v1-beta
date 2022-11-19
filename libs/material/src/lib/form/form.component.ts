@@ -43,7 +43,7 @@ export class FormComponent implements AfterViewInit {
 
   @Input() formGroup!: FormGroup;
   @Input() fields!: InputOptions[];
-
+  @Input() submitLabel = 'Submit';
   @Output() submitEvent = new EventEmitter();
 
   submit() {
