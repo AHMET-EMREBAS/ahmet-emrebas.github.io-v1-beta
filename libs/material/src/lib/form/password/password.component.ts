@@ -22,30 +22,39 @@ export class PasswordComponent implements AfterViewInit {
   @Input() field!: InputOptions;
 
   ngAfterViewInit(): void {
-    const lc = /[a-z]{1,}/;
-    const uc = /[A-Z]{1,}/;
-    const n = /[0-9]{1,}/;
-    const c = /[~!@#$%^&*()_+-=]{1,}/;
-
-    this.password.nativeElement.setCustomValidity('');
-
     this.password.nativeElement.oninput = (e: any) => {
-      e.target.setCustomValidity('');
-      const value = e.target.value;
-      const target = e.target;
-
-      if (!lc.test(value)) this.m(target, 'Must contain a lowercase letter!');
-      if (!uc.test(value)) this.m(target, 'Must contain an uppercase letter!');
-      if (!n.test(value)) this.m(target, 'Must contain a number letter!');
-      if (!c.test(value)) this.m(target, 'Must contain a special character!');
+      this.verifyPassword(e.target);
     };
 
     this.password.nativeElement.oninvalid = (e: any) => {
-      if (this.field?.required) {
-        this.m(e.target, '');
-        if (!e.target.validity.valid) this.m(e.target, 'Password is required!');
-      }
+      this.verifyPassword(e.target);
     };
+  }
+
+  private verifyPassword(target: any) {
+    const value = target.value;
+    const lc = /[a-z]{1,}/;
+    const uc = /[A-Z]{1,}/;
+    const n = /[0-9]{1,}/;
+    const c = /[~!@#$%^&*()_+{}:"<>?]{1,}/;
+    this.m(target, '');
+
+    if (!lc.test(value)) {
+      this.m(target, 'Must contain a lowercase letter!');
+      return;
+    }
+    if (!uc.test(value)) {
+      this.m(target, 'Must contain an uppercase letter!');
+      return;
+    }
+    if (!n.test(value)) {
+      this.m(target, 'Must contain a number letter!');
+      return;
+    }
+    if (!c.test(value)) {
+      this.m(target, 'Must contain a special character!');
+      return;
+    }
   }
 
   private m(target: any, msg: string) {
