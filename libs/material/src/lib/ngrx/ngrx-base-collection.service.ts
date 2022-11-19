@@ -90,7 +90,8 @@ export class NgrxBaseCollecitonService<
 
   getAsOptions(keys: (keyof T & string)[]) {
     return this.getWithQuery({
-      select: JSON.stringify(keys),
+      select: JSON.stringify(['index', ...keys]),
+      view: 'true',
     });
   }
 }

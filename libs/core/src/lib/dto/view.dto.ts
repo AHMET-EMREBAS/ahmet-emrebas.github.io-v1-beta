@@ -18,4 +18,11 @@ export class ViewDto {
   @Expose()
   @Transform(({ value }) => (value === 'true' || value === true ? true : false))
   view: boolean;
+
+  @ApiProperty({ type: 'boolean', required: false })
+  @Field(() => Boolean, { nullable: true })
+  @IsOptional()
+  @Expose()
+  @Transform(({ value }) => (value === 'true' || value === true ? true : false))
+  lightView: boolean;
 }
