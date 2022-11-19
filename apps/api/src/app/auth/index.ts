@@ -5,7 +5,6 @@ export * from './auth.service';
 export * from './decorators';
 export * from './dto';
 export * from './guards';
-export * from './hash-password';
 export * from './jwt-options.const';
 export * from './jwt.strategy';
 export * from './local.strategy';
