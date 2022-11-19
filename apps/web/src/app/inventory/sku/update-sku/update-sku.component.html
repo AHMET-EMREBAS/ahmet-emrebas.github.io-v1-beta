@@ -22,11 +22,14 @@
         [fields]="group[1]"
         [submitLabel]="false"
       >
+        <div class="flex justify-content-end">
+          <p-button
+            type="submit"
+            label="Update Sku"
+            (click)="submit()"
+          ></p-button>
+        </div>
       </ae-form>
     </mat-step>
   </mat-stepper>
-
-  <div class="flex justify-content-end">
-    <p-button label="Update Sku" (click)="submit()"></p-button>
-  </div>
 </div>
