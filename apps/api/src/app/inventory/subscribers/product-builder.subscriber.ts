@@ -48,7 +48,7 @@ export class ProductBuilderSubscriber implements EntitySubscriberInterface {
     for (const s of stores) {
       try {
         await QuantityRepo.save({
-          quantity: entity.quantity,
+          quantity: entity.quantity || 0,
           sku: { id: sku.id },
           store: { id: s.id },
         });
@@ -60,8 +60,8 @@ export class ProductBuilderSubscriber implements EntitySubscriberInterface {
     for (const p of priceLevels) {
       try {
         await PriceRepo.save({
-          price: entity.price,
-          cost: entity.cost,
+          price: entity.price || 0,
+          cost: entity.cost || 0,
           sku: { id: sku.id },
           priceLevel: { id: p.id },
         });
