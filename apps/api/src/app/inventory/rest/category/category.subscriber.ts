@@ -1,5 +1,6 @@
 import { EntitySubscriberInterface, EventSubscriber } from 'typeorm';
-import { Category } from '../../models/category';
+
+import { Category } from './entity';
 
 @EventSubscriber()
 export class CategorySubscriber implements EntitySubscriberInterface {

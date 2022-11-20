@@ -1,34 +1,29 @@
 import {
-  FunctionsDto,
-  PaginatorDto,
-  ViewDto,
-  WhereDto,
-} from 'core/dto';
-
-import {
-  BadRequestException,
   Body,
   Controller,
   Delete,
   Get,
   Param,
-  Patch,
   Post,
   Put,
   Query,
+  Patch,
+  BadRequestException,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
+import {
+  FunctionsDto,
+  PaginatorDto,
+  QueryDto,
+  ViewDto,
+  WhereDto,
+} from 'core/dto';
 
-import {
-  CanRead,
-  CanWrite,
-} from '../../../auth';
-import {
-  Category,
-  CategoryView,
-  CreateCategoryDto,
-  UpdateCategoryDto,
-} from '../../models/category';
+import { CanRead, CanWrite } from '../../auth';
+
+import { Category, CategoryView } from './entity';
+import { CreateCategoryDto, UpdateCategoryDto } from './dto';
+
 import { CategoryViewService } from './category-view.service';
 import { CategoryService } from './category.service';
 
@@ -39,12 +34,11 @@ export class CategoryController {
     private readonly service: CategoryService,
     private readonly viewService: CategoryViewService
   ) {}
-
   @CanRead('category')
   @Get()
   readCategory(
-    @Query() viewDto: ViewDto,
     @Query() paginatorDto: PaginatorDto<Category | CategoryView>,
+    @Query() viewDto: ViewDto,
     @Query() whereDto: WhereDto
   ) {
     const q = {
@@ -60,8 +54,8 @@ export class CategoryController {
 
   @CanRead('category')
   @Get(':id')
-  readCategoryById(@Param('id') id: number, @Query() viewDto: ViewDto) {
-    if (viewDto.view === true) {
+  readCategoryById(@Param('id') id: number, @Query() view: ViewDto) {
+    if (view.view === true) {
       return this.viewService.findOneBy();
     }
     return this.service.findOneBy({ id });

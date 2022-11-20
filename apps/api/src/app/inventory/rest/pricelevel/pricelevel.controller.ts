@@ -19,12 +19,10 @@ import {
   WhereDto,
 } from 'core/dto';
 
-import {
-  Pricelevel,
-  PricelevelView,
-  CreatePricelevelDto,
-  UpdatePricelevelDto,
-} from '../../models/pricelevel';
+import { CanRead, CanWrite } from '../../auth';
+
+import { Pricelevel, PricelevelView } from './entity';
+import { CreatePricelevelDto, UpdatePricelevelDto } from './dto';
 
 import { PricelevelViewService } from './pricelevel-view.service';
 import { PricelevelService } from './pricelevel.service';
@@ -36,7 +34,7 @@ export class PricelevelController {
     private readonly service: PricelevelService,
     private readonly viewService: PricelevelViewService
   ) {}
-
+  @CanRead('pricelevel')
   @Get()
   readPricelevel(
     @Query() paginatorDto: PaginatorDto<Pricelevel | PricelevelView>,
@@ -54,6 +52,7 @@ export class PricelevelController {
     return this.service.find(q);
   }
 
+  @CanRead('pricelevel')
   @Get(':id')
   readPricelevelById(@Param('id') id: number, @Query() view: ViewDto) {
     if (view.view === true) {
@@ -62,21 +61,25 @@ export class PricelevelController {
     return this.service.findOneBy({ id });
   }
 
+  @CanWrite('pricelevel')
   @Post()
   writePricelevel(@Body() body: CreatePricelevelDto) {
     return this.service.save(body);
   }
 
+  @CanWrite('pricelevel')
   @Put(':id')
   updatePricelevel(@Param('id') id: number, @Body() body: UpdatePricelevelDto) {
     return this.service.update(id, body);
   }
 
+  @CanWrite('pricelevel')
   @Delete(':id')
   deletePricelevel(@Param('id') id: number) {
     return this.service.delete(id);
   }
 
+  @CanRead('pricelevel')
   @Patch()
   functionsPricelevel(
     @Query() whereDto: WhereDto,

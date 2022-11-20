@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-import { Quantity, QuantityView } from '../../models/quantity';
+import { Quantity, QuantityView } from './entity';
 
 import { QuantityViewService } from './quantity-view.service';
 import { QuantityController } from './quantity.controller';

@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-import { Sku, SkuView } from '../../models/sku';
+import { Sku, SkuView } from './entity';
 
 import { SkuViewService } from './sku-view.service';
 import { SkuController } from './sku.controller';

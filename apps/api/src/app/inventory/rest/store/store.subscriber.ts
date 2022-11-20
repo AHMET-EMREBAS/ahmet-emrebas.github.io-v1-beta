@@ -1,5 +1,6 @@
 import { EntitySubscriberInterface, EventSubscriber } from 'typeorm';
-import { Store } from '../../models/store';
+
+import { Store } from './entity';
 
 @EventSubscriber()
 export class StoreSubscriber implements EntitySubscriberInterface {

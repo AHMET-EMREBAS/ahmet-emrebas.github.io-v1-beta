@@ -19,12 +19,10 @@ import {
   WhereDto,
 } from 'core/dto';
 
-import {
-  Store,
-  StoreView,
-  CreateStoreDto,
-  UpdateStoreDto,
-} from '../../models/store';
+import { CanRead, CanWrite } from '../../auth';
+
+import { Store, StoreView } from './entity';
+import { CreateStoreDto, UpdateStoreDto } from './dto';
 
 import { StoreViewService } from './store-view.service';
 import { StoreService } from './store.service';
@@ -36,7 +34,7 @@ export class StoreController {
     private readonly service: StoreService,
     private readonly viewService: StoreViewService
   ) {}
-
+  @CanRead('store')
   @Get()
   readStore(
     @Query() paginatorDto: PaginatorDto<Store | StoreView>,
@@ -54,6 +52,7 @@ export class StoreController {
     return this.service.find(q);
   }
 
+  @CanRead('store')
   @Get(':id')
   readStoreById(@Param('id') id: number, @Query() view: ViewDto) {
     if (view.view === true) {
@@ -62,21 +61,25 @@ export class StoreController {
     return this.service.findOneBy({ id });
   }
 
+  @CanWrite('store')
   @Post()
   writeStore(@Body() body: CreateStoreDto) {
     return this.service.save(body);
   }
 
+  @CanWrite('store')
   @Put(':id')
   updateStore(@Param('id') id: number, @Body() body: UpdateStoreDto) {
     return this.service.update(id, body);
   }
 
+  @CanWrite('store')
   @Delete(':id')
   deleteStore(@Param('id') id: number) {
     return this.service.delete(id);
   }
 
+  @CanRead('store')
   @Patch()
   functionsStore(
     @Query() whereDto: WhereDto,
@@ -88,11 +91,13 @@ export class StoreController {
     throw new BadRequestException('Must provide a fucntion name.');
   }
 
+  @CanWrite('store')
   @Post(':id/pricelevel/:pricelevelId')
   setpricelevelToStore(id: number, pricelevelId: number) {
     return this.service.set(id, pricelevelId, 'pricelevel');
   }
 
+  @CanWrite('store')
   @Post(':id/pricelevel')
   unsetpricelevelFromStore(id: number) {
     return this.service.unset(id, 'pricelevel');

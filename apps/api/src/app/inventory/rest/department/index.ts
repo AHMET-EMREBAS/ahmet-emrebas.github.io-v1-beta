@@ -4,3 +4,5 @@ export * from './department.controller';
 export * from './department.module';
 export * from './department.resolver';
 export * from './department.subscriber';
+export * from './entity';
+export * from './dto';

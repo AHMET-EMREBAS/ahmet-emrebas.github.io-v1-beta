@@ -19,12 +19,10 @@ import {
   WhereDto,
 } from 'core/dto';
 
-import {
-  Product,
-  ProductView,
-  CreateProductDto,
-  UpdateProductDto,
-} from '../../models/product';
+import { CanRead, CanWrite } from '../../auth';
+
+import { Product, ProductView } from './entity';
+import { CreateProductDto, UpdateProductDto } from './dto';
 
 import { ProductViewService } from './product-view.service';
 import { ProductService } from './product.service';
@@ -36,7 +34,7 @@ export class ProductController {
     private readonly service: ProductService,
     private readonly viewService: ProductViewService
   ) {}
-
+  @CanRead('product')
   @Get()
   readProduct(
     @Query() paginatorDto: PaginatorDto<Product | ProductView>,
@@ -54,6 +52,7 @@ export class ProductController {
     return this.service.find(q);
   }
 
+  @CanRead('product')
   @Get(':id')
   readProductById(@Param('id') id: number, @Query() view: ViewDto) {
     if (view.view === true) {
@@ -62,21 +61,25 @@ export class ProductController {
     return this.service.findOneBy({ id });
   }
 
+  @CanWrite('product')
   @Post()
   writeProduct(@Body() body: CreateProductDto) {
     return this.service.save(body);
   }
 
+  @CanWrite('product')
   @Put(':id')
   updateProduct(@Param('id') id: number, @Body() body: UpdateProductDto) {
     return this.service.update(id, body);
   }
 
+  @CanWrite('product')
   @Delete(':id')
   deleteProduct(@Param('id') id: number) {
     return this.service.delete(id);
   }
 
+  @CanRead('product')
   @Patch()
   functionsProduct(
     @Query() whereDto: WhereDto,
@@ -88,21 +91,25 @@ export class ProductController {
     throw new BadRequestException('Must provide a fucntion name.');
   }
 
+  @CanWrite('product')
   @Post(':id/category/:categoryId')
   setcategoryToProduct(id: number, categoryId: number) {
     return this.service.set(id, categoryId, 'category');
   }
 
+  @CanWrite('product')
   @Post(':id/category')
   unsetcategoryFromProduct(id: number) {
     return this.service.unset(id, 'category');
   }
 
+  @CanWrite('product')
   @Post(':id/department/:departmentId')
   setdepartmentToProduct(id: number, departmentId: number) {
     return this.service.set(id, departmentId, 'department');
   }
 
+  @CanWrite('product')
   @Post(':id/department')
   unsetdepartmentFromProduct(id: number) {
     return this.service.unset(id, 'department');

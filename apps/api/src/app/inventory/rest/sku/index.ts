@@ -4,3 +4,5 @@ export * from './sku.controller';
 export * from './sku.module';
 export * from './sku.resolver';
 export * from './sku.subscriber';
+export * from './entity';
+export * from './dto';

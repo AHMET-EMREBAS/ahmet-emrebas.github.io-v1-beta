@@ -19,7 +19,10 @@ import {
   WhereDto,
 } from 'core/dto';
 
-import { Sku, SkuView, CreateSkuDto, UpdateSkuDto } from '../../models/sku';
+import { CanRead, CanWrite } from '../../auth';
+
+import { Sku, SkuView } from './entity';
+import { CreateSkuDto, UpdateSkuDto } from './dto';
 
 import { SkuViewService } from './sku-view.service';
 import { SkuService } from './sku.service';
@@ -31,7 +34,7 @@ export class SkuController {
     private readonly service: SkuService,
     private readonly viewService: SkuViewService
   ) {}
-
+  @CanRead('sku')
   @Get()
   readSku(
     @Query() paginatorDto: PaginatorDto<Sku | SkuView>,
@@ -49,6 +52,7 @@ export class SkuController {
     return this.service.find(q);
   }
 
+  @CanRead('sku')
   @Get(':id')
   readSkuById(@Param('id') id: number, @Query() view: ViewDto) {
     if (view.view === true) {
@@ -57,21 +61,25 @@ export class SkuController {
     return this.service.findOneBy({ id });
   }
 
+  @CanWrite('sku')
   @Post()
   writeSku(@Body() body: CreateSkuDto) {
     return this.service.save(body);
   }
 
+  @CanWrite('sku')
   @Put(':id')
   updateSku(@Param('id') id: number, @Body() body: UpdateSkuDto) {
     return this.service.update(id, body);
   }
 
+  @CanWrite('sku')
   @Delete(':id')
   deleteSku(@Param('id') id: number) {
     return this.service.delete(id);
   }
 
+  @CanRead('sku')
   @Patch()
   functionsSku(@Query() whereDto: WhereDto, @Query() functions: FunctionsDto) {
     if (functions.query === 'count') {
@@ -80,11 +88,13 @@ export class SkuController {
     throw new BadRequestException('Must provide a fucntion name.');
   }
 
+  @CanWrite('sku')
   @Post(':id/product/:productId')
   setproductToSku(id: number, productId: number) {
     return this.service.set(id, productId, 'product');
   }
 
+  @CanWrite('sku')
   @Post(':id/product')
   unsetproductFromSku(id: number) {
     return this.service.unset(id, 'product');

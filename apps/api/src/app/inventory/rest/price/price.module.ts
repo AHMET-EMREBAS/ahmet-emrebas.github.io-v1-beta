@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-import { Price, PriceView } from '../../models/price';
+import { Price, PriceView } from './entity';
 
 import { PriceViewService } from './price-view.service';
 import { PriceController } from './price.controller';

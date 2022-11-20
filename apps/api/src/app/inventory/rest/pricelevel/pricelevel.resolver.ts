@@ -4,12 +4,11 @@ import { ILike } from 'typeorm';
 
 import { Args, Mutation, Query, Resolver, Subscription } from '@nestjs/graphql';
 
-import {
-  Pricelevel,
-  PricelevelView,
-  CreatePricelevelDto,
-  UpdatePricelevelDto,
-} from '../../models/pricelevel';
+import { CanRead, CanWrite } from '../../auth';
+
+import { Pricelevel, PricelevelView } from './entity';
+
+import { CreatePricelevelDto, UpdatePricelevelDto } from './dto';
 
 import { PricelevelViewService } from './pricelevel-view.service';
 import { PricelevelService } from './pricelevel.service';
@@ -23,6 +22,7 @@ export class PricelevelResolver {
     private readonly viewService: PricelevelViewService
   ) {}
 
+  @CanRead('Pricelevel')
   @Query(() => [Pricelevel])
   readPricelevel(
     @Args('paginator') paginatorDto: PaginatorDto<Pricelevel | PricelevelView>,
@@ -40,16 +40,18 @@ export class PricelevelResolver {
     return this.service.find(q);
   }
 
+  @CanRead('Pricelevel')
   @Query(() => Pricelevel)
   readPricelevelById(@Args('id') id: number) {
     return this.service.findOneBy({ id });
   }
-
+  @CanWrite('Pricelevel')
   @Mutation(() => Pricelevel)
   writePricelevel(@Args('pricelevel') body: CreatePricelevelDto) {
     return this.service.save(body);
   }
 
+  @CanWrite('Pricelevel')
   @Mutation(() => Boolean)
   updatePricelevel(
     @Args('id') id: number,
@@ -58,11 +60,13 @@ export class PricelevelResolver {
     return this.service.update(id, body);
   }
 
+  @CanWrite('Pricelevel')
   @Mutation(() => Boolean)
   deletePricelevel(@Args('id') id: number) {
     return this.service.delete(id);
   }
 
+  @CanWrite('Pricelevel')
   @Subscription(() => Pricelevel)
   onSavePricelevel() {
     return pubSub.asyncIterator('savedPricelevel');

@@ -19,12 +19,10 @@ import {
   WhereDto,
 } from 'core/dto';
 
-import {
-  Quantity,
-  QuantityView,
-  CreateQuantityDto,
-  UpdateQuantityDto,
-} from '../../models/quantity';
+import { CanRead, CanWrite } from '../../auth';
+
+import { Quantity, QuantityView } from './entity';
+import { CreateQuantityDto, UpdateQuantityDto } from './dto';
 
 import { QuantityViewService } from './quantity-view.service';
 import { QuantityService } from './quantity.service';
@@ -36,7 +34,7 @@ export class QuantityController {
     private readonly service: QuantityService,
     private readonly viewService: QuantityViewService
   ) {}
-
+  @CanRead('quantity')
   @Get()
   readQuantity(
     @Query() paginatorDto: PaginatorDto<Quantity | QuantityView>,
@@ -54,6 +52,7 @@ export class QuantityController {
     return this.service.find(q);
   }
 
+  @CanRead('quantity')
   @Get(':id')
   readQuantityById(@Param('id') id: number, @Query() view: ViewDto) {
     if (view.view === true) {
@@ -62,21 +61,25 @@ export class QuantityController {
     return this.service.findOneBy({ id });
   }
 
+  @CanWrite('quantity')
   @Post()
   writeQuantity(@Body() body: CreateQuantityDto) {
     return this.service.save(body);
   }
 
+  @CanWrite('quantity')
   @Put(':id')
   updateQuantity(@Param('id') id: number, @Body() body: UpdateQuantityDto) {
     return this.service.update(id, body);
   }
 
+  @CanWrite('quantity')
   @Delete(':id')
   deleteQuantity(@Param('id') id: number) {
     return this.service.delete(id);
   }
 
+  @CanRead('quantity')
   @Patch()
   functionsQuantity(
     @Query() whereDto: WhereDto,
@@ -88,21 +91,25 @@ export class QuantityController {
     throw new BadRequestException('Must provide a fucntion name.');
   }
 
+  @CanWrite('quantity')
   @Post(':id/sku/:skuId')
   setskuToQuantity(id: number, skuId: number) {
     return this.service.set(id, skuId, 'sku');
   }
 
+  @CanWrite('quantity')
   @Post(':id/sku')
   unsetskuFromQuantity(id: number) {
     return this.service.unset(id, 'sku');
   }
 
+  @CanWrite('quantity')
   @Post(':id/store/:storeId')
   setstoreToQuantity(id: number, storeId: number) {
     return this.service.set(id, storeId, 'store');
   }
 
+  @CanWrite('quantity')
   @Post(':id/store')
   unsetstoreFromQuantity(id: number) {
     return this.service.unset(id, 'store');

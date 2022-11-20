@@ -1,5 +1,6 @@
 import { EntitySubscriberInterface, EventSubscriber } from 'typeorm';
-import { Price } from '../../models/price';
+
+import { Price } from './entity';
 
 @EventSubscriber()
 export class PriceSubscriber implements EntitySubscriberInterface {

@@ -19,12 +19,10 @@ import {
   WhereDto,
 } from 'core/dto';
 
-import {
-  Price,
-  PriceView,
-  CreatePriceDto,
-  UpdatePriceDto,
-} from '../../models/price';
+import { CanRead, CanWrite } from '../../auth';
+
+import { Price, PriceView } from './entity';
+import { CreatePriceDto, UpdatePriceDto } from './dto';
 
 import { PriceViewService } from './price-view.service';
 import { PriceService } from './price.service';
@@ -36,7 +34,7 @@ export class PriceController {
     private readonly service: PriceService,
     private readonly viewService: PriceViewService
   ) {}
-
+  @CanRead('price')
   @Get()
   readPrice(
     @Query() paginatorDto: PaginatorDto<Price | PriceView>,
@@ -54,6 +52,7 @@ export class PriceController {
     return this.service.find(q);
   }
 
+  @CanRead('price')
   @Get(':id')
   readPriceById(@Param('id') id: number, @Query() view: ViewDto) {
     if (view.view === true) {
@@ -62,21 +61,25 @@ export class PriceController {
     return this.service.findOneBy({ id });
   }
 
+  @CanWrite('price')
   @Post()
   writePrice(@Body() body: CreatePriceDto) {
     return this.service.save(body);
   }
 
+  @CanWrite('price')
   @Put(':id')
   updatePrice(@Param('id') id: number, @Body() body: UpdatePriceDto) {
     return this.service.update(id, body);
   }
 
+  @CanWrite('price')
   @Delete(':id')
   deletePrice(@Param('id') id: number) {
     return this.service.delete(id);
   }
 
+  @CanRead('price')
   @Patch()
   functionsPrice(
     @Query() whereDto: WhereDto,
@@ -88,21 +91,25 @@ export class PriceController {
     throw new BadRequestException('Must provide a fucntion name.');
   }
 
+  @CanWrite('price')
   @Post(':id/sku/:skuId')
   setskuToPrice(id: number, skuId: number) {
     return this.service.set(id, skuId, 'sku');
   }
 
+  @CanWrite('price')
   @Post(':id/sku')
   unsetskuFromPrice(id: number) {
     return this.service.unset(id, 'sku');
   }
 
+  @CanWrite('price')
   @Post(':id/pricelevel/:pricelevelId')
   setpricelevelToPrice(id: number, pricelevelId: number) {
     return this.service.set(id, pricelevelId, 'pricelevel');
   }
 
+  @CanWrite('price')
   @Post(':id/pricelevel')
   unsetpricelevelFromPrice(id: number) {
     return this.service.unset(id, 'pricelevel');

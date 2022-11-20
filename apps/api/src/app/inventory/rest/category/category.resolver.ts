@@ -4,12 +4,11 @@ import { ILike } from 'typeorm';
 
 import { Args, Mutation, Query, Resolver, Subscription } from '@nestjs/graphql';
 
-import {
-  Category,
-  CategoryView,
-  CreateCategoryDto,
-  UpdateCategoryDto,
-} from '../../models/category';
+import { CanRead, CanWrite } from '../../auth';
+
+import { Category, CategoryView } from './entity';
+
+import { CreateCategoryDto, UpdateCategoryDto } from './dto';
 
 import { CategoryViewService } from './category-view.service';
 import { CategoryService } from './category.service';
@@ -23,6 +22,7 @@ export class CategoryResolver {
     private readonly viewService: CategoryViewService
   ) {}
 
+  @CanRead('Category')
   @Query(() => [Category])
   readCategory(
     @Args('paginator') paginatorDto: PaginatorDto<Category | CategoryView>,
@@ -40,16 +40,18 @@ export class CategoryResolver {
     return this.service.find(q);
   }
 
+  @CanRead('Category')
   @Query(() => Category)
   readCategoryById(@Args('id') id: number) {
     return this.service.findOneBy({ id });
   }
-
+  @CanWrite('Category')
   @Mutation(() => Category)
   writeCategory(@Args('category') body: CreateCategoryDto) {
     return this.service.save(body);
   }
 
+  @CanWrite('Category')
   @Mutation(() => Boolean)
   updateCategory(
     @Args('id') id: number,
@@ -58,11 +60,13 @@ export class CategoryResolver {
     return this.service.update(id, body);
   }
 
+  @CanWrite('Category')
   @Mutation(() => Boolean)
   deleteCategory(@Args('id') id: number) {
     return this.service.delete(id);
   }
 
+  @CanWrite('Category')
   @Subscription(() => Category)
   onSaveCategory() {
     return pubSub.asyncIterator('savedCategory');
