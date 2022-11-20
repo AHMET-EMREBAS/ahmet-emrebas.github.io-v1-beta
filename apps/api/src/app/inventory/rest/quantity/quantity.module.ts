@@ -11,7 +11,7 @@ import { QuantitySubscriber } from './quantity.subscriber';
 
 @Module({
   controllers: [QuantityController],
-  imports: [TypeOrmModule.forFeature([Quantity, QuantityView], 'inventory')],
+  imports: [TypeOrmModule.forFeature([Quantity, QuantityView])],
   providers: [
     QuantityResolver,
     QuantityService,

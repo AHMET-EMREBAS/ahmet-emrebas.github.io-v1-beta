@@ -26,6 +26,7 @@ export const ResouceModules = [];
       synchronize: true,
       dropSchema: true,
     }),
+
     ProductModule,
     PriceModule,
     DepartmentModule,

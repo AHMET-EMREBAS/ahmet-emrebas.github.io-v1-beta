@@ -11,9 +11,7 @@ import { PermissionSubscriber } from './permission.subscriber';
 
 @Module({
   controllers: [PermissionController],
-  imports: [
-    TypeOrmModule.forFeature([Permission, PermissionView], 'inventory'),
-  ],
+  imports: [TypeOrmModule.forFeature([Permission, PermissionView])],
   providers: [
     PermissionResolver,
     PermissionService,

@@ -11,7 +11,7 @@ import { MessageSubscriber } from './message.subscriber';
 
 @Module({
   controllers: [MessageController],
-  imports: [TypeOrmModule.forFeature([Message, MessageView], 'inventory')],
+  imports: [TypeOrmModule.forFeature([Message, MessageView])],
   providers: [
     MessageResolver,
     MessageService,

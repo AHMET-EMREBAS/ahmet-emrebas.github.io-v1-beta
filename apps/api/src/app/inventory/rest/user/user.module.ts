@@ -11,7 +11,7 @@ import { UserSubscriber } from './user.subscriber';
 
 @Module({
   controllers: [UserController],
-  imports: [TypeOrmModule.forFeature([User, UserView], 'inventory')],
+  imports: [TypeOrmModule.forFeature([User, UserView])],
   providers: [UserResolver, UserService, UserViewService, UserSubscriber],
 })
 export class UserModule {}

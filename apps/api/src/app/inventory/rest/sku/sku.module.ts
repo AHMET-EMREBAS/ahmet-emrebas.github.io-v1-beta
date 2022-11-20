@@ -11,7 +11,7 @@ import { SkuSubscriber } from './sku.subscriber';
 
 @Module({
   controllers: [SkuController],
-  imports: [TypeOrmModule.forFeature([Sku, SkuView], 'inventory')],
+  imports: [TypeOrmModule.forFeature([Sku, SkuView])],
   providers: [SkuResolver, SkuService, SkuViewService, SkuSubscriber],
 })
 export class SkuModule {}

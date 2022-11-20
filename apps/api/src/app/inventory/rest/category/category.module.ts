@@ -11,7 +11,7 @@ import { CategorySubscriber } from './category.subscriber';
 
 @Module({
   controllers: [CategoryController],
-  imports: [TypeOrmModule.forFeature([Category, CategoryView], 'inventory')],
+  imports: [TypeOrmModule.forFeature([Category, CategoryView])],
   providers: [
     CategoryResolver,
     CategoryService,

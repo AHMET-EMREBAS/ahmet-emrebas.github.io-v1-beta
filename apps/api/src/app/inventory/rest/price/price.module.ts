@@ -11,7 +11,7 @@ import { PriceSubscriber } from './price.subscriber';
 
 @Module({
   controllers: [PriceController],
-  imports: [TypeOrmModule.forFeature([Price, PriceView], 'inventory')],
+  imports: [TypeOrmModule.forFeature([Price, PriceView])],
   providers: [PriceResolver, PriceService, PriceViewService, PriceSubscriber],
 })
 export class PriceModule {}

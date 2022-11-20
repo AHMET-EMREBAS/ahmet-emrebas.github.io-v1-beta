@@ -11,9 +11,7 @@ import { DepartmentSubscriber } from './department.subscriber';
 
 @Module({
   controllers: [DepartmentController],
-  imports: [
-    TypeOrmModule.forFeature([Department, DepartmentView], 'inventory'),
-  ],
+  imports: [TypeOrmModule.forFeature([Department, DepartmentView])],
   providers: [
     DepartmentResolver,
     DepartmentService,

@@ -1,6 +1,9 @@
 import { IReadPermission } from 'common/inventory/interfaces/permission';
 import { IReadUser } from 'common/inventory/interfaces/user';
-import { startCase } from 'lodash';
+import {
+  lowerCase,
+  startCase,
+} from 'lodash';
 
 import { SetMetadata } from '@nestjs/common';
 
@@ -28,7 +31,7 @@ export function createPermission(
   const permissionString = [o, r.toUpperCase()].join(':');
   return {
     name: permissionString,
-    description: startCase(permissionString.split(':').join(' ')),
+    description: startCase(lowerCase(permissionString.split(':').join(' '))),
   };
 }
 
