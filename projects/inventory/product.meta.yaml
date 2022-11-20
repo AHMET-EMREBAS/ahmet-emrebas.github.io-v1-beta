@@ -75,6 +75,7 @@ Relations:
     group: Meta
     target: Category
     name: category
+    label: name
     eager: true
     joinColumn: true
     nullable: true
@@ -88,6 +89,7 @@ Relations:
     group: Meta
     target: Department
     name: department
+    label: name
     eager: true
     nullable: true
     joinColumn: true

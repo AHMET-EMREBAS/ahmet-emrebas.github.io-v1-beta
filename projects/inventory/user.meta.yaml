@@ -39,10 +39,7 @@ Relations:
     nullable: true
     group: Permissions
     onDelete: CASCADE
-    viewColumns:
-      - column: description
-        as: permission
-        valueType: string
+    label: description
 
 Required:
   - username

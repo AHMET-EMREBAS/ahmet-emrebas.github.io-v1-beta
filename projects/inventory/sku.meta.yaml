@@ -54,6 +54,7 @@ Relations:
     group: Product
     joinColumn: true
     onDelete: CASCADE
+    label: name
     viewColumns:
       - column: name
         as: product

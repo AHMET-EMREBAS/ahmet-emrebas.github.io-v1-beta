@@ -27,6 +27,7 @@ Relations:
     nullable: true
     joinColumn: true
     onDelete: CASCADE
+    label: name
     group: Meta
     viewColumns:
       - column: name
@@ -42,6 +43,7 @@ Relations:
     name: store
     eager: true
     group: Meta
+    label: name
     joinColumn: true
     onDelete: CASCADE
     viewColumns:

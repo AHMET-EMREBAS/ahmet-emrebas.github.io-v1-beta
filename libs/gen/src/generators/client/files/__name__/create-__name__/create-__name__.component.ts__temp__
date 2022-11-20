@@ -110,7 +110,7 @@ export class Create<%- classname %>Component implements OnInit {
       placeholder: '<%- r.label || r.name %>',     
       asyncOptions:  this.<%- r.target.toLowerCase() %>Service.entities$,
       optionValue:'id', 
-      optionLabel: '<%- r.viewColumns[0].column %>',
+      optionLabel: '<%- r.label %>',
       <% if(options.Required?.includes(r.name)) { %> 
             required:true,
        <% } %>

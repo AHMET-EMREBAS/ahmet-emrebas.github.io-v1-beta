@@ -1,17 +1,21 @@
-import { IReadUser } from 'common/inventory/interfaces/user';
-
 import {
   createParamDecorator,
   ExecutionContext,
 } from '@nestjs/common';
 
-export const GetUser = createParamDecorator(
+/**
+ * User token content
+ */
+export const Sub = createParamDecorator(
   (data: unknown, context: ExecutionContext) => {
-    return context.switchToHttp().getRequest().user as IReadUser;
+    return context.switchToHttp().getRequest().user;
   }
 );
 
-export const UserID = createParamDecorator<number>(
+/**
+ * User token content's id
+ */
+export const SubId = createParamDecorator<number>(
   (data: unknown, context: ExecutionContext) => {
     return context.switchToHttp().getRequest().user.id;
   }

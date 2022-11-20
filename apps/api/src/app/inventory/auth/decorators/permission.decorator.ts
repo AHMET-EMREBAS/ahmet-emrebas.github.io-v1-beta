@@ -7,7 +7,10 @@ import {
 
 import { SetMetadata } from '@nestjs/common';
 
-export enum OperationNames {
+/**
+ * Operation names
+ */
+export enum ONS {
   WRITE = 'WRITE',
   READ = 'READ',
   WRITE_OWN = 'WRITE:OWN',
@@ -19,15 +22,12 @@ export enum OperationNames {
 export const RESOURCE_PERMISSION_KEY = 'RESOURCE_PERMISSION_KEY';
 
 /**
- *
+ * Create permission
  * @param r Resource name
  * @param o Opeation name
  * @returns permittion string
  */
-export function createPermission(
-  r: string,
-  o: OperationNames
-): IReadPermission {
+export function cp(r: string, o: ONS): IReadPermission {
   const permissionString = [o, r.toUpperCase()].join(':');
   return {
     name: permissionString,
@@ -35,37 +35,37 @@ export function createPermission(
   };
 }
 
-export function requiredPermission(
-  resourceName: string,
-  operation: OperationNames
-) {
-  return SetMetadata(
-    RESOURCE_PERMISSION_KEY,
-    createPermission(resourceName, operation).name
-  );
+/**
+ * Required permission
+ * @param resourceName
+ * @param operation
+ * @returns
+ */
+export function rp(resourceName: string, operation: ONS) {
+  return SetMetadata(RESOURCE_PERMISSION_KEY, cp(resourceName, operation).name);
 }
 
 export function CanRead(r: string) {
-  return requiredPermission(r, OperationNames.READ);
+  return rp(r, ONS.READ);
 }
 
 export function CanWrite(r: string) {
-  return requiredPermission(r, OperationNames.WRITE);
+  return rp(r, ONS.WRITE);
 }
 
 export function CanManage(r: string) {
-  return requiredPermission(r, OperationNames.MANAGE);
+  return rp(r, ONS.MANAGE);
 }
 
 export function CanReadOwn(r: string) {
-  return requiredPermission(r, OperationNames.READ_OWN);
+  return rp(r, ONS.READ_OWN);
 }
 export function CanWriteOwn(r: string) {
-  return requiredPermission(r, OperationNames.WRITE_OWN);
+  return rp(r, ONS.WRITE_OWN);
 }
 
 export function CanManageOwn(r: string) {
-  return requiredPermission(r, OperationNames.MANAGE_OWN);
+  return rp(r, ONS.MANAGE_OWN);
 }
 
 export function hasPermission(

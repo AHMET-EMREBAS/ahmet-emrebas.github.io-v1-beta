@@ -27,6 +27,7 @@ Relations:
     nullable: true
     onDelete: SET NULL
     joinColumn: true
+    label: name
     viewColumns:
       - column: name
         as: pricelevel

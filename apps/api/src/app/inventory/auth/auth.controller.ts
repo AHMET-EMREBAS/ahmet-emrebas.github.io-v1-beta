@@ -21,8 +21,8 @@ import {
 
 import { AuthService } from './auth.service';
 import {
-  GetUser,
   PublicResource,
+  Sub,
 } from './decorators';
 import { LoginDto } from './dto/login.dto';
 import {
@@ -67,7 +67,7 @@ export class AuthController {
   @Post('has-permission')
   hasPermission(
     @Query('permission') permission: string,
-    @GetUser() user: IReadUser
+    @Sub() user: IReadUser
   ) {
     return this.authService.hasPermission(permission, user);
   }

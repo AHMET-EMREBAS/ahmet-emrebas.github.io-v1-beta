@@ -1,31 +1,38 @@
 import {
+  FunctionsDto,
+  PaginatorDto,
+  ViewDto,
+  WhereDto,
+} from 'core/dto';
+
+import {
+  BadRequestException,
   Body,
   Controller,
   Delete,
   Get,
   Param,
+  Patch,
   Post,
   Put,
   Query,
-  Patch,
-  BadRequestException,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
+
 import {
-  FunctionsDto,
-  PaginatorDto,
-  QueryDto,
-  ViewDto,
-  WhereDto,
-} from 'core/dto';
-
-import { CanRead, CanWrite } from '../../auth/decorators';
-
-import { Department, DepartmentView } from './entity';
-import { CreateDepartmentDto, UpdateDepartmentDto } from './dto';
-
+  CanRead,
+  CanWrite,
+} from '../../auth/decorators';
 import { DepartmentViewService } from './department-view.service';
 import { DepartmentService } from './department.service';
+import {
+  CreateDepartmentDto,
+  UpdateDepartmentDto,
+} from './dto';
+import {
+  Department,
+  DepartmentView,
+} from './entity';
 
 @ApiTags('department')
 @Controller('department')
@@ -56,7 +63,7 @@ export class DepartmentController {
   @Get(':id')
   readDepartmentById(@Param('id') id: number, @Query() view: ViewDto) {
     if (view.view === true) {
-      return this.viewService.findOneBy();
+      return this.viewService.findOneBy({ id });
     }
     return this.service.findOneBy({ id });
   }
@@ -88,6 +95,6 @@ export class DepartmentController {
     if (functions.query === 'count') {
       return this.viewService.count({ where: whereDto.where });
     }
-    throw new BadRequestException('Must provide a fucntion name.');
+    throw new BadRequestException('Must provide a function name.');
   }
 }
