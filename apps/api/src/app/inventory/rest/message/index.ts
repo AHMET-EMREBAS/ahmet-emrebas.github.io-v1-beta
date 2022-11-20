@@ -4,3 +4,5 @@ export * from './message.controller';
 export * from './message.module';
 export * from './message.resolver';
 export * from './message.subscriber';
+export * from './entity';
+export * from './dto';

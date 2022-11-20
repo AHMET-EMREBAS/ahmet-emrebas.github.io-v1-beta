@@ -1,5 +1,6 @@
 import { EntitySubscriberInterface, EventSubscriber } from 'typeorm';
-import { Permission } from '../../models/permission';
+
+import { Permission } from './entity';
 
 @EventSubscriber()
 export class PermissionSubscriber implements EntitySubscriberInterface {

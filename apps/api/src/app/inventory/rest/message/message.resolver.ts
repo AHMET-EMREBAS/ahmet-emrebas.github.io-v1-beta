@@ -4,12 +4,11 @@ import { ILike } from 'typeorm';
 
 import { Args, Mutation, Query, Resolver, Subscription } from '@nestjs/graphql';
 
-import {
-  Message,
-  MessageView,
-  CreateMessageDto,
-  UpdateMessageDto,
-} from '../../models/message';
+import { CanRead, CanWrite } from '../../auth';
+
+import { Message, MessageView } from './entity';
+
+import { CreateMessageDto, UpdateMessageDto } from './dto';
 
 import { MessageViewService } from './message-view.service';
 import { MessageService } from './message.service';
@@ -23,6 +22,7 @@ export class MessageResolver {
     private readonly viewService: MessageViewService
   ) {}
 
+  @CanRead('Message')
   @Query(() => [Message])
   readMessage(
     @Args('paginator') paginatorDto: PaginatorDto<Message | MessageView>,
@@ -40,16 +40,18 @@ export class MessageResolver {
     return this.service.find(q);
   }
 
+  @CanRead('Message')
   @Query(() => Message)
   readMessageById(@Args('id') id: number) {
     return this.service.findOneBy({ id });
   }
-
+  @CanWrite('Message')
   @Mutation(() => Message)
   writeMessage(@Args('message') body: CreateMessageDto) {
     return this.service.save(body);
   }
 
+  @CanWrite('Message')
   @Mutation(() => Boolean)
   updateMessage(
     @Args('id') id: number,
@@ -58,11 +60,13 @@ export class MessageResolver {
     return this.service.update(id, body);
   }
 
+  @CanWrite('Message')
   @Mutation(() => Boolean)
   deleteMessage(@Args('id') id: number) {
     return this.service.delete(id);
   }
 
+  @CanWrite('Message')
   @Subscription(() => Message)
   onSaveMessage() {
     return pubSub.asyncIterator('savedMessage');

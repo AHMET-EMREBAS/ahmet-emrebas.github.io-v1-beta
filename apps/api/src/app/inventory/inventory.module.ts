@@ -1,11 +1,6 @@
 import { Module } from '@nestjs/common';
-import { APP_GUARD } from '@nestjs/core';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-import {
-  AuthModule,
-  PermissionGuard,
-} from '../auth';
 import { CategoryModule } from './rest/category';
 import { DepartmentModule } from './rest/department';
 import { MessageModule } from './rest/message';
@@ -22,7 +17,6 @@ export const ResouceModules = [];
 
 @Module({
   imports: [
-    AuthModule,
     TypeOrmModule.forRoot({
       name: 'inventory',
       type: 'better-sqlite3',
@@ -44,12 +38,6 @@ export const ResouceModules = [];
     MessageModule,
     UserModule,
     PermissionModule,
-  ],
-  providers: [
-    {
-      provide: APP_GUARD,
-      useClass: PermissionGuard,
-    },
   ],
 })
 export class InventoryModule {}

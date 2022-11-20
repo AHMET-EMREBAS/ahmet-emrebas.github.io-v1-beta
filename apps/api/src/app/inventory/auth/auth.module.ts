@@ -3,9 +3,11 @@ import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-import { Permission } from '../inventory/models/permission';
-import { User } from '../inventory/models/user';
-import { UserService } from '../inventory/rest/user';
+import { Permission } from '../rest/permission';
+import {
+  User,
+  UserService,
+} from '../rest/user';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import {

@@ -32,7 +32,7 @@ export function createPermission(
   };
 }
 
-export function Permission(resourceName: string, operation: OperationNames) {
+export function ReqPermission(resourceName: string, operation: OperationNames) {
   return SetMetadata(
     RESOURCE_PERMISSION_KEY,
     createPermission(resourceName, operation).name
@@ -40,26 +40,26 @@ export function Permission(resourceName: string, operation: OperationNames) {
 }
 
 export function CanRead(r: string) {
-  return Permission(r, OperationNames.READ);
+  return ReqPermission(r, OperationNames.READ);
 }
 
 export function CanWrite(r: string) {
-  return Permission(r, OperationNames.WRITE);
+  return ReqPermission(r, OperationNames.WRITE);
 }
 
 export function CanManage(r: string) {
-  return Permission(r, OperationNames.MANAGE);
+  return ReqPermission(r, OperationNames.MANAGE);
 }
 
 export function CanReadOwn(r: string) {
-  return Permission(r, OperationNames.READ_OWN);
+  return ReqPermission(r, OperationNames.READ_OWN);
 }
 export function CanWriteOwn(r: string) {
-  return Permission(r, OperationNames.WRITE_OWN);
+  return ReqPermission(r, OperationNames.WRITE_OWN);
 }
 
 export function CanManageOwn(r: string) {
-  return Permission(r, OperationNames.MANAGE_OWN);
+  return ReqPermission(r, OperationNames.MANAGE_OWN);
 }
 
 export function hasPermission(

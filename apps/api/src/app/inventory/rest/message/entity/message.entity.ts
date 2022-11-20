@@ -12,29 +12,29 @@ import {
 import { ID } from 'core/dto';
 import { hashPassword } from 'core/transformers';
 
-import { IStore } from 'common/inventory/interfaces/store';
+import { IMessage } from 'common/inventory/interfaces/message';
 
-import { Pricelevel } from '../../pricelevel';
+import { User } from '../../user';
 
 import { Field, ObjectType } from '@nestjs/graphql';
 
 @Entity()
 @ObjectType()
-export class Store extends BaseEntity implements IStore<ID> {
+export class Message extends BaseEntity implements IMessage<ID, ID> {
   @Field()
   @Column({
     type: 'text',
     nullable: false,
-    unique: true,
+    unique: false,
     transformer: [],
   })
-  name: string;
+  message: string;
 
-  @ManyToOne(() => Pricelevel, {
-    eager: true,
-    nullable: true,
-    onDelete: 'SET NULL',
-  })
+  @ManyToOne(() => User, { eager: true, nullable: false, onDelete: 'CASCADE' })
   @JoinColumn()
-  pricelevel?: ID;
+  to?: ID;
+
+  @ManyToOne(() => User, { eager: true, nullable: false, onDelete: 'CASCADE' })
+  @JoinColumn()
+  from?: ID;
 }

@@ -4,12 +4,11 @@ import { ILike } from 'typeorm';
 
 import { Args, Mutation, Query, Resolver, Subscription } from '@nestjs/graphql';
 
-import {
-  User,
-  UserView,
-  CreateUserDto,
-  UpdateUserDto,
-} from '../../models/user';
+import { CanRead, CanWrite } from '../../auth';
+
+import { User, UserView } from './entity';
+
+import { CreateUserDto, UpdateUserDto } from './dto';
 
 import { UserViewService } from './user-view.service';
 import { UserService } from './user.service';
@@ -23,6 +22,7 @@ export class UserResolver {
     private readonly viewService: UserViewService
   ) {}
 
+  @CanRead('User')
   @Query(() => [User])
   readUser(
     @Args('paginator') paginatorDto: PaginatorDto<User | UserView>,
@@ -40,26 +40,30 @@ export class UserResolver {
     return this.service.find(q);
   }
 
+  @CanRead('User')
   @Query(() => User)
   readUserById(@Args('id') id: number) {
     return this.service.findOneBy({ id });
   }
-
+  @CanWrite('User')
   @Mutation(() => User)
   writeUser(@Args('user') body: CreateUserDto) {
     return this.service.save(body);
   }
 
+  @CanWrite('User')
   @Mutation(() => Boolean)
   updateUser(@Args('id') id: number, @Args('user') body: UpdateUserDto) {
     return this.service.update(id, body);
   }
 
+  @CanWrite('User')
   @Mutation(() => Boolean)
   deleteUser(@Args('id') id: number) {
     return this.service.delete(id);
   }
 
+  @CanWrite('User')
   @Subscription(() => User)
   onSaveUser() {
     return pubSub.asyncIterator('savedUser');

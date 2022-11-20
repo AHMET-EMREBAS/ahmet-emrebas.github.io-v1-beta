@@ -4,7 +4,7 @@ import { Repository } from 'typeorm';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 
-import { PermissionView } from '../../models/permission';
+import { PermissionView } from './entity';
 
 @Injectable()
 export class PermissionViewService extends ResourceViewService<PermissionView> {

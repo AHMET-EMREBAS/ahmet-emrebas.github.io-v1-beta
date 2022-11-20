@@ -19,12 +19,10 @@ import {
   WhereDto,
 } from 'core/dto';
 
-import {
-  User,
-  UserView,
-  CreateUserDto,
-  UpdateUserDto,
-} from '../../models/user';
+import { CanRead, CanWrite } from '../../auth';
+
+import { User, UserView } from './entity';
+import { CreateUserDto, UpdateUserDto } from './dto';
 
 import { UserViewService } from './user-view.service';
 import { UserService } from './user.service';
@@ -36,7 +34,7 @@ export class UserController {
     private readonly service: UserService,
     private readonly viewService: UserViewService
   ) {}
-
+  @CanRead('user')
   @Get()
   readUser(
     @Query() paginatorDto: PaginatorDto<User | UserView>,
@@ -54,6 +52,7 @@ export class UserController {
     return this.service.find(q);
   }
 
+  @CanRead('user')
   @Get(':id')
   readUserById(@Param('id') id: number, @Query() view: ViewDto) {
     if (view.view === true) {
@@ -62,21 +61,25 @@ export class UserController {
     return this.service.findOneBy({ id });
   }
 
+  @CanWrite('user')
   @Post()
   writeUser(@Body() body: CreateUserDto) {
     return this.service.save(body);
   }
 
+  @CanWrite('user')
   @Put(':id')
   updateUser(@Param('id') id: number, @Body() body: UpdateUserDto) {
     return this.service.update(id, body);
   }
 
+  @CanWrite('user')
   @Delete(':id')
   deleteUser(@Param('id') id: number) {
     return this.service.delete(id);
   }
 
+  @CanRead('user')
   @Patch()
   functionsUser(@Query() whereDto: WhereDto, @Query() functions: FunctionsDto) {
     if (functions.query === 'count') {
@@ -85,11 +88,13 @@ export class UserController {
     throw new BadRequestException('Must provide a fucntion name.');
   }
 
+  @CanWrite('user')
   @Post(':id/permission/:rid')
   addpermissionToUser(id: number, rid: number) {
     return this.service.add(id, rid, 'permission');
   }
 
+  @CanWrite('user')
   @Post(':id/permission/:rid')
   removepermissionFromUser(id: number, rid: number) {
     return this.service.remove(id, rid, 'permission');

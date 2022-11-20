@@ -19,12 +19,10 @@ import {
   WhereDto,
 } from 'core/dto';
 
-import {
-  Message,
-  MessageView,
-  CreateMessageDto,
-  UpdateMessageDto,
-} from '../../models/message';
+import { CanRead, CanWrite } from '../../auth';
+
+import { Message, MessageView } from './entity';
+import { CreateMessageDto, UpdateMessageDto } from './dto';
 
 import { MessageViewService } from './message-view.service';
 import { MessageService } from './message.service';
@@ -36,7 +34,7 @@ export class MessageController {
     private readonly service: MessageService,
     private readonly viewService: MessageViewService
   ) {}
-
+  @CanRead('message')
   @Get()
   readMessage(
     @Query() paginatorDto: PaginatorDto<Message | MessageView>,
@@ -54,6 +52,7 @@ export class MessageController {
     return this.service.find(q);
   }
 
+  @CanRead('message')
   @Get(':id')
   readMessageById(@Param('id') id: number, @Query() view: ViewDto) {
     if (view.view === true) {
@@ -62,21 +61,25 @@ export class MessageController {
     return this.service.findOneBy({ id });
   }
 
+  @CanWrite('message')
   @Post()
   writeMessage(@Body() body: CreateMessageDto) {
     return this.service.save(body);
   }
 
+  @CanWrite('message')
   @Put(':id')
   updateMessage(@Param('id') id: number, @Body() body: UpdateMessageDto) {
     return this.service.update(id, body);
   }
 
+  @CanWrite('message')
   @Delete(':id')
   deleteMessage(@Param('id') id: number) {
     return this.service.delete(id);
   }
 
+  @CanRead('message')
   @Patch()
   functionsMessage(
     @Query() whereDto: WhereDto,
@@ -88,21 +91,25 @@ export class MessageController {
     throw new BadRequestException('Must provide a fucntion name.');
   }
 
+  @CanWrite('message')
   @Post(':id/to/:toId')
   settoToMessage(id: number, toId: number) {
     return this.service.set(id, toId, 'to');
   }
 
+  @CanWrite('message')
   @Post(':id/to')
   unsettoFromMessage(id: number) {
     return this.service.unset(id, 'to');
   }
 
+  @CanWrite('message')
   @Post(':id/from/:fromId')
   setfromToMessage(id: number, fromId: number) {
     return this.service.set(id, fromId, 'from');
   }
 
+  @CanWrite('message')
   @Post(':id/from')
   unsetfromFromMessage(id: number) {
     return this.service.unset(id, 'from');

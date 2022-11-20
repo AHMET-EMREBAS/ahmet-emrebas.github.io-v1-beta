@@ -8,7 +8,7 @@ import {
 } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 
-import { UserService } from '../../inventory/rest/user';
+import { UserService } from '../../rest/user';
 import {
   hasPermission,
   PUBLIC_RESOURCE_KEY,

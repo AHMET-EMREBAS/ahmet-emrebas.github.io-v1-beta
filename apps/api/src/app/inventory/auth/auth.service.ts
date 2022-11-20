@@ -4,7 +4,7 @@ import { IReadUser } from 'common/inventory/interfaces/user';
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 
-import { UserService } from '../inventory/rest/user';
+import { UserService } from '../rest/user';
 
 @Injectable()
 export class AuthService {

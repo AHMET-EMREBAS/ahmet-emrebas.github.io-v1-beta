@@ -19,12 +19,10 @@ import {
   WhereDto,
 } from 'core/dto';
 
-import {
-  Permission,
-  PermissionView,
-  CreatePermissionDto,
-  UpdatePermissionDto,
-} from '../../models/permission';
+import { CanRead, CanWrite } from '../../auth';
+
+import { Permission, PermissionView } from './entity';
+import { CreatePermissionDto, UpdatePermissionDto } from './dto';
 
 import { PermissionViewService } from './permission-view.service';
 import { PermissionService } from './permission.service';
@@ -36,7 +34,7 @@ export class PermissionController {
     private readonly service: PermissionService,
     private readonly viewService: PermissionViewService
   ) {}
-
+  @CanRead('permission')
   @Get()
   readPermission(
     @Query() paginatorDto: PaginatorDto<Permission | PermissionView>,
@@ -54,6 +52,7 @@ export class PermissionController {
     return this.service.find(q);
   }
 
+  @CanRead('permission')
   @Get(':id')
   readPermissionById(@Param('id') id: number, @Query() view: ViewDto) {
     if (view.view === true) {
@@ -62,21 +61,25 @@ export class PermissionController {
     return this.service.findOneBy({ id });
   }
 
+  @CanWrite('permission')
   @Post()
   writePermission(@Body() body: CreatePermissionDto) {
     return this.service.save(body);
   }
 
+  @CanWrite('permission')
   @Put(':id')
   updatePermission(@Param('id') id: number, @Body() body: UpdatePermissionDto) {
     return this.service.update(id, body);
   }
 
+  @CanWrite('permission')
   @Delete(':id')
   deletePermission(@Param('id') id: number) {
     return this.service.delete(id);
   }
 
+  @CanRead('permission')
   @Patch()
   functionsPermission(
     @Query() whereDto: WhereDto,

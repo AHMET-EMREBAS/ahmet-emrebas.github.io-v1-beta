@@ -1,0 +1,41 @@
+Name: Permission
+Description: Permission schema
+Properties:
+  - Property: name
+    Description: Permission string
+    Defination:
+      datatype: string
+    Validation:
+      type: string
+      minLength: 3
+      maxLength: 20
+    UI:
+      type: text
+      group: Permission
+    Column:
+      columnType: date
+      valueType: string
+
+  - Property: description
+    Description: Permission description
+    Defination:
+      datatype: string
+    Validation:
+      type: string
+      minLength: 0
+      maxLength: 50
+    Column:
+      columnType: text
+      valueType: string
+    UI:
+      type: text
+      group: Permission
+
+Required:
+  - name
+
+Unique:
+  - name
+
+SearchFields:
+  - name

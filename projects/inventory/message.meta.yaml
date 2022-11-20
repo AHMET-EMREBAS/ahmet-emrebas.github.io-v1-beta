@@ -1,0 +1,49 @@
+Name: Message
+Description: Message schema
+Properties:
+  - Property: message
+    Description: Message
+    Defination:
+      lorem: text
+    Validation:
+      type: string
+      minLength: 0
+      maxLength: 400
+
+    Column:
+      columnType: text
+      valueType: string
+
+    UI:
+      type: text
+      group: Message
+
+SearchFields:
+  - message
+
+Required:
+  - message
+
+Relations:
+  - type: ManyToOne
+    target: User
+    name: to
+    group: To
+    eager: true
+    joinColumn: true
+    onDelete: CASCADE
+    viewColumns:
+      - column: username
+        as: to
+        valueType: string
+
+  - type: ManyToOne
+    target: User
+    name: from
+    eager: true
+    onDelete: CASCADE
+    joinColumn: true
+    viewColumns:
+      - column: username
+        as: from
+        valueType: string

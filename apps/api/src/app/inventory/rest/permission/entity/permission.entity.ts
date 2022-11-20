@@ -1,20 +1,14 @@
+import { IPermission } from 'common/inventory/interfaces/permission';
 import { BaseEntity } from 'core/entity';
 import {
   Column,
   Entity,
-  JoinColumn,
-  JoinTable,
-  ManyToOne,
-  OneToOne,
-  OneToMany,
-  ManyToMany,
 } from 'typeorm';
-import { ID } from 'core/dto';
-import { hashPassword } from 'core/transformers';
 
-import { IPermission } from 'common/inventory/interfaces/permission';
-
-import { Field, ObjectType } from '@nestjs/graphql';
+import {
+  Field,
+  ObjectType,
+} from '@nestjs/graphql';
 
 @Entity()
 @ObjectType()

@@ -58,7 +58,7 @@ export class CreateMessageComponent implements OnInit {
     {
       name: 'from',
       type: 'select',
-      group: 'To',
+      group: 'Primary',
       placeholder: 'from',
       asyncOptions: this.userService.entities$,
       optionValue: 'id',
