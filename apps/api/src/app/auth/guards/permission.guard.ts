@@ -1,23 +1,26 @@
-import { ResourceService } from 'core/service';
+import { IReadUser } from 'common/inventory/interfaces/user';
+import { Request } from 'express';
 import { Observable } from 'rxjs';
 
 import {
   ExecutionContext,
-  Inject,
   Injectable,
 } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 
-import { IAuthUser } from '../auth-user';
-import { PUBLIC_RESOURCE_KEY } from '../decorators';
+import { UserService } from '../../inventory/rest/user';
+import {
+  hasPermission,
+  PUBLIC_RESOURCE_KEY,
+  RESOURCE_PERMISSION_KEY,
+} from '../decorators';
 import { JwtAuthGuard } from './jwt-auth.guard';
 
 @Injectable()
 export class PermissionGuard extends JwtAuthGuard {
   constructor(
     public readonly reflector: Reflector,
-    @Inject('USER_SERVICE')
-    private readonly userService: ResourceService<IAuthUser>
+    private readonly userService: UserService
   ) {
     super(reflector);
   }
@@ -36,24 +39,25 @@ export class PermissionGuard extends JwtAuthGuard {
 
     const isAuthenticated = await super.canActivate(context);
 
+    console.log('[Permission Guard] Is authenticated : ', isAuthenticated);
     if (isAuthenticated) {
-      const userIds = context.switchToHttp().getRequest<Request>()[
-        'user'
-      ] as Partial<IAuthUser>;
+      const userCookie = context.switchToHttp().getRequest<Request>()
+        .user as IReadUser;
 
-      console.log('User Cookie : ', userIds);
+      console.log('User Cookie : ', userCookie);
 
-      const user = await this.userService.findOneBy({
-        id: userIds.id,
-      });
+      const user = (await this.userService.findOneBy({
+        id: userCookie.id,
+      })) as IReadUser;
 
-      const requiredPermission = context.getHandler().name;
-
-      const foundPermission = user?.permission.find(
-        (e) => e.name === requiredPermission
+      const requiredPermission = this.reflector.getAllAndOverride(
+        RESOURCE_PERMISSION_KEY,
+        [context.getHandler(), context.getClass()]
       );
 
-      if (foundPermission) {
+      console.log('Required Permission', requiredPermission);
+
+      if (hasPermission(user, requiredPermission)) {
         return true;
       }
     }

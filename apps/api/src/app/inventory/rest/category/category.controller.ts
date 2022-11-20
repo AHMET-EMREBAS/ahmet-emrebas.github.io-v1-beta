@@ -1,31 +1,34 @@
 import {
+  FunctionsDto,
+  PaginatorDto,
+  ViewDto,
+  WhereDto,
+} from 'core/dto';
+
+import {
+  BadRequestException,
   Body,
   Controller,
   Delete,
   Get,
   Param,
+  Patch,
   Post,
   Put,
   Query,
-  Patch,
-  BadRequestException,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import {
-  FunctionsDto,
-  PaginatorDto,
-  QueryDto,
-  ViewDto,
-  WhereDto,
-} from 'core/dto';
 
+import {
+  CanRead,
+  CanWrite,
+} from '../../../auth';
 import {
   Category,
   CategoryView,
   CreateCategoryDto,
   UpdateCategoryDto,
 } from '../../models/category';
-
 import { CategoryViewService } from './category-view.service';
 import { CategoryService } from './category.service';
 
@@ -37,10 +40,11 @@ export class CategoryController {
     private readonly viewService: CategoryViewService
   ) {}
 
+  @CanRead('category')
   @Get()
   readCategory(
-    @Query() paginatorDto: PaginatorDto<Category | CategoryView>,
     @Query() viewDto: ViewDto,
+    @Query() paginatorDto: PaginatorDto<Category | CategoryView>,
     @Query() whereDto: WhereDto
   ) {
     const q = {
@@ -54,29 +58,34 @@ export class CategoryController {
     return this.service.find(q);
   }
 
+  @CanRead('category')
   @Get(':id')
-  readCategoryById(@Param('id') id: number, @Query() view: ViewDto) {
-    if (view.view === true) {
+  readCategoryById(@Param('id') id: number, @Query() viewDto: ViewDto) {
+    if (viewDto.view === true) {
       return this.viewService.findOneBy();
     }
     return this.service.findOneBy({ id });
   }
 
+  @CanWrite('category')
   @Post()
   writeCategory(@Body() body: CreateCategoryDto) {
     return this.service.save(body);
   }
 
+  @CanWrite('category')
   @Put(':id')
   updateCategory(@Param('id') id: number, @Body() body: UpdateCategoryDto) {
     return this.service.update(id, body);
   }
 
+  @CanWrite('category')
   @Delete(':id')
   deleteCategory(@Param('id') id: number) {
     return this.service.delete(id);
   }
 
+  @CanRead('category')
   @Patch()
   functionsCategory(
     @Query() whereDto: WhereDto,

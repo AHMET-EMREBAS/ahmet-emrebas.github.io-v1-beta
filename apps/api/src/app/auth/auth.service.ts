@@ -1,29 +1,27 @@
 import { compareSync } from 'bcrypt';
-import { ResourceService } from 'core/service';
+import { IReadUser } from 'common/inventory/interfaces/user';
 
-import {
-  Inject,
-  Injectable,
-} from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 
-import { IAuthUser } from './auth-user';
+import { UserService } from '../inventory/rest/user';
 
 @Injectable()
 export class AuthService {
   constructor(
-    @Inject('USER_SERVICE') private readonly userService: ResourceService<any>,
+    private readonly userService: UserService,
     private readonly jwtService: JwtService
   ) {}
 
   async validateUser(username: string, password: string) {
     const found = await this.userService.findOneBy({ username });
 
-    console.log('FOund user : ', found);
+    console.log('[Auth SErvice] Found user : ', found.id);
 
     if (found && found.username == username && found.password) {
       const isPasswordMatch = compareSync(password, found.password);
 
+      console.log('Is password match : ', isPasswordMatch);
       if (isPasswordMatch === true) {
         return found;
       }
@@ -41,8 +39,10 @@ export class AuthService {
     };
   }
 
-  async hasPermission(permission: string, user: IAuthUser) {
-    const found = await this.userService.findOneBy({ id: user.id });
+  async hasPermission(permission: string, user: IReadUser) {
+    const found = (await this.userService.findOneBy({
+      id: user.id,
+    })) as IReadUser;
     return found?.permission?.find((e) => e.name === permission);
   }
 }

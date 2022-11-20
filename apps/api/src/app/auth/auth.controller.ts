@@ -1,3 +1,4 @@
+import { IReadUser } from 'common/inventory/interfaces/user';
 import {
   Request,
   Response,
@@ -18,7 +19,6 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 
-import { IAuthUser } from './auth-user';
 import { AuthService } from './auth.service';
 import {
   GetUser,
@@ -45,9 +45,9 @@ export class AuthController {
     @Req() req: Request,
     @Res() res: Response
   ) {
-    const token = await this.authService.login(req.user as IAuthUser);
+    const token = await this.authService.login(req.user as IReadUser);
     res.cookie('auth', token.accessToken);
-    res.end();
+    res.send(token);
   }
 
   @UseGuards(JwtAuthGuard, PermissionGuard)
@@ -59,15 +59,15 @@ export class AuthController {
   @UseGuards(JwtAuthGuard)
   @Post('logout')
   logout(@Res() res: Response) {
-    res.cookie('auth', '');
-    res.redirect('/login');
+    res.cookie('authorization', '');
+    res.end();
   }
 
   @UseGuards(JwtAuthGuard)
   @Post('has-permission')
   hasPermission(
     @Query('permission') permission: string,
-    @GetUser() user: IAuthUser
+    @GetUser() user: IReadUser
   ) {
     return this.authService.hasPermission(permission, user);
   }

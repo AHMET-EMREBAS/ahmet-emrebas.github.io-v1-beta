@@ -10,21 +10,33 @@ import { PassportStrategy } from '@nestjs/passport';
 import { JWT_SECRET } from './jwt-options.const';
 
 function fromCookie(req: Request) {
-  return req.cookies.auth;
+  const authtoken = req.cookies.authorization;
+  console.log('Found authtoken : ', authtoken, ' From fromCookie');
+  return authtoken;
 }
 
 function fromQuery(req: Request) {
-  return req.query.auth;
+  const authtoken = req.query.authorization;
+  console.log('Found authtoken : ', authtoken, ' From fromQuery');
+
+  return authtoken;
 }
 
 function fromHeader(req: Request) {
-  return req.headers.authorization;
+  const authtoken = req.headers.authorization;
+  console.log('Found authtoken : ', authtoken, ' From fromHeader');
+
+  return authtoken;
 }
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor() {
     super({
-      jwtFromRequest: ExtractJwt.fromExtractors([fromCookie]),
+      jwtFromRequest: ExtractJwt.fromExtractors([
+        fromCookie,
+        fromHeader,
+        fromQuery,
+      ]),
       ignoreExpiration: false,
       secretOrKey: JWT_SECRET,
     });

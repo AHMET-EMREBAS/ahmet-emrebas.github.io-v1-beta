@@ -35,6 +35,10 @@ import { StoreModule } from '@ngrx/store';
 import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
 import { entityDataModuleConfig } from './app.ngrx';
+import {
+  AuthComponent,
+  AuthModule,
+} from './auth';
 import { UserService } from './inventory/user';
 
 const BASE_API_URL = 'BASE_API_URL';
@@ -70,17 +74,32 @@ export class BaseUrlInterceptor implements HttpInterceptor {
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    const apiReq = request.clone({ url: `${this.baseUrl}/${request.url}` });
+    const authtoken = document.cookie
+      .split(';')
+      .map((e) => e.split('='))
+      .find(([key, value]) => key === 'authorization');
+
+    console.log(authtoken?.[1]);
+
+    const tokenAppendedRequest = request.clone({
+      setHeaders: {
+        authorization: authtoken?.[1] || '',
+      },
+    });
+
+    const apiReq = tokenAppendedRequest.clone({
+      url: `${this.baseUrl}/${request.url}`,
+    });
 
     if (request.url.includes('http://') || request.url.includes('https://')) {
-      return next.handle(request);
+      return next.handle(tokenAppendedRequest);
     }
 
     if (request.url.includes('api')) {
       return next.handle(apiReq);
     }
 
-    return next.handle(request);
+    return next.handle(tokenAppendedRequest);
   }
 }
 
@@ -89,6 +108,11 @@ const routes: Routes = [
     title: 'Home',
     path: '',
     children: [
+      {
+        title: 'Login',
+        path: '',
+        component: AuthComponent,
+      },
       {
         title: 'Inventory',
         path: 'inventory',
@@ -117,6 +141,7 @@ const routes: Routes = [
     BrowserAnimationsModule,
     HttpClientModule,
     LayoutModule,
+    AuthModule,
     StoreModule.forRoot({}, {}),
     EffectsModule.forRoot([]),
     EntityDataModule.forRoot({ ...entityDataModuleConfig }),

@@ -1,4 +1,8 @@
 import { NgModule } from '@angular/core';
+import {
+  FormsModule,
+  ReactiveFormsModule,
+} from '@angular/forms';
 
 import { FormModule } from 'material/form';
 import { TableModule } from 'material/table';
@@ -16,6 +20,8 @@ import { TooltipModule } from 'primeng/tooltip';
 @NgModule({
   imports: [
     TableModule,
+    FormsModule,
+    ReactiveFormsModule,
     FormModule,
     ToolbarModule,
     ButtonModule,
@@ -33,6 +39,8 @@ import { TooltipModule } from 'primeng/tooltip';
     ConfirmDialogModule,
     MessageModule,
     ToastModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [ConfirmationService, MessageService],
 })

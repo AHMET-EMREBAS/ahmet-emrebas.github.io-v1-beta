@@ -42,6 +42,10 @@ export class ResourceService<T> {
     }
   }
 
+  findOneById(id: number) {
+    return this.findOneBy({ id } as unknown as FindOptionsWhere<T>);
+  }
+
   findAndCount(options?: FindManyOptions<T>) {
     try {
       return this.__repo.findAndCount(options);
@@ -107,7 +111,10 @@ export class ResourceService<T> {
 
   async update(id: number, updated: QueryDeepPartialEntity<T>) {
     try {
-      return await this.__repo.save({ ...updated, id: id } as any);
+      return await this.__repo.save({
+        ...updated,
+        id: id,
+      } as unknown as DeepPartial<T>);
     } catch (err) {
       console.log(err);
       throw new InternalServerErrorException();

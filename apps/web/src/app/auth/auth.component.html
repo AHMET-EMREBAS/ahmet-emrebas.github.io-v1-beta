@@ -1,0 +1,20 @@
+<div class="flex flex-column w-full h-full gap-4 justify-content-center align-items-center">
+
+    <form class="flex flex-column gap-5 p-4" [formGroup]="formGroup" [noValidate]="false" (submit)="submit()">
+
+        <div class="flex flex-column ">
+            <label for="username"> Username</label>
+            <input type="email" formControlName="username" autocomplete="username">
+        </div>
+
+        <div class="flex flex-column ">
+            <label for="username"> Password</label>
+            <input type="password" formControlName="password" autocomplete="current-password">
+        </div>
+
+
+        <button type="submit"> Login </button>
+
+
+    </form>
+</div>

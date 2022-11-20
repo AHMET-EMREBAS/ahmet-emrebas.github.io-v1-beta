@@ -1,11 +1,11 @@
-import {
-  DynamicModule,
-  Module,
-} from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
+import { Permission } from '../inventory/models/permission';
+import { User } from '../inventory/models/user';
+import { UserService } from '../inventory/rest/user';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import {
@@ -18,6 +18,7 @@ import { LocalStrategy } from './local.strategy';
 @Module({
   imports: [
     PassportModule,
+    TypeOrmModule.forFeature([User, Permission]),
     JwtModule.register({
       secret: JWT_SECRET,
       signOptions: {
@@ -26,14 +27,6 @@ import { LocalStrategy } from './local.strategy';
     }),
   ],
   controllers: [AuthController],
-  providers: [AuthService, LocalStrategy, JwtStrategy],
+  providers: [AuthService, LocalStrategy, JwtStrategy, UserService],
 })
-export class AuthModule {
-  static register(options: { entities: any[]; service: any }): DynamicModule {
-    return {
-      module: AuthModule,
-      imports: [TypeOrmModule.forFeature(options.entities)],
-      providers: [{ provide: 'USER_SERVICE', useClass: options.service }],
-    };
-  }
-}
+export class AuthModule {}

@@ -8,23 +8,12 @@ import {
   ApolloDriverConfig,
 } from '@nestjs/apollo';
 import { Module } from '@nestjs/common';
-import { APP_GUARD } from '@nestjs/core';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ScheduleModule } from '@nestjs/schedule';
 import { ServeStaticModule } from '@nestjs/serve-static';
-import { TypeOrmModule } from '@nestjs/typeorm';
 
-import {
-  AuthModule,
-  PermissionGuard,
-} from './auth';
 import { InventoryModule } from './inventory';
-import { Permission } from './inventory/models/permission';
-import { User } from './inventory/models/user';
-import { PermissionService } from './inventory/rest/permission';
-import { UserService } from './inventory/rest/user';
-import { ProductBuilderSubscriber } from './inventory/subscribers';
 
 @Module({
   imports: [
@@ -36,14 +25,6 @@ import { ProductBuilderSubscriber } from './inventory/subscribers';
       global: true,
       wildcard: true,
       delimiter: '.',
-    }),
-    TypeOrmModule.forRoot({
-      type: 'better-sqlite3',
-      database: 'tmp/database/main.sqlite',
-      autoLoadEntities: true,
-      subscribers: [ProductBuilderSubscriber],
-      synchronize: true,
-      dropSchema: true,
     }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
@@ -78,24 +59,6 @@ import { ProductBuilderSubscriber } from './inventory/subscribers';
       },
     }),
     InventoryModule,
-    TypeOrmModule.forFeature([User, Permission]),
-    AuthModule.register({
-      entities: [User, Permission],
-      service: UserService,
-    }),
-  ],
-  providers: [
-    UserService,
-    PermissionService,
-    ProductBuilderSubscriber,
-    {
-      provide: 'USER_SERVICE',
-      useClass: UserService,
-    },
-    {
-      provide: APP_GUARD,
-      useClass: PermissionGuard,
-    },
   ],
 })
 export class AppModule {}

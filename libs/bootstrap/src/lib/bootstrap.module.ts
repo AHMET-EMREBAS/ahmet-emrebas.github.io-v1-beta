@@ -18,6 +18,7 @@ export async function bootstrap(module: any) {
   app.setGlobalPrefix(GLOBAL_PREFIX);
   app.enableCors();
   // app.use(helmet.default());
+
   app.use(favicon(join(__dirname, 'favicon.ico')));
   app.use(cookieParser());
   app.useGlobalPipes(
