@@ -105,7 +105,10 @@ export class AuthComponent {
   }
 
   async submitLoginWithCode() {
-    const authtoken = await firstValueFrom<{ accessToken: string }>(
+    const authtoken = await firstValueFrom<{
+      accessToken: string;
+      message?: string;
+    }>(
       this.httpClient.post<{ accessToken: string }>(
         'api/auth/login-with-code',
         {
@@ -115,10 +118,13 @@ export class AuthComponent {
       )
     );
 
-    this.setAuthCookie(authtoken.accessToken);
     if (authtoken.accessToken) {
+      this.setAuthCookie(authtoken.accessToken);
       this.router.navigate(['inventory']);
+      return;
     }
+    console.log(authtoken);
+    this.message = authtoken.message + '';
   }
 
   private value(key: string) {

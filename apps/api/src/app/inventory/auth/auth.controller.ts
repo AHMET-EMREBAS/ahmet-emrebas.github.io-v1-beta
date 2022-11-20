@@ -71,16 +71,24 @@ export class AuthController {
       loginWithCodeDto.username
     );
 
+    if (!foundUser) {
+      throw new UnauthorizedException();
+    }
+
+    if (!foundUser.code) {
+      res.send({ message: 'Please request a code first!' });
+      return;
+    }
+
     if (foundUser.code + '' == loginWithCodeDto.code + '') {
       await this.authService.updateUserCode(foundUser.username, v4());
       const token = await this.authService.login(foundUser);
       res.cookie('auth', token.accessToken);
       res.send(token);
+      return;
     }
 
-    if (!foundUser) {
-      throw new UnauthorizedException();
-    }
+    return res.send({ message: 'You cannot use the same code again!' });
   }
 
   @UseGuards(JwtAuthGuard, PermissionGuard)
