@@ -18,13 +18,20 @@ import {
   ViewDto,
   WhereDto
 } from 'core/dto';
- 
+
+ import {
+  CanRead,
+  CanWrite,
+} from '../../auth';
+
 import { 
   <%- classname %>,
   <%- classname %>View,
+} from './entity';
+import {
   Create<%- classname %>Dto,
   Update<%- classname %>Dto
-} from '../../models/<%- name %>';
+} from './dto';
 
 import { <%- classname %>ViewService } from './<%- name %>-view.service';
 import { <%- classname %>Service } from './<%- name %>.service';
@@ -36,7 +43,7 @@ export class <%- classname %>Controller {
     private readonly service: <%- classname %>Service,
     private readonly viewService: <%- classname %>ViewService
   ) {}
-
+  @CanRead('<%- name %>')
   @Get()
   read<%- classname %>(
     @Query() paginatorDto: PaginatorDto<<%- classname %> | <%- classname %>View>,
@@ -54,6 +61,8 @@ export class <%- classname %>Controller {
     return this.service.find(q);
   }
 
+ 
+  @CanRead('<%- name %>')
   @Get(':id')
   read<%- classname %>ById(@Param('id') id: number, @Query() view: ViewDto) {
     if (view.view === true) {
@@ -62,21 +71,25 @@ export class <%- classname %>Controller {
     return this.service.findOneBy({ id });
   }
 
+  @CanWrite('<%- name %>')
   @Post()
   write<%- classname %>(@Body() body: Create<%- classname %>Dto) {
     return this.service.save(body);
   }
 
+  @CanWrite('<%- name %>')
   @Put(':id')
   update<%- classname %>(@Param('id') id: number, @Body() body: Update<%- classname %>Dto) {
     return this.service.update(id, body);
   }
 
+  @CanWrite('<%- name %>')
   @Delete(':id')
   delete<%- classname %>(@Param('id') id: number) {
     return this.service.delete(id);
   }
 
+  @CanRead('<%- name %>')
   @Patch()
   functions<%- classname %>(@Query() whereDto: WhereDto, @Query() functions: FunctionsDto) {
     if (functions.query === 'count') {
@@ -89,23 +102,29 @@ export class <%- classname %>Controller {
   <% for( const r of options.Relations || []) { %> 
 
 
-      <% if(r.type.endsWith('One')) { %> 
+      <% if(r.type.endsWith('One')) { %>
+            
+            @CanWrite('<%- name %>') 
             @Post(':id/<%- r.name %>/:<%- r.name %>Id')
             set<%- r.name %>To<%- classname %>(id: number, <%- r.name %>Id: number) {
               return this.service.set(id, <%- r.name %>Id, '<%- r.name %>');
             }
 
+
+            @CanWrite('<%- name %>')
             @Post(':id/<%- r.name %>')
             unset<%- r.name %>From<%- classname %>(id: number) {
               return this.service.unset(id, '<%- r.name %>');
             }
       <% } else { %> 
 
+            @CanWrite('<%- name %>')
             @Post(':id/<%- r.name %>/:rid')
             add<%- r.name %>To<%- classname %>(id: number, rid: number) {
               return this.service.add(id, rid, '<%- r.name %>');
             }
 
+              @CanWrite('<%- name %>')
             @Post(':id/<%- r.name %>/:rid')
             remove<%- r.name %>From<%- classname %>(id: number, rid: number) {
               return this.service.remove(id, rid, '<%- r.name %>');
