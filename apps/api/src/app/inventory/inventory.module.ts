@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
+import { AuthModule } from './auth';
 import { CategoryModule } from './rest/category';
 import { DepartmentModule } from './rest/department';
 import { MessageModule } from './rest/message';
@@ -17,12 +18,11 @@ export const ResouceModules = [];
 
 @Module({
   imports: [
+    AuthModule,
     TypeOrmModule.forRoot({
-      name: 'inventory',
       type: 'better-sqlite3',
       database: 'tmp/database/inventory.sqlite',
       autoLoadEntities: true,
-      subscribers: [],
       synchronize: true,
       dropSchema: true,
     }),

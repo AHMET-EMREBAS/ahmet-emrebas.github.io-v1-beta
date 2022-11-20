@@ -14,7 +14,7 @@ import { <%- classname %>Subscriber } from './<%- name %>.subscriber';
 
 @Module({
   controllers: [<%- classname %>Controller],
-  imports: [TypeOrmModule.forFeature([<%- classname %>, <%- classname %>View], <%- options.project %>)],
+  imports: [TypeOrmModule.forFeature([<%- classname %>, <%- classname %>View])],
   providers: [
     <%- classname %>Resolver,
     <%- classname %>Service,

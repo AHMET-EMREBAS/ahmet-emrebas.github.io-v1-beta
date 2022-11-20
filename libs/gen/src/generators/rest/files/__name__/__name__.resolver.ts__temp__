@@ -15,7 +15,7 @@ import {
  import {
   CanRead,
   CanWrite,
-} from '../../auth';
+} from '../../auth/decorators';
 
 import {
   <%- classname %>, 

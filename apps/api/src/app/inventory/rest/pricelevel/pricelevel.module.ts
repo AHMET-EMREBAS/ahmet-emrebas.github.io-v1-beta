@@ -11,7 +11,9 @@ import { PricelevelSubscriber } from './pricelevel.subscriber';
 
 @Module({
   controllers: [PricelevelController],
-  imports: [TypeOrmModule.forFeature([Pricelevel, PricelevelView])],
+  imports: [
+    TypeOrmModule.forFeature([Pricelevel, PricelevelView], 'inventory'),
+  ],
   providers: [
     PricelevelResolver,
     PricelevelService,

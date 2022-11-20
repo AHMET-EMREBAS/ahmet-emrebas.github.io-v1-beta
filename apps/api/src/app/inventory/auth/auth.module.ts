@@ -20,7 +20,7 @@ import { LocalStrategy } from './local.strategy';
 @Module({
   imports: [
     PassportModule,
-    TypeOrmModule.forFeature([User, Permission]),
+    TypeOrmModule.forFeature([User, Permission], 'inventory'),
     JwtModule.register({
       secret: JWT_SECRET,
       signOptions: {

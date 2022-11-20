@@ -4,7 +4,7 @@ import { ILike } from 'typeorm';
 
 import { Args, Mutation, Query, Resolver, Subscription } from '@nestjs/graphql';
 
-import { CanRead, CanWrite } from '../../auth';
+import { CanRead, CanWrite } from '../../auth/decorators';
 
 import { Price, PriceView } from './entity';
 

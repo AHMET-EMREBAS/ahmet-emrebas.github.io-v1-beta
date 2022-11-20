@@ -19,7 +19,7 @@ import {
   WhereDto,
 } from 'core/dto';
 
-import { CanRead, CanWrite } from '../../auth';
+import { CanRead, CanWrite } from '../../auth/decorators';
 
 import { Quantity, QuantityView } from './entity';
 import { CreateQuantityDto, UpdateQuantityDto } from './dto';

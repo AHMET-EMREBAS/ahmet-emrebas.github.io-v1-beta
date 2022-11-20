@@ -21,6 +21,7 @@ import { InventoryModule } from './inventory';
       rootPath: join(__dirname, 'public'),
     }),
     ScheduleModule.forRoot(),
+
     EventEmitterModule.forRoot({
       global: true,
       wildcard: true,

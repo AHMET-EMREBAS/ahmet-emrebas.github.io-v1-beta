@@ -11,7 +11,7 @@ import { StoreSubscriber } from './store.subscriber';
 
 @Module({
   controllers: [StoreController],
-  imports: [TypeOrmModule.forFeature([Store, StoreView])],
+  imports: [TypeOrmModule.forFeature([Store, StoreView], 'inventory')],
   providers: [StoreResolver, StoreService, StoreViewService, StoreSubscriber],
 })
 export class StoreModule {}
