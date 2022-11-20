@@ -10,7 +10,6 @@ import {
   Router,
 } from '@angular/router';
 
-import { InputOptions } from 'material/form';
 import { MessageService as SystemMessageService } from 'primeng/api';
 import {
   firstValueFrom,
@@ -23,6 +22,7 @@ import {
   styleUrls: ['./auth.component.scss'],
 })
 export class AuthComponent {
+  message = '';
   submitted = false;
   title = 'Create User';
   formGroup = new FormGroup({
@@ -35,29 +35,23 @@ export class AuthComponent {
       Validators.required,
       Validators.minLength(6),
     ]),
-
-    permission: new FormControl(undefined, []),
   });
 
-  fields: InputOptions[] = [
-    {
-      name: 'username',
-      type: 'email',
-      group: 'Username',
-      placeholder: 'username',
-      required: true,
-      email: true,
-    },
+  forgotPasswordForm = new FormGroup({
+    username: new FormControl(undefined, [
+      Validators.required,
+      Validators.email,
+    ]),
+  });
 
-    {
-      name: 'password',
-      type: 'text',
-      group: 'Password',
-      placeholder: 'password',
-      required: true,
-      password: true,
-    },
-  ];
+  loginWithCodeForm = new FormGroup({
+    username: new FormControl(undefined, [
+      Validators.required,
+      Validators.email,
+    ]),
+
+    code: new FormControl(undefined, [Validators.required]),
+  });
 
   constructor(
     private readonly systemMessageService: SystemMessageService,
@@ -67,10 +61,8 @@ export class AuthComponent {
   ) {}
 
   async submit() {
-    console.log('Submitting');
     if (this.submitted === false) {
       if (this.formGroup.valid) {
-        console.log('Submitted');
         this.submitted = true;
         const authtoken = await firstValueFrom<{ accessToken: string }>(
           this.httpClient.post('api/auth/login', {
@@ -79,15 +71,10 @@ export class AuthComponent {
           }) as Observable<{ accessToken: string }>
         );
 
+        this.setAuthCookie(authtoken.accessToken);
         if (authtoken.accessToken) {
           this.router.navigate(['inventory']);
         }
-
-        console.log(authtoken.accessToken);
-
-        document.cookie = 'authorization=' + authtoken.accessToken;
-
-        console.log('cookies:', document.cookie);
       } else {
         const e = Object.entries(this.formGroup.controls).filter(
           (e) => e[1].errors
@@ -98,6 +85,39 @@ export class AuthComponent {
           summary: `${e[0]} field is not valid!`,
         });
       }
+    }
+  }
+
+  private setAuthCookie(token: string) {
+    document.cookie = 'authorization=' + token;
+  }
+
+  async submitForgotPassword() {
+    const message = await firstValueFrom<{ message: string }>(
+      this.httpClient.post<{ message: string }>('api/auth/forgot-password', {
+        username: this.forgotPasswordForm.controls.username.value,
+      })
+    );
+
+    console.log(message);
+
+    this.message = message.message;
+  }
+
+  async submitLoginWithCode() {
+    const authtoken = await firstValueFrom<{ accessToken: string }>(
+      this.httpClient.post<{ accessToken: string }>(
+        'api/auth/login-with-code',
+        {
+          username: this.loginWithCodeForm.controls.username.value,
+          code: this.loginWithCodeForm.controls.code.value,
+        }
+      )
+    );
+
+    this.setAuthCookie(authtoken.accessToken);
+    if (authtoken.accessToken) {
+      this.router.navigate(['inventory']);
     }
   }
 

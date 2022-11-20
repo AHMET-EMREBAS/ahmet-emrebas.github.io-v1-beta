@@ -1,22 +1,20 @@
+import { IUser } from 'common/inventory/interfaces/user';
+import { ID } from 'core/dto';
 import { BaseEntity } from 'core/entity';
+import { hashPassword } from 'core/transformers';
 import {
   Column,
   Entity,
-  JoinColumn,
   JoinTable,
-  ManyToOne,
-  OneToOne,
-  OneToMany,
   ManyToMany,
 } from 'typeorm';
-import { ID } from 'core/dto';
-import { hashPassword } from 'core/transformers';
 
-import { IUser } from 'common/inventory/interfaces/user';
+import {
+  Field,
+  ObjectType,
+} from '@nestjs/graphql';
 
 import { Permission } from '../../permission';
-
-import { Field, ObjectType } from '@nestjs/graphql';
 
 @Entity()
 @ObjectType()
@@ -29,6 +27,10 @@ export class User extends BaseEntity implements IUser<ID[]> {
     transformer: [],
   })
   username: string;
+
+  @Field()
+  @Column({ type: 'text', nullable: true })
+  code?: string;
 
   @Field()
   @Column({

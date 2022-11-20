@@ -48,7 +48,7 @@ import { InventoryModule } from './inventory';
         },
       },
       defaults: {
-        from: `"No Reply" <${process.env.EMAIL}>`,
+        from: `"Inventory System" <${process.env.EMAIL}>`,
       },
       template: {
         dir: __dirname + '/emails',

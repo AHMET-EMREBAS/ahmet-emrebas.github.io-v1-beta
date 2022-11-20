@@ -63,8 +63,8 @@ export class AuthModule implements OnModuleInit {
     // Creating Super user
 
     const user = await this.us.save({
-      username: 'Root1@root.com',
-      password: 'Root1@root.com',
+      username: 'aemrebas.dev@gmail.com',
+      password: 'Aemrebas.dev1@gmail.com',
     });
     for (const r of [
       'user',

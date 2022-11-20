@@ -1,20 +1,63 @@
 <div class="flex flex-column w-full h-full gap-4 justify-content-center align-items-center">
 
-    <form class="flex flex-column gap-5 p-4" [formGroup]="formGroup" [noValidate]="false" (submit)="submit()">
 
-        <div class="flex flex-column ">
-            <label for="username"> Username</label>
-            <input type="email" formControlName="username" autocomplete="username">
-        </div>
+    <mat-stepper #stepper>
 
-        <div class="flex flex-column ">
-            <label for="username"> Password</label>
-            <input type="password" formControlName="password" autocomplete="current-password">
-        </div>
+        <mat-step [label]="'Login'">
+            <form class="flex flex-column gap-5 p-4" [formGroup]="formGroup" [noValidate]="false" (submit)="submit()">
+
+                <div class="flex flex-column ">
+                    <label for="username"> Username</label>
+                    <input pInputText type="email" formControlName="username" required autocomplete="username">
+                </div>
+
+                <div class="flex flex-column ">
+                    <label for="username"> Password</label>
+                    <input pInputText type="password" formControlName="password" required
+                        autocomplete="current-password">
+                </div>
 
 
-        <button type="submit"> Login </button>
+                <button pButton type="submit" [label]="'Login'"> </button>
 
 
-    </form>
+            </form>
+        </mat-step>
+
+        <mat-step [label]="'Forgot Password'">
+            <form class="flex flex-column gap-5 p-4" [formGroup]="forgotPasswordForm" [noValidate]="false"
+                (submit)="submitForgotPassword()">
+
+                <div class="flex flex-column ">
+                    <label for="username"> Username</label>
+                    <input pInputText type="email" formControlName="username" required autocomplete="username">
+                </div>
+
+                <button pButton type="submit" [label]="'Send Security Code'"> </button>
+
+                <span>{{message}}</span>
+            </form>
+        </mat-step>
+
+
+        <mat-step [label]="'Login With Code'">
+            <form class="flex flex-column gap-5 p-4" [formGroup]="loginWithCodeForm" [noValidate]="false"
+                (submit)="submitLoginWithCode()">
+
+                <div class="flex flex-column ">
+                    <label for="username"> Username</label>
+                    <input pInputText type="email" formControlName="username" required autocomplete="username">
+                </div>
+
+                <div class="flex flex-column ">
+                    <label for="username"> Username</label>
+                    <input pInputText type="number" formControlName="code" required autocomplete="off">
+                </div>
+
+                <button pButton type="submit" [label]="'Login'"> </button>
+
+                <span>{{message}}</span>
+            </form>
+        </mat-step>
+    </mat-stepper>
 </div>

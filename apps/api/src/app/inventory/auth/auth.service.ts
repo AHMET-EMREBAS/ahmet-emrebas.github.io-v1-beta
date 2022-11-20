@@ -45,4 +45,13 @@ export class AuthService {
     })) as IReadUser;
     return found?.permission?.find((e) => e.name === permission);
   }
+
+  findUserByUsername(username: string) {
+    return this.userService.findOneBy({ username });
+  }
+
+  async updateUserCode(username: string, code: string) {
+    const found = await this.userService.findOneBy({ username });
+    await this.userService.update(found.id, { code });
+  }
 }

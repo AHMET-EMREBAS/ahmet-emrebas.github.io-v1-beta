@@ -18,3 +18,24 @@ export class LoginDto {
   @Expose()
   password: string;
 }
+
+export class ForgotPasswordDto {
+  @ApiProperty({ type: 'string', format: 'email' })
+  @IsEmail()
+  @IsNotEmpty()
+  @Expose()
+  username: string;
+}
+
+export class LoginWithCodeDto {
+  @ApiProperty({ type: 'string', format: 'email' })
+  @IsEmail()
+  @IsNotEmpty()
+  @Expose()
+  username: string;
+
+  @ApiProperty({ type: 'number' })
+  @IsNotEmpty()
+  @Expose()
+  code: number;
+}
