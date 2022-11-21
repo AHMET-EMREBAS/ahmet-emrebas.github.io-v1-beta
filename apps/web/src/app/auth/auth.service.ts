@@ -22,7 +22,9 @@ export class AuthService {
         username,
         password,
       }) as Observable<{ accessToken: string }>
-    );
+    ).catch((err) => {
+      return { accessToken: null };
+    });
 
     if (serverResponse?.accessToken) {
       this.setAuthCookie(serverResponse.accessToken);
@@ -52,8 +54,8 @@ export class AuthService {
    * @http /api/auth/reset-password
    */
   async resetPassword(username: string, code: string, newPassword: string) {
-    return await firstValueFrom(
-      this.httpClient.post('api/auth/reset-password', {
+    return await firstValueFrom<{ message: string }>(
+      this.httpClient.post<{ message: string }>('api/auth/reset-password', {
         username,
         code,
         newPassword,

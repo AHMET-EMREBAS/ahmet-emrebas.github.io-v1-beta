@@ -6,36 +6,49 @@
 
 </head>
 
-<body style=" border:20px solid rgb(150, 240, 240) ; padding:20px;">
+<body>
+    <table style="border: none">
 
-    <div style="position: relative; padding: 10px; ">
+        <thead>
+            <tr>
+                <th colspan="3" style="background-color: royalblue; color:white; padding:10px">
+                    <h1>
+                        <%- locals.subject %>
+                    </h1>
+                </th>
+            </tr>
+        </thead>
 
+        <tbody>
+            <tr>
+                <td colspan="3">
+                    <%- locals.message %>
+                </td>
 
-        <div
-            style="position: relative; background-color: rgb(60, 118, 156);  padding:10px ; border-radius: 30px; box-shadow: 0px 0px 10px white; border: 4px dashed gray;">
-            <h1 style="color: white; text-align: center;">
-                <%= locals.subject %>
-            </h1>
-        </div>
-
-
-
-        <div style="padding: 20px; border: 4px dashed gray; margin-top: 20px; border-radius: 30px; ">
-            <h1 style="color: gray;">
-                <%= locals.subject %>
-            </h1>
-            <hr>
-            <p style="color: gray">
-                <%= locals.message %>
-            </p>
-
-            <hr />
-            <% if(locals.link) { %>
-                <a style="width: 200px; height:50px; padding:10px; text-align: center; "
-                    href="<%= locals.link %>">CLICK</a>
+            </tr>
+            <% if(locals.code) { %>
+                <tr>
+                    <td>
+                        <strong>
+                            Security Code:
+                        </strong>
+                    </td>
+                    <td colspan="2" style="font-family: 'Courier New', Courier, monospace;">
+                        <%- locals.code %>
+                    </td>
+                </tr>
                 <% } %>
-        </div>
-    </div>
+                    <% if(locals.link) { %>
+                        <tr>
+                            <td colspan="3" style="text-align: center;">
+                                <a href="<%- locals.link %>" target="_blank">
+                                    <%- locals.linkLabel %>
+                                </a>
+                            </td>
+                        </tr>
+                        <% } %>
+        </tbody>
+    </table>
 
 </body>
 

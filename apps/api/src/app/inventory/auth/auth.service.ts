@@ -43,12 +43,7 @@ export class AuthService {
   }
 
   async hasPermission(permission: string, user: IReadUser) {
-    const found = (await this.userService.findOneBy({
-      id: user.id,
-    })) as IReadUser;
-    return {
-      canActivate: !!found?.permission?.find((e) => e.name === permission),
-    };
+    return this.userService.findOneBy();
   }
 
   findUserByUsername(username: string) {
@@ -88,7 +83,10 @@ export class AuthService {
       to: username,
       context: {
         subject: 'Forgot Password',
-        message: `Password reset code: ${code}`,
+        message: 'This is your one-time password-reset code.',
+        code,
+        link: `http://localhost:4200/#/?code=${code}&username=${username}`,
+        linkLabel: 'Reset Password',
       },
     });
   }
@@ -103,5 +101,7 @@ export class AuthService {
       password: newPassword,
       code: v4(),
     });
+
+    return { message: 'Password is updated.' };
   }
 }

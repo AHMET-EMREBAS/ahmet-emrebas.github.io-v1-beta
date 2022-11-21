@@ -9,12 +9,13 @@
 
                 <div class="flex flex-column ">
                     <label for="username"> Username</label>
-                    <input pInputText type="email" formControlName="username" required autocomplete="username">
+                    <input id="username" pInputText type="email" formControlName="username" required
+                        autocomplete="username">
                 </div>
 
                 <div class="flex flex-column ">
-                    <label for="username"> Password</label>
-                    <input pInputText type="password" formControlName="password" required
+                    <label for="password"> Password</label>
+                    <input id="password" pInputText type="password" formControlName="password" required
                         autocomplete="current-password">
                 </div>
 
@@ -37,20 +38,21 @@
                 (submit)="submitResetPasswordForm()">
 
                 <div class="flex flex-column ">
-                    <label for="username"> Username</label>
-                    <input pInputText type="email" formControlName="username" required autocomplete="username">
+                    <label for="u-username"> Username</label>
+                    <input id="u-username" pInputText type="email" formControlName="username" required
+                        autocomplete="username">
                 </div>
 
 
                 <div class="flex flex-column ">
-                    <label for="username"> New Password </label>
-                    <input pInputText type="password" formControlName="newPassword" required
+                    <label for="new-password"> New Password </label>
+                    <input id="new-password" pInputText type="password" formControlName="newPassword" required
                         autocomplete="new-password">
                 </div>
 
                 <div class="flex flex-column ">
-                    <label for="username"> Security Code </label>
-                    <input pInputText type="text" formControlName="code" required>
+                    <label for="code"> Security Code </label>
+                    <input id="code" pInputText type="text" formControlName="code" required>
                 </div>
 
                 <button pButton type="submit" [label]="'Reset Password'"> </button>
@@ -58,5 +60,7 @@
             </form>
         </mat-step>
     </mat-stepper>
-    <span>{{serverResponse?.message}}</span>
+    <span>
+        <i>{{serverResponse?.message }} </i>
+    </span>
 </div>

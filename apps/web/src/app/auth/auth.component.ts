@@ -1,4 +1,9 @@
-import { Component } from '@angular/core';
+import { CdkStepper } from '@angular/cdk/stepper';
+import {
+  AfterViewInit,
+  Component,
+  ViewChild,
+} from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -18,23 +23,24 @@ import { AuthService } from './auth.service';
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.scss'],
 })
-export class AuthComponent {
-  readonly usernameInput = new FormControl(undefined, [
+export class AuthComponent implements AfterViewInit {
+  @ViewChild('stepper') stepper!: CdkStepper;
+  readonly usernameInput = new FormControl('', [
     Validators.required,
     Validators.email,
   ]);
 
-  readonly passwordInput = new FormControl(undefined, [
+  readonly passwordInput = new FormControl('', [
     Validators.required,
     Validators.minLength(6),
   ]);
 
-  readonly newPasswordInput = new FormControl(undefined, [
+  readonly newPasswordInput = new FormControl('', [
     Validators.required,
     Validators.minLength(6),
   ]);
 
-  readonly securityCodeInput = new FormControl(undefined, [
+  readonly securityCodeInput = new FormControl('', [
     Validators.required,
     Validators.minLength(6),
   ]);
@@ -59,6 +65,20 @@ export class AuthComponent {
     private readonly router: Router,
     private readonly route: ActivatedRoute
   ) {}
+
+  ngAfterViewInit(): void {
+    const params = this.route.snapshot.queryParamMap;
+    const code = params.get('code');
+    const username = params.get('username');
+
+    if (code) {
+      this.resetPasswordForm.controls.code.setValue(code);
+      if (username) {
+        this.resetPasswordForm.controls.username.setValue(username);
+      }
+      this.stepper.next();
+    }
+  }
 
   async submitLoginForm() {
     const isLoginFormValid = this.loginForm.valid;
@@ -103,7 +123,15 @@ export class AuthComponent {
     if (isResetPasswordFormValid) {
       const { username, code, newPassword } = isResetPasswordFormValue;
       if (username && code && newPassword) {
-        await this.authService.resetPassword(username, code, newPassword);
+        this.serverResponse = await this.authService.resetPassword(
+          username,
+          code,
+          newPassword
+        );
+
+        if (this.serverResponse) {
+          await this.loginUserAndNavigate(username, newPassword);
+        }
       }
     }
   }
