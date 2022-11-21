@@ -95,11 +95,13 @@ export class AuthComponent implements AfterViewInit {
   }
 
   async loginUserAndNavigate(username: string, password: string) {
-    const isLoggedIn = await this.authService.login(username, password);
-    if (isLoggedIn) {
+    const isLogin = await this.authService.login(username, password);
+    if (isLogin) {
       this.router.navigate(['inventory'], { relativeTo: this.route });
+      return isLogin;
     } else {
       this.serverResponse = { message: 'Could not login!' };
+      return isLogin;
     }
   }
 

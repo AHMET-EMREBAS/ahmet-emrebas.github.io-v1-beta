@@ -17,10 +17,6 @@ export class BaseUrlInterceptor {
   constructor(@Inject(BASE_URL_TOKEN) private baseUrl: string) {}
 
   private async getAuthToken() {
-    if ((window as any)['electron']) {
-      return await (window as any)['electron'].getCookie(AUTH_TOKEN_NAME);
-    }
-
     return (
       document.cookie
         .split(';')
@@ -28,6 +24,7 @@ export class BaseUrlInterceptor {
         .find(([key, value]) => key === AUTH_TOKEN_NAME)?.[1] || ''
     );
   }
+
   private isUrlComplete(request: HttpRequest<any>) {
     return request.url.includes('://');
   }
@@ -40,11 +37,9 @@ export class BaseUrlInterceptor {
     console.log('Token : ', await this.getAuthToken());
     const tokenizedRequest = request.clone({
       setHeaders: {
-        [AUTH_TOKEN_NAME]: await this.getAuthToken(),
+        [AUTH_TOKEN_NAME]: (await this.getAuthToken()) || '',
       },
     });
-
-    console.log('Intercepting...');
 
     const internalApiRequest = tokenizedRequest.clone({
       url: `${this.baseUrl}/${request.url}`,

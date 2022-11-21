@@ -16,21 +16,17 @@ export class AuthService {
    * @returns
    */
   async login(username: string, password: string): Promise<boolean> {
-    const serverResponse = await firstValueFrom<any>(
-      this.httpClient.post('api/auth/login', {
+    const result = await firstValueFrom(
+      this.httpClient.post<{ accessToken: string }>('api/auth/login', {
         username,
         password,
       })
-    ).catch((err) => {
-      console.log(err);
-      return { accessToken: null };
-    });
-
-    if (serverResponse?.accessToken) {
-      this.setAuthCookie(serverResponse.accessToken);
-      return true;
+    );
+    console.log(result, 'Result: ');
+    if (result.accessToken) {
+      this.setAuthCookie(result.accessToken);
     }
-    return false;
+    return !!result.accessToken;
   }
 
   /**
@@ -69,9 +65,6 @@ export class AuthService {
    */
   private setAuthCookie(token: string) {
     document.cookie = `${AUTH_TOKEN_NAME}=` + token;
-    if ((window as any)['electron']) {
-      (window as any)['electron'].setCookie(AUTH_TOKEN_NAME, token);
-    }
   }
 
   async canActivate(permission: string | undefined | null) {
