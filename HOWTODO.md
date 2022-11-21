@@ -52,3 +52,5 @@ nx run appname:extract-i18n
 
 
 ```
+
+### For inner compatiblity, libraries should have same target like ES2017
