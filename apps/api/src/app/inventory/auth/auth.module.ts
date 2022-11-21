@@ -1,31 +1,16 @@
-import {
-  Module,
-  OnModuleInit,
-} from '@nestjs/common';
+import { Module, OnModuleInit } from '@nestjs/common';
 import { APP_GUARD } from '@nestjs/core';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-import {
-  Permission,
-  PermissionService,
-} from '../rest/permission';
-import {
-  User,
-  UserService,
-} from '../rest/user';
+import { Permission, PermissionService } from '../rest/permission';
+import { User, UserService } from '../rest/user';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
-import {
-  cp,
-  ONS,
-} from './decorators';
+import { cp, ONS } from './decorators';
 import { PermissionGuard } from './guards';
-import {
-  EXPIRES_IN,
-  JWT_SECRET,
-} from './jwt-options.const';
+import { EXPIRES_IN, JWT_SECRET } from './jwt-options.const';
 import { JwtStrategy } from './jwt.strategy';
 import { LocalStrategy } from './local.strategy';
 
@@ -64,7 +49,7 @@ export class AuthModule implements OnModuleInit {
 
     const user = await this.us.save({
       username: 'aemrebas.dev@gmail.com',
-      password: 'Aemrebas.dev1@gmail.com',
+      password: '!1Pass',
     });
     for (const r of [
       'user',
