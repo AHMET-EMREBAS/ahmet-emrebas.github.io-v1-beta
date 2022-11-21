@@ -1,9 +1,20 @@
-import { Component, OnInit } from '@angular/core';
-import { MessageService as SystemMessageService } from 'primeng/api';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import {
+  Component,
+  OnInit,
+} from '@angular/core';
+import {
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import {
+  ActivatedRoute,
+  Router,
+} from '@angular/router';
+
 import { groupBy } from 'lodash';
 import { InputOptions } from 'material/form';
+import { MessageService as SystemMessageService } from 'primeng/api';
 
 import { CategoryService } from '../category.service';
 
@@ -48,7 +59,6 @@ export class CreateCategoryComponent implements OnInit {
     private readonly router: Router,
     private readonly route: ActivatedRoute
   ) {}
-
   ngOnInit(): void {}
 
   submit() {

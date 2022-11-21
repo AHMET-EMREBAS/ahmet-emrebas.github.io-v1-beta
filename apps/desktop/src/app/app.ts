@@ -74,11 +74,25 @@ export default class App {
       width: width,
       height: height,
       show: false,
+      icon: 'dist/apps/desktop/assets/logo.png',
+      // backgroundColor: '#003399',
+      opacity: 0.9,
+      title: 'Inventory App',
+
+      titleBarStyle: 'customButtonsOnHover',
+      titleBarOverlay: true,
+      // alwaysOnTop: true,
 
       webPreferences: {
         contextIsolation: true,
         backgroundThrottling: false,
+        javascript: true,
+        allowRunningInsecureContent: false,
+
+        enableBlinkFeatures: 'false',
+
         preload: join(__dirname, 'main.preload.js'),
+        devTools: true,
       },
     });
     App.mainWindow.setMenu(null);
@@ -109,8 +123,17 @@ export default class App {
   private static loadMainWindow() {
     // load the index.html of the app.
     if (!App.application.isPackaged) {
+      console.log('[loadMainWindow] Rendering from URL');
       App.mainWindow.loadURL(`http://localhost:${rendererAppPort}`);
+      // App.mainWindow.loadURL(
+      //   format({
+      //     pathname: join(__dirname, '..', rendererAppName, 'index.html'),
+      //     protocol: 'file:',
+      //     slashes: true,
+      //   })
+      // );
     } else {
+      console.log('[loadMainWindow] Rendering from file');
       App.mainWindow.loadURL(
         format({
           pathname: join(__dirname, '..', rendererAppName, 'index.html'),

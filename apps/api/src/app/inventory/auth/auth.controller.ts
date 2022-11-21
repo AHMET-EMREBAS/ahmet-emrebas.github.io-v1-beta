@@ -46,7 +46,7 @@ export class AuthController {
     @Res() res: Response
   ) {
     const token = await this.authService.login(req.user as IReadUser);
-    res.cookie('auth', token.accessToken);
+    res.cookie('authorization', token.accessToken);
     res.send(token);
   }
 
