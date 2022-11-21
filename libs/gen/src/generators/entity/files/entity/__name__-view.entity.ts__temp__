@@ -44,7 +44,7 @@ import { <%- target  %>  } from '../../<%- target.toLowerCase() %>';
 
         <% for(const o of options.Relations || []) { %> 
           
-            <% for(const v of o.viewColumns) { %> 
+            <% for(const v of o.viewColumns || []) { %> 
                   .addSelect('<%- o.name %>.<%- v.column %>', '<%- v.as %>')
             <% } %>
         <% } %>
@@ -107,7 +107,7 @@ export class <%- classname %>View
 
 <% for(const o of options.Relations || []) { %> 
 
-    <% for(const v of o.viewColumns) { %> 
+    <% for(const v of o.viewColumns || []) { %> 
 
         @Field()
         @ViewColumn()

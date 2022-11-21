@@ -24,6 +24,15 @@ export class Message extends BaseEntity implements IMessage<ID, ID> {
   @Field()
   @Column({
     type: 'text',
+    nullable: true,
+    unique: false,
+    transformer: [],
+  })
+  subject: string;
+
+  @Field()
+  @Column({
+    type: 'text',
     nullable: false,
     unique: false,
     transformer: [],
@@ -32,9 +41,9 @@ export class Message extends BaseEntity implements IMessage<ID, ID> {
 
   @ManyToOne(() => User, { eager: true, nullable: false, onDelete: 'CASCADE' })
   @JoinColumn()
-  to?: ID;
+  receiver?: ID;
 
   @ManyToOne(() => User, { eager: true, nullable: false, onDelete: 'CASCADE' })
   @JoinColumn()
-  from?: ID;
+  sender?: ID;
 }

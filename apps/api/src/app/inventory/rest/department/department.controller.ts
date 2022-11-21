@@ -1,38 +1,31 @@
 import {
-  FunctionsDto,
-  PaginatorDto,
-  ViewDto,
-  WhereDto,
-} from 'core/dto';
-
-import {
-  BadRequestException,
   Body,
   Controller,
   Delete,
   Get,
   Param,
-  Patch,
   Post,
   Put,
   Query,
+  Patch,
+  BadRequestException,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-
 import {
-  CanRead,
-  CanWrite,
-} from '../../auth/decorators';
+  FunctionsDto,
+  PaginatorDto,
+  QueryDto,
+  ViewDto,
+  WhereDto,
+} from 'core/dto';
+
+import { CanRead, CanWrite } from '../../auth/decorators';
+
+import { Department, DepartmentView } from './entity';
+import { CreateDepartmentDto, UpdateDepartmentDto } from './dto';
+
 import { DepartmentViewService } from './department-view.service';
 import { DepartmentService } from './department.service';
-import {
-  CreateDepartmentDto,
-  UpdateDepartmentDto,
-} from './dto';
-import {
-  Department,
-  DepartmentView,
-} from './entity';
 
 @ApiTags('department')
 @Controller('department')

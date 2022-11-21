@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-
+import { PermissionGuard } from '../../auth';
 import { CreateQuantityComponent } from './create-quantity/';
 import { DeleteQuantityComponent } from './delete-quantity/';
 import { QuantityComponent } from './quantity.component';
@@ -38,21 +38,37 @@ import { StoreService } from '../store';
             title: 'View Quantity',
             path: '',
             component: ViewQuantityComponent,
+            data: {
+              permission: 'READ:QUANTITY',
+            },
+            canActivate: [PermissionGuard],
           },
           {
             title: 'Create Quantity',
             path: 'create',
             component: CreateQuantityComponent,
+            data: {
+              permission: 'WRITE:QUANTITY',
+            },
+            canActivate: [PermissionGuard],
           },
           {
             title: 'Update Quantity',
             path: 'update',
             component: UpdateQuantityComponent,
+            data: {
+              permission: 'WRITE:QUANTITY',
+            },
+            canActivate: [PermissionGuard],
           },
           {
             title: 'Delete Quantity',
             path: 'delete',
             component: DeleteQuantityComponent,
+            data: {
+              permission: 'WRITE:QUANTITY',
+            },
+            canActivate: [PermissionGuard],
           },
         ],
       },

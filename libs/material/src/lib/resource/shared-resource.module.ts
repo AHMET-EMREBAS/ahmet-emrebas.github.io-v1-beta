@@ -4,8 +4,6 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 
-import { FormModule } from 'material/form';
-import { TableModule } from 'material/table';
 import {
   ConfirmationService,
   MessageService,
@@ -16,6 +14,9 @@ import { MessageModule } from 'primeng/message';
 import { ToastModule } from 'primeng/toast';
 import { ToolbarModule } from 'primeng/toolbar';
 import { TooltipModule } from 'primeng/tooltip';
+
+import { FormModule } from '../form';
+import { TableModule } from '../table';
 
 @NgModule({
   imports: [

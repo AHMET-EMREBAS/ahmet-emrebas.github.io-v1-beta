@@ -69,7 +69,7 @@ export class UpdatePriceComponent implements AfterViewInit, OnInit {
       name: 'sku',
       type: 'select',
       group: 'Meta',
-      placeholder: 'sku',
+      placeholder: 'name',
       asyncOptions: this.skuService.entities$,
       optionValue: 'id',
       optionLabel: 'name',
@@ -79,7 +79,7 @@ export class UpdatePriceComponent implements AfterViewInit, OnInit {
       name: 'pricelevel',
       type: 'select',
       group: 'Meta',
-      placeholder: 'pricelevel',
+      placeholder: 'name',
       asyncOptions: this.pricelevelService.entities$,
       optionValue: 'id',
       optionLabel: 'name',
@@ -134,6 +134,7 @@ export class UpdatePriceComponent implements AfterViewInit, OnInit {
       )[0];
 
       this.systemMessageService.add({
+        key: 'resource',
         severity: 'error',
         summary: `${e[0]} field is not valid!`,
       });

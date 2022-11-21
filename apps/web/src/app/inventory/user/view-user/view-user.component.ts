@@ -51,11 +51,6 @@ export class ViewUserComponent implements AfterViewInit {
     },
 
     {
-      header: 'permission',
-      field: 'permission',
-    },
-
-    {
       header: 'Create Time',
       field: 'createdAt',
     },

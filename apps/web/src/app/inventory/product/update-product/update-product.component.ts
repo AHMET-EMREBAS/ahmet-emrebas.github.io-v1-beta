@@ -124,7 +124,7 @@ export class UpdateProductComponent implements AfterViewInit, OnInit {
       name: 'category',
       type: 'select',
       group: 'Meta',
-      placeholder: 'category',
+      placeholder: 'name',
       asyncOptions: this.categoryService.entities$,
       optionValue: 'id',
       optionLabel: 'name',
@@ -134,7 +134,7 @@ export class UpdateProductComponent implements AfterViewInit, OnInit {
       name: 'department',
       type: 'select',
       group: 'Meta',
-      placeholder: 'department',
+      placeholder: 'name',
       asyncOptions: this.departmentService.entities$,
       optionValue: 'id',
       optionLabel: 'name',
@@ -195,6 +195,7 @@ export class UpdateProductComponent implements AfterViewInit, OnInit {
       )[0];
 
       this.systemMessageService.add({
+        key: 'resource',
         severity: 'error',
         summary: `${e[0]} field is not valid!`,
       });

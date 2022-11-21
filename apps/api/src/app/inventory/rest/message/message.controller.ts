@@ -56,7 +56,7 @@ export class MessageController {
   @Get(':id')
   readMessageById(@Param('id') id: number, @Query() view: ViewDto) {
     if (view.view === true) {
-      return this.viewService.findOneBy();
+      return this.viewService.findOneBy({ id });
     }
     return this.service.findOneBy({ id });
   }
@@ -88,30 +88,30 @@ export class MessageController {
     if (functions.query === 'count') {
       return this.viewService.count({ where: whereDto.where });
     }
-    throw new BadRequestException('Must provide a fucntion name.');
+    throw new BadRequestException('Must provide a function name.');
   }
 
   @CanWrite('message')
-  @Post(':id/to/:toId')
-  settoToMessage(id: number, toId: number) {
-    return this.service.set(id, toId, 'to');
+  @Post(':id/receiver/:receiverId')
+  setreceiverToMessage(id: number, receiverId: number) {
+    return this.service.set(id, receiverId, 'receiver');
   }
 
   @CanWrite('message')
-  @Post(':id/to')
-  unsettoFromMessage(id: number) {
-    return this.service.unset(id, 'to');
+  @Post(':id/receiver')
+  unsetreceiverFromMessage(id: number) {
+    return this.service.unset(id, 'receiver');
   }
 
   @CanWrite('message')
-  @Post(':id/from/:fromId')
-  setfromToMessage(id: number, fromId: number) {
-    return this.service.set(id, fromId, 'from');
+  @Post(':id/sender/:senderId')
+  setsenderToMessage(id: number, senderId: number) {
+    return this.service.set(id, senderId, 'sender');
   }
 
   @CanWrite('message')
-  @Post(':id/from')
-  unsetfromFromMessage(id: number) {
-    return this.service.unset(id, 'from');
+  @Post(':id/sender')
+  unsetsenderFromMessage(id: number) {
+    return this.service.unset(id, 'sender');
   }
 }

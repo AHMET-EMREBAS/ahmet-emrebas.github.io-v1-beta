@@ -47,7 +47,7 @@ export class CreateStoreComponent implements OnInit {
       name: 'pricelevel',
       type: 'select',
       group: 'Price Level',
-      placeholder: 'pricelevel',
+      placeholder: 'name',
       asyncOptions: this.pricelevelService.entities$,
       optionValue: 'id',
       optionLabel: 'name',
@@ -83,6 +83,7 @@ export class CreateStoreComponent implements OnInit {
         )[0];
 
         this.systemMessageService.add({
+          key: 'resource',
           severity: 'error',
           summary: `${e[0]} field is not valid!`,
         });

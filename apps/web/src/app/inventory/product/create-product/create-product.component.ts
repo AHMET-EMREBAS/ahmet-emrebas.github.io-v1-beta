@@ -119,7 +119,7 @@ export class CreateProductComponent implements OnInit {
       name: 'category',
       type: 'select',
       group: 'Meta',
-      placeholder: 'category',
+      placeholder: 'name',
       asyncOptions: this.categoryService.entities$,
       optionValue: 'id',
       optionLabel: 'name',
@@ -129,7 +129,7 @@ export class CreateProductComponent implements OnInit {
       name: 'department',
       type: 'select',
       group: 'Meta',
-      placeholder: 'department',
+      placeholder: 'name',
       asyncOptions: this.departmentService.entities$,
       optionValue: 'id',
       optionLabel: 'name',
@@ -178,6 +178,7 @@ export class CreateProductComponent implements OnInit {
         )[0];
 
         this.systemMessageService.add({
+          key: 'resource',
           severity: 'error',
           summary: `${e[0]} field is not valid!`,
         });

@@ -75,13 +75,29 @@ export class AuthService {
     if (!permission) {
       return true;
     }
-    return (
-      await firstValueFrom<{ canActivate: boolean }>(
-        this.httpClient.post<{ canActivate: boolean }>(
-          `api/auth/has-permission/?permission=${permission}`,
-          {}
+    try {
+      return (
+        await firstValueFrom<{ canActivate: boolean }>(
+          this.httpClient.post<{ canActivate: boolean }>(
+            `api/auth/has-permission/?permission=${permission}`,
+            {}
+          )
         )
-      )
-    ).canActivate;
+      ).canActivate;
+    } catch (err) {
+      return false;
+    }
+  }
+
+  async isLogin() {
+    try {
+      return (
+        await firstValueFrom(
+          this.httpClient.post<{ isLogin: boolean }>('api/auth/is-login', {})
+        )
+      ).isLogin;
+    } catch (err) {
+      return false;
+    }
   }
 }

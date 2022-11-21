@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-
+import { PermissionGuard } from '../../auth';
 import { CreateStoreComponent } from './create-store/';
 import { DeleteStoreComponent } from './delete-store/';
 import { StoreComponent } from './store.component';
@@ -36,21 +36,37 @@ import { PricelevelService } from '../pricelevel';
             title: 'View Store',
             path: '',
             component: ViewStoreComponent,
+            data: {
+              permission: 'READ:STORE',
+            },
+            canActivate: [PermissionGuard],
           },
           {
             title: 'Create Store',
             path: 'create',
             component: CreateStoreComponent,
+            data: {
+              permission: 'WRITE:STORE',
+            },
+            canActivate: [PermissionGuard],
           },
           {
             title: 'Update Store',
             path: 'update',
             component: UpdateStoreComponent,
+            data: {
+              permission: 'WRITE:STORE',
+            },
+            canActivate: [PermissionGuard],
           },
           {
             title: 'Delete Store',
             path: 'delete',
             component: DeleteStoreComponent,
+            data: {
+              permission: 'WRITE:STORE',
+            },
+            canActivate: [PermissionGuard],
           },
         ],
       },

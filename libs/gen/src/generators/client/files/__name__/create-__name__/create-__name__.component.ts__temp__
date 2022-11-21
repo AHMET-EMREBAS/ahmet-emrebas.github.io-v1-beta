@@ -137,7 +137,7 @@ export class Create<%- classname %>Component implements OnInit {
   ngOnInit(): void {
     
     <% for(const target of new Set(options.Relations?.map(e=>e.target) || [])) { %> 
-            this.<%- target.toLowerCase() %>Service.getAsOptions(['id', '<%- options.Relations.find(e=>e.target===target).viewColumns[0].column %>']);
+            this.<%- target.toLowerCase() %>Service.getAsOptions(['id', '<%- options.Relations.find(e=>e.target===target).label %>']);
     <% } %>
   }
 
@@ -160,7 +160,7 @@ export class Create<%- classname %>Component implements OnInit {
             )[0];
 
             this.systemMessageService.add({
-              key:'resource'
+              key:'resource',
               severity: 'error',
               summary: `${e[0]} field is not valid!`,
             });

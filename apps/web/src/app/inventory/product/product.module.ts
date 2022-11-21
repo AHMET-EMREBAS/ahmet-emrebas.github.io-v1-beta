@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-
+import { PermissionGuard } from '../../auth';
 import { CreateProductComponent } from './create-product/';
 import { DeleteProductComponent } from './delete-product/';
 import { ProductComponent } from './product.component';
@@ -38,21 +38,37 @@ import { DepartmentService } from '../department';
             title: 'View Product',
             path: '',
             component: ViewProductComponent,
+            data: {
+              permission: 'READ:PRODUCT',
+            },
+            canActivate: [PermissionGuard],
           },
           {
             title: 'Create Product',
             path: 'create',
             component: CreateProductComponent,
+            data: {
+              permission: 'WRITE:PRODUCT',
+            },
+            canActivate: [PermissionGuard],
           },
           {
             title: 'Update Product',
             path: 'update',
             component: UpdateProductComponent,
+            data: {
+              permission: 'WRITE:PRODUCT',
+            },
+            canActivate: [PermissionGuard],
           },
           {
             title: 'Delete Product',
             path: 'delete',
             component: DeleteProductComponent,
+            data: {
+              permission: 'WRITE:PRODUCT',
+            },
+            canActivate: [PermissionGuard],
           },
         ],
       },

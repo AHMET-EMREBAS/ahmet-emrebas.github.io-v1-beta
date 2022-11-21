@@ -69,7 +69,7 @@ export class UpdateUserComponent implements AfterViewInit, OnInit {
       name: 'permission',
       type: 'select-many',
       group: 'Permissions',
-      placeholder: 'permission',
+      placeholder: 'description',
       asyncOptions: this.permissionService.entities$,
       optionValue: 'id',
       optionLabel: 'description',
@@ -119,6 +119,7 @@ export class UpdateUserComponent implements AfterViewInit, OnInit {
       )[0];
 
       this.systemMessageService.add({
+        key: 'resource',
         severity: 'error',
         summary: `${e[0]} field is not valid!`,
       });

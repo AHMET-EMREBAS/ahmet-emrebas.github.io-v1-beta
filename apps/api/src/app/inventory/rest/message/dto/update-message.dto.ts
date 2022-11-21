@@ -24,6 +24,20 @@ export class UpdateMessageDto implements Partial<IMessage<ID, ID>> {
   @ApiProperty({
     type: 'string',
 
+    maxLength: 50,
+
+    required: false,
+    nullable: true,
+  })
+  @MaxLength(50)
+  @IsOptional()
+  @Expose()
+  subject: string;
+
+  @Field()
+  @ApiProperty({
+    type: 'string',
+
     maxLength: 400,
 
     required: false,
@@ -37,11 +51,11 @@ export class UpdateMessageDto implements Partial<IMessage<ID, ID>> {
   @ApiProperty({ type: ID })
   @Field(() => ID, { nullable: true })
   @Type(() => ID)
-  @IsOptional()
+  @IsNotEmpty()
   @ValidateNested()
-  @IsNotEmptyObject({ nullable: true })
+  @IsNotEmptyObject({ nullable: false })
   @Expose()
-  to: ID;
+  receiver: ID;
 
   @ApiProperty({ type: ID })
   @Field(() => ID, { nullable: true })
@@ -50,5 +64,5 @@ export class UpdateMessageDto implements Partial<IMessage<ID, ID>> {
   @ValidateNested()
   @IsNotEmptyObject({ nullable: true })
   @Expose()
-  from: ID;
+  sender: ID;
 }

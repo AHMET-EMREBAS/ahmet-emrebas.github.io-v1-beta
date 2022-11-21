@@ -1,17 +1,17 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { MatStepperModule } from '@angular/material/stepper';
 import { RouterModule } from '@angular/router';
+import { PermissionGuard } from '../../auth';
+import { CreateCategoryComponent } from './create-category/';
+import { DeleteCategoryComponent } from './delete-category/';
+import { CategoryComponent } from './category.component';
+import { CategoryService } from './category.service';
+import { UpdateCategoryComponent } from './update-category/';
+import { ViewCategoryComponent } from './view-category';
 
 import { SharedResourceModule } from 'material/resource';
 
-import { PermissionGuard } from '../../auth';
-import { CategoryComponent } from './category.component';
-import { CategoryService } from './category.service';
-import { CreateCategoryComponent } from './create-category/';
-import { DeleteCategoryComponent } from './delete-category/';
-import { UpdateCategoryComponent } from './update-category/';
-import { ViewCategoryComponent } from './view-category';
+import { MatStepperModule } from '@angular/material/stepper';
 
 @NgModule({
   declarations: [
@@ -42,28 +42,28 @@ import { ViewCategoryComponent } from './view-category';
           {
             title: 'Create Category',
             path: 'create',
+            component: CreateCategoryComponent,
             data: {
               permission: 'WRITE:CATEGORY',
             },
-            component: CreateCategoryComponent,
             canActivate: [PermissionGuard],
           },
           {
             title: 'Update Category',
             path: 'update',
+            component: UpdateCategoryComponent,
             data: {
               permission: 'WRITE:CATEGORY',
             },
-            component: UpdateCategoryComponent,
             canActivate: [PermissionGuard],
           },
           {
             title: 'Delete Category',
             path: 'delete',
+            component: DeleteCategoryComponent,
             data: {
               permission: 'WRITE:CATEGORY',
             },
-            component: DeleteCategoryComponent,
             canActivate: [PermissionGuard],
           },
         ],

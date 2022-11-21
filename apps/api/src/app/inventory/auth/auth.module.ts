@@ -92,7 +92,7 @@ export class AuthModule implements OnModuleInit {
       await this.us.add(user.id, M.id, 'permission');
     }
 
-    for (const r of ['message', 'profile', '']) {
+    for (const r of ['message', 'profile']) {
       const RO = await this.ps.save(cp(r, ONS.READ_OWN));
       const WO = await this.ps.save(cp(r, ONS.WRITE_OWN));
       const MO = await this.ps.save(cp(r, ONS.MANAGE_OWN));

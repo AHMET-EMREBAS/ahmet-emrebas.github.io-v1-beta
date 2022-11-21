@@ -22,17 +22,19 @@ import { User } from '../../user';
       .addSelect('message.deletedAt', 'deletedAt')
       .addSelect('message.active', 'active')
 
+      .addSelect('message.subject', 'subject')
+
       .addSelect('message.message', 'message')
 
-      .addSelect('to.username', 'to')
+      .addSelect('receiver.username', 'receiver')
 
-      .addSelect('from.username', 'from')
+      .addSelect('sender.username', 'sender')
 
       .from(Message, 'message')
 
-      .leftJoin(User, 'to', 'to.id = message.toId')
+      .leftJoin(User, 'receiver', 'receiver.id = message.receiverId')
 
-      .leftJoin(User, 'from', 'from.id = message.fromId');
+      .leftJoin(User, 'sender', 'sender.id = message.senderId');
   },
 })
 export class MessageView implements IMessage<string, string> {
@@ -50,15 +52,19 @@ export class MessageView implements IMessage<string, string> {
 
   @Field()
   @ViewColumn()
+  subject: string;
+
+  @Field()
+  @ViewColumn()
   message: string;
 
   @Field()
   @ViewColumn()
-  to: string;
+  receiver: string;
 
   @Field()
   @ViewColumn()
-  from: string;
+  sender: string;
 
   @Field()
   @ViewColumn()

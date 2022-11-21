@@ -64,7 +64,7 @@ export class CreatePriceComponent implements OnInit {
       name: 'sku',
       type: 'select',
       group: 'Meta',
-      placeholder: 'sku',
+      placeholder: 'name',
       asyncOptions: this.skuService.entities$,
       optionValue: 'id',
       optionLabel: 'name',
@@ -74,7 +74,7 @@ export class CreatePriceComponent implements OnInit {
       name: 'pricelevel',
       type: 'select',
       group: 'Meta',
-      placeholder: 'pricelevel',
+      placeholder: 'name',
       asyncOptions: this.pricelevelService.entities$,
       optionValue: 'id',
       optionLabel: 'name',
@@ -117,6 +117,7 @@ export class CreatePriceComponent implements OnInit {
         )[0];
 
         this.systemMessageService.add({
+          key: 'resource',
           severity: 'error',
           summary: `${e[0]} field is not valid!`,
         });

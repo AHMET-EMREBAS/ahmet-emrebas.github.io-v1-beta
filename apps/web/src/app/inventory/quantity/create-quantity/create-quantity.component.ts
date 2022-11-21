@@ -1,15 +1,24 @@
-import { Component, OnInit } from '@angular/core';
-import { MessageService as SystemMessageService } from 'primeng/api';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import {
+  Component,
+  OnInit,
+} from '@angular/core';
+import {
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import {
+  ActivatedRoute,
+  Router,
+} from '@angular/router';
+
 import { groupBy } from 'lodash';
 import { InputOptions } from 'material/form';
-
-import { QuantityService } from '../quantity.service';
+import { MessageService as SystemMessageService } from 'primeng/api';
 
 import { SkuService } from '../../sku';
-
 import { StoreService } from '../../store';
+import { QuantityService } from '../quantity.service';
 
 @Component({
   selector: 'ae-create-quantity',
@@ -51,7 +60,7 @@ export class CreateQuantityComponent implements OnInit {
       name: 'sku',
       type: 'select',
       group: 'Meta',
-      placeholder: 'sku',
+      placeholder: 'name',
       asyncOptions: this.skuService.entities$,
       optionValue: 'id',
       optionLabel: 'name',
@@ -63,7 +72,7 @@ export class CreateQuantityComponent implements OnInit {
       name: 'store',
       type: 'select',
       group: 'Meta',
-      placeholder: 'store',
+      placeholder: 'name',
       asyncOptions: this.storeService.entities$,
       optionValue: 'id',
       optionLabel: 'name',
@@ -106,6 +115,7 @@ export class CreateQuantityComponent implements OnInit {
         )[0];
 
         this.systemMessageService.add({
+          key: 'resource',
           severity: 'error',
           summary: `${e[0]} field is not valid!`,
         });

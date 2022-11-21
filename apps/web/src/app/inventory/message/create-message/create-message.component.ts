@@ -1,23 +1,13 @@
-import {
-  Component,
-  OnInit,
-} from '@angular/core';
-import {
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
-import {
-  ActivatedRoute,
-  Router,
-} from '@angular/router';
-
+import { Component, OnInit } from '@angular/core';
+import { MessageService as SystemMessageService } from 'primeng/api';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { groupBy } from 'lodash';
 import { InputOptions } from 'material/form';
-import { MessageService as SystemMessageService } from 'primeng/api';
+
+import { MessageService } from '../message.service';
 
 import { UserService } from '../../user';
-import { MessageService } from '../message.service';
 
 @Component({
   selector: 'ae-create-message',
@@ -28,6 +18,12 @@ export class CreateMessageComponent implements OnInit {
   submitted = false;
   title = 'Create Message';
   formGroup = new FormGroup({
+    subject: new FormControl(undefined, [
+      Validators.minLength(0),
+
+      Validators.maxLength(50),
+    ]),
+
     message: new FormControl(undefined, [
       Validators.required,
 
@@ -36,15 +32,26 @@ export class CreateMessageComponent implements OnInit {
       Validators.maxLength(400),
     ]),
 
-    to: new FormControl(undefined, []),
+    receiver: new FormControl(undefined, [Validators.required]),
 
-    from: new FormControl(undefined, []),
+    sender: new FormControl(undefined, []),
   });
 
   fields: InputOptions[] = [
     {
-      name: 'message',
+      name: 'subject',
       type: 'text',
+      group: 'Subject',
+      placeholder: 'subject',
+
+      minLength: 0,
+
+      maxLength: 50,
+    },
+
+    {
+      name: 'message',
+      type: 'textarea',
       group: 'Message',
       placeholder: 'message',
 
@@ -56,20 +63,22 @@ export class CreateMessageComponent implements OnInit {
     },
 
     {
-      name: 'to',
+      name: 'receiver',
       type: 'select',
       group: 'To',
-      placeholder: 'to',
+      placeholder: 'username',
       asyncOptions: this.userService.entities$,
       optionValue: 'id',
       optionLabel: 'username',
+
+      required: true,
     },
 
     {
-      name: 'from',
+      name: 'sender',
       type: 'select',
       group: 'Primary',
-      placeholder: 'from',
+      placeholder: 'username',
       asyncOptions: this.userService.entities$,
       optionValue: 'id',
       optionLabel: 'username',
@@ -87,8 +96,7 @@ export class CreateMessageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.userService.clearCache();
-    this.userService.getAll();
+    this.userService.getAsOptions(['id', 'username']);
   }
 
   submit() {
@@ -96,11 +104,13 @@ export class CreateMessageComponent implements OnInit {
       if (this.formGroup.valid) {
         this.submitted = true;
         this.messageService.add({
+          subject: this.value('subject'),
+
           message: this.value('message'),
 
-          to: this.value('to'),
+          receiver: this.value('receiver'),
 
-          from: this.value('from'),
+          sender: this.value('sender'),
         });
       } else {
         const e = Object.entries(this.formGroup.controls).filter(
@@ -108,6 +118,7 @@ export class CreateMessageComponent implements OnInit {
         )[0];
 
         this.systemMessageService.add({
+          key: 'resource',
           severity: 'error',
           summary: `${e[0]} field is not valid!`,
         });

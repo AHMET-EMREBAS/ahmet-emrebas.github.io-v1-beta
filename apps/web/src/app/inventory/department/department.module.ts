@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-
+import { PermissionGuard } from '../../auth';
 import { CreateDepartmentComponent } from './create-department/';
 import { DeleteDepartmentComponent } from './delete-department/';
 import { DepartmentComponent } from './department.component';
@@ -34,21 +34,37 @@ import { MatStepperModule } from '@angular/material/stepper';
             title: 'View Department',
             path: '',
             component: ViewDepartmentComponent,
+            data: {
+              permission: 'READ:DEPARTMENT',
+            },
+            canActivate: [PermissionGuard],
           },
           {
             title: 'Create Department',
             path: 'create',
             component: CreateDepartmentComponent,
+            data: {
+              permission: 'WRITE:DEPARTMENT',
+            },
+            canActivate: [PermissionGuard],
           },
           {
             title: 'Update Department',
             path: 'update',
             component: UpdateDepartmentComponent,
+            data: {
+              permission: 'WRITE:DEPARTMENT',
+            },
+            canActivate: [PermissionGuard],
           },
           {
             title: 'Delete Department',
             path: 'delete',
             component: DeleteDepartmentComponent,
+            data: {
+              permission: 'WRITE:DEPARTMENT',
+            },
+            canActivate: [PermissionGuard],
           },
         ],
       },

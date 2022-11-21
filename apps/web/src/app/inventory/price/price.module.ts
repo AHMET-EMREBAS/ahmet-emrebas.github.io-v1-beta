@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-
+import { PermissionGuard } from '../../auth';
 import { CreatePriceComponent } from './create-price/';
 import { DeletePriceComponent } from './delete-price/';
 import { PriceComponent } from './price.component';
@@ -38,21 +38,37 @@ import { PricelevelService } from '../pricelevel';
             title: 'View Price',
             path: '',
             component: ViewPriceComponent,
+            data: {
+              permission: 'READ:PRICE',
+            },
+            canActivate: [PermissionGuard],
           },
           {
             title: 'Create Price',
             path: 'create',
             component: CreatePriceComponent,
+            data: {
+              permission: 'WRITE:PRICE',
+            },
+            canActivate: [PermissionGuard],
           },
           {
             title: 'Update Price',
             path: 'update',
             component: UpdatePriceComponent,
+            data: {
+              permission: 'WRITE:PRICE',
+            },
+            canActivate: [PermissionGuard],
           },
           {
             title: 'Delete Price',
             path: 'delete',
             component: DeletePriceComponent,
+            data: {
+              permission: 'WRITE:PRICE',
+            },
+            canActivate: [PermissionGuard],
           },
         ],
       },

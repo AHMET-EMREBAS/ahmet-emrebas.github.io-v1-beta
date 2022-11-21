@@ -56,7 +56,7 @@ export class QuantityController {
   @Get(':id')
   readQuantityById(@Param('id') id: number, @Query() view: ViewDto) {
     if (view.view === true) {
-      return this.viewService.findOneBy();
+      return this.viewService.findOneBy({ id });
     }
     return this.service.findOneBy({ id });
   }
@@ -88,7 +88,7 @@ export class QuantityController {
     if (functions.query === 'count') {
       return this.viewService.count({ where: whereDto.where });
     }
-    throw new BadRequestException('Must provide a fucntion name.');
+    throw new BadRequestException('Must provide a function name.');
   }
 
   @CanWrite('quantity')

@@ -17,7 +17,8 @@
       "type": "string"
     },
     "label": {
-      "type": "string"
+      "type": "string",
+      "description": "Which column of the entity is used for html select option label?"
     },
     "joinColumn": {
       "type": "boolean",

@@ -81,4 +81,10 @@ export class AuthController {
   ) {
     return await this.authService.resetPassword(username, code, newPassword);
   }
+
+  @CanRead('profile')
+  @Post('is-login')
+  async isLogin() {
+    return { isLogin: true };
+  }
 }

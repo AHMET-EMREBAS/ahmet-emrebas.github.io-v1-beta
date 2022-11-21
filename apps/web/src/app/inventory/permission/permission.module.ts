@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-
+import { PermissionGuard } from '../../auth';
 import { CreatePermissionComponent } from './create-permission/';
 import { DeletePermissionComponent } from './delete-permission/';
 import { PermissionComponent } from './permission.component';
@@ -34,21 +34,37 @@ import { MatStepperModule } from '@angular/material/stepper';
             title: 'View Permission',
             path: '',
             component: ViewPermissionComponent,
+            data: {
+              permission: 'READ:PERMISSION',
+            },
+            canActivate: [PermissionGuard],
           },
           {
             title: 'Create Permission',
             path: 'create',
             component: CreatePermissionComponent,
+            data: {
+              permission: 'WRITE:PERMISSION',
+            },
+            canActivate: [PermissionGuard],
           },
           {
             title: 'Update Permission',
             path: 'update',
             component: UpdatePermissionComponent,
+            data: {
+              permission: 'WRITE:PERMISSION',
+            },
+            canActivate: [PermissionGuard],
           },
           {
             title: 'Delete Permission',
             path: 'delete',
             component: DeletePermissionComponent,
+            data: {
+              permission: 'WRITE:PERMISSION',
+            },
+            canActivate: [PermissionGuard],
           },
         ],
       },

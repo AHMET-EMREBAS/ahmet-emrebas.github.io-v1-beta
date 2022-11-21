@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-
+import { PermissionGuard } from '../../auth';
 import { CreatePricelevelComponent } from './create-pricelevel/';
 import { DeletePricelevelComponent } from './delete-pricelevel/';
 import { PricelevelComponent } from './pricelevel.component';
@@ -34,21 +34,37 @@ import { MatStepperModule } from '@angular/material/stepper';
             title: 'View Pricelevel',
             path: '',
             component: ViewPricelevelComponent,
+            data: {
+              permission: 'READ:PRICELEVEL',
+            },
+            canActivate: [PermissionGuard],
           },
           {
             title: 'Create Pricelevel',
             path: 'create',
             component: CreatePricelevelComponent,
+            data: {
+              permission: 'WRITE:PRICELEVEL',
+            },
+            canActivate: [PermissionGuard],
           },
           {
             title: 'Update Pricelevel',
             path: 'update',
             component: UpdatePricelevelComponent,
+            data: {
+              permission: 'WRITE:PRICELEVEL',
+            },
+            canActivate: [PermissionGuard],
           },
           {
             title: 'Delete Pricelevel',
             path: 'delete',
             component: DeletePricelevelComponent,
+            data: {
+              permission: 'WRITE:PRICELEVEL',
+            },
+            canActivate: [PermissionGuard],
           },
         ],
       },

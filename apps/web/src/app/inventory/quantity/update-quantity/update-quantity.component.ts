@@ -56,7 +56,7 @@ export class UpdateQuantityComponent implements AfterViewInit, OnInit {
       name: 'sku',
       type: 'select',
       group: 'Meta',
-      placeholder: 'sku',
+      placeholder: 'name',
       asyncOptions: this.skuService.entities$,
       optionValue: 'id',
       optionLabel: 'name',
@@ -68,7 +68,7 @@ export class UpdateQuantityComponent implements AfterViewInit, OnInit {
       name: 'store',
       type: 'select',
       group: 'Meta',
-      placeholder: 'store',
+      placeholder: 'name',
       asyncOptions: this.storeService.entities$,
       optionValue: 'id',
       optionLabel: 'name',
@@ -123,6 +123,7 @@ export class UpdateQuantityComponent implements AfterViewInit, OnInit {
       )[0];
 
       this.systemMessageService.add({
+        key: 'resource',
         severity: 'error',
         summary: `${e[0]} field is not valid!`,
       });

@@ -26,8 +26,6 @@ import { Permission } from '../../permission';
 
       .addSelect('user.password', 'password')
 
-      .addSelect('permission.description', 'permission')
-
       .from(User, 'user')
 
       .leftJoin(
@@ -63,10 +61,6 @@ export class UserView implements IUser<string> {
   @Field()
   @ViewColumn()
   password: string;
-
-  @Field()
-  @ViewColumn()
-  permission: string;
 
   @Field()
   @ViewColumn()

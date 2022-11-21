@@ -100,6 +100,7 @@ export class UpdatePermissionComponent implements AfterViewInit, OnInit {
       )[0];
 
       this.systemMessageService.add({
+        key: 'resource',
         severity: 'error',
         summary: `${e[0]} field is not valid!`,
       });

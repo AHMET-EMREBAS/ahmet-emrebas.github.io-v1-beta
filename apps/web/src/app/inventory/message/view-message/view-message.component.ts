@@ -41,18 +41,23 @@ export class ViewMessageComponent implements AfterViewInit {
     },
 
     {
+      header: 'subject',
+      field: 'subject',
+    },
+
+    {
       header: 'message',
       field: 'message',
     },
 
     {
-      header: 'to',
-      field: 'to',
+      header: 'receiver',
+      field: 'receiver',
     },
 
     {
-      header: 'from',
-      field: 'from',
+      header: 'sender',
+      field: 'sender',
     },
 
     {
@@ -73,8 +78,8 @@ export class ViewMessageComponent implements AfterViewInit {
     private readonly messageService: MessageService,
     private readonly router: Router,
     private readonly route: ActivatedRoute,
-    private readonly toService: UserService,
-    private readonly fromService: UserService
+    private readonly receiverService: UserService,
+    private readonly senderService: UserService
   ) {}
 
   ngAfterViewInit(): void {

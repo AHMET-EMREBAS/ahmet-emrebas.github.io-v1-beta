@@ -29,7 +29,11 @@ export class User extends BaseEntity implements IUser<ID[]> {
   username: string;
 
   @Field()
-  @Column({ type: 'text', nullable: true })
+  @Column({
+    type: 'text',
+    nullable: true,
+    unique: true,
+  })
   code?: string;
 
   @Field()

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {
   ActivatedRouteSnapshot,
   CanActivate,
+  Router,
   RouterStateSnapshot,
   UrlTree,
 } from '@angular/router';
@@ -14,18 +15,23 @@ import { AuthService } from './auth.service';
 export class PermissionGuard implements CanActivate {
   constructor(
     private readonly messagService: MessageService,
-    private readonly authService: AuthService
+    private readonly authService: AuthService,
+    private readonly router: Router
   ) {}
   async canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Promise<boolean | UrlTree> {
     const requiredPermission = route.data['permission'];
-    console.log('[PermissionGuard] required permission : ', requiredPermission);
+    const isLogin = await this.authService.isLogin();
+
+    if (!isLogin) {
+      this.router.navigate(['/']);
+      return false;
+    }
 
     const canActivate = await this.authService.canActivate(requiredPermission);
 
-    console.log('[PermissionGuard] can activate : ', canActivate);
     if (!canActivate) {
       this.messagService.add({
         key: 'auth',
