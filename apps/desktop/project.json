@@ -5,16 +5,12 @@
   "targets": {
     "build": {
       "executor": "nx-electron:build",
-      "outputs": [
-        "{options.outputPath}"
-      ],
+      "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/apps/desktop",
         "main": "apps/desktop/src/main.ts",
         "tsConfig": "apps/desktop/tsconfig.app.json",
-        "assets": [
-          "apps/desktop/src/assets"
-        ]
+        "assets": ["apps/desktop/src/assets"]
       },
       "configurations": {
         "production": {
@@ -41,7 +37,7 @@
       "options": {
         "name": "desktop",
         "frontendProject": "web",
-        "outputPath": "dist/packages",
+        "outputPath": "dist/packages/desktop",
         "prepackageOnly": true
       }
     },
@@ -50,25 +46,19 @@
       "options": {
         "name": "desktop",
         "frontendProject": "web",
-        "outputPath": "dist/executables"
+        "outputPath": "dist/makes/desktop"
       }
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
-      "outputs": [
-        "{options.outputFile}"
-      ],
+      "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": [
-          "apps/desktop/**/*.ts"
-        ]
+        "lintFilePatterns": ["apps/desktop/**/*.ts"]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": [
-        "coverage/apps/desktop"
-      ],
+      "outputs": ["coverage/apps/desktop"],
       "options": {
         "jestConfig": "apps/desktop/jest.config.js",
         "passWithNoTests": true

@@ -1,6 +1,7 @@
 {
   "$schema": "../../../../../node_modules/nx-electron/src/validation/maker.schema.json",
-  "icon": "assets/favicon.ico",
-
-  "productName": "Inventory Application"
+  "icon": "dist/apps/desktop/assets/logo.png",
+  "appId": "com.aemrebas.inventory",
+  "productName": "Inventory App",
+  "copyright": "Copyright © 2022 Ahmet Emrebas"
 }
