@@ -107,7 +107,7 @@ export class Create<%- classname %>Component implements OnInit {
       name: '<%- r.name %>', 
       type: <% if(r.type.endsWith('Many')) { %>  'select-many' <% } else { %> 'select' <% } %>, 
       group: '<%- r.group || 'Primary' %>',  
-      placeholder: '<%- r.label || r.name %>',     
+      placeholder: 'Select <%- r.target %>',     
       asyncOptions:  this.<%- r.target.toLowerCase() %>Service.entities$,
       optionValue:'id', 
       optionLabel: '<%- r.label %>',
@@ -137,6 +137,7 @@ export class Create<%- classname %>Component implements OnInit {
   ngOnInit(): void {
     
     <% for(const target of new Set(options.Relations?.map(e=>e.target) || [])) { %> 
+            this.<%- target.toLowerCase() %>Service.clearCache();
             this.<%- target.toLowerCase() %>Service.getAsOptions(['id', '<%- options.Relations.find(e=>e.target===target).label %>']);
     <% } %>
   }

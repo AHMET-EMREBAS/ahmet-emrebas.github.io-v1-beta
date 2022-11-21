@@ -40,11 +40,9 @@ export class BaseUrlInterceptor implements HttpInterceptor {
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    const authorization = this.getAuthToken();
-
     const tokenizedRequest = request.clone({
       setHeaders: {
-        authorization,
+        [AUTH_TOKEN_NAME]: this.getAuthToken(),
       },
     });
 

@@ -1,15 +1,24 @@
-import { Component, OnInit } from '@angular/core';
-import { MessageService as SystemMessageService } from 'primeng/api';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import {
+  Component,
+  OnInit,
+} from '@angular/core';
+import {
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import {
+  ActivatedRoute,
+  Router,
+} from '@angular/router';
+
 import { groupBy } from 'lodash';
 import { InputOptions } from 'material/form';
-
-import { ProductService } from '../product.service';
+import { MessageService as SystemMessageService } from 'primeng/api';
 
 import { CategoryService } from '../../category';
-
 import { DepartmentService } from '../../department';
+import { ProductService } from '../product.service';
 
 @Component({
   selector: 'ae-create-product',
@@ -148,6 +157,7 @@ export class CreateProductComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.categoryService.clearCache();
     this.categoryService.getAsOptions(['id', 'name']);
 
     this.departmentService.getAsOptions(['id', 'name']);
