@@ -1,6 +1,8 @@
 import { compareSync } from 'bcrypt';
 import { IReadUser } from 'common/inventory/interfaces/user';
+import { v4 } from 'uuid';
 
+import { MailerService } from '@nestjs-modules/mailer';
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 
@@ -10,7 +12,8 @@ import { UserService } from '../rest/user';
 export class AuthService {
   constructor(
     private readonly userService: UserService,
-    private readonly jwtService: JwtService
+    private readonly jwtService: JwtService,
+    private readonly mailService: MailerService
   ) {}
 
   async validateUser(username: string, password: string) {
@@ -43,15 +46,62 @@ export class AuthService {
     const found = (await this.userService.findOneBy({
       id: user.id,
     })) as IReadUser;
-    return found?.permission?.find((e) => e.name === permission);
+    return {
+      canActivate: !!found?.permission?.find((e) => e.name === permission),
+    };
   }
 
   findUserByUsername(username: string) {
     return this.userService.findOneBy({ username });
   }
 
-  async updateUserCode(username: string, code: string) {
-    const found = await this.userService.findOneBy({ username });
-    await this.userService.update(found.id, { code });
+  findUserByCode(code: string) {
+    return this.userService.findOneBy({ code });
+  }
+
+  async updateUserCode(id: number, code: string) {
+    await this.userService.update(id, { code });
+  }
+
+  async updatePassword(id: number, password: string) {
+    return this.userService.update(id, { password });
+  }
+
+  async forgotPassword(username: string) {
+    await this.sendSecurityCode(username);
+
+    return {
+      message: 'Password reset code is sent.',
+    };
+  }
+
+  async sendSecurityCode(username: string) {
+    const foundUser = await this.userService.findOneByOrFail({ username });
+
+    const code = v4();
+
+    await this.userService.update(foundUser.id, { code });
+
+    await this.mailService.sendMail({
+      subject: 'Forgot Password',
+      template: 'message',
+      to: username,
+      context: {
+        subject: 'Forgot Password',
+        message: `Password reset code: ${code}`,
+      },
+    });
+  }
+
+  async resetPassword(username: string, code: string, newPassword: string) {
+    const foundUser = await this.userService.findOneByOrFail({
+      code,
+      username,
+    });
+
+    await this.userService.update(foundUser.id, {
+      password: newPassword,
+      code: v4(),
+    });
   }
 }

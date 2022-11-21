@@ -7,6 +7,7 @@ import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 
 import { AuthComponent } from './auth.component';
+import { AuthService } from './auth.service';
 
 @NgModule({
   declarations: [AuthComponent],
@@ -18,6 +19,7 @@ import { AuthComponent } from './auth.component';
     ButtonModule,
     MatStepperModule,
   ],
+  providers: [AuthService],
   exports: [AuthComponent],
 })
 export class AuthModule {}

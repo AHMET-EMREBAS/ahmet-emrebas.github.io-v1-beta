@@ -81,6 +81,7 @@ export class AuthModule implements OnModuleInit {
       'department',
       'promotion',
       'sku',
+      'profile',
     ]) {
       const R = await this.ps.save(cp(r, ONS.READ));
       const W = await this.ps.save(cp(r, ONS.WRITE));

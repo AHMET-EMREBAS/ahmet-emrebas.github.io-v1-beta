@@ -4,7 +4,8 @@
     <mat-stepper #stepper>
 
         <mat-step [label]="'Login'">
-            <form class="flex flex-column gap-5 p-4" [formGroup]="formGroup" [noValidate]="false" (submit)="submit()">
+            <form class="flex flex-column gap-3 p-4" [formGroup]="loginForm" [noValidate]="false"
+                (submit)="submitLoginForm()">
 
                 <div class="flex flex-column ">
                     <label for="username"> Username</label>
@@ -18,46 +19,44 @@
                 </div>
 
 
-                <button pButton type="submit" [label]="'Login'"> </button>
+                <div class="flex flex-column gap-2">
 
+                    <button pButton type="submit" [label]="'Login'"> </button>
+
+                    <button class="p-button-secondary" type="button" styleClass="p-button-secondary" pButton
+                        [label]="'Forgot Password'" (click)="forgotPassword(); stepper.next()">
+                    </button>
+
+                </div>
 
             </form>
         </mat-step>
 
-        <mat-step [label]="'Forgot Password'">
-            <form class="flex flex-column gap-5 p-4" [formGroup]="forgotPasswordForm" [noValidate]="false"
-                (submit)="submitForgotPassword()">
+        <mat-step [label]="'Reset Password'">
+            <form class="flex flex-column gap-3 p-4" [formGroup]="resetPasswordForm" [noValidate]="false"
+                (submit)="submitResetPasswordForm()">
 
                 <div class="flex flex-column ">
                     <label for="username"> Username</label>
                     <input pInputText type="email" formControlName="username" required autocomplete="username">
                 </div>
 
-                <button pButton type="submit" [label]="'Send Security Code'"> </button>
-
-                <span>{{message}}</span>
-            </form>
-        </mat-step>
-
-
-        <mat-step [label]="'Login With Code'">
-            <form class="flex flex-column gap-5 p-4" [formGroup]="loginWithCodeForm" [noValidate]="false"
-                (submit)="submitLoginWithCode()">
 
                 <div class="flex flex-column ">
-                    <label for="username"> Username</label>
-                    <input pInputText type="email" formControlName="username" required autocomplete="username">
+                    <label for="username"> New Password </label>
+                    <input pInputText type="password" formControlName="newPassword" required
+                        autocomplete="new-password">
                 </div>
 
                 <div class="flex flex-column ">
-                    <label for="username"> Code </label>
-                    <input pInputText type="number" formControlName="code" required autocomplete="off">
+                    <label for="username"> Security Code </label>
+                    <input pInputText type="text" formControlName="code" required>
                 </div>
 
-                <button pButton type="submit" [label]="'Login'"> </button>
+                <button pButton type="submit" [label]="'Reset Password'"> </button>
 
-                <span>{{message}}</span>
             </form>
         </mat-step>
     </mat-stepper>
+    <span>{{serverResponse?.message}}</span>
 </div>

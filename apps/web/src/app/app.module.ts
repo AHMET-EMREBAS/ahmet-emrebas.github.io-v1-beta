@@ -39,7 +39,6 @@ import {
   AuthComponent,
   AuthModule,
 } from './auth';
-import { UserService } from './inventory/user';
 
 const BASE_API_URL = 'BASE_API_URL';
 const BASE_URL_VALUE = 'http://localhost:3333';
@@ -180,8 +179,4 @@ const routes: Routes = [
     },
   ],
 })
-export class AppModule {
-  constructor(private readonly userService: UserService) {
-    this.userService.entities$.subscribe(console.log);
-  }
-}
+export class AppModule {}

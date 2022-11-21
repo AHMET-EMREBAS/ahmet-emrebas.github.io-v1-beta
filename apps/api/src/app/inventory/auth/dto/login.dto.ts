@@ -13,7 +13,7 @@ export class LoginDto {
   @Expose()
   username: string;
 
-  @ApiProperty({ type: 'string', format: 'email' })
+  @ApiProperty({ type: 'string', format: 'password' })
   @IsNotEmpty()
   @Expose()
   password: string;
@@ -27,15 +27,20 @@ export class ForgotPasswordDto {
   username: string;
 }
 
-export class LoginWithCodeDto {
+export class ResetPasswordDto {
   @ApiProperty({ type: 'string', format: 'email' })
   @IsEmail()
   @IsNotEmpty()
   @Expose()
   username: string;
 
-  @ApiProperty({ type: 'number' })
+  @ApiProperty({ type: 'string', format: 'password' })
   @IsNotEmpty()
   @Expose()
-  code: number;
+  newPassword: string;
+
+  @ApiProperty({ type: 'string' })
+  @IsNotEmpty()
+  @Expose()
+  code: string;
 }

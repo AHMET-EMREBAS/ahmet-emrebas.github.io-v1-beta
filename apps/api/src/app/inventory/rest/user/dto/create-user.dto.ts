@@ -1,21 +1,20 @@
-import { Expose, Type } from 'class-transformer';
 import {
-  IsNotEmpty,
-  Max,
-  MaxLength,
-  Min,
-  MinLength,
-  IsNotEmptyObject,
+  Expose,
+  Type,
+} from 'class-transformer';
+import {
+  IsEmail,
   IsOptional,
   ValidateNested,
-  IsEmail,
 } from 'class-validator';
-import { ApiProperty } from '@nestjs/swagger';
-import { Field, InputType, Int } from '@nestjs/graphql';
-import { Validations } from 'core/validations';
+import { IUser } from 'common/inventory/interfaces/user';
 import { ID } from 'core/dto';
 
-import { IUser } from 'common/inventory/interfaces/user';
+import {
+  Field,
+  InputType,
+} from '@nestjs/graphql';
+import { ApiProperty } from '@nestjs/swagger';
 
 @InputType()
 export class CreateUserDto implements IUser<ID[]> {
@@ -35,7 +34,6 @@ export class CreateUserDto implements IUser<ID[]> {
   @Field()
   @ApiProperty({
     type: 'specific',
-
     required: false,
     nullable: true,
   })

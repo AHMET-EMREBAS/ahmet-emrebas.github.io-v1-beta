@@ -3,18 +3,14 @@ import {
   Request,
   Response,
 } from 'express';
-import { v4 } from 'uuid';
 
-import { MailerService } from '@nestjs-modules/mailer';
 import {
   Body,
   Controller,
-  Get,
   Post,
   Query,
   Req,
   Res,
-  UnauthorizedException,
   UseGuards,
 } from '@nestjs/common';
 import {
@@ -30,21 +26,17 @@ import {
 import {
   ForgotPasswordDto,
   LoginDto,
-  LoginWithCodeDto,
+  ResetPasswordDto,
 } from './dto/login.dto';
 import {
   JwtAuthGuard,
   LocalAuthGuard,
-  PermissionGuard,
 } from './guards';
 
 @ApiTags(AuthController.name)
 @Controller('auth')
 export class AuthController {
-  constructor(
-    private authService: AuthService,
-    private readonly mailService: MailerService
-  ) {}
+  constructor(private authService: AuthService) {}
 
   @PublicResource()
   @UseGuards(LocalAuthGuard)
@@ -58,43 +50,6 @@ export class AuthController {
     const token = await this.authService.login(req.user as IReadUser);
     res.cookie('auth', token.accessToken);
     res.send(token);
-  }
-
-  @PublicResource()
-  @ApiOperation({ summary: 'Login with username and code' })
-  @Post('login-with-code')
-  async loginWithCode(
-    @Body() loginWithCodeDto: LoginWithCodeDto,
-    @Res() res: Response
-  ) {
-    const foundUser = await this.authService.findUserByUsername(
-      loginWithCodeDto.username
-    );
-
-    if (!foundUser) {
-      throw new UnauthorizedException();
-    }
-
-    if (!foundUser.code) {
-      res.send({ message: 'Please request a code first!' });
-      return;
-    }
-
-    if (foundUser.code + '' == loginWithCodeDto.code + '') {
-      await this.authService.updateUserCode(foundUser.username, v4());
-      const token = await this.authService.login(foundUser);
-      res.cookie('auth', token.accessToken);
-      res.send(token);
-      return;
-    }
-
-    return res.send({ message: 'You cannot use the same code again!' });
-  }
-
-  @UseGuards(JwtAuthGuard, PermissionGuard)
-  @Get('profile')
-  profile() {
-    return 'profile';
   }
 
   @UseGuards(JwtAuthGuard)
@@ -115,32 +70,16 @@ export class AuthController {
 
   @PublicResource()
   @Post('forgot-password')
-  async forgotPassword(@Body() forgotPassword: ForgotPasswordDto) {
-    console.log(forgotPassword, '<< request body');
-    const foundUser = await this.authService.findUserByUsername(
-      forgotPassword.username
-    );
+  async forgotPassword(@Body() { username }: ForgotPasswordDto) {
+    return this.authService.forgotPassword(username);
+  }
 
-    if (!foundUser) {
-      return { message: 'User not found!' };
-    }
-    const onetimecode = Math.floor(Math.random() * 1000) + 1000;
-
-    await this.authService.updateUserCode(foundUser.username, onetimecode + '');
-
-    const result = await this.mailService.sendMail({
-      subject: 'Forgot Password',
-      template: 'message',
-      to: foundUser.username,
-      context: {
-        subject: 'Forgot Password',
-        message: `Here is your one time login code.\n ${onetimecode} `,
-      },
-    });
-
-    return {
-      message:
-        'We send you a reset code. Please checkout your email. Use the code to reset your password.',
-    };
+  @PublicResource()
+  @Post('reset-password')
+  async resetPassword(
+    @Res() res: Response,
+    @Body() { username, code, newPassword }: ResetPasswordDto
+  ) {
+    return this.authService.resetPassword(username, code, newPassword);
   }
 }

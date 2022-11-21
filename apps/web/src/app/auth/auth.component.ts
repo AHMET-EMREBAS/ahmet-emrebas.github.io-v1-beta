@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import {
   FormControl,
@@ -11,10 +10,8 @@ import {
 } from '@angular/router';
 
 import { MessageService as SystemMessageService } from 'primeng/api';
-import {
-  firstValueFrom,
-  Observable,
-} from 'rxjs';
+
+import { AuthService } from './auth.service';
 
 @Component({
   selector: 'ae-auth',
@@ -22,112 +19,92 @@ import {
   styleUrls: ['./auth.component.scss'],
 })
 export class AuthComponent {
-  message = '';
-  submitted = false;
+  readonly usernameInput = new FormControl(undefined, [
+    Validators.required,
+    Validators.email,
+  ]);
+
+  readonly passwordInput = new FormControl(undefined, [
+    Validators.required,
+    Validators.minLength(6),
+  ]);
+
+  readonly newPasswordInput = new FormControl(undefined, [
+    Validators.required,
+    Validators.minLength(6),
+  ]);
+
+  readonly securityCodeInput = new FormControl(undefined, [
+    Validators.required,
+    Validators.minLength(6),
+  ]);
+
+  serverResponse!: { message: string } | null;
   title = 'Create User';
-  formGroup = new FormGroup({
-    username: new FormControl(undefined, [
-      Validators.required,
-      Validators.email,
-    ]),
 
-    password: new FormControl(undefined, [
-      Validators.required,
-      Validators.minLength(6),
-    ]),
+  loginForm = new FormGroup({
+    username: this.usernameInput,
+    password: this.passwordInput,
   });
 
-  forgotPasswordForm = new FormGroup({
-    username: new FormControl(undefined, [
-      Validators.required,
-      Validators.email,
-    ]),
-  });
-
-  loginWithCodeForm = new FormGroup({
-    username: new FormControl(undefined, [
-      Validators.required,
-      Validators.email,
-    ]),
-
-    code: new FormControl(undefined, [Validators.required]),
+  resetPasswordForm = new FormGroup({
+    username: this.usernameInput,
+    newPassword: this.newPasswordInput,
+    code: this.securityCodeInput,
   });
 
   constructor(
     private readonly systemMessageService: SystemMessageService,
+    private readonly authService: AuthService,
     private readonly router: Router,
-    private readonly route: ActivatedRoute,
-    private readonly httpClient: HttpClient
+    private readonly route: ActivatedRoute
   ) {}
 
-  async submit() {
-    if (this.submitted === false) {
-      if (this.formGroup.valid) {
-        this.submitted = true;
-        const authtoken = await firstValueFrom<{ accessToken: string }>(
-          this.httpClient.post('api/auth/login', {
-            username: this.value('username'),
-            password: this.value('password'),
-          }) as Observable<{ accessToken: string }>
-        );
+  async submitLoginForm() {
+    const isLoginFormValid = this.loginForm.valid;
+    const isLoginFormValue = this.loginForm.value;
 
-        this.setAuthCookie(authtoken.accessToken);
-        if (authtoken.accessToken) {
-          this.router.navigate(['inventory']);
+    if (isLoginFormValid) {
+      if (isLoginFormValue) {
+        const { username, password } = isLoginFormValue;
+        if (username && password) {
+          this.loginUserAndNavigate(username, password);
         }
-      } else {
-        const e = Object.entries(this.formGroup.controls).filter(
-          (e) => e[1].errors
-        )[0];
-
-        this.systemMessageService.add({
-          severity: 'error',
-          summary: `${e[0]} field is not valid!`,
-        });
       }
     }
   }
 
-  private setAuthCookie(token: string) {
-    document.cookie = 'authorization=' + token;
-  }
+  async loginUserAndNavigate(username: string, password: string) {
+    const isLoggedIn = await this.authService.login(username, password);
 
-  async submitForgotPassword() {
-    const message = await firstValueFrom<{ message: string }>(
-      this.httpClient.post<{ message: string }>('api/auth/forgot-password', {
-        username: this.forgotPasswordForm.controls.username.value,
-      })
-    );
-
-    console.log(message);
-
-    this.message = message.message;
-  }
-
-  async submitLoginWithCode() {
-    const authtoken = await firstValueFrom<{
-      accessToken: string;
-      message?: string;
-    }>(
-      this.httpClient.post<{ accessToken: string }>(
-        'api/auth/login-with-code',
-        {
-          username: this.loginWithCodeForm.controls.username.value,
-          code: this.loginWithCodeForm.controls.code.value,
-        }
-      )
-    );
-
-    if (authtoken.accessToken) {
-      this.setAuthCookie(authtoken.accessToken);
-      this.router.navigate(['inventory']);
-      return;
+    if (isLoggedIn) {
+      this.router.navigate(['inventory'], { relativeTo: this.route });
+    } else {
+      this.serverResponse = { message: 'Could not login!' };
     }
-    console.log(authtoken);
-    this.message = authtoken.message + '';
   }
 
-  private value(key: string) {
-    return this.formGroup.get(key)?.value;
+  async forgotPassword() {
+    const isUsernameValid = this.usernameInput.valid;
+    if (isUsernameValid) {
+      const isUsernameHasValue = this.usernameInput.value;
+      if (isUsernameHasValue) {
+        this.serverResponse = await this.authService.requestResetPassworCode(
+          isUsernameHasValue
+        );
+      }
+    }
+  }
+
+  async submitResetPasswordForm() {
+    const isResetPasswordFormValid = this.resetPasswordForm.valid;
+    const isResetPasswordFormValue = this.resetPasswordForm.value;
+
+    if (isResetPasswordFormValid) {
+      const { username, code, newPassword } = isResetPasswordFormValue;
+      if (username && code && newPassword) {
+        await this.authService.resetPassword(username, code, newPassword);
+      }
+    }
   }
 }
