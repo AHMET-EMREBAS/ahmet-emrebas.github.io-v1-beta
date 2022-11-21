@@ -1,10 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import {
-  firstValueFrom,
-  Observable,
-} from 'rxjs';
+import { firstValueFrom } from 'rxjs';
+
+import { AUTH_TOKEN_NAME } from '../app.config';
 
 @Injectable()
 export class AuthService {
@@ -17,12 +16,13 @@ export class AuthService {
    * @returns
    */
   async login(username: string, password: string): Promise<boolean> {
-    const serverResponse = await firstValueFrom<{ accessToken: string }>(
+    const serverResponse = await firstValueFrom<any>(
       this.httpClient.post('api/auth/login', {
         username,
         password,
-      }) as Observable<{ accessToken: string }>
+      })
     ).catch((err) => {
+      console.log(err);
       return { accessToken: null };
     });
 
@@ -68,7 +68,10 @@ export class AuthService {
    * @param token
    */
   private setAuthCookie(token: string) {
-    document.cookie = 'authorization=' + token;
+    document.cookie = `${AUTH_TOKEN_NAME}=` + token;
+    if ((window as any)['electron']) {
+      (window as any)['electron'].setCookie(AUTH_TOKEN_NAME, token);
+    }
   }
 
   async canActivate(permission: string | undefined | null) {

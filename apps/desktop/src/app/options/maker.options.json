@@ -2,6 +2,10 @@
   "$schema": "../../../../../node_modules/nx-electron/src/validation/maker.schema.json",
   "icon": "dist/apps/desktop/assets/logo.png",
   "appId": "com.aemrebas.inventory",
+  "npmRebuild": false,
+  "buildDependenciesFromSource": false,
+  "compression": "maximum",
+  "electronCompile": false,
   "productName": "Inventory App",
   "copyright": "Copyright © 2022 Ahmet Emrebas"
 }

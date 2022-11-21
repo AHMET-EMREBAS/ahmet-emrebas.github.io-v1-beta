@@ -25,12 +25,12 @@ import { AuthService } from './auth.service';
 })
 export class AuthComponent implements AfterViewInit {
   @ViewChild('stepper') stepper!: CdkStepper;
-  readonly usernameInput = new FormControl('', [
+  readonly usernameInput = new FormControl('aemrebas.dev@gmail.com', [
     Validators.required,
     Validators.email,
   ]);
 
-  readonly passwordInput = new FormControl('', [
+  readonly passwordInput = new FormControl('!1Pass', [
     Validators.required,
     Validators.minLength(6),
   ]);
@@ -81,14 +81,14 @@ export class AuthComponent implements AfterViewInit {
   }
 
   async submitLoginForm() {
+    console.log(this.loginForm.value);
     const isLoginFormValid = this.loginForm.valid;
     const isLoginFormValue = this.loginForm.value;
-
     if (isLoginFormValid) {
       if (isLoginFormValue) {
         const { username, password } = isLoginFormValue;
         if (username && password) {
-          this.loginUserAndNavigate(username, password);
+          await this.loginUserAndNavigate(username, password);
         }
       }
     }
@@ -96,7 +96,6 @@ export class AuthComponent implements AfterViewInit {
 
   async loginUserAndNavigate(username: string, password: string) {
     const isLoggedIn = await this.authService.login(username, password);
-
     if (isLoggedIn) {
       this.router.navigate(['inventory'], { relativeTo: this.route });
     } else {

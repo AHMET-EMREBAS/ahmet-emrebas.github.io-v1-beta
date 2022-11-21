@@ -1,7 +1,5 @@
 import {
-  HttpEvent,
   HttpHandler,
-  HttpInterceptor,
   HttpRequest,
 } from '@angular/common/http';
 import {
@@ -9,18 +7,20 @@ import {
   Injectable,
 } from '@angular/core';
 
-import { Observable } from 'rxjs';
-
 import {
   AUTH_TOKEN_NAME,
   BASE_URL_TOKEN,
 } from '../app.config';
 
 @Injectable()
-export class BaseUrlInterceptor implements HttpInterceptor {
+export class BaseUrlInterceptor {
   constructor(@Inject(BASE_URL_TOKEN) private baseUrl: string) {}
 
-  private getAuthToken() {
+  private async getAuthToken() {
+    if ((window as any)['electron']) {
+      return await (window as any)['electron'].getCookie(AUTH_TOKEN_NAME);
+    }
+
     return (
       document.cookie
         .split(';')
@@ -36,16 +36,15 @@ export class BaseUrlInterceptor implements HttpInterceptor {
     return request.url.includes('api');
   }
 
-  intercept(
-    request: HttpRequest<any>,
-    next: HttpHandler
-  ): Observable<HttpEvent<any>> {
+  async intercept(request: HttpRequest<any>, next: HttpHandler) {
     const tokenizedRequest = request.clone({
       setHeaders: {
-        [AUTH_TOKEN_NAME]: this.getAuthToken(),
+        [AUTH_TOKEN_NAME]: await this.getAuthToken(),
+        'User-Agent': '*',
       },
     });
 
+    console.log(this.baseUrl + request.url);
     const internalApiRequest = tokenizedRequest.clone({
       url: `${this.baseUrl}/${request.url}`,
     });

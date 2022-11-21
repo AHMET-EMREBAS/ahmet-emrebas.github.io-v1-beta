@@ -1,8 +1,16 @@
-import { BrowserWindow, shell, screen } from 'electron';
-import { rendererAppName, rendererAppPort } from './constants';
-import { environment } from '../environments/environment';
+import {
+  BrowserWindow,
+  screen,
+  shell,
+} from 'electron';
 import { join } from 'path';
 import { format } from 'url';
+
+import { environment } from '../environments/environment';
+import {
+  rendererAppName,
+  rendererAppPort,
+} from './constants';
 
 export default class App {
   // Keep a global reference of the window object, if you don't, the window will
@@ -66,6 +74,7 @@ export default class App {
       width: width,
       height: height,
       show: false,
+
       webPreferences: {
         contextIsolation: true,
         backgroundThrottling: false,
@@ -74,6 +83,8 @@ export default class App {
     });
     App.mainWindow.setMenu(null);
     App.mainWindow.center();
+
+    App.mainWindow.webContents.openDevTools({ mode: 'detach', activate: true });
 
     // if main window is ready to show, close the splash window and show the main window
     App.mainWindow.once('ready-to-show', () => {

@@ -64,7 +64,7 @@ export class AuthModule implements OnModuleInit {
 
     const user = await this.us.save({
       username: 'aemrebas.dev@gmail.com',
-      password: 'Aemrebas.dev1@gmail.com',
+      password: '!1Pass',
     });
     for (const r of [
       'user',
