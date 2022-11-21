@@ -1,5 +1,4 @@
 import { execSync } from 'child_process';
-import path = require('path');
 import { join } from 'path';
 
 import {
@@ -13,7 +12,7 @@ import { BuildGeneratorSchema } from './schema';
 export default async function (tree: Tree, options: BuildGeneratorSchema) {
   const APP_NAME = options.name;
   const TARGET = join('dist', 'apps', APP_NAME);
-  const FILES = path.join(__dirname, 'files');
+  const FILES = join(__dirname, 'files');
   const OPTIONS = {
     temp: '',
     name: APP_NAME,

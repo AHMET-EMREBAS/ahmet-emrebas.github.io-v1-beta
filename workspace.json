@@ -1,9 +1,8 @@
 {
   "version": 2,
   "projects": {
-    "ae-auth": "apps/ae-auth",
-    "ae-databridge": "apps/ae-databridge",
     "api": "apps/api",
+    "desktop": "apps/desktop",
     "bootstrap": "libs/bootstrap",
     "common": "libs/common",
     "core": "libs/core",

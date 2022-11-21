@@ -131,6 +131,7 @@
     "jest": "27.2.3",
     "jest-preset-angular": "11.1.1",
     "ng-packagr": "^13.0.0",
+    "node-gyp-build": "^4.5.0",
     "nx": "13.10.6",
     "nx-electron": "13",
     "postcss": "^8.4.5",
