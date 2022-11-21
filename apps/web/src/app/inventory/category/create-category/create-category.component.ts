@@ -1,9 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { MessageService as SystemMessageService } from 'primeng/api';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component } from '@angular/core';
+import {
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import {
+  ActivatedRoute,
+  Router,
+} from '@angular/router';
+
 import { groupBy } from 'lodash';
 import { InputOptions } from 'material/form';
+import { MessageService as SystemMessageService } from 'primeng/api';
 
 import { CategoryService } from '../category.service';
 
@@ -12,7 +20,7 @@ import { CategoryService } from '../category.service';
   templateUrl: './create-category.component.html',
   styleUrls: ['./create-category.component.scss'],
 })
-export class CreateCategoryComponent implements OnInit {
+export class CreateCategoryComponent {
   submitted = false;
   title = 'Create Category';
   formGroup = new FormGroup({
@@ -49,8 +57,6 @@ export class CreateCategoryComponent implements OnInit {
     private readonly route: ActivatedRoute
   ) {}
 
-  ngOnInit(): void {}
-
   submit() {
     if (this.submitted === false) {
       if (this.formGroup.valid) {
@@ -64,6 +70,7 @@ export class CreateCategoryComponent implements OnInit {
         )[0];
 
         this.systemMessageService.add({
+          key: 'resource',
           severity: 'error',
           summary: `${e[0]} field is not valid!`,
         });

@@ -70,4 +70,18 @@ export class AuthService {
   private setAuthCookie(token: string) {
     document.cookie = 'authorization=' + token;
   }
+
+  async canActivate(permission: string | undefined | null) {
+    if (!permission) {
+      return true;
+    }
+    return (
+      await firstValueFrom<{ canActivate: boolean }>(
+        this.httpClient.post<{ canActivate: boolean }>(
+          `api/auth/has-permission/?permission=${permission}`,
+          {}
+        )
+      )
+    ).canActivate;
+  }
 }

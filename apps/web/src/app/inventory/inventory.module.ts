@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { LayoutModule } from 'layout';
+import { ToastModule } from 'primeng/toast';
 
 import { InventoryComponent } from './inventory.component';
 
@@ -11,6 +12,7 @@ import { InventoryComponent } from './inventory.component';
   imports: [
     CommonModule,
     LayoutModule,
+    ToastModule,
     RouterModule.forChild([
       {
         path: '',
@@ -19,17 +21,26 @@ import { InventoryComponent } from './inventory.component';
           {
             title: 'Product Module',
             path: 'product',
+            data: {
+              permission: 'READ:PRODUCT',
+            },
             loadChildren: () =>
               import('./product').then((m) => m.ProductModule),
           },
           {
             title: 'Sku Module',
             path: 'sku',
+            data: {
+              permission: 'READ:SKU',
+            },
             loadChildren: () => import('./sku').then((m) => m.SkuModule),
           },
           {
             title: 'Category Module',
             path: 'category',
+            data: {
+              permission: 'READ:CATEGORY',
+            },
             loadChildren: () =>
               import('./category').then((m) => m.CategoryModule),
           },
