@@ -33,10 +33,10 @@ import { ViewCategoryComponent } from './view-category';
           {
             title: 'View Category',
             path: '',
+            component: ViewCategoryComponent,
             data: {
               permission: 'READ:CATEGORY',
             },
-            component: ViewCategoryComponent,
             canActivate: [PermissionGuard],
           },
           {
