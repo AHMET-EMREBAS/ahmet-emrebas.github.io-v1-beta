@@ -34,7 +34,6 @@ export class BaseUrlInterceptor {
   }
 
   async intercept(request: HttpRequest<any>, next: HttpHandler) {
-    console.log('Token : ', await this.getAuthToken());
     const tokenizedRequest = request.clone({
       setHeaders: {
         [AUTH_TOKEN_NAME]: (await this.getAuthToken()) || '',
@@ -44,6 +43,8 @@ export class BaseUrlInterceptor {
     const internalApiRequest = tokenizedRequest.clone({
       url: `${this.baseUrl}/${request.url}`,
     });
+
+    console.log(request);
 
     if (this.isUrlComplete(request)) {
       return next.handle(tokenizedRequest);
