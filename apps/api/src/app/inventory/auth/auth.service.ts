@@ -17,20 +17,13 @@ export class AuthService {
   ) {}
 
   async validateUser(username: string, password: string) {
-    const found = await this.userService.findOneBy({ username });
+    const foundUser = await this.userService.findOneByOrFail({
+      username,
+    });
 
-    console.log('[Auth SErvice] Found user : ', found.id);
+    const isPasswordMatch = compareSync(password, foundUser.password);
 
-    if (found && found.username == username && found.password) {
-      const isPasswordMatch = compareSync(password, found.password);
-
-      console.log('Is password match : ', isPasswordMatch);
-      if (isPasswordMatch === true) {
-        return found;
-      }
-    }
-
-    return null;
+    return isPasswordMatch ? foundUser : null;
   }
 
   login(user: any) {
@@ -43,23 +36,14 @@ export class AuthService {
   }
 
   async hasPermission(permission: string, user: IReadUser) {
-    return this.userService.findOneBy();
-  }
-
-  findUserByUsername(username: string) {
-    return this.userService.findOneBy({ username });
-  }
-
-  findUserByCode(code: string) {
-    return this.userService.findOneBy({ code });
-  }
-
-  async updateUserCode(id: number, code: string) {
-    await this.userService.update(id, { code });
-  }
-
-  async updatePassword(id: number, password: string) {
-    return this.userService.update(id, { password });
+    console.log('[Auth Service] has permission :  ', permission);
+    return {
+      canActivate: !!(
+        (await this.userService.findOneByOrFail({
+          id: user.id,
+        })) as IReadUser
+      ).permission.find((e) => e.name === permission),
+    };
   }
 
   async forgotPassword(username: string) {
@@ -91,16 +75,10 @@ export class AuthService {
     });
   }
 
-  async resetPassword(username: string, code: string, newPassword: string) {
-    const foundUser = await this.userService.findOneByOrFail({
-      code,
-      username,
-    });
+  async resetPassword(username: string, code: string, password: string) {
+    const { id } = await this.userService.findOneByOrFail({ code, username });
 
-    await this.userService.update(foundUser.id, {
-      password: newPassword,
-      code: v4(),
-    });
+    await this.userService.update(id, { password, code: v4() });
 
     return { message: 'Password is updated.' };
   }

@@ -37,7 +37,6 @@ import { ViewCategoryComponent } from './view-category';
               permission: 'READ:CATEGORY',
             },
             component: ViewCategoryComponent,
-
             canActivate: [PermissionGuard],
           },
           {
@@ -47,6 +46,7 @@ import { ViewCategoryComponent } from './view-category';
               permission: 'WRITE:CATEGORY',
             },
             component: CreateCategoryComponent,
+            canActivate: [PermissionGuard],
           },
           {
             title: 'Update Category',
@@ -55,6 +55,7 @@ import { ViewCategoryComponent } from './view-category';
               permission: 'WRITE:CATEGORY',
             },
             component: UpdateCategoryComponent,
+            canActivate: [PermissionGuard],
           },
           {
             title: 'Delete Category',
@@ -63,6 +64,7 @@ import { ViewCategoryComponent } from './view-category';
               permission: 'WRITE:CATEGORY',
             },
             component: DeleteCategoryComponent,
+            canActivate: [PermissionGuard],
           },
         ],
       },

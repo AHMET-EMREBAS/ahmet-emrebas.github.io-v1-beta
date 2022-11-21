@@ -7,7 +7,6 @@ import {
 } from '@angular/router';
 
 import { MessageService } from 'primeng/api';
-import { Observable } from 'rxjs';
 
 import { AuthService } from './auth.service';
 
@@ -17,19 +16,16 @@ export class PermissionGuard implements CanActivate {
     private readonly messagService: MessageService,
     private readonly authService: AuthService
   ) {}
-  canActivate(
+  async canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-  ):
-    | boolean
-    | UrlTree
-    | Observable<boolean | UrlTree>
-    | Promise<boolean | UrlTree> {
+  ): Promise<boolean | UrlTree> {
     const requiredPermission = route.data['permission'];
-    console.log('Required Permission : ', requiredPermission);
+    console.log('[PermissionGuard] required permission : ', requiredPermission);
 
-    const canActivate = this.authService.canActivate(requiredPermission);
+    const canActivate = await this.authService.canActivate(requiredPermission);
 
+    console.log('[PermissionGuard] can activate : ', canActivate);
     if (!canActivate) {
       this.messagService.add({
         key: 'auth',

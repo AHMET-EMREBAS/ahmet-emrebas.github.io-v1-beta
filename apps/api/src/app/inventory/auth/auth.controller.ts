@@ -20,6 +20,7 @@ import {
 
 import { AuthService } from './auth.service';
 import {
+  CanRead,
   PublicResource,
   Sub,
 } from './decorators';
@@ -28,10 +29,7 @@ import {
   LoginDto,
   ResetPasswordDto,
 } from './dto/login.dto';
-import {
-  JwtAuthGuard,
-  LocalAuthGuard,
-} from './guards';
+import { LocalAuthGuard } from './guards';
 
 @ApiTags(AuthController.name)
 @Controller('auth')
@@ -52,26 +50,28 @@ export class AuthController {
     res.send(token);
   }
 
-  @UseGuards(JwtAuthGuard)
   @Post('logout')
   logout(@Res() res: Response) {
     res.cookie('authorization', '');
     res.end();
   }
 
-  @UseGuards(JwtAuthGuard)
+  @CanRead('profile')
   @Post('has-permission')
-  hasPermission(
+  async hasPermission(
     @Query('permission') permission: string,
     @Sub() user: IReadUser
   ) {
-    return this.authService.hasPermission(permission, user);
+    const result = await this.authService.hasPermission(permission, user);
+    console.log('[auth controller ] has permission: permission :', permission);
+    console.log('[auth controller ] has permission: result :', result);
+    return result;
   }
 
   @PublicResource()
   @Post('forgot-password')
   async forgotPassword(@Body() { username }: ForgotPasswordDto) {
-    return this.authService.forgotPassword(username);
+    return await this.authService.forgotPassword(username);
   }
 
   @PublicResource()

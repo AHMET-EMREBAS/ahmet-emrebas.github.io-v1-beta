@@ -11,21 +11,16 @@ import { JWT_SECRET } from './jwt-options.const';
 
 function fromCookie(req: Request) {
   const authtoken = req.cookies.authorization;
-  console.log('Found authtoken : ', authtoken, ' From fromCookie');
   return authtoken;
 }
 
 function fromQuery(req: Request) {
   const authtoken = req.query.authorization;
-  console.log('Found authtoken : ', authtoken, ' From fromQuery');
-
   return authtoken;
 }
 
 function fromHeader(req: Request) {
   const authtoken = req.headers.authorization;
-  console.log('Found authtoken : ', authtoken, ' From fromHeader');
-
   return authtoken;
 }
 @Injectable()

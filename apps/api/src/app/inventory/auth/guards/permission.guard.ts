@@ -39,12 +39,9 @@ export class PermissionGuard extends JwtAuthGuard {
 
     const isAuthenticated = await super.canActivate(context);
 
-    console.log('[Permission Guard] Is authenticated : ', isAuthenticated);
     if (isAuthenticated) {
       const userCookie = context.switchToHttp().getRequest<Request>()
         .user as IReadUser;
-
-      console.log('User Cookie : ', userCookie);
 
       const user = (await this.userService.findOneBy({
         id: userCookie.id,
@@ -54,8 +51,6 @@ export class PermissionGuard extends JwtAuthGuard {
         RESOURCE_PERMISSION_KEY,
         [context.getHandler(), context.getClass()]
       );
-
-      console.log('Required Permission', requiredPermission);
 
       if (hasPermission(user, requiredPermission)) {
         return true;
