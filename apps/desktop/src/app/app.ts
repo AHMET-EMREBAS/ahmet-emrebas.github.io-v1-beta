@@ -7,10 +7,7 @@ import { join } from 'path';
 import { format } from 'url';
 
 import { environment } from '../environments/environment';
-import {
-  rendererAppName,
-  rendererAppPort,
-} from './constants';
+import { rendererAppName } from './constants';
 
 export default class App {
   // Keep a global reference of the window object, if you don't, the window will
@@ -76,33 +73,30 @@ export default class App {
       show: false,
       icon: 'dist/apps/desktop/assets/logo.png',
       // backgroundColor: '#003399',
-      opacity: 0.9,
+      // opacity: 0.9,
       title: 'Inventory App',
 
       titleBarStyle: 'customButtonsOnHover',
       titleBarOverlay: true,
       // alwaysOnTop: true,
-
       webPreferences: {
-        contextIsolation: true,
-        backgroundThrottling: false,
-        javascript: true,
-        allowRunningInsecureContent: false,
-
-        enableBlinkFeatures: 'false',
-
+        // contextIsolation: true,
+        // backgroundThrottling: false,
+        // allowRunningInsecureContent: false,
         preload: join(__dirname, 'main.preload.js'),
-        devTools: true,
       },
     });
     App.mainWindow.setMenu(null);
     App.mainWindow.center();
 
-    App.mainWindow.webContents.openDevTools({ mode: 'detach', activate: true });
-
     // if main window is ready to show, close the splash window and show the main window
     App.mainWindow.once('ready-to-show', () => {
       App.mainWindow.show();
+
+      App.mainWindow.webContents.openDevTools({
+        mode: 'detach',
+        activate: true,
+      });
     });
 
     // handle all external redirects in a new browser window
@@ -124,7 +118,7 @@ export default class App {
     // load the index.html of the app.
     if (!App.application.isPackaged) {
       console.log('[loadMainWindow] Rendering from URL');
-      App.mainWindow.loadURL(`http://localhost:${rendererAppPort}`);
+      // App.mainWindow.loadURL(`http://localhost:${rendererAppPort}`);
       // App.mainWindow.loadURL(
       //   format({
       //     pathname: join(__dirname, '..', rendererAppName, 'index.html'),
@@ -132,6 +126,10 @@ export default class App {
       //     slashes: true,
       //   })
       // );
+
+      App.mainWindow.loadFile(
+        join(__dirname, '..', rendererAppName, 'index.html')
+      );
     } else {
       console.log('[loadMainWindow] Rendering from file');
       App.mainWindow.loadURL(
