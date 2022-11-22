@@ -6,7 +6,6 @@
     "common": "libs/common",
     "core": "libs/core",
     "desktop": "apps/desktop",
-    "directive": "libs/directive",
     "gen": "libs/gen",
     "gen-e2e": "apps/gen-e2e",
     "material": "libs/material",

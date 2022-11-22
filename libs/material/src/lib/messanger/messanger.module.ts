@@ -7,11 +7,11 @@ import {
 } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
-import { DirectiveModule } from 'directive';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 
+import { DirectiveModule } from '../directive';
 import { MessageService } from './message.service';
 import { MessangerComponent } from './messanger.component';
 
