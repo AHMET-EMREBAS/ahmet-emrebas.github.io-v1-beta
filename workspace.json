@@ -12,7 +12,6 @@
     "layout": "libs/layout",
     "material": "libs/material",
     "messanger": "libs/messanger",
-    "nativescript-mobile": "apps/nativescript-mobile",
     "notification": "libs/notification",
     "web": "apps/web",
     "web-e2e": "apps/web-e2e"
