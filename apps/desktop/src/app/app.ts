@@ -7,7 +7,10 @@ import { join } from 'path';
 import { format } from 'url';
 
 import { environment } from '../environments/environment';
-import { rendererAppName } from './constants';
+import {
+  rendererAppName,
+  rendererAppPort,
+} from './constants';
 
 export default class App {
   // Keep a global reference of the window object, if you don't, the window will
@@ -118,21 +121,8 @@ export default class App {
   private static loadMainWindow() {
     // load the index.html of the app.
     if (!App.application.isPackaged) {
-      console.log('[loadMainWindow] Rendering from URL');
-      // App.mainWindow.loadURL(`http://localhost:${rendererAppPort}`);
-      // App.mainWindow.loadURL(
-      //   format({
-      //     pathname: join(__dirname, '..', rendererAppName, 'index.html'),
-      //     protocol: 'file:',
-      //     slashes: true,
-      //   })
-      // );
-
-      App.mainWindow.loadFile(
-        join(__dirname, '..', rendererAppName, 'index.html')
-      );
+      App.mainWindow.loadURL(`http://localhost:${rendererAppPort}`);
     } else {
-      console.log('[loadMainWindow] Rendering from file');
       App.mainWindow.loadURL(
         format({
           pathname: join(__dirname, '..', rendererAppName, 'index.html'),
