@@ -25,12 +25,12 @@ import { AuthService } from './auth.service';
 })
 export class AuthComponent implements AfterViewInit {
   @ViewChild('stepper') stepper!: CdkStepper;
-  readonly usernameInput = new FormControl('aemrebas.dev@gmail.com', [
+  readonly usernameInput = new FormControl('', [
     Validators.required,
     Validators.email,
   ]);
 
-  readonly passwordInput = new FormControl('!1Pass', [
+  readonly passwordInput = new FormControl('', [
     Validators.required,
     Validators.minLength(6),
   ]);
@@ -83,13 +83,12 @@ export class AuthComponent implements AfterViewInit {
   async submitLoginForm() {
     console.log(this.loginForm.value);
     const isLoginFormValid = this.loginForm.valid;
-    const isLoginFormValue = this.loginForm.value;
     if (isLoginFormValid) {
-      if (isLoginFormValue) {
-        const { username, password } = isLoginFormValue;
-        if (username && password) {
-          await this.loginUserAndNavigate(username, password);
-        }
+      if (this.usernameInput.value && this.passwordInput.value) {
+        await this.loginUserAndNavigate(
+          this.usernameInput.value,
+          this.passwordInput.value
+        );
       }
     }
   }
