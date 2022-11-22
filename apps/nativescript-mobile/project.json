@@ -13,6 +13,7 @@
         "release": true,
         "forDevice": true
       },
+
       "configurations": {
         "prod": {
           "fileReplacements": [

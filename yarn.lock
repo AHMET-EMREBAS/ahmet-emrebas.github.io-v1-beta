@@ -3202,6 +3202,11 @@
     "@material/theme" "15.0.0-canary.ecfee946f.0"
     tslib "^2.1.0"
 
+"@nativescript/android@^8.3.1":
+  version "8.3.1"
+  resolved "https://registry.yarnpkg.com/@nativescript/android/-/android-8.3.1.tgz#107f8eb567cd7caf64b76d5c1510cd29998204f3"
+  integrity sha512-Q82ZuACx4DapjKsvqlGVEhcIAJR111ppMRL+Dnw2Jkt1YeE5CFQUZGq1mE72BfzrqrV6RrkgHtwS4EF511JxbQ==
+
 "@nativescript/angular@^14.0.0":
   version "14.2.5"
   resolved "https://registry.yarnpkg.com/@nativescript/angular/-/angular-14.2.5.tgz#07acd0c86943dc79b548f92803bdfee7db547de7"
