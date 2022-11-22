@@ -6,7 +6,6 @@
     "declarationMap": true,
     "inlineSources": true,
     "types": [],
-    "target": "ES2022",
     "useDefineForClassFields": false
   },
   "exclude": [

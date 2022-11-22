@@ -1,4 +1,4 @@
-import { ScrollIntoViewDirective } from './scroll-into-view.directive';
+import { ScrollIntoViewDirective } from './scroll-into-view';
 
 describe('ScrollIntoViewDirective', () => {
   it('should create an instance', () => {

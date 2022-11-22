@@ -1,6 +1,6 @@
 import { ElementRef } from '@angular/core';
 
-import { ScrollControlDirective } from './scroll-control.directive';
+import { ScrollControlDirective } from './scroll-control';
 
 describe('ScrollControlDirective', () => {
   it('should create an instance', () => {
