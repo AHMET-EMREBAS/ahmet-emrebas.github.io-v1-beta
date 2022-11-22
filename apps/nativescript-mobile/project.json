@@ -6,6 +6,7 @@
   "targets": {
     "build": {
       "builder": "@nativescript/nx:build",
+      "executor": "@nativescript/nx:build",
       "options": {
         "noHmr": true,
         "production": true,
@@ -27,6 +28,7 @@
     },
     "ios": {
       "builder": "@nativescript/nx:build",
+      "executor": "@nativescript/nx:build",
       "options": {
         "platform": "ios"
       },
@@ -41,6 +43,7 @@
     },
     "android": {
       "builder": "@nativescript/nx:build",
+      "executor": "@nativescript/nx:build",
       "options": {
         "platform": "android"
       },
@@ -55,12 +58,14 @@
     },
     "clean": {
       "builder": "@nativescript/nx:build",
+      "executor": "@nativescript/nx:build",
       "options": {
         "clean": true
       }
     },
     "lint": {
       "builder": "@nrwl/linter:eslint",
+      "executor": "@nrwl/linter:eslint",
       "options": {
         "lintFilePatterns": [
           "apps/nativescript-mobile/**/*.ts",
