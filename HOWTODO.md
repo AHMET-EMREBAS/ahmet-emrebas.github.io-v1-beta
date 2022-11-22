@@ -61,3 +61,8 @@ nx run appname:extract-i18n
 
 - nx migrate next
 - nx migrate --run-migrations=migrations.json
+
+### Nativescript
+
+- Install the internal dependencies
+- Then run `nx run nativescript-mobile:android`
