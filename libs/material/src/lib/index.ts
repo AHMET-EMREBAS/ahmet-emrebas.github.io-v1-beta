@@ -4,3 +4,4 @@ export * from './table';
 export * from './resource';
 export * from './layout';
 export * from './messanger';
+export * from './directive';
