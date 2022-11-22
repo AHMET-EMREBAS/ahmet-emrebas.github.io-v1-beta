@@ -11,6 +11,7 @@ import { AUTH_TOKEN_NAME } from '../app.config';
 
 @Injectable()
 export class AuthService {
+  static authtokens = new Map();
   constructor(private readonly httpClient: HttpClient) {}
 
   /**
@@ -27,7 +28,7 @@ export class AuthService {
       }),
       { defaultValue: { accessToken: null } }
     );
-    console.log(result, 'Result: ');
+
     if (result.accessToken) {
       this.setAuthCookie(result.accessToken);
     }
@@ -73,7 +74,12 @@ export class AuthService {
    * @param token
    */
   private setAuthCookie(token: string) {
-    document.cookie = `${AUTH_TOKEN_NAME}=` + token;
+    AuthService.authtokens.set(AUTH_TOKEN_NAME, token);
+    try {
+      document.cookie = `${AUTH_TOKEN_NAME}=` + token + `; path=/`;
+    } catch (err) {
+      // ignore
+    }
   }
 
   async canActivate(permission: string | undefined | null) {

@@ -14,18 +14,25 @@ import {
   AUTH_TOKEN_NAME,
   BASE_URL_TOKEN,
 } from '../app.config';
+import { AuthService } from '../auth/auth.service';
 
 @Injectable()
 export class BaseUrlInterceptor {
   constructor(@Inject(BASE_URL_TOKEN) private baseUrl: string) {}
 
   private getAuthToken() {
-    return (
-      document.cookie
-        .split(';')
-        .map((e) => e.split('='))
-        .find(([key, value]) => key === AUTH_TOKEN_NAME)?.[1] || ''
-    );
+    try {
+      return (
+        document.cookie
+          .split(';')
+          .map((e) => e.split('='))
+          .find(([key, value]) => key === AUTH_TOKEN_NAME)?.[1] ||
+        '' ||
+        AuthService.authtokens.get(AUTH_TOKEN_NAME)
+      );
+    } catch (err) {
+      // ignore
+    }
   }
 
   private isUrlComplete(request: HttpRequest<any>) {
