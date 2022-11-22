@@ -12,8 +12,8 @@ import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 
-import { MessageService } from './messanger/message.service';
-import { MessangerComponent } from './messanger/messanger.component';
+import { MessageService } from './message.service';
+import { MessangerComponent } from './messanger.component';
 
 @NgModule({
   imports: [

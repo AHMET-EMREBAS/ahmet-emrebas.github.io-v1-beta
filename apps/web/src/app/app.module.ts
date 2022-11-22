@@ -12,7 +12,7 @@ import {
 } from '@angular/router';
 import { ServiceWorkerModule } from '@angular/service-worker';
 
-import { LayoutModule } from 'layout';
+import { LayoutModule } from 'material/layout';
 
 import {
   EntityDataModule,
@@ -56,13 +56,8 @@ const routes: Routes = [
       {
         title: 'Messanger',
         path: 'messanger',
-        loadChildren: () => import('messanger').then((m) => m.MessangerModule),
-      },
-      {
-        title: 'Notification',
-        path: 'notification',
         loadChildren: () =>
-          import('notification').then((m) => m.NotificationModule),
+          import('material/messanger').then((m) => m.MessangerModule),
       },
     ],
   },

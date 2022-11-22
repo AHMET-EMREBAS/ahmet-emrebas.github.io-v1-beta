@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { LayoutModule } from 'layout';
+import { LayoutModule } from 'material/layout';
 import { ToastModule } from 'primeng/toast';
 
 import { InventoryComponent } from './inventory.component';

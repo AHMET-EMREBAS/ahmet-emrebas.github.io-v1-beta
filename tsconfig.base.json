@@ -20,10 +20,7 @@
       "core/*": ["libs/core/src/lib/*"],
       "directive": ["libs/directive/src/index.ts"],
       "gen": ["libs/gen/src/index.ts"],
-      "layout": ["libs/layout/src/index.ts"],
-      "material/*": ["libs/material/src/lib/*"],
-      "messanger": ["libs/messanger/src/index.ts"],
-      "notification": ["libs/notification/src/index.ts"]
+      "material/*": ["libs/material/src/lib/*"]
     }
   },
   "exclude": ["node_modules", "tmp"]

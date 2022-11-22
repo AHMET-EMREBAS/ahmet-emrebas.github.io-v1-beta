@@ -15,7 +15,7 @@ import { SidebarModule } from 'primeng/sidebar';
 import { ToolbarModule } from 'primeng/toolbar';
 import { TooltipModule } from 'primeng/tooltip';
 
-import { LayoutComponent } from './layout/layout.component';
+import { LayoutComponent } from './layout.component';
 
 @NgModule({
   imports: [

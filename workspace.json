@@ -9,10 +9,7 @@
     "directive": "libs/directive",
     "gen": "libs/gen",
     "gen-e2e": "apps/gen-e2e",
-    "layout": "libs/layout",
     "material": "libs/material",
-    "messanger": "libs/messanger",
-    "notification": "libs/notification",
     "web": "apps/web",
     "web-e2e": "apps/web-e2e"
   },
