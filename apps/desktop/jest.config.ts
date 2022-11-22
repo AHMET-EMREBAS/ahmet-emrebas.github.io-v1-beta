@@ -1,7 +1,7 @@
-module.exports = {
-  displayName: 'api',
+/* eslint-disable */
+export default {
+  displayName: 'desktop',
   preset: '../../jest.preset.js',
-  verbose: true,
   globals: {
     'ts-jest': {
       tsconfig: '<rootDir>/tsconfig.spec.json',
@@ -12,5 +12,5 @@ module.exports = {
     '^.+\\.[tj]s$': 'ts-jest',
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
-  coverageDirectory: '../../coverage/apps/api',
+  coverageDirectory: '../../coverage/apps/desktop',
 };

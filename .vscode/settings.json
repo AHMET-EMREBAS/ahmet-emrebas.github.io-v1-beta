@@ -4,5 +4,6 @@
     "file:///c%3A/Users/aecst/Projects/ahmet-emrebas/schemas/resource.schema.json": [
       "file:///c%3A/Users/aecst/Projects/ahmet-emrebas/projects/**/*.yaml"
     ]
-  }
+  },
+  "angular.enable-strict-mode-prompt": false
 }

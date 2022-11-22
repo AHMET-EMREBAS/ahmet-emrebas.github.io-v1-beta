@@ -1,12 +1,13 @@
 {
+  "name": "messanger",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
-  "root": "libs/messanger",
   "sourceRoot": "libs/messanger/src",
   "prefix": "ae",
   "targets": {
     "build": {
       "executor": "@nrwl/angular:package",
-      "outputs": ["dist/libs/messanger"],
+      "outputs": ["{workspaceRoot}/dist/libs/messanger"],
       "options": {
         "project": "libs/messanger/ng-package.json"
       },
@@ -22,9 +23,9 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/messanger"],
+      "outputs": ["{workspaceRoot}/coverage/libs/messanger"],
       "options": {
-        "jestConfig": "libs/messanger/jest.config.js",
+        "jestConfig": "libs/messanger/jest.config.ts",
         "passWithNoTests": true
       }
     },

@@ -1,12 +1,13 @@
 {
+  "name": "notification",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
-  "root": "libs/notification",
   "sourceRoot": "libs/notification/src",
   "prefix": "ahmet-emrebas",
   "targets": {
     "build": {
       "executor": "@nrwl/angular:package",
-      "outputs": ["dist/libs/notification"],
+      "outputs": ["{workspaceRoot}/dist/libs/notification"],
       "options": {
         "project": "libs/notification/ng-package.json"
       },
@@ -22,9 +23,9 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/notification"],
+      "outputs": ["{workspaceRoot}/coverage/libs/notification"],
       "options": {
-        "jestConfig": "libs/notification/jest.config.js",
+        "jestConfig": "libs/notification/jest.config.ts",
         "passWithNoTests": true
       }
     },

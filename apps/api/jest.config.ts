@@ -1,14 +1,17 @@
-module.exports = {
-  displayName: 'gen',
+/* eslint-disable */
+export default {
+  displayName: 'api',
   preset: '../../jest.preset.js',
+  verbose: true,
   globals: {
     'ts-jest': {
       tsconfig: '<rootDir>/tsconfig.spec.json',
     },
   },
+  testEnvironment: 'node',
   transform: {
     '^.+\\.[tj]s$': 'ts-jest',
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
-  coverageDirectory: '../../coverage/libs/gen',
+  coverageDirectory: '../../coverage/apps/api',
 };

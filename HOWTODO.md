@@ -56,3 +56,8 @@ nx run appname:extract-i18n
 ### Electron Notes
 
 - On close run both quit and exit methods
+
+### Migration
+
+- nx migrate next
+- nx migrate --run-migrations=migrations.json

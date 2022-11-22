@@ -1,5 +1,6 @@
 {
-  "root": "libs/bootstrap",
+  "name": "bootstrap",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/bootstrap/src",
   "targets": {
     "lint": {
@@ -11,9 +12,9 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/bootstrap"],
+      "outputs": ["{workspaceRoot}/coverage/libs/bootstrap"],
       "options": {
-        "jestConfig": "libs/bootstrap/jest.config.js",
+        "jestConfig": "libs/bootstrap/jest.config.ts",
         "passWithNoTests": true
       }
     }

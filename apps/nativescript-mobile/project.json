@@ -1,5 +1,6 @@
 {
-  "root": "apps/nativescript-mobile/",
+  "name": "nativescript-mobile",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/nativescript-mobile/src",
   "projectType": "application",
   "targets": {

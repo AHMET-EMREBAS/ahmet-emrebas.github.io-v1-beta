@@ -1,5 +1,6 @@
 {
-  "root": "libs/gen",
+  "name": "gen",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/gen/src",
   "targets": {
     "build": {
@@ -43,9 +44,9 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/gen"],
+      "outputs": ["{workspaceRoot}/coverage/libs/gen"],
       "options": {
-        "jestConfig": "libs/gen/jest.config.js",
+        "jestConfig": "libs/gen/jest.config.ts",
         "passWithNoTests": true
       }
     }

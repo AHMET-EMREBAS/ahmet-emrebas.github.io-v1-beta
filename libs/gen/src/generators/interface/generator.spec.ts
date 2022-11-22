@@ -1,8 +1,5 @@
-import {
-  readProjectConfiguration,
-  Tree,
-} from '@nrwl/devkit';
-import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
+import { readProjectConfiguration, Tree } from '@nrwl/devkit';
+import { createTreeWithEmptyV1Workspace } from '@nrwl/devkit/testing';
 
 import generator from './generator';
 import { InterfaceGeneratorSchema } from './schema';
@@ -12,7 +9,7 @@ describe('interface generator', () => {
   const options: InterfaceGeneratorSchema = { name: 'test', project: '' };
 
   beforeEach(() => {
-    appTree = createTreeWithEmptyWorkspace();
+    appTree = createTreeWithEmptyV1Workspace();
   });
 
   it('should run successfully', async () => {

@@ -1,12 +1,13 @@
 {
+  "name": "directive",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
-  "root": "libs/directive",
   "sourceRoot": "libs/directive/src",
   "prefix": "ae",
   "targets": {
     "build": {
       "executor": "@nrwl/angular:package",
-      "outputs": ["dist/libs/directive"],
+      "outputs": ["{workspaceRoot}/dist/libs/directive"],
       "options": {
         "project": "libs/directive/ng-package.json"
       },
@@ -22,9 +23,9 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/directive"],
+      "outputs": ["{workspaceRoot}/coverage/libs/directive"],
       "options": {
-        "jestConfig": "libs/directive/jest.config.js",
+        "jestConfig": "libs/directive/jest.config.ts",
         "passWithNoTests": true
       }
     },

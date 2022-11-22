@@ -2,10 +2,10 @@
   "version": 2,
   "projects": {
     "api": "apps/api",
-    "desktop": "apps/desktop",
     "bootstrap": "libs/bootstrap",
     "common": "libs/common",
     "core": "libs/core",
+    "desktop": "apps/desktop",
     "directive": "libs/directive",
     "gen": "libs/gen",
     "gen-e2e": "apps/gen-e2e",
@@ -16,5 +16,6 @@
     "notification": "libs/notification",
     "web": "apps/web",
     "web-e2e": "apps/web-e2e"
-  }
+  },
+  "$schema": "./node_modules/nx/schemas/workspace-schema.json"
 }
