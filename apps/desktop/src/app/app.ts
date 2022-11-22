@@ -97,10 +97,12 @@ export default class App {
     App.mainWindow.once('ready-to-show', () => {
       App.mainWindow.show();
 
-      App.mainWindow.webContents.openDevTools({
-        mode: 'detach',
-        activate: true,
-      });
+      if (!App.application.isPackaged) {
+        App.mainWindow.webContents.openDevTools({
+          mode: 'right',
+          activate: true,
+        });
+      }
     });
 
     // handle all external redirects in a new browser window
