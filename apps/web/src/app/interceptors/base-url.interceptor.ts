@@ -1,4 +1,5 @@
 import {
+  HttpEvent,
   HttpHandler,
   HttpRequest,
 } from '@angular/common/http';
@@ -6,6 +7,8 @@ import {
   Inject,
   Injectable,
 } from '@angular/core';
+
+import { Observable } from 'rxjs';
 
 import {
   AUTH_TOKEN_NAME,
@@ -16,7 +19,7 @@ import {
 export class BaseUrlInterceptor {
   constructor(@Inject(BASE_URL_TOKEN) private baseUrl: string) {}
 
-  private async getAuthToken() {
+  private getAuthToken() {
     return (
       document.cookie
         .split(';')
@@ -33,18 +36,19 @@ export class BaseUrlInterceptor {
     return request.url.includes('api');
   }
 
-  async intercept(request: HttpRequest<any>, next: HttpHandler) {
+  intercept(
+    request: HttpRequest<any>,
+    next: HttpHandler
+  ): Observable<HttpEvent<any>> {
     const tokenizedRequest = request.clone({
       setHeaders: {
-        [AUTH_TOKEN_NAME]: (await this.getAuthToken()) || '',
+        [AUTH_TOKEN_NAME]: this.getAuthToken() || '',
       },
     });
 
     const internalApiRequest = tokenizedRequest.clone({
       url: `${this.baseUrl}/${request.url}`,
     });
-
-    console.log(request);
 
     if (this.isUrlComplete(request)) {
       return next.handle(tokenizedRequest);
@@ -54,6 +58,6 @@ export class BaseUrlInterceptor {
       return next.handle(internalApiRequest);
     }
 
-    return next.handle(tokenizedRequest);
+    return next.handle(request);
   }
 }
