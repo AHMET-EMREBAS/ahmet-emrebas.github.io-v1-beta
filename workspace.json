@@ -10,7 +10,8 @@
     "gen-e2e": "apps/gen-e2e",
     "material": "libs/material",
     "web": "apps/web",
-    "web-e2e": "apps/web-e2e"
+    "web-e2e": "apps/web-e2e",
+    "nativescript-mobile": "apps/nativescript-mobile/"
   },
   "$schema": "./node_modules/nx/schemas/workspace-schema.json"
 }

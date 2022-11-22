@@ -14,4 +14,9 @@
 -- Data table specifications like visible columns, sortable columns, searchables columns.
 -- Persist UI configuration somewhere like user profile model.
 -- Persist menu items based on user permissions, users can see only allowed resource links.
---
+-- Create base entity classes, basic, timestamp, with-owner, with-status, and define the type in the document.
+
+### Goals 2
+
+-- Auth service app
+-- Auth client app
