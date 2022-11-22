@@ -1,9 +1,13 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IReadQuantity } from 'common/inventory/interfaces';
 import { InputOptions, setFormGroupValue } from 'material/form';
 import { QuantityService } from '../quantity.service';
 import { firstValueFrom } from 'rxjs';
+
+import { MessageService as SystemMessageService } from 'primeng/api';
+
+import { groupBy } from 'lodash';
 
 import { SkuService } from '../../sku';
 
@@ -16,12 +20,12 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   templateUrl: './update-quantity.component.html',
   styleUrls: ['./update-quantity.component.scss'],
 })
-export class UpdateQuantityComponent implements AfterViewInit {
+export class UpdateQuantityComponent implements AfterViewInit, OnInit {
   title = 'Update Quantity';
   private itemToBeUpdated!: Partial<IReadQuantity>;
 
   formGroup = new FormGroup({
-    quantity: new FormControl('', [
+    quantity: new FormControl(undefined, [
       Validators.required,
 
       Validators.min(-200),
@@ -29,15 +33,16 @@ export class UpdateQuantityComponent implements AfterViewInit {
       Validators.max(999999999999),
     ]),
 
-    sku: new FormControl('', [Validators.required]),
+    sku: new FormControl(undefined, [Validators.required]),
 
-    store: new FormControl('', [Validators.required]),
+    store: new FormControl(undefined, [Validators.required]),
   });
 
   fields: InputOptions[] = [
     {
       name: 'quantity',
       type: 'number',
+      group: 'Quantity',
       placeholder: 'quantity',
 
       required: true,
@@ -50,7 +55,8 @@ export class UpdateQuantityComponent implements AfterViewInit {
     {
       name: 'sku',
       type: 'select',
-      placeholder: 'sku',
+      group: 'Meta',
+      placeholder: 'name',
       asyncOptions: this.skuService.entities$,
       optionValue: 'id',
       optionLabel: 'name',
@@ -61,7 +67,8 @@ export class UpdateQuantityComponent implements AfterViewInit {
     {
       name: 'store',
       type: 'select',
-      placeholder: 'store',
+      group: 'Meta',
+      placeholder: 'name',
       asyncOptions: this.storeService.entities$,
       optionValue: 'id',
       optionLabel: 'name',
@@ -70,15 +77,21 @@ export class UpdateQuantityComponent implements AfterViewInit {
     },
   ];
 
+  groups = Object.entries(groupBy(this.fields, 'group'));
+
   constructor(
     private readonly quantityService: QuantityService,
     private readonly router: Router,
+    private readonly systemMessageService: SystemMessageService,
     private readonly route: ActivatedRoute,
     private readonly skuService: SkuService,
     private readonly storeService: StoreService
-  ) {
-    this.skuService.getAll();
-    this.storeService.getAll();
+  ) {}
+
+  ngOnInit(): void {
+    this.skuService.getAsOptions(['id', 'name']);
+
+    this.storeService.getAsOptions(['id', 'name']);
   }
 
   async ngAfterViewInit() {
@@ -88,7 +101,9 @@ export class UpdateQuantityComponent implements AfterViewInit {
         this.quantityService.getByKey(__item.id)
       );
       setFormGroupValue(this.formGroup, this.itemToBeUpdated);
+      return;
     }
+    this.router.navigate(['../'], { relativeTo: this.route });
   }
 
   submit() {
@@ -98,9 +113,19 @@ export class UpdateQuantityComponent implements AfterViewInit {
 
         quantity: this.value('quantity'),
 
-        sku: this.value('sku')?.id,
+        sku: this.value('sku'),
 
-        store: this.value('store')?.id,
+        store: this.value('store'),
+      });
+    } else {
+      const e = Object.entries(this.formGroup.controls).filter(
+        (e) => e[1].errors
+      )[0];
+
+      this.systemMessageService.add({
+        key: 'resource',
+        severity: 'error',
+        summary: `${e[0]} field is not valid!`,
       });
     }
   }

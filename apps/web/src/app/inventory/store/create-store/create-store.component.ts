@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { MessageService as SystemMessageService } from 'primeng/api';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-
+import { groupBy } from 'lodash';
 import { InputOptions } from 'material/form';
 
 import { StoreService } from '../store.service';
@@ -17,7 +18,7 @@ export class CreateStoreComponent implements OnInit {
   submitted = false;
   title = 'Create Store';
   formGroup = new FormGroup({
-    name: new FormControl('', [
+    name: new FormControl(undefined, [
       Validators.required,
 
       Validators.minLength(2),
@@ -25,13 +26,14 @@ export class CreateStoreComponent implements OnInit {
       Validators.maxLength(30),
     ]),
 
-    pricelevel: new FormControl('', []),
+    pricelevel: new FormControl(undefined, []),
   });
 
   fields: InputOptions[] = [
     {
       name: 'name',
       type: 'text',
+      group: 'Store',
       placeholder: 'name',
 
       required: true,
@@ -44,22 +46,26 @@ export class CreateStoreComponent implements OnInit {
     {
       name: 'pricelevel',
       type: 'select',
-      placeholder: 'pricelevel',
+      group: 'Price Level',
+      placeholder: 'name',
       asyncOptions: this.pricelevelService.entities$,
       optionValue: 'id',
       optionLabel: 'name',
     },
   ];
 
+  groups = Object.entries(groupBy(this.fields, 'group'));
+
   constructor(
     private readonly storeService: StoreService,
+    private readonly systemMessageService: SystemMessageService,
     private readonly router: Router,
     private readonly route: ActivatedRoute,
     private readonly pricelevelService: PricelevelService
   ) {}
 
   ngOnInit(): void {
-    this.pricelevelService.getAll();
+    this.pricelevelService.getAsOptions(['id', 'name']);
   }
 
   submit() {
@@ -69,7 +75,17 @@ export class CreateStoreComponent implements OnInit {
         this.storeService.add({
           name: this.value('name'),
 
-          pricelevel: this.value('pricelevel')?.id,
+          pricelevel: this.value('pricelevel'),
+        });
+      } else {
+        const e = Object.entries(this.formGroup.controls).filter(
+          (e) => e[1].errors
+        )[0];
+
+        this.systemMessageService.add({
+          key: 'resource',
+          severity: 'error',
+          summary: `${e[0]} field is not valid!`,
         });
       }
     }

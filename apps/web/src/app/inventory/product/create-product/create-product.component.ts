@@ -1,14 +1,24 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import {
+  Component,
+  OnInit,
+} from '@angular/core';
+import {
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import {
+  ActivatedRoute,
+  Router,
+} from '@angular/router';
 
+import { groupBy } from 'lodash';
 import { InputOptions } from 'material/form';
-
-import { ProductService } from '../product.service';
+import { MessageService as SystemMessageService } from 'primeng/api';
 
 import { CategoryService } from '../../category';
-
 import { DepartmentService } from '../../department';
+import { ProductService } from '../product.service';
 
 @Component({
   selector: 'ae-create-product',
@@ -19,7 +29,7 @@ export class CreateProductComponent implements OnInit {
   submitted = false;
   title = 'Create Product';
   formGroup = new FormGroup({
-    name: new FormControl('', [
+    name: new FormControl(undefined, [
       Validators.required,
 
       Validators.minLength(3),
@@ -27,21 +37,40 @@ export class CreateProductComponent implements OnInit {
       Validators.maxLength(50),
     ]),
 
-    description: new FormControl('', [
+    price: new FormControl(undefined, [
+      Validators.min(0),
+
+      Validators.max(999999999999),
+    ]),
+
+    cost: new FormControl(undefined, [
+      Validators.min(0),
+
+      Validators.max(999999999999),
+    ]),
+
+    quantity: new FormControl(undefined, [
+      Validators.min(0),
+
+      Validators.max(999999999999),
+    ]),
+
+    description: new FormControl(undefined, [
       Validators.minLength(0),
 
       Validators.maxLength(500),
     ]),
 
-    category: new FormControl('', []),
+    category: new FormControl(undefined, []),
 
-    department: new FormControl('', []),
+    department: new FormControl(undefined, []),
   });
 
   fields: InputOptions[] = [
     {
       name: 'name',
       type: 'text',
+      group: 'Product',
       placeholder: 'name',
 
       required: true,
@@ -52,8 +81,42 @@ export class CreateProductComponent implements OnInit {
     },
 
     {
+      name: 'price',
+      type: 'currency',
+      group: 'Price',
+      placeholder: 'price',
+
+      min: 0,
+
+      max: 999999999999,
+    },
+
+    {
+      name: 'cost',
+      type: 'currency',
+      group: 'Price',
+      placeholder: 'cost',
+
+      min: 0,
+
+      max: 999999999999,
+    },
+
+    {
+      name: 'quantity',
+      type: 'number',
+      group: 'Quantity',
+      placeholder: 'quantity',
+
+      min: 0,
+
+      max: 999999999999,
+    },
+
+    {
       name: 'description',
       type: 'textarea',
+      group: 'Product',
       placeholder: 'description',
 
       minLength: 0,
@@ -64,7 +127,8 @@ export class CreateProductComponent implements OnInit {
     {
       name: 'category',
       type: 'select',
-      placeholder: 'category',
+      group: 'Meta',
+      placeholder: 'name',
       asyncOptions: this.categoryService.entities$,
       optionValue: 'id',
       optionLabel: 'name',
@@ -73,15 +137,19 @@ export class CreateProductComponent implements OnInit {
     {
       name: 'department',
       type: 'select',
-      placeholder: 'department',
+      group: 'Meta',
+      placeholder: 'name',
       asyncOptions: this.departmentService.entities$,
       optionValue: 'id',
       optionLabel: 'name',
     },
   ];
 
+  groups = Object.entries(groupBy(this.fields, 'group'));
+
   constructor(
     private readonly productService: ProductService,
+    private readonly systemMessageService: SystemMessageService,
     private readonly router: Router,
     private readonly route: ActivatedRoute,
     private readonly categoryService: CategoryService,
@@ -89,8 +157,10 @@ export class CreateProductComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.categoryService.getAll();
-    this.departmentService.getAll();
+    this.categoryService.clearCache();
+    this.categoryService.getAsOptions(['id', 'name']);
+
+    this.departmentService.getAsOptions(['id', 'name']);
   }
 
   submit() {
@@ -100,11 +170,27 @@ export class CreateProductComponent implements OnInit {
         this.productService.add({
           name: this.value('name'),
 
+          price: this.value('price'),
+
+          cost: this.value('cost'),
+
+          quantity: this.value('quantity'),
+
           description: this.value('description'),
 
-          category: this.value('category')?.id,
+          category: this.value('category'),
 
-          department: this.value('department')?.id,
+          department: this.value('department'),
+        });
+      } else {
+        const e = Object.entries(this.formGroup.controls).filter(
+          (e) => e[1].errors
+        )[0];
+
+        this.systemMessageService.add({
+          key: 'resource',
+          severity: 'error',
+          summary: `${e[0]} field is not valid!`,
         });
       }
     }

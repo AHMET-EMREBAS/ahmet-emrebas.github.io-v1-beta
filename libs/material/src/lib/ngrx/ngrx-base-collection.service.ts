@@ -1,11 +1,17 @@
 import { HttpClient } from '@angular/common/http';
 
 import { BaseInterface } from 'common/base';
+import { uniqBy } from 'lodash';
+import {
+  FilterMatchMode,
+  FilterMetadata,
+} from 'primeng/api';
 import { Table } from 'primeng/table';
 import {
   BehaviorSubject,
   debounceTime,
   delay,
+  map,
   Observable,
   switchMap,
 } from 'rxjs';
@@ -80,5 +86,29 @@ export class NgrxBaseCollecitonService<
       sortField: table.sortField || 'id',
       where: JSON.stringify(table.filters),
     };
+  }
+
+  uniqueBy(key: keyof T & string) {
+    return this.entities$.pipe(map((data) => uniqBy(data, (e) => e[key])));
+  }
+
+  isExist(key: string, value: string) {
+    return this.getWithQuery({
+      take: '1',
+      where: JSON.stringify({
+        [key]: [{ matchMode: FilterMatchMode.EQUALS, value } as FilterMetadata],
+      }),
+    }).pipe(
+      map((data) => {
+        return data.length > 0;
+      })
+    );
+  }
+
+  getAsOptions(keys: (keyof T & string)[]) {
+    return this.getWithQuery({
+      select: JSON.stringify(['index', ...keys]),
+      view: 'true',
+    });
   }
 }

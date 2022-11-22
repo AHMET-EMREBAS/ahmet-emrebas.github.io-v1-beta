@@ -11,8 +11,49 @@ Properties:
       valueType: string
     UI:
       type: text
+      group: Product
+
     Defination:
       commerce: productName
+
+  - Property: price
+    Validation:
+      type: number
+      min: 0
+      max: 999999999999
+    Column:
+      columnType: numeric
+      valueType: number
+
+    UI:
+      type: currency
+      group: Price
+
+  - Property: cost
+    Validation:
+      type: number
+      min: 0
+      max: 999999999999
+    Column:
+      columnType: numeric
+      valueType: number
+
+    UI:
+      type: currency
+      group: Price
+
+  - Property: quantity
+    Validation:
+      type: number
+      min: 0
+      max: 999999999999
+    Column:
+      columnType: int
+      valueType: number
+
+    UI:
+      type: number
+      group: Quantity
 
   - Property: description
     Description: Product description
@@ -27,11 +68,14 @@ Properties:
       valueType: string
     UI:
       type: textarea
+      group: Product
 
 Relations:
   - type: ManyToOne
+    group: Meta
     target: Category
     name: category
+    label: name
     eager: true
     joinColumn: true
     nullable: true
@@ -42,8 +86,10 @@ Relations:
         valueType: string
 
   - type: ManyToOne
+    group: Meta
     target: Department
     name: department
+    label: name
     eager: true
     nullable: true
     joinColumn: true

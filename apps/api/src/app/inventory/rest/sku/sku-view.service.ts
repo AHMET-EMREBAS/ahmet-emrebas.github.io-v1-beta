@@ -4,7 +4,7 @@ import { Repository } from 'typeorm';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 
-import { SkuView } from '../../models/sku';
+import { SkuView } from './entity';
 
 @Injectable()
 export class SkuViewService extends ResourceViewService<SkuView> {

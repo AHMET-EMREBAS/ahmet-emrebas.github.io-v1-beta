@@ -11,9 +11,11 @@ Properties:
       max: 999999999999
     Column:
       columnType: numeric
+      default: 0
       valueType: number
     UI:
-      type: number
+      type: currency
+      group: Price
 
   - Property: cost
     Description: cost
@@ -25,17 +27,11 @@ Properties:
       max: 999999999999
     Column:
       columnType: numeric
+      default: 0
       valueType: number
     UI:
-      type: number
-
-SearchFields:
-  - price
-  - cost
-
-Required:
-  - price
-    - cost
+      type: currency
+      group: Price
 
 Relations:
   - type: ManyToOne
@@ -45,23 +41,35 @@ Relations:
     onDelete: CASCADE
     nullable: true
     joinColumn: true
+    group: Meta
+    label: name
     viewColumns:
-      - column: barcode
-        as: barcode
-        valueType: string
-
       - column: name
         as: sku
+        valueType: string
+
+      - column: barcode
+        as: barcode
         valueType: string
 
   - type: ManyToOne
     target: Pricelevel
     name: pricelevel
     nullable: true
-    onDelete: SET NULL
+    group: Meta
+    onDelete: CASCADE
     eager: true
     joinColumn: true
+    label: name
     viewColumns:
       - column: name
         as: pricelevel
         valueType: string
+
+SearchFields:
+  - price
+  - cost
+
+Required:
+  - price
+    - cost

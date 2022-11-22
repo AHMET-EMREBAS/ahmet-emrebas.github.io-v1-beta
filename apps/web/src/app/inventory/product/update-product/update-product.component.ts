@@ -1,39 +1,31 @@
-import {
-  AfterViewInit,
-  Component,
-} from '@angular/core';
-import {
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
-import {
-  ActivatedRoute,
-  Router,
-} from '@angular/router';
-
+import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IReadProduct } from 'common/inventory/interfaces';
-import {
-  InputOptions,
-  setFormGroupValue,
-} from 'material/form';
+import { InputOptions, setFormGroupValue } from 'material/form';
+import { ProductService } from '../product.service';
 import { firstValueFrom } from 'rxjs';
 
+import { MessageService as SystemMessageService } from 'primeng/api';
+
+import { groupBy } from 'lodash';
+
 import { CategoryService } from '../../category';
+
 import { DepartmentService } from '../../department';
-import { ProductService } from '../product.service';
+
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'ae-update-product',
   templateUrl: './update-product.component.html',
   styleUrls: ['./update-product.component.scss'],
 })
-export class UpdateProductComponent implements AfterViewInit {
+export class UpdateProductComponent implements AfterViewInit, OnInit {
   title = 'Update Product';
   private itemToBeUpdated!: Partial<IReadProduct>;
 
   formGroup = new FormGroup({
-    name: new FormControl('', [
+    name: new FormControl(undefined, [
       Validators.required,
 
       Validators.minLength(3),
@@ -41,21 +33,40 @@ export class UpdateProductComponent implements AfterViewInit {
       Validators.maxLength(50),
     ]),
 
-    description: new FormControl('', [
+    price: new FormControl(undefined, [
+      Validators.min(0),
+
+      Validators.max(999999999999),
+    ]),
+
+    cost: new FormControl(undefined, [
+      Validators.min(0),
+
+      Validators.max(999999999999),
+    ]),
+
+    quantity: new FormControl(undefined, [
+      Validators.min(0),
+
+      Validators.max(999999999999),
+    ]),
+
+    description: new FormControl(undefined, [
       Validators.minLength(0),
 
       Validators.maxLength(500),
     ]),
 
-    category: new FormControl('', []),
+    category: new FormControl(undefined, []),
 
-    department: new FormControl('', []),
+    department: new FormControl(undefined, []),
   });
 
   fields: InputOptions[] = [
     {
       name: 'name',
       type: 'text',
+      group: 'Product',
       placeholder: 'name',
 
       required: true,
@@ -66,8 +77,42 @@ export class UpdateProductComponent implements AfterViewInit {
     },
 
     {
+      name: 'price',
+      type: 'currency',
+      group: 'Price',
+      placeholder: 'price',
+
+      min: 0,
+
+      max: 999999999999,
+    },
+
+    {
+      name: 'cost',
+      type: 'currency',
+      group: 'Price',
+      placeholder: 'cost',
+
+      min: 0,
+
+      max: 999999999999,
+    },
+
+    {
+      name: 'quantity',
+      type: 'number',
+      group: 'Quantity',
+      placeholder: 'quantity',
+
+      min: 0,
+
+      max: 999999999999,
+    },
+
+    {
       name: 'description',
       type: 'textarea',
+      group: 'Product',
       placeholder: 'description',
 
       minLength: 0,
@@ -78,7 +123,8 @@ export class UpdateProductComponent implements AfterViewInit {
     {
       name: 'category',
       type: 'select',
-      placeholder: 'category',
+      group: 'Meta',
+      placeholder: 'name',
       asyncOptions: this.categoryService.entities$,
       optionValue: 'id',
       optionLabel: 'name',
@@ -87,44 +133,71 @@ export class UpdateProductComponent implements AfterViewInit {
     {
       name: 'department',
       type: 'select',
-      placeholder: 'department',
+      group: 'Meta',
+      placeholder: 'name',
       asyncOptions: this.departmentService.entities$,
       optionValue: 'id',
       optionLabel: 'name',
     },
   ];
 
+  groups = Object.entries(groupBy(this.fields, 'group'));
+
   constructor(
     private readonly productService: ProductService,
     private readonly router: Router,
+    private readonly systemMessageService: SystemMessageService,
     private readonly route: ActivatedRoute,
     private readonly categoryService: CategoryService,
     private readonly departmentService: DepartmentService
-  ) {
-    this.categoryService.getAll();
-    this.departmentService.getAll();
+  ) {}
+
+  ngOnInit(): void {
+    this.categoryService.getAsOptions(['id', 'name']);
+
+    this.departmentService.getAsOptions(['id', 'name']);
   }
 
   async ngAfterViewInit() {
     const __item = this.productService.getItemToBeUpdated();
-    this.formGroup.markAsDirty();
-    this.formGroup.markAllAsTouched();
     if (__item) {
       this.itemToBeUpdated = await firstValueFrom(
         this.productService.getByKey(__item.id)
       );
       setFormGroupValue(this.formGroup, this.itemToBeUpdated);
+      return;
     }
+    this.router.navigate(['../'], { relativeTo: this.route });
   }
 
-  async submit() {
+  submit() {
     if (this.formGroup.valid) {
       this.productService.update({
         id: this.itemToBeUpdated.id,
+
         name: this.value('name'),
+
+        price: this.value('price'),
+
+        cost: this.value('cost'),
+
+        quantity: this.value('quantity'),
+
         description: this.value('description'),
-        category: this.value('category')?.id,
-        department: this.value('department')?.id,
+
+        category: this.value('category'),
+
+        department: this.value('department'),
+      });
+    } else {
+      const e = Object.entries(this.formGroup.controls).filter(
+        (e) => e[1].errors
+      )[0];
+
+      this.systemMessageService.add({
+        key: 'resource',
+        severity: 'error',
+        summary: `${e[0]} field is not valid!`,
       });
     }
   }

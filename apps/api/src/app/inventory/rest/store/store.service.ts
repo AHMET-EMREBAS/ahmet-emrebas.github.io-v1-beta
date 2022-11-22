@@ -4,7 +4,7 @@ import { Repository } from 'typeorm';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 
-import { Store } from '../../models/store';
+import { Store } from './entity';
 
 @Injectable()
 export class StoreService extends ResourceService<Store> {

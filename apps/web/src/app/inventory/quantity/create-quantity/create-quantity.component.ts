@@ -1,14 +1,24 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import {
+  Component,
+  OnInit,
+} from '@angular/core';
+import {
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import {
+  ActivatedRoute,
+  Router,
+} from '@angular/router';
 
+import { groupBy } from 'lodash';
 import { InputOptions } from 'material/form';
-
-import { QuantityService } from '../quantity.service';
+import { MessageService as SystemMessageService } from 'primeng/api';
 
 import { SkuService } from '../../sku';
-
 import { StoreService } from '../../store';
+import { QuantityService } from '../quantity.service';
 
 @Component({
   selector: 'ae-create-quantity',
@@ -19,7 +29,7 @@ export class CreateQuantityComponent implements OnInit {
   submitted = false;
   title = 'Create Quantity';
   formGroup = new FormGroup({
-    quantity: new FormControl('', [
+    quantity: new FormControl(undefined, [
       Validators.required,
 
       Validators.min(-200),
@@ -27,15 +37,16 @@ export class CreateQuantityComponent implements OnInit {
       Validators.max(999999999999),
     ]),
 
-    sku: new FormControl('', [Validators.required]),
+    sku: new FormControl(undefined, [Validators.required]),
 
-    store: new FormControl('', [Validators.required]),
+    store: new FormControl(undefined, [Validators.required]),
   });
 
   fields: InputOptions[] = [
     {
       name: 'quantity',
       type: 'number',
+      group: 'Quantity',
       placeholder: 'quantity',
 
       required: true,
@@ -48,7 +59,8 @@ export class CreateQuantityComponent implements OnInit {
     {
       name: 'sku',
       type: 'select',
-      placeholder: 'sku',
+      group: 'Meta',
+      placeholder: 'name',
       asyncOptions: this.skuService.entities$,
       optionValue: 'id',
       optionLabel: 'name',
@@ -59,7 +71,8 @@ export class CreateQuantityComponent implements OnInit {
     {
       name: 'store',
       type: 'select',
-      placeholder: 'store',
+      group: 'Meta',
+      placeholder: 'name',
       asyncOptions: this.storeService.entities$,
       optionValue: 'id',
       optionLabel: 'name',
@@ -68,8 +81,11 @@ export class CreateQuantityComponent implements OnInit {
     },
   ];
 
+  groups = Object.entries(groupBy(this.fields, 'group'));
+
   constructor(
     private readonly quantityService: QuantityService,
+    private readonly systemMessageService: SystemMessageService,
     private readonly router: Router,
     private readonly route: ActivatedRoute,
     private readonly skuService: SkuService,
@@ -77,8 +93,9 @@ export class CreateQuantityComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.skuService.getAll();
-    this.storeService.getAll();
+    this.skuService.getAsOptions(['id', 'name']);
+
+    this.storeService.getAsOptions(['id', 'name']);
   }
 
   submit() {
@@ -88,9 +105,19 @@ export class CreateQuantityComponent implements OnInit {
         this.quantityService.add({
           quantity: this.value('quantity'),
 
-          sku: this.value('sku')?.id,
+          sku: this.value('sku'),
 
-          store: this.value('store')?.id,
+          store: this.value('store'),
+        });
+      } else {
+        const e = Object.entries(this.formGroup.controls).filter(
+          (e) => e[1].errors
+        )[0];
+
+        this.systemMessageService.add({
+          key: 'resource',
+          severity: 'error',
+          summary: `${e[0]} field is not valid!`,
         });
       }
     }

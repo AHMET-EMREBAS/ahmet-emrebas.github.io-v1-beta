@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-import { Department, DepartmentView } from '../../models/department';
+import { Department, DepartmentView } from './entity';
 
 import { DepartmentViewService } from './department-view.service';
 import { DepartmentController } from './department.controller';

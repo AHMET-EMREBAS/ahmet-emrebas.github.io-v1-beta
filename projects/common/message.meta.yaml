@@ -16,6 +16,8 @@ Properties:
 
     UI:
       type: text
+      group: Message
+
 SearchFields:
   - message
 
@@ -26,19 +28,22 @@ Relations:
   - type: ManyToOne
     target: User
     name: to
+    group: To
     eager: true
     joinColumn: true
+    onDelete: CASCADE
     viewColumns:
       - column: username
-        as: username
+        as: to
         valueType: string
 
   - type: ManyToOne
     target: User
     name: from
     eager: true
+    onDelete: CASCADE
     joinColumn: true
     viewColumns:
       - column: username
-        as: username
+        as: from
         valueType: string

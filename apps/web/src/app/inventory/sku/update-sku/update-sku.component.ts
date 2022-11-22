@@ -1,9 +1,13 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IReadSku } from 'common/inventory/interfaces';
 import { InputOptions, setFormGroupValue } from 'material/form';
 import { SkuService } from '../sku.service';
 import { firstValueFrom } from 'rxjs';
+
+import { MessageService as SystemMessageService } from 'primeng/api';
+
+import { groupBy } from 'lodash';
 
 import { ProductService } from '../../product';
 
@@ -14,12 +18,12 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   templateUrl: './update-sku.component.html',
   styleUrls: ['./update-sku.component.scss'],
 })
-export class UpdateSkuComponent implements AfterViewInit {
+export class UpdateSkuComponent implements AfterViewInit, OnInit {
   title = 'Update Sku';
   private itemToBeUpdated!: Partial<IReadSku>;
 
   formGroup = new FormGroup({
-    name: new FormControl('', [
+    name: new FormControl(undefined, [
       Validators.required,
 
       Validators.minLength(0),
@@ -27,7 +31,7 @@ export class UpdateSkuComponent implements AfterViewInit {
       Validators.maxLength(30),
     ]),
 
-    barcode: new FormControl('', [
+    barcode: new FormControl(undefined, [
       Validators.required,
 
       Validators.minLength(10),
@@ -35,19 +39,20 @@ export class UpdateSkuComponent implements AfterViewInit {
       Validators.maxLength(13),
     ]),
 
-    description: new FormControl('', [
+    description: new FormControl(undefined, [
       Validators.minLength(0),
 
       Validators.maxLength(500),
     ]),
 
-    product: new FormControl('', [Validators.required]),
+    product: new FormControl(undefined, [Validators.required]),
   });
 
   fields: InputOptions[] = [
     {
       name: 'name',
       type: 'text',
+      group: 'Sku',
       placeholder: 'name',
 
       required: true,
@@ -60,6 +65,7 @@ export class UpdateSkuComponent implements AfterViewInit {
     {
       name: 'barcode',
       type: 'text',
+      group: 'Sku',
       placeholder: 'barcode',
 
       required: true,
@@ -72,6 +78,7 @@ export class UpdateSkuComponent implements AfterViewInit {
     {
       name: 'description',
       type: 'textarea',
+      group: 'Sku',
       placeholder: 'description',
 
       minLength: 0,
@@ -82,7 +89,8 @@ export class UpdateSkuComponent implements AfterViewInit {
     {
       name: 'product',
       type: 'select',
-      placeholder: 'product',
+      group: 'Product',
+      placeholder: 'name',
       asyncOptions: this.productService.entities$,
       optionValue: 'id',
       optionLabel: 'name',
@@ -91,13 +99,18 @@ export class UpdateSkuComponent implements AfterViewInit {
     },
   ];
 
+  groups = Object.entries(groupBy(this.fields, 'group'));
+
   constructor(
     private readonly skuService: SkuService,
     private readonly router: Router,
+    private readonly systemMessageService: SystemMessageService,
     private readonly route: ActivatedRoute,
     private readonly productService: ProductService
-  ) {
-    this.productService.getAll();
+  ) {}
+
+  ngOnInit(): void {
+    this.productService.getAsOptions(['id', 'name']);
   }
 
   async ngAfterViewInit() {
@@ -107,7 +120,9 @@ export class UpdateSkuComponent implements AfterViewInit {
         this.skuService.getByKey(__item.id)
       );
       setFormGroupValue(this.formGroup, this.itemToBeUpdated);
+      return;
     }
+    this.router.navigate(['../'], { relativeTo: this.route });
   }
 
   submit() {
@@ -121,7 +136,17 @@ export class UpdateSkuComponent implements AfterViewInit {
 
         description: this.value('description'),
 
-        product: this.value('product')?.id,
+        product: this.value('product'),
+      });
+    } else {
+      const e = Object.entries(this.formGroup.controls).filter(
+        (e) => e[1].errors
+      )[0];
+
+      this.systemMessageService.add({
+        key: 'resource',
+        severity: 'error',
+        summary: `${e[0]} field is not valid!`,
       });
     }
   }

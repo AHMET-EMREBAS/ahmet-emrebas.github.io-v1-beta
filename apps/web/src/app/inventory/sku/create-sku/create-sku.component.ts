@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { MessageService as SystemMessageService } from 'primeng/api';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-
+import { groupBy } from 'lodash';
 import { InputOptions } from 'material/form';
 
 import { SkuService } from '../sku.service';
@@ -17,7 +18,7 @@ export class CreateSkuComponent implements OnInit {
   submitted = false;
   title = 'Create Sku';
   formGroup = new FormGroup({
-    name: new FormControl('', [
+    name: new FormControl(undefined, [
       Validators.required,
 
       Validators.minLength(0),
@@ -25,7 +26,7 @@ export class CreateSkuComponent implements OnInit {
       Validators.maxLength(30),
     ]),
 
-    barcode: new FormControl('', [
+    barcode: new FormControl(undefined, [
       Validators.required,
 
       Validators.minLength(10),
@@ -33,19 +34,20 @@ export class CreateSkuComponent implements OnInit {
       Validators.maxLength(13),
     ]),
 
-    description: new FormControl('', [
+    description: new FormControl(undefined, [
       Validators.minLength(0),
 
       Validators.maxLength(500),
     ]),
 
-    product: new FormControl('', [Validators.required]),
+    product: new FormControl(undefined, [Validators.required]),
   });
 
   fields: InputOptions[] = [
     {
       name: 'name',
       type: 'text',
+      group: 'Sku',
       placeholder: 'name',
 
       required: true,
@@ -58,6 +60,7 @@ export class CreateSkuComponent implements OnInit {
     {
       name: 'barcode',
       type: 'text',
+      group: 'Sku',
       placeholder: 'barcode',
 
       required: true,
@@ -70,6 +73,7 @@ export class CreateSkuComponent implements OnInit {
     {
       name: 'description',
       type: 'textarea',
+      group: 'Sku',
       placeholder: 'description',
 
       minLength: 0,
@@ -80,7 +84,8 @@ export class CreateSkuComponent implements OnInit {
     {
       name: 'product',
       type: 'select',
-      placeholder: 'product',
+      group: 'Product',
+      placeholder: 'name',
       asyncOptions: this.productService.entities$,
       optionValue: 'id',
       optionLabel: 'name',
@@ -89,15 +94,18 @@ export class CreateSkuComponent implements OnInit {
     },
   ];
 
+  groups = Object.entries(groupBy(this.fields, 'group'));
+
   constructor(
     private readonly skuService: SkuService,
+    private readonly systemMessageService: SystemMessageService,
     private readonly router: Router,
     private readonly route: ActivatedRoute,
     private readonly productService: ProductService
   ) {}
 
   ngOnInit(): void {
-    this.productService.getAll();
+    this.productService.getAsOptions(['id', 'name']);
   }
 
   submit() {
@@ -111,7 +119,17 @@ export class CreateSkuComponent implements OnInit {
 
           description: this.value('description'),
 
-          product: this.value('product')?.id,
+          product: this.value('product'),
+        });
+      } else {
+        const e = Object.entries(this.formGroup.controls).filter(
+          (e) => e[1].errors
+        )[0];
+
+        this.systemMessageService.add({
+          key: 'resource',
+          severity: 'error',
+          summary: `${e[0]} field is not valid!`,
         });
       }
     }

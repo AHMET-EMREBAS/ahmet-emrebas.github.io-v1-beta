@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-
+import { PermissionGuard } from '../../auth';
 import { CreateCategoryComponent } from './create-category/';
 import { DeleteCategoryComponent } from './delete-category/';
 import { CategoryComponent } from './category.component';
@@ -10,6 +10,8 @@ import { UpdateCategoryComponent } from './update-category/';
 import { ViewCategoryComponent } from './view-category';
 
 import { SharedResourceModule } from 'material/resource';
+
+import { MatStepperModule } from '@angular/material/stepper';
 
 @NgModule({
   declarations: [
@@ -22,6 +24,7 @@ import { SharedResourceModule } from 'material/resource';
   imports: [
     CommonModule,
     SharedResourceModule,
+    MatStepperModule,
     RouterModule.forChild([
       {
         path: '',
@@ -31,21 +34,37 @@ import { SharedResourceModule } from 'material/resource';
             title: 'View Category',
             path: '',
             component: ViewCategoryComponent,
+            data: {
+              permission: 'READ:CATEGORY',
+            },
+            canActivate: [PermissionGuard],
           },
           {
             title: 'Create Category',
             path: 'create',
             component: CreateCategoryComponent,
+            data: {
+              permission: 'WRITE:CATEGORY',
+            },
+            canActivate: [PermissionGuard],
           },
           {
             title: 'Update Category',
             path: 'update',
             component: UpdateCategoryComponent,
+            data: {
+              permission: 'WRITE:CATEGORY',
+            },
+            canActivate: [PermissionGuard],
           },
           {
             title: 'Delete Category',
             path: 'delete',
             component: DeleteCategoryComponent,
+            data: {
+              permission: 'WRITE:CATEGORY',
+            },
+            canActivate: [PermissionGuard],
           },
         ],
       },

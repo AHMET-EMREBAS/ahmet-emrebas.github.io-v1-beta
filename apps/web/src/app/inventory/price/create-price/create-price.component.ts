@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { MessageService as SystemMessageService } from 'primeng/api';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-
+import { groupBy } from 'lodash';
 import { InputOptions } from 'material/form';
 
 import { PriceService } from '../price.service';
@@ -19,27 +20,28 @@ export class CreatePriceComponent implements OnInit {
   submitted = false;
   title = 'Create Price';
   formGroup = new FormGroup({
-    price: new FormControl('', [
+    price: new FormControl(undefined, [
       Validators.min(0),
 
       Validators.max(999999999999),
     ]),
 
-    cost: new FormControl('', [
+    cost: new FormControl(undefined, [
       Validators.min(0),
 
       Validators.max(999999999999),
     ]),
 
-    sku: new FormControl('', []),
+    sku: new FormControl(undefined, []),
 
-    pricelevel: new FormControl('', []),
+    pricelevel: new FormControl(undefined, []),
   });
 
   fields: InputOptions[] = [
     {
       name: 'price',
-      type: 'number',
+      type: 'currency',
+      group: 'Price',
       placeholder: 'price',
 
       min: 0,
@@ -49,7 +51,8 @@ export class CreatePriceComponent implements OnInit {
 
     {
       name: 'cost',
-      type: 'number',
+      type: 'currency',
+      group: 'Price',
       placeholder: 'cost',
 
       min: 0,
@@ -60,24 +63,29 @@ export class CreatePriceComponent implements OnInit {
     {
       name: 'sku',
       type: 'select',
-      placeholder: 'sku',
+      group: 'Meta',
+      placeholder: 'name',
       asyncOptions: this.skuService.entities$,
       optionValue: 'id',
-      optionLabel: 'barcode',
+      optionLabel: 'name',
     },
 
     {
       name: 'pricelevel',
       type: 'select',
-      placeholder: 'pricelevel',
+      group: 'Meta',
+      placeholder: 'name',
       asyncOptions: this.pricelevelService.entities$,
       optionValue: 'id',
       optionLabel: 'name',
     },
   ];
 
+  groups = Object.entries(groupBy(this.fields, 'group'));
+
   constructor(
     private readonly priceService: PriceService,
+    private readonly systemMessageService: SystemMessageService,
     private readonly router: Router,
     private readonly route: ActivatedRoute,
     private readonly skuService: SkuService,
@@ -85,8 +93,9 @@ export class CreatePriceComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.skuService.getAll();
-    this.pricelevelService.getAll();
+    this.skuService.getAsOptions(['id', 'name']);
+
+    this.pricelevelService.getAsOptions(['id', 'name']);
   }
 
   submit() {
@@ -98,9 +107,19 @@ export class CreatePriceComponent implements OnInit {
 
           cost: this.value('cost'),
 
-          sku: this.value('sku')?.id,
+          sku: this.value('sku'),
 
-          pricelevel: this.value('pricelevel')?.id,
+          pricelevel: this.value('pricelevel'),
+        });
+      } else {
+        const e = Object.entries(this.formGroup.controls).filter(
+          (e) => e[1].errors
+        )[0];
+
+        this.systemMessageService.add({
+          key: 'resource',
+          severity: 'error',
+          summary: `${e[0]} field is not valid!`,
         });
       }
     }

@@ -52,6 +52,21 @@ export class ViewProductComponent implements AfterViewInit {
     },
 
     {
+      header: 'price',
+      field: 'price',
+    },
+
+    {
+      header: 'cost',
+      field: 'cost',
+    },
+
+    {
+      header: 'quantity',
+      field: 'quantity',
+    },
+
+    {
       header: 'description',
       field: 'description',
     },

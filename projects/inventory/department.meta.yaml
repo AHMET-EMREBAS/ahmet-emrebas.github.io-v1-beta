@@ -11,6 +11,7 @@ Properties:
       maxLength: 20
     UI:
       type: text
+      group: Department
     Column:
       columnType: text
       valueType: string

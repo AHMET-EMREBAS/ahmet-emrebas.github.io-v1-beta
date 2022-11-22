@@ -9,6 +9,7 @@ import {
   IsIn,
   IsNumber,
   IsOptional,
+  IsString,
   Max,
   MaxLength,
   Min,
@@ -28,7 +29,7 @@ import {
 } from '../transformers';
 
 @InputType()
-export class PaginatorDto {
+export class PaginatorDto<T = any> {
   @ApiProperty({
     minimum: 1,
     maximum: 100,
@@ -99,4 +100,15 @@ export class PaginatorDto {
     };
   })
   order: FindOptionsOrder<any>;
+
+  @Expose()
+  @IsOptional()
+  @MaxLength(30, { each: true })
+  @IsString({ each: true })
+  @Transform(({ value }) => {
+    if (value) return JSON.parse(value);
+
+    return undefined;
+  })
+  select: (keyof T & string)[];
 }

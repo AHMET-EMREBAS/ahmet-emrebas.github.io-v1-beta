@@ -4,12 +4,11 @@ import { ILike } from 'typeorm';
 
 import { Args, Mutation, Query, Resolver, Subscription } from '@nestjs/graphql';
 
-import {
-  Quantity,
-  QuantityView,
-  CreateQuantityDto,
-  UpdateQuantityDto,
-} from '../../models/quantity';
+import { CanRead, CanWrite } from '../../auth/decorators';
+
+import { Quantity, QuantityView } from './entity';
+
+import { CreateQuantityDto, UpdateQuantityDto } from './dto';
 
 import { QuantityViewService } from './quantity-view.service';
 import { QuantityService } from './quantity.service';
@@ -23,9 +22,10 @@ export class QuantityResolver {
     private readonly viewService: QuantityViewService
   ) {}
 
+  @CanRead('Quantity')
   @Query(() => [Quantity])
   readQuantity(
-    @Args('paginator') paginatorDto: PaginatorDto,
+    @Args('paginator') paginatorDto: PaginatorDto<Quantity | QuantityView>,
     @Args('view') viewDto: ViewDto,
     @Args('query') query: QueryDto
   ) {
@@ -40,16 +40,18 @@ export class QuantityResolver {
     return this.service.find(q);
   }
 
+  @CanRead('Quantity')
   @Query(() => Quantity)
   readQuantityById(@Args('id') id: number) {
     return this.service.findOneBy({ id });
   }
-
+  @CanWrite('Quantity')
   @Mutation(() => Quantity)
   writeQuantity(@Args('quantity') body: CreateQuantityDto) {
     return this.service.save(body);
   }
 
+  @CanWrite('Quantity')
   @Mutation(() => Boolean)
   updateQuantity(
     @Args('id') id: number,
@@ -58,11 +60,13 @@ export class QuantityResolver {
     return this.service.update(id, body);
   }
 
+  @CanWrite('Quantity')
   @Mutation(() => Boolean)
   deleteQuantity(@Args('id') id: number) {
     return this.service.delete(id);
   }
 
+  @CanWrite('Quantity')
   @Subscription(() => Quantity)
   onSaveQuantity() {
     return pubSub.asyncIterator('savedQuantity');

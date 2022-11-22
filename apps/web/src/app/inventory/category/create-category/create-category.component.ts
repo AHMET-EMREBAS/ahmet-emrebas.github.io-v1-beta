@@ -1,8 +1,20 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import {
+  Component,
+  OnInit,
+} from '@angular/core';
+import {
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import {
+  ActivatedRoute,
+  Router,
+} from '@angular/router';
 
+import { groupBy } from 'lodash';
 import { InputOptions } from 'material/form';
+import { MessageService as SystemMessageService } from 'primeng/api';
 
 import { CategoryService } from '../category.service';
 
@@ -15,7 +27,7 @@ export class CreateCategoryComponent implements OnInit {
   submitted = false;
   title = 'Create Category';
   formGroup = new FormGroup({
-    name: new FormControl('', [
+    name: new FormControl(undefined, [
       Validators.required,
 
       Validators.minLength(0),
@@ -28,6 +40,7 @@ export class CreateCategoryComponent implements OnInit {
     {
       name: 'name',
       type: 'text',
+      group: 'Category',
       placeholder: 'name',
 
       required: true,
@@ -38,12 +51,14 @@ export class CreateCategoryComponent implements OnInit {
     },
   ];
 
+  groups = Object.entries(groupBy(this.fields, 'group'));
+
   constructor(
     private readonly categoryService: CategoryService,
+    private readonly systemMessageService: SystemMessageService,
     private readonly router: Router,
     private readonly route: ActivatedRoute
   ) {}
-
   ngOnInit(): void {}
 
   submit() {
@@ -52,6 +67,16 @@ export class CreateCategoryComponent implements OnInit {
         this.submitted = true;
         this.categoryService.add({
           name: this.value('name'),
+        });
+      } else {
+        const e = Object.entries(this.formGroup.controls).filter(
+          (e) => e[1].errors
+        )[0];
+
+        this.systemMessageService.add({
+          key: 'resource',
+          severity: 'error',
+          summary: `${e[0]} field is not valid!`,
         });
       }
     }

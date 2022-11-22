@@ -19,7 +19,10 @@ import {
   WhereDto,
 } from 'core/dto';
 
-import { CreateProductDto, UpdateProductDto } from '../../models/product';
+import { CanRead, CanWrite } from '../../auth/decorators';
+
+import { Product, ProductView } from './entity';
+import { CreateProductDto, UpdateProductDto } from './dto';
 
 import { ProductViewService } from './product-view.service';
 import { ProductService } from './product.service';
@@ -31,10 +34,10 @@ export class ProductController {
     private readonly service: ProductService,
     private readonly viewService: ProductViewService
   ) {}
-
+  @CanRead('product')
   @Get()
   readProduct(
-    @Query() paginatorDto: PaginatorDto,
+    @Query() paginatorDto: PaginatorDto<Product | ProductView>,
     @Query() viewDto: ViewDto,
     @Query() whereDto: WhereDto
   ) {
@@ -49,52 +52,64 @@ export class ProductController {
     return this.service.find(q);
   }
 
+  @CanRead('product')
   @Get(':id')
   readProductById(@Param('id') id: number, @Query() view: ViewDto) {
     if (view.view === true) {
-      return this.viewService.findOneBy();
+      return this.viewService.findOneBy({ id });
     }
     return this.service.findOneBy({ id });
   }
 
+  @CanWrite('product')
   @Post()
   writeProduct(@Body() body: CreateProductDto) {
     return this.service.save(body);
   }
 
+  @CanWrite('product')
   @Put(':id')
   updateProduct(@Param('id') id: number, @Body() body: UpdateProductDto) {
     return this.service.update(id, body);
   }
 
+  @CanWrite('product')
   @Delete(':id')
   deleteProduct(@Param('id') id: number) {
     return this.service.delete(id);
   }
 
+  @CanRead('product')
   @Patch()
-  functions(@Query() whereDto: WhereDto, @Query() functions: FunctionsDto) {
+  functionsProduct(
+    @Query() whereDto: WhereDto,
+    @Query() functions: FunctionsDto
+  ) {
     if (functions.query === 'count') {
       return this.viewService.count({ where: whereDto.where });
     }
-    throw new BadRequestException('Must provide a fucntion name.');
+    throw new BadRequestException('Must provide a function name.');
   }
 
+  @CanWrite('product')
   @Post(':id/category/:categoryId')
   setcategoryToProduct(id: number, categoryId: number) {
     return this.service.set(id, categoryId, 'category');
   }
 
+  @CanWrite('product')
   @Post(':id/category')
   unsetcategoryFromProduct(id: number) {
     return this.service.unset(id, 'category');
   }
 
+  @CanWrite('product')
   @Post(':id/department/:departmentId')
   setdepartmentToProduct(id: number, departmentId: number) {
     return this.service.set(id, departmentId, 'department');
   }
 
+  @CanWrite('product')
   @Post(':id/department')
   unsetdepartmentFromProduct(id: number) {
     return this.service.unset(id, 'department');

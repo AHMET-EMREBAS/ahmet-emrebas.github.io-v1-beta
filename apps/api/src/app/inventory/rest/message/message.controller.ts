@@ -19,7 +19,10 @@ import {
   WhereDto,
 } from 'core/dto';
 
-import { CreateMessageDto, UpdateMessageDto } from '../../models/message';
+import { CanRead, CanWrite } from '../../auth/decorators';
+
+import { Message, MessageView } from './entity';
+import { CreateMessageDto, UpdateMessageDto } from './dto';
 
 import { MessageViewService } from './message-view.service';
 import { MessageService } from './message.service';
@@ -31,10 +34,10 @@ export class MessageController {
     private readonly service: MessageService,
     private readonly viewService: MessageViewService
   ) {}
-
+  @CanRead('message')
   @Get()
   readMessage(
-    @Query() paginatorDto: PaginatorDto,
+    @Query() paginatorDto: PaginatorDto<Message | MessageView>,
     @Query() viewDto: ViewDto,
     @Query() whereDto: WhereDto
   ) {
@@ -49,54 +52,66 @@ export class MessageController {
     return this.service.find(q);
   }
 
+  @CanRead('message')
   @Get(':id')
   readMessageById(@Param('id') id: number, @Query() view: ViewDto) {
     if (view.view === true) {
-      return this.viewService.findOneBy();
+      return this.viewService.findOneBy({ id });
     }
     return this.service.findOneBy({ id });
   }
 
+  @CanWrite('message')
   @Post()
   writeMessage(@Body() body: CreateMessageDto) {
     return this.service.save(body);
   }
 
+  @CanWrite('message')
   @Put(':id')
   updateMessage(@Param('id') id: number, @Body() body: UpdateMessageDto) {
     return this.service.update(id, body);
   }
 
+  @CanWrite('message')
   @Delete(':id')
   deleteMessage(@Param('id') id: number) {
     return this.service.delete(id);
   }
 
+  @CanRead('message')
   @Patch()
-  functions(@Query() whereDto: WhereDto, @Query() functions: FunctionsDto) {
+  functionsMessage(
+    @Query() whereDto: WhereDto,
+    @Query() functions: FunctionsDto
+  ) {
     if (functions.query === 'count') {
       return this.viewService.count({ where: whereDto.where });
     }
-    throw new BadRequestException('Must provide a fucntion name.');
+    throw new BadRequestException('Must provide a function name.');
   }
 
-  @Post(':id/to/:toId')
-  settoToMessage(id: number, toId: number) {
-    return this.service.set(id, toId, 'to');
+  @CanWrite('message')
+  @Post(':id/receiver/:receiverId')
+  setreceiverToMessage(id: number, receiverId: number) {
+    return this.service.set(id, receiverId, 'receiver');
   }
 
-  @Post(':id/to')
-  unsettoFromMessage(id: number) {
-    return this.service.unset(id, 'to');
+  @CanWrite('message')
+  @Post(':id/receiver')
+  unsetreceiverFromMessage(id: number) {
+    return this.service.unset(id, 'receiver');
   }
 
-  @Post(':id/from/:fromId')
-  setfromToMessage(id: number, fromId: number) {
-    return this.service.set(id, fromId, 'from');
+  @CanWrite('message')
+  @Post(':id/sender/:senderId')
+  setsenderToMessage(id: number, senderId: number) {
+    return this.service.set(id, senderId, 'sender');
   }
 
-  @Post(':id/from')
-  unsetfromFromMessage(id: number) {
-    return this.service.unset(id, 'from');
+  @CanWrite('message')
+  @Post(':id/sender')
+  unsetsenderFromMessage(id: number) {
+    return this.service.unset(id, 'sender');
   }
 }

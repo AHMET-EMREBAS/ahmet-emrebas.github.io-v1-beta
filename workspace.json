@@ -2,6 +2,8 @@
   "version": 2,
   "projects": {
     "api": "apps/api",
+    "desktop": "apps/desktop",
+    "bootstrap": "libs/bootstrap",
     "common": "libs/common",
     "core": "libs/core",
     "directive": "libs/directive",
@@ -12,7 +14,6 @@
     "messanger": "libs/messanger",
     "nativescript-mobile": "apps/nativescript-mobile",
     "notification": "libs/notification",
-    "util": "libs/util",
     "web": "apps/web",
     "web-e2e": "apps/web-e2e"
   }

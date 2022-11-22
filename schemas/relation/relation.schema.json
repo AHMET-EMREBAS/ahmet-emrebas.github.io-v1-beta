@@ -10,8 +10,15 @@
       "type": "string",
       "$ref": "../names/resource.schema.json"
     },
+    "group": {
+      "type": "string"
+    },
     "name": {
       "type": "string"
+    },
+    "label": {
+      "type": "string",
+      "description": "Which column of the entity is used for html select option label?"
     },
     "joinColumn": {
       "type": "boolean",
@@ -41,5 +48,5 @@
     }
   },
   "additionalProperties": false,
-  "required": ["target", "name", "type"]
+  "required": ["target", "name", "type", "label"]
 }

@@ -4,7 +4,7 @@ import { Repository } from 'typeorm';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 
-import { PricelevelView } from '../../models/pricelevel';
+import { PricelevelView } from './entity';
 
 @Injectable()
 export class PricelevelViewService extends ResourceViewService<PricelevelView> {

@@ -1,9 +1,13 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IReadStore } from 'common/inventory/interfaces';
 import { InputOptions, setFormGroupValue } from 'material/form';
 import { StoreService } from '../store.service';
 import { firstValueFrom } from 'rxjs';
+
+import { MessageService as SystemMessageService } from 'primeng/api';
+
+import { groupBy } from 'lodash';
 
 import { PricelevelService } from '../../pricelevel';
 
@@ -14,12 +18,12 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   templateUrl: './update-store.component.html',
   styleUrls: ['./update-store.component.scss'],
 })
-export class UpdateStoreComponent implements AfterViewInit {
+export class UpdateStoreComponent implements AfterViewInit, OnInit {
   title = 'Update Store';
   private itemToBeUpdated!: Partial<IReadStore>;
 
   formGroup = new FormGroup({
-    name: new FormControl('', [
+    name: new FormControl(undefined, [
       Validators.required,
 
       Validators.minLength(2),
@@ -27,13 +31,14 @@ export class UpdateStoreComponent implements AfterViewInit {
       Validators.maxLength(30),
     ]),
 
-    pricelevel: new FormControl('', []),
+    pricelevel: new FormControl(undefined, []),
   });
 
   fields: InputOptions[] = [
     {
       name: 'name',
       type: 'text',
+      group: 'Store',
       placeholder: 'name',
 
       required: true,
@@ -46,20 +51,26 @@ export class UpdateStoreComponent implements AfterViewInit {
     {
       name: 'pricelevel',
       type: 'select',
-      placeholder: 'pricelevel',
+      group: 'Price Level',
+      placeholder: 'name',
       asyncOptions: this.pricelevelService.entities$,
       optionValue: 'id',
       optionLabel: 'name',
     },
   ];
 
+  groups = Object.entries(groupBy(this.fields, 'group'));
+
   constructor(
     private readonly storeService: StoreService,
     private readonly router: Router,
+    private readonly systemMessageService: SystemMessageService,
     private readonly route: ActivatedRoute,
     private readonly pricelevelService: PricelevelService
-  ) {
-    this.pricelevelService.getAll();
+  ) {}
+
+  ngOnInit(): void {
+    this.pricelevelService.getAsOptions(['id', 'name']);
   }
 
   async ngAfterViewInit() {
@@ -69,7 +80,9 @@ export class UpdateStoreComponent implements AfterViewInit {
         this.storeService.getByKey(__item.id)
       );
       setFormGroupValue(this.formGroup, this.itemToBeUpdated);
+      return;
     }
+    this.router.navigate(['../'], { relativeTo: this.route });
   }
 
   submit() {
@@ -79,7 +92,17 @@ export class UpdateStoreComponent implements AfterViewInit {
 
         name: this.value('name'),
 
-        pricelevel: this.value('pricelevel')?.id,
+        pricelevel: this.value('pricelevel'),
+      });
+    } else {
+      const e = Object.entries(this.formGroup.controls).filter(
+        (e) => e[1].errors
+      )[0];
+
+      this.systemMessageService.add({
+        key: 'resource',
+        severity: 'error',
+        summary: `${e[0]} field is not valid!`,
       });
     }
   }

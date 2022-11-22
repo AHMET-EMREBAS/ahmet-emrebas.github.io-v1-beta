@@ -10,6 +10,7 @@ Properties:
       email: true
     UI:
       type: email
+      group: Username
     Column:
       columnType: text
       valueType: string
@@ -27,6 +28,7 @@ Properties:
       hash: true
     UI:
       type: password
+      group: Password
 
 Relations:
   - type: ManyToMany
@@ -35,11 +37,9 @@ Relations:
     eager: true
     joinTable: true
     nullable: true
+    group: Permissions
     onDelete: CASCADE
-    viewColumns:
-      - column: name
-        as: permission
-        valueType: string
+    label: description
 
 Required:
   - username

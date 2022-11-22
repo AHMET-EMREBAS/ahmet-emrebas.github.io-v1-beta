@@ -3,6 +3,12 @@ import { BaseInterface } from '../../../base';
 export interface IProduct<Category1, Department2> extends BaseInterface {
   name: string;
 
+  price: number;
+
+  cost: number;
+
+  quantity: number;
+
   description: string;
 
   category?: Category1;

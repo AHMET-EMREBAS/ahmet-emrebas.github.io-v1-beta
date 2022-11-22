@@ -8,37 +8,45 @@ import {
 import { FormGroup } from '@angular/forms';
 
 import {
-  map,
   Observable,
   of,
 } from 'rxjs';
 
-export type InputOptions<T = Record<string, any>> = Partial<
-  Omit<HTMLInputElement, 'min' | 'max'> & {
-    options: T[];
-    asyncOptions: Observable<T[]>;
-    optionLabel: string;
-    optionValue: string;
-    min: number;
-    max: number;
-    password: boolean;
-    email: boolean;
-  }
->;
+type IoExtra<T> = {
+  options: T[];
+  asyncOptions: Observable<T[]>;
+  optionLabel: string;
+  optionValue: string;
+  min: number;
+  max: number;
+  password: boolean;
+  email: boolean;
+  group: string;
+};
+
+type IoRequired = {
+  type: string;
+  name: string;
+};
+type IoAttr = Omit<HTMLInputElement, 'min' | 'max'>;
+
+type R = Record<string, any>;
+
+export type InputOptions<T = R> = Partial<IoAttr & IoExtra<T>> & IoRequired;
 @Component({
   selector: 'ae-form',
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.scss'],
 })
 export class FormComponent implements AfterViewInit {
+  defaultValues = {};
+
   @Input() formGroup!: FormGroup;
   @Input() fields!: InputOptions[];
-
+  @Input() submitLabel: string | false = 'Submit';
   @Output() submitEvent = new EventEmitter();
 
   submit() {
-    console.log('[Form Component] submitting');
-
     this.submitEvent.emit();
   }
 
@@ -54,33 +62,20 @@ export class FormComponent implements AfterViewInit {
 
   getOptions(name: string) {
     const found = this.fields.find((e) => e.name === name);
-
-    const common: any = {};
-    if (found?.optionLabel) {
-      common[found.optionLabel] = `Select ${found.name}`;
-    } else if (found?.name) {
-      common[found.name] = `Select ${found.name}`;
-    }
-
-    if (found?.options) {
-      return of([common, ...found.options]);
-    }
-
-    return found?.asyncOptions?.pipe(
-      map((data) => {
-        return [common, ...data];
-      })
-    );
+    return found?.options ? of(found.options) : found?.asyncOptions;
   }
 
-  fieldType(fType: string | undefined) {
+  fieldType(fType: string) {
     if (!fType) {
-      return 'text';
-    }
-    if (fType === 'number') {
-      return 'text';
+      throw new Error('Input type is required!');
     }
 
+    if (fType === 'number') return 'text';
+
     return fType;
+  }
+
+  getFirstError(fieldName: string) {
+    return Object.entries(this.formGroup.get(fieldName)?.errors || {})[0];
   }
 }

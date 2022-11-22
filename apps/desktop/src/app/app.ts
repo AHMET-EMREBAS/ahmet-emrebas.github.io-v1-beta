@@ -1,8 +1,13 @@
-import { BrowserWindow, shell, screen } from 'electron';
-import { rendererAppName, rendererAppPort } from './constants';
-import { environment } from '../environments/environment';
+import {
+  BrowserWindow,
+  screen,
+  shell,
+} from 'electron';
 import { join } from 'path';
 import { format } from 'url';
+
+import { environment } from '../environments/environment';
+import { rendererAppName } from './constants';
 
 export default class App {
   // Keep a global reference of the window object, if you don't, the window will
@@ -22,6 +27,7 @@ export default class App {
   private static onWindowAllClosed() {
     if (process.platform !== 'darwin') {
       App.application.quit();
+      App.application.exit();
     }
   }
 
@@ -66,9 +72,18 @@ export default class App {
       width: width,
       height: height,
       show: false,
+      icon: 'dist/apps/desktop/assets/logo.png',
+      // backgroundColor: '#003399',
+      // opacity: 0.9,
+      title: 'Inventory App',
+
+      titleBarStyle: 'customButtonsOnHover',
+      titleBarOverlay: true,
+      // alwaysOnTop: true,
       webPreferences: {
-        contextIsolation: true,
-        backgroundThrottling: false,
+        // contextIsolation: true,
+        // backgroundThrottling: false,
+        // allowRunningInsecureContent: false,
         preload: join(__dirname, 'main.preload.js'),
       },
     });
@@ -78,6 +93,11 @@ export default class App {
     // if main window is ready to show, close the splash window and show the main window
     App.mainWindow.once('ready-to-show', () => {
       App.mainWindow.show();
+
+      App.mainWindow.webContents.openDevTools({
+        mode: 'detach',
+        activate: true,
+      });
     });
 
     // handle all external redirects in a new browser window
@@ -98,8 +118,21 @@ export default class App {
   private static loadMainWindow() {
     // load the index.html of the app.
     if (!App.application.isPackaged) {
-      App.mainWindow.loadURL(`http://localhost:${rendererAppPort}`);
+      console.log('[loadMainWindow] Rendering from URL');
+      // App.mainWindow.loadURL(`http://localhost:${rendererAppPort}`);
+      // App.mainWindow.loadURL(
+      //   format({
+      //     pathname: join(__dirname, '..', rendererAppName, 'index.html'),
+      //     protocol: 'file:',
+      //     slashes: true,
+      //   })
+      // );
+
+      App.mainWindow.loadFile(
+        join(__dirname, '..', rendererAppName, 'index.html')
+      );
     } else {
+      console.log('[loadMainWindow] Rendering from file');
       App.mainWindow.loadURL(
         format({
           pathname: join(__dirname, '..', rendererAppName, 'index.html'),

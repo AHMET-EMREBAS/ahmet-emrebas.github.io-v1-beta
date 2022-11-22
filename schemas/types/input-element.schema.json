@@ -4,7 +4,6 @@
   "description": "Input element type for the property. Ex. select, input, textarea, checkbox etc.",
   "type": "string",
   "enum": [
-    "button",
     "checkbox",
     "color",
     "date",
@@ -27,6 +26,8 @@
     "url",
     "week",
     "textarea",
-    "select"
+    "select",
+    "currency",
+    "select-many"
   ]
 }

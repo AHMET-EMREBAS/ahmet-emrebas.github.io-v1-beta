@@ -57,13 +57,13 @@ export class ViewPriceComponent implements AfterViewInit {
     },
 
     {
-      header: 'barcode',
-      field: 'barcode',
+      header: 'sku',
+      field: 'sku',
     },
 
     {
-      header: 'sku',
-      field: 'sku',
+      header: 'barcode',
+      field: 'barcode',
     },
 
     {

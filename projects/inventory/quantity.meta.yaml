@@ -12,10 +12,44 @@ Properties:
 
     Column:
       columnType: int
+      default: 0
       valueType: number
 
     UI:
       type: number
+      group: Quantity
+
+Relations:
+  - type: ManyToOne
+    target: Sku
+    name: sku
+    eager: true
+    nullable: true
+    joinColumn: true
+    onDelete: CASCADE
+    label: name
+    group: Meta
+    viewColumns:
+      - column: name
+        as: sku
+        valueType: string
+
+      - column: barcode
+        as: barcode
+        valueType: string
+
+  - type: ManyToOne
+    target: Store
+    name: store
+    eager: true
+    group: Meta
+    label: name
+    joinColumn: true
+    onDelete: CASCADE
+    viewColumns:
+      - column: name
+        as: store
+        valueType: string
 
 SearchFields:
   - quantity
@@ -26,26 +60,3 @@ Required:
   - quantity
   - sku
   - store
-
-Relations:
-  - type: ManyToOne
-    target: Sku
-    name: sku
-    eager: true
-    joinColumn: true
-    onDelete: CASCADE
-    viewColumns:
-      - column: name
-        as: sku
-        valueType: string
-
-  - type: ManyToOne
-    target: Store
-    name: store
-    eager: true
-    joinColumn: true
-    onDelete: SET NULL
-    viewColumns:
-      - column: name
-        as: store
-        valueType: string

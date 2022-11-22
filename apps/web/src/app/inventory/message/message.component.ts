@@ -24,6 +24,7 @@ export class MessageComponent implements OnInit, OnDestroy {
     this.sub = this.resourceService.entityActions$.subscribe((event) => {
       if (event.type.endsWith('add-one/success')) {
         this.prmMessageService.add({
+          key: 'resource',
           severity: 'success',
           summary: 'Created',
         });
@@ -32,6 +33,7 @@ export class MessageComponent implements OnInit, OnDestroy {
 
       if (event.type.endsWith('delete-one/success')) {
         this.prmMessageService.add({
+          key: 'resource',
           severity: 'success',
           summary: 'Deleted',
         });
@@ -40,6 +42,7 @@ export class MessageComponent implements OnInit, OnDestroy {
 
       if (event.type.endsWith('update-one/success')) {
         this.prmMessageService.add({
+          key: 'resource',
           severity: 'success',
           summary: 'Updated',
         });
@@ -48,6 +51,7 @@ export class MessageComponent implements OnInit, OnDestroy {
 
       if (event.type.endsWith('add-one/error')) {
         this.prmMessageService.add({
+          key: 'resource',
           severity: 'error',
           summary: 'Not Created',
         });
@@ -56,6 +60,7 @@ export class MessageComponent implements OnInit, OnDestroy {
 
       if (event.type.endsWith('delete-one/error')) {
         this.prmMessageService.add({
+          key: 'resource',
           severity: 'error',
           summary: 'Not Deleted',
         });
@@ -64,6 +69,7 @@ export class MessageComponent implements OnInit, OnDestroy {
 
       if (event.type.endsWith('update-one/error')) {
         this.prmMessageService.add({
+          key: 'resource',
           severity: 'error',
           summary: 'Not Updated',
         });

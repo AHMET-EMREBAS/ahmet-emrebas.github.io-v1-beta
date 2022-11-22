@@ -32,6 +32,31 @@
       "factory": "./src/generators/client/generator",
       "schema": "./src/generators/client/schema.json",
       "description": "client generator"
+    },
+    "publish": {
+      "factory": "./src/generators/publish/generator",
+      "schema": "./src/generators/publish/schema.json",
+      "description": "publish generator"
+    },
+    "deploy": {
+      "factory": "./src/generators/deploy/generator",
+      "schema": "./src/generators/deploy/schema.json",
+      "description": "deploy generator"
+    },
+    "build": {
+      "factory": "./src/generators/build/generator",
+      "schema": "./src/generators/build/schema.json",
+      "description": "build generator"
+    },
+    "api": {
+      "factory": "./src/generators/api/generator",
+      "schema": "./src/generators/api/schema.json",
+      "description": "api generator"
+    },
+    "web": {
+      "factory": "./src/generators/web/generator",
+      "schema": "./src/generators/web/schema.json",
+      "description": "web generator"
     }
   }
 }

@@ -4,7 +4,7 @@ import { Repository } from 'typeorm';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 
-import { MessageView } from '../../models/message';
+import { MessageView } from './entity';
 
 @Injectable()
 export class MessageViewService extends ResourceViewService<MessageView> {

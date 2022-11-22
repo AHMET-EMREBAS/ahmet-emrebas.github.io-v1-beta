@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-
+import { PermissionGuard } from '../../auth';
 import { CreateDepartmentComponent } from './create-department/';
 import { DeleteDepartmentComponent } from './delete-department/';
 import { DepartmentComponent } from './department.component';
@@ -10,6 +10,8 @@ import { UpdateDepartmentComponent } from './update-department/';
 import { ViewDepartmentComponent } from './view-department';
 
 import { SharedResourceModule } from 'material/resource';
+
+import { MatStepperModule } from '@angular/material/stepper';
 
 @NgModule({
   declarations: [
@@ -22,6 +24,7 @@ import { SharedResourceModule } from 'material/resource';
   imports: [
     CommonModule,
     SharedResourceModule,
+    MatStepperModule,
     RouterModule.forChild([
       {
         path: '',
@@ -31,21 +34,37 @@ import { SharedResourceModule } from 'material/resource';
             title: 'View Department',
             path: '',
             component: ViewDepartmentComponent,
+            data: {
+              permission: 'READ:DEPARTMENT',
+            },
+            canActivate: [PermissionGuard],
           },
           {
             title: 'Create Department',
             path: 'create',
             component: CreateDepartmentComponent,
+            data: {
+              permission: 'WRITE:DEPARTMENT',
+            },
+            canActivate: [PermissionGuard],
           },
           {
             title: 'Update Department',
             path: 'update',
             component: UpdateDepartmentComponent,
+            data: {
+              permission: 'WRITE:DEPARTMENT',
+            },
+            canActivate: [PermissionGuard],
           },
           {
             title: 'Delete Department',
             path: 'delete',
             component: DeleteDepartmentComponent,
+            data: {
+              permission: 'WRITE:DEPARTMENT',
+            },
+            canActivate: [PermissionGuard],
           },
         ],
       },

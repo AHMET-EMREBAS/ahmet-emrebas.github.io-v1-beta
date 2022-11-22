@@ -21,3 +21,19 @@ input[type=radio] {
     width: 30px;
     height: 30px;
 }
+
+
+.hidden-input {
+    opacity: 0;
+    position: absolute;
+    z-index: -2987349;
+
+}
+
+.form-style {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding: 5px;
+    padding-bottom: 200px;
+}

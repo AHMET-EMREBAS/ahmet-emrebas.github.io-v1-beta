@@ -4,12 +4,11 @@ import { ILike } from 'typeorm';
 
 import { Args, Mutation, Query, Resolver, Subscription } from '@nestjs/graphql';
 
-import {
-  Store,
-  StoreView,
-  CreateStoreDto,
-  UpdateStoreDto,
-} from '../../models/store';
+import { CanRead, CanWrite } from '../../auth/decorators';
+
+import { Store, StoreView } from './entity';
+
+import { CreateStoreDto, UpdateStoreDto } from './dto';
 
 import { StoreViewService } from './store-view.service';
 import { StoreService } from './store.service';
@@ -23,9 +22,10 @@ export class StoreResolver {
     private readonly viewService: StoreViewService
   ) {}
 
+  @CanRead('Store')
   @Query(() => [Store])
   readStore(
-    @Args('paginator') paginatorDto: PaginatorDto,
+    @Args('paginator') paginatorDto: PaginatorDto<Store | StoreView>,
     @Args('view') viewDto: ViewDto,
     @Args('query') query: QueryDto
   ) {
@@ -40,26 +40,30 @@ export class StoreResolver {
     return this.service.find(q);
   }
 
+  @CanRead('Store')
   @Query(() => Store)
   readStoreById(@Args('id') id: number) {
     return this.service.findOneBy({ id });
   }
-
+  @CanWrite('Store')
   @Mutation(() => Store)
   writeStore(@Args('store') body: CreateStoreDto) {
     return this.service.save(body);
   }
 
+  @CanWrite('Store')
   @Mutation(() => Boolean)
   updateStore(@Args('id') id: number, @Args('store') body: UpdateStoreDto) {
     return this.service.update(id, body);
   }
 
+  @CanWrite('Store')
   @Mutation(() => Boolean)
   deleteStore(@Args('id') id: number) {
     return this.service.delete(id);
   }
 
+  @CanWrite('Store')
   @Subscription(() => Store)
   onSaveStore() {
     return pubSub.asyncIterator('savedStore');

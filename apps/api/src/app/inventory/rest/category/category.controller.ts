@@ -19,7 +19,10 @@ import {
   WhereDto,
 } from 'core/dto';
 
-import { CreateCategoryDto, UpdateCategoryDto } from '../../models/category';
+import { CanRead, CanWrite } from '../../auth/decorators';
+
+import { Category, CategoryView } from './entity';
+import { CreateCategoryDto, UpdateCategoryDto } from './dto';
 
 import { CategoryViewService } from './category-view.service';
 import { CategoryService } from './category.service';
@@ -31,10 +34,10 @@ export class CategoryController {
     private readonly service: CategoryService,
     private readonly viewService: CategoryViewService
   ) {}
-
+  @CanRead('category')
   @Get()
   readCategory(
-    @Query() paginatorDto: PaginatorDto,
+    @Query() paginatorDto: PaginatorDto<Category | CategoryView>,
     @Query() viewDto: ViewDto,
     @Query() whereDto: WhereDto
   ) {
@@ -49,34 +52,42 @@ export class CategoryController {
     return this.service.find(q);
   }
 
+  @CanRead('category')
   @Get(':id')
   readCategoryById(@Param('id') id: number, @Query() view: ViewDto) {
     if (view.view === true) {
-      return this.viewService.findOneBy();
+      return this.viewService.findOneBy({ id });
     }
     return this.service.findOneBy({ id });
   }
 
+  @CanWrite('category')
   @Post()
   writeCategory(@Body() body: CreateCategoryDto) {
     return this.service.save(body);
   }
 
+  @CanWrite('category')
   @Put(':id')
   updateCategory(@Param('id') id: number, @Body() body: UpdateCategoryDto) {
     return this.service.update(id, body);
   }
 
+  @CanWrite('category')
   @Delete(':id')
   deleteCategory(@Param('id') id: number) {
     return this.service.delete(id);
   }
 
+  @CanRead('category')
   @Patch()
-  functions(@Query() whereDto: WhereDto, @Query() functions: FunctionsDto) {
+  functionsCategory(
+    @Query() whereDto: WhereDto,
+    @Query() functions: FunctionsDto
+  ) {
     if (functions.query === 'count') {
       return this.viewService.count({ where: whereDto.where });
     }
-    throw new BadRequestException('Must provide a fucntion name.');
+    throw new BadRequestException('Must provide a function name.');
   }
 }

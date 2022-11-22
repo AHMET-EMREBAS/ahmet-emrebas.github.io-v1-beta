@@ -1,0 +1,22 @@
+{
+  "root": "libs/bootstrap",
+  "sourceRoot": "libs/bootstrap/src",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/bootstrap/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/bootstrap"],
+      "options": {
+        "jestConfig": "libs/bootstrap/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

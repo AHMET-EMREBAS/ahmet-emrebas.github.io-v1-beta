@@ -16,6 +16,22 @@ Properties:
 
     UI:
       type: text
+      group: Store
+
+Relations:
+  - type: ManyToOne
+    target: Pricelevel
+    name: pricelevel
+    eager: true
+    group: Price Level
+    nullable: true
+    onDelete: SET NULL
+    joinColumn: true
+    label: name
+    viewColumns:
+      - column: name
+        as: pricelevel
+        valueType: string
 
 SearchFields:
   - name
@@ -25,15 +41,3 @@ Required:
 
 Unique:
   - name
-
-Relations:
-  - type: ManyToOne
-    target: Pricelevel
-    name: pricelevel
-    eager: true
-    nullable: true
-    joinColumn: true
-    viewColumns:
-      - column: name
-        as: pricelevel
-        valueType: string

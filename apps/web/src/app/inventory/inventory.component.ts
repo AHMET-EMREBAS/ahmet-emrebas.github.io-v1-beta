@@ -12,7 +12,10 @@ export class InventoryComponent {
     {
       label: 'Product',
       items: [
-        { label: 'Product', routerLink: ['product'] },
+        {
+          label: 'Product',
+          routerLink: ['product'],
+        },
         { label: 'Sku', routerLink: ['sku'] },
         { separator: true },
         { label: 'Category', routerLink: ['category'] },

@@ -8,7 +8,7 @@
       "executor": "@angular-devkit/build-angular:browser",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "docs",
+        "outputPath": "dist/apps/web",
         "index": "apps/web/src/index.html",
         "main": "apps/web/src/main.ts",
         "polyfills": "apps/web/src/polyfills.ts",
@@ -17,7 +17,8 @@
         "assets": [
           "apps/web/src/favicon.ico",
           "apps/web/src/assets",
-          "apps/web/src/manifest.webmanifest"
+          "apps/web/src/manifest.webmanifest",
+          "apps/web/src/main.preload.js.map"
         ],
         "styles": [
           "apps/web/src/styles.scss",

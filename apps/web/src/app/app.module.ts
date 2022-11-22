@@ -1,16 +1,8 @@
 import {
   HTTP_INTERCEPTORS,
   HttpClientModule,
-  HttpEvent,
-  HttpHandler,
-  HttpInterceptor,
-  HttpRequest,
 } from '@angular/common/http';
-import {
-  Inject,
-  Injectable,
-  NgModule,
-} from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
@@ -21,74 +13,40 @@ import {
 import { ServiceWorkerModule } from '@angular/service-worker';
 
 import { LayoutModule } from 'layout';
-import { Observable } from 'rxjs';
 
 import {
-  DefaultHttpUrlGenerator,
   EntityDataModule,
   HttpUrlGenerator,
-  Pluralizer,
 } from '@ngrx/data';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
 import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
+import {
+  BASE_URL_TOKEN,
+  BASE_URL_VALUE,
+} from './app.config';
 import { entityDataModuleConfig } from './app.ngrx';
-import { UserService } from './inventory/user';
-
-const BASE_API_URL = 'BASE_API_URL';
-const BASE_URL_VALUE = 'http://localhost:3333';
-
-@Injectable()
-export class NgrxHttpUrlGenerator extends DefaultHttpUrlGenerator {
-  constructor(
-    @Inject(BASE_API_URL) public readonly baseURL: string,
-    private pluralizer0: Pluralizer
-  ) {
-    super(pluralizer0);
-  }
-
-  override entityResource(
-    entityName: string,
-    root: string,
-    trailingSlashEndpoints: boolean
-  ): string {
-    return `${this.baseURL}/api/${entityName.toLowerCase()}/`;
-  }
-
-  override collectionResource(entityName: string, root: string): string {
-    return `${this.baseURL}/api/${entityName.toLowerCase()}`;
-  }
-}
-
-@Injectable()
-export class BaseUrlInterceptor implements HttpInterceptor {
-  constructor(@Inject(BASE_API_URL) private baseUrl: string) {}
-
-  intercept(
-    request: HttpRequest<any>,
-    next: HttpHandler
-  ): Observable<HttpEvent<any>> {
-    const apiReq = request.clone({ url: `${this.baseUrl}/${request.url}` });
-
-    if (request.url.includes('http://') || request.url.includes('https://')) {
-      return next.handle(request);
-    }
-
-    if (request.url.includes('api')) {
-      return next.handle(apiReq);
-    }
-
-    return next.handle(request);
-  }
-}
+import {
+  AuthComponent,
+  AuthModule,
+} from './auth';
+import {
+  BaseUrlInterceptor,
+  NgrxURLInterceptor,
+} from './interceptors';
 
 const routes: Routes = [
   {
     title: 'Home',
     path: '',
     children: [
+      {
+        title: 'Login',
+        path: '',
+        component: AuthComponent,
+      },
       {
         title: 'Inventory',
         path: 'inventory',
@@ -117,6 +75,7 @@ const routes: Routes = [
     BrowserAnimationsModule,
     HttpClientModule,
     LayoutModule,
+    AuthModule,
     StoreModule.forRoot({}, {}),
     EffectsModule.forRoot([]),
     EntityDataModule.forRoot({ ...entityDataModuleConfig }),
@@ -131,7 +90,7 @@ const routes: Routes = [
       initialNavigation: 'enabledNonBlocking',
     }),
     ServiceWorkerModule.register('ngsw-worker.js', {
-      enabled: environment.production,
+      enabled: (window as any).electron ? false : environment.production,
       // Register the ServiceWorker as soon as the application is stable
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000',
@@ -140,10 +99,10 @@ const routes: Routes = [
   bootstrap: [AppComponent],
   providers: [
     {
-      provide: BASE_API_URL,
+      provide: BASE_URL_TOKEN,
       useValue: BASE_URL_VALUE,
     },
-    NgrxHttpUrlGenerator,
+    NgrxURLInterceptor,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: BaseUrlInterceptor,
@@ -151,12 +110,8 @@ const routes: Routes = [
     },
     {
       provide: HttpUrlGenerator,
-      useClass: NgrxHttpUrlGenerator,
+      useClass: NgrxURLInterceptor,
     },
   ],
 })
-export class AppModule {
-  constructor(private readonly userService: UserService) {
-    this.userService.entities$.subscribe(console.log);
-  }
-}
+export class AppModule {}

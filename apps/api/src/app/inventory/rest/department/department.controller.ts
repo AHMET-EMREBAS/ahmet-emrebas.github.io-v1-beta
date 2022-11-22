@@ -19,10 +19,10 @@ import {
   WhereDto,
 } from 'core/dto';
 
-import {
-  CreateDepartmentDto,
-  UpdateDepartmentDto,
-} from '../../models/department';
+import { CanRead, CanWrite } from '../../auth/decorators';
+
+import { Department, DepartmentView } from './entity';
+import { CreateDepartmentDto, UpdateDepartmentDto } from './dto';
 
 import { DepartmentViewService } from './department-view.service';
 import { DepartmentService } from './department.service';
@@ -34,10 +34,10 @@ export class DepartmentController {
     private readonly service: DepartmentService,
     private readonly viewService: DepartmentViewService
   ) {}
-
+  @CanRead('department')
   @Get()
   readDepartment(
-    @Query() paginatorDto: PaginatorDto,
+    @Query() paginatorDto: PaginatorDto<Department | DepartmentView>,
     @Query() viewDto: ViewDto,
     @Query() whereDto: WhereDto
   ) {
@@ -52,34 +52,42 @@ export class DepartmentController {
     return this.service.find(q);
   }
 
+  @CanRead('department')
   @Get(':id')
   readDepartmentById(@Param('id') id: number, @Query() view: ViewDto) {
     if (view.view === true) {
-      return this.viewService.findOneBy();
+      return this.viewService.findOneBy({ id });
     }
     return this.service.findOneBy({ id });
   }
 
+  @CanWrite('department')
   @Post()
   writeDepartment(@Body() body: CreateDepartmentDto) {
     return this.service.save(body);
   }
 
+  @CanWrite('department')
   @Put(':id')
   updateDepartment(@Param('id') id: number, @Body() body: UpdateDepartmentDto) {
     return this.service.update(id, body);
   }
 
+  @CanWrite('department')
   @Delete(':id')
   deleteDepartment(@Param('id') id: number) {
     return this.service.delete(id);
   }
 
+  @CanRead('department')
   @Patch()
-  functions(@Query() whereDto: WhereDto, @Query() functions: FunctionsDto) {
+  functionsDepartment(
+    @Query() whereDto: WhereDto,
+    @Query() functions: FunctionsDto
+  ) {
     if (functions.query === 'count') {
       return this.viewService.count({ where: whereDto.where });
     }
-    throw new BadRequestException('Must provide a fucntion name.');
+    throw new BadRequestException('Must provide a function name.');
   }
 }

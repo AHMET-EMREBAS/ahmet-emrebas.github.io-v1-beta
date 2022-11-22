@@ -67,6 +67,8 @@
     "permissions",
     "roles",
     "due",
-    "status"
+    "status",
+    "title",
+    "subject"
   ]
 }

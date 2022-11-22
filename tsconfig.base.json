@@ -8,13 +8,14 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "importHelpers": true,
-    "target": "es2015",
+    "target": "ES2017",
     "module": "esnext",
-    "lib": ["es2017", "dom"],
+    "lib": ["ES2017", "DOM"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "bootstrap": ["libs/bootstrap/src/index.ts"],
       "common/*": ["libs/common/src/lib/*"],
       "core/*": ["libs/core/src/lib/*"],
       "directive": ["libs/directive/src/index.ts"],
@@ -22,8 +23,7 @@
       "layout": ["libs/layout/src/index.ts"],
       "material/*": ["libs/material/src/lib/*"],
       "messanger": ["libs/messanger/src/index.ts"],
-      "notification": ["libs/notification/src/index.ts"],
-      "util/*": ["libs/util/src/lib/*"]
+      "notification": ["libs/notification/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

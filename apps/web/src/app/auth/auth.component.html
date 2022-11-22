@@ -1,0 +1,66 @@
+<div class="flex flex-column w-full h-full gap-4 justify-content-center align-items-center">
+
+
+    <mat-stepper #stepper>
+
+        <mat-step [label]="'Login'">
+            <form class="flex flex-column gap-3 p-4" [formGroup]="loginForm" [noValidate]="false"
+                (submit)="submitLoginForm()">
+
+                <div class="flex flex-column ">
+                    <label for="username"> Username</label>
+                    <input id="username" pInputText type="email" formControlName="username" required
+                        autocomplete="username">
+                </div>
+
+                <div class="flex flex-column ">
+                    <label for="password"> Password</label>
+                    <input id="password" pInputText type="password" formControlName="password" required
+                        autocomplete="current-password">
+                </div>
+
+
+                <div class="flex flex-column gap-2">
+
+                    <button pButton type="submit" [label]="'Login'"> </button>
+
+                    <button class="p-button-secondary" type="button" styleClass="p-button-secondary" pButton
+                        [label]="'Forgot Password'" (click)="forgotPassword(); stepper.next()">
+                    </button>
+
+                </div>
+
+            </form>
+        </mat-step>
+
+        <mat-step [label]="'Reset Password'">
+            <form class="flex flex-column gap-3 p-4" [formGroup]="resetPasswordForm" [noValidate]="false"
+                (submit)="submitResetPasswordForm()">
+
+                <div class="flex flex-column ">
+                    <label for="u-username"> Username</label>
+                    <input id="u-username" pInputText type="email" formControlName="username" required
+                        autocomplete="username">
+                </div>
+
+
+                <div class="flex flex-column ">
+                    <label for="new-password"> New Password </label>
+                    <input id="new-password" pInputText type="password" formControlName="newPassword" required
+                        autocomplete="new-password">
+                </div>
+
+                <div class="flex flex-column ">
+                    <label for="code"> Security Code </label>
+                    <input id="code" pInputText type="text" formControlName="code" required>
+                </div>
+
+                <button pButton type="submit" [label]="'Reset Password'"> </button>
+
+            </form>
+        </mat-step>
+    </mat-stepper>
+    <span>
+        <i>{{serverResponse?.message }} </i>
+    </span>
+</div>

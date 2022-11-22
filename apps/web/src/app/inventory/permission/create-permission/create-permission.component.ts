@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { MessageService as SystemMessageService } from 'primeng/api';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-
+import { groupBy } from 'lodash';
 import { InputOptions } from 'material/form';
 
 import { PermissionService } from '../permission.service';
@@ -15,7 +16,7 @@ export class CreatePermissionComponent implements OnInit {
   submitted = false;
   title = 'Create Permission';
   formGroup = new FormGroup({
-    name: new FormControl('', [
+    name: new FormControl(undefined, [
       Validators.required,
 
       Validators.minLength(3),
@@ -23,7 +24,7 @@ export class CreatePermissionComponent implements OnInit {
       Validators.maxLength(20),
     ]),
 
-    description: new FormControl('', [
+    description: new FormControl(undefined, [
       Validators.minLength(0),
 
       Validators.maxLength(50),
@@ -34,6 +35,7 @@ export class CreatePermissionComponent implements OnInit {
     {
       name: 'name',
       type: 'text',
+      group: 'Permission',
       placeholder: 'name',
 
       required: true,
@@ -46,6 +48,7 @@ export class CreatePermissionComponent implements OnInit {
     {
       name: 'description',
       type: 'text',
+      group: 'Permission',
       placeholder: 'description',
 
       minLength: 0,
@@ -54,8 +57,11 @@ export class CreatePermissionComponent implements OnInit {
     },
   ];
 
+  groups = Object.entries(groupBy(this.fields, 'group'));
+
   constructor(
     private readonly permissionService: PermissionService,
+    private readonly systemMessageService: SystemMessageService,
     private readonly router: Router,
     private readonly route: ActivatedRoute
   ) {}
@@ -70,6 +76,16 @@ export class CreatePermissionComponent implements OnInit {
           name: this.value('name'),
 
           description: this.value('description'),
+        });
+      } else {
+        const e = Object.entries(this.formGroup.controls).filter(
+          (e) => e[1].errors
+        )[0];
+
+        this.systemMessageService.add({
+          key: 'resource',
+          severity: 'error',
+          summary: `${e[0]} field is not valid!`,
         });
       }
     }

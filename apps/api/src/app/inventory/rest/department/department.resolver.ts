@@ -4,12 +4,11 @@ import { ILike } from 'typeorm';
 
 import { Args, Mutation, Query, Resolver, Subscription } from '@nestjs/graphql';
 
-import {
-  Department,
-  DepartmentView,
-  CreateDepartmentDto,
-  UpdateDepartmentDto,
-} from '../../models/department';
+import { CanRead, CanWrite } from '../../auth/decorators';
+
+import { Department, DepartmentView } from './entity';
+
+import { CreateDepartmentDto, UpdateDepartmentDto } from './dto';
 
 import { DepartmentViewService } from './department-view.service';
 import { DepartmentService } from './department.service';
@@ -23,9 +22,10 @@ export class DepartmentResolver {
     private readonly viewService: DepartmentViewService
   ) {}
 
+  @CanRead('Department')
   @Query(() => [Department])
   readDepartment(
-    @Args('paginator') paginatorDto: PaginatorDto,
+    @Args('paginator') paginatorDto: PaginatorDto<Department | DepartmentView>,
     @Args('view') viewDto: ViewDto,
     @Args('query') query: QueryDto
   ) {
@@ -40,16 +40,18 @@ export class DepartmentResolver {
     return this.service.find(q);
   }
 
+  @CanRead('Department')
   @Query(() => Department)
   readDepartmentById(@Args('id') id: number) {
     return this.service.findOneBy({ id });
   }
-
+  @CanWrite('Department')
   @Mutation(() => Department)
   writeDepartment(@Args('department') body: CreateDepartmentDto) {
     return this.service.save(body);
   }
 
+  @CanWrite('Department')
   @Mutation(() => Boolean)
   updateDepartment(
     @Args('id') id: number,
@@ -58,11 +60,13 @@ export class DepartmentResolver {
     return this.service.update(id, body);
   }
 
+  @CanWrite('Department')
   @Mutation(() => Boolean)
   deleteDepartment(@Args('id') id: number) {
     return this.service.delete(id);
   }
 
+  @CanWrite('Department')
   @Subscription(() => Department)
   onSaveDepartment() {
     return pubSub.asyncIterator('savedDepartment');

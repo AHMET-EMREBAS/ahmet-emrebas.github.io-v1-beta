@@ -19,7 +19,10 @@ import {
   WhereDto,
 } from 'core/dto';
 
-import { CreateUserDto, UpdateUserDto } from '../../models/user';
+import { CanRead, CanWrite } from '../../auth/decorators';
+
+import { User, UserView } from './entity';
+import { CreateUserDto, UpdateUserDto } from './dto';
 
 import { UserViewService } from './user-view.service';
 import { UserService } from './user.service';
@@ -31,10 +34,10 @@ export class UserController {
     private readonly service: UserService,
     private readonly viewService: UserViewService
   ) {}
-
+  @CanRead('user')
   @Get()
   readUser(
-    @Query() paginatorDto: PaginatorDto,
+    @Query() paginatorDto: PaginatorDto<User | UserView>,
     @Query() viewDto: ViewDto,
     @Query() whereDto: WhereDto
   ) {
@@ -49,44 +52,51 @@ export class UserController {
     return this.service.find(q);
   }
 
+  @CanRead('user')
   @Get(':id')
   readUserById(@Param('id') id: number, @Query() view: ViewDto) {
     if (view.view === true) {
-      return this.viewService.findOneBy();
+      return this.viewService.findOneBy({ id });
     }
     return this.service.findOneBy({ id });
   }
 
+  @CanWrite('user')
   @Post()
   writeUser(@Body() body: CreateUserDto) {
     return this.service.save(body);
   }
 
+  @CanWrite('user')
   @Put(':id')
   updateUser(@Param('id') id: number, @Body() body: UpdateUserDto) {
     return this.service.update(id, body);
   }
 
+  @CanWrite('user')
   @Delete(':id')
   deleteUser(@Param('id') id: number) {
     return this.service.delete(id);
   }
 
+  @CanRead('user')
   @Patch()
-  functions(@Query() whereDto: WhereDto, @Query() functions: FunctionsDto) {
+  functionsUser(@Query() whereDto: WhereDto, @Query() functions: FunctionsDto) {
     if (functions.query === 'count') {
       return this.viewService.count({ where: whereDto.where });
     }
-    throw new BadRequestException('Must provide a fucntion name.');
+    throw new BadRequestException('Must provide a function name.');
   }
 
-  @Post(':id//:rid')
+  @CanWrite('user')
+  @Post(':id/permission/:rid')
   addpermissionToUser(id: number, rid: number) {
-    return this.service.add(id, rid, '');
+    return this.service.add(id, rid, 'permission');
   }
 
-  @Post(':id//:rid')
+  @CanWrite('user')
+  @Post(':id/permission/:rid')
   removepermissionFromUser(id: number, rid: number) {
-    return this.service.remove(id, rid, '');
+    return this.service.remove(id, rid, 'permission');
   }
 }

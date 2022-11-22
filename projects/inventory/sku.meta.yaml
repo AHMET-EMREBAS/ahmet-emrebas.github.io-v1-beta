@@ -12,6 +12,7 @@ Properties:
       valueType: string
     UI:
       type: text
+      group: Sku
     Defination:
       random: alpha
 
@@ -26,6 +27,7 @@ Properties:
       valueType: string
     UI:
       type: text
+      group: Sku
     Defination:
       random: alphaNumeric
 
@@ -42,14 +44,17 @@ Properties:
       valueType: string
     UI:
       type: textarea
+      group: Sku
 
 Relations:
   - type: ManyToOne
     target: Product
     name: product
     eager: true
+    group: Product
     joinColumn: true
     onDelete: CASCADE
+    label: name
     viewColumns:
       - column: name
         as: product

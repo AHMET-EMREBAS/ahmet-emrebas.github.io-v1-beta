@@ -4,3 +4,5 @@ export * from './product.controller';
 export * from './product.module';
 export * from './product.resolver';
 export * from './product.subscriber';
+export * from './entity';
+export * from './dto';

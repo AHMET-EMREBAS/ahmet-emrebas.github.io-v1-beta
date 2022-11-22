@@ -4,7 +4,7 @@ import { Repository } from 'typeorm';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 
-import { Sku } from '../../models/sku';
+import { Sku } from './entity';
 
 @Injectable()
 export class SkuService extends ResourceService<Sku> {

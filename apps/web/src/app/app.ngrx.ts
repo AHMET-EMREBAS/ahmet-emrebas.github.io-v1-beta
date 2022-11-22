@@ -3,13 +3,14 @@ import {
   EntityMetadata,
 } from '@ngrx/data';
 
+/**
+ * Sometimes response data contains items with the same id.
+ * The NgRX dataservice group items by id, and show only one of them.
+ * For such a data set, the server sets index number for each item.
+ * So index property is set as primary identifier of the items.
+ */
 const defaultMetaData: Partial<EntityMetadata> = {
-  sortComparer: (a, b) => 100,
-  selectId: (item: any) => {
-    // While reading the data, item.index is used,
-    // Whiel writing the item.index is nulled, and actual item id is used.
-    return item.index || item.id;
-  },
+  selectId: (item) => item.index || item.id,
 };
 export const entityDataModuleConfig: EntityDataModuleConfig = {
   pluralNames: {

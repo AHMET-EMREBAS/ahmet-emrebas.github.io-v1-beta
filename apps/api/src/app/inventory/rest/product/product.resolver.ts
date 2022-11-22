@@ -4,12 +4,11 @@ import { ILike } from 'typeorm';
 
 import { Args, Mutation, Query, Resolver, Subscription } from '@nestjs/graphql';
 
-import {
-  Product,
-  ProductView,
-  CreateProductDto,
-  UpdateProductDto,
-} from '../../models/product';
+import { CanRead, CanWrite } from '../../auth/decorators';
+
+import { Product, ProductView } from './entity';
+
+import { CreateProductDto, UpdateProductDto } from './dto';
 
 import { ProductViewService } from './product-view.service';
 import { ProductService } from './product.service';
@@ -23,9 +22,10 @@ export class ProductResolver {
     private readonly viewService: ProductViewService
   ) {}
 
+  @CanRead('Product')
   @Query(() => [Product])
   readProduct(
-    @Args('paginator') paginatorDto: PaginatorDto,
+    @Args('paginator') paginatorDto: PaginatorDto<Product | ProductView>,
     @Args('view') viewDto: ViewDto,
     @Args('query') query: QueryDto
   ) {
@@ -47,16 +47,18 @@ export class ProductResolver {
     return this.service.find(q);
   }
 
+  @CanRead('Product')
   @Query(() => Product)
   readProductById(@Args('id') id: number) {
     return this.service.findOneBy({ id });
   }
-
+  @CanWrite('Product')
   @Mutation(() => Product)
   writeProduct(@Args('product') body: CreateProductDto) {
     return this.service.save(body);
   }
 
+  @CanWrite('Product')
   @Mutation(() => Boolean)
   updateProduct(
     @Args('id') id: number,
@@ -65,11 +67,13 @@ export class ProductResolver {
     return this.service.update(id, body);
   }
 
+  @CanWrite('Product')
   @Mutation(() => Boolean)
   deleteProduct(@Args('id') id: number) {
     return this.service.delete(id);
   }
 
+  @CanWrite('Product')
   @Subscription(() => Product)
   onSaveProduct() {
     return pubSub.asyncIterator('savedProduct');

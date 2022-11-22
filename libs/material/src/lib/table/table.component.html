@@ -7,11 +7,10 @@
                 <div class="flex flex-column gap-2 w-full">
                     <label><strong> Select Visible Columns </strong></label>
                     <p-multiSelect styleClass="w-full" [options]="columns" [(ngModel)]="visibleColumns"
-                        optionLabel="header">
+                        optionLabel="header" [showClear]="true" [display]="'chip'">
                     </p-multiSelect>
                 </div>
             </div>
-
         </p-tabPanel>
 
     </p-tabView>

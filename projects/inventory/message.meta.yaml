@@ -1,6 +1,21 @@
 Name: Message
 Description: Message schema
 Properties:
+  - Property: subject
+    Description: Subject
+    Defination:
+      lorem: text
+    Validation:
+      type: string
+      minLength: 0
+      maxLength: 50
+    Column:
+      columnType: text
+      valueType: string
+    UI:
+      type: text
+      group: Subject
+
   - Property: message
     Description: Message
     Defination:
@@ -15,32 +30,38 @@ Properties:
       valueType: string
 
     UI:
-      type: text
+      type: textarea
+      group: Message
+
+Relations:
+  - type: ManyToOne
+    target: User
+    name: receiver
+    group: To
+    eager: true
+    label: username
+    joinColumn: true
+    onDelete: CASCADE
+    viewColumns:
+      - column: username
+        as: receiver
+        valueType: string
+
+  - type: ManyToOne
+    target: User
+    name: sender
+    eager: true
+    label: username
+    onDelete: CASCADE
+    joinColumn: true
+    viewColumns:
+      - column: username
+        as: sender
+        valueType: string
+
 SearchFields:
   - message
 
 Required:
   - message
-
-Relations:
-  - type: ManyToOne
-    target: User
-    name: to
-    eager: true
-    joinColumn: true
-    onDelete: CASCADE
-    viewColumns:
-      - column: username
-        as: to
-        valueType: string
-
-  - type: ManyToOne
-    target: User
-    name: from
-    eager: true
-    onDelete: CASCADE
-    joinColumn: true
-    viewColumns:
-      - column: username
-        as: from
-        valueType: string
+  - receiver

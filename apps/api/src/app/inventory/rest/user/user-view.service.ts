@@ -4,7 +4,7 @@ import { Repository } from 'typeorm';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 
-import { UserView } from '../../models/user';
+import { UserView } from './entity';
 
 @Injectable()
 export class UserViewService extends ResourceViewService<UserView> {
