@@ -1,6 +1,19 @@
+import { requestPermissions } from 'nativescript-permissions';
+
 import { getNativeApplication } from '@nativescript/core/application';
 
-export async function sendSms(phoneNumber: string, message: string) {
+/**
+ * Request SMS permission
+ * @returns
+ */
+async function smsPermission(): Promise<boolean> {
+  return !!(await requestPermissions(
+    [android.Manifest.permission.READ_CONTACTS],
+    'I need these permissions!'
+  ));
+}
+
+export async function sendSmsWithIntent(phoneNumber: string, message: string) {
   return new Promise(function (resolve, reject) {
     try {
       const intent = new android.content.Intent(
@@ -24,20 +37,20 @@ export async function sendSms(phoneNumber: string, message: string) {
   });
 }
 
-export async function sendTextMessageQuite(
-  phoneNumber: string,
-  message: string
-) {
-  return new Promise(function (res, rej) {
+export async function sendSMS(phoneNumber: string, message: string) {
+  if (await smsPermission()) {
     const smsService = android.telephony.SmsManager.getDefault();
+
     if (!smsService) {
-      console.log('SmsManager is not found!');
+      console.log('Could not get the SmsManager!');
     }
+
     try {
       smsService.sendTextMessage(phoneNumber, null, message, null, null);
-      res('Message is send!');
+      return true;
     } catch (err) {
-      rej('Something went wrong sending message!');
+      return false;
     }
-  });
+  }
+  return false;
 }
