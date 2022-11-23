@@ -13,3 +13,16 @@ export function groupBy<T>(items: T[], group: keyof T & string) {
   }
   return obj as Record<string, T[]>;
 }
+
+export function uniqueBy<T>(items: T[], field: keyof T & string) {
+  const nlist: T[] = [];
+
+  for (const i of items) {
+    if (nlist.find((e) => e[field] === i[field])) {
+      continue;
+    }
+    nlist.push(i);
+  }
+
+  return nlist;
+}

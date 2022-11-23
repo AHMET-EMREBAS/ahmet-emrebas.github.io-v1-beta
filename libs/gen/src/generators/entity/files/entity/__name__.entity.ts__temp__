@@ -60,7 +60,7 @@ export class <%- classname %> extends BaseEntity
       <% if(o.Column.hash) { %> { to: (value) => hashPassword(value), from: (value) => value }, <% } %>
     ],
   })
-  <%- o.Property %>: <%- o.Column.valueType %>;
+  <%- o.Property %><% if(!options.Required?.includes(o.Property)) { %>?<% }%>: <%- o.Column.valueType %>;
 
 
 <% } %>

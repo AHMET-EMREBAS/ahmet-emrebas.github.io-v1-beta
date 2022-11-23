@@ -41,7 +41,7 @@ export class AuthService {
       canActivate: !!(
         (await this.userService.findOneByOrFail({
           id: user.id,
-        })) as IReadUser
+        })) as unknown as IReadUser
       ).permission.find((e) => e.name === permission),
     };
   }

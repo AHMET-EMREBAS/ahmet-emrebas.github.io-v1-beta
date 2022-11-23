@@ -45,7 +45,7 @@ export class PermissionGuard extends JwtAuthGuard {
 
       const user = (await this.userService.findOneBy({
         id: userCookie.id,
-      })) as IReadUser;
+      })) as unknown as IReadUser;
 
       const requiredPermission = this.reflector.getAllAndOverride(
         RESOURCE_PERMISSION_KEY,

@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 
 import { BaseInterface } from 'common/base';
-import { uniqBy } from 'lodash';
 import {
   FilterMatchMode,
   FilterMetadata,
@@ -20,6 +19,8 @@ import {
   EntityCollectionServiceBase,
   EntityCollectionServiceElementsFactory,
 } from '@ngrx/data';
+
+import { uniqueBy } from '../utils';
 
 export class NgrxBaseCollecitonService<
   T extends BaseInterface
@@ -89,7 +90,7 @@ export class NgrxBaseCollecitonService<
   }
 
   uniqueBy(key: keyof T & string) {
-    return this.entities$.pipe(map((data) => uniqBy(data, (e) => e[key])));
+    return this.entities$.pipe(map((data) => uniqueBy(data, key)));
   }
 
   isExist(key: string, value: string) {

@@ -37,7 +37,7 @@ export class User extends BaseEntity implements IUser<ID[]> {
     unique: false,
     transformer: [],
   })
-  code: string;
+  code?: string;
 
   @Field()
   @Column({
