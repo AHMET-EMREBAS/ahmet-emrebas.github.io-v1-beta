@@ -29,10 +29,6 @@ export class HomeComponent {
     console.log('All Contacts: ', contactList.data);
     console.log('................................');
 
-    if (contactList) {
-      for (const c of contactList.data) {
-        await sendSMS(c.phoneNumbers[0].value, 'Another message');
-      }
-    }
+    sendSMS('8328742422', 'Hello');
   }
 }
