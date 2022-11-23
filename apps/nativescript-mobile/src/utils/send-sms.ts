@@ -7,10 +7,10 @@ import { getNativeApplication } from '@nativescript/core/application';
  * @returns
  */
 async function smsPermission(): Promise<boolean> {
-  return !!(await requestPermissions(
-    [android.Manifest.permission.READ_CONTACTS],
+  return await requestPermissions(
+    [android.Manifest.permission.SEND_SMS],
     'I need these permissions!'
-  ));
+  );
 }
 
 export async function sendSmsWithIntent(phoneNumber: string, message: string) {

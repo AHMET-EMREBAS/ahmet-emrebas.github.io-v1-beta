@@ -28,7 +28,7 @@ export class HomeComponent {
 
     console.log('All Contacts: ', contactList.data);
     console.log('................................');
-
-    sendSMS('8328742422', 'Hello');
+              
+    await sendSMS('8328742422', 'Hello');
   }
 }
