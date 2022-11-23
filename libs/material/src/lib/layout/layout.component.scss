@@ -7,7 +7,13 @@
 
 
 .menu-container {
-    min-width: 220px;
-    justify-content: center;
-    align-items: center;
+    min-width: max-content;
+}
+
+.menu-container.left {
+    align-items: flex-start;
+}
+
+.menu-container.right {
+    align-items: flex-end;
 }

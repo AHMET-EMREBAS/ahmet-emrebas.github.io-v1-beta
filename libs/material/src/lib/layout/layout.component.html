@@ -1,7 +1,7 @@
 <!-- Bottom toolbar  -->
 <ng-template #bottomToolbar>
     <p-toolbar>
-        <div class=" flex gap-2 lg:pl-4">
+        <div class=" flex gap-1 lg:pl-4">
             <p-button *ngIf="isHandset$ | async" icon="pi pi-arrow-right" (click)="leftSidebar =!leftSidebar">
             </p-button>
 
@@ -15,7 +15,7 @@
 
         </div>
 
-        <div class="flex gap-2 lg:pr-4">
+        <div class="flex gap-1 lg:pr-4">
 
             <p-button styleClass="p-button-info" icon="pi pi-comments" pTooltip="Messages" tooltipPosition="top"
                 (click)="messagesClick.emit()">
@@ -59,24 +59,24 @@
 
 
 
-<div class="flex flex-column gap-2 h-full overflow-hidden" *ngIf="isNotHandset$ | async ">
+<div class="flex flex-column gap-1 h-full overflow-hidden" *ngIf="isNotHandset$ | async ">
 
 
     <ng-container *ngTemplateOutlet="topMenubar;context:{items:menubarItems}"></ng-container>
 
-    <div class="flex flex-column p-2 h-full overflow-hidden">
+    <div class="flex flex-column h-full overflow-hidden">
 
-        <div class="flex gap-2 h-full overflow-hidden overflow-y-auto">
+        <div class="flex gap-1 h-full overflow-hidden overflow-y-auto">
 
-            <div class="menu-container flex flex-column gap-2  justify-content-between h-full overflow-y-auto">
-                <p-menu styleClass="p-2" [model]="primaryMenuItems"> </p-menu>
+            <div class="menu-container left flex flex-column gap-1  justify-content-between h-full overflow-y-auto">
+                <p-menu styleClass="p-1" [model]="primaryMenuItems"> </p-menu>
             </div>
 
             <ng-container *ngTemplateOutlet="content"></ng-container>
 
-            <div class="menu-container flex flex-column gap-2  justify-content-between h-full overflow-y-auto">
+            <div class="menu-container right flex flex-column gap-1  justify-content-between h-full overflow-y-auto">
 
-                <p-menu styleClass="p-2" [model]="secondaryMenuItems"> </p-menu>
+                <p-menu styleClass="p-1" [model]="secondaryMenuItems"> </p-menu>
 
             </div>
         </div>
@@ -85,26 +85,22 @@
     <ng-container *ngTemplateOutlet="bottomToolbar"></ng-container>
 </div>
 
-<div class="flex flex-column gap-2 h-full overflow-hidden" *ngIf="isHandset$ | async">
+<div class="flex flex-column gap-1 h-full overflow-hidden" *ngIf="isHandset$ | async">
 
     <ng-container *ngTemplateOutlet="topMenubar;context:{items:menubarItems}"></ng-container>
 
 
-
-
-
-
     <p-sidebar [(visible)]="leftSidebar" [position]="'left'">
-        <div class="flex flex-column gap-2  justify-content-between h-full overflow-y-auto">
-            <p-menu styleClass="p-2 border-none w-full" [model]="primaryMenuItems"> </p-menu>
+        <div class="flex flex-column gap-1  justify-content-between h-full overflow-y-auto">
+            <p-menu styleClass="p-1 border-none w-full" [model]="primaryMenuItems"> </p-menu>
         </div>
     </p-sidebar>
 
     <ng-container *ngTemplateOutlet="content"></ng-container>
 
     <p-sidebar [(visible)]="rightSidebar" [position]="'right'">
-        <div class="flex flex-column gap-2  justify-content-between h-full overflow-y-auto">
-            <p-menu styleClass="p-2 border-none w-full" [model]="secondaryMenuItems"> </p-menu>
+        <div class="flex flex-column gap-1  justify-content-between h-full overflow-y-auto">
+            <p-menu styleClass="p-1 border-none w-full" [model]="secondaryMenuItems"> </p-menu>
         </div>
     </p-sidebar>
 
