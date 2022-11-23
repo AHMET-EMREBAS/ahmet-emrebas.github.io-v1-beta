@@ -12,8 +12,8 @@ import {
   Router,
 } from '@angular/router';
 
-import { groupBy } from 'lodash';
 import { InputOptions } from 'material/form';
+import { groupBy } from 'material/utils';
 import { MessageService as SystemMessageService } from 'primeng/api';
 
 import { CategoryService } from '../../category';

@@ -1,13 +1,23 @@
-import { Component, OnInit } from '@angular/core';
-import { MessageService as SystemMessageService } from 'primeng/api';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { groupBy } from 'lodash';
-import { InputOptions } from 'material/form';
+import {
+  Component,
+  OnInit,
+} from '@angular/core';
+import {
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import {
+  ActivatedRoute,
+  Router,
+} from '@angular/router';
 
-import { UserService } from '../user.service';
+import { InputOptions } from 'material/form';
+import { groupBy } from 'material/utils';
+import { MessageService as SystemMessageService } from 'primeng/api';
 
 import { PermissionService } from '../../permission';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'ae-create-user',

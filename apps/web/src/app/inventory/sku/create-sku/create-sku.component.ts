@@ -1,13 +1,23 @@
-import { Component, OnInit } from '@angular/core';
-import { MessageService as SystemMessageService } from 'primeng/api';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { groupBy } from 'lodash';
-import { InputOptions } from 'material/form';
+import {
+  Component,
+  OnInit,
+} from '@angular/core';
+import {
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import {
+  ActivatedRoute,
+  Router,
+} from '@angular/router';
 
-import { SkuService } from '../sku.service';
+import { InputOptions } from 'material/form';
+import { groupBy } from 'material/utils';
+import { MessageService as SystemMessageService } from 'primeng/api';
 
 import { ProductService } from '../../product';
+import { SkuService } from '../sku.service';
 
 @Component({
   selector: 'ae-create-sku',
