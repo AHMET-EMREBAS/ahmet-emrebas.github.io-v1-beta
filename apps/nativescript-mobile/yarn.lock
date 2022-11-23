@@ -7,6 +7,13 @@
   resolved "https://registry.yarnpkg.com/@nativescript/android/-/android-8.3.1.tgz#107f8eb567cd7caf64b76d5c1510cd29998204f3"
   integrity sha512-Q82ZuACx4DapjKsvqlGVEhcIAJR111ppMRL+Dnw2Jkt1YeE5CFQUZGq1mE72BfzrqrV6RrkgHtwS4EF511JxbQ==
 
+"@nativescript/contacts@^2.1.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@nativescript/contacts/-/contacts-2.1.0.tgz#b790376f3ad616f8786eb70a7a1cb18fb5dc2315"
+  integrity sha512-XXQTMtlynwvXANXeQQCYLIZTw7c3kQcjq2A3045ox8s0PWzNezypuSBWiw2G5jd+DnM/vXLcNrbYkoYcjWi78w==
+  dependencies:
+    nativescript-permissions "1.3.11"
+
 "@nativescript/core@^8.3.6":
   version "8.3.6"
   resolved "https://registry.yarnpkg.com/@nativescript/core/-/core-8.3.6.tgz#7b68498a3beea3d35f448c25b37aab60e4064371"
@@ -113,6 +120,11 @@ mkdirp@^1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-1.0.4.tgz#3eb5ed62622756d79a5f0e2a221dfebad75c2f7e"
   integrity sha512-vVqVZQyf3WLx2Shd0qJ9xuvqgAyKPLAiqITEtqW0oIUjzo3PePDd6fW9iFz30ef7Ysp/oiWqbhszeGWW2T6Gzw==
+
+nativescript-permissions@1.3.11:
+  version "1.3.11"
+  resolved "https://registry.yarnpkg.com/nativescript-permissions/-/nativescript-permissions-1.3.11.tgz#29569b0c9de5bbfe6149bb983c0ebedd1504e25a"
+  integrity sha512-4ox9WpVJPLfepPauqECvPfbxVE1hVPVVBLZxOs3d9+2Yrr0mSkJO7D7BQ4OUS90hHfRdPhf70aJKWxzJoqi63g==
 
 once@^1.3.0:
   version "1.4.0"
