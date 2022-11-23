@@ -35,6 +35,21 @@ export class UpdateUserDto implements Partial<IUser<ID[]>> {
 
   @Field()
   @ApiProperty({
+    type: 'string',
+    minLength: 1,
+    maxLength: 100,
+
+    required: false,
+    nullable: true,
+  })
+  @MinLength(1)
+  @MaxLength(100)
+  @IsOptional()
+  @Expose()
+  code: string;
+
+  @Field()
+  @ApiProperty({
     type: 'specific',
 
     required: false,

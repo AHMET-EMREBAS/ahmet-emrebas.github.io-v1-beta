@@ -24,6 +24,8 @@ import { Permission } from '../../permission';
 
       .addSelect('user.username', 'username')
 
+      .addSelect('user.code', 'code')
+
       .addSelect('user.password', 'password')
 
       .from(User, 'user')
@@ -57,6 +59,10 @@ export class UserView implements IUser<string> {
   @Field()
   @ViewColumn()
   username: string;
+
+  @Field()
+  @ViewColumn()
+  code: string;
 
   @Field()
   @ViewColumn()

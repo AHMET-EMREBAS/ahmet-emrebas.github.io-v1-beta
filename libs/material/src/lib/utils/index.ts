@@ -4,7 +4,12 @@ export function groupBy<T>(items: T[], group: keyof T & string) {
 
   for (const i of items) {
     const gname = i[group] || 'undefined';
-    obj[gname] = i;
+    if (obj[gname]) {
+      obj[gname].push(i);
+    } else {
+      obj[gname] = [];
+      obj[gname].push(i);
+    }
   }
-  return obj as Record<string, T>;
+  return obj as Record<string, T[]>;
 }
