@@ -1,24 +1,15 @@
-import {
-  Component,
-  OnInit,
-} from '@angular/core';
-import {
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
-import {
-  ActivatedRoute,
-  Router,
-} from '@angular/router';
-
-import { InputOptions } from 'material/form';
-import { groupBy } from 'material/utils';
+import { Component, OnInit } from '@angular/core';
 import { MessageService as SystemMessageService } from 'primeng/api';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { groupBy } from 'material/utils';
+import { InputOptions } from 'material/form';
+
+import { QuantityService } from '../quantity.service';
 
 import { SkuService } from '../../sku';
+
 import { StoreService } from '../../store';
-import { QuantityService } from '../quantity.service';
 
 @Component({
   selector: 'ae-create-quantity',
@@ -60,7 +51,7 @@ export class CreateQuantityComponent implements OnInit {
       name: 'sku',
       type: 'select',
       group: 'Meta',
-      placeholder: 'name',
+      placeholder: 'Select Sku',
       asyncOptions: this.skuService.entities$,
       optionValue: 'id',
       optionLabel: 'name',
@@ -72,7 +63,7 @@ export class CreateQuantityComponent implements OnInit {
       name: 'store',
       type: 'select',
       group: 'Meta',
-      placeholder: 'name',
+      placeholder: 'Select Store',
       asyncOptions: this.storeService.entities$,
       optionValue: 'id',
       optionLabel: 'name',
@@ -81,7 +72,7 @@ export class CreateQuantityComponent implements OnInit {
     },
   ];
 
-  groups = Object.entries(groupBy(this.fields, 'group'));
+  groups = Object.entries(groupBy<InputOptions>(this.fields, 'group'));
 
   constructor(
     private readonly quantityService: QuantityService,
@@ -93,8 +84,10 @@ export class CreateQuantityComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.skuService.clearCache();
     this.skuService.getAsOptions(['id', 'name']);
 
+    this.storeService.clearCache();
     this.storeService.getAsOptions(['id', 'name']);
   }
 

@@ -56,7 +56,7 @@ export class UpdateQuantityComponent implements AfterViewInit, OnInit {
       name: 'sku',
       type: 'select',
       group: 'Meta',
-      placeholder: 'name',
+      placeholder: 'Select Sku',
       asyncOptions: this.skuService.entities$,
       optionValue: 'id',
       optionLabel: 'name',
@@ -68,7 +68,7 @@ export class UpdateQuantityComponent implements AfterViewInit, OnInit {
       name: 'store',
       type: 'select',
       group: 'Meta',
-      placeholder: 'name',
+      placeholder: 'Select Store',
       asyncOptions: this.storeService.entities$,
       optionValue: 'id',
       optionLabel: 'name',
@@ -89,8 +89,10 @@ export class UpdateQuantityComponent implements AfterViewInit, OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.skuService.clearCache();
     this.skuService.getAsOptions(['id', 'name']);
 
+    this.storeService.clearCache();
     this.storeService.getAsOptions(['id', 'name']);
   }
 

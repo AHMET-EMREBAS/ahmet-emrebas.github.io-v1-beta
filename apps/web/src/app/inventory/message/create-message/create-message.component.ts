@@ -1,23 +1,13 @@
-import {
-  Component,
-  OnInit,
-} from '@angular/core';
-import {
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
-import {
-  ActivatedRoute,
-  Router,
-} from '@angular/router';
-
-import { InputOptions } from 'material/form';
-import { groupBy } from 'material/utils';
+import { Component, OnInit } from '@angular/core';
 import { MessageService as SystemMessageService } from 'primeng/api';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { groupBy } from 'material/utils';
+import { InputOptions } from 'material/form';
+
+import { MessageService } from '../message.service';
 
 import { UserService } from '../../user';
-import { MessageService } from '../message.service';
 
 @Component({
   selector: 'ae-create-message',
@@ -76,7 +66,7 @@ export class CreateMessageComponent implements OnInit {
       name: 'receiver',
       type: 'select',
       group: 'To',
-      placeholder: 'username',
+      placeholder: 'Select User',
       asyncOptions: this.userService.entities$,
       optionValue: 'id',
       optionLabel: 'username',
@@ -88,14 +78,14 @@ export class CreateMessageComponent implements OnInit {
       name: 'sender',
       type: 'select',
       group: 'Primary',
-      placeholder: 'username',
+      placeholder: 'Select User',
       asyncOptions: this.userService.entities$,
       optionValue: 'id',
       optionLabel: 'username',
     },
   ];
 
-  groups = Object.entries(groupBy(this.fields, 'group'));
+  groups = Object.entries(groupBy<InputOptions>(this.fields, 'group'));
 
   constructor(
     private readonly messageService: MessageService,
@@ -106,6 +96,7 @@ export class CreateMessageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.userService.clearCache();
     this.userService.getAsOptions(['id', 'username']);
   }
 

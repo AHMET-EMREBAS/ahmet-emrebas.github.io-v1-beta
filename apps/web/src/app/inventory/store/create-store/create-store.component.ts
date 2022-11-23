@@ -1,23 +1,13 @@
-import {
-  Component,
-  OnInit,
-} from '@angular/core';
-import {
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
-import {
-  ActivatedRoute,
-  Router,
-} from '@angular/router';
-
-import { InputOptions } from 'material/form';
-import { groupBy } from 'material/utils';
+import { Component, OnInit } from '@angular/core';
 import { MessageService as SystemMessageService } from 'primeng/api';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { groupBy } from 'material/utils';
+import { InputOptions } from 'material/form';
+
+import { StoreService } from '../store.service';
 
 import { PricelevelService } from '../../pricelevel';
-import { StoreService } from '../store.service';
 
 @Component({
   selector: 'ae-create-store',
@@ -57,14 +47,14 @@ export class CreateStoreComponent implements OnInit {
       name: 'pricelevel',
       type: 'select',
       group: 'Price Level',
-      placeholder: 'name',
+      placeholder: 'Select Pricelevel',
       asyncOptions: this.pricelevelService.entities$,
       optionValue: 'id',
       optionLabel: 'name',
     },
   ];
 
-  groups = Object.entries(groupBy(this.fields, 'group'));
+  groups = Object.entries(groupBy<InputOptions>(this.fields, 'group'));
 
   constructor(
     private readonly storeService: StoreService,
@@ -75,6 +65,7 @@ export class CreateStoreComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.pricelevelService.clearCache();
     this.pricelevelService.getAsOptions(['id', 'name']);
   }
 

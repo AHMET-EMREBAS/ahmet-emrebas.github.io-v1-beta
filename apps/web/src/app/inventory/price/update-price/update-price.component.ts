@@ -69,7 +69,7 @@ export class UpdatePriceComponent implements AfterViewInit, OnInit {
       name: 'sku',
       type: 'select',
       group: 'Meta',
-      placeholder: 'name',
+      placeholder: 'Select Sku',
       asyncOptions: this.skuService.entities$,
       optionValue: 'id',
       optionLabel: 'name',
@@ -79,7 +79,7 @@ export class UpdatePriceComponent implements AfterViewInit, OnInit {
       name: 'pricelevel',
       type: 'select',
       group: 'Meta',
-      placeholder: 'name',
+      placeholder: 'Select Pricelevel',
       asyncOptions: this.pricelevelService.entities$,
       optionValue: 'id',
       optionLabel: 'name',
@@ -98,8 +98,10 @@ export class UpdatePriceComponent implements AfterViewInit, OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.skuService.clearCache();
     this.skuService.getAsOptions(['id', 'name']);
 
+    this.pricelevelService.clearCache();
     this.pricelevelService.getAsOptions(['id', 'name']);
   }
 

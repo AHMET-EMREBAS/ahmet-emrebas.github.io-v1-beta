@@ -71,7 +71,7 @@ export class UpdateMessageComponent implements AfterViewInit, OnInit {
       name: 'receiver',
       type: 'select',
       group: 'To',
-      placeholder: 'username',
+      placeholder: 'Select User',
       asyncOptions: this.userService.entities$,
       optionValue: 'id',
       optionLabel: 'username',
@@ -83,7 +83,7 @@ export class UpdateMessageComponent implements AfterViewInit, OnInit {
       name: 'sender',
       type: 'select',
       group: 'Primary',
-      placeholder: 'username',
+      placeholder: 'Select User',
       asyncOptions: this.userService.entities$,
       optionValue: 'id',
       optionLabel: 'username',
@@ -101,6 +101,7 @@ export class UpdateMessageComponent implements AfterViewInit, OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.userService.clearCache();
     this.userService.getAsOptions(['id', 'username']);
   }
 

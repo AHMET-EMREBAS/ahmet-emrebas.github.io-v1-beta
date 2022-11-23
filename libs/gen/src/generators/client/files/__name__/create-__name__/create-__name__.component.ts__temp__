@@ -9,7 +9,7 @@ import {
   ActivatedRoute,
   Router,
 } from '@angular/router';
-import { groupBy } from 'lodash';
+import { groupBy } from 'material/utils';
 import { InputOptions } from 'material/form';
 
 import { <%- classname %>Service } from '../<%- name %>.service';
@@ -122,7 +122,7 @@ export class Create<%- classname %>Component implements OnInit {
   ];
 
 
-  groups = Object.entries(groupBy(this.fields, 'group'));
+  groups = Object.entries(groupBy<InputOptions>(this.fields, 'group'));
   
 
   constructor(

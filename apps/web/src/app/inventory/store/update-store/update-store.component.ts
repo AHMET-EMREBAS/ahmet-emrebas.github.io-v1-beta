@@ -52,7 +52,7 @@ export class UpdateStoreComponent implements AfterViewInit, OnInit {
       name: 'pricelevel',
       type: 'select',
       group: 'Price Level',
-      placeholder: 'name',
+      placeholder: 'Select Pricelevel',
       asyncOptions: this.pricelevelService.entities$,
       optionValue: 'id',
       optionLabel: 'name',
@@ -70,6 +70,7 @@ export class UpdateStoreComponent implements AfterViewInit, OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.pricelevelService.clearCache();
     this.pricelevelService.getAsOptions(['id', 'name']);
   }
 

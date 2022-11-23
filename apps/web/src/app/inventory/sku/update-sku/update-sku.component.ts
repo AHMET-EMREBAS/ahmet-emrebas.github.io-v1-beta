@@ -90,7 +90,7 @@ export class UpdateSkuComponent implements AfterViewInit, OnInit {
       name: 'product',
       type: 'select',
       group: 'Product',
-      placeholder: 'name',
+      placeholder: 'Select Product',
       asyncOptions: this.productService.entities$,
       optionValue: 'id',
       optionLabel: 'name',
@@ -110,6 +110,7 @@ export class UpdateSkuComponent implements AfterViewInit, OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.productService.clearCache();
     this.productService.getAsOptions(['id', 'name']);
   }
 

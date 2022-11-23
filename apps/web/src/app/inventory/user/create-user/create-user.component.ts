@@ -1,23 +1,13 @@
-import {
-  Component,
-  OnInit,
-} from '@angular/core';
-import {
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
-import {
-  ActivatedRoute,
-  Router,
-} from '@angular/router';
-
-import { InputOptions } from 'material/form';
-import { groupBy } from 'material/utils';
+import { Component, OnInit } from '@angular/core';
 import { MessageService as SystemMessageService } from 'primeng/api';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { groupBy } from 'material/utils';
+import { InputOptions } from 'material/form';
+
+import { UserService } from '../user.service';
 
 import { PermissionService } from '../../permission';
-import { UserService } from '../user.service';
 
 @Component({
   selector: 'ae-create-user',
@@ -74,14 +64,14 @@ export class CreateUserComponent implements OnInit {
       name: 'permission',
       type: 'select-many',
       group: 'Permissions',
-      placeholder: 'description',
+      placeholder: 'Select Permission',
       asyncOptions: this.permissionService.entities$,
       optionValue: 'id',
       optionLabel: 'description',
     },
   ];
 
-  groups = Object.entries(groupBy(this.fields, 'group'));
+  groups = Object.entries(groupBy<InputOptions>(this.fields, 'group'));
 
   constructor(
     private readonly userService: UserService,
@@ -92,6 +82,7 @@ export class CreateUserComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.permissionService.clearCache();
     this.permissionService.getAsOptions(['id', 'description']);
   }
 

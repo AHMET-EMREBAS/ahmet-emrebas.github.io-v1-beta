@@ -69,7 +69,7 @@ export class UpdateUserComponent implements AfterViewInit, OnInit {
       name: 'permission',
       type: 'select-many',
       group: 'Permissions',
-      placeholder: 'description',
+      placeholder: 'Select Permission',
       asyncOptions: this.permissionService.entities$,
       optionValue: 'id',
       optionLabel: 'description',
@@ -87,6 +87,7 @@ export class UpdateUserComponent implements AfterViewInit, OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.permissionService.clearCache();
     this.permissionService.getAsOptions(['id', 'description']);
   }
 

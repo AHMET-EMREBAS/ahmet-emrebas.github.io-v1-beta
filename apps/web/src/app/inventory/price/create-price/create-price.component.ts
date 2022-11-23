@@ -1,24 +1,15 @@
-import {
-  Component,
-  OnInit,
-} from '@angular/core';
-import {
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
-import {
-  ActivatedRoute,
-  Router,
-} from '@angular/router';
-
-import { InputOptions } from 'material/form';
-import { groupBy } from 'material/utils';
+import { Component, OnInit } from '@angular/core';
 import { MessageService as SystemMessageService } from 'primeng/api';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { groupBy } from 'material/utils';
+import { InputOptions } from 'material/form';
+
+import { PriceService } from '../price.service';
+
+import { SkuService } from '../../sku';
 
 import { PricelevelService } from '../../pricelevel';
-import { SkuService } from '../../sku';
-import { PriceService } from '../price.service';
 
 @Component({
   selector: 'ae-create-price',
@@ -73,7 +64,7 @@ export class CreatePriceComponent implements OnInit {
       name: 'sku',
       type: 'select',
       group: 'Meta',
-      placeholder: 'name',
+      placeholder: 'Select Sku',
       asyncOptions: this.skuService.entities$,
       optionValue: 'id',
       optionLabel: 'name',
@@ -83,14 +74,14 @@ export class CreatePriceComponent implements OnInit {
       name: 'pricelevel',
       type: 'select',
       group: 'Meta',
-      placeholder: 'name',
+      placeholder: 'Select Pricelevel',
       asyncOptions: this.pricelevelService.entities$,
       optionValue: 'id',
       optionLabel: 'name',
     },
   ];
 
-  groups = Object.entries(groupBy(this.fields, 'group'));
+  groups = Object.entries(groupBy<InputOptions>(this.fields, 'group'));
 
   constructor(
     private readonly priceService: PriceService,
@@ -102,8 +93,10 @@ export class CreatePriceComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.skuService.clearCache();
     this.skuService.getAsOptions(['id', 'name']);
 
+    this.pricelevelService.clearCache();
     this.pricelevelService.getAsOptions(['id', 'name']);
   }
 

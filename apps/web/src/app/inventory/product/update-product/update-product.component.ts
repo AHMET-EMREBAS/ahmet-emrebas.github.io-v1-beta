@@ -124,7 +124,7 @@ export class UpdateProductComponent implements AfterViewInit, OnInit {
       name: 'category',
       type: 'select',
       group: 'Meta',
-      placeholder: 'name',
+      placeholder: 'Select Category',
       asyncOptions: this.categoryService.entities$,
       optionValue: 'id',
       optionLabel: 'name',
@@ -134,7 +134,7 @@ export class UpdateProductComponent implements AfterViewInit, OnInit {
       name: 'department',
       type: 'select',
       group: 'Meta',
-      placeholder: 'name',
+      placeholder: 'Select Department',
       asyncOptions: this.departmentService.entities$,
       optionValue: 'id',
       optionLabel: 'name',
@@ -153,8 +153,10 @@ export class UpdateProductComponent implements AfterViewInit, OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.categoryService.clearCache();
     this.categoryService.getAsOptions(['id', 'name']);
 
+    this.departmentService.clearCache();
     this.departmentService.getAsOptions(['id', 'name']);
   }
 

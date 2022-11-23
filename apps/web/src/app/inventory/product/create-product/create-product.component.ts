@@ -1,24 +1,15 @@
-import {
-  Component,
-  OnInit,
-} from '@angular/core';
-import {
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
-import {
-  ActivatedRoute,
-  Router,
-} from '@angular/router';
-
-import { InputOptions } from 'material/form';
-import { groupBy } from 'material/utils';
+import { Component, OnInit } from '@angular/core';
 import { MessageService as SystemMessageService } from 'primeng/api';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { groupBy } from 'material/utils';
+import { InputOptions } from 'material/form';
+
+import { ProductService } from '../product.service';
 
 import { CategoryService } from '../../category';
+
 import { DepartmentService } from '../../department';
-import { ProductService } from '../product.service';
 
 @Component({
   selector: 'ae-create-product',
@@ -128,7 +119,7 @@ export class CreateProductComponent implements OnInit {
       name: 'category',
       type: 'select',
       group: 'Meta',
-      placeholder: 'name',
+      placeholder: 'Select Category',
       asyncOptions: this.categoryService.entities$,
       optionValue: 'id',
       optionLabel: 'name',
@@ -138,14 +129,14 @@ export class CreateProductComponent implements OnInit {
       name: 'department',
       type: 'select',
       group: 'Meta',
-      placeholder: 'name',
+      placeholder: 'Select Department',
       asyncOptions: this.departmentService.entities$,
       optionValue: 'id',
       optionLabel: 'name',
     },
   ];
 
-  groups = Object.entries(groupBy(this.fields, 'group'));
+  groups = Object.entries(groupBy<InputOptions>(this.fields, 'group'));
 
   constructor(
     private readonly productService: ProductService,
@@ -160,6 +151,7 @@ export class CreateProductComponent implements OnInit {
     this.categoryService.clearCache();
     this.categoryService.getAsOptions(['id', 'name']);
 
+    this.departmentService.clearCache();
     this.departmentService.getAsOptions(['id', 'name']);
   }
 

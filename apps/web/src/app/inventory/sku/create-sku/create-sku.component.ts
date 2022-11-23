@@ -1,23 +1,13 @@
-import {
-  Component,
-  OnInit,
-} from '@angular/core';
-import {
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
-import {
-  ActivatedRoute,
-  Router,
-} from '@angular/router';
-
-import { InputOptions } from 'material/form';
-import { groupBy } from 'material/utils';
+import { Component, OnInit } from '@angular/core';
 import { MessageService as SystemMessageService } from 'primeng/api';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { groupBy } from 'material/utils';
+import { InputOptions } from 'material/form';
+
+import { SkuService } from '../sku.service';
 
 import { ProductService } from '../../product';
-import { SkuService } from '../sku.service';
 
 @Component({
   selector: 'ae-create-sku',
@@ -95,7 +85,7 @@ export class CreateSkuComponent implements OnInit {
       name: 'product',
       type: 'select',
       group: 'Product',
-      placeholder: 'name',
+      placeholder: 'Select Product',
       asyncOptions: this.productService.entities$,
       optionValue: 'id',
       optionLabel: 'name',
@@ -104,7 +94,7 @@ export class CreateSkuComponent implements OnInit {
     },
   ];
 
-  groups = Object.entries(groupBy(this.fields, 'group'));
+  groups = Object.entries(groupBy<InputOptions>(this.fields, 'group'));
 
   constructor(
     private readonly skuService: SkuService,
@@ -115,6 +105,7 @@ export class CreateSkuComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.productService.clearCache();
     this.productService.getAsOptions(['id', 'name']);
   }
 
