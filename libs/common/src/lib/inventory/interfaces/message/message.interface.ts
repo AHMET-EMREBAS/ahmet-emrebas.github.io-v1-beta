@@ -1,7 +1,7 @@
 import { BaseInterface } from '../../../base';
 
 export interface IMessage<User1, User2> extends BaseInterface {
-  subject: string;
+  subject?: string;
 
   message: string;
 

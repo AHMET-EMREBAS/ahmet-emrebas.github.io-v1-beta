@@ -1,9 +1,9 @@
 import { BaseInterface } from '../../../base';
 
 export interface IPrice<Sku1, Pricelevel2> extends BaseInterface {
-  price: number;
+  price?: number;
 
-  cost: number;
+  cost?: number;
 
   sku?: Sku1;
 

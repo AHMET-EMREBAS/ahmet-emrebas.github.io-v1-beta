@@ -17,7 +17,7 @@ export interface I<%- classname %>
   extends BaseInterface {
 
 <% for(const o of options.Properties) { %> 
-  <%- o.Property %>: <%- o.Column.valueType %>;
+  <%- o.Property %><% if(!options.Required?.includes(o.Property)) { %>?<% }%>: <%- o.Column.valueType %>;
 <% } %>
 
 <% let j = 1 %>

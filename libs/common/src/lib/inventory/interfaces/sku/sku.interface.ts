@@ -5,7 +5,7 @@ export interface ISku<Product1> extends BaseInterface {
 
   barcode: string;
 
-  description: string;
+  description?: string;
 
   product?: Product1;
 }
