@@ -35,5 +35,5 @@ export class Permission extends BaseEntity implements IPermission {
     unique: false,
     transformer: [],
   })
-  description: string;
+  description?: string;
 }

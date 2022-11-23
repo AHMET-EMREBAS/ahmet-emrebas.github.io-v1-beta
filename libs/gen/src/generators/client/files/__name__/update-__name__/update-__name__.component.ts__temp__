@@ -20,7 +20,8 @@ import { firstValueFrom } from 'rxjs';
 import { MessageService as SystemMessageService } from 'primeng/api';
 
 
-import { groupBy } from 'lodash';
+
+import { groupBy } from 'material/utils';
 
 <% for(const target of new Set(options.Relations?.map(e=>e.target) || [])) { %> 
 

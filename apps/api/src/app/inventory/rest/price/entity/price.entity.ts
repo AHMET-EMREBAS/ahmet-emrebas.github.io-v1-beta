@@ -30,7 +30,7 @@ export class Price extends BaseEntity implements IPrice<ID, ID> {
     unique: false,
     transformer: [],
   })
-  price: number;
+  price?: number;
 
   @Field()
   @Column({
@@ -39,7 +39,7 @@ export class Price extends BaseEntity implements IPrice<ID, ID> {
     unique: false,
     transformer: [],
   })
-  cost: number;
+  cost?: number;
 
   @ManyToOne(() => Sku, { eager: true, nullable: true, onDelete: 'CASCADE' })
   @JoinColumn()

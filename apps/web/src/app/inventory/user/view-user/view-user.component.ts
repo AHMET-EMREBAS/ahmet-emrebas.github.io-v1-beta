@@ -46,6 +46,11 @@ export class ViewUserComponent implements AfterViewInit {
     },
 
     {
+      header: 'code',
+      field: 'code',
+    },
+
+    {
       header: 'password',
       field: 'password',
     },

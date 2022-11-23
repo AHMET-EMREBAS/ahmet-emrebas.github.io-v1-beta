@@ -7,7 +7,7 @@ import { firstValueFrom } from 'rxjs';
 
 import { MessageService as SystemMessageService } from 'primeng/api';
 
-import { groupBy } from 'lodash';
+import { groupBy } from 'material/utils';
 
 import { SkuService } from '../../sku';
 

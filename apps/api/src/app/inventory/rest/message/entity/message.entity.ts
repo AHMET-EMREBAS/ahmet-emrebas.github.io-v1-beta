@@ -28,7 +28,7 @@ export class Message extends BaseEntity implements IMessage<ID, ID> {
     unique: false,
     transformer: [],
   })
-  subject: string;
+  subject?: string;
 
   @Field()
   @Column({

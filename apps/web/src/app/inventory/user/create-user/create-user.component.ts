@@ -24,6 +24,12 @@ export class CreateUserComponent implements OnInit {
       Validators.email,
     ]),
 
+    code: new FormControl(undefined, [
+      Validators.minLength(1),
+
+      Validators.maxLength(100),
+    ]),
+
     password: new FormControl(undefined, [
       Validators.required,
 
@@ -47,6 +53,17 @@ export class CreateUserComponent implements OnInit {
       required: true,
 
       email: true,
+    },
+
+    {
+      name: 'code',
+      type: 'text',
+      group: 'Code',
+      placeholder: 'code',
+
+      minLength: 1,
+
+      maxLength: 100,
     },
 
     {
@@ -92,6 +109,8 @@ export class CreateUserComponent implements OnInit {
         this.submitted = true;
         this.userService.add({
           username: this.value('username'),
+
+          code: this.value('code'),
 
           password: this.value('password'),
 

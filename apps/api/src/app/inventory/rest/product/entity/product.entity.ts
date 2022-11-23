@@ -39,7 +39,7 @@ export class Product extends BaseEntity implements IProduct<ID, ID> {
     unique: false,
     transformer: [],
   })
-  price: number;
+  price?: number;
 
   @Field()
   @Column({
@@ -48,7 +48,7 @@ export class Product extends BaseEntity implements IProduct<ID, ID> {
     unique: false,
     transformer: [],
   })
-  cost: number;
+  cost?: number;
 
   @Field()
   @Column({
@@ -57,7 +57,7 @@ export class Product extends BaseEntity implements IProduct<ID, ID> {
     unique: false,
     transformer: [],
   })
-  quantity: number;
+  quantity?: number;
 
   @Field()
   @Column({
@@ -66,7 +66,7 @@ export class Product extends BaseEntity implements IProduct<ID, ID> {
     unique: false,
     transformer: [],
   })
-  description: string;
+  description?: string;
 
   @ManyToOne(() => Category, {
     eager: true,

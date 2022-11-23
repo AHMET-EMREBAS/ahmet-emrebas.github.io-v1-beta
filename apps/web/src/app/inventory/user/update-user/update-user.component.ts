@@ -7,7 +7,7 @@ import { firstValueFrom } from 'rxjs';
 
 import { MessageService as SystemMessageService } from 'primeng/api';
 
-import { groupBy } from 'lodash';
+import { groupBy } from 'material/utils';
 
 import { PermissionService } from '../../permission';
 
@@ -27,6 +27,12 @@ export class UpdateUserComponent implements AfterViewInit, OnInit {
       Validators.required,
 
       Validators.email,
+    ]),
+
+    code: new FormControl(undefined, [
+      Validators.minLength(1),
+
+      Validators.maxLength(100),
     ]),
 
     password: new FormControl(undefined, [
@@ -52,6 +58,17 @@ export class UpdateUserComponent implements AfterViewInit, OnInit {
       required: true,
 
       email: true,
+    },
+
+    {
+      name: 'code',
+      type: 'text',
+      group: 'Code',
+      placeholder: 'code',
+
+      minLength: 1,
+
+      maxLength: 100,
     },
 
     {
@@ -109,6 +126,8 @@ export class UpdateUserComponent implements AfterViewInit, OnInit {
         id: this.itemToBeUpdated.id,
 
         username: this.value('username'),
+
+        code: this.value('code'),
 
         password: this.value('password'),
 

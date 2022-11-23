@@ -46,7 +46,7 @@ export class Sku extends BaseEntity implements ISku<ID> {
     unique: false,
     transformer: [],
   })
-  description: string;
+  description?: string;
 
   @ManyToOne(() => Product, {
     eager: true,
