@@ -4,11 +4,10 @@
   "title": "Update Date Property",
   "description": "Timestamp of creation",
   "properties": {
-    "name": { "type": "string", "const": "updatedAt" },
     "type": {
       "type": "string",
       "const": "updatedAt"
     }
   },
-  "required": ["name", "type"]
+  "required": ["type"]
 }

@@ -4,11 +4,10 @@
   "title": "Delete Date Property",
   "description": "Timestamp of creation",
   "properties": {
-    "name": { "type": "string", "const": "deletedAt" },
     "type": {
       "type": "string",
       "const": "deletedAt"
     }
   },
-  "required": ["name", "type"]
+  "required": ["type"]
 }

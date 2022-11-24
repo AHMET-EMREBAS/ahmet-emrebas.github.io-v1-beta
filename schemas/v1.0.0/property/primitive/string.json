@@ -4,7 +4,6 @@
   "title": "String Property",
 
   "properties": {
-    "name": { "$ref": "../../name/property-name.json" },
     "type": {
       "type": "string",
       "const": "string"
@@ -20,5 +19,5 @@
       "description": "Maximum allowed length of string property."
     }
   },
-  "required": ["name", "type"]
+  "required": ["type"]
 }

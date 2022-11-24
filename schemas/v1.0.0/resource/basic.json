@@ -4,16 +4,13 @@
   "properties": {
     "type": {
       "type": "string",
-      "const": "Basic Resource"
+      "const": "basic-resource"
     },
     "name": {
       "$ref": "../name/resource-name.json"
     },
     "properties": {
-      "type": "array",
-      "items": {
-        "$ref": "../property/index.json"
-      }
+      "$ref": "./properties.json"
     }
   },
   "required": ["name", "type"],

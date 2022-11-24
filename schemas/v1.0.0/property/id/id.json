@@ -3,11 +3,10 @@
   "$id": "IDProperty",
   "title": "ID Property",
   "properties": {
-    "name": { "$ref": "../../name/property-name.json" },
     "type": {
       "type": "string",
       "const": "id"
     }
   },
-  "required": ["name", "type"]
+  "required": ["type"]
 }

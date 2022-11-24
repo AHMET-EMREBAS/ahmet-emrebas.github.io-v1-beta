@@ -3,11 +3,10 @@
   "$id": "DateProperty",
   "title": "Date Property",
   "properties": {
-    "name": { "$ref": "../../name/property-name.json" },
     "type": {
       "type": "string",
       "const": "date"
     }
   },
-  "required": ["name", "type"]
+  "required": ["type"]
 }

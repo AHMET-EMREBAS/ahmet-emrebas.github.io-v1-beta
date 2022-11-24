@@ -4,7 +4,6 @@
   "title": "Number Property",
 
   "properties": {
-    "name": { "$ref": "../../name/property-name.json" },
     "type": {
       "type": "string",
       "const": "number"
@@ -20,5 +19,5 @@
       "description": "Maximum allowed value of the number property."
     }
   },
-  "required": ["name", "type"]
+  "required": ["type"]
 }

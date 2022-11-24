@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "$id": "ResourceNamesv2.0.0",
-  "title": "ResourceNamesv2.0.0",
+  "$id": "ResourceNames",
+  "title": "Resource names",
   "description": "Available resource names",
   "type": "string",
 

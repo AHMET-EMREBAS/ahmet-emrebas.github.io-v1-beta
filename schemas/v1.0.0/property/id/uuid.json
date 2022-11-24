@@ -3,11 +3,10 @@
   "$id": "UUIDProperty",
   "title": "UUID Property",
   "properties": {
-    "name": { "$ref": "../../name/property-name.json" },
     "type": {
       "type": "string",
       "const": "uuid"
     }
   },
-  "required": ["name", "type"]
+  "required": ["type"]
 }
