@@ -2,6 +2,6 @@
   "$schema": "http://json-schema.org/draft-07/schema",
   "$id": "ResourceSchemaV1.0.0",
   "title": "ResourceSchemaV1.0.0",
-  "description": "Place to define and describe your resource propreteis, attributes, behaviours, and features etc.",
+  "description": "Place to define and describe your resource properties, attributes, behaviours, and features etc.",
   "$ref": "./resource/index.json"
 }

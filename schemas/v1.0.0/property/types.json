@@ -2,7 +2,6 @@
   "$schema": "http://json-schema.org/draft-07/schema",
   "$id": "PropertyTypes",
   "title": "Property Types",
-  "type": "string",
   "enum": [
     "string",
     "number",
@@ -12,6 +11,10 @@
     "updatedAt",
     "deletedAt",
     "id",
-    "uuid"
+    "uuid",
+    "many-to-many",
+    "many-to-one",
+    "one-to-one",
+    "one-to-many"
   ]
 }

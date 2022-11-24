@@ -3,12 +3,9 @@
   "title": "Properties schema",
   "$id": "PropertiesSchema",
   "type": "object",
-
   "patternProperties": {
     "^[a-z]{1}[a-zA-Z]{1,}$": {
       "$ref": "../property/index.json"
     }
-  },
-
-  "additionalProperties": false
+  }
 }

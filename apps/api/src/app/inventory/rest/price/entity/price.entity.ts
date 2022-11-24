@@ -1,24 +1,20 @@
+import { IPrice } from 'common/inventory/interfaces/price';
+import { ID } from 'core/dto';
 import { BaseEntity } from 'core/entity';
 import {
   Column,
   Entity,
   JoinColumn,
-  JoinTable,
   ManyToOne,
-  OneToOne,
-  OneToMany,
-  ManyToMany,
 } from 'typeorm';
-import { ID } from 'core/dto';
-import { hashPassword } from 'core/transformers';
 
-import { IPrice } from 'common/inventory/interfaces/price';
-
-import { Sku } from '../../sku';
+import {
+  Field,
+  ObjectType,
+} from '@nestjs/graphql';
 
 import { Pricelevel } from '../../pricelevel';
-
-import { Field, ObjectType } from '@nestjs/graphql';
+import { Sku } from '../../sku';
 
 @Entity()
 @ObjectType()
@@ -41,7 +37,7 @@ export class Price extends BaseEntity implements IPrice<ID, ID> {
   })
   cost?: number;
 
-  @ManyToOne(() => Sku, { eager: true, nullable: true, onDelete: 'CASCADE' })
+  @ManyToOne(() => Sku, { eager: true, nullable: true })
   @JoinColumn()
   sku?: ID;
 

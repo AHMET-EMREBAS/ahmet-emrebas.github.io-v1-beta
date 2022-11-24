@@ -4,9 +4,9 @@
   "title": "Boolean Property",
   "properties": {
     "type": {
-      "type": "string",
       "const": "boolean"
     }
   },
-  "required": ["type"]
+  "required": ["type"],
+  "additionalProperties": false
 }

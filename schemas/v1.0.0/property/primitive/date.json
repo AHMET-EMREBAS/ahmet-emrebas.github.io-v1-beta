@@ -4,9 +4,9 @@
   "title": "Date Property",
   "properties": {
     "type": {
-      "type": "string",
       "const": "date"
     }
   },
-  "required": ["type"]
+  "required": ["type"],
+  "additionalProperties": false
 }

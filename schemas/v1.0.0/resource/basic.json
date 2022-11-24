@@ -3,7 +3,6 @@
   "title": "Basic Resource",
   "properties": {
     "type": {
-      "type": "string",
       "const": "basic-resource"
     },
     "name": {
@@ -11,8 +10,17 @@
     },
     "properties": {
       "$ref": "./properties.json"
+    },
+    "required": {
+      "type": "object",
+      "patternProperties": {
+        "^[a-z]{1}[a-zA-Z]{1,}$": {
+          "type": "boolean",
+          "default": true
+        }
+      }
     }
   },
-  "required": ["name", "type"],
+  "required": ["type"],
   "additionalProperties": false
 }

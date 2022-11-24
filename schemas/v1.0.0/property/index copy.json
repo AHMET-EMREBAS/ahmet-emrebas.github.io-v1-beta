@@ -1,0 +1,180 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "PropertySchemaV2.0.0",
+  "title": "PropertySchemaV2.0.0",
+  "description": "Resource property schema to define and describe the property.",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Property name",
+      "default": "Write property name"
+    },
+    "type": {
+      "$ref": "./types.json"
+    },
+    "target": {
+      "$ref": "../name/resource-name.json"
+    },
+    "required": {
+      "type": "boolean",
+      "const": false
+    },
+    "prefix": {
+      "type": "string",
+      "maxLength": 100,
+      "description": "Prefix for the property like dollar $."
+    },
+    "suffix": {
+      "type": "string",
+      "maxLength": 100,
+      "description": "Prefix for the property like km,cm,mm,dm."
+    },
+    "min": {
+      "type": "number",
+      "default": 0,
+      "description": "Minimum allowed value of the number property."
+    },
+    "max": {
+      "type": "number",
+      "default": 900100100100,
+      "description": "Maximum allowed value of the number property."
+    },
+    "minLength": {
+      "type": "number",
+      "default": 0,
+      "description": "Minimum allowed length of string property."
+    },
+    "maxLength": {
+      "type": "number",
+      "default": 400,
+      "description": "Maximum allowed length of string property."
+    }
+  },
+  "oneOf": [
+    {
+      "oneOf": [
+        {
+          "allOf": [
+            {
+              "$ref": "./primitive/string.json"
+            },
+            {
+              "$ref": "./not/not-number.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "oneOf": [
+        {
+          "allOf": [
+            {
+              "$ref": "./primitive/number.json"
+            },
+            {
+              "$ref": "./not/not-string.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "oneOf": [
+        {
+          "allOf": [
+            {
+              "$ref": "./primitive/boolean.json"
+            },
+            { "$ref": "./not/not-all.json" }
+          ]
+        }
+      ]
+    },
+    {
+      "oneOf": [
+        {
+          "allOf": [
+            {
+              "$ref": "./primitive/date.json"
+            },
+            { "$ref": "./not/not-all.json" }
+          ]
+        }
+      ]
+    },
+    {
+      "oneOf": [
+        {
+          "allOf": [
+            {
+              "$ref": "./id/id.json"
+            },
+            { "$ref": "./not/not-all.json" }
+          ]
+        }
+      ]
+    },
+    {
+      "oneOf": [
+        {
+          "allOf": [
+            {
+              "$ref": "./id/uuid.json"
+            },
+            { "$ref": "./not/not-all.json" }
+          ]
+        }
+      ]
+    },
+    {
+      "oneOf": [
+        {
+          "allOf": [
+            {
+              "$ref": "./timestamp/create-date.json"
+            },
+            { "$ref": "./not/not-all.json" }
+          ]
+        }
+      ]
+    },
+    {
+      "oneOf": [
+        {
+          "allOf": [
+            {
+              "$ref": "./timestamp/update-date.json"
+            },
+            { "$ref": "./not/not-all.json" }
+          ]
+        }
+      ]
+    },
+    {
+      "oneOf": [
+        {
+          "allOf": [
+            {
+              "$ref": "./timestamp/delete-date.json"
+            },
+            { "$ref": "./not/not-all.json" }
+          ]
+        }
+      ]
+    },
+    {
+      "oneOf": [
+        {
+          "allOf": [
+            {
+              "$ref": "./relation/index.json"
+            },
+            { "$ref": "./not/not-all.json" }
+          ]
+        }
+      ]
+    }
+  ],
+  "additionalProperties": false
+}

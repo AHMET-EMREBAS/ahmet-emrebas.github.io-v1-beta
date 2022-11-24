@@ -5,7 +5,6 @@
   "description": "Timestamp of creation",
   "properties": {
     "type": {
-      "type": "string",
       "const": "createdAt"
     }
   },

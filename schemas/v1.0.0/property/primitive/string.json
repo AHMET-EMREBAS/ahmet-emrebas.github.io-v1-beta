@@ -5,7 +5,6 @@
 
   "properties": {
     "type": {
-      "type": "string",
       "const": "string"
     },
     "minLength": {
@@ -19,5 +18,6 @@
       "description": "Maximum allowed length of string property."
     }
   },
-  "required": ["type"]
+  "required": ["type"],
+  "additionalProperties": false
 }

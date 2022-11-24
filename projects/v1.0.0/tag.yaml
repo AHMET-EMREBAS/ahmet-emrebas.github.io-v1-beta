@@ -1,8 +1,24 @@
 type: basic-resource
-name: balance
 properties:
-  id:
-    type: id
+  name:
+    type: string
+    maxLength: 400
+    minLength: 0
 
-  uuid:
-    type: uuid
+  active:
+    type: boolean
+
+  category:
+    type: many-to-one
+    target: category
+
+  deparment:
+    type: many-to-one
+    target: department
+
+  some:
+    type: many-to-one
+    target: category
+    cascade:
+      - insert
+      - update
