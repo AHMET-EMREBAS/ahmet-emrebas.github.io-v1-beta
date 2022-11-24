@@ -1,6 +1,6 @@
 {
   "name": "ae",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "scripts": {
     "start": "nx serve",
     "build": "nx build",

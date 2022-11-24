@@ -31,10 +31,11 @@ export default async function (tree: Tree, options: EntityGeneratorSchema) {
     'rest',
     options.name
   );
+  const NAMES = names(options.name);
 
   await generateFiles(tree, join(__dirname, 'files'), target, {
     name: options.name,
-    classname: names(options.name).className,
+    classname: NAMES.className,
     options: schemaOptions,
     project: options.project,
     temp: '',

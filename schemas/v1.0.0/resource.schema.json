@@ -1,7 +1,7 @@
 {
-  "$id": "ResourceSchema",
+  "$id": "ResourceSchemaV1.0.0",
   "description": "Resource Schemas",
-  "title": "Resource Schemas",
+  "title": "ResourceSchemaV1.0.0",
   "type": "object",
   "properties": {
     "Name": {
