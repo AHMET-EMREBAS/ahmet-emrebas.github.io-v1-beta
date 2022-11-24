@@ -1,0 +1,10 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "PropertyNameType",
+  "title": "Property name type",
+  "type": "string",
+  "pattern": "^[a-z]{1}[a-zA-Z]{1,}$",
+  "description": "Name must start with a lowercase letter and only contains alphabetical characters.",
+  "default": "Write Property Name",
+  "examples": ["somePropertyName"]
+}

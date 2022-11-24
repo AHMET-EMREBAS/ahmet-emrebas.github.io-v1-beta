@@ -89,6 +89,18 @@
         {
           "allOf": [
             {
+              "$ref": "./primitive/date.json"
+            },
+            { "$ref": "./not/not-all.json" }
+          ]
+        }
+      ]
+    },
+    {
+      "oneOf": [
+        {
+          "allOf": [
+            {
               "$ref": "./id/id.json"
             },
             { "$ref": "./not/not-all.json" }

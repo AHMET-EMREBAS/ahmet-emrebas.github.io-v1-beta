@@ -1,12 +1,12 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "$id": "IDProperty",
-  "title": "ID Property",
+  "$id": "DateProperty",
+  "title": "Date Property",
   "properties": {
     "name": { "$ref": "../../name/property-name.json" },
     "type": {
       "type": "string",
-      "const": "id"
+      "const": "date"
     }
   },
   "required": ["name", "type"]

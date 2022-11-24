@@ -7,7 +7,7 @@
       "const": "Basic Resource"
     },
     "name": {
-      "type": "string"
+      "$ref": "../name/resource-name.json"
     },
     "properties": {
       "type": "array",

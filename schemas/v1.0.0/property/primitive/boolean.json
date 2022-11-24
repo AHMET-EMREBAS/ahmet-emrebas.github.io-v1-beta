@@ -3,7 +3,7 @@
   "$id": "BooleanProperty",
   "title": "Boolean Property",
   "properties": {
-    "name": { "type": "string", "default": "Write property name" },
+    "name": { "$ref": "../../name/property-name.json" },
     "type": {
       "type": "string",
       "const": "boolean"

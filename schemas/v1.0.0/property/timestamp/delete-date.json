@@ -4,7 +4,7 @@
   "title": "Delete Date Property",
   "description": "Timestamp of creation",
   "properties": {
-    "name": { "type": "string", "default": "Write property name" },
+    "name": { "type": "string", "const": "deletedAt" },
     "type": {
       "type": "string",
       "const": "deletedAt"

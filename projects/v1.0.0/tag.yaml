@@ -1,18 +1,21 @@
 type: Basic Resource
-name: some
+name: balance
 properties:
-  - name: Write property name
+  - name: name
     type: number
     min: 0
     max: 900100100100
 
-  - type: createdAt
-    name: Write property name
-
   - type: boolean
     name: some
 
-  - name: Write property name
+  - name: name
     type: string
     minLength: 100
     maxLength: 400
+
+  - name: some
+    type: id
+
+  - name: some
+    type: id
