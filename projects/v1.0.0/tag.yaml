@@ -1,0 +1,11 @@
+type: Basic Resource
+name: some
+properties:
+  - name: some
+    type: string
+    maxLength: 400
+
+  - type: number
+    min: 0
+    max: 900100100100
+    name: some

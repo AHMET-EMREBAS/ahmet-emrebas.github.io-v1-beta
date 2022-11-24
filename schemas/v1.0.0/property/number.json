@@ -1,0 +1,29 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "NumberProperty",
+  "title": "Number Property",
+
+  "properties": {
+    "type": {
+      "type": "string",
+      "const": "number"
+    },
+    "min": {
+      "type": "number",
+      "default": 0
+    },
+    "max": {
+      "type": "number",
+      "default": 900100100100
+    },
+    "minLength": {
+      "not": true,
+      "default": "Not allowed here!"
+    },
+    "maxLength": {
+      "not": true,
+      "default": "Not allowed here!"
+    }
+  },
+  "required": ["type", "min", "max"]
+}

@@ -1,0 +1,11 @@
+:host ::ng-deep .p-paginator {
+  position: -webkit-sticky !important;
+  position: sticky !important;
+  bottom: 0;
+}
+
+.header-row {
+  position: static;
+  margin-top: 100px;
+  z-index: 124124;
+}/*# sourceMappingURL=table.component.css.map */

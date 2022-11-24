@@ -1,12 +1,12 @@
 {
   "yaml.schemas": {
-    "schemas/v1.0.0/resource.schema.json": [
-      "projects/v1.0.0/**/*.meta.yaml",
-      "projects/v1.0.0/*.meta.yaml"
+    "schemas/v1.0.0-beta/resource.schema.json": [
+      "projects/v1.0.0-beta/**/*.yaml",
+      "projects/v1.0.0-beta/*.yaml"
     ],
-    "schemas/v2.0.0/resource.schema.json": [
-      "projects/v2.0.0/**/*.meta.yaml",
-      "projects/v2.0.0/*.meta.yaml"
+    "schemas/v1.0.0/resource.json": [
+      "projects/v1.0.0/**/*.yaml",
+      "projects/v1.0.0/*.yaml"
     ]
   },
   "angular.enable-strict-mode-prompt": false

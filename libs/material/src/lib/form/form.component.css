@@ -1,0 +1,33 @@
+input[type=text],
+input[type=date],
+input[type=number],
+input[type=email],
+input[type=password],
+select,
+textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  resize: vertical;
+  max-height: 200px;
+}
+
+input[type=checkbox],
+input[type=radio] {
+  width: 30px;
+  height: 30px;
+}
+
+.hidden-input {
+  opacity: 0;
+  position: absolute;
+  z-index: -2987349;
+}
+
+.form-style {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding: 5px;
+  padding-bottom: 200px;
+}/*# sourceMappingURL=form.component.css.map */
