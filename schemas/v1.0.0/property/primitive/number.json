@@ -4,26 +4,21 @@
   "title": "Number Property",
 
   "properties": {
+    "name": { "type": "string", "default": "Write property name" },
     "type": {
       "type": "string",
       "const": "number"
     },
     "min": {
       "type": "number",
-      "default": 0
+      "default": 0,
+      "description": "Minimum allowed value of the number property."
     },
     "max": {
       "type": "number",
-      "default": 900100100100
-    },
-    "minLength": {
-      "not": true,
-      "default": "Not allowed here!"
-    },
-    "maxLength": {
-      "not": true,
-      "default": "Not allowed here!"
+      "default": 900100100100,
+      "description": "Maximum allowed value of the number property."
     }
   },
-  "required": ["type", "min", "max"]
+  "required": ["name", "type"]
 }

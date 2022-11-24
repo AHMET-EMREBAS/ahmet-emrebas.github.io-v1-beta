@@ -1,11 +1,18 @@
 type: Basic Resource
 name: some
 properties:
-  - name: some
-    type: string
-    maxLength: 400
-
-  - type: number
+  - name: Write property name
+    type: number
     min: 0
     max: 900100100100
+
+  - type: createdAt
+    name: Write property name
+
+  - type: boolean
     name: some
+
+  - name: Write property name
+    type: string
+    minLength: 100
+    maxLength: 400

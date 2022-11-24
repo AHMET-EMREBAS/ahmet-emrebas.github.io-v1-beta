@@ -4,26 +4,21 @@
   "title": "String Property",
 
   "properties": {
+    "name": { "type": "string", "default": "Write property name" },
     "type": {
       "type": "string",
       "const": "string"
     },
     "minLength": {
       "type": "number",
-      "default": 0
+      "default": 0,
+      "description": "Minimum allowed length of string property."
     },
     "maxLength": {
       "type": "number",
-      "default": 400
-    },
-    "min": {
-      "not": true,
-      "default": "Not allowed here!"
-    },
-    "max": {
-      "not": true,
-      "default": "Not allowed here!"
+      "default": 400,
+      "description": "Maximum allowed length of string property."
     }
   },
-  "required": ["type", "maxLength"]
+  "required": ["name", "type"]
 }

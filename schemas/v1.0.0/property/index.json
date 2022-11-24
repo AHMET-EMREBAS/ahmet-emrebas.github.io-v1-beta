@@ -9,7 +9,9 @@
       "description": "Property name",
       "default": "Write property name"
     },
-    "type": { "type": "string", "description": "Property value type" },
+    "type": {
+      "$ref": "./types.json"
+    },
     "prefix": {
       "type": "string",
       "maxLength": 100,
@@ -46,9 +48,11 @@
       "oneOf": [
         {
           "allOf": [
-            { "$ref": "./common.json" },
             {
-              "$ref": "./string.json"
+              "$ref": "./primitive/string.json"
+            },
+            {
+              "$ref": "./not/not-number.json"
             }
           ]
         }
@@ -58,10 +62,84 @@
       "oneOf": [
         {
           "allOf": [
-            { "$ref": "./common.json" },
             {
-              "$ref": "./number.json"
+              "$ref": "./primitive/number.json"
+            },
+            {
+              "$ref": "./not/not-string.json"
             }
+          ]
+        }
+      ]
+    },
+    {
+      "oneOf": [
+        {
+          "allOf": [
+            {
+              "$ref": "./primitive/boolean.json"
+            },
+            { "$ref": "./not/not-all.json" }
+          ]
+        }
+      ]
+    },
+    {
+      "oneOf": [
+        {
+          "allOf": [
+            {
+              "$ref": "./id/id.json"
+            },
+            { "$ref": "./not/not-all.json" }
+          ]
+        }
+      ]
+    },
+    {
+      "oneOf": [
+        {
+          "allOf": [
+            {
+              "$ref": "./id/uuid.json"
+            },
+            { "$ref": "./not/not-all.json" }
+          ]
+        }
+      ]
+    },
+    {
+      "oneOf": [
+        {
+          "allOf": [
+            {
+              "$ref": "./timestamp/create-date.json"
+            },
+            { "$ref": "./not/not-all.json" }
+          ]
+        }
+      ]
+    },
+    {
+      "oneOf": [
+        {
+          "allOf": [
+            {
+              "$ref": "./timestamp/update-date.json"
+            },
+            { "$ref": "./not/not-all.json" }
+          ]
+        }
+      ]
+    },
+    {
+      "oneOf": [
+        {
+          "allOf": [
+            {
+              "$ref": "./timestamp/delete-date.json"
+            },
+            { "$ref": "./not/not-all.json" }
           ]
         }
       ]
