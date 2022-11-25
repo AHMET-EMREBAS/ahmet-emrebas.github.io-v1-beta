@@ -1,0 +1,35 @@
+type: basic-resource
+properties:
+  id:
+    type: id
+
+  upc:
+    type: upc
+
+  name:
+    type: string
+
+  description:
+    type: string
+
+  category:
+    type: many-to-one
+    target: category
+
+  department:
+    type: many-to-one
+    target: department
+
+  tags:
+    type: many-to-many
+    target: tag
+    cascade:
+      - insert
+
+required:
+  - name
+  - upc
+
+unique:
+  - name
+  - upc

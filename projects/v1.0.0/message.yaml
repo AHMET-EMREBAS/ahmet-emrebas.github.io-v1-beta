@@ -1,0 +1,18 @@
+type: basic-resource
+properties:
+  id:
+    type: id
+
+  message:
+    type: string
+    maxLength: 400
+
+  receiver:
+    type: many-to-one
+    target: user
+    from: param
+
+  sender:
+    type: many-to-one
+    target: user
+    from: request

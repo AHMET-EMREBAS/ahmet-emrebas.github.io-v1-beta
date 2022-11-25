@@ -24,7 +24,11 @@
         "enum": ["insert", "update", "remove", "soft-remove", "recover"]
       },
       "description": "Define how the relation object manipulates its relationship."
+    },
+    "from": {
+      "enum": ["request", "param"]
     }
   },
-  "required": ["type", "target"]
+  "required": ["type", "target"],
+  "additionalProperties": false
 }

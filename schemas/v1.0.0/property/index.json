@@ -6,6 +6,7 @@
   "oneOf": [
     { "$ref": "./primitive/index.json" },
     { "$ref": "./relation/index.json" },
-    { "$ref": "./timestamp/index.json" }
+    { "$ref": "./timestamp/index.json" },
+    { "$ref": "./id/index.json" }
   ]
 }

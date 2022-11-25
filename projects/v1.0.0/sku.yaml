@@ -1,0 +1,9 @@
+type: basic-resource
+properties:
+  sku:
+    type: string
+
+  product:
+    type: many-to-one
+    target: product
+    from: param

@@ -1,0 +1,11 @@
+type: basic-resource
+properties:
+  username:
+    type: email
+
+  password:
+    type: password
+
+  permission:
+    type: many-to-many
+    target: permission

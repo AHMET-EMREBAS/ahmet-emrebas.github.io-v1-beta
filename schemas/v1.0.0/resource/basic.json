@@ -5,19 +5,19 @@
     "type": {
       "const": "basic-resource"
     },
-    "name": {
-      "$ref": "../name/resource-name.json"
-    },
     "properties": {
       "$ref": "./properties.json"
     },
     "required": {
-      "type": "object",
-      "patternProperties": {
-        "^[a-z]{1}[a-zA-Z]{1,}$": {
-          "type": "boolean",
-          "default": true
-        }
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "unique": {
+      "type": "array",
+      "items": {
+        "type": "string"
       }
     }
   },
